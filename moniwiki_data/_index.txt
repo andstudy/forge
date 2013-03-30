@@ -853,11 +853,9 @@ TAOCP1/2.5
 TAOCP1/2고_시작발표
 TAOCP1/시작발표
 TCPL
-TCPL/�ҽ� ���ϰ� ���α׷�
 TCPL/시작발표
 TCPL/책소개
 TCPL/표현식및문장
-TCPL/�ҽ� ���ϰ� ���α׷�
 TDD
 TTF
 TableOfContentsMacro
