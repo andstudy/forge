@@ -1,0 +1,3 @@
+[submodule "forge.wiki"]
+	path = forge.wiki
+	url = git://github.com/andstudy/forge.wiki.git
