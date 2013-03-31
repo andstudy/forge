@@ -1,0 +1,55 @@
+ * 다운로드
+   attachment:gcode.tar
+ * 설치방법
+    첨부된 파일을  moni위키가 설치된 디렉토리에 그냥 복사하세요 ^^.
+ * 사용방법
+   {{{
+{{{#!gcode 언어명
+소스코드
+}}}}}}
+ * 지원 언어
+ c,cpp,c++
+ c#,csharp
+ css,style
+ delphi
+ java
+ jscript,javascript
+ php
+ phthon
+ ruby
+ sql
+ vb,visualbasic
+ xml,html
+ * 예제
+{{{#!gcode cpp
+#include <stdio.h>
+main()
+{
+  printf("Hello World");
+}
+}}}
+ * 출처
+ 해당 플러그인은 http://code.google.com/p/syntaxhighlighter/ 기반으로 MoniWiki에서 사용하기 편하게 개발 되었습니다.
+
+----
+Q && A
+ * 회사 위키에 gcode를 적용시켰습니다. 다음과 같은 warning이 뜹니다.
+{{{#!gcode html
+Warning: in_array() [function.in-array]: Wrong datatype for second argument in /usr/local/moniwiki/plugin/processor/gcode.php on line 48
+}}}
+
+ 오류를 해결할 수 있는 방법이나, 또는 warning 메세지를 안 뿌려주게 moniwiki 세팅을 변경할 수 있나요? warning이 뜨긴 하지만, 코드가 예쁘게 파싱되서 잘 표시는 되거든요... -- MovingSpotlight
+    48 라인의 in_array 앞에 @를 붙여주시면 warning 이 안나옵니다. :) (살짝 임시방편 같지만;; 딱히 문제는 없는듯 합니다;;) --[free1002]
+      아주 그냥 끝내줘요~~, 고마워요 석천씨~~ -- MovingSpotlight
+{{{#!gcode php
+ 45   $type = strtolower($type);
+ 46   $format = "";
+ 47   foreach($alias as $key => $ar_values){
+ 48     if(@in_array($ar_values,$type)){
+ 49         $format = $key;
+ 50         break;
+ 51     }
+ 52   }
+}}}
+
+[http://www.learncpp.com/cpp-tutorial/813-friend-functions-and-classes/ 이거 version up 된 게 있나봐요] - ParkPD

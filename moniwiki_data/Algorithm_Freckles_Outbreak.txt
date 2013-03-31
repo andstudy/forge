@@ -1,0 +1,209 @@
+= 문제 요약 =
+ * 평면 xy 에 여러점이 있을 때, 이 점들을 모두 직선으로 잇는 최소 길이를 구하라
+
+= 문제 해결 =
+ * 열린목록, 닫힌목록을 만듬
+ * 처음 시작 시 닫힌목록에 1개를 넣어두고 나머지는 열린 목록
+  * 닫힌목록의 점들과 최소 거리의 점을 열린목록에서 선택
+  * 선택 된 점을 닫힌목록에 추가. 열린목록에선 제거.
+  * 위 두 과정 반복
+ * 크루스칼 알고리즘 형태인 듯?
+ 
+= 소감 =
+ * 예전에 풀어봤던 문제.. 이번주는 쉽게 한문제.. ㅋㅋ
+ * 예전 코드를 보니, 풀이 구조를 정형화 시키려고 노력했던 것 같지만..
+ * scanf/printf 를 왜 쓰냐는 이야기를 들었던 기억이 나네요 어휴~
+
+= ''' 풀이 ''' =
+{{{#!vim c
+#include <cstdio>
+#include <cmath>
+#include <ctime>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+class InputStuff;
+class OutputStuff;
+
+typedef vector<InputStuff> INPUT;
+typedef vector<InputStuff>::iterator INPUTItr;
+
+typedef vector<OutputStuff> OUTPUT;
+typedef vector<OutputStuff>::iterator OUTPUTItr;
+
+void InputProc(INPUT& Inputs );
+void MainProc( const INPUT& Inputs, OUTPUT& Outputs );
+void OutputProc( const OUTPUT& Outputs );
+
+//-------------------------------------------------------------
+
+int main(int argc, char* argv[])
+{
+	int maxtestcase;
+	scanf( "%d", &maxtestcase );
+
+	while( maxtestcase > 0 )
+	{		
+		INPUT inputs;
+		OUTPUT outputs;
+
+		// 입력계
+		InputProc( inputs );
+
+		// 처리계
+		MainProc( inputs, outputs );
+
+		// 출력계
+		OutputProc( outputs );
+	
+		if( --maxtestcase > 0)
+	            printf("\n");
+	}
+
+	return 0;
+}
+
+//---------------------------------------------------------------
+class PosStuff
+{
+public:
+
+	PosStuff( float Dx = 0.f, float Dy = 0.f ) : X(Dx), Y(Dy){}
+	
+	PosStuff& operator()( float Dx, float Dy )
+	{
+		X = Dx;
+		Y = Dy;
+		return *this; 
+	}
+
+	// 두 노드간의 거리계산
+	float operator-(const PosStuff& Dst)
+	{		
+		float xx = abs(this->X-Dst.X);
+		float yy = abs(this->Y-Dst.Y);
+	
+		return sqrt(xx*xx + yy*yy);
+	}
+public:
+	float X;
+	float Y;
+};
+
+class InputStuff
+{
+public:
+	vector<PosStuff> Nodes;
+};
+
+class OutputStuff
+{
+public:
+	float Length;
+};
+
+
+void InputProc(INPUT& Inputs )
+{
+	int maxample;
+	scanf( "%d", &maxsample);
+
+	InputStuff stuff;
+
+	while( maxsample > 0 )
+	{
+		int input = 0;
+
+		PosStuff xy;
+
+		scanf("%f %f", &xy.X, &xy.Y );
+
+		stuff.Nodes.push_back( xy );
+	
+		maxsample--;
+	}
+
+	Inputs.push_back( stuff );
+}
+
+float FindSmallestCost( const vector<PosStuff>& Nodes )
+{
+	vector<PosStuff> Opend;
+	vector<PosStuff> Closed;
+
+	// 닫힌 목록과 열린 목록을 만들어준다.
+	Closed.push_back( Nodes.front() );
+	Opend.assign( Nodes.begin()+1, Nodes.end() );
+	
+	// 전체 비용
+	float total = 0.f;
+
+	while( true )
+	{
+		// 최소 비용
+		float min = 9999999.f;
+
+		// 최소 비용이 되는 열린 목록의 타겟 노드
+		int minnode = 0;
+
+		for( int i=0; i<Closed.size(); i++ )
+		{
+			for( int j=0; j<Opend.size(); j++ )
+			{
+				// 열린 목록 중 최소 비용이 드는 노드를 찾는다.
+				float dist = Closed[i]-Opend[j];
+				if( min > dist )
+				{
+					min = dist;
+					minnode = j;
+				}
+			}
+		}
+
+		// 닫힌 목록에 삽입
+		Closed.push_back( Opend[minnode] );
+
+		// 열린 목록에서는 삭제
+		Opend.erase( Opend.begin() + minnode );
+
+		//printf("최소비용 노드는 %d 번째이고 비용은 %f \n", minnode, min);
+		total += min;
+
+		if( Opend.empty() )
+		{
+			//printf("모두 닫힌 노드가 됐습니다! 소비 비용은 %0.2f 입니다!\n", total);
+			break;
+		}
+	}
+	
+	return total;
+}
+
+void MainProc( const INPUT& Inputs, OUTPUT& Outputs )
+{	
+	for( int i=0; i<Inputs.size(); i++ )
+	{
+		vector<PosStuff> nodes;
+
+		nodes.assign( Inputs[i].Nodes.begin(), Inputs[i].Nodes.end() );
+
+		OutputStuff stuff;
+		stuff.Length = FindSmallestCost( nodes );
+
+		Outputs.push_back( stuff );
+	}
+}
+
+void OutputProc( const OUTPUT& Outputs )
+{
+	for( int i=0; i<Outputs.size(); i++ )
+	{		
+		printf( "%0.2f\n", Outputs[i].Length );
+	}	
+}
+
+}}}
+

@@ -1,0 +1,5 @@
+Describe xUnitTestPattern/chapter1 here
+{{{#!html
+<div style="width:425px" id="__ss_4870981"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/apknight/x-unittestpattern-1" title="X unittestpattern 1장_아꿈사">X unittestpattern 1장_아꿈사</a></strong><object id="__sse4870981" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=xunittestpattern1-100730025528-phpapp02&stripped_title=x-unittestpattern-1" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4870981" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=xunittestpattern1-100730025528-phpapp02&stripped_title=x-unittestpattern-1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/apknight">apknight</a>.</div></div>
+
+}}}

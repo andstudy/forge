@@ -1,0 +1,6 @@
+== OekakiMacro ==
+{{{[[OeKaki(filename)]]}}}
+----
+{{{[[OeKaki(300x200,filename)]]}}}
+
+100x100 ~ 600x600 can be drawable.

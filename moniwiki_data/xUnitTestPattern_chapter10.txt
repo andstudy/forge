@@ -1,0 +1,4 @@
+Describe xUnitTestPattern/chapter10 here
+{{{#!html
+<div style="width:425px" id="__ss_4919689"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/dagri82/10-4919689" title="10장 결과 검증">10장 결과 검증</a></strong><object id="__sse4919689" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=10-100807052830-phpapp02&stripped_title=10-4919689" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4919689" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=10-100807052830-phpapp02&stripped_title=10-4919689" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/dagri82">dagri82</a>.</div></div>
+}}}

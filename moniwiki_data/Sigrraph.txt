@@ -1,0 +1,1 @@
+ [http://ati.amd.com/developer/SIGGRAPH08/Chapter05-Filion-StarCraftII.pdf StarCraft II effect]

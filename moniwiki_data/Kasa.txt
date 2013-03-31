@@ -1,0 +1,7 @@
+ [http://dev3d.tistory.com/ 카사 팀 블로그]
+
+== 발표 자료 ==
+ [http://dev3d.tistory.com/attachment/fk040000000000.ppt 08.03.30 발표자료 - 온라인 게임 해킹- 해커들의 기술과 수법들]
+ [http://dev3d.tistory.com/attachment/ek150000000001.pdf 김성익 - A Survey of Font Rendering Techniques]
+ [http://dev3d.tistory.com/attachment/ek150000000000.pdf unreal editor for gears of war 소개]
+ [http://pds9.egloos.com/pds/200803/02/63/Game_Design_3.ppt 이재석 - 게임에서의 경제]

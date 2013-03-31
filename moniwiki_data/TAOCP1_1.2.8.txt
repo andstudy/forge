@@ -1,0 +1,11 @@
+문제 풀이 번호
+#1,2,3,4,7,12,13....
+
+{{{#!html
+<DIV style="WIDTH: 425px" id=__ss_6902747><STRONG style="MARGIN: 12px 0px 4px; DISPLAY: block"><A title="110212 [아꿈사발표자료] taocp#1 1.2.8. 피보나치수열" href="http://www.slideshare.net/hiscale/110212-taocp1-128">110212 [아꿈사발표자료] taocp#1 1.2.8. 피보나치수열</A></STRONG><object id="__sse6902747" width="620" height="517"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=110210taocp-110212085744-phpapp01&amp;stripped_title=110212-taocp1-128&amp;userName=hiscale" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6902747" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=110210taocp-110212085744-phpapp01&amp;stripped_title=110212-taocp1-128&amp;userName=hiscale" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="620" height="517"></embed></object> 
+<DIV style="PADDING-BOTTOM: 12px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 5px">View more <A href="http://www.slideshare.net/">presentations</A> from <A href="http://www.slideshare.net/hiscale">sung ki choi</A>.</DIV></DIV>
+}}}
+
+{{{#!html
+<div style="width:425px" id="__ss_6967974"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jun0683/taocp" title="Taocp">Taocp</a></strong><object id="__sse6967974" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp-110217205103-phpapp01&stripped_title=taocp&userName=jun0683" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6967974" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp-110217205103-phpapp01&stripped_title=taocp&userName=jun0683" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jun0683">jun0683</a>.</div></div>
+}}}

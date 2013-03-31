@@ -1,0 +1,3 @@
+{{{#!html
+<object style="margin:0px" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=deducingerrors-090808060432-phpapp02&rel=0&stripped_title=why-programs-fail-deducing-errors-1830386" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=deducingerrors-090808060432-phpapp02&rel=0&stripped_title=why-programs-fail-deducing-errors-1830386" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object>
+}}}

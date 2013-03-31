@@ -1,0 +1,95 @@
+= 9.1 전형적인 이야기 =
+ * 할당자를 수정하여 단편화를 줄여서 45%의 성능 향상을 이룸.
+
+= 9.2 코드 튜닝의 몇가지 예제 =
+ * 문제1. 정수에 대한 나머지 연산
+  * %연산자를 비교문과 뺄샘으로 대체.
+  * 별로 쓸모 없다.
+ * 문제2. 함수, 매크로, 인라인코드
+  * max의 매크로 버전 : 89ns -> 47ns (n=10000일때는 100초)
+  * 직접 코드로 풀어서 작성 : 실행시간 그대로...
+ * 문제3. 순차탐색
+  * 단순한 sequencial search : 평균 4.06ns, 최악: 8.1ns
+  * 센티널([Sentinel])값을 사용 : loop하나를 줄임 : 3.87ns
+  * 센티널 + 루프펼치기 : 1.7ns => 파이프라인의 지연을 없앰.
+ * 문제4. 구면체 위의 거리 계산
+  * (위도, 경도) 데이터를 (위도, 경도, xyz)로 바꾸고 두 점 사이 거리 계산하는 방식을 직선거리 공식으로 바꿈.
+
+= 9.3 대수술-이진탐색 =
+ * 최종 버전의 한계
+  * n이 1000이라는 가정을 일반화 하지 못했다.
+  * 대안은? 여러가지 범위를 커버할 수 있는 함수를 여러개 만들고 배열 크기에 따라 가장 가까운 2^n값에 해당하는 함수를 호출.
+= 9.4 원리 =
+ * 효율성의 역할
+  * 효율성과 정확성, 기능성, 유지보수성은 트레이드 오프!
+ * 측정도구
+  * 프로파일러를 이용하여 튜닝대상 선정
+ * 디자인 수준
+  * 다른방법으로 해결 할 수는 없을까?
+ * 속도 개선이 둔화될 때
+  * 튜닝 효과를 측정해야 함.. 여러가지 test case로..
+[코드튜닝의원리]로 본 예제들
+ * Van Wyk의 그래픽 프로그램
+ * 문제1. 정수에 대한 나머지 연산
+ * 문제2. 함수, 매크로, 인라인코드
+ * 문제3. 순차탐색
+ * 문제4. 구면체 위의 거리 계산
+
+= 9.5 연습문제 =
+5. 최악의 경우 데이터를 binary tree에 넣고 모든 노드를 traverse하는 만큼의 시간이 소요.
+6. 
+{{{
+int isupper(char c)
+{
+   //ascii코드표에서 upper case에 해당하는 부분을 1로 체크
+   char UpperCase[255] = { 0,0, ... 1,1,1, ... 1, 0, 0, ... };
+   return UpperCase[c];
+}
+소문자나 숫자도 비슷한 방식으로 처리
+}}}
+
+7. 히스토그램을 얻는 방식으로 데이터 추출, 8조 bit => 0x746A5288000
+{{{
+//8바이트 이내에 표현이 가능함..
+unsigned LONGLONG sum=0;
+unsigned char* buffer = getLargeBufferPtr(); //1조개의 버퍼를 가져옴
+unsigned LONGLONG bufferSize = getLargeBufferSize();
+unsigned LONGLONG i;
+unsigned char charTable[256] = { 0, 1, 2, 1, 2, 2, ... }; //256개의 문자의 bit수를 저장
+for(i=0;i<bufferSize;i++)
+{
+   sum += charTable[ buffer[i] ];
+}
+
+}}}
+
+8. 
+{{{
+int array[ARRAY_SIZE + 1] = { ... };
+array[ARRAY_SIZE] = MAX_INTEGER;
+int i;
+int maxValue = array[0];
+for( i = 1 ; ; i++)
+{
+   if( array[i] > maxValue )
+   {
+       maxValue = array[i];
+       if( maxValue == MAX_INTEGER )
+       {
+           if( i <= ARRAY_SIZE-1 )
+              return maxValue; //찾기성공
+             else 
+              return MIN_INTEGER;
+       }
+   }
+}
+}}}
+
+11. 삼각함수 table이용..
+
+12. 
+{{{
+y=a[n]
+for i = [n-1..0]
+  y = y * x + a[i]
+}}}

@@ -1,0 +1,115 @@
+// 정답지에 있는 소스 코드 입니다. ^^;
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_N 1000
+
+int compare( const void *arg1, const void *arg2)
+{
+	return (*(int*)arg1) - (*(int*)arg2);
+}
+
+int main()
+{
+	int total_case, i;
+	scanf("%d", &total_case);
+	for (int i=0; i < total_case; ++i)
+	{
+		int n, j;
+		int time[ MAX_N] = {0};
+		int total_time = 0;
+		int sequence_size = 0;
+		int sequence_num[ MAX_N*2-1] = {0};
+		int sequence_person[ MAX_N*2-1][2] = {0};
+
+		scanf("%d", &n);
+		for (j=0; j < n; j++)
+			scanf("%d", &time[j]);
+		qsort((void*)time, (size_t)n, sizeof(int), compare);
+
+		while (n>3)
+		{
+			int x1,x2,x3,x4;
+			x1 = time[0];
+			x2 = time[1];
+			x3 = time[n-2];
+			x4 = time[n-1];
+			if (x2+x2 < x3+x1)
+			{
+				sequence_num[ sequence_size] = 2;
+				sequence_person[ sequence_size][ 0] = x1;
+				sequence_person[ sequence_size][ 1] = x2;
+				sequence_size++;
+				sequence_num[ sequence_size] = 1;
+				sequence_person[ sequence_size][ 0] = x1;
+				sequence_size++;
+				sequence_num[ sequence_size] = 2;
+				sequence_person[ sequence_size][ 0] = x3;
+				sequence_person[ sequence_size][ 1] = x4;
+				sequence_size++;
+				sequence_num[ sequence_size] = 1;
+				sequence_person[ sequence_size][ 0] = x2;
+				sequence_size++;
+				total_time += x2+x1+x4+x2;
+			}
+			else
+			{
+				sequence_num[ sequence_size] = 2;
+				sequence_person[ sequence_size][ 0] = x1;
+				sequence_person[ sequence_size][ 1] = x3;
+				sequence_size++;
+				sequence_num[ sequence_size] = 1;
+				sequence_person[ sequence_size][ 0] = x1;
+				sequence_size++;
+				sequence_num[ sequence_size] = 2;
+				sequence_person[ sequence_size][ 0] = x1;
+				sequence_person[ sequence_size][ 1] = x4;
+				sequence_size++;
+				sequence_num[ sequence_size] = 1;
+				sequence_person[ sequence_size][ 0] = x1;
+				sequence_size++;
+				total_time += x3+x1+x4+x1;				
+			}
+			n -= 2;			
+		}
+
+		if (n == 3)
+		{
+			sequence_num[ sequence_size] = 2;
+			sequence_person[ sequence_size][ 0] = time[ 0];
+			sequence_person[ sequence_size][ 1] = time[ 2];
+			sequence_size++;
+			sequence_num[ sequence_size] = 1;
+			sequence_person[ sequence_size][ 0] = time[ 0];
+			sequence_size++;
+			total_time += time[ 2] + time[ 0];
+			n--;
+		}
+
+		sequence_num[ sequence_size] = n;
+		for (j=0; j < n; j++)
+		{
+			sequence_person[ sequence_size][ j] = time[ j];
+		}
+		total_time += time[ n-1];
+		sequence_size++;
+
+		printf( "%d\n", total_time);
+		for (j=0; j < sequence_size; ++j)
+		{
+			int k;
+			for (k=0; k < sequence_num[j]; ++k)
+			{
+				printf( "%d", sequence_person[j][k]);
+				if (k<sequence_num[j]-1)
+					printf(" ");
+				else
+					printf("\n");
+			}
+		}
+		if (i < total_case - 1)
+			printf("\n");
+	}
+
+	return 1;
+}

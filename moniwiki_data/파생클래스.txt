@@ -1,0 +1,6 @@
+{{{#!html
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/17276863" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/ssuser239f08/tcpl-12" title="Tcpl 12장 파생클래스" target="_blank">Tcpl 12장 파생클래스</a> </strong> from <strong><a href="http://www.slideshare.net/ssuser239f08" target="_blank">재정 이</a></strong> </div>
+
+}}}
+

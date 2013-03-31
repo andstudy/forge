@@ -1,0 +1,14 @@
+ 1. extract class 리팩토링
+   1. SRP 단일책임원칙을 어기고 있는건 아닌지 살펴본다
+ 1. 하지 않는다
+   1. private 까지 굳이 테스트 할 필요 없다
+ 1. public 으로 바꾼다
+   1. 테스트 없는 private 보다 테스트 있는 public 이 낫다
+   1. 몇개의 메서드가 public 이 된다고 해서 정보 은닉이 깨지는 것은 아니다
+ 1. protected 와 상속을 이용한다
+   1. 우회 작전
+ 1. 리플렉션 사용
+   1. 완벽주의자
+
+http://xper.org/wiki/xp/TestingPrivateInterfaces
+http://jania.pe.kr/wiki/jwiki/moin.cgi/UnitTestingPrivateMethod

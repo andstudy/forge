@@ -1,0 +1,2 @@
+ [http://www.usenix.org/events/sec07/tech/ Usenix Security Symposium 2007]
+ [http://www.usenix.org/events/sec07/tech/#thurs Exploiting Online Games]

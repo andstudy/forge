@@ -1,0 +1,545 @@
+KGC 2010 후기와 발표자료를 모으고 있습니다.
+여기 [http://andstudy.com/andwiki/wiki.php/KGC2010 공개위키]에 정리하고 있으니 더 추가하고 싶은 내용 있으면 직접 추가해 주셔도 되고, 댓글로 남겨주셔도 됩니다.
+한동안 계속 업데이트 됩니다.
+KGC 를 못 온 분들과, 피드백을 듣고 싶은 강연자들을 위해서,
+그리고 KGC 때 나온 얘기를 계속 발전시키기 위해서 많은 피드백 부탁드립니다.
+감사합니다.
+
+http://twitter.com/#search?q=%23kgc2010 : kgc용 해시테그
+{{{<KGC2010 최종 강연자료> 웹하드(http://webhard.co.kr)를 통해 2010.09.16일 부터 프리젠테이션 파일 다운로드 가능. 아이디(KGC10TH) 비밀번호(kgc2010)}}}
+
+[http://a130.a-gen.co.kr/network/conference.php?q=conferencef2&sessDate=1 첫째 날 강연 목록]
+[http://a130.a-gen.co.kr/network/conference.php?q=conferencef2&sessDate=2 둘째 날 강연 목록]
+[http://a130.a-gen.co.kr/network/conference.php?q=conferencef2&sessDate=3 셋째 날 강연 목록]
+
+= 첫째 날 =
+== 키노트 : Kristian Segerstrale (Playfish) 소셜 게임의 미래 ==
+현재 소셜게임의 현주소와 빠르게 성장하는 소셜게임의 미래를 예리한 견식으로 소개 ... 
+[http://a130.a-gen.co.kr/network/conference.php?q=session_profile&bsNo=32 강연소개]
+[http://thisisgame.com/board/view.php?id=486501&category=102&subcategory= TIG - “소셜 게임, 혁신과 프랜차이즈에 올인하라” 플레이피시 크리스티안 시거스트레일 부사장 기조강연]
+[http://haralab.net/note/?p=1798 HaraWish 님의 첫째 날 강연 정리]
+[http://antilove.egloos.com/4464991 게임 회사원의 도서관 - KGC2010 1st day 후기]
+[http://www.gamemeca.com/news/news_view.html?seq=32&ymd=20100913&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - 소셜 게임, 대중 넘어 하드코어 게이머 정복!]
+[http://szmyoung.blogspot.com/2010/09/kgc-2010.html Flowers bloom in sunlight - KGC 2010 첫째 날 간단평]
+[http://www.thisisgame.com/board/view.php?id=486646&category=14101 TIG - “소셜 게임, 혁신과 프랜차이즈에 올인하라”]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+[https://docs3.google.com/document/edit?id=152SCMEa_mj9zG-yLpMKXpJQd0MbKR4lyQ37x5aumfoY&hl=ko&authkey=CJuo-tQJ&pli=1# 이종주님 KGC 1일차 후기]
+
+== 키노트 :  Dag Frommhold (Trinigy GmbH) 살아있는 미들웨어: 게임 개발자와 기술 제공자의 공생 구축 ==
+본 강연은 아시아 지역 게임 산업 미들웨어의 성장 역할을 중심으로 게임 비즈니스의 성장이 어떻게 미들웨어 공간 (space)의 다양성을 부가했는지 설... 
+[http://kaistizen.net/EE/index.php/weblog/comments/1792/ 안드로메다 토끼님 후기 - 미들웨어는 살아 있다.]
+[http://haralab.net/note/?p=1798 HaraWish 님의 첫째 날 강연 정리]
+[http://www.thisisgame.com/board/view.php?id=486765&category=14101 TIG - 미들웨어와 개발자의 공생관계가 필요하다]
+
+== Takeshi Kajii (SONY Product Development Dept Japan Studio), Hidetaka Miyazaki (Fromsoftware,Inc.) 데몬즈 소울의 게임 디자인, 데몬즈소울의 시장적 어프로치와 게임디자인 ==
+난이도 등에 있어서 시대에 역행한다고 하는 타이틀 '데몬즈소울'은 어떻게 해서 탄생했는가. 프로듀스적 견지에서 그 시장가치를 도출하고, 그것을 구체적... 
+데몬즈소울의 게임디자인에 대해 최초 컨셉부터 드릴다운,결론, 최종적인 실장까지의 흐름을 쫓는 형식으로 설명하며, 이렇게 함으로써 데몬즈소울이라는 게임이... 
+[http://www.inven.co.kr/webzine/news/?news=26537 인벤칼럼 - 이런게 실감나는 온라인 월드, 데몬즈소울은 왜 회자되는가]
+[http://www.inven.co.kr/webzine/news/?news=30522 인벤 - 데몬즈소울, 위험했지만 도전했다.]
+[http://www.inven.co.kr/webzine/news/?news=30523 인벤 - 나는 데몬즈소울을 이렇게 만들었다]
+[http://haralab.net/note/?p=1798 HaraWish 님의 첫째 날 강연 정리]
+[http://antilove.egloos.com/4464991 게임 회사원의 도서관 - KGC2010 1st day 후기]
+[http://www.gamemeca.com/news/news_view.html?seq=34&ymd=20100913&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - 타협없는 도전으로 성공한 `데몬즈 소울`]
+[http://szmyoung.blogspot.com/2010/09/kgc-2010.html Flowers bloom in sunlight - KGC 2010 첫째 날 간단평]
+[http://madmaiz.blog.me/10094095255 마이즈 - 데몬즈 소울의 시장적 어프로치]
+[http://madmaiz.blog.me/10094096847 마이즈 - 데몬즈 소울의 게임 디자인]
+[http://joyakdol.com/334 조약돌의 이야기 - 데몬즈 소울의 시장적 어프로치와 게임 디자인]
+[http://www.thisisgame.com/board/view.php?id=486772&category=14101 “데몬즈소울, 개발자가 원하는 게임을 만들었다”]
+
+== 정순권(나우콤) 캐주얼 게임 마케팅의 과거와 미래 ==
+<포트리스>와 <카트라이더>만 유명한 캐쥬얼 시장에서 당시 동시접속자 2만명을 달성했던 <오투잼>의 성공과 실패의 이야기와 전혀 퍼블리싱 사례가 없던 ... 
+[http://thisisgame.com/board/view.php?id=486217&category=102&subcategory= TIG - 나우콤 정순권 PD, 캐주얼 게임 마케팅의 과거와 미래]
+[http://antilove.egloos.com/4464991 게임 회사원의 도서관 - KGC2010 1st day 후기]
+[http://www.thisisgame.com/board/view.php?id=486589&category=14102 TIG 대학생기자단 Ver. 20살의 눈으로 캐주얼 게임을 보다..!]
+
+== James Gwertzman (Popcap) 팝캡의 초대박 히트에서 무엇을 배울 수 있는가? - 식물 대 좀비의 제작과정 ==
+"팝캡의 초대박 히트에서 무엇을 배울 수 있는가?"
+1) 어떻게 초대박 게임들을 만드는가? 2) 다른 게임들로부터 영감을 받기, 혁신적인 방향으로 3) 네 아이디어의 본보기 4) 재미는 더하고 좌절은 ... 
+[https://docs.google.com/View?id=d238vr2_459gsgkqjch 식물 대 좀비의 제작과정 - GDC china 2010 강연 번역]
+[http://www.inven.co.kr/webzine/news/?news=30517 인벤 - 팝캡의 초대박 히트, 뭘 배울 수 있나]
+[http://haralab.net/note/?p=1798 HaraWish 님의 첫째 날 강연 정리]
+[http://antilove.egloos.com/4464991 게임 회사원의 도서관 - KGC2010 1st day 후기]
+[http://www.gamemeca.com/news/news_view.html?seq=22&ymd=20100913&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - 팝캡이 직접 밝힌, 플랜츠 VS 좀비 성공 비결]
+[http://www.thisisgame.com/board/view.php?id=486777&category=14101 TIG - 플랜트 VS. 좀비는 어떻게 만들어졌나?]
+[https://docs3.google.com/document/edit?id=152SCMEa_mj9zG-yLpMKXpJQd0MbKR4lyQ37x5aumfoY&hl=ko&authkey=CJuo-tQJ&pli=1# 이종주님 KGC 1일차 후기]
+
+== 정진호(한빛소프트) 저사양 고퀄리티 MMORPG란 무엇인가? ==
+현재 게임시장은 무한경쟁의 시대이며 MMORPG 홍수의 시대이다. 단순히 대작게임만으로 성공이 보장되지 않으며 장점과 특징이 있는 작품이 살아남는다.... 
+[http://www.thisisgame.com/board/view.php?id=487409&category=117&subcategory= TIG - 저사양 고퀄리티 게임을 위해 필요한 것은?]
+[http://www.thisisgame.com/board/view.php?id=486761&category=14102 TIG 대학생기자단 - 한빛소프트 정진호PD '저사양 고퀄리티 MMORPG의 개발사례']
+[http://ozlael.egloos.com/3441521 오즈라엘 저사양 고퀄리티 MMORPG의 개발사례 - KGC2010]
+
+== 강태훈(라이드소프트) "지형 렌더링을 기반으로 한 3D 게임엔진 개발" ==
+라이드엔진은 3D 슈팅, 아케이드, 캐쥬얼 등의 게임은 물론 뒤어난 지형 렌더링 성능으로 인하여 지형 기반의 RPG와 FPS및 전략게임 개발에도 사용할... 
+
+== Felix Roeken (Trinigy GmbH) "게임 미들웨어의 생태계 - 과거, 현재, 그리고 미래" ==
+오늘 비디오 게임 산업에서 미들웨어 기술은 상업용 게임 생산에 아주 중요한 역할을 맡고 있다. 미들웨어 시장은 포괄적인 게임 엔진 환경부터 전문적인 ... 
+[http://www.thisisgame.com/board/view.php?id=489569&category=14101 TIG - 미들웨어의 현재 그리고 과거, 미래를 보다]
+
+== 강성재(한국마이크로소프트)   "Visual Studio 2010을 통한 애자일 개발 방법" ==
+소프트웨어 개발에 있어 가장 중요한 요소 3가지를 이야기 하라고 한다면, Budget, Time, Feature를 들 수 있다. 최근 여기에 4대 요소...   
+
+== 조진현(G.O.G.N.) "DirectX11 소개" ==
+조금씩 공개되고 있는 DirectX11의 API적인 변화에 대해서 살펴보고, 그 트렌드에 대해서 소개한다. 그리고 그 변화의 핵심인 Tessellati... 
+
+== 김병진(아이티플로우) "SCRUM 사용을 위한 VS TFS 2010" ==
+Visual Studio Team System에서 VS TFS 2010은 변화된 모습으로 새롭게 태어났습니다. 변화된 VS TFS 2010과 프로젝트... 
+
+== 배성우(SCE Studios Santa Monica) 갓오브워3 타이탄의 기술 ==
+1.타이탄 게임 플레이 간단 소개 2.Pipeline 소개 3.SCEA 타이탄 기술 4.Q&A...     
+[http://www.inven.co.kr/webzine/news/?news=30500 인벤 - 갓오브워3 타이탄의 기술]
+[http://www.thisisgame.com/board/view.php?id=486973&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - <갓 오브 워3> - 타이탄 기술 강연 정리]
+
+== 홍승표 (Rockstar Games) 게임 필드에 Concept Art ==
+개인적, 업무적으로 작성된 컨셉 아트 관련 슬라이드 쇼를 소개 함으로써 과정과 그 안에 숨어있는 생각들을 소개 할 것이다. 또 비디오 게임과 어떠한 관...     
+[http://www.thisisgame.com/board/view.php?id=487237&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 락스타게임즈 홍승표 게임필드의 Concept Art]
+
+== Dirk Steenpass(Ubisoft. Studio Blue Byte) The Settler 7 : 포스트모템 ==
+The Settler 게임은 7번째 시리즈에 돌입 했으며 여전히 다정다감하고 열심히 일하는 개발자들로 부터 배울 점이 남아 있다고 느낍니다. 이 게...     
+[http://szmyoung.blogspot.com/2010/09/kgc-2010.html Flowers bloom in sunlight - KGC 2010 첫째 날 간단평]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+
+== Bruce Mitchener(Army of Bruce)   "소프트웨어와 소비자 경험을 분석하여 이해하고 개선하기" ==
+클라이언트 소프트웨어와 서버 소프트웨어로부터 데이터 수집의 기본적인 방법. 데이터 분석, 저장하는 솔루션 참고및 소비자 성향을 분석하는 아이디어들을 ...     
+[https://docs3.google.com/document/edit?id=152SCMEa_mj9zG-yLpMKXpJQd0MbKR4lyQ37x5aumfoY&hl=ko&authkey=CJuo-tQJ&pli=1# 이종주님 KGC 1일차 후기]
+
+== 신상린(복단대학 관리학원 중국마케팅센터) "중국 게임 산업에 대한 오해와 진실" ==
+2000년대 중반부터 더 이상 온라인 게임, 이스포츠 강국이라는 수식어가 대한민국의 것이 아니라는 우려의 목소리가 심심찮게 들리기 시작했다. 중국 ...   
+[http://www.inven.co.kr/webzine/news/?news=30521 인벤 - 중국 게임시장에 대한 오해와 진실]
+[http://antilove.egloos.com/4464991 게임 회사원의 도서관 - KGC2010 1st day 후기]
+[http://thug.egloos.com/4835683 THUG 님 후기 - "게임과 게임연구", "중국 게임 산업에 대한 오해와 진실"]
+
+== Alex Wilmer(Crystal Dynamics) 필름 생산 기술이 어떻게 게임 산업에 적용되며 우리가 무엇을 배울 수 있는지 ==
+어떤 사람들은 비디오 게임 산업이 1950년 대 필름 산업과 흡사하다고 합니다. 만약 이 주장이 사실이라면 우리는 필름 산업 역사를 공부함으로써 미래...    
+[http://haralab.net/note/?p=1798 HaraWish 님의 첫째 날 강연 정리]
+[http://www.thisisgame.com/board/view.php?id=486971&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 필름 생산 기술이 어떻게 게임산업에 적용되며 무얼 배울 수 있는가]
+[http://szmyoung.blogspot.com/2010/09/kgc-2010.html Flowers bloom in sunlight - KGC 2010 첫째 날 간단평]
+
+== Patrick Streppel(Gamigo) - 웹 vs 클라이언트 게임: 누가 서구 시장을 지배할 것인가? ==
+[http://a130.a-gen.co.kr/network/conference.php?q=session_profile&bsNo=72 강연소개]
+[http://haralab.net/note/?p=1798 HaraWish 님의 첫째 날 강연 정리]
+[http://www.thisisgame.com/board/view.php?id=487132&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 웹vs클라이언트 "게임의 마케팅 방향은 ´고객 대상´에 의해 결정된다."]
+[http://www.gamemeca.com/news/news_view.html?seq=26&ymd=20100913&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - 서구시장, 웹이냐 클라이언트 게임이냐]
+
+== 신승민(WindySoft, Co., Ltd)   "게임과 보안 프로토콜" ==
+온라인 게임 서비스 환경하에서 클라이언트와 서버 사이 네트워크 구간의 패킷을 보호하기 위한 암호 기초 논의를 통하여 안전한 프로토콜을 설계하는 방안을 제...    
+
+== 정성일(THQ) Company of Heroes Online ==
+[http://www.thisisgame.com/board/view.php?id=486753&category=14101 TIG - 무모한 도전? COHO의 고난과 극복, 교훈]
+[http://www.thisisgame.com/board/view.php?id=487219&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - Company of Heroes Online 게임의 개발부터 디자인, 프로덕션, 판매]
+
+== 신효종(반다이 남코 게임즈)   "물리엔진 제작의 기초" ==
+"최근 게임제작에 물리적인 움직임을 구현하는 사례가 늘고 있으며 물리엔진의 도입이 일반화 되어가는 추세이다. 그러나 물리엔진을 사용하기 위해서는 물리...     
+
+== Je Alipio(BuzzCity Pte Ltd)  "엡스토어 :모바일 게임 붕괴" ==
+모바일 엡스토어의 성공은 모바일 게임 산업에 혁명을 불러 왔으며, 모바일 게임의 지속적인 성장은 모바일 게임 산업을 항상 굳건히 지킬 것이다....
+[http://www.thisisgame.com/board/view.php?id=489542&category=14101 TIG - 모바일게임의 붕괴와 앱스토어의 출현. Djuzz의 지 알리피오 대표, 앱스토어:모바일게임의 붕괴]
+[http://www.thisisgame.com/board/view.php?id=486969&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 모바일 게임 시장의 희망, 엡스토어]
+[http://www.thisisgame.com/board/view.php?id=488054&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - "모바일 게임시장에 다시 한번 기회가 찾아왔다"]
+
+== Christopher M. Kennedy(Keywords International Limited)   "로컬라이징으로 인해 당신의 제품에 생명력을 불어넣으십시요" ==
+본강연은 로컬라이징과 언어 테스팅 과정의 기본을 논할 것입니다. 다중언어식 접근에 중심 초첨이 맞춰질 것이며, 다중언어은 제품의 퀄리티와 효과를 더 ...  
+
+== 장규식(멀티미디스튜디오 중앙대학교 첨단영상대학원)   "레이싱게임의 상호작용적인 엔진 사운드 디자인" ==
+본 강연은 레이싱게임에서의 차량엔진 사운드 디자인 방법에 대한 연구입니다. 첫째, 기존 레이싱게임들의 차량엔진 사운드 디자인 방법에 대하여 논의하고 장...     
+ 
+== 김영준(이화여자대학교)   "e-Entertainment를 위한 실시간 물리 시뮬레이션 엔진 기술" ==
+본 강연은 이화여대 컴퓨터 그래픽스 및 가상현실 연구센터를 중심으로 서울대/카이스트/키스트/ 광운대에서 공동으로 개발중인 게임을 위한 실시간 물리시뮬...     
+ 
+== 윤성의(KAIST)   "실시간 대용량 모델 렌더링 기술" ==
+대용량 모델이 실시간 게임 및 다양한 응용프로그램에 쓰이고 있는 실정이다. 하지만 이를 효과적으로 렌더링 하는 것은 상당한 하드웨어 지식 및 소프트웨...     
+
+== 김종원(Ncsoft)   "차세대 분산 MMORPG 서비스 아키텍처" ==
+기존 MMORPG 게임의 서비스 구조를 간략하게 설명하고 SNS에 적합한 새로운 게임 서비스 구조에 대해 논의한다....     
+[http://kaistizen.net/EE/index.php/weblog/comments/kgc_2010_mmorpg/ 안드로메다 토끼님 후기 - 차세대 MMORPG 서비스 아키텍처]
+
+== 현호진(디게이트)   "다양한 3D 특수효과와 장면관리를 위한 저작도구 개발방법" ==
+마법천자문 아케이드를 개발하기 위해서 제작한 Scene Composer 툴에 대해서 소개한다. 엔진 개발에 대한 경험과 게임개발에 대한 경험을 토대로..
+
+== 콘텐츠 디자인에서의 컨셉디자인 분야의 이해와 확장성에 대하여 - 위메이드 엔터테인먼트의 수석 아트 디렉터인 오우진 ==
+[http://www.thisisgame.com/board/view.php?id=487001&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - <콘텐츠 디자인에서의 컨셉 디자인 분야의 이해와 확장성에 대하여> 강연 정리]
+[http://www.thisisgame.com/board/view.php?id=486617&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 3D게임 개발 프로세스]
+
+== 강산아(엔도어즈)   "DB는 느리지 않아요! SQL Server를 이용한 게임 데이터베이스 이야기" ==
+온라인 게임에 있어 개발만큼 중요한 부분이 데이터베이스입니다. 하지만 전문 DBA 가 없는 환경이라면 신경 쓰지 못 하는 부분들이 너무 많은 분야이기도...     
+ 
+== 정재범(엔텔리전트게임즈,고려대학교,성균관대학교)   "차세대 인지능력 측정 및 증진 기능성 게임 개발연구" ==
+본 연구의 목적은 아동 두뇌기능의 기초가 되는 인지 및 정서 지능을 쉽고 재미있게 측정하고 증진시킬 수 있는 기능성 게임의 개발에 있다. 이를 위해 ...     
+[http://haralab.net/note/?p=1798 HaraWish 님의 첫째 날 강연 정리]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+
+== 강지웅, 권민석나보라, 이상우(연세대학교 사회학과 대학원, 커뮤니케이션 대학원, 중앙대학교 일반대학원 문화예술경영학과) 게임과 게임연구 - 게임에 대한 과학적인 연구(Scientific research) ==
+오늘날 경제적으로는 물론이고, 사회적, 문화적으로도 갈수록 확대되고 있는 게임의 영향력은 게임에 대한 학문적 논의의 필요성을 제기하나, 게임 연구의 양...  
+[http://thug.egloos.com/4835683 THUG 님 후기 - "게임과 게임연구", "중국 게임 산업에 대한 오해와 진실"]
+[http://www.thisisgame.com/board/view.php?id=487148&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 게임에 대한 과학적인 연구(Scientific research)]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+
+== 하창현(티쓰리 엔터테인먼트)   "오디션 잉글리쉬를 통한 차세대 기능성 게임의 비젼 및 전략 제시" ==
+영어 교육 기능성 게임의 미래에 대한 사업적 개발적 방안을 제시하여 여러 기능성 게임 제작을 원하는 게임 및 기업들에게 그 가치를 공유하고 비전을 제...     
+ 
+== Kawaguchi Hirotaka, Takuma Kei, Kauchi Tooru(NHN JAPAN)   "PC와 스마트폰의 게임연동방법론" ==
+최근, 집에 가서도 PC를 켜지 않고 스마트폰으로 인터넷을 이용하는 기회가 많아졌다. 여러분 중에도 마찬가지인 분이 많을 것이라고 생각한다. 네트웍 ...     
+[http://www.thisisgame.com/board/view.php?id=487299&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - PC와 스마트폰의 게임연동방법론]
+[http://zio45.blog.me/140114652606 지오 - PC와 스마트폰의 게임연동방법론(위와 같음)]
+ 
+== 남정현(㈜코아뱅크)   "소셜 게임과 Windows Azure Platform" ==
+소셜 게임에 관하여 가장 많이 언급되는 대표적인 사례 중 하나인 FarmVille은 Xen Server 기반의 Linux Private Cloud와 Fac...  
+[http://www.rkttu.com/430 발표자 블로그 - Korea Games Conference 2010 - Social Game and Windows Azure Platform 강의 자료 올립니다.]
+
+= 둘째 날 =
+== 키노트 - 박상근(THQ) "비디오게임의 미래"  ==
+[http://a130.a-gen.co.kr/network/conference.php?q=session_profile&bsNo=30 강연 소개]
+본 강연은 렐릭 사가 현재 게임 산업의 콘텐츠를 어떻게 보고 있는지에 대해 설명하고 게임 산업의 짧은 역사를 통해 많은 지역의 게임 시장들을 분석하고...
+[http://stoo.asiae.co.kr/news/stview.htm?idxno=2010091422225215864&sc1=sports&sc2=general&sc3=game&sk= 게임메카 - 향후 5년, 해외 거대 퍼블리셔의 온라인 진출에 주목!]
+[http://szmyoung.blogspot.com/2010/09/kgc-2010_15.html Flowers bloom in sunlight님 - KGC 2010 둘째 날 간단평]
+[http://haralab.net/note/?p=1817 HaraWish 님의 둘째 날 강연 정리]
+[http://www.thisisgame.com/board/view.php?id=489212&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 변화되어가는 비디오게임의 미래]
+
+== 키노트 - Warren Currell(Autodesk) "게임 시장의 동향 및 신기술 소개" ==
+서론: 간랸하게 오토데스크가 무엇이며 게임기장 트렌드와 개발 트렌드 과거: 소비자 케이스 (소프트웨어와 미들웨어) 그리고 시술적인 어려움들 현재: 오토...
+[http://a130.a-gen.co.kr/network/conference.php?q=session_profile&bsNo=229 강연소개]
+[http://www.gamemeca.com/news/news_view.html?seq=34&ymd=20100914&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - 오토데스크에서 말하는 게임 기술의 미래는?]
+[http://szmyoung.blogspot.com/2010/09/kgc-2010_15.html Flowers bloom in sunlight님 - KGC 2010 둘째 날 간단평]
+
+== Wolfgang Engel(Confetti Special Effects) "Point-Light Screen-Space Soft-Shadows" ==
+Deferred lighting 은 수천개의 라이트 연출을 시킬 수 있다. 게임 개발의 그 다음 단계는 그 수천개의 라이트를 위해 그 라이트 숫자만큼 그림...
+[http://szmyoung.blogspot.com/2010/09/kgc-2010_15.html Flowers bloom in sunlight님 - KGC 2010 둘째 날 간단평]
+
+== Yoshitaro Honjo(DropWave Inc.) "일본 소셜게임의 최근 트랜드" ==
+1.일본 소셜게임의 현상황 2.플랫폼별의 특징 3.모바일과 PC의 차이 4.일본유저의 특징 5.일본 소셜게임시장에서 성공하기 위해서는?...
+
+== 정종필(엔도어즈) "초보팀장의 카운셀링 기법 (엄마, 게임회사 팀장이 되어 버렸어요)" ==
+애석하게도 많은 게임회사의 직원들이나 학생들은 팀장이 되기위해 들어온 사람들이 아니며, 특별한 지식이나 소양의 판단이 부족한채 갑자기 팀장이라는 직책...
+[http://www.inven.co.kr/webzine/news/?news=30559 인벤 - 엄마, 게임회사 팀장이 되어버렸어요]
+[http://www.thisisgame.com/board/view.php?id=487318&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 밥주삼의kgc탐방기 2일차]
+[http://www.thisisgame.com/board/view.php?id=487632&category=14101 TIG - “정치를 하지 않는 팀장은 없다”]
+
+== Yoshinori Ono(Capcom Online Game Development Department R&D Management Group) "클레식 게임 디자인의 연속과 유저들 수 유지" ==
+1.한국캐릭터를 도입하기까지의 경위와 목적 여기서는 WW로 전개하는 타이틀로서, 마이너리티시장을 무시한다는 시점이 아니라, 글로벌하게 이런...
+[http://www.inven.co.kr/webzine/news/?news=30560 인벤 - 스트리트파이터4는 "첫사랑"의 귀환]
+[http://madmaiz.blog.me/10094098645 마이즈 - 클래식 게임 디자인의 연속과 유저들 수 유지]
+[http://cagetu.egloos.com/5353795 cagetu -  KGC10 - "Capcom Online Game Development Department R&D Management Group"]
+[http://www.thisisgame.com/board/view.php?id=487601&category=14101 TIG - 스파4로 보는 ‘고전 게임의 부활 비법’]
+
+== Jack Porter(에픽 게임즈 코리아) "'Landscape' 구축, Unreal Engine3 의 차세대 terrain system" ==
+본 강연은 새로운 terrain rendering system (Landscape) 에 대해 소개합니다. 에픽게임즈 코리아는 특히 한국 게임 개발자들을 ...
+
+== Geoff Harrower(EA Florida Studio) "오토데스크 HumanIK 및 Motionbuilder를 활용한 EA Sports game 제작사례" ==
+Motion Builder 와 HumanIK 은 EA 캐나다에서 쓰는 애니매이션 도구와 기술이다. 본 강연에서 Geoff 는: - 애니매이션 pipel...
+
+== James Sweeney(EA Vancouver Studio) "오토데스크 제품을 활용한 게임 제작 파이프 라인의 현대화" ==
+For MMA, Mixed Martial Arts game (based in Florida) for his details. 강연주제는 파이프라인 현대화...
+
+== 크리스 김(NVIDIA Corporation) "물리엔진 (APEX/PhsyX) 적용과 디버깅(Parallel Nsight) 툴의 소개" ==
+이 세션에서는 엔비디아에서 최근에 출시한 툴들이 게임개발의 다양한 분야에서 어떻게 도움을 줄 수 있는지에 대해 알아봅니다. 물리시뮬레이션을 쉽게 쓸 수...
+ 
+== Miguel Sainz(NVIDIA Corporation) "DX 11 (tessellation & Compute) 의 최신 프로그래밍 기술" ==
+This talk provides a comprehensive overview of Direct3D11 tessellation technology and ...
+ 
+== 크리스김, 최은정 (NVIDIA Corporation) "3D 입체 게임 개발 및 미래의 전망 " ==
+NVIDIA® 3D Vision™ technology is a combination of Graphics Processor Units (GPU), spec...
+  
+== 김항기(한국전자통신연구원) "시나리오 기반 온라인 게임 서버 부하 테스트 기술" ==
+많은 수의 베타 테스터들이 필요한 온라인 게임 QA에서 실제 사람과 유사한 행동을 하는 가상유저를 시나리오 기반 제어를 통하여 품질 검증을 수행할 수 ...
+헬게이트 런던의 경우, 서버 다운으로 인한 손실 금액이 170억원으로 추정
+[http://kaistizen.net/EE/index.php/weblog/comments/kgc_2010/ 안드로메다 토끼님 후기 - 온라인 게임 부하 테스트 콘텐츠 적용사례]
+  
+== 원종호(한국전자통신연구원) "실시간 스트리밍 기반 게임 서비스 기술" ==
+고품질 3D 렌더링을 지원하는 고성능 서버에서 생성된 게임 화면을 실시간 인코딩을 통하여 스트리밍하고, 클라이언트 단에서는 영상 디코딩과 사용자 입력을...
+  
+== 김동국(㈜케이비온라인) "온라인 게임 부하 테스트 콘텐츠 적용사례" ==
+패킷 정보를 기반으로 실제 사용자와 유사한 행동을 하는 가상유저를 생성하고, 이를 시나리오 기반으로 제어할 수 있는 온라인 게임 품질 검증 솔루션의 실...
+
+== Katsuhiro Harada(NAMCO BANDAI GAMES) "철권 제작" ==
+'철권'은 어떠한 사상과 기술로 만들어져왔는가. 독자의 애니메이션제작 사상과 제어기술, 독자의 게임스크립트 기술 등을 간단하고 알기 쉽게 설명합니다....
+[http://stoo.asiae.co.kr/news/stview.htm?idxno=2010091420144413262&sc1=sports&sc2=general&sc3=game&sk= 게임메카 - 철권 개발자 “미국이 대전게임 못 만드는 이유는?”]
+[http://thisisgame.com/board/view.php?id=487373&category=14101 TIG - 철권의 비결? "모방과 상상을 꺼리지 마라"
+
+== Jaakko Lisalo(Rovio Mobile Ltd) "Angry Birds 제작 - 모바일 히트 게임 개발" ==
+Angry Birds 소개:게임 개요,게임플레이,캐릭터 게임개발:어디서 초기 아이디어를 얻었으며 성공작까지 어떻게 만들었는가. Angry Bird...
+[http://haralab.net/note/?p=1817 HaraWish 님의 둘째 날 강연 정리]
+[http://www.inven.co.kr/webzine/news/?news=30558 인벤 - 69개국 1위, 앵그리버드의 성공 요인]
+[http://thisisgame.com/board/view.php?id=487397&category=14101 TIG - 화난 새들은 어떻게 대박으로 날아올랐을까?]
+
+== 이권일(EA Seoul Studio) "최적화 무료 티켓:SSE (SIMD Streaming Extension)" ==
+SSE 는 SIMD Streaming Extension 의 약자로 펜티엄의 MMX 이후 펜티엄 3 이후 프로세서에 추가된 새로운 병렬 처리 명령어입니다...
+ 
+== 이은석(넥슨 라이브개발본부 개발7실) "Developer's High 마비노기 영웅전 개발 포스트 모뎀" ==
+[http://a130.a-gen.co.kr/network/conference.php?q=session_profile&bsNo=61 강연 소개]
+[http://www.thisisgame.com/board/view.php?id=487416&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 마영전 개발포스트모뎀]
+[http://www.gamemeca.com/news/news_view.html?seq=4&ymd=20100915&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - 마영전 개발과정의 5가지 성공과 실패요소]
+
+== Tadashi Shiiba(ONE UP.Inc) "우리 브라우저 삼국지에 대하여" ==
+일본시장에서 가장 성공한 브라우저게임 '브라우저 삼국지'를 사례로 구체적인 숫자 (과금율, ARPPU)를 들면서, 일본 온라인게임 시장의 가능성을 설...
+[http://www.thisisgame.com/board/view.php?id=487383&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - <브라우저 삼국지>를 통해 알아본 일본 온라인 게임시장 현황과 전망]
+
+== Roberto Dillon(DigiPen Institute of Technology - Singapore) "게임 분석 모델들 :MDA 와 6-11 frameworks" ==
+강연은 게임 분석시 사용할 수 있는 두가지의 모델 소개로 이루어져 있으며, 어떤 게임이라도 이 두가지 모델로 분석이 됩니다. 게임룰과 게임플레이 액션...
+[http://www.thisisgame.com/board/view.php?id=489182&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - MDA와 6-11 Framework를 통한 분석]
+누군가 했더니 On the way to FUN 책 저자였군.
+ 
+== Michael Herring(Gendai Games) "게임 디자인 언어의 혜택" ==
+게임디자인을 위해 공통 언어를 개발한다면 그것은 많은 게임 디자이너들에게 이득을 안겨줄 것입니다. Cross-platform 방법이 현재 많이 쓰이고 ...
+ 
+== Pierre Langer(Dynamedion GbR) "할리우드 음악 기준의 중요성과 서양 audience를 위한 sound FX" ==
+본강연은 어떻게 훌륭한 악보를 쓰는지, 개발자들이 어떤 오디오 엔진을 사용해야 하는지에 대한 것이 아닙니다. 본강연은 게임 오디오 세계 소개, 비즈니스 ...
+[http://haralab.net/note/?p=1817 HaraWish 님의 둘째 날 강연 정리]
+
+== 배현직(넷텐션) "게임엔진 API 디자인을 잘하기" ==
+잘 정의된 게임 엔진 API는 사용자가 쉽게 엔진을 사용 하는데 결정적으로 중요한 역할을 합니다. 본 강연은 게임 엔진을 쓰는 사람들의 편의를 위해서 ...
+[http://szmyoung.blogspot.com/2010/09/kgc-2010_15.html Flowers bloom in sunlight님 - KGC 2010 둘째 날 간단평]
+[http://blog.daum.net/proudnet/34 넷텐션 - KGC 2010 공개 영상물입니다]
+[http://kukuta.tistory.com/146 HardCore in Programming - Game API Design(Kgc 2010/배현직)]
+
+== 배상철(게임어스) "온라인게임 수성 이야기" ==
+상용 서비스 이후 온라인 게임 유지 방향을 이야기 한다. 개발, 상용 아이템, 운영 등 전반적인 내용을 다룬다....
+[http://www.thisisgame.com/board/view.php?id=487386&category=14102 TIG 대학생기자단 - OBT이후 온라인 게임 서비스 유지 방법 이야기]
+[http://www.thisisgame.com/board/view.php?id=487110&category=14101 TIG - 오픈후 온라인 게임 수명 연장 방법은?]
+
+== 박일(Ncsoft) "낡은 코드와 단위테스트" ==
+3-4년 전에 비하면 단위테스트는 많이 알려졌고, 실제로 쓰고 있는 조직도 많이 늘었다. 하지만 여전히 '관심은 있지만 실제로 어떻게 해야할 지 모르...
+[http://parkpd.egloos.com/3440389 KGC2010 - 낡은 코드에 단위테스트 넣기 발표자료]
+[http://kaistizen.net/EE/index.php/weblog/comments/kgc_2010_working_with_legacy_code/ 안드로메다 토끼님 후기 - 낡은 코드에 단위테스트 추가하기]
+
+== 이정웅(선데이토즈) "선데이토즈가 경험한 소셜게임 트랜드" ==
+국내 '네이트 앱스토어'와 '네이버 앱스토어' 등 소셜 오픈 마켓과 페이스북 기반의 해외마켓을 비교 평가함...
+[http://www.thisisgame.com/board/view.php?id=487168&category=14101 TIG - “소셜 게임의 피크타임은 하루에 4번!”]
+[http://www.thisisgame.com/board/view.php?id=487448&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 국내 소셜 게임의 성공 전략]
+[http://www.thisisgame.com/board/view.php?id=487287&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 이정웅 대표의 선데이토즈가 경험한 소셜게임 트렌드]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+
+== 정원철(액토즈소프트) "능동적인 QA로 인한 영향력" ==
+QA 업무를 수행하는데 있어 회사나 주변 여건에 따라 많은 변수가 존재한다. 그러나 QA 업무의 본질은 크게 다르지 않다. QA 로써 영향력은 내가 ...
+
+== 함영철(넥슨노바) "소셜 네트워크 게임 전략 가이드" ==
+페이스북의 소셜게임인 Farmville과 Restaurant City, 아이폰 소셜게임인 We Rule에서 볼 수 있듯이 최근 소셜 네트워크 게임은 전...
+[http://haralab.net/note/?p=1817 HaraWish 님의 둘째 날 강연 정리]
+[http://www.inven.co.kr/webzine/news/?news=30554 소셜네트워크게임의 8가지 성공전략]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+
+== 노우영(엔트리브 소프트) "프로야구 매니저의 로컬라이징 사례" ==
+외산 게임의 비중이 높아지고 있는 이 때에, 로컬라이징과 컬쳐라이징의 사이에서 현명한 판단으로 성공으로 가는 길을 제안해 본다...
+[http://www.thisisgame.com/board/view.php?id=486922&category=14101 TIG - 해외 게임 로컬라이징, 직접 개발이 답이다]
+[http://www.inven.co.kr/webzine/news/?news=30551 인벤 - 프야매 로컬라이징, 이렇게 성공했다]
+  
+== 최우성(Ncsoft) "구별하여 사용하면 좋은 프로젝트 관련 용어" ==
+본 발표에서는 사람들이 쉽게 사용하는 Quality라는 용어에 대하여, 프로젝트 관리 관점에서의 Grade와의 비교를 통해 흔히 혼동하여 사용하는 개념...
+[http://www.thisisgame.com/board/view.php?id=487711&category=14101 TIG - “그레이드와 퀄리티를 구분해서 쓰세요~”]
+ 
+== 김태민(저스트나인) "애플 앱스토어에서의 부분 유료화를 위한 게임디자인" ==
+애플스토어 내에서 살아남기 위해, 보다 많은 수익을 내기 위해 끊임없이 마케팅/개발기법들이 발전해 오고 있다. 그러한 수단으로 이슈화되고 있는 것이 ...
+[http://www.inven.co.kr/webzine/news/?news=30552 인벤 - 앱스토어 게임으로 살아남는 방법?]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+ 
+== 문춘식(Ncsoft) "게임 디자이너들이 알아야할 게임 인터페이스 이야기" ==
+기획자들이 시스템 설계를 할 때 마주치게 되는 UI에 대한 어려움들을 쉽게 극복 할 수 있도록 게임 시스템 설계에 도움이 될만한 사전 지식들과 설계 ...
+[http://haralab.net/note/?p=1817 HaraWish 님의 둘째 날 강연 정리]
+[http://www.thisisgame.com/board/view.php?id=489159&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 게임 디자이너들이 알아야 할, 게임 인터페이스 이야기]
+[http://yfrog.com/bgkzbvj 사용성 테스트 무용론]
+[http://yfrog.com/hqn7ygj 와우의 Top10 플러그인들의 특징 분석]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+ 
+ == 김다미(바벨미디어) "글로벌 영토 확장을 위한 차별화된 현지화 전략" ==
+최근 활황을 맞고 있는 글로벌 온라인 게임 시장의 성장세는 한동안 더욱 가속화될 전망입니다. 북미와 유럽, 동남아 지역의 온라인 인프라 환경이 개선됨에...
+[http://haralab.net/note/?p=1817 HaraWish 님의 둘째 날 강연 정리]
+[http://blog.naver.com/gamediz/20091293014 gump님 - KGC2009 글로벌 시장 진출의 열쇠 , 현지화 - 김다미(QA)]
+[http://www.thisisgame.com/board/view.php?id=487166&category=102&category=102&subcategory= TIG - “유럽 현지화, 이제는 전문성이 필요하다”]
+
+= 셋째 날 =
+== Casey Hudson(Bioware) "트랜스미디어 스토리텔링: Mass Effect Universe 에서 게임, 만화, 영화가 합쳐진 스토리라인 만들기" ==
+대작들을 영화나 게임같이 다시 만드는 것은 이젠 평범한 일이 되었다. 하지만 어떻게 이 프랜차이즈 작품들이 원작과 이어지고 합쳐질 수 있도록 원작의...
+[http://kaistizen.net/EE/index.php/weblog/comments/kgc_2010_mass_effect_universe_-_casey_hudson/ 안드로메다 토끼님 후기 - 트랜스 미디어 스토리텔링: Mass Effect Universe에서 게임, 만화, 영화가 합쳐진 스토리라인 만들기 - Casey Hudson]
+[http://yfrog.com/jq9u1ij 바이오웨어가 말하는 '세계관을 만들고 성장시킬때 주의해야 할 것]
+[http://www.thisisgame.com/board/view.php?id=488388&category=14101 TIG - 바이오웨어 “하나의 거대한 이야기를 만들라”]
+[http://www.thisisgame.com/board/view.php?id=489254&category=14102 TIG 대학생기자단 - 트랜스미디어 스토리텔링 : Mass Effect Universe 에서 게임, 만화, 영화가 합쳐진 스토리라인 만들기]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+  
+== Angel Cunado(Blueside Inc.) "The Terrain of Kingdom Under Fire 2" ==
+Kingdom Under Fire 2 를 개발할때 쓰인 terrain 기술은 RTS, Action, MMORPG 장르를 유지함과 동시에 높은 비쥬얼 퀄...
+ 
+== 류휘만(펜타비전) "음악의 게임화에 관한 연구" ==
+게임이 다른 엔터테인먼트 미디어와 차별화 되는 요소는 유저가 조작하는 것에 따라서 결과 및 상황이 변화하는 인터랙티브(Interactive)를 가지고 ...
+[http://blog.naver.com/creatune/90096392596 KGC2010 류휘만 '음악의 게임화에 관한 연구' 강연 대본]
+[http://blog.naver.com/creatune/90096161576 발표자 블로그 - KGC2010 제 강연에 대한 후기1]
+[http://blog.naver.com/creatune/90097132237 발표자 블로그 - KGC2010 제 강연에 대한 후기2]
+[http://www.inven.co.kr/webzine/news/?news=30599 인벤 - 디맥 개발자가 말하는 음악의 게임화]
+[http://www.thisisgame.com/board/view.php?id=488327&category=14101 TIG - 맞고와 리듬의 조화! 음악의 게임화 가능성]
+[http://www.thisisgame.com/board/view.php?id=488050&board=0&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 음악의 게임화에 대하여...]
+[http://kaistizen.net/EE/index.php/weblog/comments/kgc_2010_-audio/ 안드로메다 토끼님 후기 - 음악의 게임화에 관한 연구 - 류휘만]
+
+== 고성원(드래곤플라이) "사람, 커뮤니케이션 그리고 자기조직화" ==
+빠르고 복잡하게 변화하는 환경... 컨버전스 및 통섭 등... 창조경영이 대두되는 시대의 흐름 속에서 개발 매니지먼트에 있어서도 이러한 시대의 흐름에...
+[http://www.inven.co.kr/webzine/news/?news=30591 인벤 - 스페셜포스2팀의 감동 커뮤니케이션]
+[http://www.thisisgame.com/board/view.php?id=488119&board=0&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 밥주삼의kgc마지막 탐방기 3일차]
+ [http://persian8.com/2511496 박수영 - KGC2010 후기]
+
+== 안영기(삼성전자) "bada로 하는 게임 개발" ==
+2010년 삼성전자는 새로운 스마트폰 플랫폼 바다를 공개하였습니다. 본 강연에서는 모바일 게임 개발자가 반드시 알아둬야 할 바다의 게임 관련 주요기능...
+[http://www.thisisgame.com/board/view.php?id=488693&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 바다로 하는 게임 개발]
+[http://www.masque.kr/45507 KGC에서 바다폰을 직접 만져보고 왔습니다]
+ 
+== 장언일(제로딘게임즈) "MMORPG 게임엔진의 현재와 미래(제로딘엔진)" ==
+MMORPG는 그동안 비약적인 발전을 해왔습니다. 현재의 MMORPG에서 최소 리소스 개발로 최대효과를 볼 수 있는 방법과 MMORPG에 반드시 필요한...
+[http://a130.a-gen.co.kr/network/conference.php?q=session_profile&bsNo=46 강연소개]
+[http://www.gamemeca.com/news/news_view.html?seq=53&ymd=20100915&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - MMORPG 비빔밥, 게임엔진으로 맛있게 만들자]
+[http://hekamedia.egloos.com/3444776 해카 블로그 - KGC 2010]
+ 
+== 윤기범(제로딘게임즈) "엔진을 사용한 프레임워크 구성과 활용" ==
+많은 개발사에서 상용 또는 자체 개발엔진을 사용하여 게임이 개발되어지고 있습니다. 하지만 기본적인 프레임워크를 이해하지 못하면 개발비용이 증가되고 엔...
+ 
+== 서진호(한국마이크로 소프트) "윈도우폰 7에서 혁신적인 모바일 게임 전략" ==
+이 세션에서는 국내 최초로 윈도우폰7의 2D와 3D 모바일 게임 데모를 XNA Game Studio4.0을 이용하여 보여준다. 특히 PC와 XBOX3...
+[http://hekamedia.egloos.com/3444776 해카 블로그 - KGC 2010]
+ 
+== Richard Radmacher(Trinigy GmbH) "기능성게임-게임개발자의 기회와 위기" ==
+이 세션은 기능성 게임의 현황에 관한 기본적인 이해를 도와 줄 것입니다. 밀접한 관계이지만 서로 같아지기엔 힘든 두가지 분야에 대한 설명 하려고 합니다...
+ 
+== Armand Filippi(Autodesk) "인공지능 미들웨어 Kynapse 7 및 HumanIK 소개" ==
+준비중
+  
+== David Larsson(Autodesk) "게임내 GI 구현을 위한 미들웨어 Beast소개" ==
+본강연은 미리 계산된 게임 lighting 과 Audodesk middleware가 당신의 게임 도구를 어떻게 도와줄 수 있는지 설명할 것이다. 비디오...
+  
+== 김일혁(Autodesk) "3ds Max Tips & Tricks" ==
+캐릭터 제작과 관련된 모델링, 텍스쳐링 및 애니메이션 테크닉을 3ds Max의 최신 기능과 Motionbuilder를 활용해 제작하는 기법을 소개하고. 맥...
+ 
+== 신석현(형아소프트) "bada Application 개발사례" ==
+본 세션은 삼성 bada를 통한 어플리케이션 개발사례에 대한 세션입니다. bada플랫폼에서 지원하는 다양한 하드웨어 제어와 그래픽, 사운드를 이용한 ...
+ 
+==  Brendan Iribe(Scaleform) "Scaleform GFx 4 - 3D 게임을 위한 Flash 10 & AS3!" ==
+Scaleform 은 한국시장에서 가장 빠르게 성장하는 미들웨어 제공 회사로 현재 100개가 넘는 한국 게임들과 700개가 넘는 세계 게임들에 사용되고 있...
+ 
+==  서동일(스케일폼 코리아) "게임, 모바일 그리고 그 이 후의 3D UI에 대한 미래" ==
+본 강연은 비디오 게임 시장에서 새로운 3D UI 트렌드에 대하여 집중 조명하며 현재 개발자들이 사용화 툴과 미들웨어를 사용하여 어떻게 전통적인 2D 인터...
+ 
+==  Mark Hobbs(NaturalMotion Ltd.) "보다 현실적인 애니메이션 제작의 미래" ==
+"캐릭터: 환경과의 상호작용 애니매이션 제작 파이프라아인 변화 멀티타이틀 환경안 애니매이션 자본 매니지먼트" ...
+ 
+==  최흥배(마이에트 엔터테인먼트) "Visula C++10과 디버깅" ==
+프로그램을 만들 때 개발과 견줄 수 있을 정도로 많은 시간이 소요되는 것이 디버깅입니다. 이 세션은 이번에 새로 나온 Visual C++10을 사용하여...
+[http://jacking.tistory.com/733 발표자 블로그 - 발표자료]
+  
+== 강태훈(라이드소프트) "Texture Splatting과 Normal Mapping을 적용한 지형 렌더링" ==
+게임의 배경을 처리하는데 있어서 지형 렌더링 엔진을 적용할 경우 훨씬 넓은 시야를 제공함과 더불어 여러가지 개발 상의 편리함을 제공 합니다. ...
+[http://www.thisisgame.com/board/view.php?id=488370&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 라이드 소프트의 지형 엔진]
+  
+== 이승찬(아이덴티티게임즈) "더욱 풍부한 게임월드 만들기" ==
+드래곤네스트의 개발과정을 통해서 세세한 설정과 컨셉이 게임에 미치는 좋은 영향과 컨셉아티스트들이 게임에 영향을 미칠수 있는 많은 것들에 대한 이야기...
+[http://skulit.egloos.com/5405640 발표자 블로그 - 발표 소감]
+[http://www.thisisgame.com/board/view.php?id=489893&category=14101 TIG - “컨셉 아트는 단순히 그리는 게 아니다”]
+[http://www.thisisgame.com/board/view.php?id=488374&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 더욱 풍부한 게임 월드 만들기]
+
+== 김병선(비주얼샤워) "모바일 어드벤처 스크립트 엔진의 구현 및 적용" ==
+<하얀섬 감독판>은 그간 모바일 어드벤처 게임에서 볼 수 없었던 다양하고 참신한 시도를 한 제품입니다. 그 시도 중 한 가지가 바로 어드벤처용 스크립트...
+  
+== 윤준희(다이슨인터렉티브) "PC온라인 캐주얼게임으로 살아남기" ==
+강연자의 경험을 중심으로 어려운 한국 게임 시장 환경을 살펴보고, 적은 인원과 예산으로 한국형 PC 온라인 캐주얼 게임을 개발 할 때 목표로 할 수 있...
+[http://www.thisisgame.com/board/view.php?id=489447&category=14101 TIG - “유료화 모델부터 치밀하게 구축하라” ]
+ 
+==  Andreas Wiepcke(RUAG Electronics AG) "시뮬레이션을 통한 군대 트레이닝 - 기능성 게임" ==
+군대용 트레이닝을 위한 시뮬레이션들은 잘 구성되어 있다. 그 예로 현재 군대에서는 파일럿들을 위한 비행 시뮬레이션, 운전병들을 위한 운전 시뮬레이션 등...
+[http://zio45.blog.me/140114779950 지오 - 시뮬레이션을 통한 군대 트레이닝 - 기능성 게임]
+[http://www.thisisgame.com/board/view.php?id=488272&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 시뮬레이션을 통한 군대 트레이닝 - 기능성 게임]
+  
+== Yoshiyuki Fukui(Foom Inc. / Foom Korea Inc.) "한국과 일본 게임 마케팅 트랜드" ==
+일본과 한국의 마케팅 트렌드와 그 차이점을 분석하고 최신 동향을 이야기합니다. 일본 마케팅 트랜드에서는 30년에 가까운 역사가 가진 강력한 콘텐츠 프로...
+[http://www.thisisgame.com/board/view.php?id=489668&category=14101 TIG - 한국과 일본 게임의 마케팅 트렌드]
+[http://www.thisisgame.com/board/view.php?id=488341&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 한국과 일본의 마케팅 트랜드 "아이디어와 이슈화가 중요하다."]
+
+== Jane Zavalishina(Yandex Money) "러시아에서 돈을 어떻게 버는지 :environmental guide and best practice" ==
+러시아 온라인 결제 시스템의 대표 회사인 Yandex는 2002년 부터 시작되었습니다. 오늘날 600만명의 유저가 있으며 매일 6천명의 새로운 가입자...
+  
+== Hiroyuki Kawato(Sony Computer Entertainment Asia) "게임 플랫폼과 플레이스테이션 홈" ==
+플레이스테이션 홈 3D 온라인 게임 커뮤니티 서비스는 2007년 12월 시작한 후 꾸준히 성장하였다. 우리는 많은 게임 개발자, 모바일 게임 개발자, ...
+ 
+==  Iris Ludolf(Partnertrans) "세계 정복 - 어떻게 내 게임이 세계를 정복 할 것인가?" ==
+새로운 마켓의 출현은 그 새로운 마켓의 성향과 언어에 적응 해야 한다는 것을 의미한다. 개발자와 출판사, localisation 에이전시들과의 좋은 업무...
+  
+== Detlef Schiron(EADS - Military Air Systems) "Explosive Ordnance Disposal Training: 게임 기술과 트레이닝 & 시뮬레이션이 만나다" ==
+방위 산업과 같은 "전통적인" 산업들이 게임 산업에서 "신" 기술을 이용하려고 한다면 어떤일이 벌어질까? 그들은 서로를 이해할까? 서로가 모두에게 유리...
+ 
+==  Frank Deppisch(eurosimtec GmbH) "군대를 위한 기능성게임 시뮬레이션, 비쥬얼화 :UAS-TS 와 3D-TDA " ==
+본강연은 UAS-TS (Unmanned Aerial System-훈련 시물레이션)과 3D situational display solution 3D-TD...
+  
+== Cory Kumm(MASA Group) "모델링과 시뮬레이션을 위해 게임 기술을 사용했을때의 혜택과 도전들" ==
+본 강연은 군사적 기능성 게임 개발에 대한 기술및 사업적 요구사항에 대한 흥미로운 관점들을 자세하게 알려 줍니다. 토론의 토픽들은 다음과 같습니다. ...
+  
+== Malte Behrmann(EGDF) "게임 개발자 단체들의 국제적 상호협력" ==
+지난 몇 년간 게임 개발자 단체들은(주로 개별적인) 개발자 스튜디오 들의 관심사를 옹호하기 위해 시민사회로부터 모습을 드러내었다. 본 강연에서는 이 ...
+ 
+==  Andrew Bowell(Havok) "어떻게 game middleware 가 현대 시뮬레이션과 훈련 환경을 향상시키는가" ==
+본 강연에서는 어떻게 현재 game middleware 솔루션이 실시간 modelling 과 시뮬레이션 문제에 어떻게 적용 되는지 알아 볼 것이다. ...
+ 
+==  김지원(넥슨) "온라인 게임 비즈니스의 패러다임 쉬프트" ==
+현 온라인 게임 비즈니스 패러다임의 문제점을 짚어보고 새로운 패러다임의 올바른 방향성에 대해 논의 하고자 합니다....
+[http://www.thisisgame.com/board/view.php?id=489826&category=14101 TIG - 온라인게임 비즈니스의 패러다임이 움직인다]
+[http://www.thisisgame.com/board/view.php?id=488378&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 온라인 게임 비즈니스의 패러다임 쉬프트]
+ 
+==  송교석(안철수연구소 고슴도치플러스) "소셜게임 동향 및 개발사의 전략" ==
+2007년 페이스북으로부터 시작된 소셜 플랫폼은 소셜게임이라는 새로운 산업 영역을 창출하였다. 미국, 일본 등의 시장이 급속히 성장하는 것에 비해 온...
+[http://www.thisisgame.com/board/view.php?id=488445&category=14101 TIG - 세계는 그리고 우리는? 소셜게임의 현주소]
+ 
+==  김주복, 김충효(넥슨) "프로젝트 M2의 실시간 절차적 리깅 시스템" ==
+현 세대에 이르러 요구되는 그래픽 수준이 높아지면서 캐릭터 셋팅에 사용되는 본의 수는 100~200개에 이를 정도로 복잡해지고 있다. 이 중 많은 본은...
+[http://beforu.egloos.com/4465671 매운맛나리 - M2 프로젝트의 절차적 캐릭터 리깅 시스템 강연자료]
+
+==  백승엽(넥슨) "개발팀용 오류보고 시스템 - M2 프로젝트의 사례" ==
+게임개발 과정에서는 많은 버그가 만들어지고 수정됩니다. 이러한 버그를 좀 더 효율적으로 수정하고 관리하기 위해서는 오류 정보에 대한 적절한 수집 방법이...
+  
+== 국순신(디스이즈게임닷컴/연세디지털게임교육원) "MMORPG 사례로 살펴 본 만족도와 재접속" ==
+이번 강연은 '게임은 좋은데, 다시 접속하기 싫다'는 FGT 참가자들의 의견에서 시작한다. 정작 참가자들이 높은 만족도를 보인 게임임에도 불구하고 테...
+[http://www.thisisgame.com/board/view.php?id=491877&category=102 TIG 기사 - "'재미있다'와 '접속하겠다'는 다르다" 국순신 TIG 기자, 'MMORPG 사례로 본 만족도와 재접속']
+  
+== 김용하(넥슨) "실용적인 랜덤 컨텐츠 생성" ==
+게임 개발사 유저에게 제공하는 컨텐츠를 보다 풍성하게 하기 위해 알고리즘에 의한 컨텐츠 생성 방법을 선택할 수 있다. 본 강연에서는 이러한 방법을 통...
+ 
+==  김익중(네시삼십삼분) "스마트폰에서 펼쳐지는 한국형 포탈 사이트의 제작" ==
+차세대 게임의 주요 플랫폼으로 PC에서 스마트폰이 급부상하게 되었다. 그러나 한두개의 단발적인 싱글 게임이 아닌 온라인 게임을 만들고자 한다면 아직도 스마...
+[http://rhea.pe.kr/ 발표자 블로그]
+  
+== 오규환(아주대학교) "아이폰 게임 제작 Postmortem :DrOStudio 게임 사례 소개" ==
+이 강연에서는 아주대학교 미디어학부 학생들이 개발하여 ㈜저스트나인에서 퍼블리싱을 하는 다수의 아이폰 게임의 제작 사례를 소개하고 이를 통해 얻은 경험...
+[http://www.thisisgame.com/board/view.php?id=489629&category=14101 TIG - 앱스토어에서 수익 창출을 위한 열쇠]
+[http://www.thisisgame.com/board/view.php?id=488372&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 아이폰 게임 제작 Postmortem :DrOStudio 게임 사례 소개]
+[http://stoo.asiae.co.kr/news/stview.htm?idxno=2010091418443507378 stoo.com - 앱스토어 게임, 재미없으면 3분 안에 ‘삭제’]
+
+== 김동훈(삼성전자 DMC 연구소) "XNA, Silverlight를 이용한 Windows Phone 7 게임 개발" ==
+최근 Windows Phone 7과 더불어 이를 지원하기 위한 Silverlight과 XNA가 공개되었습니다. XNA 4.0은 게임 제작을 위한 전문 ..
+[http://hekamedia.egloos.com/3444776 해카 블로그 - KGC 2010]
+  
+== 김광삼(별바람스튜디오/청강문화산업대학) "만능 개발자를 위한 '아틀리에 게임 개발 시스템'" ==
+기존의 다수 분업 방식의 개발이 주류가 된 현 게임 시스템 내에서 제작되는 게임이 왜 서로 비슷해지고 '냉장고' 같은 게임이 주류를 이루게 되었는가? ...
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+ 
+== 노동진(Ncsoft) "메가 스플래팅" ==
+지형은 3D 게임에서 outdoor를 구성하는 중요한 요소입니다. 지형 렌더링 기법 중 가장 많이 사용되는 splatting 기법은, 그 효용성에도 불...
+[http://forour.egloos.com/3440052 발표자 블로그 - 메가 스플래팅 (Mega Splatting) - KGC2010 발표]
+[http://ozlael.egloos.com/3441125 오즈라엘 - 메가 스플래팅 (Mega Splatting) - KGC2010]  
+
+== 이주환(소프트맥스) "뉴웨이브:소셜네트워크와 스마트폰의 주는 변화와 기회의 리스크" ==
+패키지 게임 시대에 업계의 중심에도 있어보고, 온라인 게임 시대에 업계의 주변에도 있어본 사람으로써 소셜과 스마트폰이라고 하는 뉴웨이브를 보는 관점을...
+[http://www.thisisgame.com/board/view.php?id=489483&category=14101 TIG - “SNS에서 새로운 수익 모델을 찾아라”]
+[http://www.thisisgame.com/board/view.php?id=488240&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 소셜네트워크와 스마트폰이 주는 변화와 기회의 리스크]
+[http://www.thisisgame.com/board/view.php?id=488225&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 소셜네트워크가 뜨는 이유는?]
+ 
+== 강상진(리얼네트웍스) "모바일 엔터테인먼트 프로젝트의 현재와 미래" ==
+스마트폰의 열풍과 더불어 더욱 큰 기회의 시장에서, 현재의 비즈니스를 점검하고 미래의 비즈니스를 대비할 수 있는 제품, 고객, 트렌드를 살펴본다. 스...
+[http://www.thisisgame.com/board/view.php?id=488392&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 스마트한 모바일 엔터테인먼트 프로젝트의 현재와 미래]
+ 
+== 한승원(EA) "팀, 프로젝트, 스튜디오 그리고 관리" ==
+시장에서 요구하는 게임의 퀄리티나 규모가 상향 평준화됨에 따라 하나의 프로젝트에 들어가는 인력,비용,시간이 기하급수적으로 늘어가고 있다. 문제는 이러...  
+[http://www.thisisgame.com/board/view.php?id=488287&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 팀, 프로젝트, 스튜디오, 그리고 관리 강연 정리]
+[http://www.inven.co.kr/webzine/news/?news=30606 인벤 - 프로젝트 관리의 선입견을 버려라]
+[http://charles.abstractations.com/ea/software_engineer_job_family_matrix.pdf Software Engineer Job Matrix]
+[http://kaistizen.net/EE/index.php/weblog/comments/kgc_2010_project_management/ 안드로메다 토끼님 후기 - 팀, 프로젝트, 스튜디오, 그리고 관리]
+[http://www.twitlonger.com/show/622ts1 @phmon 님 후기]
+[http://persian8.com/2511496 박수영 - KGC2010 후기]
+
+== 전체 후기 ==
+[https://docs.google.com/Doc?id=ddwh5cs9_67hkft4zd4&pli=1 AgainKGC: KGC의 감동을 한 장에]
+[http://cagetu.egloos.com/5354985 cagetu - KGC 2010 종합 후기]
+[http://www.inven.co.kr/webzine/news/?keyword=kgc2010 인벤 KGC2010 관련 기사 모음]
+[http://www.inven.co.kr/webzine/news/?news=30613 인벤 - 3일간의 게임축제, 한국 국제 게임 컨퍼런스 막내리다!]
+[http://www.thisisgame.com/board/list.php?board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG - 대학생기자단 강연 요약]
+[http://www.thisisgame.com/board/view.php?id=486607&board=&category=14102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG 대학생기자단 - 밥주삼의kgc탐방기 1일차]
+[http://www.criburn.net/blog/mizelan/138 표 블로그 - KGC 2010 소감]

@@ -1,0 +1,235 @@
+졸려서 여기까지만...
+
+{{{
+/* @JUDGE_ID:parkpd 10189 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+
+using namespace std;
+
+template<int Width, int Height>
+class CMineBoard
+{
+public:
+	int GetWidth() const { return Width; }
+	int GetHeight() const { return Height; }
+
+	void SetData(int data[])
+	{
+		for (int r = 0; r < Height; ++r)
+		{
+			for (int c = 0; c < Width; ++c)
+			{
+				const int index = r * Width + c;
+				m_Data[r][c] = data[index];
+			}
+		}
+	}
+
+	void GetResult(int data[])
+	{
+		for (int r = 0; r < Height; ++r)
+		{
+			for (int c = 0; c < Width; ++c)
+			{
+				const int index = r * Width + c;
+				data[index] = m_Data[r][c];
+			}
+		}
+	}
+
+	void FindMine()
+	{
+		for (int r = 0; r < Height; ++r)
+		{
+			for (int c = 0; c < Width; ++c)
+			{
+				if (-1 == m_Data[r][c])
+				{
+					FindMine(r, c);
+				}
+			}
+		}
+	}
+
+	void FindMine(int row, int col)
+	{
+		int rFrom = 0;
+		int rTo = 0;
+		int cFrom = 0;
+		int cTo = 0;
+		GetValidRange(row, col, rFrom, rTo, cFrom, cTo);
+
+		for (int r = rFrom; r <= rTo; ++r)
+		{
+			for (int c = cFrom; c <= cTo; ++c)
+			{
+				if (-1 != m_Data[r][c])
+				{
+					m_Data[r][c]++;
+				}
+			}
+		}
+	}
+
+	void GetValidRange(int r, int c, int& rFrom, int& rTo, int& cFrom, int& cTo) const
+	{
+		rFrom = std::max(r - 1, 0);
+		rTo = std::min(r + 1, Height - 1);
+		cFrom = std::max(c - 1, 0);
+		cTo = std::min(c + 1, Width - 1);
+	}
+
+	int m_Data[Height][Width];
+};
+
+#define _UNIT_TEST
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	return 0;
+}
+
+#else
+
+#include "../../UnitTest++/src/UnitTest++.h"
+
+typedef CMineBoard<3, 4> CMainBoard34;
+typedef CMineBoard<4, 4> CMainBoard44;
+
+TEST(GetWidth)
+{
+	CMainBoard34 board;
+	CHECK_EQUAL(3, board.GetWidth());
+	CHECK_EQUAL(4, board.GetHeight());
+}
+
+TEST(SetData)
+{
+	CMainBoard44 board;
+	CHECK_EQUAL(4, board.GetWidth());
+	CHECK_EQUAL(4, board.GetHeight());
+
+	int data[16] = {-1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0};
+	board.SetData(data);
+	CHECK_EQUAL(-1, board.m_Data[0][0]);
+	CHECK_EQUAL(0, board.m_Data[0][1]);
+}
+
+struct FixtureBoard
+{
+	FixtureBoard()
+	{
+		rFrom = 0;
+		rTo = 0;
+		cFrom = 0;
+		cTo = 0;
+	}
+
+	int rFrom;
+	int rTo;
+	int cFrom;
+	int cTo;
+};
+
+struct Fixture4 : public FixtureBoard
+{
+	Fixture4()
+	{
+		int data[16] = {-1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0};
+		board.SetData(data);
+	}
+
+	CMainBoard44 board;
+};
+
+TEST_FIXTURE(Fixture4, GetValidRange)
+{
+	board.GetValidRange(0, 0, rFrom, rTo, cFrom, cTo);
+	CHECK_EQUAL(0, rFrom);
+	CHECK_EQUAL(1, rTo);
+	CHECK_EQUAL(0, cFrom);
+	CHECK_EQUAL(1, cTo);
+
+	board.GetValidRange(1, 1, rFrom, rTo, cFrom, cTo);
+	CHECK_EQUAL(0, rFrom);
+	CHECK_EQUAL(2, rTo);
+	CHECK_EQUAL(0, cFrom);
+	CHECK_EQUAL(2, cTo);
+
+	board.GetValidRange(3, 3, rFrom, rTo, cFrom, cTo);
+	CHECK_EQUAL(2, rFrom);
+	CHECK_EQUAL(3, rTo);
+	CHECK_EQUAL(2, cFrom);
+	CHECK_EQUAL(3, cTo);
+}
+
+TEST_FIXTURE(Fixture4, FindMineAndGetResult)
+{
+	board.FindMine();
+
+	int expect[16] = 
+	{
+		-1,  1, 0, 0, 
+		 2,  2, 1, 0, 
+		 1, -1, 1, 0, 
+		 1,  1, 1, 0
+	};
+
+	int result[16];
+	board.GetResult(result);
+	CHECK_ARRAY_EQUAL(expect, result, 16);
+}
+
+struct Fixture53 : public FixtureBoard
+{
+	typedef CMineBoard<5, 3> CMainBoard53;
+	CMainBoard53 board;
+};
+
+TEST_FIXTURE(Fixture53, FindMineAndGetResult1)
+{
+	board.GetValidRange(2, 1, rFrom, rTo, cFrom, cTo);
+	CHECK_EQUAL(1, rFrom);
+	CHECK_EQUAL(2, rTo);
+	CHECK_EQUAL(0, cFrom);
+	CHECK_EQUAL(2, cTo);
+
+	int data1[15] = {
+		-1, -1, 0, 0, 0, 
+		 0,  0, 0, 0, 0, 
+		 0, -1, 0, 0, 0
+	};
+	board.SetData(data1);
+	board.FindMine();
+
+	int expect[15] = 
+	{
+		-1, -1, 1, 0, 0, 
+		 3,  3, 2, 0, 0, 
+		 1, -1, 1, 0, 0
+	};
+
+	int result[15];
+	board.GetResult(result);
+	CHECK_ARRAY_EQUAL(expect, result, 15);
+}
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

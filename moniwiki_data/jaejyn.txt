@@ -1,0 +1,12 @@
+= Instruction =
+이름 : 신재진
+직업 : 개발자(병특 군바리)
+분야 : GIS 어플리케이션 개발
+이메일 : jaejyn@gmail.com
+언어: C, C++, C#, Delphi(pascal)
+최근 관심분야 : 이두박근, Bass guitar, 칼퇴
+          
+현재 참여 스터디 : SICP
+
+= Comments =
+ * 팀장 미워 - [jaejyn]

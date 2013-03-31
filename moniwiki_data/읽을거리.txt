@@ -1,0 +1,6 @@
+ [http://msdn.microsoft.com/msdnmag/issues/07/06/EndBracket/default.aspx?loc=ko 개발자로서의 자부심. 희종님이 말씀하신 그 기사입니다.]
+ [http://www.isit.or.jp/lab2/kouryu/2006/postech/Korea_University/online%20game%20security/A%20taxonomy%20of%20online%20game%20security.ppt A taxonomy of online game security - 온라인 게임 공수의 분류학]
+ [http://pds8.egloos.com/pds/200803/05/32/TeamFortress2mitchell.pdf Illustrative Rendering in Team Fortress 2]
+ [http://pds7.egloos.com/pds/200802/17/71/lecture_kaist_2007.ppt 이은석 - 2007년 KAIST 특강 멋진 신세계: 게임 테크놀러지의 현주소와 공대생을 위한 서바이벌 가이드]
+ [http://javawork.springnote.com/pages/740529 Javawork 님의 ACE 강의 첫번째 시간]
+  [http://javawork.springnote.com/pages/740529/attachments/352408 ACE 강의 발표자료] 

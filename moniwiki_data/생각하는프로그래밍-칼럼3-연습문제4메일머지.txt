@@ -1,0 +1,43 @@
+== 문제 ==
+ * 데이터베이스 내의 각 레코드문서에 대한 맞춤문서를 작성하는 프로그램을 작성하시오
+
+== 풀이 ==
+
+ * [http://andstudy.com/pds/mailmerge/form.php]
+ * action.php
+{{{
+<?
+//메일 템플릿을 읽고 템플릿에 내용을 변환하여 글내용을 반환한다.
+function get_mail_content($template_name,$template_info)
+{
+    //템플릿 로드
+	$content = "";
+	if(file_exists($template_name))
+	{
+		$content = file_get_contents($template_name);
+	}	
+
+	//템플릿 정보에 key랑 매칭되는 값들을 값으로 바꾼다.
+	if(is_array($template_info))
+	{
+		foreach($template_info as $key => $value)
+		{
+			$content = str_replace("##".$key."##",$value,$content);
+		}
+	}
+	return $content;
+}
+
+$tpl_info = array();
+$tpl_info[user_id] = $user_id;
+$tpl_info[requester_name] = $requester_name;
+$tpl_info[request_date] = $request_date;
+$tpl_info[reason] = $reason;
+$tpl_info[content_title] = $content_title;
+$tpl_info['send_date'] = date("Y년 m월 d일");
+$mail_content = get_mail_content("stop.html",$tpl_info);
+
+echo $mail_content;
+?>
+}}}
+ * 템플릿 [http://andstudy.com/pds/mailmerge/stop.html]

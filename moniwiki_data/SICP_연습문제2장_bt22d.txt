@@ -1,0 +1,179 @@
+MIT Scheme으로 코드를 작성하였기 때문에
+Dr. Scheme에서 테스트 하시려면 기본 프로시저의 이름을 바꾸셔야 합니다. 
+(ex. append -> append1/append-new)
+
+
+== Exercise 2.17 ==
+{{{#!gcode
+(define (last-pair items)
+  (if (null? (cdr items))
+      items
+      (last-pair (cdr items))))
+(last-pair (list 23 34 39 99))
+}}}
+
+== Exercise 2.18. reverse ==
+{{{#!gcode
+(define (reverse items)
+  (if (null? (cdr items))
+      items
+      (append (reverse (cdr items)) (list (car items)))))
+(reverse (list 1 2 3 4))
+; output : (4 3 2 1)
+}}}
+
+== Exercise 2.20 ==
+{{{#!gcode
+(define (parity-list items fun)
+  (if (null? items)
+      items
+      (if (fun (car items))
+	  (cons (car items) (parity-list (cdr items) fun))
+	  (parity-list (cdr items) fun))))
+
+(define (same-parity p . items)
+  (cons p (parity-list items 
+                       (if (odd? p) odd? even?))))
+(same-parity 2 3 4 5 6)
+}}}
+
+== Exercise 2.23. for-each ==
+{{{#!gcode
+(for-each (lambda (x) (newline) (display x))
+	  (list 1 2 34 5))
+(define (for-each1 proc items)
+  (if (null? items)
+      (proc items)
+      (for-each1 proc (cdr items))))
+}}}
+
+== Exercise 2.27 ==
+{{{#!gcode
+(define x (list (list 1 2) (list 3 4)))
+
+(define (deep-reverse items)
+  (cond ((not (pair? items)) items)
+	(else (append (deep-reverse (cdr items)) 
+                  (list (deep-reverse (car items)))))))
+(deep-reverse x)
+; output : ((4 3) (2 1))
+}}}
+
+== Exercise 2.28 ==
+{{{#!gcode
+(define (fringle tree)
+  (cond ((null? tree) '())
+	((not (pair? tree)) (list tree))
+	(else (append (fringle (car tree))
+		      (fringle (cdr tree))))))
+(fringle (list 1 (list 2 (list 3 4)) 5))
+}}}
+
+== Exercise 2.30 ==
+{{{#!gcode
+(square-tree
+ (list 1
+       (list 2 (list 3 4) 5)
+       (list 6 7)))
+
+(define (square-tree tree)
+  (cond ((null? tree) '())
+	((not (pair? tree)) (square tree))
+	(else (cons (square-tree (car tree))
+				 (square-tree (cdr tree))))))
+
+(define (square-tree tree)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (square-tree sub-tree)
+	     (square sub-tree)))
+       tree))
+}}}
+== Exercise 2.31 ==
+{{{#!gcode
+(define (tree-map proc tree)
+  (cond ((null? tree) '())
+	((not (pair? tree)) (proc tree))
+	(else (cons (tree-map proc (car tree))
+		    (tree-map proc (cdr tree))))))
+(define (square-tree tree) (tree-map square tree))
+(square-tree
+ (list 1 (list 2 (list 3 4) 5) (list 6 7)))
+}}}
+
+== Exercise 2.32 ==
+{{{#!gcode
+(define (subsets s)
+  (if (null? s)
+      (list '())
+      (let ((rest (subsets (cdr s))))
+	(append rest (map (lambda (x)
+			    (cons (car s) x)) rest)))))
+(subsets (list 1 2 3))
+; output : (() (3) (2) (2 3) (1) (1 3) (1 2) (1 2 3))
+}}}
+
+== Exercise 2.33 ==
+{{{#!gcode
+(define (map p sequence)
+  (accumulate (lambda (x y) (cons (p x) y)) '() sequence))
+(map square (list 1 2 3 4))
+
+(define (append seq1 seq2)
+  (accumulate cons seq2 seq1))
+(append (list 1 2 3) (list 4 5 6))
+
+(define (length sequence)
+  (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+}}}
+
+== Exercise 2.35 ==
+{{{#!gcode
+(define (count-leaves t)
+  (accumulate + 0 (map (lambda x 1) (enumerate-tree t))))
+(count-leaves (list 1 (list 2 (list 3 4)) 5))
+; output : 5
+}}}
+
+== Exercise 2.36 ==
+{{{#!gcode
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs))
+      '()
+      (cons (accumulate op init (map car seqs))
+	    (accumulate-n op init (map cdr seqs)))))
+(accumulate-n + 0 (list (list 1 2 3) (list 4 5 6) (list 7 8 9) (list 10 11 12)))
+; output : (22 26 30)
+}}}
+
+== Exercise 2.37 ==
+{{{#!gcode
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+
+(define (matrix-*-vector m v)
+  (map (lambda x (dot-product v (car x))) m))
+
+(define (transpose mat)
+  (accumulate-n cons '() mat))
+
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map (lambda x (accumulate-n * 1 cols)) m)))
+}}}
+
+== Exercise 2.39 ==
+{{{#!gcode
+(define (reverse sequence)
+  (fold-right (lambda (x y) (append y (list x))) '() sequence))
+
+; fold-left 버전 한참 고민했었는데... -_-;; 정오표 참고하세요.
+(define (reverse sequence)
+  (fold-left (lambda (x y) (cons y x)) '() sequence))
+}}}
+
+
+== Exercise 2. ==
+{{{#!gcode
+
+}}}

@@ -1,0 +1,158 @@
+= 문제 풀이 =
+작년과 같은 문제로 Wrong Answer를 여럿 찍었습니다. ㅠㅠ
+programming-challenges에서는 RTE를 Wrong answer라고 알려주네요.;;
+입력의 최대값이 10^100 이므로 총 101 자리숫자, Null문자 포함 102개의 char배열에 입력 받아야 하는데 101개로 설정해서 Wrong Answer를 받았었어요, 경계값 테스트의 중요성을 다시 한번 느꼈습니다.
+
+BigNumber 클래스를 보다더 클래스 답게 만들려고 했지만 그게 쉽진 않네요 @_@ 결국 Solved받기에만 급급해서 후다닥 작성해 버렸습니다;
+
+= 소스 코드 =
+{{{
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+#define MAXLEN 103
+#define max(x,y) ((x)>(y)?(x):(y))
+
+using namespace std;
+
+class BigNumber
+{
+public:
+	BigNumber()
+	{
+		length = 0;
+		for(int i = 0; i < MAXLEN; i++ )
+		{
+			Number[i] = 0;
+		}
+	}
+
+	BigNumber(char* in)
+	{
+		BigNumber();
+		length = strlen(in);
+		for(int i = length-1; i >= 0; i-- )
+		{
+			Number[i] = in[length-i-1] - '0';
+		}
+	}
+
+	char GetAt(int i) const
+	{
+		if( i >= length ) return 0;
+		return Number[i];
+	}
+
+	const BigNumber& operator+=(const BigNumber& rhs)
+	{
+		int i;
+		int carry = 0;
+		int MaxLen = max(rhs.length, length);
+
+		for( i = 0; i < MaxLen; i++ )
+		{
+			Number[i] = rhs.GetAt(i) + Number[i] + carry;
+
+			if( Number[i] >= 10 )
+			{
+				Number[i] -= 10;
+				carry = 1;
+			}
+			else
+			{
+				carry = 0;
+			}						
+		}
+
+		if( carry )
+		{
+			length = MaxLen+1;
+			Number[i] = carry;
+		}
+		else
+		{
+			length = MaxLen;
+		}
+
+		return *this;
+	}
+
+	bool operator>=(const BigNumber& rhs)
+	{
+		if( length > rhs.length ) return true;
+		if( length < rhs.length) return false;
+
+		for( int i = length-1; i >= 0; i-- )
+		{
+			if( Number[i] > rhs.Number[i] ) return true;
+			if( Number[i] < rhs.Number[i] ) return false;
+		}
+
+		return true;	
+	}
+
+	bool operator>(const BigNumber& rhs)
+	{
+		if( length > rhs.length ) return true;
+		if( length < rhs.length) return false;
+
+		for( int i = length-1; i >= 0; i-- )
+		{
+			if( Number[i] > rhs.Number[i] ) return true;
+			if( Number[i] < rhs.Number[i] ) return false;
+		}
+
+		return false;	
+	}
+	
+
+private:
+	char Number[MAXLEN];
+	int  length;
+};
+
+BigNumber operator+(const BigNumber& lhs, const BigNumber& rhs)
+{
+	BigNumber temp;
+
+	temp += lhs;
+	temp += rhs;
+
+	return temp;
+}
+
+int main()
+{
+	char Input1[102];
+	char Input2[102];
+	
+	while( scanf("%s %s", Input1, Input2) == 2 )
+	{
+		if(Input1[0] == '0' && Input2[0] == '0')
+		{
+			break;
+		}
+
+		BigNumber Start(Input1), End(Input2);
+
+		BigNumber fibo1("1"), fibo2("2");
+		
+		int result = 0;
+
+		while(true)
+		{
+			if( fibo1 > End ) break;
+			if( fibo1 >= Start ) result++;
+			BigNumber Temp(fibo2);
+			fibo2 = fibo1 + fibo2;
+			fibo1 = Temp;
+		}
+
+		printf("%d\n", result);
+	}
+
+	return 0;
+}
+
+}}}

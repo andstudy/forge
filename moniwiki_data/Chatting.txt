@@ -1,0 +1,3 @@
+{{{#!html
+<embed height="200" width="90%" src="http://www.gagalive.kr/livechat1.swf?chatroom=andstudy"></embed>
+}}}

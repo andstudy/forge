@@ -1,0 +1,159 @@
+* 문제를 이해하는게 아직은 어렵다.
+
+{{{#!gcode cpp
+#ifdef _UNIT_TEST
+#include "UnitTest++.h"
+#endif
+
+#include <iostream>
+#include <list>
+#include <set>
+
+
+class CJollySeries
+{
+public:
+	CJollySeries(){};
+
+	void Clear()
+	{
+		m_Series.clear();
+		m_DiffSet.clear();
+	}
+
+	void AddNumber( int number )
+	{
+		m_Series.push_back( number );
+	}
+
+	bool IsJolly()
+	{
+		int seriesCount = m_Series.size();
+
+		if( seriesCount == 0 )
+			return false;
+
+		if( seriesCount == 1 )
+			return true;
+
+
+		std::list<int>::iterator begin = m_Series.begin();
+
+		int prev = *begin;
+		++begin;		
+		for( ;begin != m_Series.end(); ++begin )
+		{
+			int cur = *begin;
+			int diff = abs(cur - prev);
+
+			if( diff <= 0 || diff >= seriesCount )
+				return false;
+
+			std::pair< std::set<int>::iterator, bool > result = m_DiffSet.insert( diff );
+			if( result.second == false )
+				return false;
+
+			prev = cur;
+		}	
+
+		return true;
+	}
+
+private:
+	std::set< int >		m_DiffSet;
+	std::list< int >	m_Series;
+};
+
+int main()
+{
+#ifdef _UNIT_TEST
+	if( UnitTest::RunAllTests() )
+	{
+		;
+	}
+#endif
+		
+	CJollySeries jollySeries;
+	std::string buf;
+	int count;	
+	while( scanf("%d", &count) == 1 )
+	{
+		jollySeries.Clear();		
+
+		int number;
+		while( count-- )
+		{
+			std::cin >> number;
+			jollySeries.AddNumber( number );
+		}
+
+		if( jollySeries.IsJolly() )
+			std::cout << "Jolly" << std::endl;
+		else
+			std::cout << "Not jolly" << std::endl;		
+
+		char buf[10000];
+		gets(buf);
+    }
+
+	return 0;
+}
+
+
+#ifdef _UNIT_TEST
+
+TEST( jolly )
+{
+	CJollySeries jolly;
+
+	jolly.Clear();
+
+	jolly.AddNumber( 1 );
+	jolly.AddNumber( 4 );
+	jolly.AddNumber( 2 );
+	jolly.AddNumber( 3 );
+
+	CHECK_EQUAL( true, jolly.IsJolly() );
+
+	jolly.Clear();
+
+	jolly.AddNumber( 1 );
+	jolly.AddNumber( 4 );
+	jolly.AddNumber( 2 );
+	jolly.AddNumber( -1 );
+	jolly.AddNumber( 6 );
+	CHECK_EQUAL( false, jolly.IsJolly() );
+
+	jolly.Clear();
+
+	jolly.AddNumber( 1 );
+	jolly.AddNumber( 4 );
+	jolly.AddNumber( 2 );
+	jolly.AddNumber( 3 );
+	jolly.AddNumber( 1 );
+
+	CHECK_EQUAL( false, jolly.IsJolly() );
+
+	jolly.Clear();
+
+	jolly.AddNumber( 1 );
+	jolly.AddNumber( 4 );
+	jolly.AddNumber( 2 );
+	jolly.AddNumber( 3 );
+	jolly.AddNumber( 3 );
+
+	CHECK_EQUAL( false, jolly.IsJolly() );
+
+	jolly.Clear();
+
+	jolly.AddNumber( 1 );
+	jolly.AddNumber( 4 );
+	jolly.AddNumber( 2 );
+	jolly.AddNumber( 3 );
+	jolly.AddNumber( 2 );
+
+	CHECK_EQUAL( false, jolly.IsJolly() );
+}
+
+#endif
+}}}

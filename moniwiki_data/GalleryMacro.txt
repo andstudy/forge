@@ -1,0 +1,4 @@
+#action UploadFile 그림 올리기
+[[Gallery]]
+----
+CategoryMacro

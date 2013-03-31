@@ -1,0 +1,58 @@
+SICP/2.2 계층구조데이터와 닫힘성질
+
+ * 계층구조 데이터
+ * Closure property 닫힘성질
+  * pair 가 다시 pair 의 원소가 될수있다는것.
+
+ * pair
+  * 박스와 화살표
+{{{#!gcode
+   (cons 1 2)
+}}}
+attachment:sicp_1.gif
+
+  * car -> 1 카
+  * cdr -> 2 카더
+  * ! 뱅
+
+ * 리스트 - list
+{{{#!gcode
+(cons 1
+      (cons 2
+            (cons 3
+                  (cons 4 nil))))
+
+(list 1 2 3 4)
+}}}
+
+  * Erlang 리스트. 
+   * [1,2,3,4]=[H|T]. 
+   * H=[1] , T=[2,3,4]
+
+ * 리스트매핑 - map
+  * 원소 하나씩 돌아가면서 fun 처리
+{{{#!gcode
+(define (add x) (+ 1 x))
+(map add (list 1 2 3 4))
+}}}
+
+ * 계층구조 - tree
+{{{#!gcode
+(cons (list 1 2) (list 3 4))
+}}}
+attachment:sicp_2.gif
+
+attachment:sicp_3.gif
+
+ * 트리매핑 - map
+
+ * 공통인터페이스 , 모듈방식 - modular
+  * 독립된 부품 짜맞추기
+attachment:sicp_4.gif
+
+ * 겹친매핑 - 
+ * 그림언어
+  * 데이터모음을 list 대신 procedure 이용.
+  * 데이터가 painter 라는 procedure 가 사용됨으로 그리기기능이 한결같음
+  * painter 가 닫힘성질을 가짐으로 인해 복잡한 그림을 쉽게 설계
+  * 다층설계방식 가능.

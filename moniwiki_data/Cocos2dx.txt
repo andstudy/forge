@@ -1,0 +1,146 @@
+2013.01.08 기준 설치 방법
+
+== 준비해 놔야 할 것 ==
+VisualStudio 2010 설치
+
+== JDK 설치 ==
+[http://www.oracle.com/technetwork/java/javase/downloads/index.html Java SE Downloads] 에서 Java Platform (JDK) 7u10 다운로드 및 설치(jdk-7u10-windows-x64.exe)
+
+== Cygwin 설치 ==
+http://cygwin.com 에 들어가서 [http://cygwin.com/install.html cygwin 설치]
+FTP 경로에 ftp://ftp.kaist.ac.kr/cygwin 추가(목록에는 없지만 추가하면 다운로드 가능하다)한 뒤 선택.
+Devel, Editors 두 항목을 Install 로 변경 후 설치 시작.
+Cygwin 설치가 끝난 후에는 실행 아이콘 우클릭 -> 속성 -> 호환성 -> 권한 수준 -> 관리자 권한으로 이 프로그램 실행 체크할 것
+
+== 패스 지정 ==
+시작버튼 -> 컴퓨터에서 우클릭 -> 속성 -> 고급 시스템 설정 -> 고급탭에서 환경 변수 클릭 -> 시스템 변수에 JAVA_HOME 추가. 변수값은 아까 JDK 를 설치한 폴더 위치(C:\Program Files\Java\jdk1.7.0_10)
+Path 변수도 수정. 맨 뒤에 %JAVA_HOME%\bin 를 추가하고 android-sdk 위치도 미리 추가
+%JAVA_HOME%\bin;C:\Cocos2dx\sdk\tools;C:\Cocos2dx\sdk\platform-tools
+'컴퓨터 재부팅 해서 적용'(다른 방법은 없나?)
+
+== Android SDK 설치 ==
+http://developer.android.com/sdk/index.html 에서 ADT Budle for Windows 다운로드 후 압축풀기
+SDK Manager.exe 를 실행한 뒤 안드로이드를 업데이트한다. 갤럭시s2 기준일 경우 2.3.3 만 설치하면 된다.
+앞에서 패스를 지정하지 않으면 SDK Manager.exe 가 제대로 실행되지 않을 수 있다.
+
+== 안드로이드 NDK ==
+http://developer.android.com/tools/sdk/ndk/index.html 에서 최신 파일을 다운받아 적당한 위치에 압축푼다.
+C:\Cocos2dx\android-ndk-r8d 에 압축풀었다.
+
+== cocos2d-x ==
+[http://www.cocos2d-x.org/ Cocos2dx 홈페이지] -> Download 에서 적당한 파일([http://cocos2d-x.googlecode.com/files/cocos2d-2.0-x-2.0.4.zip cocos2d-2.0-x-2.0.4 @ Nov 02 2012])을 다운받은 뒤 압축을 푼다.
+C:\Cocos2dx\cocos2d-2.0-x-2.0.4\create-android-project.bat 파일을 열어 아래와 같이 수정한다.
+set _CYGBIN=C:\cygwin\bin
+set _ANDROIDTOOLS=C:\Cocos2dx\sdk\tools
+set _NDKROOT=C:\Cocos2dx\android-ndk-r8d
+
+=== create-android-project.bat 실행 ===
+관리자 권한으로 create-android-project.bat 실행 -> 어짜피 여기에서 만든 프로젝트를 쓰진 않을테니 적당한 이름을 입력해 프로젝트를 하나 만들자. (sample 프로젝트를 복사/변형해서 사용할 거임)
+package path : com.test.game (package path 는 최소 Java 변수 두개는 합친 형태로 만들어야 한다.)
+project name : test1
+target 은 Android 2.3.3 용으로 하나 선택
+
+=== build_native.sh 수정 ===
+{{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp\proj.android}}} 프로젝트를 사용하기로 하자.
+{{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp\proj.android\build_native.sh}}} 을 열어
+{{{NDK_ROOT="C:/Cocos2dx/android-ndk-r8d"}}} 를 추가한다.
+
+=== cygwin 실행 ===
+cygwin 이 설치된 폴더에서 .bashrc 파일 수정(C:\cygwin\home\parkpd\.bashrc) 해 아래 내용을 추가
+{{{#!plain cpp
+# User dependent .bashrc file
+export PATH=$PATH:/cygdrive/c/Cocos2dx/android-ndk-r8d
+export ANDROID_NDK_ROOT=/cygdrive/c/Cocos2dx/android-ndk-r8d
+}}}
+
+관리자 권한으로 cygwin 실행한 뒤 cd 명령어로 {{{cygdrive/c/Cocos2dx/cocos2d-2.0-x-2.0.4/samples/HelloCpp/proj.android}}} 로 들어간 다음 ndk-build -B 실행
+*** Android NDK: Aborting. 이라는 메시지와 함께 멈추는데 괜찮다고 함(왜?).
+같은 폴더에서 ./build_native.sh 실행
+make: Leaving directory ... 어쩌고 나오면 성공한 것임.
+
+permission 에러가 나면 적절히 chmod 해줌. 
+{{{$chmod 644 obj/local/armeabi/*.a}}} 하고 나서 또 실행 {{{$./build_native.sh}}}
+
+== 삼성 갤럭시노트1 연결 ==
+디바이스는 삼성 갤럭시노트1 을 사용하고 있다.
+[http://www.samsung.com/sec/support/download/supportDownloadMain.do 삼성 메뉴얼& 다운로드] 에서 휴대폰 -> 스마트폰 -> SHV-E160K 삼성 갤럭시 노트 -> 휴대폰 소프트웨어 다운로드 '확인' 누르면 [http://www.samsung.com/sec/support/pcApplication/KIES/ Samsung Kies] 소프트웨어를 설치할 수 있다.
+참고로 갤럭시노트1 의 해상도는 1,280 * 800(WXGA) 이다.
+{{{#!plain cpp
+CCEGLView* eglView = CCEGLView::sharedOpenGLView();
+eglView->setFrameSize(800, 1280);
+}}}
+할 때 참고할 것
+
+== 이클립스 ==
+ADT Budle for Windows 에 같이 포함되어 있는 이클립스를 실행하면 따로 ADT plugin 설치 안 해도 된다.
+Menu -> File -> New -> Android Project from Existing Code 에서 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp}}} 선택 후 Finish 한다.
+프로젝트 마우스 우클릭 -> Properties -> Java Compiler -> Compiler compliance level 이 1.6 인지 확인한다.
+{{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\cocos2dx\platform\android\java\src\org\cocos2dx\lib}}} 안의 lib 폴더 통째로 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp\proj.android\src\org\cocos2dx}}} 에 복사한 뒤 프로젝트 폴더에서 F5 로 refresh 하면 소스코드 에러 제거된다.
+
+Run -> Run configurations -> Android Application 용으로 Configuration 하나 만든다.
+Android 탭에서 Browse 를 선택해 HelloCpp 를 선택한다.
+Target 탭에서는 Launch on all compatible device (Active devices and AVD's) 를 선택한다.
+
+{{{Unable to add 'C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp\proj.android\assets\ipad\CloseNormal.png': Zip add failed}}}
+{{{ERROR: packaging of 'C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp\proj.android\bin\resources.ap_' failed}}}
+이런 에러가 뜬다면 Windows7 권한 문제 때문이다. 실제로 C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp\proj.android\assets\ipad 폴더를 들어가보면 CloseNormal.png 가 viewer 에서 열리지 않을 것이다.
+그럴 때는 '관리자 권한'으로 실행한 cygwin 에서 /cygdrive/c/Cocos2dx/cocos2d-2.0-x-2.0.4/samples/HelloCpp/proj.android 에서 chmod 777 -R assets/ 를 한 번 실행한다. 그러면 탐색기에서 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\samples\HelloCpp\proj.android\assets\ipad\CloseNormal.png}}} 파일이 보이는 걸 확인할 수 있다. [http://westwoodforever.blogspot.kr/2012_07_01_archive.html 참고]
+{{{No active compatible AVD's or devices found. Relaunch this configuration after connecting a device or starting an AVD.}}} 에러가 뜬다면 자신의 핸드폰에 맞는 드라이버를 설치했는지 확인한다.
+USB 를 꽂은 뒤 Run 을 해도 잠금화면에서는 프로그램 실행된 걸 확인할 수 없다. 잠금화면을 풀고 메인화면으로 들어가서 확인한다.
+
+== 프로젝트 변경 및 빌드 ==
+ * 위에서 만든 HelloCpp 폴더를 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\work}}} 에 복사한 뒤 SudokuMaker 로 폴더 이름 변경.
+ * {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\work\SudokuMaker\proj.win32\HelloCpp.vcxproj}}} 를 더블클릭해 VisualStudio2010 실행
+ * Solution -> Add -> Existing Project -> {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\cocos2dx\proj.win32\cocos2d.vcxproj}}} 와 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\CocosDenshion\proj.win32\CocosDenshion.vcxproj}}} 추가한 뒤 Project Dependency 에 libcocos2d, libCocosDenshion 추가. 필요하다면 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\extensions\proj.win32\libExtensions.vcxproj}}} 도 추가한 뒤 Project Dependency 를 걸어준다.
+
+프로젝트를 수정한 뒤에는
+ * proj.android 폴더가 없을 경우 sample 폴더에서 가져와 복사한다.
+ * {{{proj.android\jni\Android.mk}}} 에 LOCAL_SRC_FILES 값에 추가된 .cpp 파일을 덧붙인 후에
+ * 관리자 권한으로 실행한 cygwin 에서 {{{cd /cygdrive/c/Cocos2dx/cocos2d-2.0-x-2.0.4/samples/HelloCpp/proj.android}}} 으로 들어간 뒤
+ * {{{./build_native.sh}}} 를 실행한다.
+  * {{{proj.android\jni\hellocpp}}} 파일을 다른 프로젝트에서 가져왔다면 첫 화면으로 보여주고 싶은 {{{CCLayer}}} 가 있는 파일을 {{{#include}}} 걸어준다.
+ * {{{chmod 777 -R assets/}}} 를 실행한다.
+ * override 키워드 등의 이유로 빌드가 실패하면 코드 수정한 뒤
+  * {{{./build_native.sh}}} 실행 -> {{{chmod 777 -R assets/}}} 을 반복한다.
+
+== 에러 ==
+=== Re-installation failed due to different application signatures. Please execute 'adb uninstall org.cocos2dx.hellocpp' in a shell. ===
+ * [http://blog.jidolstar.com/803 지돌스타 : 안드로이드 개발시 ADB가 실행중 "Please 'adb uninstall ~' in a shell" 에러 메시지가 뜰 경우 처리] 참고
+  * 한줄 요약 : cmd 로 {{{C:\Cocos2dx\sdk\platform-tools}}} 에 들어간 뒤 {{{adb.exe uninstall org.cocos2dx.hellocpp}}} 를 실행해 Success 가 뜨는 것을 확인한다.
+
+=== build_native.sh not finding SimpleAudioEngine.h ===
+아래 코드를 Android.mk 에 추가한다.
+{{{#!plain cpp
+LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static cocosdenshion_static
+
+include $(BUILD_SHARED_LIBRARY)
+
+$(call import-module,cocos2dx)
+$(call import-module,CocosDenshion/android)
+}}}
+
+== Visual Studio 프로젝트 마법사로 프로젝트 시작하기 ==
+ * {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\install-templates-msvc.bat}}} 를 실행
+ * New Project -> Visual C++ -> Cocos2d-win32 Application 항목이 추가된다.
+ * 다만 이 프로젝트 마법사는 [http://www.cocos2d-x.org/projects/cocos2d-x/wiki/Cocos2d-x_Application_Wizard_for_Visual_Studio_User_Guide Cocos2d-x Application Wizard for Visual Studio User Guide] 에서처럼 cocos2d-win32.vc2010.sln 안에서 프로젝트를 추가하고 프로젝트 location 을 cocos2d-x 소스폴더의 루트로 지정할 때에만 정상적으로 동작한다.
+  * 예 : {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4}}}
+ * 다른 폴더에 만들고 싶다면 프로젝트 생성한 뒤에 
+ * Properties -> Configuration Properties -> Additional Include Directories 를 적당히 잡아준 뒤
+ * Solution -> Add -> Existing Project -> {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\cocos2dx\proj.win32\cocos2d.vcxproj}}} 와 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\CocosDenshion\proj.win32\CocosDenshion.vcxproj}}} 추가한 뒤
+ * Project Dependency 에 libcocos2d, libCocosDenshion 추가.
+ * 필요하다면 {{{C:\Cocos2dx\cocos2d-2.0-x-2.0.4\extensions\proj.win32\libExtensions.vcxproj}}} 도 추가한 뒤 Project Dependency 를 걸어준다.
+이런 방식이 맘에 안 든다면 InstallWizardForVS2010.js 를 수정해 보는 것도 좋겠다.
+
+== 팁 ==
+=== 가로/세로 모드설정 ===
+안드로이드/Android screenOrientation (가로/세로 모드설정) 은 proj.android 폴더안의 AndroidManifest.xml 의 android:screenOrientation 을 landscape : 가로, portrait : 세로 중에서 선택하면 된다. [http://arabiannight.tistory.com/104 출처]
+=== 여러 해상도 지원 ===
+ * [http://www.cocos2d-x.org/projects/cocos2d-x/wiki/Multi_resolution_support cocos2d-x/wiki : Multi-resolution support]
+  * 한줄 요약 - {{{AppDelegate::applicationDidFinishLaunching}}} 에서 {{{CCEGLView::sharedOpenGLView()->setDesignResolutionSize(320, 480, kResolutionShowAll);}}} 와 같은 코드로 원하는 기준해상도를 지정하면 화면 크기에 따라 알아서 확대된다.
+ * [http://developer.android.com/guide/practices/screens_support.html developer.android.com : Supporting Multiple Screens] 는 여러 해상도 지원에 대한 일반적인 내용을 다루고 있다.
+
+== 참고 링크 ==
+ * [http://doodoori2.tistory.com/entry/cocos2dx-android-%EC%84%B8%ED%8C%85-windows 참고링크 : doodoori2 님 - cocos2d-x android 세팅 @windows]
+ * [http://hashs.tistory.com/126 hashs : cocos2d-x 안드로이드 개발환경 구축하기]
+ * [http://merds.tistory.com/305 merds : Cocos2d-x + Visual studio 2010 + Android VisualStudio 소스와 연동시키기]
+ * [http://cocos2dx.tistory.com/entry/cocos2dx-Android-Window-setting cocos2d-x Android Window setting (0) setting 준비]

@@ -1,0 +1,22 @@
+xUnit 테스트 패턴 : 68가지 단위 테스트 패턴을 통한 테스트 코드 리팩토링 기법
+ [http://www.acornpub.co.kr/book/xunit 소개 in 에이콘 출판사]
+ [http://www.yes24.com/24/goods/3720055?scode=032&srank=1 yes24]
+ [http://www.kyobobook.co.kr/product/detailViewKor.laf?&mallGb=KOR&ejkGb=KOR&barcode=9788960771253&orderClick=LBB 교보문고]
+ [http://www.aladdin.co.kr/shop/wproduct.aspx?ISBN=8960771252 알라딘]
+ [http://kangcom.com/sub/view.asp?topid=1&sku=201002260001 강컴]
+
+[http://xunitpatterns.com/ xUnit Test Patterns] [http://www.amazon.com/dp/0131495054?tag=xuntespat0f-2&camp=14573&creative=327641&linkCode=as1&creativeASIN=0131495054&adid=199X4SSSTBWYG51XKNYR& amazon] 베타리딩 및 Errata 용 페이지입니다.
+ * RSS 로 의견 올라오는 거 계속 확인하고 있습니다. 감사합니다. [ParkPD]
+ * [xUnitTestPatterns/ParkPD]
+ * [xUnitTestPatterns/용어]
+ * [xUnitTestPatterns/뒷면]
+ * [xUnitTestPatterns/역자서문]
+
+== 베타리더분들의 의견 ==
+ * [xUnitTestPatterns/kukuman의 의견]
+ * ["xUnitTestPatterns/ehkim"]
+ * [xUnitTestPatterns/ohyecloudy]
+ * [xUnitTestPatterns/benelog]
+ * ["xUnitTestPatterns/smryoo"]
+ * [xUnitTestPatterns/CynicJJ]
+ * [xUnitTestPatterns/junoyoon]

@@ -1,0 +1,6 @@
+이름 : 박경현
+직업 : 대용량 분산 데이터베이스 개발자
+이메일 : hareton91 @ naver.com
+홈페이지 : http://blog.naver.com/hareton91
+주로 쓰는 언어 : Java
+관심분야 : 데이터베이스, XML, 객체지향 디자인

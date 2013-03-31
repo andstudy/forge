@@ -1,0 +1,187 @@
+compile 에러랍니다. gcc 에서는 include 같은 걸 다르게 해 줘야 하나 보네요.
+언제 GCC 쓰는 법 한 번 배워야 겠어요.
+
+에러...
+{{{
+In file included from /usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/g++-v4/backward/strstream:51,
+                 from pgdaemon.tmp.cpp:12:
+/usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/g++-v4/backward/backward_warning.h:32:2: warning: #warning This file includes at least one deprecated or antiquated header. Please consider using one of the 32 headers found in section 17.4.1.2 of the C++ standard. Examples include substituting the <X> header for the <X.h> header for C++ includes, or <iostream> instead of the deprecated header <iostream.h>. To disable this warning use -Wno-deprecated.
+pgdaemon.tmp.cpp:169:26: warning: no newline at end of file
+pgdaemon.tmp.cpp: In static member function 'static std::string CReverseAdder::ToString(int)':
+pgdaemon.tmp.cpp:84: error: '_itoa' was not declared in this scope
+}}}
+ * C언어 해더를 C++표준형식으로 바꾸셔야 합니다. stdlib.h -> cstdlib
+ * itoa는 비표준입니다. gcc/g++에서는 구현되어 있지 않습니다.
+ * 소스코드의 마지막에는 빈줄이 꼭 있어야 합니다. 왜그런진 모르겠지만요 @_@);;
+
+{{{
+/* @JUDGE_ID:parkpd 10038 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
+#define _CRT_SECURE_NO_DEPRECATE 1 
+
+#include <stdlib.h>
+#include <iostream>
+#include <vector>
+#include <set>
+#include <strstream>
+#include <algorithm>
+
+using namespace std;
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+
+#include "../../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+class CReverseAdder
+{
+public:
+	static void GetOutput(int num, int& iter, int& palindrome);
+	static int MakeReverse(int num);
+	static bool IsPalindrome(int num);
+	static string ToString(int num);
+	static int ToInt(string s);
+};
+
+void CReverseAdder::GetOutput(int num, int& iter, int& palindrome)
+{
+	iter = 0;
+	while (!IsPalindrome(num))
+	{
+		num += MakeReverse(num);
+		iter++;
+	}
+	palindrome = num;
+}
+
+bool CReverseAdder::IsPalindrome(int num)
+{
+	string s = ToString(num);
+	const int size = s.size();
+	for (int i = 0; i < size / 2; ++i)
+	{
+		char a = s[i];
+		char b = s[size - i - 1];
+		if (a != b)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int CReverseAdder::MakeReverse(int num)
+{
+	string s = ToString(num);
+	reverse(s.begin(), s.end());
+	return ToInt(s.c_str());
+}
+
+std::string CReverseAdder::ToString( int num )
+{
+	// max : 4,294,967,295
+	char buffer[12];
+	_itoa(num, buffer, 10);
+	return string(buffer);
+}
+
+int CReverseAdder::ToInt( string s )
+{
+	return atoi(s.c_str());
+}
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	vector<int> testNums;
+
+	int count;
+	cin >> count;
+
+	int num;
+	for (int i = 0; i < count; ++i)
+	{
+		cin >> num;
+		testNums.push_back(num);
+	}
+
+	int iter;
+	int palindrome;
+	for (int i = 0; i < count; ++i)
+	{
+		CReverseAdder::GetOutput(testNums[i], iter, palindrome);
+		cout << iter << " " << palindrome << "\n";
+	}
+
+	return 0;
+}
+
+#else
+
+struct FixtureReverseAdder : public CReverseAdder
+{
+	int iter;
+	int palindrome;
+};
+
+TEST_FIXTURE(FixtureReverseAdder, ToStringToInt)
+{
+	string s = ToString(1423);
+	CHECK_EQUAL("1423", s);
+	int n = ToInt(s);
+	CHECK_EQUAL(1423, n);
+}
+
+TEST_FIXTURE(FixtureReverseAdder, MakeReverse)
+{
+	int n = 5214;
+	n = MakeReverse(n);
+	CHECK_EQUAL(4125, n);
+	n = MakeReverse(n);
+	CHECK_EQUAL(5214, n);
+}
+
+TEST_FIXTURE(FixtureReverseAdder, IsPalindrome)
+{
+	CHECK(!IsPalindrome(5214));
+	CHECK(IsPalindrome(9339));
+	CHECK(IsPalindrome(45254));
+}
+
+TEST_FIXTURE(FixtureReverseAdder, GetOutput)
+{
+	GetOutput(195, iter, palindrome);
+	CHECK_EQUAL(4, iter);
+	CHECK_EQUAL(9339, palindrome);
+
+	GetOutput(265, iter, palindrome);
+	CHECK_EQUAL(5, iter);
+	CHECK_EQUAL(45254, palindrome);
+
+	GetOutput(750, iter, palindrome);
+	CHECK_EQUAL(3, iter);
+	CHECK_EQUAL(6666, palindrome);
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

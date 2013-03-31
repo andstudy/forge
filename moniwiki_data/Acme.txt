@@ -1,0 +1,16 @@
+Acme
+ADL(Architecture Description Language) 의 일종
+
+공식 홈페이지 같은 거일까요?
+http://www.cs.cmu.edu/~acme/
+
+툴도 있다.
+http://www.cs.cmu.edu/~acme/AcmeStudio/index.html
+
+도움말:
+attachment:ASTutorial1.zip
+attachment:ASTutorial2.zip
+
+참고 문서
+ * http://www.opengroup.org/architecture/togaf/bbs/9910wash/adl_over.pdf
+ * http://www.opengroup.org/architecture/togaf/bbs/9910wash/adl_over.pdf

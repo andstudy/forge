@@ -1,0 +1,81 @@
+
+{{{#!gcode cpp
+#include <iostream>
+#include <map>
+
+
+void SortInput( int& i, int& j )
+{
+	if( i > j )
+		std::swap( i, j );
+}
+
+int cache[1000000] = {0,};
+
+int GetCycleLength( int k )
+{
+//	static std::map< int, int > chcheMap;
+//	std::map< int, int >::iterator itor = chcheMap.find( k );
+//	if( itor != chcheMap.end() )
+//		return itor->second;
+	if( cache[k] != 0 )
+		return cache[k];
+
+	if( k == 0 )
+		return 0;
+
+	int thisK = k;
+	int cycleLehgth = 1;
+	while( thisK != 1 )
+	{
+		/// odd
+		if( thisK&1 )
+		{
+			thisK = thisK * 3 + 1;
+		}else
+		{
+			thisK = thisK>>1;
+		}
+
+		//cycleLehgth += GetCycleLength( thisK );
+		cycleLehgth++;
+	}
+
+//	chcheMap.insert( std::make_pair( k, cycleLehgth ) );
+	cache[k] = cycleLehgth;
+//	std::cout << "k=" << k << ", length=" << cycleLehgth << std::endl;
+
+	return cycleLehgth;
+}
+
+int GetMaxCycleLength( int i, int j )
+{
+	SortInput( i, j );		
+
+	int maxCycleLength = 0;
+	for( int k = i; k <= j; k++ )
+	{
+		int tempCyclyLength = GetCycleLength(k);
+		if( tempCyclyLength > maxCycleLength )
+			maxCycleLength = tempCyclyLength;
+	}
+
+	return maxCycleLength;
+}
+
+
+int main ( char* arg[] )
+{
+
+	int i,j;
+	while( std::cin >> i >> j )
+	{		
+		int maxCycleLength = GetMaxCycleLength( i, j );
+		std::cout << i << " " << j << " " << maxCycleLength << std::endl;		
+	}
+
+
+	return 0;
+}
+
+}}}

@@ -1,0 +1,2 @@
+== 참고 ==
+루비로 해 보는 [ConstraintProgramming]. amb 등장합니다.

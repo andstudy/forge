@@ -1,0 +1,86 @@
+GameDeveloperMagazine200405 : The Game Design of Surreal’s The Suffering, p. 36
+GameDeveloperMagazine20040607 : EA Sports Fight Night 2004, p. 28
+GameDeveloperMagazine200408 : The Cinematic Effect of Zombie Studios’ Shadow Ops: Red Mercury, p. 34
+GameDeveloperMagazine200409: The Swinging System of Treyarch’s Spider-Man 2 game, p. 26, Brainstorming, p. 47
+GameDeveloperMagazine200410 : The Mobile Multiplayer of Blue Ridge’s Momentum, p. 25
+GameDeveloperMagazine200411 : Two Timing: Timegate Studios’ Kohan II and Axis & Allies, p. 34
+GameDeveloperMagazine200412 : The Singular Design of Katamari Damacy, p. 34
+GameDeveloperMagazine200501 : Avoiding Sequelitis in The Sims 2, p. 38
+GameDeveloperMagazine200502 : Up You Arsenal: On and Offline in Ratchet & Clank, p. 28
+GameDeveloperMagazine200503 : What’s Inside the Room? The Horrors of Silent Hill 4 Investigated, p. 34
+GameDeveloperMagazine200504 : Jedi Mind Trick: Choice and Consequence in KOTOR II, p. 30
+GameDeveloperMagazine200505 : Indie Power! Riding the FBI with Alien Hominid, p. 28
+GameDeveloperMagazine20050607 : A Collective Backbone: Foundation 9’ Development Dream, p. 24
+GameDeveloperMagazine200508 : Head Games: Double Fine’s Psychonautic Break, p. 30
+GameDeveloperMagazine200509 : Before Crisis: Final Fantasy VII, p. 28
+GameDeveloperMagazine200510 : The Graphical Styling of Resident Evil 4, p. 26
+GameDeveloperMagazine200512 : Designing Pac-Man, p. 26
+GameDeveloperMagazine200601 : Chomping at the Bit: Wideload Games’ Studio Experiment Bites Back with Stubbs, p. 24
+GameDeveloperMagazine200602 : The Buzz on Hamonix’s Guitar Hero, p. 24
+GameDeveloperMagazine200603 : Gun: The Good, the Bad and the Ugly, p. 34
+GameDeveloperMagazine200604: Ubisoft’s Peter Jackson’s King Kong, p. 28
+GameDeveloperMagazine200605 : Konami’s Metal Gear: Playing the 3D Card, p. 28
+GameDeveloperMagazine20060607 : Indigo Prophecy – The Nightmare of the Original Concept, p. 24
+GameDeveloperMagazine200608 : Reestablishing an Icon: The Peaks and Pitfalls of Tomb Raider: Legend, p. 24
+GameDeveloperMagazine200609 : Gamevil’s NOM, p. 25
+GameDeveloperMagazine200610 : Iron Lore’s Titan Quest, p. 36
+GameDeveloperMagazine200611 : Creeping Death: Designing the DeathWalk System in Prey, p. 31
+GameDeveloperMagazine200612 : Detonating Introversion’s DEFCON, p. 26
+GameDeveloperMagazine200701 : Not Your Typical Grind: Tony Hawk’s Downhill Jam for Wii, p.30
+GameDeveloperMagazine200702 : Resistance: Fall of Man, p.28
+GameDeveloperMagazine200703 : Sam & Max: A Journey Through Episodic Gaming, p.26
+GameDeveloperMagazine200704 : Advent of Advergaming: Blitz Games’ Burger King Games, p.20
+GameDeveloperMagazine200705 : Konami’s Elebits, p.28 
+GameDeveloperMagazine20070607 : Big Huge Games’ Catan for Xbox Live Arcade, p.20
+GameDeveloperMagazine200708 : Final Fantasy XII, p.23
+GameDeveloperMagazine200709 : Infinite Interactive’s Puzzle Quest: Challenge of the Warlords, p.43
+GameDeveloperMagazine200710 :  Realtime Worlds’ Crackdown, p.26
+[GameDeveloperMagazine200711] : 2K Games’ Bioshock, p.20
+GameDeveloperMagazine200712 : 5th Cell’s Drawn to Life, p.23
+GameDeveloperMagazine200801 : Midway Games’ Stranglehold, p.32
+GameDeveloperMagazine200802 : Ratchet & Clank Future: Tools of Destruction, p.32
+GameDeveloperMagazine200804 : Infinity Ward’s Call of Duty 4, p.24
+[GameDeveloperMagazine200804] : Naughty Dog’s Uncharted: Drake’s Fortune, p.24
+GameDeveloperMagazine200805 : Harmonix’s Rock Band, p.36 
+GameDeveloperMagazine20080607 : Square Enix’s Final Fantasy Crystal Chronicles: My Life as a King, p.34
+GameDeveloperMagazine200808 : Penny Arcade Adventures, p.28
+GameDeveloperMagazine200809 : Metanet's N+
+GameDeveloperMagazine200810 : Square Enix's The world ends with you
+GameDeveloperMagazine200811 : Certain Affinity's Age of booty
+GameDeveloperMagazine200812 : Twisted Pixel's The Maw 
+GameDeveloperMagazine200901 : Little big planet
+GameDeveloperMagazine200902 : Golden axe : Beast rider
+GameDeveloperMagazine200903 : Ubisoft montreal's Far Cry 2 
+GameDeveloperMagazine200904 : Volition Inc.'s Saints Row 2
+GameDeveloperMagazine200905 : Rainbow's Deadly creatures 
+GameDeveloperMagazine2009067 : Crystal dynamics' Tomb raider : underworld
+GameDeveloperMagazine200908 : High Voltage's The Conduit 
+GameDeveloperMagazine200909 : Kingsisle Entertainment's Wizard101
+GameDeveloperMagazine200910 : Sucker Punch's inFamous 
+GameDeveloperMagazine200911 : 5th Cell's Scribblenauts 
+GameDeveloperMagazine200912 : Double Fine'2 Brutal Legend 
+[GameDeveloperMagazine201001] : NCSOFT : AION
+[GameDeveloperMagazine201002] : Borderlands
+[GameDeveloperMagazine201003] : Uncharted 2 Among thieves
+[GameDeveloperMagazine201004] : Sony online entertainment : Free Reamls
+[GameDeveloperMagazine201005] : Telltale Games : Tales of Monkey Island
+[GameDeveloperMagazine20100607] : Vigil Games : Darksiders
+[GameDeveloperMagazine201008] : Access Games : Deadly premonition
+[GameDeveloperMagazine201009] : RAVEN SOFTWARE'S SINGULARITY
+[GameDeveloperMagazine201010] : SQUARE ENIX'S FINAL FANTASY XIII
+[GameDeveloperMagazine201011] : Beenox's Spider-Man: Shattered Dimensions
+[GameDeveloperMagazine201012] : UBISOFT MONTREAL'S SPLINTER CELL CONVICTION
+[GameDeveloperMagazine201101] : HARMONIX' DANCE CENTRAL
+[GameDeveloperMagazine201102] : Minecraft
+[GameDeveloperMagazine201103] : CIVILIZATION V
+[GameDeveloperMagazine201104] : Super Meat Boy
+[GameDeveloperMagazine201105] : Xbox Live Indie Games
+[GameDeveloperMagazine20110607] : Rift
+[GameDeveloperMagazine201109] : Section 8: Prejudice, Superbrothers: Sword & Sworcery EP
+GameDeveloperMagazine201110 : Bulletstorm
+GameDeveloperMagazine201202 : Stacking 
+[GameDeveloperMagazine201203] : Halo, combat evolved anniversary
+GameDeveloperMagazine201204 : Kingdoms of amalur : Reckoning
+[GameDeveloperMagazine201205] : Indiana Jones Adventure World
+
+[포스트모르템]

@@ -1,0 +1,135 @@
+== Exercise 3.1 ==
+{{{#!gcode
+(define (make-accumulator accumulation)
+  (lambda (num)
+    (begin (set! accumulation (+ accumulation num))
+           accumulation)))
+}}}
+
+== Exercise 3.2 ==
+{{{#!gcode
+(define (make-monitored f)
+  (define count 0)
+  (define (dispatch m)
+    (cond ((eq? m 'reset-count) (begin (set! count 0) count))
+          ((eq? m 'how-many-calls?) count)
+          (else (begin (set! count (+ count 1)) (f m)))))
+  dispatch)
+}}}
+
+== Exercise 3.3 ==
+{{{#!gcode
+(define (make-account balance password)
+  (lambda (input-password m)
+    (define (withdraw amount)
+      (if (>= balance amount)
+          (begin (set! balance (- balance amount))
+                 balance)
+          "Insufficient funds"))
+    (define (deposit amount)
+      (begin (set! balance (+ balance amount))
+             balance))
+    (define (wrong-password dummy)
+      "Incorrect password")
+    (define (dispatch m)
+      (cond ((eq? m 'withdraw) withdraw)
+            ((eq? m 'deposit) deposit)
+            (else (error "Unknown request -- MAKE-ACCOUNT"
+                         m))))
+    (cond ((eq? input-password password) (dispatch m))
+          (else wrong-password))))
+}}}
+
+== Exercise 3.4 ==
+{{{#!gcode
+(define (make-account balance password)
+  (define wrong-count 0)
+  (lambda (input-password m)
+    (define (withdraw amount)
+      (if (>= balance amount)
+          (begin (set! balance (- balance amount))
+                 balance)
+          "Insufficient funds"))
+    (define (deposit amount)
+      (begin (set! balance (+ balance amount))
+             balance))
+    (define (wrong-password dummy)
+      (begin (set! wrong-count (+ wrong-count 1))
+      wrong-count)
+      (if (> wrong-count 7) "call-the-cops"
+          "Incorrect password"))
+    (define (dispatch m)
+      (cond ((eq? m 'withdraw) withdraw)
+            ((eq? m 'deposit) deposit)
+            (else (error "Unknown request -- MAKE-ACCOUNT"
+                         m))))
+    (cond ((eq? input-password password)
+           (begin (set! wrong-count 0);패스워드가 맞으면 틀린 카운트를 초기화 한다.
+                  (dispatch m)))
+          (else wrong-password))))
+}}}
+
+== Exercise 3.5 ==
+{{{#!gcode
+;; random ----
+(define (random-in-range low high)
+  (let ((range (- high low)))
+    (+ low (random-real range))))
+
+(define (random-real range) (* range (random)))
+
+;; estimate-integral ----
+(define (monte-carlo trials experiment)
+  (define (iter trials-remaining trials-passed)
+    (cond ((= trials-remaining 0)
+           (/ trials-passed trials))
+          ((experiment)
+           (iter (- trials-remaining 1) (+ trials-passed 1)))
+          (else
+           (iter (- trials-remaining 1) trials-passed))))
+  (iter trials 0.0)) ; 소수로 나타내기 위해서.
+
+(define (estimate-integral p x1 x2 y1 y2 trials)
+  (let ((width (- x2 x1))
+        (height (- y2 y1)))        
+    (* (monte-carlo trials p)
+       (* width height))))
+
+(define (unit-circle-test)
+  (define (square x) (* x x))
+  (let ((rand-x (random-in-range -1 1))
+        (rand-y (random-in-range -1 1)))
+    (<= (+ (square rand-x) (square rand-y)) 1)))
+
+;; test ----
+(estimate-integral unit-circle-test -1 1 -1 1 10000)
+}}}
+
+== Exercise 3.6 ==
+{{{#!gcode
+; rand-update from SICP homepage
+(define (rand-update x)
+  (let ((a 27) (b 26) (m 127))
+    (modulo (+ (* a x) b) m)))
+
+(define rand-init 0)
+
+(define rand
+  (let ((x rand-init))
+    (define (dispatch m)
+      (cond ((eq? m 'generate)
+             (set! x (rand-update x))
+             x)
+            ((eq? m 'reset)
+             (lambda (reset-num)
+               (set! x reset-num)
+               x))))
+    dispatch))
+
+;; test ----
+(rand 'generate)
+(rand 'generate)
+(rand 'generate)
+((rand 'reset) 0)
+(rand 'generate)
+}}}

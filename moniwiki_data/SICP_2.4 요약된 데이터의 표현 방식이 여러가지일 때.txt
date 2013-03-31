@@ -1,0 +1,227 @@
+= 데이터 요약(데이터 간추리기) =
+ * 한 프로그램을 설계할 때 그 프로그램에서 다루고자 하는 데이터를 어떻게 
+ 구현했는지가 외부에 드러나지 않도록 프로그램의 체계를 잡아가는 방법
+
+ * 2.1.1절에서처럼 리스트 구조로, 유리수를 표현하는 방식과 그런 유리수를 쓰는 
+ 방식을 서로 갈라놓을 수 있도록 둘 사이에 요약의 경계(간추림 경계)를 세운 다는것
+
+ * 데이터 요약을 통해 요약의 경계를 긋는 다는 것은 복잡한 설계를 다루는 데 
+ 더할 나위 없이 뛰어난 수단이 된다.(큰 프로그램의 설계를 작은 일로 나누어
+ 다룰 수 있음 즉 모듈화)
+
+ '''하. 지. 만''' 한 데이터를 표현하는 방식에도 여러 가지가 있을 수 있음
+
+ * 프로그래밍 시스템 설계라는 것 자체가 여러 사람이 오랜 시간에 걸쳐 함게 하는 일
+
+ * 데이터 요약을 통해 데이터의 표현법과 쓰임새를 떼어놓을 수 있도록 데이터 사이에
+ 요약의 경계를 세워야 함은 기본이고, 서로 다른 설계 방식 사이에도 요약의 경계를
+ 잡아서 한 프로그램 속에 서로 다른 설계 방식 사이에도 요약의 경계를 잡아서 한 
+ 프로그램 속에 서로 다른 설계 방식이함께 자리 잡을 수 있도록 해야 한다.
+
+ * 프로그래머가 모듈 설계나 구현을 손보지 않고 있는 그대로 큰 시스템 속에 덧붙여 
+ 넣을 수 있는 방식이 필요하다
+
+ * 한 프로그램 속에서 여러 방식으로 표현된 데이터를 어떻게 다루는지 알아보자.
+
+== 일반화된 프로시저(generic procedure) ==
+ * 한 데이터를 표현하는 방식이 하나가 아닐 때 이런 데이터들을 받아들여 정해진 
+ 연산을 해 낼 수 있도록 정의된 프로시저를 말한다.
+
+ * 타입표시(type tag)
+  * 일반화된 프로시저를 정의할때 주로 쓰는 기법으로 데이터 속에 그표현 방식을 
+  알려주는 글귀로 타입표시(type tag)를 붙여서 프로시저가 그 표시를 읽고 그에 
+  맞추어 데이터를 처리하도록 하는 것.
+
+ 1) 단순한 복소수 연산
+ 2) 직각 좌표와 극 좌표 표현을 설계
+ 3) 타입 표시와 데이터 중심 방식에 따라 여러 표현 방식을 간추림
+ 4) 복소수의 표현 방식을 가리지 않게 일반화 된 고르개를 정의, 복소수 연산을 정의
+
+
+  attachment:complex.gif
+
+ 가로로 그은 경계는 위층의 연산과 아래층의 '''표현이 나뉘어 있음'''을 보여준다.
+ 세로로 그은 요약의 경계는 한 '''데이터를 표현하는 데 여러 방식'''이 있을 수 있고
+ 이를 '''따로 설계하거나 구현하여 덧붙여 넣을 수 있음'''을 알려준다.
+
+=== 타입에 따라 나누어 맡기기(dispatching on type) 구현 ===
+ * 단순한 복소수 연산
+  * 복소수
+    실수와 허수축으로 이루어진 이차원 공간에서 그 평면 위에 놓인 점의 집합
+
+   * 복소수 연산 구현
+    real-part, imag-part, magnitude, angle
+   * 복소수를 짜맞추은 프로시저
+   make-from-real imag : 실수부와 허수부로 이루어진 복소수를 내놓음
+   make-from-mag-ang : 크기와 각도를 받아서 복소수를 만들어 냄
+
+   * 복소수 산술 연산을 구현
+   add-complex, sub-complex (실수부와 허수부를 사용)
+   mul-complex, div-complex (크기와 각을 사용)
+
+   * 직각 좌표와 극 좌표 표현을 설계
+   직각 좌표에 따라 쌍으로 복소수를 표현(실수부, 허수부) 방식과 극좌표(크기, 각도)
+   에 따라 쌍으로 복소수를 표현하는 방식 두가지 중 어느쪽을 따르는게 좋을까?
+
+  '''그때 그때 달라요~'''
+
+   * 즉, 데이터 요약(데이터 간추리기)원칙에 따르면 무엇을 쓰든 복소수 연산은
+   똑같은 방법으로 구현 할 수 있어야 하며, 이 연산들은 두 표현 방식 모두와 잘 
+   맞물려 돌아가야 한다.
+
+  * 타입 표시와 데이터 중심 방식에 따라 여러 표현 방식을 간추림
+   * 데이터 요약이란?
+    * 판단을 한껏 미루자는 원칙에 따라 프로그램을 설계하는것(runtime?)
+    * 고르개와 짜맞추개 연산으로 요약한 데이터 사이에 요약의 경계를 잡아 놓으면 
+    데이터의 판단을 뒤로 미룰 수 있으므로, 시스템을 설계하는 일에서 선택의 폭이
+    그만큼 넓어진다.
+			
+   * 타입 표시(type-tag)
+    * 데이터의 표현 방식이 무엇인지 알 수 있도록 정의하는것
+    * 예제로 든 모든 복소수 물체에 타입 표시가 붙어 있기 때문에, 예제의 표현 방식이
+    한 시스템에 자리잡게 만들 수 있다.
+
+  * 복수수의 표현 방식을 가리지 않게 일반화 된 고르개를 정의, 복소수 연산을 정의
+   * 물체에 붙은 표시를 살펴보고, 알맞은 프로시저를 호출 할 수 있게 됨
+{{{#!gcode
+(define (attach-tag type-tag contents)
+  (cons type-tag contents))
+(define (type-tag datum)
+  (if (pair? datum)
+      (car datum)
+      (error "Bad tagged datum -- TYPE-TAG" datum)))
+(define (contents datum)
+  (if (pair? datum)
+      (cdr datum)
+      (error "Bad tagged datum -- CONTENTS" datum)))
+
+(define (rectangular? z)
+  (eq? (type-tag z) 'rectangular))
+
+
+(define (real-part z)
+  (cond ((rectangular? z) 
+         (real-part-rectangular (contents z)))
+        ((polar? z)
+         (real-part-polar (contents z)))
+        (else (error "Unknown type -- REAL-PART" z))))
+}}}		
+   * 일반화된 연산으로 정의 되기 때문에 달리 손보지 않더라도 두 표현 방식과 잘 맞물려 돌아간다.
+
+  attachment:complex1.gif
+
+  * 고르개 연산이 데이터 타입을 가리지 않고 돌아가느 까닭은, 데이터 물체마다 타입을
+  나타내는 표시가 붙어 있기 때문이다.	
+
+  * 고르개 연산은 저마다 인자로 받은 데이터 타입에 따라 알맞은 방식으로 돌아가게끔
+  정의되어 있다.
+
+  * 층과 층 사이에서 데이터를 주고 받으며 표시를 붙였다 뗐다 하는 기법은, 
+  큰 프로그램을 짜맞출 때 쓸 수 있는 중요한 방법이다.
+
+=== 데이터 중심 프로그래밍과 덧붙임 성질 구현 ===
+  * 타입에 따라 나누어 맡기기의 문제점
+   * 일반화된 인터페이스 프로시저를 만들고자 할 때 모든 표현방식을 미리 알아야 한다.
+   * 따로 설계된 여러 데이터 표현을 뭉쳐서 한 시스템으로 엮어 내는데 서로 다른 
+   표현 속에서 똑같이 이름 지은 프로시저가 없다는 사실이 뒷받침 되어야 한다.
+
+  새로운 표현을 받아 들일 때마다 일반화된 고르개 연산을 그에 맞게 고쳐야 할 뿐
+  아니라, 따로 만든 여러 표현을 이어 붙일 적에도 같은 이름을 쓰는 일이 없도록 모든
+  코드를 손봐야 한다. 이러한 약점을 걷어내기 위해서 훨씬 더 모듈 방식에 맞게 시스템
+  을 설계하는 방법이 필요하다. 
+
+  이른바 '''데이터 중심 프로그래밍'''이 이런 문제를 푸는 데 쓸 수 있는 기법 가운데
+  하나이다.
+
+  * 데이터 중심 프로그래밍
+   * 프로그램을 짤 때 아래 표와 같이 서로 다른 여러 데이터 타입 사이에 
+   공통된 연산을 다룸
+   * 연산과 타입을 두축으로 하는 이차원 표를	다루는 것과 같다. 프로그램을 짤 때 
+   이런 표를 곧바로 쓸 수 있도록 하여 이를 바탕으로 일반화된 연산을 구현하는 기법
+   * 이차원 표 속에 타입과 연산이 만나는 자리에는 그 타입에 알맞은 연산을 구하는 
+   프로시저가 들어 있다. 
+  attachment:sheet.gif
+   * 인터페이스 구현
+    연산이름과 인자 타입에 따라 표에서 알맞은 프로시저를 찾아내어 그 프로시저를
+    인자의 내용물에 적용하는 일을 한다.
+
+     (put <''op''> <''type''> <''item''>)
+     <''op''>와 <''type''>으로 <''item''>을 꺼내 쓸 수 있도록 <''item''>을 표에 집어 넣는다.
+
+     (get <''op''> <''type''> <''item''>)
+     표에서 <''op''>, <''type''>자리에 있는 원소를 꺼내온다. 그런 원소가 표에 없으면 거짓이라고 답한다.
+
+   * 꾸러미 내부에 프로시저가 정의되기 때무에 이름이 겹쳐질 걱정은 없다.
+   * 프로시저 정의 후 연산-타입 표에 집어 넣어서 시스템에 맞물리도록 만든다.
+
+	
+   * 일반화된 고르개 연산을 정의하기 위해 표에서 알맞은 프로시저를 꺼냄
+    연산 이름과 인자 타입에 맞는 프로시저를 찾아낸 다음 그 프로시저를 인자에
+    적용하는 apply-generic이라는 연산을 정의하여 사용
+{{{#!gcode
+   (define (install-rectangular-package)
+  ;; internal procedures
+  (define (real-part z) (car z))
+  (define (imag-part z) (cdr z))
+  (define (make-from-real-imag x y) (cons x y))
+  (define (magnitude z)
+    (sqrt (+ (square (real-part z))
+             (square (imag-part z)))))
+  (define (angle z)
+    (atan (imag-part z) (real-part z)))
+  (define (make-from-mag-ang r a) 
+    (cons (* r (cos a)) (* r (sin a))))
+  ;; interface to the rest of the system
+  (define (tag x) (attach-tag 'rectangular x))
+  (put 'real-part '(rectangular) real-part)
+  (put 'imag-part '(rectangular) imag-part)
+  (put 'magnitude '(rectangular) magnitude)
+  (put 'angle '(rectangular) angle)
+  (put 'make-from-real-imag 'rectangular 
+       (lambda (x y) (tag (make-from-real-imag x y))))
+  (put 'make-from-mag-ang 'rectangular 
+       (lambda (r a) (tag (make-from-mag-ang r a))))
+  'done)
+
+
+(define (apply-generic op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          (error
+            "No method for these types -- APPLY-GENERIC"
+            (list op type-tags))))))
+
+
+
+Using apply-generic, we can define our generic selectors as follows:
+
+
+
+(define (real-part z) (apply-generic 'real-part z))
+(define (imag-part z) (apply-generic 'imag-part z))
+(define (magnitude z) (apply-generic 'magnitude z))
+(define (angle z) (apply-generic 'angle z))
+
+
+
+}}}
+
+=== 메시지 패싱 ===
+  * 데이터 물체가 연산 이름을 메시지 처럼 받는다는다는 생각에서 비롯된 이름	
+   자세한건 3장에서~~
+
+{{{#!gcode
+   (define (make-from-real-imag x y)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part) x)
+          ((eq? op 'imag-part) y)
+          ((eq? op 'magnitude)
+           (sqrt (+ (square x) (square y))))
+          ((eq? op 'angle) (atan y x))
+          (else
+           (error "Unknown op -- MAKE-FROM-REAL-IMAG" op))))
+  dispatch)
+}}}
+

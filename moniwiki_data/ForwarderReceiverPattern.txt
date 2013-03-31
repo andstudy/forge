@@ -1,0 +1,71 @@
+[POSA1]
+[[TableOfContents]]
+= Forwarder-Receiver =
+ * Forwarder-Receiver 디자인 패턴은 투명한 inter process communication 을 제공한다. 	
+ * 통신 메커니즘으로부터 peer들을 분리시킨다.
+
+== Example ==
+컴퓨터 네트웍 관리 프로그램
+각 Network node 에 agent process.
+각 Agent는 Observing & Monitoring events, resources 한다.
+네트웍설정을 변경하거나 동작을 Control 할 수 있다.
+Peer들은 특별한 IPC 메커니즘에 종속되지 않아야 한다.
+
+== Context ==
+P2P Communication
+
+== Problem ==
+ * Low-level IPC 를 직접 사용하면 OS와 Network protocol 에 종속적이게 된다.
+  * 통신 메카니즘의 교환이 가능함.
+  * Sender 는 receivers의 이름만 알면 된다.
+  * Peer 사이의 통신은 성능상의 중요한 영향(충돌)이 없다.
+
+== Solution ==
+ * 분산된 peer들은 문제를 해결하기위해 협업한다.
+ * Peer 는 client 일 수도 있고, Server 일 수도 있고, 둘 다일 수도 있다.
+ * 각 분리된 components에 캡슐화에 의해 IPC 메커니즘의 세부사항은 감추어져 있다.
+  * 이름과 물리적 위치 간의 Mapping
+  * 통신 채널의 생성
+  * Marshaling & unmarshaling
+
+== Scenario ==
+보통의 forwarder-Receiver 구조
+ * P1 은 forw1 과 수신자의 이름을 명시해서 p2 에게 service 요청을 보낸다.
+ * Forw1 은 remote peer 의 주소를 결정하고, Message 를 Marshal  한다.
+ * Forw1 은 remote receiver Recv2 에게 Msg 를 전달한다.
+ * P2 는 요청이 오는것을 기다리는 recv2 를 요청해놨다. Forw1 으로부터 메시지를 Recv2가 받는다.
+ * Recv2는 메시지를 unmarshal 하고 p2에게 전달한다.
+ * 그 사이에 p1은 recv1을 호출해 응답을 기다린다.
+ * P2 는 요청을 수행하고 결과를 보낸다. Forw2는 결과를 marshal 하고 recv1에게 전달한다.
+ * Recv1은 응답을 p2 로 부터 받고 unmarshal 하고 p1 에게 전달한다.
+
+== Implementation ==
+ 1. 이름-주소 Mapping 을 명시화. (Namespace 정의.)
+ 1. Peers 사이에서 사용되어질 msg protocol 을 명시
+ 1. 통신 메커니즘 선택
+ 1. Forwarder 구현
+ 1. Receiver 구현
+ 1. Peer 구현. Server, client 셋.
+ 1. Start-up configuration 구현.( ex)name-ip set 구축 )
+
+== Variants ==
+ * Forwarder-Receiver without name-to-address mapping.
+  * 때때로 모든 IPC 메카니즘을 캡슐화 하는 것보다 성능이 더 중요시 될 때 이름으로 주소를 찾는 작업을 receiver와 forwarder에서 삭제한다. 
+  * 이는 PC 메커니즘 변경성을 감소시킨다.
+
+== Known Uses ==
+ * TASC
+ * REBOOT
+ * ATM-P
+ * BrouHaHa
+
+== Consequences ==
+=== Benefits ===
+ * 효과적인 통신 제공
+ * 실제 IPC의 캡슐화
+
+=== Liabilities ===
+ * Components 들의 유연한 재 구성을 제공하지 않는다.
+=== Benefits & Liabilities ===
+
+== Related Patterns ==

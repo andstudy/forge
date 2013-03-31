@@ -1,0 +1,3 @@
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-100312191047-phpapp02&stripped_title=ss-3415927" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}

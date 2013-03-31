@@ -1,0 +1,4 @@
+ [http://www.omg.org/docs/formal/07-11-04.pdf OMG Unified Modeling Language (OMG UML) Infrastructure, V2.1.2]
+ [http://www.omg.org/spec/UML/2.1.2/ Documents associated with UML Version 2.1.2]
+ [UML-RT]
+ [http://www.agilemodeling.com/ AgileModeling]

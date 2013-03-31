@@ -1,0 +1,12 @@
+=== 4주차 ( 10월 22일 ) ===
+
+ * 참석자
+  이동현, 강대명, 전효성, 한승오, 박일, 이수안, 김미선
+
+ * 발표자
+  이동현, 강대명, 전효성
+
+  * Overview
+  * Wrapper facade
+  * Component configurator
+  * Interceptor

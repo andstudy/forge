@@ -1,0 +1,201 @@
+[http://www.research.att.com/~njas/sequences/ sequences 알아내기. 와우!]
+[http://www.research.att.com/~njas/sequences/?q=1%2C2%2C2%2C3%2C3%2C4%2C4%2C4%2C5%2C5%2C5%2C6&language=english&go=Search Golomb's sequence]
+[http://www.research.att.com/~njas/sequences/b001462.txt 문제의 순열]
+[http://www.research.att.com/~njas/sequences/table?a=1462&fmt=4 문제의 순열1]
+
+이게 무슨 순열인지 이해하는 데에만 1시간이 더 걸렸네요. 머리가 굳은 거 같아 걱정이예요. T_T
+
+{{{
+-- Library
+
+function fwrite(fmt, ...)
+	return io.write(string.format(fmt, unpack(arg)))
+end
+
+function swrite(fmt, ...)
+	return string.format(fmt, unpack(arg))
+end
+
+function SwapBySize(i1, i2)
+	if (i2 < i1) then
+		return i2, i1
+	end	
+	return i1, i2
+end
+
+function IsBetween(i, i1, i2)
+	i1, i2 = SwapBySize(i1, i2)
+	return i1 <= i and i <= i2
+end
+
+function PrintTable(t)	
+	fwrite("%s\n", ConvertTableToString(t))
+end
+
+function ConvertTableToString(t)
+	s = "["
+	for _, k in pairs(t) do
+		s = s..tostring(k)..' '
+	end
+	s = s .. "]"
+	return s
+end
+
+function pack(...)
+	return arg
+end
+
+function PushBackTable(t, a, n)
+	for _ = 1, n do
+		t[#t + 1] = a
+	end
+	return t
+end
+
+-- UnitTest
+UnitTest = {test = 0, success = 0, failed = 0}
+
+function UnitTest:new(o)
+	o = o or {}
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function UnitTest:ShowResult()
+	if UnitTest.failed == 0 then
+		fwrite("Success : %d tests passed\n", UnitTest.success)
+	else
+		fwrite("Failed : %d in tests %d\n", UnitTest.failed, UnitTest.test)
+	end
+end
+
+function Check(name, actual)
+	UnitTest.test = UnitTest.test + 1
+	if not actual then
+		fwrite("Check Failed in %s\n", name)
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+function CheckEqual(name, expect, actual)
+	UnitTest.test = UnitTest.test + 1
+	if (expect ~= actual) then
+		fwrite("CheckEqual Failed in %s. %s expected but actual is %s\n", name, tostring(expect), tostring(actual))
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+function CheckArrayEqual(name, expect, actual)
+	UnitTest.test = UnitTest.test + 1
+	
+	local fail = false
+	if (#expect == #actual) then
+		for k, v in pairs(expect) do
+			if (actual[k] ~= v) then
+				fail = true
+				break
+			end			
+		end		
+	else
+		fail = true
+	end
+		
+	if (fail) then
+		fwrite("CheckArrayEqual Failed in %s. %s expected but actual is %s\n", name, ConvertTableToString(expect), ConvertTableToString(actual))
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+-- Algorithm
+
+GSeq = {Nums = {1, 2}, k = 3, v = 3}
+function GSeq:new(o)
+	o = o or {}
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function GSeq:GetNearSeq(num)
+	for i = 0, num do
+		if (self.Nums[num - i] ~= nil) then
+			return self.Nums[num - i]
+		end
+	end
+	
+	assert(0)
+	return -1
+end
+
+-- k 의 위치는 아직 순열을 만들지 않은 최초의 key 를 가리키고
+-- v 의 위치는 바로 이전에 처리한 순열의 마지막 위치를 가리킨다.
+-- 즉, 다음 순열은 k 부터 시작하고, 
+-- k 라는 숫자를 v + 1 위치에서부터 f(k) 만큼 추가해 주면 된다.
+function GSeq:GetF(num)
+	while (self.v < num) do
+		self.Nums[self.v + 1] = self.k
+		if (self.Nums[self.k] ~= nil) then
+			self.v = self.v + self.Nums[self.k]
+		else
+			-- 바로 이전 녀석을 찾는다.
+			self.v = self.v + self:GetNearSeq(self.k)
+		end
+		
+		self.k = self.k + 1
+	end
+	
+	return self:GetNearSeq(num)
+end
+
+-- test part
+
+do
+	local t = {1, 2, 3}
+	local k = PushBackTable(t, 6, 2)
+	CheckArrayEqual("PushBackTable", {1, 2, 3, 6, 6}, k)
+end
+
+do
+	local testSet = 
+		{
+		  	4, 3,
+		  	5, 3,
+		  	6, 4,
+		  	7, 4, 
+		  	8, 4, 
+		  	9, 5
+		}
+
+	for i = 1, #testSet, 2 do
+		CheckEqual("GetF _ "..testSet[i], testSet[i + 1], GSeq:GetF(testSet[i]))
+	end	
+end
+
+do
+	CheckEqual("GetF 1", 21, GSeq:GetF(100))
+	CheckEqual("GetF 1", 356, GSeq:GetF(9999))
+	CheckEqual("GetF 1", 1684, GSeq:GetF(123456))
+	
+	-- 첫 방법으로 했을 때는 메모리가 부족하다고 나왔다. 냠...
+	-- 이정표만 찍으면서 진행하자.
+	CheckEqual("GetF 1", 438744, GSeq:GetF(1000000000))
+end
+
+UnitTest:ShowResult()
+
+-- input part
+
+while 1 do
+	local count = io.read("*number")
+	if count == nil then 
+		break 
+	end
+end
+}}}

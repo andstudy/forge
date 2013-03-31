@@ -1,0 +1,8 @@
+TAOCP1/1.2.2
+수, 거듭제곱, 로그
+
+수식이 다 깨져서 나오네요... 좋은 방법 없을까요? -_-;;
+
+{{{#!html
+<embed name="__sse6660615" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp-122-110122023455-phpapp02&stripped_title=taocp-1-22-6660615&userName=codevania" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="480"></embed>
+}}}

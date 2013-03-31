@@ -1,0 +1,6 @@
+이름 : TTF
+이메일 : zone0000_at_dreamwiz_dot_com
+블로그 : http://www.npteam.net/
+직업 : 게임 서버 개발
+관심 분야 : C++, TDD, 리버스 엔지니어링, 윈도우 서버 개발
+주로 쓰는 언어 : C++

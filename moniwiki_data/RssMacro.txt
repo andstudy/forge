@@ -1,0 +1,14 @@
+[[RSS(http://chemie.skku.ac.kr/wiki/wiki.php/RecentChanges?action=rss_rc)]]
+----
+[[RSS(http://chem.skku.ac.kr/~kle/moin/RecentChanges?action=rss_rc)]]
+----
+[[RSS(http://kz.mpecc.com/moniwiki/wiki.php?action=rss_rc&dummy=1)]]
+----
+[[RSS(http://moniwiki.sf.net/wiki.php/RecentChanges?action=rss_rc)]]
+----
+== wikiX ==
+[[RSS(http://wikix.org/ko/mymisc/rss?10)]]
+== KLDP ==
+[[RSS(http://kldp.org/root/rdf.xml)]]
+== MoniWiki blog ==
+[[Rss(http://chemie.skku.ac.kr/wiki/wiki.php/BlogChanges?action=blogrss&all=1)]]

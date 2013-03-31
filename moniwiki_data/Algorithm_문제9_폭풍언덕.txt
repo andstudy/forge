@@ -1,0 +1,102 @@
+웹사이트에서 테스트는 성공하지 못했습니다. 이거 꼭 웹상에서 테스트를 성공시키는데 시간과 노력을 들일 필요가 있는지 잘 모르겠네요. 몇번 올리기를 반복하자니 승질만 ... --a;;;
+
+=== JollyJumper.java ===
+{{{
+import java.util.*;
+import java.io.*;
+
+public class JollyJumper {
+	public static void main(String args[]) throws IOException
+	{
+		// 데이터 읽기
+		BufferedReader reader = new BufferedReader( new InputStreamReader( System.in));
+		String line = reader.readLine();
+		
+		// 데이터 파싱
+		int[] param = getParam(line);
+
+		if (param[0] <= 0 || param[0] > 3000)
+		{
+			System.out.println("Error: invalid range of data");
+			return;
+		}
+		
+		// Jumper 객체 생성 및 초기화
+		Jumper jumper = new Jumper(param[0]);
+		
+		
+		// Jolly Jumper 체크
+		for (int i=1; i<param[0]-1; i++)
+		{
+			int distance = Math.abs(param[i] - param[i+1]);
+			
+			if (jumper.isEnable(distance))
+				jumper.setDisable(distance);
+			else
+			{
+				System.out.println("Not Jolly");
+				return;
+			}
+		}
+		System.out.println("Jolly Jumper");
+		return;
+	}
+	
+	static int[] getParam(String line)
+	{
+		StringTokenizer tokens = new StringTokenizer(line, " ");
+		int size = tokens.countTokens();
+		
+		int[] param = new int[size+1];
+		int i=0;
+		while (tokens.hasMoreTokens())
+		{
+			int value = Integer.parseInt(tokens.nextToken());
+			param[i] = value;
+			i++;
+		}
+		return param;
+	}
+}
+}}}
+
+=== Jumper.java ===
+{{{
+public class Jumper {
+	private boolean[] bitBox;
+	private int length;
+		
+	Jumper(int size)
+	{
+		length = size;
+		bitBox = new boolean[size];
+		
+		for (int i=0; i<size; i++)
+		{
+			bitBox[i] = true;
+		}
+		bitBox[0] = false;
+	}
+	
+	boolean isEnable(int distance)
+	{
+		if (isValidIndex(distance) && bitBox[distance])
+			return true;
+		
+		return false;
+	}
+	
+	void setDisable(int distance)
+	{
+		bitBox[distance] = false;
+	}
+	
+	boolean isValidIndex(int distance)
+	{
+		if (distance > 0 && distance < length)
+			return true;
+		
+		return false;
+	}
+}
+}}}

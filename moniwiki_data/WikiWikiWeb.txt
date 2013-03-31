@@ -1,0 +1,9 @@
+The [wiki:Wiki:FrontPage first ever wiki site] was founded in 1994 as an automated supplement to the Wiki:PortlandPatternRepository. The site was immediately popular within the pattern community, largely due to the newness of the internet and a good slate of Wiki:InvitedAuthors. The site was, and remains, dedicated to Wiki:PeopleProjectsAndPatterns. 
+
+Wiki:WardCunnigham created the site and the WikiWikiWeb machinery that operates it. He chose wiki-wiki as an alliterative substitute for quick and thereby avoided naming this stuff quick-web. An early page, Wiki:WikiWikiHyperCard, traces wiki ideas back to a Wiki:HyperCard stack he wrote in the late 80's. 
+
+See also one of these links:
+ * http://www.c2.com/cgi/wiki or wiki:Wiki/FrontPage
+ * get some answers on the Wiki:WikiWikiWebFaq
+ * get to know more about the Wiki:WikiHistory
+ * [http://news.mpr.org/programs/futuretense/daily_rafiles/20011220.ram Ward Cunningham Radio Interview]

@@ -1,0 +1,12 @@
+[KGC]
+
+ [http://parkpd.egloos.com/1666157 UnitTest, TDD in Games]
+ [http://mypage.sarang.net/tt/211 남기룡 - '사례 중심의 SCRUM & XP']
+ [http://kimsama.egloos.com/1645106 KGC 2007 - 쉐이더 시스템 통합]
+  [http://kimsama.egloos.com/1662816 Nebula2 - nmaxtoolbox video (1)]
+  [http://kimsama.egloos.com/1662832 Nebula2 - nmaxtoolbox video (2)]
+ 
+[http://www.gitiss.org/html/knowledge/media_list.jsp?compid=7&catid=248&insid=844 KGC07 강연 동영상]
+[http://pds6.egloos.com/pds/200711/15/12/For_KGC2007_YM_GameAI_technologies_No17.pdf Game AI Technologies - Youichiro Miyake]
+
+[KGC]

@@ -1,0 +1,663 @@
+[[TableOfContents]]
+
+=== 문제 목록 ===
+ * [http://altlang.org/fest/%EB%8C%80%EC%95%88%EC%96%B8%EC%96%B4%EC%B6%95%EC%A0%9C2006/%EA%B3%B5%ED%86%B5%EB%AC%B8%EC%A0%9C%EC%A7%91%ED%95%A9 대안언어 축제 문제 모음]
+ * ["HarryPotterKata"]
+ * ["Python Challenge"]
+
+=== 3월 10일 ===
+==== 구구단 - 김경렬 ====
+{{{
+2.upto(9){|i| 1.upto(9){|j| printf "%d * %d = %d\n", i, j, i*j}}
+}}}
+
+==== 구구단 - 전효성 ====
+{{{
+(2..9).each { |num| (1..9).each {|mul| STDOUT << num << " * " << mul << " = " << num * mul << "\n" }; puts "\n" }
+}}}
+
+==== N까지합 - 안상혁 ====
+{{{
+sum = 0
+1.upto(gets.to_i){|i|sum+=i}
+print sum
+}}}
+
+==== 구구단 - 이동현 ====
+{{{
+def dan( i )  
+  (2..9).each {|j| puts "#{i}*#{j}=#{i*j}" }
+end
+(2..9).each { |j| dan(j) }
+}}}
+
+==== N까지합 - 이수안 ====
+{{{
+print "N> "
+STDOUT.flush
+n = gets.to_i()
+n.times{|i| n+= i}
+puts n  
+}}}
+{{{
+print "N> "
+STDOUT.flush
+n = gets.to_i()
+result =  (n*n + n)/2  
+puts result
+}}}
+
+==== 구구단 - 정희종 ====
+{{{
+(2..9).each { |dan|
+    (1..9).each { |mul|
+        puts "#{dan} * #{mul} = #{dan*mul}"
+    }
+    puts
+}
+}}}
+
+==== N까지의 합 - 정희종 ====
+{{{
+def getNSum(num)
+  sum = 0
+  (1..num).each { |n| sum+= n }
+  return sum
+end
+}}}
+
+==== n 까지의 합 - ParkPD ====
+{{{
+def Sum(n)
+  i = 0, ret = 0
+  for i in 0 ... n
+    ret += i
+    i += 1
+  end
+  return ret
+end
+
+puts Sum(5)
+}}}
+
+==== 구구단  - ParkPD ====
+{{{
+def MultipleMatrix()
+  i = 0, j = 0
+  for i in 2 ... 10
+    for j in 1 ... 10
+      print i * j
+      print " "
+    end
+    print "\n"
+  end
+end
+}}}
+
+==== 구구단 - [Outbreak] ====
+{{{
+require 'matrix'
+require 'mathn'
+
+class AnDGem20070310
+  def AnDGem20070310.P1
+    v1 = Vector[1,2,3,4,5,6,7,8,9]
+    m1 = Matrix.row_vector(v1)
+    m2 = Matrix.column_vector(v1)
+    (m2*m1).to_a.collect{|row| yield row}
+  end
+
+  def AnDGem20070310.P1_Ex( m1, m2 )
+    (m2*m1).to_a.collect{|row| yield row}
+  end
+end
+
+AnDGem20070310.P1 { |row| print ' ' + row.inspect + "\n" }
+
+AnDGem20070310.P1_Ex(Matrix[[1,2,3,4,5,6,7,8,9]],Matrix[[1],[2],[3],[4],[5],[6],[7],[8],[9]]){ |row| print ' ' + row.inspect + "\n" }
+}}}
+
+=== 3월 17일 ===
+
+==== 우애수 - 정희종 ====
+실행시간이 너무 기네요
+
+{{{
+#~ 약수의 합
+def getDivSum(num)
+	divsum = 1
+	(2..num/2).each { |n|
+		divsum += n if num%n == 0
+	}
+	return divsum
+end
+
+#~ 우애수 출력
+def printFriendNum
+	(2..10000).each { |i|
+		divsum = getDivSum(i)
+		next if divsum <= i
+		if getDivSum(divsum)==i
+			print i, '  ', divsum, "\n"
+		end
+	}
+end
+}}}
+
+==== Reverse And Add - 정희종 ====
+{{{
+#~ Sample Input
+#~ 195
+#~ 265
+#~ 750
+
+#~ Sample Output
+#~ 4 9339 
+#~ 5 45254 
+#~ 3 6666
+
+def getReversed(num)
+  return num.to_s.reverse.to_i
+end
+
+def palindrome(num)
+  n = num
+  reversed = getReversed(n)
+
+  count = 0
+  while n != reversed
+    n += reversed
+    reversed = getReversed(n)
+    count += 1
+  end
+  
+  print count, '   ', reversed, "\n"
+end
+
+palindrome(195)
+palindrome(265)
+palindrome(750)
+}}}
+
+==== 연속된 자연수 찾기 - 이동현 ====
+{{{
+# "1 2 3" => "1-3." 
+# "1 2 3 5 7 8" => "1-3, 5, 7-8." 
+# "1 3 4 5 7" => "1, 3-5, 7." 
+
+require 'test/unit'
+
+class TestNNumberRange < Test::Unit::TestCase
+  def test_simple
+    assert_equal( ".", nnumberRange( "" ) )
+    assert_equal( "1.", nnumberRange( "1" ) )
+    assert_equal( "1-3.", nnumberRange( "1 2 3" ) )
+    assert_equal( "1-3, 5, 7-8.", nnumberRange( "1 2 3 5 7 8" ) )
+    assert_equal( "1, 3-5, 7.", nnumberRange( "1 3 4 5 7" ) )
+    assert_equal( "1, 3-5, 7, 11-12, 112-113, 119.", nnumberRange( "1 3 4 5 7 11 12 112 113 119" ) )
+  end
+end
+
+def formatSequenceNum( arg1, arg2 )
+  if arg1 == arg2
+    return arg1.to_s
+  else
+    return arg1.to_s + "-" + arg2.to_s
+  end
+end
+
+def nnumberRange( arg ) 
+  if arg.length == 0
+    return "."
+  end
+  
+  result = ""
+  tokens = arg.split(" ")
+  startpos = 0
+  endpos = 0
+  
+  curpos = 1;
+  while curpos < tokens.length
+    if tokens[endpos].to_i == tokens[curpos].to_i - 1
+      endpos += 1      
+    else
+      result += formatSequenceNum( tokens[startpos].to_i, tokens[endpos].to_i ) + ", "
+      startpos = curpos
+      endpos = curpos
+    end
+    curpos += 1
+  end
+  
+  if startpos < tokens.length
+    result += formatSequenceNum( tokens[startpos].to_i, tokens[endpos].to_i )
+  end
+      
+  return result + "."
+end
+
+print nnumberRange( "" ), "\n"
+print nnumberRange( "1" ), "\n"
+print nnumberRange( "1 2 3" ), "\n"
+print nnumberRange( "1 2 3 5 7 8" ), "\n"
+print nnumberRange( "1 3 4 5 7" ), "\n"
+print nnumberRange( "1 3 4 5 7 11 12 112 113 119" ), "\n"
+
+}}}
+
+==== 우애수 - 전효성 ( 엄청 느립니다.. -_- ) ====
+{{{
+require 'mathn.rb'
+
+def calculateGCD( targetNumber )
+  gcdArray = Array.new
+  
+  (1..targetNumber).each{ 
+    |n|      
+
+    #Integer#gcdlcm을 사용하는 경우
+    num = n.gcdlcm targetNumber; 
+    gcdArray.push num[0] 
+
+    #mathn의 gcd2를 사용하는 경우( gcdlcm보다 느림 )
+    #gcdArray.push   targetNumber.gcd2( n )    
+  }
+  
+  gcdArray.uniq!
+  
+  gcdArray.delete_at gcdArray.size-1
+  
+  return gcdArray
+end
+
+def makeSumOfGCD( targetNumber )
+  sum = 0
+  calculateGCD(targetNumber).each{ |key | sum = sum + key }
+  return sum
+end
+
+def main()
+  arr = []
+  1.upto(1200) { |i| arr.push makeSumOfGCD(i) }
+
+  count = 1
+  for i in arr
+    if arr[i-1] == count and arr[i-1] != arr[count-1] and arr[i-1] != arr[i]
+      STDOUT << count << ": " <<"("<< i  <<", "<< arr[ count - 1]  << ")"<< "#{arr[i-1]} == #{count}" << "\n"
+    end
+    count = count+1
+  end
+end
+
+main
+}}}
+
+==== 주민등록번호와 BarCode -- ParkPD ====
+{{{
+def ValidateSn(s)
+  a = s.split(//).collect! {|x| x.to_i}
+  lastNum = a.pop
+  add = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5]
+  sum = 0
+
+  # 더 좋은 방법은?
+  # 두 array 를 동시에 싹 더해주는 방법은?
+  a.each_index {|i| sum = sum + (a[i] * add[i])}
+
+  #~ print "sum = ",  sum, "\n"
+
+  remainder = sum % 11
+  #~ print "remainder = ", remainder, "\n"
+
+  remainder =11 - remainder
+  remainder = remainder % 10
+  #~ print "remainder = ", remainder, "\n"
+
+  #~ print "lastnum = " , lastNum, "\n"
+
+  if remainder == lastNum
+    puts "Valid Sn"
+  else
+    puts "Invalid Sn"
+  end
+end
+
+ValidateSn("1111111111111")
+
+def ValidateBarCode(s)
+  barCode = s.split(//).map {|i| i.to_i}
+  #~ print "barCode = ", barCode, "\n"
+  
+  checkSum = barCode.pop
+  
+  odd = true
+  sum = 0
+  barCode.each do |i|
+    #~ puts i
+    
+    if odd == true
+      sum += i
+      odd = false
+    else
+      sum = sum + (i * 3)
+      odd = true
+    end
+  end
+    
+  print "sum = ", sum, "\n"
+  if (sum + checkSum) % 10 == 0
+    print "Valid BarCode\n"
+  else
+    print "Invalid BarCode\n"
+  end
+end
+
+ValidateBarCode("8809010665009")
+}}}
+
+==== 우애수 ====
+{{{
+# 약수의 합
+def SumDivisors(num)
+  sum = 1
+  half = num / 2
+  for i in 2..half
+    if num % i == 0 
+      sum += i
+    end
+  end
+  return sum
+end
+
+divisorsDB = []
+
+# 저장
+divisorsDB[1] = 0
+
+for i in 2..10000 do
+  sum = SumDivisors(i)
+  divisorsDB[i] = sum
+  #print i, " ", sum, "\n"
+  if (i != sum && divisorsDB[sum] == i)
+    print sum, " ", i, "\n"
+  end
+end
+}}}
+
+
+=== 3월 24일 ===
+==== 숫자야구 - [Outbreak] ====
+{{{
+a = [9,9,4,9,1]
+MAX_CNT = 5
+while STDOUT.flush
+  s = 0; b = 0; cnt = 0
+  gets.to_s.scan /[[:digit:]]/ do |digit|  
+    if (a[cnt].to_s == digit)
+      s+=1
+    elsif
+      a.find{|i| b+=1 if i.to_s == digit}
+    end
+    cnt+=1
+    break if cnt == MAX_CNT
+  end 
+  print s.to_s + "s " + b .to_s + "b " + "\n"
+  break  if s == MAX_CNT
+end
+}}}
+
+==== Game Of Life - ParkPD ====
+{{{
+require 'fox16'
+require 'fox16/colors'
+include Fox
+
+class Cell
+  attr_accessor :state
+  def initialize
+    @state = :dead
+  end
+end
+
+class LifeGameBoard
+  attr_reader :board_width, :board_height
+  def initialize(width, height)
+    @board_width = width
+    @board_height = height
+    @boards = [[], []]
+    
+    FillByZero(GetBoard(0))
+    FillByZero(GetBoard(1))
+    
+    @board_index = 0
+    @board_next_index = 1
+  end
+  
+  #iterate 2 dimention array. 막상 쓸려니 좀 힘드네...
+  def each_cell(board)
+    board.each do |row|
+      row.each do |cell|
+        yield call
+      end
+    end
+  end
+  
+  def GetCurrentBoard
+    return @boards[@board_index]
+  end
+  
+  def GetNextBoard
+    return @boards[@board_next_index]
+  end
+  
+  def GetBoard(i)
+    return @boards[i]
+  end
+
+  def FillByZero(board)
+    (0...@board_height).each do |row|
+      board[row] = [Cell.new]
+      (0...@board_width).each do |col|
+        board[row][col] = Cell.new
+      end
+    end
+  end
+  
+  def cell_at(row, column)
+    board = GetCurrentBoard()
+    return board[row][column]
+  end
+  
+  def NextGen
+    board = GetCurrentBoard()
+    nextBoard = GetNextBoard()
+    (0...@board_height).each do |row|
+      (0...@board_width).each do |col|
+        ProcessNextGen(board, nextBoard, row, col)
+      end
+    end
+    
+    # swap
+    @board_index, @board_next_index = @board_next_index, @board_index
+    print "@board_index = ", @board_index, "@board_next_index = ", @board_next_index, "\n"
+  end
+  
+  def GetSafeRange(i, range)
+    from = i - 1
+    to = i + 1
+    if from < 0
+      from = 0
+    end
+    
+    if range <= to
+      to = i
+    end
+    
+    return from, to
+  end
+  
+  def GetNeighborCount(row, col)
+    from_row, to_row = GetSafeRange(row, @board_height)
+    from_col, to_col = GetSafeRange(col, @board_width)
+    num = 0
+    (from_row..to_row).each do |r|
+      (from_col..to_col).each do |c|
+        if r != row || c != col   # except self
+          if cell_at(r, c).state == :live
+            num += 1
+          end
+        end
+      end
+    end  
+    return num
+  end
+  
+  def ProcessNextGen(board, nextBoard, row, col)
+    n = GetNeighborCount(row, col)
+    if n > 0
+      print "row = ", row, " col = ", col, " n = ", n, "\n"
+    end
+    
+    if board[row][col].state == :live # 살아있는 경우
+      if n < 2 || n > 3
+        nextBoard[row][col].state = :dead   # 죽인다
+      else
+        nextBoard[row][col].state = :live
+        puts "live"
+      end
+    else    # 죽어있는 경우
+      if n == 3
+        nextBoard[row][col].state = :live   # 살린다
+        puts "live"
+      else
+        nextBoard[row][col].state = :dead
+      end
+    end
+  end
+    
+end
+
+class GridCanvas < FXCanvas
+  GRIDSIZE = 25
+  def initialize(frame, gameBoard)
+    super(frame, nil, 0, FRAME_RAISED|LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT)
+    @gameBoard = gameBoard
+    @width = @gameBoard.board_width * GRIDSIZE
+    @height = @gameBoard.board_height * GRIDSIZE
+    @grid_background = FXColor::DarkGray
+    @grid_foreground = FXColor::LightGray
+    @live_cell_color = FXColor::SpringGreen
+    @dragging = false
+    connect(SEL_PAINT) do |sender, sel, event|
+      draw_grid
+    end
+    
+    # the dragging stuff here is almost certainly not the
+    # "correct" way to git-r-dun... pending enlightenment
+    connect(SEL_LEFTBUTTONPRESS) do |sender, sel, event|
+      toggle_cell_at_location(event.click_x, event.click_y)
+      @dragging = true
+    end
+    connect(SEL_LEFTBUTTONRELEASE) do |sender, sel, event|
+      @dragging = false
+    end
+    connect(SEL_MOTION) do |sender, sel, event|
+      handle_drag(event.win_x, event.win_y) if @dragging
+    end
+  end
+  
+  def draw_grid
+    FXDCWindow.new(self) do |dc|
+      self.backColor = @grid_background
+      dc.foreground = self.backColor
+      dc.fillRectangle(0, 0, width, height)
+      dc.foreground = @grid_foreground
+      0.step(@width, GRIDSIZE) do |column|
+        dc.drawLine(column, 0, column, @height)
+      end
+      0.step(@height, GRIDSIZE) do |row|
+        dc.drawLine(0, row, @width, row)
+      end
+      dc.foreground = @live_cell_color
+      for row in 0...@gameBoard.board_height
+        for column in 0...@gameBoard.board_width
+          cell = @gameBoard.cell_at(row, column)
+          if(cell.state == :live)
+            x = (column * GRIDSIZE) + (GRIDSIZE / 2)
+            y = (row * GRIDSIZE) + (GRIDSIZE / 2)
+            dc.fillCircle(x, y, GRIDSIZE / 3)
+          end
+        end
+      end
+    end
+  end
+  
+  def handle_drag(x, y)
+    cell = cell_at_location(x, y)
+    if cell && cell.state == :dead
+      cell.state = :live
+      draw_grid
+    end
+  end
+  
+  def toggle_cell_at_location(x, y)
+    cell = cell_at_location(x, y)
+    if cell
+      if cell.state == :live
+        cell.state = :dead
+      else
+        cell.state = :live
+      end
+      draw_grid
+    end
+  end
+  
+  def cell_at_location(x, y)
+    cell = nil
+    column = x / GRIDSIZE
+    row = y / GRIDSIZE
+    cell = @gameBoard.cell_at(row, column) if column < @gameBoard.board_width && row < @gameBoard.board_height
+    cell
+  end
+end
+
+class LifeGameWindow < FXMainWindow
+  GRIDSIZE = 25
+  def initialize(app)
+   super(app, "Test", nil, nil, DECOR_ALL, 0, 0, 800, 600)
+ 
+  rightFrame = FXVerticalFrame.new(self,LAYOUT_SIDE_TOP|LAYOUT_SIDE_RIGHT|LAYOUT_FILL_Y)
+  buttonFrame = FXHorizontalFrame.new(rightFrame,
+                                      LAYOUT_SIDE_TOP|LAYOUT_SIDE_RIGHT|LAYOUT_FILL_Y)
+   nextBtn = FXButton.new(buttonFrame, "&Next", nil, nil, 0, FRAME_RAISED, 70, 30)
+
+  canvasFrame = FXVerticalFrame.new(self,
+                                FRAME_RIDGE|LAYOUT_FILL_X|LAYOUT_FILL_Y|
+                                LAYOUT_TOP|LAYOUT_LEFT,
+                                0, 0, 0, 0, 0,0,0,0)
+  
+  @board = LifeGameBoard.new(10, 10)
+  @canvas = GridCanvas.new(canvasFrame, @board)
+  
+   nextBtn.connect(SEL_COMMAND) {
+    @board.NextGen
+    @canvas.draw_grid
+   }
+
+  end
+
+  def create
+    super
+    show(PLACEMENT_SCREEN)
+  end
+end
+
+application = FXApp.new("LifeGame", "Test")
+lifeGameWnd = LifeGameWindow.new(application)
+application.create
+application.run
+}}}
+ * http://www.fxruby.org/doc/book.html
+ * http://rubyforge.org/projects/fxruby/
+ * http://rubyforge.org/
+=== 3월 31일 ===
+==== [HarryPotterKata] ====

@@ -1,0 +1,138 @@
+= 문제 요약 =
+ * 스택의 특정 위치부터 Top 까지를 통째로 뒤집어 가며 작은 수가 스택의 위에 큰 수가 스택의 아래에 위치하도록 정렬하는 문제
+= 문제 해결 =
+ * 일전에 풀어본 문제라 다른 풀이 방법으로 시도
+  * 최초 입력 값을 정렬한 다음 문자열 패턴으로 만듬
+  * 정렬된 문자열 패턴과 일치하는 값을 찾기 위해 백트래킹 해가며 모든 경우를 찾음
+  * 이 알고리즘은 '''실패'''
+= 기타 =
+ * 으아.. 괜히 재귀형태로 만들어서 낭패
+ * 연산을 줄일 방책을 생각해야 함. 입력값이 5개만 되도 처리 시간이 엄청 길다.
+
+= '''코드''' =
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+// 정렬된 결과를 찾는다
+
+// 정렬된 결과 패턴이 나올 때까지 반복
+
+// 만약 처음 패턴 또는 중간에 이미 구한 패턴이 나타나면 중지 
+
+// 최대 패턴 수는 숫자 개수의 순열이므로 n!
+
+namespace PanCake
+{ 
+    class Solver
+    {
+        List<List<string>> 추적로그 = new List<List<string>>();
+        List<List<int>> 답 = new List<List<int>>();
+
+        string goal = "";
+
+        public Solver(int[] array)
+        {
+            int[] tmpArray = new int[array.Length];
+            Array.Copy(array, tmpArray, array.Length);
+            Array.Sort<int>(tmpArray);
+
+            foreach (int i in tmpArray)
+            {
+                goal += i;
+            }
+        }
+
+        public void Flip(Stack<int> a, int pos)
+        {
+            int popCnt = a.Count - pos;
+
+            List<int> list = new List<int>();
+
+            while (popCnt-- >= 0)
+            {
+                list.Add(a.Pop());
+            }
+
+            foreach (int i in list)
+            {
+                a.Push(i);
+            }
+        }
+
+        void Solve(int[] array, int pos, string[] traceArray, int[] tracePosArray)
+        {
+            Stack<int> stack = new Stack<int>(array);
+            List<string> trace = new List<string>(traceArray);
+            List<int> tracePos = new List<int>(tracePosArray);
+
+            Flip(stack, pos);
+
+            string traceString = "";
+            foreach (int i in stack)
+            {
+                traceString += i;
+            }
+
+            if (traceString == goal)
+            {
+                trace.Add(traceString);
+                tracePos.Add(pos);
+
+                추적로그.Add(new List<string>(trace));
+                답.Add(new List<int>(tracePos));
+
+                return;
+            }
+
+            foreach (string s in trace)
+            {
+                if (s == traceString)
+                {
+                    return;
+                }
+            }
+
+            trace.Add(traceString);
+            tracePos.Add(pos);
+
+            int[] tmpArray = stack.ToArray();
+            Array.Reverse(tmpArray);
+
+            string[] tmpTraceArray = trace.ToArray();
+            int[] tmpTracePosArray = tracePos.ToArray();
+
+            for (int i = 1; i < stack.Count; i++)
+            {
+                Solve(tmpArray, i, tmpTraceArray, tmpTracePosArray);
+            }
+        }
+
+        public static List<List<int>> Exec(int[] array)
+        {
+            Array.Reverse(array);
+
+            Solver solver = new Solver(array);
+
+            for (int i = 1; i <= array.Length; i++)
+            {
+                solver.Solve(array, i, (new List<string>()).ToArray(), (new List<int>()).ToArray());
+            }
+
+            return solver.답;
+        }
+
+    }
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {          
+            Solver.Exec(new int[] { 1, 3, 2 });
+        }
+    }
+}
+ 
+}}}
+

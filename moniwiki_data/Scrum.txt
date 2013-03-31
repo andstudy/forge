@@ -1,0 +1,10 @@
+'스크럼' 책에 문의 사항은 여기 위키를 사용하라고 써 놨습니다. 몇 분이나 오실지 모르겠지만 혹시나 해서 정리해 둡니다. :) [ParkPD]
+
+[Scrum/스터디]
+[Scrum/발표]
+[Scrum/정오표]
+
+attachment:scrum.gif
+
+[http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200809300002 강컴 판매중]
+[http://blog.insightbook.co.kr/entry/애자일-소프트웨어-개발-방법론의-전위대-스크럼 인사이트 출판사 블로그 - 애자일 소프트웨어 개발 방법론의 전위대, 스크럼]

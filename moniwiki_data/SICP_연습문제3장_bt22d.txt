@@ -1,0 +1,127 @@
+== 연습문제 3.1 ==
+{{{#!gcode
+(define (make-accumulator acc-value)
+  (lambda (elem)
+    (begin (set! acc-value (+ acc-value elem))
+	   acc-value)))
+(define A (make-accumulator 5))
+}}}
+
+== 연습문제 3.2 ==
+{{{#!gcode
+(define (make-monitored f)
+  (let ((call-num 0))
+    (define (mf arg)
+      (cond ((eq? arg 'how-many-calls?) call-num)
+            ((eq? arg 'reset-count) (set! call-num 0) call-num)
+            (else (set! call-num (+ call-num 1)) (f arg))))
+    mf))
+(define s (make-monitored sqrt))
+(s 100)
+(s 'how-many-calls?)
+(s 'reset-count)
+}}}
+
+== 연습문제 3.3 ==
+{{{#!gcode
+(define (make-account balance passwd)
+  (define (withdraw amount)
+    (if (>= balance amount)
+	(begin (set! balance (- balance amount))
+	       balance)
+	"Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch pw m)
+    (if (not (eq? pw passwd))
+        (lambda x "Incorrect password")
+        (cond ((eq? m 'withdraw) withdraw)
+              ((eq? m 'deposit) deposit)
+              (else (error "Unknown request -- MAKE-ACCOUNT"
+			   m)))))
+  dispatch)
+
+(define acc (make-account 100 'secret-password))
+
+((acc 'secret-password 'withdraw) 30)
+((acc 'wrong-pass 'withdraw) 30)
+((acc 'secret-password 'deposit) 150)
+}}}
+
+
+== 연습문제 3.4 ==
+{{{#!gcode
+(define (make-account balance passwd)
+  (let ((num-wrong-input 0))
+  (define (withdraw amount)
+    (if (>= balance amount)
+	(begin (set! balance (- balance amount))
+	       balance)
+	"Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch pw m)
+    (if (eq? pw passwd)
+	(cond ((eq? m 'withdraw) withdraw)
+	      ((eq? m 'deposit) deposit)
+	      (else (error "Unknown request -- MAKE-ACCOUNT"
+			   m)))
+	(begin (set! num-wrong-input (+ num-wrong-input 1))
+	       (lambda x (if (> num-wrong-input 7)
+			     "call-the-cops"
+			     "Incorrect password")))))
+  dispatch))
+
+(define acc (make-account 100 'secret-password))
+
+((acc 'secret-password 'withdraw) 30)
+((acc 'wrong-pass 'withdraw) 30)
+((acc 'secret-password 'deposit) 150)
+}}}
+
+== 연습문제 3.5 ==
+{{{#!gcode
+(define (square x)
+  (* x x))
+
+(define (sum-of-squares x y)
+  (+ (square x) (square y)))
+
+(define (random-in-range low high)
+  (let ((range (- high low)))
+    (+ low (random range))))
+
+(define (monte-carlo trials experiment)
+  (define (iter trials-remaining trials-passed)
+    (cond ((= trials-remaining 0)
+	   (/ trials-passed trials))
+	  ((experiment)
+	   (iter (- trials-remaining 1) (+ trials-passed 1)))
+	  (else
+	   (iter (- trials-remaining 1) trials-passed))))
+    (iter trials 0.0))
+
+(define (area x1 x2 y1 y2)
+  (* (- x2 x1) (- y2 y1)))
+
+(define (estimate-integral P x1 x2 y1 y2 trials)
+  (define (fn-P)
+      (P (random-in-range x1 x2) (random-in-range y1 y2)))
+  (* (area x1 x2 y1 y2) (monte-carlo trials fn-P)))
+
+(define (P x y)
+  (<= (sum-of-squares (- x 5) (- y 7)) 
+      (square 3)))
+
+(estimate-integral P 2 8 4 10 10000)
+}}}
+
+
+
+
+== 연습문제 3. ==
+{{{#!gcode
+
+}}}

@@ -1,0 +1,192 @@
+== C++ Accept 버전 ==
+{{{
+}}}
+
+== C++ 버전 ==
+Presentation error랍니다 ㅠㅠ [itmentor]
+{{{
+/* @JUDGE_ID:itmentor 110102 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#ifdef _UNIT_TEST_
+	#include <UnitTest++.h>
+	#include <TestReporterStdout.h>
+#endif
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+typedef std::vector< int >  Line;
+typedef std::vector< Line >  Array;
+
+const int MINE = -1;
+
+void createMap( int width, int height, Array& arr )
+{
+	arr.clear();
+	for(int i = 0 ; i < height ; i++ )
+		arr.push_back( Line (width, 0) );
+}
+
+void addMine( int xIndex, int yIndex, Array& arr )
+{
+	if( arr[yIndex][xIndex] == MINE )
+		return;
+
+	arr[yIndex][xIndex] = MINE;	//mine
+
+	for(int y = 0 ; y < arr.size() ; y++ )
+	{
+		for(int x = 0 ; x < arr[y].size() ; x++ )
+		{
+			float xDiff = xIndex - x;
+			float yDiff = yIndex - y;
+
+			float distance = sqrt( xDiff*xDiff + yDiff*yDiff );
+
+			if( 1.0f <= distance && distance <= sqrt(2.0f) )
+			{
+				if( arr[y][x] != MINE )
+					arr[y][x]++;
+			}
+		}
+	}	
+}
+
+int main()
+{
+#ifdef _UNIT_TEST_
+    UnitTest::RunAllTests();
+#endif
+
+	int count = 1;
+	while( true )
+	{
+		int row = 0, col = 0;
+		std::cin >> row >> col;
+
+		if( row == col && row == 0 )
+		{
+			break;
+		}
+		
+		int tmp = row;
+		row = col;
+		col = tmp;
+
+		Array arr;
+		createMap( row, col, arr );
+
+		for(int y = 0 ; y < col ; y++)
+		{
+			std::string buf;
+			std::cin >> buf;
+			
+			for(int x = 0 ; x < row ; x++)
+			{
+				if( buf[x] == '*' )
+				{
+					addMine(x, y, arr);
+				}
+			}
+		}
+		
+		std::cout << "Field #" << count << ":" << std::endl;
+		for(int y = 0 ; y < col ; y++)
+		{
+			for(int x = 0 ; x < row ; x++ )
+			{
+				if( arr[y][x] == -1 )
+					std::cout << '*';
+				else
+					std::cout << arr[y][x];
+			}
+			std::cout << std::endl;
+		}
+		std::cout << std::endl;
+
+		count++;
+	}
+
+	return 0;
+}
+#ifdef _UNIT_TEST_
+TEST( testCreationArray )
+{
+	Array arr;
+	createMap( 1, 2, arr );
+
+	CHECK_EQUAL( 2, arr.size() );
+	CHECK_EQUAL( 1, arr[0].size() );
+	CHECK_EQUAL( 0, arr[1][0] );
+}
+
+TEST( testAddSingleMine )
+{
+	Array arr;
+	createMap( 3, 3, arr );
+	addMine( 1,1,arr );
+
+	CHECK_EQUAL( MINE, arr[1][1] );
+	CHECK_EQUAL( 1, arr[0][0] );
+	CHECK_EQUAL( 1, arr[2][2] );
+}
+
+TEST( testAddSingleMineToBoundary )
+{
+	Array arr;
+	createMap( 3, 3, arr );
+	addMine( 2,2,arr );
+
+	CHECK_EQUAL( 1, arr[1][1] );
+	CHECK_EQUAL( MINE, arr[2][2] );
+	CHECK_EQUAL( 1, arr[2][1] );
+}
+
+TEST( testAddSingleMineToBoundary2 )
+{
+	Array arr;
+	createMap( 3, 3, arr );
+	addMine( 0,0,arr );
+
+	CHECK_EQUAL( 1, arr[1][1] );
+	CHECK_EQUAL( MINE, arr[0][0] );
+	CHECK_EQUAL( 1, arr[1][0] );
+}
+
+TEST( testAddMultiMine )
+{
+	Array arr;
+	createMap( 5, 10, arr );
+	addMine( 1,1, arr );
+	CHECK_EQUAL( MINE, arr[1][1] );
+	CHECK_EQUAL( 1,arr[0][0] );
+	CHECK_EQUAL( 1,arr[2][2] ); 
+
+	addMine( 2,2,arr );
+	CHECK_EQUAL( MINE, arr[1][1] );
+	CHECK_EQUAL( MINE,  arr[2][2]);
+	CHECK_EQUAL( 2,arr[1][2]  );
+
+	addMine( 2,2,arr );
+	CHECK_EQUAL(  2, arr[1][2]);
+
+	addMine( 4,9,arr );
+	CHECK_EQUAL( 2, arr[1][2] );
+}
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}
+
+== 다른 풀이 ==
+[Algorithm/문제2/ParkPD]
+[Algorithm/문제2/MovingSpotlight]
+[Algorithm/문제2/폭풍언덕]
+[Algorithm/문제2/CynicJJ]
+
+
+----
+CategoryProblem

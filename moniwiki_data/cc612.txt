@@ -1,0 +1,10 @@
+이름 : 정민철 (cc612)
+이메일 : ccc612_at_gmail_dot_com
+블로그 : 
+Twitter : crazycat612
+미투데이 : cc612
+직업 : 방송용 M/W 개발
+관심 분야 : Pattern, Agile 방법론, 안드로이드
+주로 쓰는 언어 : C/C++
+약간 아는 분야 : 방송 spec., 임베디드 리눅스, 안드로이드 application 개발
+

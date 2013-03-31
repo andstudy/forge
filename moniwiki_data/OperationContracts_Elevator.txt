@@ -1,0 +1,25 @@
+기본 가정
+: 엘리베이터는 멈춰있다.
+  사용 가능한 상태다.
+
+Operation : CallElevator(story : int, direction : Direction)
+Cross References : 
+Preconditions : NULL
+Postconditions : 나에게로 출발, 방향 버튼 on
+
+Operation : EnterElevator(story : int)
+Cross References : 
+Preconditions : 내가 밖에 있다, 문 열린다.
+Postconditions : 안에 탔다, 밖의 방향 버튼 off, 문 닫혔다.
+
+Operation : InputDestination(story : int)
+Cross References : 
+Preconditions : 내가 안에 있다.
+Postconditions : 목표층 추가, 층 버튼 on
+
+Operation : 
+Cross References : 
+Preconditions :
+Postconditions : 
+
+층을 story 로 전달하는 것 보다 User 라는 객체를 만들어서 그 안에 현재 위치등 사용자에 관한 정보를 기억하는게 더 좋을 듯 합니다.

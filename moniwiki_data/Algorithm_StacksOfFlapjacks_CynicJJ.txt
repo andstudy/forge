@@ -1,0 +1,700 @@
+ * 동일 크기는 처리하지 않음
+ * Java는 컴파일 에러. 버전 때문인가?
+ * IsOrdered() 에서 pos < flapjackSizes.size()-1 이 맞음. ㅋ
+
+[[TableOfContents([maxdepth])]]
+
+= Stacks Of Flapjacks =
+== Visual Basic ==
+=== !FlapjackStack.vb ===
+{{{
+' $Id: FlapjackStack.vb 90 2008-02-13 23:49:10Z 정희종 $
+
+Public Class FlapjackStack
+	Private _flapjackSizes As List(Of Integer) = New List(Of Integer)
+	Private _inputFlapjackSizes As List(Of Integer) = New List(Of Integer)
+	Private _flipPositions As List(Of Integer) = New List(Of Integer)
+
+	ReadOnly Property FlipPositions() As List(Of Integer)
+		Get
+			Return _flipPositions
+		End Get
+	End Property
+
+	ReadOnly Property InputFlapjackSizes() As List(Of Integer)
+		Get
+			Return _inputFlapjackSizes
+		End Get
+	End Property
+
+	Sub SetupFlapjacks(ByVal flapjacsSizes() As Integer)
+		_flapjackSizes.Clear()
+		' 위치는 1부터 시작하므로 빈 엔트리 하나 추가
+		_flapjackSizes.Add(Nothing)
+		' 뒤집에서 추가
+		Array.Reverse(flapjacsSizes)
+		_flapjackSizes.AddRange(flapjacsSizes)
+
+		' 최초 입력 저장
+		_inputFlapjackSizes.Clear()
+		_inputFlapjackSizes = _flapjackSizes.GetRange(0, _flapjackSizes.Count)
+
+		' flip 위치 초기화
+		_flipPositions.Clear()
+	End Sub
+
+	Function GetSize(ByVal position As Integer) As Integer
+		Dim isValid = (position >= 1 And position < _flapjackSizes.Count)
+		If isValid Then
+			Return _flapjackSizes(position)
+		Else
+			Return 0
+		End If
+	End Function
+
+	Sub Flip(ByVal position As Integer)
+		Dim flipCount = _flapjackSizes.Count - position
+
+		Dim subList As List(Of Integer) = _flapjackSizes.GetRange(position, flipCount)
+		subList.Reverse()
+
+		_flapjackSizes.RemoveRange(position, flipCount)
+		_flapjackSizes.InsertRange(position, subList)
+
+		' flip 위치 보관
+		_flipPositions.Add(position)
+	End Sub
+
+	Function IsOrdered() As Boolean
+		For pos As Integer = 1 To _flapjackSizes.Count - 1
+			If GetSize(pos) < GetSize(pos + 1) Then
+				Return False
+			End If
+		Next
+		Return True
+	End Function
+
+	Function GetSizeOrderOf(ByVal order As Integer) As Integer
+		Dim sorted As List(Of Integer) = New List(Of Integer)
+		sorted = _flapjackSizes.GetRange(0, _flapjackSizes.Count)
+		sorted.Sort()
+
+		Return sorted(sorted.Count - order)
+	End Function
+
+	Function GetPositionOrderOf(ByVal order As Integer) As Integer
+		For i As Integer = _flapjackSizes.Count - 1 To 1 Step -1
+			If GetSizeOrderOf(order) = _flapjackSizes(i) Then
+				Return i
+			End If
+		Next
+	End Function
+
+	Function IsLocateLastSizeOrderOf(ByVal order As Integer) As Boolean
+		Return (GetSizeOrderOf(order) = _flapjackSizes(_flapjackSizes.Count - 1))
+	End Function
+
+	Sub Order()
+		For order As Integer = 1 To InputFlapjackSizes().Count - 1
+			If IsOrdered() Then Exit For
+
+			Dim needFlip As Boolean = (GetPositionOrderOf(order) <> order)
+			If needFlip Then
+				If Not IsLocateLastSizeOrderOf(order) Then
+					Flip(GetPositionOrderOf(order))
+				End If
+				Flip(order)
+			End If
+		Next
+
+		If IsOrdered() Then
+			_flipPositions.Add(0)
+		End If
+	End Sub
+End Class
+}}}
+
+=== !ModuleTest.vb ===
+{{{
+' $Id: ModuleTest.vb 90 2008-02-13 23:49:10Z 정희종 $
+
+Imports Microsoft.VisualStudio.TestTools.UnitTesting
+
+Module ModuleTest
+	Private _stack As FlapjackStack = New FlapjackStack
+
+	Sub Setup()
+		Dim flapjackSizes() As Integer = {8, 4, 6, 7, 5, 2}
+		_stack.SetupFlapjacks(flapjackSizes)
+	End Sub
+
+	Sub Run()
+		Setup()
+
+		SetupFlapjacksTest()
+		SetupFlapjacksInvalidTest()
+		FlipTest()
+		GetInputStackSizesTest()
+		IsOrderedTest()
+		GetSizeOrderOfTest()
+		GetPositionOrderOfTest()
+		IsLocateLastSizeOrderOfTest()
+		OrderManuallyTest()
+		OrderImplTest()
+		OrderTest()
+		GetFlipPositionsTest()
+		NoNeedFlipTest()
+		DuplicatedTest()
+	End Sub
+
+	Sub DuplicatedTest()
+		Dim flapjackSizes() As Integer = {1, 1, 2, 2, 4, 4, 3}
+		_stack.SetupFlapjacks(flapjackSizes)
+		_stack.Order()
+		Assert.AreEqual(6, _stack.FlipPositions.Count)
+		Assert.AreEqual(3, _stack.FlipPositions(0))
+		Assert.AreEqual(1, _stack.FlipPositions(1))
+		Assert.AreEqual(6, _stack.FlipPositions(2))
+		Assert.AreEqual(2, _stack.FlipPositions(3))
+		Assert.AreEqual(4, _stack.FlipPositions(4))
+		Assert.AreEqual(0, _stack.FlipPositions(5))
+	End Sub
+
+	Sub NoNeedFlipTest()
+		Dim flapjackSizes() As Integer = {3, 2, 1, 8, 9}
+		_stack.SetupFlapjacks(flapjackSizes)
+		_stack.Order()
+		Assert.AreEqual(2, _stack.FlipPositions.Count)
+		Assert.AreEqual(3, _stack.FlipPositions(0))
+		Assert.AreEqual(0, _stack.FlipPositions(1))
+	End Sub
+
+	Sub GetFlipPositionsTest()
+		Setup()
+		_stack.Order()
+		Assert.AreEqual(8, _stack.FlipPositions.Count)
+		Assert.AreEqual(1, _stack.FlipPositions(0))
+		Assert.AreEqual(4, _stack.FlipPositions(1))
+		Assert.AreEqual(2, _stack.FlipPositions(2))
+		Assert.AreEqual(5, _stack.FlipPositions(3))
+		Assert.AreEqual(3, _stack.FlipPositions(4))
+		Assert.AreEqual(4, _stack.FlipPositions(5))
+		Assert.AreEqual(5, _stack.FlipPositions(6))
+		Assert.AreEqual(0, _stack.FlipPositions(7))
+	End Sub
+
+	Sub OrderTest()
+		Setup()
+		_stack.Order()
+		Assert.IsTrue(_stack.IsOrdered())
+	End Sub
+
+	Sub OrderImplTest()
+		Setup()
+		For order As Integer = 1 To _stack.InputFlapjackSizes().Count - 1
+			If Not _stack.IsLocateLastSizeOrderOf(order) Then
+				_stack.Flip(_stack.GetPositionOrderOf(order))
+			End If
+			_stack.Flip(order)
+		Next
+		Assert.IsTrue(_stack.IsOrdered())
+	End Sub
+
+	Sub OrderManuallyTest()
+		Setup()
+		Dim order As Integer = 1
+		Assert.IsTrue(_stack.IsLocateLastSizeOrderOf(order))
+		Assert.AreEqual(1, order)
+		_stack.Flip(1)
+
+		order += 1
+
+		Assert.AreEqual(4, _stack.GetPositionOrderOf(order))
+		_stack.Flip(4)
+		Assert.AreEqual(2, order)
+		_stack.Flip(2)
+
+		order += 1
+
+		Assert.AreEqual(5, _stack.GetPositionOrderOf(order))
+		_stack.Flip(5)
+		Assert.AreEqual(3, order)
+		_stack.Flip(3)
+
+		order += 1
+
+		Assert.IsTrue(_stack.IsLocateLastSizeOrderOf(order))
+		Assert.AreEqual(4, order)
+		_stack.Flip(4)
+
+		order += 1
+
+		Assert.IsTrue(_stack.IsLocateLastSizeOrderOf(order))
+		Assert.AreEqual(5, order)
+		_stack.Flip(5)
+
+		Assert.IsTrue(_stack.IsOrdered())
+	End Sub
+
+	Sub IsLocateLastSizeOrderOfTest()
+		Setup()
+		Assert.IsTrue(_stack.IsLocateLastSizeOrderOf(1))
+		Assert.IsFalse(_stack.IsLocateLastSizeOrderOf(2))
+		_stack.Flip(3)
+		Assert.IsTrue(_stack.IsLocateLastSizeOrderOf(2))
+	End Sub
+
+	Sub GetSizeOrderOfTest()
+		Setup()
+		Assert.AreEqual(8, _stack.GetSizeOrderOf(1))
+		Assert.AreEqual(7, _stack.GetSizeOrderOf(2))
+		Assert.AreEqual(6, _stack.GetSizeOrderOf(3))
+	End Sub
+
+	Sub GetPositionOrderOfTest()
+		Setup()
+		Assert.AreEqual(6, _stack.GetPositionOrderOf(1))
+		Assert.AreEqual(3, _stack.GetPositionOrderOf(2))
+	End Sub
+
+	Sub IsOrderedTest()
+		Assert.IsFalse(_stack.IsOrdered())
+
+		Dim flapjackSizes() As Integer = {1, 2, 3, 4}
+		Dim stack As FlapjackStack = New FlapjackStack
+		stack.SetupFlapjacks(flapjackSizes)
+		Assert.IsTrue(stack.IsOrdered())
+	End Sub
+
+	Sub GetInputStackSizesTest()
+		_stack.Flip(1)
+		Assert.AreEqual(2, _stack.InputFlapjackSizes(1))
+		Assert.AreEqual(5, _stack.InputFlapjackSizes(2))
+	End Sub
+
+	Sub FlipTest()
+		_stack.Flip(3)
+		Assert.AreEqual(7, _stack.GetSize(6))
+		Assert.AreEqual(6, _stack.GetSize(5))
+		Assert.AreEqual(4, _stack.GetSize(4))
+		Assert.AreEqual(8, _stack.GetSize(3))
+	End Sub
+
+	Sub SetupFlapjacksInvalidTest()
+		Assert.AreEqual(0, _stack.GetSize(0))
+		Assert.AreEqual(0, _stack.GetSize(7))
+	End Sub
+
+	Sub SetupFlapjacksTest()
+		Assert.AreEqual(2, _stack.GetSize(1))
+		Assert.AreEqual(7, _stack.GetSize(3))
+		Assert.AreEqual(8, _stack.GetSize(6))
+	End Sub
+
+End Module
+}}}
+
+== !ModuleMain.vb ===
+{{{
+' $Id: ModuleMain.vb 90 2008-02-13 23:49:10Z 정희종 $
+
+Module ModuleMain
+
+	Sub Main()
+#Const UNITTEST = True
+#If UNITTEST Then
+		ModuleTest.Run()
+#End If
+
+#Const RUN = False
+#If RUN Then
+		While True
+			Dim input As String = Console.ReadLine()
+			Dim separator() As Char = {" "c}
+			Dim inputs() As String = input.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+
+			Dim sizes As List(Of Integer) = New List(Of Integer)
+			For Each str As String In inputs
+				sizes.Add(Integer.Parse(str))
+			Next
+
+			Dim stack As FlapjackStack = New FlapjackStack
+			stack.SetupFlapjacks(sizes.ToArray())
+			stack.Order()
+
+			Dim output As String = ""
+			For Each flipPosition As Integer In stack.FlipPositions
+				output += String.Format("{0:D} ", flipPosition)
+			Next
+
+			Console.WriteLine(input)
+			Console.WriteLine(output)
+		End While
+#End If
+	End Sub
+
+End Module
+}}}
+
+== Java ==
+=== !FlapjackStack.java ===
+{{{
+/*
+ * Main.java
+ *  java program model for www.programming-challenges.com
+ */
+
+package flapjack;
+
+import java.io.*;
+import java.util.*;
+
+class Main implements Runnable {
+    static String ReadLn(int maxLength){  // utility function to read from stdin,
+                                          // Provided by Programming-challenges, edit for style only
+        byte line[] = new byte [maxLength];
+        int length = 0;
+        int input = -1;
+        try{
+            while (length < maxLength){//Read untill maxlength
+                input = System.in.read();
+                if ((input < 0) || (input == '\n')) break; //or untill end of line ninput
+                line [length++] += input;
+            }
+
+            if ((input < 0) && (length == 0)) return null;  // eof
+            return new String(line, 0, length);
+        }catch (IOException e){
+            return null;
+        }
+    }
+
+    public static void main(String args[])  // entry point from OS
+    {
+        Main myWork = new Main();  // Construct the bootloader
+        myWork.run();            // execute
+    }
+
+    public void run() {
+        new FlapjackStack().run();
+    }
+}
+
+class FlapjackStack implements Runnable {
+	private static FlapjackStack stack = new FlapjackStack();
+	
+	public void run()
+	{
+		String input;
+		
+		while(!(input = readLine()).equals(""))
+		{
+			initStack(input);
+			stack.Order();
+			printStack();
+		}
+	}
+
+	public static void printStack()
+	{
+		for(int i=0 ; i<stack.getInputFlapjackSizes().size() ; i++) {
+			System.out.print(stack.getInputFlapjackSizes().get(i) + " ");
+		}
+		System.out.println();
+		for(int i=0; i< stack.getFlipPositions().size(); i++)
+		{
+			System.out.print(stack.getFlipPositions().get(i) + " ");
+		}
+
+		System.out.println("");
+	}	
+
+	public static boolean initStack(String in)
+	{
+		String[] data = in.split(" ");
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i =0; i< data.length; i++)
+		{
+			int value = Integer.parseInt(data[i]);
+			
+			list.add(value);
+		}
+
+		stack.SetupFlapjacks(list);
+		return true;
+	}
+
+	public static String readLine()
+	{
+		String data = null;
+		
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			System.out.println("IOException " +e);
+		}
+		
+		return data;		
+	}
+
+	private ArrayList<Integer> flapjackSizes = new ArrayList<Integer>();
+	public ArrayList<Integer> flipPositions = new ArrayList<Integer>();
+	public ArrayList<Integer> getFlipPositions() {
+		return flipPositions;
+	}
+
+	private ArrayList<Integer> inputFlapjackSizes = new ArrayList<Integer>();
+	public ArrayList<Integer> getInputFlapjackSizes() {
+		return inputFlapjackSizes;
+	}
+
+	public void SetupFlapjacks(List<Integer> sizes) {
+		flipPositions.clear();
+
+		inputFlapjackSizes.clear();
+		inputFlapjackSizes.addAll(sizes);
+
+		flapjackSizes.clear();
+		flapjackSizes.add(-1);
+		Collections.reverse(sizes);
+		flapjackSizes.addAll(sizes);
+	}
+
+	public Integer GetSize(int position) {
+		final boolean isValid = (position >= 1 && position < flapjackSizes.size());
+		if (isValid)
+			return flapjackSizes.get(position);
+		else
+			return 0;
+	}
+
+	public void Flip(int position) {
+		List<Integer> subList = flapjackSizes.subList(position, flapjackSizes.size());
+		Collections.reverse(subList);
+
+		flipPositions.add(position);
+	}
+
+	public boolean IsOrdered() {
+		for (int pos = 1; pos < flapjackSizes.size(); pos++) {
+			if (GetSize(pos) < GetSize(pos + 1)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void Order() {
+		for (int order = 1; order < getInputFlapjackSizes().size(); order++) {
+			if (IsOrdered())
+				break;
+
+			boolean needFlip = (GetPositionSizeOrderOf(order) != order);
+			if (needFlip) {
+				if (!IsLocateLastSizeOrderOf(order)) {
+					Flip(GetPositionSizeOrderOf(order));
+				}
+				Flip(order);
+			}
+		}
+
+		if (IsOrdered()) {
+			flipPositions.add(0);
+		}
+	}
+
+	public boolean IsLocateLastSizeOrderOf(Integer order) {
+		List<Integer> sorted = new ArrayList<Integer>();
+		sorted.addAll(flapjackSizes);
+		Collections.sort(sorted);
+
+		int sizeOrderof = sorted.get(sorted.size() - order);
+		return (sizeOrderof == flapjackSizes.get(flapjackSizes.size() - 1));
+	}
+
+	public int GetPositionSizeOrderOf(Integer order) {
+		List<Integer> sorted = new ArrayList<Integer>();
+		sorted.addAll(flapjackSizes);
+		Collections.sort(sorted);
+
+		int sizeOrderof = sorted.get(sorted.size() - order);
+		for (int i = flapjackSizes.size() - 1; i > 0; i--) {
+			if (sizeOrderof == flapjackSizes.get(i)) {
+				return i;
+			}
+		}
+		return 0;
+	}
+}
+}}}
+
+=== !FlapjackStackTest.java ===
+{{{
+package flapjack;
+
+import static org.junit.Assert.*;
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class FlapjackStackTest {
+	FlapjackStack _stack = new FlapjackStack();
+
+	@org.junit.Before
+	public void SetupFlapjackStacks() {
+		Integer[] flapjackSizes = { 8, 4, 6, 7, 5, 2 };
+		_stack.SetupFlapjacks(Arrays.asList(flapjackSizes));
+	}
+
+	@Test
+	public void SetupTest() {
+		assertEquals(2, _stack.GetSize(1));
+		assertEquals(7, _stack.GetSize(3));
+		assertEquals(8, _stack.GetSize(6));
+	}
+
+	@Test
+	public void SetupFlabjacksInvalidTest() {
+		assertEquals(0, _stack.GetSize(0));
+		assertEquals(0, _stack.GetSize(7));
+	}
+
+	@Test
+	public void FlipTest() {
+		_stack.Flip(3);
+		assertEquals(7, _stack.GetSize(6));
+		assertEquals(6, _stack.GetSize(5));
+		assertEquals(4, _stack.GetSize(4));
+		assertEquals(8, _stack.GetSize(3));
+	}
+
+	@Test
+	public void GetInputStackSizesTest() {
+		_stack.Flip(1);
+		assertEquals(2, _stack.getInputFlapjackSizes().get(1));
+		assertEquals(5, _stack.getInputFlapjackSizes().get(2));
+	}
+
+	@Test
+	public void IsOrderedTest() {
+		assertFalse(_stack.IsOrdered());
+
+		Integer[] flapjackSizes = { 1, 2, 3, 4 };
+		FlapjackStack stack = new FlapjackStack();
+		stack.SetupFlapjacks(Arrays.asList(flapjackSizes));
+		assertTrue(stack.IsOrdered());
+	}
+
+
+	@Test
+	public void GetPositionSizeOrderOfTest() {
+		assertEquals(6, _stack.GetPositionSizeOrderOf(1));
+		assertEquals(3, _stack.GetPositionSizeOrderOf(2));
+	}
+
+
+	@Test
+	public void IsLocateLastSizeOrderOfTest() {
+		assertTrue(_stack.IsLocateLastSizeOrderOf(1));
+		assertFalse(_stack.IsLocateLastSizeOrderOf(2));
+		_stack.Flip(3);
+		assertTrue(_stack.IsLocateLastSizeOrderOf(2));
+	}
+
+	@Test
+	public void OrderManuallyTest() {
+		int order = 1;
+		assertTrue(_stack.IsLocateLastSizeOrderOf(order));
+		assertEquals(1, order);
+		_stack.Flip(1);
+
+		order++;
+
+		assertEquals(4, _stack.GetPositionSizeOrderOf(order));
+		_stack.Flip(4);
+		assertEquals(2, order);
+		_stack.Flip(2);
+
+		order++;
+
+		assertEquals(5, _stack.GetPositionSizeOrderOf(order));
+		_stack.Flip(5);
+		assertEquals(3, order);
+		_stack.Flip(3);
+
+		order++;
+
+		assertTrue(_stack.IsLocateLastSizeOrderOf(order));
+		assertEquals(4, order);
+		_stack.Flip(4);
+
+		order++;
+
+		assertTrue(_stack.IsLocateLastSizeOrderOf(order));
+		assertEquals(5, order);
+		_stack.Flip(5);
+
+		assertTrue(_stack.IsOrdered());
+	}
+
+	@Test
+	public void OrderImplTest() {
+		for (Integer order = 1; order < _stack.getInputFlapjackSizes().size(); order++) {
+			if (!_stack.IsLocateLastSizeOrderOf(order)) {
+				_stack.Flip(_stack.GetPositionSizeOrderOf(order));
+			}
+			_stack.Flip(order);
+		}
+		assertTrue(_stack.IsOrdered());
+	}
+
+	@Test
+	public void OrderTest() {
+		_stack.Order();
+		assertTrue(_stack.IsOrdered());
+	}
+
+	@Test
+	public void GetFlipPositionsTest() {
+		_stack.Order();
+		assertEquals(8, _stack.getFlipPositions().size());
+		assertEquals(1, _stack.getFlipPositions().get(0));
+		assertEquals(4, _stack.getFlipPositions().get(1));
+		assertEquals(2, _stack.getFlipPositions().get(2));
+		assertEquals(5, _stack.getFlipPositions().get(3));
+		assertEquals(3, _stack.getFlipPositions().get(4));
+		assertEquals(4, _stack.getFlipPositions().get(5));
+		assertEquals(5, _stack.getFlipPositions().get(6));
+		assertEquals(0, _stack.getFlipPositions().get(7));
+	}
+
+	@Test
+	public void NoNeedFlipTest() {
+		Integer[] flapjackSizes = { 3, 2, 1, 8, 9 };
+		_stack.SetupFlapjacks(Arrays.asList(flapjackSizes));
+		_stack.Order();
+		assertEquals(2, _stack.getFlipPositions().size());
+		assertEquals(3, _stack.getFlipPositions().get(0));
+		assertEquals(0, _stack.getFlipPositions().get(1));
+	}
+
+	@Test
+	public void DuplicatedTest() {
+		Integer[] flapjackSizes = { 1, 1, 2, 2, 4, 4, 3 };
+		_stack.SetupFlapjacks(Arrays.asList(flapjackSizes));
+		_stack.Order();
+		assertEquals(6, _stack.getFlipPositions().size());
+		assertEquals(3, _stack.getFlipPositions().get(0));
+		assertEquals(1, _stack.getFlipPositions().get(1));
+		assertEquals(6, _stack.getFlipPositions().get(2));
+		assertEquals(2, _stack.getFlipPositions().get(3));
+		assertEquals(4, _stack.getFlipPositions().get(4));
+		assertEquals(0, _stack.getFlipPositions().get(5));
+	}
+}
+}}}

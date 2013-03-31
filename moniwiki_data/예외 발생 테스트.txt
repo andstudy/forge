@@ -1,0 +1,123 @@
+#title 예외 발생 테스트
+
+== 질문 ==
+ * http://cafe.naver.com/ArticleRead.nhn?clubid=13516524&articleid=1056
+
+ * 아래 코드에서 IOException 이 발생할때 G3P1EP2Exception 이 발생하는 것에 대한 테스트를 작성하려고 합니다.
+ * 그런데 fos 에서 IOException 을 발생시켜야 하는데 어떻게 하는게 좋을까요?
+
+{{{#!gcode java
+    public void saveData() throws G3P1EP2Exception {
+        File file = new File(_strFilePath);
+        
+        String strWorkingDirectory    = file.getParent();
+        
+        if(createDirectory(strWorkingDirectory) == false) {
+            throw new G3P1EP2Exception(strWorkingDirectory + " 생성 실패", ErrorCodeSet.ERR_SaveData_FailCreateDirectory);
+        }
+        
+        FileOutputStream fos = null;
+        
+        try {
+            fos = new FileOutputStream(file);
+            fos.write(bbos.getByteBuffer(), 0, bbos.getSize());
+        } 
+        catch(IOException e) {
+            throw new G3P1EP2Exception(_strFilePath + " 생성 실패", ErrorCodeSet.ERR_SaveData_FailSaveFile);
+        }
+        finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } 
+                catch (IOException e) {
+                }
+            }
+        }
+    }
+}}}
+
+-----
+
+해결방법 하나를 제시해 보겠습니다
+
+== 테스트 코드 작성 순서 ==
+ 1. FileOutputStream 상속받아 가짜 클래스 만들기 - FakeFileOutputStream
+  1. 가짜 클래스에서 예외를 던지는 함수 작성
+ 1. 가짜 클래스를 사용하기위해 분리접합지점(seam 봉합) 만들기
+ 1. 가짜 클래스를 사용하여 테스트 작성
+
+=== 가짜 클래스 만들기 ===
+ * FileOutputStream 상속받아 가짜 클래스 만들기 - FakeFileOutputStream
+ * 대충 다음 코드와 같을 것이다
+ * write(...) 함수는 무조건 예외를 던지게 만들었다
+ 
+{{{#!gcode java
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
+public class FakeOutputStream extends FileOutputStream {
+
+	public FakeOutputStream(File file) throws FileNotFoundException {
+		super(file);
+	}
+
+	@Override
+	public void write(byte[] b, int off, int len) throws IOException {
+		throw new IOException();
+	}
+}
+}}}
+
+=== 분리접합지점(seam 봉합) 만들기 ===
+ * 가짜 클래스를 사용하기위해 분리접합지점 만든다
+ * FileOutputStream 을 파라미터로 가지는 saveData(...) 함수 만들기
+{{{#!gcode java
+	public void saveData(FileOutputStream fos) throws G3P1EP2Exception {
+		try {
+			fos.write(bbos .getByteBuffer(), 0, bbos.getSize());
+		} 
+		catch(IOException e) {
+			throw new G3P1EP2Exception(_strFilePath + " 생성 실패", ErrorCodeSet.ERR_SaveData_FailSaveFile);
+		}
+	}
+}}}
+
+ * 기존의 saveData() 함수는 다음과 같이 바뀐다
+{{{#!gcode java
+	public void saveData() throws G3P1EP2Exception {
+				// 생략
+        try {
+            fos = new FileOutputStream(file);
+            saveData(fos);		// **** 여기가 바뀌었음 ****
+        } 
+      	// 생략
+    }
+}}}
+
+=== 테스트 코드 만들기 ===
+ * 분리접합지점에 가짜 객체를 사용하여 테스트 작성
+{{{#!gcode java
+public void testSaveData() throws IOException {
+		// 예외를 테스트하는 예전 방식, JUnit 버전이 올랐으니 뭔가 더 멋진 방법이 있지 않을까?
+		try {
+			new Data().saveData(new FakeOutputStream(File.createTempFile("temp", "tmp")));
+			assertTrue(false);	// 도달하면 안됨
+		} catch (G3P1EP2Exception e) {
+			assertTrue(true);	// 여기를 통과 해야 함
+			assertEquals(ErrorCodeSet.ERR_SaveData_FailSaveFile, e.getErrorCode());
+		} catch (FileNotFoundException e) {
+			assertTrue(false);	// 도달하면 안됨
+		} catch (IOException e) {
+			assertTrue(false);	// 도달하면 안됨
+		}
+	}
+}}}
+
+=== 기타 ===
+ * 잘못된 부분이 없나 모르겠네요
+ * 좀 거슬리는 부분도 있으니 대충 참고하시고 더 나은 테스트를 만들어 보시기 바랍니다
+ * FileOutputStream 의 래퍼 클래스를 만들고 거기서 인터페이스를 뽑아 올려도 좋을것 같습니다

@@ -1,0 +1,93 @@
+코드가 길어져 페이지 분리
+
+Try#1
+{{{#!gcode scheme
+; ("1" "2" ... "10" "11"..)
+(def whole-number-str (map str (iterate inc 1)))
+
+; "123" -> ("1" "2" "3")
+(defn to-single-digit-seq [s] (filter #(not= %1 "") (seq (.split s ""))))
+
+; ("1" .. "9" "1" "0" "1" "1" ...)
+(def single-digit-seq (mapcat to-single-digit-seq whole-number-str))
+
+; n=2, ("12" "23" ... "91" "10" "01" "11" ...)
+; n=3, ("123" 234" ... "910" "101" ...)
+(defn make-final [n]
+  (letfn [(final-seq
+            [coll1 coll2 n]
+            (if (zero? n)
+              coll1
+              (recur (map #(str %1 %2) coll1 coll2) (rest coll2) (dec n))))]
+    (final-seq single-digit-seq (rest single-digit-seq) (dec n))))
+
+(defn find-index [n]
+  (letfn [(semi-index
+            [coll current match goal]
+            (if (= match goal)
+              current
+              (recur
+                (rest coll)
+                (inc current)
+                (if (= (str n) (first coll)) (inc match) match)
+                goal)))]
+    (semi-index (make-final (.length (str n))) 0 0 n)))
+
+; 여기 까지 해서 (find-index 12) 이렇게 하면 271 은 나오는데
+; 큰 숫자를 넣으면 heap 할당 에러가 남. ㅠ.ㅠ
+}}}
+
+Try#2
+{{{#!gcode scheme
+(defn make-final2 [n]
+  (letfn [(final-seq
+            [coll1 coll2 n]
+            (if (zero? n)
+              (map #(list %1 %2) coll1 (iterate inc 1))
+              (recur (map #(str %1 %2) coll1 coll2) (rest coll2) (dec n))))]
+    (final-seq single-digit-seq (rest single-digit-seq) (dec n))))
+(defn find-index2-sub [n] 
+  (filter #(= (str n) (first %)) (make-final2 (.length (str n)))))
+(defn find-index2 [n]
+  (second (first (drop (dec n) (find-index2-sub n)))))
+; 조금 간단하게 만들었지만 역시 heap 에러. 알고리즘을 바꿔야 할듯
+}}}
+
+Try#3
+{{{#!gcode scheme
+; 간만에 근성으로 달려보네요. 대학때 생각나요..ㅠ.ㅠ
+(defn find-max-sub-match-index-from-end [s t]
+  (letfn [(find-sub
+            [idx src tgt]   
+            (if (or (= (apply str (take (.length tgt) src)) tgt) (= 0 (.length tgt)))   
+              idx   
+              (recur (inc idx) src (apply str (rest tgt)))))]   
+    (find-sub 0 s t)))
+
+(defn find-index3 [n]   
+  (letfn [(find-sub   
+            [coll cur-index match-count match-goal count-goal]   
+            (if (= match-count count-goal)   
+              cur-index   
+              (let [drop-count   
+                     (find-max-sub-match-index-from-end   
+                       match-goal   
+                       (apply str (take (.length match-goal) coll)))]   
+                (if (zero? drop-count)   
+                  (recur   
+                    (drop (.length match-goal) coll)   
+                    (+ cur-index (.length match-goal))   
+                    (inc match-count)   
+                    match-goal   
+                    count-goal)   
+                  (recur   
+                    (drop drop-count coll)   
+                    (+ cur-index drop-count)   
+                    match-count match-goal count-goal)))))]   
+    (find-sub single-digit-seq 0 0 (str n) n)))
+
+(reduce + (pmap find-index3 (take 13 (iterate #(* % 3) 3)))) 
+
+; 물리적 메모리는 남아있는데. java.lang.OutOfMemoryError: GC overhead limit exceeded.
+; 이런 에러를 내며 끝났네요 흑.
+}}}

@@ -1,0 +1,1 @@
+[http://www.informit.com/store/product.aspx?isbn=0201775956&rl=1 Designing Software Product Lines with UML: From Use Cases to Pattern-Based Software Architectures]

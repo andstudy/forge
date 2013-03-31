@@ -1,0 +1,12 @@
+Describe TAOCP1/1.3.2 here
+
+
+- 내용
+{{{#!html
+<div style="width:425px" id="__ss_7260757"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/soomong/taocp-132-mixal" title="Taocp 1.3.2 MIXAL">Taocp 1.3.2 MIXAL</a></strong> <object id="__sse7260757" width="620" height="517"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp1-3-2mixal-110314115024-phpapp01&stripped_title=taocp-132-mixal&userName=soomong" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <embed name="__sse7260757" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp1-3-2mixal-110314115024-phpapp01&stripped_title=taocp-132-mixal&userName=soomong" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="620" height="517"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/soomong">hyun soomyung</a> </div> </div>
+}}}
+
+- 연습문제 풀이 : 자료에 설명된 문제 번호는 2, 3, 4, 8, 9번 입니다 :)
+{{{#!html
+<div style="width:425px" id="__ss_7241507"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/hiscale/taocp-132-mix-110312" title="[아꿈사발표자료] TAOCP 1.3.2 MIX 어셈블리 언어 연습문제 (110312)">[아꿈사발표자료] TAOCP 1.3.2 MIX 어셈블리 언어 연습문제 (110312)</a></strong> <object id="__sse7241507" width="620" height="517"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=110312taocpmixal-110312063833-phpapp02&stripped_title=taocp-132-mix-110312&userName=hiscale" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <embed name="__sse7241507" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=110312taocpmixal-110312063833-phpapp02&stripped_title=taocp-132-mix-110312&userName=hiscale" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="620" height="517"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/hiscale">sung ki choi</a> </div> </div>
+}}}

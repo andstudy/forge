@@ -1,0 +1,43 @@
+''' < 멀티쓰레드 프로그래밍 패턴 서두 발표 자료 > '''
+
+[[TableOfContents]]
+= 발표 자료 =
+http://outbreak.springnote.com
+
+attachment:/멀티쓰레드_디자인패턴_서두_안준석_470x.jpg
+
+
+= Map & Reduce 관련 링크 =
+http://nexr.tistory.com/ : Nexr 블로그
+http://www.jaso.co.kr/ : 김형준님 홈페이지
+http://freesearch.pe.kr/ : 고감자님 홈페이지
+
+[http://www.jco.or.kr/conference/data/9th/5_3.zip 김형준님 Hadoop 발표 자료]
+[http://nexr.tistory.com/attachment/fk150000000001.pdf 한재선님 플랫폼 발표 자료]
+
+
+= Coroutine 과 Continuation =
+{{{
+Subroutines are special cases of Coroutines. 
+서브루틴은 코루틴의 특수한 경우다.
+
+Coroutines can be implemented with Continuations, while Continuations are just bookmarks for Closures.
+코루틴은 컨티뉴에이션(Continuation)으로 구현 되고 컨티뉴에이션은 클로저(Closure) 의 북마크 일 뿐이다.
+
+And, Generators can be thought of as a special case of a Coroutine that returns a value when it yields.
+그리고 제너레이터(Generator) 는 yield 될 때 값을 반환하는 코루틴의 특수한 경우로 생각 할 수 있다.
+}}}
+
+[http://iformattable.blogspot.com/2007/06/episodic-computation.html Subroutines, Coroutines, Continuations, Closures and Generators 대한 고찰]
+
+[http://karkata.org/blog/index.php?ptype=list&tag=YIELD C# 으로 Coroutine 데모 구현해보기]
+[http://network.hanb.co.kr/view.php?bi_id=1306 파이썬의 Generator - 중간에 Generator 부터 읽어보시면 됩니다 ^^]
+[http://www.csl.mtu.edu/cs4411/www/NOTES/non-local-goto/coroutine.html C언어 Coroutines - setjmp() 와 longjmp() 를 이용한 구현]
+[http://mushaku.egloos.com/1414984 루비 Generator 와 Continuation]
+
+[http://www.intertwingly.net/blog/2005/04/13/Continuations-for-Curmudgeons#heap Continuation]
+[http://onlisp.blogspot.com/2007/12/continuation.html Continuation]
+[http://www.cs.bham.ac.uk/~hxt/research/Logiccolumn8.pdf Continuation 과 Goto 에 대한 아티클]
+
+[http://msdn.microsoft.com/msdnmag/issues/03/09/CoroutinesinNET/default.aspx Fiber 사용한 .NET Coroutines]
+

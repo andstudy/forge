@@ -1,0 +1,202 @@
+= 문제 요약 =
+ *mxn 그리드에서 방향에 상관없이 주어진 문자열이 매칭되는 첫 위치 찾기
+= 문제 해결 =
+ *전체 그리드에 대해서 8방향 문자열 메타 데이터 생성 
+  *메타 데이터 = 특정 방향 문자열 + 각 글자의 위치정보 
+  *대각선의 경우 직선의 방정식 이용해 문자열 생성 
+= 기타 =
+ *음주 코딩 ㄱㄱ
+ 
+
+= '''데이터부''' =
+{{{
+    class MetaData
+    {
+        public class Dim
+        {
+            public int col;
+            public int row;
+
+            public Dim(int row, int col)
+            {
+                this.col = col;
+                this.row = row;
+            }
+        }
+
+        public string data;
+        public List<Dim> dimList;
+      
+        public string Reverse
+        {
+            get
+            { 
+                char[] array = data.ToCharArray();
+                Array.Reverse(array);
+                return new string(array);
+            }
+        }
+
+        public List<Dim> ReverseDimList
+        {
+            get
+            {
+                List<MetaData.Dim> rDim = new List<MetaData.Dim>(dimList);
+                rDim.Reverse();
+                return rDim;
+            }
+        }
+        
+        public MetaData(string str, List<Dim> dim)
+        {
+            this.data = str;
+            this.dimList = dim;
+        }        
+    }
+}}}
+
+= '''처리부''' =
+{{{
+    class MetaDataProcessor
+    {
+        public List<MetaData> All = new List<MetaData>();
+
+        public MetaDataProcessor(char[][] input)
+        {           
+            int rowCnt = input.Length;
+            int colCnt = input[0].GetLength(0);
+
+            // rows
+            for (int i = 0; i < rowCnt; i++)
+            {
+                string s = string.Empty;
+                List<MetaData.Dim> dim = new List<MetaData.Dim>();
+
+                for (int j = 0; j < colCnt; j++)
+                {
+                    s += input[i][j];
+                    dim.Add(new MetaData.Dim(i,j));
+                }
+
+                All.Add(new MetaData(s,dim));
+            }
+
+            // cols
+            for (int i = 0; i < colCnt; i++)
+            {
+                string s = string.Empty;
+                List<MetaData.Dim> dim = new List<MetaData.Dim>();
+
+                for (int j = 0; j < rowCnt; j++)
+                {
+                    s += input[j][i];
+                    dim.Add(new MetaData.Dim(j, i));
+                }
+
+                All.Add(new MetaData(s, dim));
+            }
+
+            // diagonal
+            int X = colCnt;
+            int Y = rowCnt;
+
+            int minD = 0;
+            int maxD = 0;
+
+            // diagonal #1
+            minD = -colCnt;
+            maxD = rowCnt;
+            for (int d = minD; d < maxD; d++)
+            {
+                string s = string.Empty;
+                List<MetaData.Dim> dim = new List<MetaData.Dim>();
+
+                for (int x = 0; x < X; x++)
+                {
+                    int y = x + d;
+
+                    if (y >= Y || y < 0)
+                        continue;
+
+                    s += input[y][x];
+                    dim.Add(new MetaData.Dim(y, x));
+                }
+
+                All.Add(new MetaData(s, dim));
+            }
+
+            // diagonal #2
+            minD = 0;
+            maxD = X + Y;
+            for (int d = minD; d < maxD; d++)
+            {
+                string s = string.Empty;
+                List<MetaData.Dim> dim = new List<MetaData.Dim>();
+
+                for (int x = 0; x < X; x++)
+                {
+                    int y = -x + d;
+
+                    if (y >= Y || y < 0)
+                        continue;
+
+                    s += input[y][x];
+                    dim.Add(new MetaData.Dim(y, x));
+                }
+
+                All.Add(new MetaData(s, dim));
+            }
+            
+            // reverse
+            List<MetaData> rAll = new List<MetaData>();
+
+            foreach (MetaData d in All)
+            {                
+                rAll.Add(new MetaData(d.Reverse, d.ReverseDimList));
+            }
+
+            All.AddRange(rAll);
+
+            Console.WriteLine("총 메타 데이터 개수 : {0}", All.Count);
+        }
+
+    }
+}}}
+
+= '''실행부''' =
+{{{
+    class Solver
+    {
+        public static void Exec()
+        {
+            Input input = new Input();
+
+            MetaDataProcessor processor = new MetaDataProcessor(input.RefinedData);
+          
+            foreach(string question in input.RawData2)
+            {
+                foreach (MetaData d in processor.All)
+                {
+                    int result = d.data.ToLower().IndexOf(question.ToLower());
+
+                    if (result == -1)
+                        continue;
+
+                    Console.WriteLine("{0}\t: {1} {2}", 
+           question, d.dimList[result].row + 1, d.dimList[result].col + 1);                    
+                }
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Solver.Exec();            
+        }
+    }
+
+}}}
+
+

@@ -1,0 +1,4 @@
+#title 9장 목적이 부여된 에이전트 행동
+{{{#!html
+<embed name="__sse4031403" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-100509233042-phpapp01&stripped_title=ss-4031403" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed>
+}}}

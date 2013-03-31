@@ -1,0 +1,7 @@
+Constraint Processing 이라고도 하는 듯
+
+=== Constraint Programming과 범인 잡기 ===
+ * http://mushaku.egloos.com/1672086
+ * http://onestepback.org/articles/callcc/amb/amb_rb.html
+ * http://ktiml.mff.cuni.cz/%7Ebartak/constraints/
+ * http://rubyquiz.com/quiz70.html

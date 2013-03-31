@@ -1,0 +1,51 @@
+http://advancedwindowsdebugging.com/
+http://www.acornpub.co.kr/book/windows-debugging
+
+추가자료
+http://mschnlnine.vo.llnwd.net/d1/pdc08/PPTX/PRECONF/PRE02.pptx
+
+[DebuggingTool]
+[CallingConvention]
+[BadFood]
+
+== 발표 순서 ==
+=== 1주  ===	
+2장-1 	김홍준 - [AdvancedWindowsDebugging-2장  (~p78)]
+2장-2	원종필 - [AdvancedWindowsDebugging-2장뒷부분(p78~)]
+3장	현수명 - [AdvancedWindowsDebugging-3장.디버거해부]
+=== 2주  ===	
+4장	안명환 - [AdvancedWindowsDebuggingChapter4]
+5장	박일 - [AdvancedWindowsDebuggingChapter5]
+6장	김태우 - [AdvancedWindowsDebuggingChapter6]
+=== 3주  ===	
+7장	허승욱 - [AdvancedWindowsDebuggingChapter7]
+8장	이수안 - [AdvancedWindowsDebuggingChapter8]
+9장	전효성 - [AdvancedWindowsDebuggingChapter9]
+=== 4주  ===	
+10장	우정권 - [AdvancedWindowsDebuggingChapter-10장. 동기화]
+11장	박상혁 - [AdvancedWindowsDebuggingChapter11]
+12장	송정석 - [AdvancedWindowsDebuggingChapter12]
+=== 5주  ===	
+13장	오종빈 - [AdvancedWindowsDebuggingChapter13]
+14장	김명관
+15장	송주영
+
+=== 발표없으신분들  ===	
+박민욱, 최승엽, 임정환 
+
+== 회비 내역 ==
+|| 날짜 || 수입 || 지출 || 잔고|| 비고||
+||  ||  || || -4,997|| 회비이월||
+|| 2009.9.5  || 80,000  || || 75,003 || 회비입금(송정석,전효성)||
+|| 2009.9.12 || || 120,000 || -44,997 || 토즈지출 ||
+|| 2009.9.12 || 330,000 ||  || 285,003 || 회비입금(이수안,박일,현수명,박민욱(9만원),송진의,안명환,임정환)||
+|| 2009.9.19 ||  ||  90,000 || 195,003 || 토즈지출||
+|| 2009.9.19 || 160,000 ||   || 355,003 || 회비입금(김명관,김태우,허승욱,박상혁)||
+|| 2009.9.26 || || 90,000  || 265,003 || 토즈지출 ||
+|| 2009.9.26 || 80,000 ||   || 345,003 || 회비입금(우정권,김홍준)||
+|| 2009.10.10 || || 90,000  || 255,003 || 토즈지출 ||
+|| 2009.10.17 || || 90,000  || 255,003 || 토즈 포인트사용(잔고차감없음) ||
+|| 2009.10.17 || || 208,500  || 46,503 || 책걸이회식(천찬음) ||
+|| 2009.10.17 || 80,000 || || 126,503 || 회비입금(오종빈,송주영) ||
+
+

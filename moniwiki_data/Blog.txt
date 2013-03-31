@@ -1,0 +1,50 @@
+
+= 개요 =
+
+이곳에는 게임 업계 관련 블로그를 정리해 링크합니다.
+
+
+= 게임 관련 블로그 =
+
+[http://blog.naver.com/naverdev/ 네이버 오픈 API관련 개발자 블로그]
+
+[http://blog.naver.com/deview_con/ NHN DeView 공식 블로그]
+
+[http://ndc.nexon.com/ NDC 공식 블로그]
+
+[http://neoplog.blog.me/ 네오플 공식 블로그]
+
+[http://pig-min.com/tt/ Pig-Min 인디게임 웹진 블로그]
+
+[http://gamemook.com/ GameMook]
+
+
+= 게임업계 종사자 블로그 =
+
+== 프로그래머 ==
+
+[http://parkpd.egloos.com/ ParkPD 블로그]
+
+[http://jacking.tistory.com/ 合理的 Programmer jacking]
+
+[http://chulin28ho.egloos.com/ 대충 살아가는 게임개발자]
+
+== 아티스트, 그래픽 디자이너 ==
+
+[http://blog.naver.com/coolboy76/ 쿨보이 블로그]
+
+== 기획자, 게임 디자이너 ==
+
+[http://blog.naver.com/gamediz 여유만만 gump의 게임&가족 이야기]
+
+[http://sstorm.egloos.com/ 스톰의 게임기획 연구실]
+
+[http://lemocin.blog.me/ 장난감 병정의 게임 보금자리]
+
+[http://madmaiz.blog.me/ MAIZ STACCATO]
+
+[http://zio45.blog.me/ 지오의 꿈꾸는 블로그]
+
+== 기타 ==
+
+[http://readersclub.tistory.com/ 게임 회사 사람들의 독서모임]

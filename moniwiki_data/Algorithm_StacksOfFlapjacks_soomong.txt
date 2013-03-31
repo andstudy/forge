@@ -1,0 +1,231 @@
+ * 쉽지가 않네요...
+  * 실패하는 케이스가 몇개 있네요.
+   * 3 2 1 8 9 -> 3 0
+   * 1 1 2 2 4 4 3 -> 3 1 6 2 4 0
+    * 이 경우엔 2 1 3 4 0 이라는 더 짧은 솔루션도 존재합니다. 하지만 문제에선 동일 크기의 팬케이크는 입력되지 않으므로 이 경우까지 고려하진 않으셔도 됩니다. - Mastojun
+     * 해답하고 같게만 만들려고 했더니 이런 오류가 있었네요.ㅋ
+     * 잘못적은 솔루션을 고쳐주시는 센스! >_<
+
+  * 제대로 된 위치에 있는 것은 flip 할 필요가 없었는데 체크를 안하고 있었네요. -soomong
+ 
+
+FlapJackMain
+{{{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class FlapJackMain {
+
+	ArrayList<Integer> sortedStack = new ArrayList<Integer>();
+	ArrayList<Integer> stack = new ArrayList<Integer>();
+	
+	public static void main(String args[])
+	{
+		FlapJackMain jack = new FlapJackMain();
+		String in;
+		
+		while(!(in = readLine()).equals(""))
+		{
+			if( jack.initStack(in) == false )
+				break;
+		
+			jack.printStack();
+			System.out.println(jack.parseStack());
+			//jack.printStack();
+		}
+	}
+	
+	public boolean initStack(String in)
+	{
+		sortedStack.clear();
+		stack.clear();
+		
+		String[] data = in.split(" ");
+		
+		if( data.length > 30)
+			return false;
+		
+		for(int i =0; i< data.length; i++)
+		{
+			int value = Integer.parseInt(data[i]);
+			
+			if( value < 1 || value > 100)
+				return false;
+			
+			sortedStack.add(value);
+			stack.add(value);
+		}
+		
+		Collections.sort(sortedStack);
+		return true;
+	}
+	
+	public String parseStack()
+	{
+		String result = "";
+		int count = stack.size();
+		
+		while(!stack.equals(sortedStack))
+		{
+			// sortedSatck 끝의 값부터 stack 에서의 index 얻어오기. 
+			int targetIndex = stack.indexOf(sortedStack.get(count-1));
+		
+			// 맞는 위치에 있지 않는 것들만 Flip
+			if( (count-1) != targetIndex )
+			{
+				// stack 의 바꿀값을 일단 맨위로 올린뒤 
+				if( targetIndex != 0 )
+				{
+					flip(stack.size() - targetIndex);
+					result += (stack.size() - targetIndex) + " ";
+				}
+					
+				// stack 의 해당 index 로 flip
+				flip(stack.size() - (count-1));
+				result += (stack.size() - (count-1)) + " ";
+			}
+			
+			count--;
+		}
+		
+		result += "0";
+		
+		return result;
+	}
+
+	public void flip(int point)
+	{
+		ArrayList<Integer> newStack = new ArrayList<Integer>();
+
+		// stack -> newStack  copy
+		for(int i=0; i< stack.size(); i++)
+		{
+			newStack.add(stack.get(i));
+		}
+		
+		// point 까지의 값을 newStack 에 반대로 flip 하여 저장
+		for(int i= 0 ,j= stack.size() - point ; j >= 0 ; i++,j--)
+		{
+			newStack.set(j,stack.get(i));
+		}
+		
+		// newStack -> stack  Copy
+		for(int i=0; i< stack.size(); i++)
+		{
+			stack.set(i,newStack.get(i));
+		}
+		
+	}
+	
+	public void printStack()
+	{
+		for(int i=0; i< stack.size(); i++)
+		{
+			System.out.print(stack.get(i) + " ");
+		}
+
+		System.out.println("");
+	}	
+	
+	public static String readLine()
+	{
+		String data = null;
+		
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			System.out.println("IOException " +e);
+		}
+		
+		return data;		
+	}
+	
+}
+}}}
+
+Junit
+{{{
+import java.util.ArrayList;
+
+import junit.framework.TestCase;
+
+
+public class FlapJackMainTest extends TestCase {
+
+	FlapJackMain jack = new FlapJackMain();
+	
+	public void testRun() {
+		
+		
+	}
+	
+	public void testParseStack() {
+		
+		jack.initStack("5 4 3 2 1");
+		assertEquals(false,jack.stack.equals(jack.sortedStack));
+		jack.parseStack();
+		assertEquals(true,jack.stack.equals(jack.sortedStack));
+		
+		jack.initStack("5 4 3 2 1");
+		assertEquals("1","1 0",jack.parseStack());
+		
+		jack.initStack("5 1 2 3 4");
+		assertEquals("1","1 2 0",jack.parseStack());
+
+		jack.initStack("3 2 1 8 9");
+		assertEquals("1","3 0",jack.parseStack());
+
+		jack.initStack("1 1 2 2 4 4 3");
+		assertEquals("1","3 1 6 2 4 0",jack.parseStack());
+	}
+	
+	public void testFlip() {
+					
+		ArrayList<Integer> fir = new ArrayList<Integer>();
+		fir.add(1);
+		fir.add(2);
+		fir.add(3);
+		fir.add(4);
+		fir.add(5);
+		
+		jack.initStack("5 4 3 2 1");
+		jack.flip(1);
+		assertEquals(true,jack.stack.equals(fir));
+
+		jack.flip(2);
+		assertEquals(false,jack.stack.equals(fir));
+		fir.set(0, 4);
+		fir.set(1, 3);
+		fir.set(2, 2);
+		fir.set(3, 1);
+		fir.set(4, 5);
+		assertEquals(true,jack.stack.equals(fir));
+		
+		jack.flip(3);
+		fir.set(0, 2);
+		fir.set(1, 3);
+		fir.set(2, 4);
+		fir.set(3, 1);
+		fir.set(4, 5);
+		assertEquals(true,jack.stack.equals(fir));		
+
+		jack.flip(4);
+		fir.set(0, 3);
+		fir.set(1, 2);
+		fir.set(2, 4);
+		fir.set(3, 1);
+		fir.set(4, 5);
+		assertEquals(true,jack.stack.equals(fir));		
+			
+	}
+
+}
+
+}}}

@@ -1,0 +1,9 @@
+This is an index of all words occuring in page titles.
+
+See also:
+
+ * TitleIndex -- a shorter index
+ * RecentChanges
+
+----
+[[WordIndex]]

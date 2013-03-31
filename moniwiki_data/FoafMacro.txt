@@ -1,0 +1,4 @@
+||[[Foaf(http://internetalchemy.org/iand/foaf.rdf)]]||
+||[[Foaf(http://internetalchemy.org/iand/foaf.rdf,homepage)]]||
+
+/!\ project argument is not implemented yet.

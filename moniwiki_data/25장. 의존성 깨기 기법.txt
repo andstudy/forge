@@ -1,0 +1,748 @@
+= Chapter 25. 의존성 깨기 기법 (Dependency-Breaking Techniques) =
+ * 리팩토링 기법 - 테스트가 없는 상태에서 테스트를 만들기 위한
+ * 몇몇 기법은 수술 자국이 크다
+ * 일단 테스트가 만들어지면 그 테스트의 도움을 받아 또다시 리팩토링
+ 
+== 매개변수 적응 (Adapt Parameter) ==
+ * 문제 - 매개 변수에 대한 의존성
+{{{#!gcode java
+public class ARMDispatcher
+{
+    public void populate(HttpServletRequest request) {
+        String [] values = request.getParameterValues(pageStateName);
+        if (values != null && values.length  > 0)
+        {
+            marketBindings.put(pageStateName + getDateStamp(), values[0]);
+        }
+        ...
+    }
+    ...
+}
+}}}
+ * HttpServletRequest 는 자바 표준 클래스
+ * 가짜 객체를 만들기가 힘들다 - 구현해야 할 메소드가 너무 많다
+ * 방법 1 - Mock 라이브러리 구해서 사용
+ * 방법 2 - Adapt Parameter
+ * 새로운 인터페이스를 만들고 HttpServletRequest 감싸기
+ * 어댑터 패턴과 비슷, 이름도 비슷
+{{{#!gcode java
+public class ARMDispatcher
+    public void populate(ParameterSource source) {
+        String values = source.getParameterForName(pageStateName);
+        if (value != null) {
+            marketBindings.put(pageStateName + getDateStamp(), value);
+        }
+        ...
+    }
+}
+
+class ServletParameterSource implements ParameterSource
+{
+    private HttpServletRequest request;
+
+    public ServletParameterSource(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    String getParameterValue(String name) {
+        String [] values = request.getParameterValues(name);
+        if (values == null || values.length < 1)
+            return null;
+        return values[0];
+    }
+}
+
+class FakeParameterSource implements ParameterSource
+{
+    public String value;
+
+    public String getParameterForName(String name) {
+        return value;
+    }
+}
+}}}
+
+== 메소드 객체 탈출 (Break Out Method Object) ==
+ * 하나의 메소드가 하나의 객체로
+{{{#!gcode cpp
+class GDIBrush
+{
+public:
+    void draw(vector<point>& renderingRoots,
+              ColorMatrix& colors,
+              vector<point>& selection);
+    ...
+
+private:
+    void drawPoint(int x, int y, COLOR color);
+    ...
+
+};
+
+void GDIBrush::draw(vector<point>& renderingRoots,
+                    ColorMatrix& colors,
+                    vector<point>& selection)
+{
+    for(vector<points>::iterator it = renderingRoots.begin();
+            it != renderingRoots.end();
+            ++it) {
+        point p = *it;
+        ...
+
+        drawPoint(p.x, p.y, colors[n]);
+    }
+    ...
+}
+}}}
+ * draw(...) 메소드를 객체로 만들자
+ * 클래스 Renderer 만들고 생성자에 GBIBrush 참조 + draw(...) 파라미터
+{{{#!gcode cpp
+class Renderer
+{
+public:
+    Renderer(GBIBrush *brush,
+             vector<point>& renderingRoots,
+             ColorMatrix &colors,
+             vector<point>& selection);
+    ...
+};
+}}}
+ * 생성자에서 받은 것들을 인스턴스 변수로 만들기
+{{{#!gcode cpp
+class Renderer
+{
+private:
+    GDIBrush *brush;
+    vector<point>& renderingRoots;
+    ColorMatrix& colors;
+    vector<point>& selection;
+
+public:
+    Renderer(GDIBrush *brush,
+             vector<point>& renderingRoots,
+             ColorMatrix& colors,
+             vector<point>& selection)
+        : brush(brush), renderingRoots(renderingRoots),
+          colors(colors), selection(selection)
+        {}
+};
+}}}
+ * draw(...) 메소드 복사
+ * 컴파일이 안 된다면 GDIBrush 에 퍼블릭 getter 도입, drawPoint(...) 메소드를 퍼블릭으로
+ * 윈래 draw(...) 에서 새로운 draw(...) 로 위임
+{{{#!gcode cpp
+void GDIBrush::draw(vector<point>& renderingRoots,
+                    ColorMatrix &colors,
+                    vector<point>& selection)
+{
+    Renderer renderer(this, renderingRoots, colors, selection);
+    renderer.draw();
+}
+}}}
+ * 여기까지 대충 완료이나 더 진행해보자
+ * 상호참조 제거, 특히 drawPoint(...)
+ * 인터페이스 추출
+{{{#!gcode cppclass PointRenderer
+{
+    public:
+        virtual void drawPoint(int x, int y, COLOR color) = 0;
+};
+}}}
+[[Attachment(MethodObject.png)]]
+ * 여기가 끝이 아니다
+ * PointRenderer 가 GDIBrush 를 가지는 클래스가 되면 안될까?
+
+== 정의 완료 (Definition Completion) ==
+ * 선언과 구현이 분리된 언어 - C, C++
+{{{#!gcode cpp
+class CLateBindingDispatchDriver : public CDispatchDriver
+{
+public:
+                CLateBindingDispatchDriver ();
+    virtual    ~CLateBindingDispatchDriver ();
+
+    ROOTID      GetROOTID (int id) const;
+
+    void        BindName (int id, OLECHAR FAR *name);
+    ...
+
+private:
+    CArray<ROOTID, ROOTID& > rootids;
+};
+}}}
+ * 테스트 코드에서 null body 구현 제공
+{{{#!gcode cpp
+#include "LateBindingDispatchDriver.h"
+
+CLateBindingDispatchDriver::CLateBindingDispatchDriver() {}
+
+CLateBindingDispatchDriver::~CLateBindingDispatchDriver() {}
+
+ROOTID GetROOTID (int id) const { return ROOTID(-1); }
+
+void BindName(int id, OLECHAR FAR *name) {}
+
+
+TEST(AddOrder,BOMTreeCtrl)
+{
+    CLateBindingDispatchDriver driver;
+    CBOMTreeCtrl  ctrl(&driver);
+
+    ctrl.AddOrder(COrderFactory::makeDefault());
+    LONGS_EQUAL(1, ctrl.OrderCount());
+}
+}}}
+ * 링크시 충돌 방지하려면 개별적인 실행파일 만들어야 함
+ * 수술자국이 매우 크다
+ * 최악의 경우 초기에만 사용하고 얼른 테스트를 만들고 나서 제거하자
+
+== 전역 참조 캡슐화 (Encapsulate Global References) ==
+ * 전역 변수 2개가 있다
+{{{#!gcode cpp
+bool AGG230_activeframe[AGG230_SIZE];
+bool AGG230_suspendedframe[AGG230_SIZE];
+
+void AGGController::suspend_frame()
+{
+    frame_copy(AGG230_suspendedframe, AGG230_activeframe);
+    clear(AGG230_activeframe);
+    flush_frame_buffers();
+}
+
+void AGGController::flush_frame_buffers()
+{
+    for (int n = 0; n < AGG230_SIZE; ++n) {
+        AGG230_activeframe[n] = false;
+        AGG230_suspendedframe[n] = false;
+    }
+}
+}}}
+ * 후보 해결책 1 - 메소드의 파라미터로 전달
+ * 전역변수를 사용하는 메소드가 많을 경우 귀찮다
+ * 후보 해결책 2 - 생성자의 파라미터로 전달
+ * 괜찮긴 하지만 더 나은 방법이 있다
+ * 여러개의 전역변수가 함께 사용될 경우 하나의 클래스에 넣자
+{{{#!gcode cpp
+class Frame
+{
+public:
+    // declare AGG230_SIZE as a constant
+    enum { AGG230_SIZE = 256 };
+
+    bool AGG230_activeframe[AGG230_SIZE];
+    bool AGG230_suspendedframe[AGG230_SIZE];
+};
+}}}
+ * 전역 변수를 사용하는 메소드들이 이 클래스로 이동해야 옳은 경우가 많다
+ * 클래스 이름을 지을때는 이런 메소드를 고려하자
+ * 이 클래스의 인스턴스를 전역 객체로 생성해서 사용
+{{{#!gcode cpp
+Frame  frameForAGG230;
+
+void AGGController::suspend_frame()
+{
+    frame_copy(frameForAGG230.AGG230_suspendedframe,
+               frameForAGG230.AGG230_activeframe);
+    clear(frameForAGG20.AGG230_activeframe);
+    flush_frame_buffer();
+}
+}}}
+ * 아직 할일이 많다
+ * 소중한 첫걸음
+ * 여기까지 진행한 다음 후보 해결책 2를 추가로 적용할 수 있다
+ * 전역 함수의 캡슐화
+ * 인터페이스 클래스를 만들고 하위 클래스를 만든다
+{{{#!gcode cpp
+class OptionSource
+{
+public:
+    virtual          ~OptionSource() = 0;
+    virtual Option   GetOption(const string& optionName) = 0;
+    virtual void     SetOption(const string& optionName,
+                               const Option& newOption) = 0;
+};
+
+class  ProductionOptionSource : public OptionSource
+{
+public:
+    Option GetOption(const string& optionName);
+    void SetOption(const string& optionName,
+                   const Option& newOption) ;
+};
+
+Option ProductionOptionSource::GetOption(
+        const string& optionName)
+{
+    ::GetOption(optionName);
+}
+
+void ProductionOptionSource::SetOption(
+        const string& optionName,
+        const Option& newOption)
+{
+    ::SetOption(optionName, newOption);
+}
+}}}
+ * 추가 적용 - 정적세터도입, 생성자 매개변수화, 메소드 매개변수화, 전역 참조를 게터로 대체
+
+== 정적 메소드 드러내기 (Expose Static Method) ==
+ * 인스턴스 변수를 사용하지 않는 메소드는 static 로 만들자
+ * 테스트하니스에서 클래스 인스턴스를 만들지 않아도 메소드 호출 가능
+ * 이런 메소드들은 다른 클래스에 있어야 옳을 가능성이 크다
+ * 일단 테스트를 만들면 메소드 이동에 도움이 된다
+ * public 이 마음에 안 들면 internal, default, protected 사용
+
+== 호출 추출과 오버라이드 (Extract and Override Call) ==
+ * 다른 클래스의 메소드 호출을 추출한다
+{{{#!gcode java
+public class PageLayout
+{
+    private int id = 0;
+    private List styles;
+    private StyleTemplate template;
+    ...
+    protected void rebindStyles() {
+        styles = StyleMaster.formStyles(template, id);
+        ...
+    }
+    ...
+}
+}}}
+{{{#!gcode java
+public class PageLayout
+{
+    private int id = 0;
+    private List styles;
+    private StyleTemplate template;
+    ...
+    protected void rebindStyles() {
+        styles = formStyles(template, id);
+        ...
+    }
+
+    protected List formStyles(StyleTemplate template, int id) {
+        return StyleMaster.formStyles(template, id);
+    }
+    ...
+}
+}}}
+ * 이제 하위클래스에서 오버라이드 가능
+{{{#!gcode java
+public class TestingPageLayout extends PageLayout {
+     protected List formStyles(StyleTemplate template, int id) {
+        return new ArrayList();
+    }
+    ...
+}
+}}}
+ * 전역변수나 정적 메소드 의존을 깨기에 적합
+
+== 팩토리 메소드 추출과 오버라이드 (Extract and Override Factory Method) ==
+ * 생성자에 있는 객체 생성 코드는 테스트를 만드는데 방해 요소
+{{{#!gcode java
+public class WorkflowEngine
+{
+    public WorkflowEngine () {
+        Reader reader = new ModelReader(AppConfig.getDryConfiguration());
+
+        Persister persister = new XMLStore(AppConfiguration.getDryConfiguration());
+
+        this.tm = new TransactionManager(reader, persister);
+        ...
+    }
+    ...
+}
+}}}
+ * 객체 생성 부분을 메소드로 추출
+{{{#!gcode java
+public class WorkflowEngine
+{
+    public WorkflowEngine () {
+        this.tm = makeTransactionManager();
+        ...
+    }
+
+    protected TransactionManager makeTransactionManager() {
+        Reader reader = new ModelReader(AppConfiguration.getDryConfiguration());
+
+        Persister persister = new XMLStore(AppConfiguration.getDryConfiguration());
+
+        return new TransactionManager(reader, persister);
+    }
+    ...
+}
+}}}
+ * 서브 클래스에서 대체 가능
+{{{#!gcode java
+public class TestWorkflowEngine extends WorkflowEngine
+{
+    protected TransactionManager makeTransactionManager() {
+        return new FakeTransactionManager();
+    }
+}
+}}}
+ * C++ 에서는 안됨 - 생성자에서 가상 메소드 호출 불가
+ * C++ 에서는 인스턴스 변수 대체 사용
+
+== 게터 추출과 오버라이드 (Extract and Override Getter) ==
+ * C++ 에서는 팩토리 메소드 추출과 오버라이드 대신 게터 추출과 오버라이드
+ * 위의 예와 마찬가지로 생성자에 복잡한 객체 생성이 있는 경우
+ * 굼뜬 게터 (lazy getter) 만든다
+{{{#!gcode cpp
+// WorkflowEngine.h
+class WorkflowEngine
+{
+private:
+    TransactionManager    *tm;
+
+protected:
+    TransactionManager    *getTransaction() const;
+
+public:
+                           WorkflowEngine ();
+    ...
+}
+
+
+// WorkflowEngine.cpp
+WorkflowEngine::WorkflowEngine()
+:tm (0)
+{
+    ...
+}
+
+TransactionManager *getTransactionManager() const
+{
+    if (tm == 0) {
+        Reader *reader = new ModelReader(AppConfig.getDryConfiguration());
+
+        Persister *persister = new XMLStore(AppConfiguration.getDryConfiguration());
+
+        tm = new TransactionManager(reader,persister);
+    }
+    return tm;
+}
+...
+}}}
+ * 게터가 만들어졌으면 하위클래스에서 오버라이드 가능
+{{{#!gcode cpp
+class TestWorkflowEngine : public WorkflowEngine
+{
+public:
+    TransactionManager* getTransactionManager() { return &transactionManager; }
+
+    FakeTransactionManager  transactionManager;
+};
+}}}
+ * 테스트 하니스에서 사용하기 편리
+{{{#!gcode cpp
+TEST(transactionCount, WorkflowEngine)
+{
+    auto_ptr<TestWorkflowEngine>  engine(new TestWorkflowEngine);
+    engine.run();
+    LONGS_EQUAL(0, engine.transactionManager.getTransactionCount());
+}
+}}}
+
+== 구현체 추출 (Extract Implementer) ==
+ * 인터페이스 추출 할때 이름짓기가 까다로운 경우가 있다
+ * 이미 존재하는 클래스의 이름이 완벽하다면 인터페이스 추출대신 구현체를 추출한다
+ * 메소드를 하위 클래스로 밀어내리고 클래스를 인터페이스로 변경
+{{{#!gcode cpp
+// ModelNode.h
+class ModelNode
+{
+private:
+    list<ModelNode *>    m_interiorNodes;
+    list<ModelNode *>    m_exteriorNodes;
+    double               m_weight;
+    void                 createSpanningLinks();
+
+public:
+    void addExteriorNode(ModelNode *newNode);
+    void addInternalNode(ModelNode *newNode);
+    void colorize();
+    ...
+
+};
+}}}
+ * 새로운 클래스 ProductionModelNode 에 밀어내림
+{{{#!gcode cpp
+// ProductionModelNode.h
+class ProductionModeNode
+{
+private:
+    list<ModelNode *>    m_interiorNodes;
+    list<ModelNode *>    m_exteriorNodes;
+    double               m_weight;
+    void                 createSpanningLinks();
+public:
+    void addExteriorNode(ModelNode *newNode);
+    void addInternalNode(ModelNode *newNode);
+    void colorize();
+    ...
+};
+}}}
+ * 기존 클래스의 메소드를 순수 가상으로 변경
+ * 가상 소멸자 추가
+{{{#!gcode cpp
+// ModelNode.h
+class ModelNode
+{
+public:
+    virtual         ~ModelNode () = 0;
+    virtual void     addExteriorNode(ModelNode *newNode) = 0;
+    virtual void     addInternalNode(ModelNode *newNode) = 0;
+    virtual void     colorize() = 0;
+    ...
+};
+
+// ModelNode.cpp
+ModelNode::~ModelNode()
+{}
+}}}
+ * ModelNode 클래스는 인터페이스로 변경됐다
+ * ProductionModeNode 클래스가 ModelNode 상속받도록 변경
+ * 상속 계층이 있을때 상위 클래스들을 모두 인터페이스로 변경, 각각 구현 클래스 추가
+[[Attachment(Complex1.png)]]
+[[Attachment(Complex2.png)]]
+[[Attachment(Complex3.png)]]
+
+== 인터페이스 추출 (Extract Interface) ==
+ * 가장 안전한 의존관계 깨기 기법
+[[Attachment(diagram.png)]]
+ * 우리는 다음과 같은 테스트를 원한다
+{{{#!gcode java
+void testPayday()
+{
+    Transaction t = new PaydayTransaction(getTestingDatabase());
+    t.run();
+
+    assertEquals(getSampleCheck(12), getTestingDatabase().findCheck(12));
+}
+}}}
+ * 컴파일이 안된다
+ * 가짜 클래스를 넘기자
+{{{#!gcode java
+void testPayday()
+{
+    FakeTransactionLog aLog = new FakeTransactionLog();
+    Transaction t = new PaydayTransaction(getTestingDatabase(), aLog);
+    t.run();
+
+    assertEquals(getSampleCheck(12), getTestingDatabase().findCheck(12));
+}
+}}}
+ * 위 테스트 코드가 컴파일 되도록 FakeTransactionLog 클래스를 만든다
+ * 인터페이스를 추출하고 FakeTransactionLog 클래스가 그 인터페이스를 구현하게 만든다
+ * 인터페이스의 이름은 심사숙고해서 결정한다
+{{{#!gcode java
+interface TransactionRecorder
+{
+}
+
+public class TransactionLog implements TransactionRecorder
+{
+   ...
+}
+
+public class FakeTransactionLog implements TransactionRecorder
+{
+}
+}}}
+ * TRansactionLog 사용하는 부분을 모두 TransactionRecorder 로 변경
+ * 컴파일 될때까지 메소드 추가
+ * FakeTransactionLog 클래스에는 빈 메소드 추가
+{{{#!gcode java
+interface TransactionRecorder
+{
+    void saveTransaction(Transaction transaction);
+}
+
+public class FakeTransactionLog implements TransactionRecorder
+{
+    void saveTransaction(Transaction transaction) {
+    }
+}
+}}}
+ * 모든 메소드를 추가할 필요 없다
+ * 비가상 메소드 오버라이드 주의
+
+== 인스턴스 위임자 도입 (Introduce Instance Delegator) ==
+ * 정적 메소드(static method) 사용 - 유틸리티 클래스 등
+ * 보통 정적 메소드는 테스트에 해가 되지 않는다
+ * 하지만 정적 메소드 내부에 심각한 의존 관계가 있다면?
+ * 정적 메소드를 호출하는 인스턴스 메소드 도입
+{{{#!gcode java
+public class BankingServices
+{
+    public static void updateAccountBalance(int userID, Money amount) {
+        ...
+    }
+
+    public void updateBalance(int userID, Money amount) {
+        updateAccountBalance(userID, amount);
+    }
+    ...
+}
+}}}
+ * 분리접합지점 만들기
+{{{#!gcode java
+public class SomeClass
+{
+    public void someMethod() {
+        ...
+        BankingServices.updateAccountBalance(id, sum);
+    }
+}
+
+
+public class SomeClass
+{
+    public void someMethod(BankingServices services) {
+        ...
+        services.updateBalance(id,sum);
+    }
+    ...
+}
+}}}
+
+== 정적 세터 도입 (Introduce Static Setter) ==
+ * 싱글턴에 의존하며 싱글턴 객체가 특정 상태에 있어야 테스트가 가능할때 적용
+ * 싱글턴을 통해 Dispatcher 가져옴. 의존관계.
+{{{#!gcode cpp
+void MessageRouter::route(Message *message) {
+    ...
+    Dispatcher* dispatcher = ExternalRouter::instance()->getDispatcher();
+    if (dispatcher != NULL)
+        dispatcher->sendMessage(message);
+}
+}}}
+ * 싱글턴
+{{{#!gcode cpp
+class ExternalRouter
+{
+private:
+    static ExternalRouter *_instance;
+public:
+    static ExternalRouter *instance();
+    ...
+};
+
+ExternalRouter *ExternalRouter::_instance = 0;
+
+ExternalRouter *ExternalRouter::instance()
+{
+    if (_instance == 0) {
+        _instance = new ExternalRouter;
+    }
+    return _instance;
+}
+}}}
+ * 정적세터 도입, 갈아치움 메소드
+{{{#!gcode cpp
+void ExternalRouter::setTestingInstance(ExternalRouter *newInstance)
+{
+    delete _instance;
+    _instance = newInstance;
+}
+}}}
+ * 싱글턴을 상속받아 가짜 dispatcher 리턴하는 메소드 작성
+{{{#!gcode cpp
+class TestingExternalRouter : public ExternalRouter
+{
+public:
+    virtual void Dispatcher *getDispatcher() const {
+        return new FakeDispatcher;
+    }
+};
+}}}
+ * 보통 싱글턴의 생성자는 private 이므로 생성자를 protected 혹은 public 로 바꾼다
+ * 이 변경 후 new 로 싱글턴 클래스를 사용하지 않도록 주의한다
+
+== 연결 대체 (Link Substitution) ==
+ * 객체와 다형성을 활용 못하는 언어에서 사용 - C
+ * 대체하고자 하는 함수와 같은 시그너처의 함수를 가지는 더미 라이브러리 작성
+ * 링크 타임에 더미로 대체
+ * 함수들이 호출되는 순서와 파라미터를 미리 조사해두면 편하다
+{{{#!gcode c
+void account_deposit(int amount)
+{
+    struct Call *call =
+        (struct Call *)calloc(1, sizeof (struct Call));
+    call->type = ACC_DEPOSIT;
+    call->arg0 = amount;
+    append(g_calls, call);
+}
+}}}
+ * C++ 에서도 가능하나 어렵다
+ * 외부 라이브러리를 가짜로 만들때 가장 유용
+
+== 생성자 매개변수화 (Parameterize Constructor) ==
+ * 생성자에서 객체를 생성하는 경우
+{{{#!gcode java
+public class MailChecker
+{
+    public MailChecker (int checkPeriodSeconds) {
+        this.receiver = new MailReceiver();
+        this.checkPeriodSeconds = checkPeriodSeconds;
+    }
+    ...
+}
+}}}
+ * 매개변수를 가지는 생성자 추가
+ * 기존의 생성자는 새로운 생성자 사용
+{{{#!gcode java
+public class MailChecker
+{
+    public MailChecker (MailReceiver receiver, int checkPeriodSeconds) {
+        this.receiver = receiver;
+        this.checkPeriodSeconds = checkPeriodSeconds;
+    }
+
+    public MailChecker (int checkPeriodSeconds) {
+        this(new MailReceiver(), checkPeriodSeconds);
+    }
+    ...
+}
+}}}
+ * 기존의 생성자는 새로운 생성자를 사용
+ * MailChecker 클래스를 사용하는 클래스에 MailReceiver 클래스 의존성이 추가되는 단점
+
+== 메소드 매개변수화 (Parameterize Method) ==
+ * 메소드에서 객체를 생성할 경우
+{{{#!gcode cpp
+void TestCase::run() {
+    delete m_result;
+    m_result = new TestResult;
+    try {
+        setUp();
+        runTest(m_result);
+    }
+    catch (exception& e) {
+        result->addFailure(e, this);
+    }
+    tearDown();
+}
+}}}
+ * 매개변수를 가지는 메소드 추가
+ * 기존의 메소드는 새로운 메소드 사용
+{{{#!gcode cpp
+void TestCase::run(TestResult *result) {
+    delete m_result;
+    m_result = result;
+    try {
+        setUp();
+        runTest(m_result);
+    }
+    catch (exception& e) {
+        result->addFailure(e, this);
+    }
+    tearDown();
+}
+
+void TestCase::run() {
+    run(new TestResult);
+}
+}}}
+ * 팩토리 메소드 추출과 오버라이드가 나은 대안이 되는지 검토

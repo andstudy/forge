@@ -1,0 +1,71 @@
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+
+= Business and Management =
+ * ''' (105) IGDA Government and Associations Summit''' - ''Toby Barnes, Jason Della Rocca, Per Stromback 외''
+ * ''' (203) Game Development Deals 2008 - Critical and Emerging Issues in Every Negotiation''' - ''Mike Arkin, Jim Charne, Joshua Meyer 외''
+ * ''' (204) Game Outsourcing Summit''' - ''Xin Chung, Steve Gray, Alistair Hirst 외''
+ * ''' (303) Casual Games Summit''' - ''Steve Meretzky, Kenny Shea Dinkin, Dave Rohrl 외''
+  [https://www.cmpevents.com/sessions/GD/S6166i1.pps Monday, Business Today, Allard]
+ * ''' (304) Worlds In Motion Summit''' - ''Leigh Alexander, Erik Bethke, Adrian Crook 외''
+  [http://www.massively.com/2008/02/19/gdc-08-entertainment-content-convergence-in-online-worlds/ massively]
+ * ''' (305) Serious Games Summit''' - ''Ben Sawyer, Ian Bogost, Katie Salen 외''
+ * ''' (306) GDC Mobile''' - ''Robert Tercek''
+ * ''' (307) Independent Games Summit''' - ''Steve Swink, Matthew Wegner, Kyle Gray 외''
+ * ''' (308) IGDA Education Summit''' - ''Susan Gold, Ernest Adams, Brenda Brathwaite 외''
+ * ''' Advertising & Games ? Opportunities, Pitfalls, and Competition''' - ''David Edery''
+ * ''' Best Practices For Billing and Fraud Management Sponsored by Vindicia''' - ''Brett Thomas, Greg Worch''
+ * ''' Best Practices for Online Game Delivery Sponsored by Akamai''' - ''Brian Harvey''
+ * ''' Bringing the Brick Online: Inside LEGO Universe''' - ''Mark Hansen''
+ * ''' Censorship of Game Content - A Report from the Trenches''' - ''Lawrence Walters''
+ * ''' Client Focused Management''' - ''Dave Ranyard''
+ * ''' Digital Delivery: How to Improve the Game Acquisition Experience to Achieve Higher Conversion Rates and Lower Distribution Costs Sponsored by Solid State Networks''' - ''Tom Ketola, Rick Buonincontri''
+ * ''' Digital Distribution ? From the Basement to the Boardroom Sponsored by Macrovision''' - ''Cal Morrell''
+ * ''' Drawing the Line in the Sand - Which Contract Issues to Fight For?''' - ''Jim Charne, Alex Chapman''
+ * ''' Early Stage Funding for Gaming Start Ups''' - ''Matthew Le Merle''
+ * ''' Entrepreneurship: From Zero to Pandemic''' - ''Josh Resnick''
+ * ''' Famous Last Words Live - An Open Mic to Discuss Game Dev Contracts (Day 1, 2 3)''' - ''Jim Charne''
+ * ''' Game Industry Advance: An IGDA Open House (Day 1, 2)''' - ''Mitzi McGilvray, Jason Della Rocca''
+ * ''' How Gamers Really Play and What That Means for Developers and Publishers Sponsored by Wild Tangent''' - ''Alex St. John''
+ * ''' Lessons from the Front Lines: Startup CEOs share their insider stories - Startup Launchpad Presented by GDC and CRV''' - ''Susan Wu, Erik Bethke, Craig Sherman 외''
+ * ''' Managing Copyright Issues in Videogames and Virtual Worlds''' - ''Sean Kane''
+  [https://www.cmpevents.com/sessions/GD/S6225i1.ppt PPT]
+ * ''' Mashups, Mods & Machinima: Who Owns the Rights to Your Blood, Sweat & Tears''' - ''Sean Kane''
+ * ''' Middleware Promises: Warranties That Don't and Indemnities That Won't''' - ''Stephen Rubin''
+ * ''' Next Generation Game Publishing is Here, Are You? Sponsored by WildTangent''' - ''Alex St. John''
+ * ''' Opportunity for Independent Developers: A Simple, Yet Brash Idea Sponsored by Brash Entertainment''' - ''Mitch Davis''
+ * ''' Pioneering in Episodic Games and Digital Distribution''' - ''Kevin Bruner''
+ * ''' Raising Venture Financing for your Startup: Tips, Tricks, and Hacks - Startup Launchpad Presented by GDC and CRV''' - ''Nabeel Hyatt, Jason Hable, Susan Wu 외''
+ * ''' Self-Publishing for Independent Developers on the PlayStation Network Sponsored by Sony''' - ''Chris Eden''
+ * ''' Small Studio Survival Stories (Day 1, 2, 3)''' - ''Jesse Schell''
+ * ''' Speaking out: Expanding the LGBT Development Community (Day 1, 2)''' - ''Jeb Havens''
+ * ''' Splash Damage: From Amateur to Triple-A in Five Years''' - ''Paul Wedgwood''
+ * ''' The 1st Annual Startup Showcase - Startup Launchpad Presented by GDC and CRV''' - ''Susan Wu, Owen Mahoney, Jamil Moledina 외''
+ * ''' The Commercial Desktop Simulation and Training Revolution ? Lessons Learned from the Front Line Creating Game-Based Tool and Technology Sponsored by BreakAway''' - ''Doug Whatley''
+ * ''' The Focused Portfolio Approach: Building a Design-Centric Game Development Studio''' - ''Jeff Pobst''
+ * ''' The Games Industry Giving Back''' - ''Martin de Ronde, Ben Sawyer, Robert Khoo 외''
+ * ''' Top Ten vs. Long Tail''' - ''Dave Walls, John Welch, Dan Prigg 외''
+ * ''' Up Against the Wall: Game Makers Take On the Press''' - ''Brian Crecente, N'Gai Croal, Geoff Keighley 외''
+ * ''' Your Shameful Secret Addiction to Crunch''' - ''David Amor''
+  [http://www.gamewatch.org/phpBB2/viewtopic.php?t=518 How We Beat Crunch @ gamewatch.org]
+  [http://www.igda.org/guildford/amortalk.htm Making high quality games in a 40 hour week(주 40시간씩 일하면서 고품질의 게임 만들기)]
+  [http://www.gamesindustry.biz/content_page.php?aid=12872 Focus: Relentless puts its finger on the Buzz! @ gamesindustry.biz -"the crazy idea of a development studio that works 9 to 5 with no overtime."]
+
+
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars

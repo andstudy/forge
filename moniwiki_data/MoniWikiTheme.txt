@@ -1,0 +1,16 @@
+MoniWiki는 기본적으로 header.php와 footer.php를 고쳐서 다양한 모습으로 자신의 개인위키를
+만들 수 있다.
+=== header.php, footer.php ===
+기본적으로 header.php, footer.php를 읽는다. 이게 없으면 기본값으로 대치된다.
+
+ * header.php, footer.php는 자신이 원하는 대로 꾸밀 수 있다.
+ * '''include'''로 처리된다.
+
+=== 임의의 Theme 설정 및 지원 ===
+
+http://chemie.skku.ac.kr/wiki/wiki.php/TwinPages?action=theme&theme=kz
+http://chemie.skku.ac.kr/wiki/wiki.php/TwinPages?action=theme&theme=blog
+http://chemie.skku.ac.kr/wiki/wiki.php/TwinPages?action=theme&theme=samplehome
+----
+{{{[[Theme]]}}}매크로를 이용하여 지원 가능한 Theme목록을 볼 수 있다.
+[[Theme]]

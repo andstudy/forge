@@ -1,0 +1,175 @@
+[[TableOfContents]]
+= Pattern 들 =
+ * [http://www.cs.illinois.edu/homes/snir/PPP/index.html Resources on Parallel Patterns]
+
+== 기술 패턴 ==
+ * [AbstractFactoryPattern]
+ * [AcceptorConnectorPattern]
+ * [ActiveObjectPattern]
+ * [ActiveRecordPattern]
+ * [AdaptableSystemsPattern]
+ * [AdapterPattern]
+ * [ApplicationControllerPattern]
+ * [AssociationTableMappingPattern]
+ * [AsynchronousCompletionTokenPattern]
+ * [BlackboardPattern]
+ * [BlockerPattern]
+ * [BridgePattern]
+ * [BuilderPattern]
+ * [ChainOfResponsibilityPattern]
+ * [ClassTableInheritancePattern]
+ * [ClientDispatcherServerPattern]
+ * [ClientSessionStatePattern]
+ * [CoarseGrainedLockPattern]
+ * [CommandPattern]
+ * [CommandProcessorPattern]
+ * [ComplositePattern]
+ * [ComponentConfiguratorPattern]
+ * [ConcreteTableInheritancePattern]
+ * [CountedPointerPattern]
+ * [DatabaseSessionStatePattern]
+ * [DataMapperPattern]
+ * [DataTransferObjectPattern]
+ * [DecoratorPattern]
+ * [DependentMappingPattern]
+ * [DomainModelPattern]
+ * [DoubleCheckedLockingOptimizationPattern]
+ * [EmbeddedValuePattern]
+ * [ExtensionInterfacePattern]
+ * [FacadePattern]
+ * [FactoryMethodPattern]
+ * [FlyweightPattern]
+ * [ForeignKeyMappingPattern]
+ * [ForwarderReceiverPattern]
+ * [FrontControllerPattern]
+ * [GatewayPattern]
+ * [Half-Sync/Half-Async]
+ * [IdentityFieldPattern]
+ * [IdentityMapPattern]
+ * [ImplcitLockPattern]
+ * [InheritanceMappersPattern]
+ * [InterceptorPattern]
+ * [InterpreterPattern]
+ * [IteratorPattern]
+ * [LayersPattern]
+ * [LayerSupertypePattern]
+ * [LazyLoadPattern]
+ * [LeaderFollowersPattern]
+ * [MapperPattern]
+ * [MasterSlavePattern]
+ * [MediatorPattern]
+ * [MementoPattern]
+ * [MetadataMappingPattern]
+ * [MicrokernelPattern]
+ * [ModelViewControllerPattern]
+ * [MoneyPattern]
+ * [MonitorObjectPattern]
+ * [ObserverPattern]
+ * [OptimisticOfflineLockPattern]
+ * [PageControllerPattern]
+ * [PessimisticOfflineLockPattern]
+ * [PipesAndFiltersPattern]
+ * [PluginPattern]
+ * [PresentationAbstractionControlPattern]
+ * [ProactorPattern]
+ * [PrototypePattern]
+ * [ProxyPattern]
+ * [PublisherSubscriberPattern]
+ * [QueryObjectPattern]
+ * [ReactorPattern]
+ * [RecordSetPattern]
+ * [ReflectionPattern]
+ * [RegistryPattern]
+ * [RemoteFacadePattern]
+ * [RepositoryPattern]
+ * [RowDataGatewayPattern]
+ * [ScopedLockedPattern]
+ * [SeparatedInterfacePattern]
+ * [SerializedLobPattern]
+ * [ServiceLayerPattern]
+ * [ServiceStubPattern]
+ * [ServerSessionStatePattern]
+ * [SingleTableInheritancePattern]
+ * [SingletonPattern]
+ * [SpecialcasePattern]
+ * [StatePattern]
+ * [StrategizedLockingPattern]
+ * [StrategyPattern]
+ * [TableDataGatewayPattern]
+ * [TableModulePattern]
+ * [TemplateMethodPattern]
+ * [TemplateViewPattern]
+ * [ThreadSafeInterfacePattern]
+ * [ThreadSpecificStoragePattern]
+ * [TwoStepViewPattern]
+ * [TransactionScriptPattern]
+ * [TransformViewPattern]
+ * [UnitOfWorkPattern]
+ * [ValueObjectPattern]
+ * [ViewHandlerPattern]
+ * [VisitorPattern]
+ * [WholePartPattern]
+ * [WrapperFacadePattern]
+
+== 인간 패턴 ==
+ * [http://pds11.egloos.com/pds/200808/22/87/Patterns_for_Productivity.pdf 생산성 향상을 위한 패턴]
+
+== 읽을 거리들 ==
+ * 패턴 공부하는 방법
+  http://www.industriallogic.com/papers/learning.html
+ * 간략한 예제들
+  http://www.cns.uni.edu/~wallingf/teaching/062/sessions/support/pattern-examples.pdf
+  복사본 : attachment:pattern-examples.pdf
+
+== 패턴 순서 정리 코드 ==
+{{{#!gcode cpp
+#include <fstream>
+#include <string>
+#include <set>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	ifstream input("f:\\patterns_name.txt");
+	ofstream output("f:\\patterns_sorted_name.txt");
+
+	set<string> PatternNames;
+
+	string name;
+	int step = 0;
+	char c;
+	while (!input.eof())
+	{
+		input.get(c);
+		if (c == '*' && step == 0)
+			step = 1;
+		else if (c == ' ' && step == 1)
+			step = 2;
+		else if (c == '[' && step == 2)
+			step = 3;
+		else if (step == 3)
+		{
+			if (c == ']') {
+				step = 0;
+				PatternNames.insert(name);
+				name = "";
+			} else {
+				name.push_back(c);
+			}
+		} else {
+			step = 0;
+		}
+	}
+
+	for (set<string>::iterator it = PatternNames.begin(); 
+		 it != PatternNames.end(); 
+		 ++it)
+	{
+		output << " * [" << it->c_str() << "]" << endl;
+	}
+	return 0;
+}
+}}}
+
+== 링크 ==
+ * [http://itunes.apple.com/app/design-patterns-process-aid/id352782035?mt=8 iTunes - Design Patterns Process Aid]

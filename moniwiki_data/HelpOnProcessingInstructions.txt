@@ -1,0 +1,23 @@
+== Processing Instructions ==
+Processing instructions have the same semantics as in XML: they control the paths taken when processing a page. Processing instructions are lines that start with a "{{{#}}}" character followed by a keyword and optionally some arguments. Two consecutive hash marks at the start of a line are a comment that won't appear in the processed page.
+
+Processing instructions this wiki knows of:
+ * {{{##}}} ''any-text'': comment
+ * {{{#FORMAT}}} ''format-specifier'': defines the input format for this page, known formats are:
+   * '''Wiki''': default MoinMoin wiki markup
+   * '''plain''': normal plain text
+   * '''html''': normal html text
+   * '''StructuredText''' ( <!> not implemented)
+ * {{{#REDIRECT}}} ''pagename'': redirect to a different page (see MeatBall:PageRedirect'''''')
+
+All !PIs must appear at the very start of a page. An exception are comment !PIs, those may appear within a wiki page (but obviously not in pages using other formats).
+== MoniWiki Extensions ==
+ * {{{#!}}}''processor-name'': same as {{{#format}}} ''formatter''
+ * {{{#title}}} ''title text'': set the title of the page
+ * {{{#action}}} ''action name'': set the default action instead of the ''EditText''
+ * {{{#keywords}}} ''keywords'': set the keywords of the Meta Tag
+ * {{{#redirect}}} ''url''
+----
+For more information on the possible markup, see HelpOnEditing.
+----
+[[Navigation(HelpOnEditing)]]

@@ -1,0 +1,9 @@
+{{{#!html
+
+
+
+<div style="width:600px" id="__ss_8027106"> 
+<strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/codevania/taocp-231" title="Taocp 2_3_1">Taocp 2_3_1</a></strong> 
+<iframe src="http://www.slideshare.net/slideshow/embed_code/8027106" width="600" height="480" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/codevania">TaeWoo Kim</a> </div> </div>
+}}}

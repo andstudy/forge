@@ -1,0 +1,194 @@
+[[TableOfContents]]
+Pattern-Oriented Software Architecture (A System of Patterns)
+ 
+== Patterns ==
+ * 패턴은 숙련된 소프트웨어 엔지니어의 집합적인 경험을 토대로 개발할 수 있도록 도와준다.
+ * 패턴은 특정 속성의 소프트웨어 아키텍처를 만드는데 유용하다.
+ * 이번 장에서는 소프트웨어 아키텍처에 있어 패턴이 무엇인지, 어떻게 소프트웨어 개발에 도움을 주는지 알아본다.
+
+=== 패턴이란 무엇인가? ===
+ * 전문가는 과거에 해결했던 방식으로 문제를 해결한다. 문제-해법 쌍.
+ * 문제-해법 쌍을 추상화 하면 공통적인 패턴이 나온다.
+ * Christopher Alexander 의 정의
+==== Example  MVC ====
+ * UI 는 고객에 따라 플랫폼에 따라 변화 요구가 많다.
+ * UI가 쉽게 실시간으로 바뀔 수 있어야 함.
+ * UI의 변화가 핵심 기능 코드에 영향을 주지 않아야 함.
+ * Model 은 핵심 데이터와 기능을 캡슐.
+ * View 는 Model 을 UI 에 표현.
+ * Controller 는 입력을 처리.
+=== 패턴의 속성들 ===
+ * 패턴은 특정 디자인 상황에서 발생하는 반복적인 디자인 문제를 다루고 해결책을 제시한다.
+ * 패턴은 잘 증명된 디자인 경험을 기록한다.바퀴의 재발명 안 한다.
+ * 패턴은 클래스, 인스턴스, 컴포넌트 보다 높은 레벨에서 추상화를 식별, 구체화 한다.
+ * 패턴은 디자인 원리 이해와 공통적 단어를 제공한다.
+ * 패턴은 아키텍처 기록의 의미를 지닌다.
+ * 패턴은 정의된 속성으로 구축을 지원한다.(품질속성 etc)
+ * 패턴은 복잡한 아키텍처를 구축할 때 도움을 준다.(빌딩블럭) 하지만 구체적인 해결책이 아니라 일반적인 해결책을 위한 스키마다.
+ * 패턴은 소프트웨어의 복잡성을 관리할 수 있도록 도와준다.
+ * 정의
+     소프트웨어 아키텍처를 위한 패턴은 특정한 디자인 상황에서 발생하는 반복적인 디자인 문제를 묘사하고, 그 해결책을 위한 잘 증명된 generic 스키마를 제공한다. 해결책 스키마는 구성되는 컴포넌트, 그리고 그들의책임과 관계, 협력하는 방법을 묘사하는 것으로 지정된다.
+=== 무엇이 패턴을 만드나? ===
+ * Context : 문제가 주어지는 상황
+ * Problem : 주어진 상황에 반복되는 문제
+  * 요구사항
+  * 제약사항
+  * 바람직한 속성
+ * Solution : 그 문제의 증명된 해결책
+  * Static aspect[Structure]
+  * Dynamic aspect [Run-time behavior]
+     Ex) MVC
+=== 패턴 카테고리 ===
+ * Architectural Patterns
+ * Design patterns
+ * Idioms
+==== Architectural Patterns ====
+ * Architectural pattern 은 소프트웨어 시스템을 위한 기본적인 구조적 조직 스키마를 표현한다.
+ * 그것은 구체적인 소프트웨어 아키텍처의 템플릿이다.
+ * Ex) MVC
+==== Design Patterns ====
+ * 소프트웨어 아키텍처의 서브시스템, 그리고 그들간의 관계이며 보통 여러 개의 작은 아키텍처적 유닛들로 구성된다.
+ * 디자인패턴은 소프트웨어 시스템의 서브시스템이나 컴포넌트, 혹은  정련하기 위한 스키마를 제공한다. 디자인패턴은 특정 상황안에서 일반적인 디자인 문제를 해결하는 communicating 컴포넌트의 공통적으로 반복되는 구조를 묘사한다.[GHJV95]
+ * 디자인패턴은 중간크기의 패턴이다. 
+  * Architectural PT > Design PT > Idiom
+==== Idioms ====
+ * Idiom 은 프로그래밍 언어를 지정하는 로레벨 패턴이다. Idiom은 특정 컴포넌트나 그들과의 관계를 어떻게 구현할 것인가를 언어를 사용하여 묘사한다.
+ * Ex) 가비지컬렉션, 레퍼런스 카운트
+==== 통합 ====
+ * Architectural 패턴은 초기 디자인을 시작하는데 유용하고, 디자인패턴은 전체 디자인 동안 , Idiom 은 구현할 때 유용하다.
+=== 패턴간의 관계 ===
+ * 패턴은 서로 돕기도 하고
+ * 큰 패턴이 작은 패턴들을 포함하기도 한다.
+      Ex1) model-view observing (Refinement)
+      Ex2) Doc-View  (Variants)
+      Ex3) Other pattern needing  (Combination)
+=== 패턴 묘사 ===
+ * 이름
+ * 다른 이름
+ * 예제
+ * 상황(Context)
+ * 문제
+ * 해결책
+ * 구조
+ * 유동성(Dynamics)
+ * 구현
+ * 예제풀이
+ * 변이
+ * 사용처
+ * 결론
+ * 참고
+=== 패턴과 소프트웨어 아키텍처 ===
+ * 패턴은 결국 소프트웨어 공학의 목적을 만족시키기 위한 것이다.
+ * 효과적인 소프트웨어 프로덕션을 지원해야 한다.
+ * 빌딩블럭으로서의 패턴(아키텍처 구축에 있어)
+ * 패턴시스템(패턴을 균일하게 묘사하고 분류하고 서로 엮이는지를 보여줌)
+ * 패턴 vs 메서드 (UML)
+ * 구현? 꼭 oop 일 필요는 없다. 패턴은 페러다임이나 언어와 관계 무.
+ 
+== 패턴들 ==
+=== Architectural Patterns ===
+ * From Mud to Structure
+  * [LayersPattern]
+      데이타가 위(상위 레이어) 에서 아래(하위 레이어)로, 아래에서 위로 이동(위 아래)
+  * [PipesAndFiltersPattern]
+      데이타가 수평관계의 Filters 을 한 방향으로 통과 (왼쪽에서 오른쪽으로)
+  * [BlackboardPattern]
+      데이타는 전방향으로 읽혀지고, 다시 쓰여진다.(update) (방사형으로 퍼지고 모인다.)
+ * Distributed Systems
+  * [BlockerPattern]
+ * Interactive Systems
+  * [ModelViewControllerPattern]
+  * [PresentationAbstractionControlPattern]
+ * Adaptable Systems 
+  * [MicrokernelPattern]
+   * O/S의 작고, 효과적이고, 이식성 강한 디자인을 위해 개발 됨
+   * 현대 O/S에 많이 사용 됨.(ex : WinNT)
+   * Plug and Play 환경 제공.
+   * 주요 서비스에 새로운 것을 추가하기가쉬움.
+  * [ReflectionPattern]  
+   * 소프트웨어 시스템의 구조와 행위의 동적인 변화를 위한 매커니즘을 제공.
+   * SMALLTALK, CORBA, OLE 등에서 조금씩 사용됨.
+=== Design Patterns ===
+ * Structural Decomposition
+  * [WholePartPattern]
+ * Organization of Work
+  * [MasterSlavePattern]
+ * Access Control
+  * [ProxyPattern]
+ * Management
+  * [CommandProcessorPattern]
+  * [ViewHandlerPattern]
+ * Communication
+  * [ForwarderReceiverPattern]
+  * [ClientDispatcherServerPattern]
+  * [PublisherSubscriberPattern]
+=== Idioms ===
+ * [CountedPointerPattern]
+ 
+== Idioms ==
+=== 소개 ===
+프로그래밍 언어안에서 구현에 관련된 문제를 어떻게 해결하는지를 보여주기 위한 것.
+	
+=== Idioms 이 제공하는 것은? ===
+ * 반복적으로 발생하는 문제를 당신이 보통 사용하는 언어로 어떻게 해결할 수 있는지를 보여준다.
+ * 프로그래머의 생각를 다른 사람에게 쉽게 전달하고, 신입이 빨리 적응할 수 있게 도와준다. Idioms 을 문서화할때 사용하자.
+
+=== Idioms 과 Style ===
+ * 팀원간에 Style 을 통일하는게 서로의 코드를 이해하는데 도움.
+ * '주석문은 항상 다음 줄에 단다.' 와 같은 스타일은 도움이 되지 않는다.
+ * 패턴과 Idioms 을 담고 있는 Style 이 훨씬 도움을 준다. - 실질적으로 문제 해결에 도움을 주기 때문.
+ * 주의 : 모든 경우에 같은 Idioms 이 적용가능하지는 않다.
+
+== Pattern Systems ==
+Pattern Systems 은 각각의 패턴을 다같이 묶어준다.
+
+=== Pattern Systems 이란? ===
+소프트웨어 architecture 을 위한 패턴들의 집합이다. 이것은 소프트웨어 개발의 구현과, 결합, 실제적인 사용에 대한 guideline 이 된다.
+
+=== 패턴 분류 ===
+아무리 좋은 패턴들로 이루어져 있어도, 그 패턴들이 너무 많고, 원하는 것을 찾기 힘들다면 소용없는 게 된다. 패턴들을 적절하게 분류해 보자.
+
+ * Pattern Categories
+ * Problem Categories
+이 두 카테고리를 2차원 배열로 잡고 도표를 그려보자.
+그리고 다른 책에서 한것과 비교해 보자.
+
+=== Pattern Selection ===
+적절한 패턴을 선택하는 방법을 알아보자.
+
+	1. 문제 정의
+	2. pattern category 선택
+	3. problem category 선택
+	4. 문제 서술(problem descriptions) 부분을 비교
+	5. 장/단점 비교
+	6. 변형(variant)도 확인.
+	7. 이런 작업 끝에 적당한 걸 못 찾았을 경우 다른걸 알아본다.
+
+=== 구현 지침으로서의 패턴 시스템 ===
+각각의 패턴의 구현단계들을 하나의 벽돌같이 생각하라. 어떤 패턴으로 구현하다가 다른 패턴을 적용해야 할 필요가 있다면, 그 패턴의 구현부분을 필요할때마다 가져와서 조립하자.
+	1. 소프트웨어의 전체적인 구조를 선호하는 방법을 이용해서 정의한다. (ex. Booch, OMT)
+	2. 문제를 해결하기에 적절한 패턴 시스템을 사용한다.
+	3. 그 패턴이 현재의 문제를 다 해결하지 못한다면, 알고 있는 다른 패턴에서 찾아보자.	
+	4. 다른 패턴을 못 찾는다면, 현재 사용하고 있는 방법의 분석과 디자인 가이드라인을 참조하자.
+	
+=== 패턴의 발전 ===
+ * 패턴의 Descriptions 의 발전
+ * Writer's Workshops
+ * Pattern-Mining
+    1. 적어도 3군데에서 어떤 반복되는 문제를 비슷하게 해결하는 방법을 찾는다.
+    2. solution schema 를 뽑아낸다.
+    3. '새로운 패턴 후보자'로 선언한다.
+    4. writer's 워크샵을 진행한다.
+    5. 실제 소프트웨어 개발에 적용해본다.
+    6. 새로운 패턴이 되었음을 선언한다.
+ * 새 패턴을 이전 패턴들과 통합
+     1. 이전 패턴과의 관계를 명시
+     2. 패턴을 분류
+ * 오래된 패턴 제거
+   * 문제가 없어졌다.
+   * 더 좋은 대안이 생겼다.
+   * 기술이 발전했다.
+ * Organization Schema 를 확장
+== 참고자료 ==
+[POSA1] : Pattern-Oriented Software Architecture. Vol1
+attachment:ArchitecturalPattern.pdf

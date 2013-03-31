@@ -1,0 +1,5 @@
+= ManagingHumans/chap13~19 =
+
+{{{#!html
+<div style="width:425px" id="__ss_6057357"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/niddo/20101204-part2" title="IT 개발자가 쓴 통쾌한 인간관리 이야기 - Part2 : 프로세스가 제품이다">IT 개발자가 쓴 통쾌한 인간관리 이야기 - Part2 : 프로세스가 제품이다</a></strong><object id="__sse6057357" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=20101204-part2-101207010745-phpapp01&stripped_title=20101204-part2&userName=niddo" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6057357" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=20101204-part2-101207010745-phpapp01&stripped_title=20101204-part2&userName=niddo" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/niddo">JangHyuk You</a>.</div></div>
+}}}

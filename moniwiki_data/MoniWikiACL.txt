@@ -1,0 +1,60 @@
+== Example ==
+{{{
+# acl.default.php
+# <?php exit()?>
+# Please don't modify the lines above
+#
+# A sample Access Control Lists file for Moniwiki
+#
+# $Id: WikiACL,v 1.2 2006/07/09 14:23:23 wkpark Exp wkpark $
+@Guest  Anonymous
+*       @ALL            deny    *
+*       @ALL            allow   ticket
+*       @User           allow   *
+# some pages are allowed to edit
+WikiSandBox     @Guest  allow   edit,info,diff
+#*      Anonymous       deny    *
+# some POST actions support protected mode using admin password
+*       @ALL            protect deletefile,deletepage,rename,rcspurge,rcs,chmod,backup,restore
+# some actions allowed to @ALL
+*       @ALL            allow   read,userform,rss_rc,aclinfo,fortune,deletepage,fixmoin,ticket
+# some pages have restrict permission
+MoniWiki        @ALL    deny    edit,uploadfile,diff
+}}}
+== Predefined @group ==
+ * @ALL: all users (priority: 1)
+ * @User: registered users (priority: 2)
+== User define @Group and @Group priority ==
+{{{
+##@groupname userlist [priority]
+@Guest  Anonymous                   # default group priority is 2
+@Kiwirian foobar,kiwi,hello123   20 # @Kiwirain group
+}}}
+== ACL entry type ==
+ * `allow`
+ * `deny`
+ * `protect`: protect some password protected POST actions (not all actions are protectable)
+== ACL matching procedure ==
+=== with same priority ===
+Last ACL entry is used.
+ * {{{allow *}}} + {{{deny *}}} = {{{deny *}}}
+ * {{{deny *}}} + {{{allow *}}} = {{{allow *}}}
+ * {{{deny *}}} + {{{allow edit,info}}} = only edit,info available
+ * {{{allow *}}} + {{{deny info,diff}}} = 
+=== with different priority ===
+{{{
+@Group1    peter,john      20    # priority = 20
+@Group2    simon,soo             # default group priorty = 2
+* @ALL     allow *               # group priority = 1
+* @ALL     deny  backup,restore
+* @Guest   deny  *               # group priority = 2
+* @Group1  deny  *               # User defined @Group1 group
+* @Group1  allow read,info,diff
+* @Group2  deny  info,diff
+}}}
+ * peter and john: {{{allow read,info,diff}}} + {{{deny *}}}
+ * Anonymous (@Guest): {{{deny *}}}
+ * all other registered users: '''Order Deny,Allow''' - {{{deny backup,resotre}}} + {{{allow *}}}
+ * @Group1 : '''Order Allow,Deny''' - {{{allow read,info,diff}}} + {{{deny *}}}
+ * @Group2 : {{{deny info,diff}}} + {{{@ALL deny backup,restore}}} + {{{allow *}}}
+  * /!\ merge all ACL entries with same group priority.

@@ -1,0 +1,69 @@
+== 문제 풀이 ==
+ O(1)에 구해지는 알고리즘이 없을까?
+ if문이 덕지덕지 들어갔지만 어쨋든 O(1) ..... -_-;
+
+== 소스 ==
+{{{
+#include <stdio.h>
+#include <math.h>
+
+int n;	///< 입력 받는 값!
+
+int GetLine()
+{
+	return (int)floor( 0.5 + sqrt( 9.0 - 12.0*(2.0-n))/6.0);
+}
+
+int GetNum(int line)
+{
+	return 3*line*line - 3 * line + 2 ;
+}
+
+void GetXY(int &x, int &y)
+{
+	int Line = GetLine();
+	int Num = GetNum(Line) - 1;
+	int diff = n - Num;
+
+	if( diff <= Line*3 )		x = -diff +   Line;
+	else				x =  diff - 4*Line;
+
+
+	if( diff <= Line*2 )		y =  diff;
+	else if( diff <= Line*4 )		y = -diff + 3*Line ;
+	else				y =  diff - 6*Line ;
+
+	if( x > Line )			x =  Line;
+	else if( x < -Line )		x = -Line;
+
+	if( y > Line )			y =  Line;
+	else if( y < -Line )		y = -Line;
+}
+
+void PrintResult()
+{
+	int x, y;
+	
+	if( n == 1 )
+	{
+		x = y = 0;
+	}
+	else
+	{
+		GetXY(x, y);		
+	}
+
+	printf("%d %d\n", x, y);
+}
+
+int main()
+{
+	while( scanf("%d", &n) >= 1 )
+	{
+		PrintResult();
+	}
+
+	return 0;
+}
+
+}}}

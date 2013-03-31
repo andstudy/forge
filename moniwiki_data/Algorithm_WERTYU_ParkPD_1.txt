@@ -1,0 +1,150 @@
+{{{
+/* @JUDGE_ID:parkpd 10038 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <strstream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+class CKeyboard
+{
+public:
+	static void TestConsole(istream& input, ostream& output);
+	static string ConvertString(string input);
+	static bool ConvertByString(const string& str, char c, char& out);
+	static char ConvertChar(char in);
+
+	const static string m_ConvertTable[4];
+};
+
+const string CKeyboard::m_ConvertTable[] =
+{
+	string("`1234567890-="),
+	string("QWERTYUIOP[]\\"),
+	string("ASDFGHJKL;'"),
+	string("ZXCVBNM,./")
+};
+
+void CKeyboard::TestConsole(istream& input, ostream& output)
+{
+	string inputString;
+	while (getline(input, inputString))
+	{
+		string outputString = ConvertString(inputString);
+		output << outputString << endl;
+	}
+}
+
+string CKeyboard::ConvertString(string input)
+{
+	transform(
+		input.begin(), input.end(), 
+		input.begin(),
+		&ConvertChar);
+
+	return input;
+}
+
+bool CKeyboard::ConvertByString(const string& str, char in, char& out)
+{
+	if (in == ' ')
+	{
+		out = ' ';
+		return true;
+	}
+
+	int index = (int)str.find(in, 1);
+	if (index != string::npos)
+	{
+		out = str[index - 1];
+		return true;
+	}
+
+	out = '?';
+	return false;
+}
+
+char CKeyboard::ConvertChar(char in)
+{
+	char out;
+	for (int i = 0; i < 4; ++i)
+	{
+		if (ConvertByString(m_ConvertTable[i], in, out))
+		{
+			return out;
+		}
+	}
+
+	return '?';
+}
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CKeyboard::TestConsole(cin, cout);
+	return 0;
+}
+
+#else
+
+TEST_FIXTURE(CKeyboard, ConvertByString)
+{
+	string test = "ABCD";
+	char output;
+	CHECK(ConvertByString(test, 'C', output));
+	CHECK_EQUAL('B', output);
+
+	CHECK(!ConvertByString(test, 'A', output));
+	CHECK_EQUAL('?', output);
+
+	CHECK(!ConvertByString(test, 'E', output));
+	CHECK_EQUAL('?', output);
+
+	CHECK(ConvertByString(test, ' ', output));
+	CHECK_EQUAL(' ', output);
+}
+
+TEST_FIXTURE(CKeyboard, ConvertChar)
+{
+	CHECK_EQUAL('I', ConvertChar('O'));
+	CHECK_EQUAL('?', ConvertChar('?'));
+}
+
+TEST(TestConsole)
+{
+	stringstream input;
+	stringstream output;
+	input << "O S, GOMR YPFSU/";
+	CKeyboard::TestConsole(input, output);
+	CHECK_EQUAL("I AM FINE TODAY.", output.str());
+};
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

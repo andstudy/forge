@@ -1,0 +1,36 @@
+== 추천 세션 ==
+ * Kojima on forging Metal Gear, teases 'Next MGS'
+  * http://www.gamespot.com/news/6206802.html?sid=6206802&part=rss&subj=6206802
+ * On the War Path: Tactical AI in Dawn of War 2
+  * http://gdc.chrisjurney.com/
+ * [http://clicknothing.typepad.com/Design/hockingc_GDC09_Improvisation.zip Fault Tolerance: From Intentionality To Improvisation]
+  * http://www.clicknothing.typepad.com/
+ * [https://www.cmpevents.com/GD09/a.asp?option=C&V=11&SessID=8888 Failure is NOT an Option - Basic Survival Techniques for any Producer/Designer]
+ * [https://www.cmpevents.com/GD09/a.asp?option=C&V=11&SessID=8554 Building Your Airplane While Flying: Production at Bungie]
+ * [https://www.cmpevents.com/GD09/a.asp?option=C&V=11&SessID=8552 Bend Microsoft Project To Your Will - Again]
+ * [https://www.cmpevents.com/GD09/a.asp?option=C&V=11&SessID=8854 The Iterative Level Design Process of Bioware's MASS EFFECT 2]
+ * Cruise Director of Azeroth - Jeff Kaplan
+  * [http://www.wowinsider.com/2009/03/27/kaplan-on-being-the-cruise-director-of-azeroth-at-gdc-09?icid=sphere_blogsmith_inpage_massively Kaplan on being the "Cruise Director of Azeroth" at GDC '09]
+  * [http://www.shacknews.com/featuredarticle.x?id=1096 Lead Blizzard Dev Outlines 9 WoW Quest Problems, Admits to Designing Stranglethorn Quest]
+ * Advanced Scrum and Agile Development -  Clinton Keith
+  * [http://www.agilegamedevelopment.com/Articles/GDC2009/ClintonKeith_GDC2009.pdf PDF]
+ * Game Design Workshop - orientation
+  * [http://algorithmancy.8kindsoffun.com/GDC2009/SF3K.zip ppt]
+  * [http://sites.google.com/site/gdworkshop/materials/mda-framework 번역]
+ * GDC09: Mission Architect in-depth
+  * http://www.massively.com/tag/mission-architect/
+  * [http://www.massively.com/2009/02/26/full-details-on-mission-architect-system-for-city-of-heroes/ Full details on Mission Architect system for City of Heroes]
+  * [http://www.massively.com/2009/02/27/captain-dynamic-wants-you-to-touch-his-awesome-button/ Captain Dynamic wants you to touch his 'awesome button']
+ * [http://developer.nvidia.com/object/devnews047.html nvidia GDC 2009 발표자료]
+ * [http://www.gamasutra.com/gdc2009/ gamasutra gdc2009] 
+ * [http://games.ign.com/index/gdc/2009/?page=1&sort.order=desc&sort.attribute=article.initial_publish_time ign GDC 2009]
+ * [http://dankline.wordpress.com/2009/03/29/gdc-2009-tuesday/ Game of Design - GDC 2009: Tuesday]
+
+== GDC2009 Canada ==
+ * [http://dev3d.tistory.com/attachment/cfile4.uf@172B51284A598AA9B81959.pdf 게임 오브젝트 컴포넌트 설계 방식 이론과 실제]
+
+== 자료 ==
+[http://mygdc.gdconf.com/vault/1337 http://mygdc.gdconf.com/vault/1337 GDC 발표자료 링크]
+
+== 링크 ==
+ [GDC]

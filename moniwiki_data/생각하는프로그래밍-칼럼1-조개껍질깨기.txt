@@ -1,0 +1,375 @@
+[http://beeswing.net/zeroboard/zboard.php?id=column&page=1&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=rdate&desc=desc&no=25 칼럼 1]
+그나저나 거의 전문이 다 올라와 있네요. 그래도 되는건가?
+
+= 1장 =
+== 정확한 문제 기술 ==
+먼저 문제가 무엇인지부터, 요구사항과 제약사항을 정확하게 파악한다.
+
+== Trade-Off ==
+공간을 늘리면 시간을 줄일 수 있고, 반대로 시간을 늘리면 공간을 줄일 수 있다.
+단, 공간을 줄였을 때 실행시간까지 같이 줄어드는 보너스가 있을 수 있다.
+(메모리가 작을 경우. 미리 계산하지 말고 필요할 때마다 매번 다시 계산하기)
+공간을 늘리는 개념은 특히 Multi-Thread 등에서 유효함.
+
+= 연습 문제 =
+== 연습 문제 1 ==
+{{{
+#include <Windows.h>
+#include <algorithm>
+#include <set>
+#include <iostream>
+
+const int million = 1000000;
+
+int a[million];
+
+int intcomp(const void* x, const void* y)
+{
+	return *(int**)x - *(int**)y;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	using namespace std;
+
+	for (int i = 0; i < million; ++i)
+	{
+		a[i] = i;
+	}
+
+	random_shuffle(&a[0], &a[million]);
+
+	// qsort 를 사용하는 경우
+	DWORD start = GetTickCount();
+
+	qsort(a, million, sizeof(int), intcomp);
+
+	cout << "using qsort : " << GetTickCount() - start << endl;
+
+	random_shuffle(&a[0], &a[million]);
+
+	// set 를 사용하는 경우
+	start = GetTickCount();
+
+	set<int> s(&a[0], &a[million]);
+
+	cout << "using set : " << GetTickCount() - start << endl;
+
+	return 0;
+}
+}}}
+
+=== 결과 ===
+디버깅 모드 :
+using qsort : 1734
+using set : 21296
+
+릴리즈 모드
+using qsort : 359
+using set : 3047
+
+== 연습 문제 3 ==
+=== C Style ===
+{{{
+#include "stdafx.h"
+#include <Windows.h>
+#include <algorithm>
+#include <fstream>
+
+const int BITSPERWORD = 32;
+const int SHIFT = 5;
+const int MASK = 0x1f;
+const int N = 1000000;
+int a[1 + N / BITSPERWORD];
+
+const int M = N / 5;
+int data[M];
+
+void set(int i) 
+{			
+	a[i >> SHIFT] |=  (1 << (i & MASK));		
+}
+
+void clr(int i) 
+{
+	a[i >> SHIFT] &= ~(1 << (i & MASK));	
+}
+
+bool test(int i) 
+{	
+	return 0 != (a[i >> SHIFT] & (1 << (i & MASK)));	
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	std::ofstream in("ch1_intput.txt");
+	std::ofstream out("ch1_output.txt");
+
+	// 입력 데이타 셋팅
+	for (int i = 0; i < M; ++i)
+	{
+		data[i] = i;
+	}
+
+	std::random_shuffle(&data[0], &data[M]);
+
+	// 입력 값을 input 에 저장
+	for (int i = 0; i < M / 2; ++i)
+	{
+		in << data[i] << std::endl;
+	}
+
+	for (int i = 0; i < N; ++i)
+	{
+		clr(i);
+	}
+
+	// 입력 값을 bitmap 에 저장
+	for (int i = 0; i < M / 2; ++i)
+	{
+		set(data[i]);
+	}
+
+	for (int i = 0; i < N; ++i)
+	{
+		if (true == test(i))
+		{
+			out << i << std::endl;
+		}
+	}
+
+	in.close();
+
+	return 0;
+}
+}}}
+=== C++ Style ===
+[http://leigh.innori.com/tag/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D Leigh's Blog 참고]
+{{{
+#include "stdafx.h"
+#include <Windows.h>
+#include <algorithm>
+#include <fstream>
+#include <bitset>
+#include <vector>
+
+const int N = 1000000;
+
+class FillNumber
+{
+public:
+   FillNumber() : i(0) {}
+   int operator()() { return i++; }
+private:
+   int i;
+};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	std::ofstream in("ch1_intput.txt");
+	std::ofstream out("ch1_output.txt");
+
+	// 입력 데이타 셋팅
+	std::vector<int> arr(N);
+	std::generate(arr.begin(), arr.end(), FillNumber());
+	std::random_shuffle(arr.begin(), arr.end());
+
+	std::copy(arr.begin(), arr.begin() + N, std::ostream_iterator<int>(in, "\n"));
+
+	std::bitset<N> bset;
+
+	// 입력 값을 bitset 에 저장
+	for (int i = 0; i < N; ++i)
+	{
+		bset[arr[i]] = 1;
+	}
+
+	for (int i = 0; i < N; ++i)
+	{
+		if (bset[i])
+		{
+			out << i << std::endl;
+		}
+	}
+
+	return 0;
+}
+}}}
+
+== 연습 문제 4 ==
+{{{
+#include "stdafx.h"
+#include <Windows.h>
+#include <algorithm>
+#include <fstream>
+#include <vector>
+
+const int N = 10000;
+const int K = N / 3;
+
+class FillNumber
+{
+public:
+   FillNumber() : i(0) {}
+   int operator()() { return i++; }
+private:
+   int i;
+};
+
+typedef std::vector<int> IntVec;
+
+void swap(IntVec& vec, int a, int b)
+{
+	std::swap(vec[a], vec[b]);
+}
+
+int randint(int from, int to)
+{
+	return rand() % (to - from) + from;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	std::ofstream in("ch1_input.txt");
+	std::ofstream out("ch1_output.txt");
+
+	// for i = [0, n)
+	//		x[i] = i
+	std::vector<int> arr(N);
+	std::generate(arr.begin(), arr.end(), FillNumber());
+
+	std::copy(arr.begin(), arr.begin() + N, std::ostream_iterator<int>(in, "\n"));
+
+	// for i = [0, k)
+	//		swap(i, randint(i, n - 1)
+	//		print x[i]
+	std::vector<int> outputArr;
+	for (int i = 0; i < K; ++i)
+	{
+		swap(arr, i, randint(i, N - 1));
+		outputArr.push_back(arr[i]);
+	}
+
+	std::copy(outputArr.begin(), outputArr.begin() + K, std::ostream_iterator<int>(out, "\n"));
+
+	return 0;
+}
+}}}
+=== Mp3 Player 의 랜덤 재생 예제 ===
+
+== 연습 문제 5 ==
+=== 2 Path Algorithm ===
+{{{
+#include "stdafx.h"
+#include <Windows.h>
+#include <algorithm>
+#include <fstream>
+#include <bitset>
+#include <vector>
+
+const int N = 1000000;
+const int Half_N = N / 2;
+
+class FillNumber
+{
+public:
+   FillNumber() : i(0) {}
+   int operator()() { return i++; }
+private:
+   int i;
+};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	std::ofstream in("ch1_input.txt");
+	std::ofstream out("ch1_output.txt");
+
+	// 입력 데이타 셋팅
+	std::vector<int> arr(N);
+	std::generate(arr.begin(), arr.end(), FillNumber());
+	std::random_shuffle(arr.begin(), arr.end());
+
+	std::copy(arr.begin(), arr.begin() + N, std::ostream_iterator<int>(in, "\n"));
+
+	// 2 pass algorithms
+	std::bitset<Half_N + 1> bset;
+
+	// 입력 값을 bitset 에 저장
+
+	// first pass
+	for (int i = 0; i < N; ++i)
+	{
+		if (arr[i] <= Half_N)
+		{
+			bset[arr[i]] = 1;
+		}
+	}
+
+	for (int i = 0; i <= Half_N; ++i)
+	{
+		if (bset[i])
+		{
+			out << i << std::endl;
+		}
+	}
+
+	bset.reset();
+
+	// second pass
+	for (int i = 0; i < N; ++i)
+	{
+		if (Half_N < arr[i])
+		{
+			bset[arr[i] - Half_N] = 1;
+		}
+	}
+
+	for (int i = 0; i < Half_N; ++i)
+	{
+		if (bset[i])
+		{
+			out << i + Half_N << std::endl;
+		}
+	}
+
+	return 0;
+}
+}}}
+== 연습문제 9 ==
+문제가 이해가 안 되네요. GG
+{{{
+#include "stdafx.h"
+#include <Windows.h>
+#include <algorithm>
+#include <fstream>
+#include <vector>
+
+const int N = 10;
+const int NotInit = -1;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	typedef std::vector<int> IntList;
+	IntList data(8, NotInit);
+	IntList from(8, NotInit);
+	IntList to(8, NotInit);
+
+	data[1] = 3;
+	data[3] = 2;
+	data[5] = 8;
+
+	int top = 0;
+	for (int i = 0; i < data.size(); ++i)
+	{
+		if (data[i] != NotInit)
+		{
+			from[i] = top;
+			to[top] = i;
+			data[i] = 0;
+			top++;
+		}
+	}
+
+	return 0;
+}
+}}}

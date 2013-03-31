@@ -1,0 +1,84 @@
+게임이름 : xbox live indie games
+
+Cthulhu saves the world
+
+잘된 점
+1. Concept
+2. Building on the past
+3. Presentation
+4. Accessibility
+5. Marketing
+
+아쉬웠던 점
+1. Underestimating the amount of work
+2. Lack of tools
+3. Lack of funds
+4. Not different enough
+5. Not enough iteration
+
+게임이름 : Epic dungeon
+
+잘된 점
+1. Evolution
+2. Playtesting
+3. Accessibility
+4. Level of difficulty
+5. Marketing
+
+아쉬웠던 점
+1. Lack of planning
+2. Music
+3. Not having a deadline
+4. Building everything from scratch
+5. "Epic" Dungeon
+
+게임 이름 : Shoot 1up
+
+잘된 점
+1. Unknown, gut-reactin design
+2. Supporting disabled gamers
+3. Critical prototype
+4. The price was right
+5. Great playtesting sessions
+
+아쉬웠던 점
+1. Didn't know what we had
+2. No design and no timeline
+3. The price was wrong
+4. Poor underlying technology
+5. Forgot my homework
+
+게임 이름 : ZP2KX
+
+잘된 점
+1. Recycled tools
+2. Distributed development
+3. Hobby mentality
+4. XBLIG promotion FTW
+5. XNA multiplayer is mostly awesome
+
+아쉬웠던 점
+1. Generosity isn't always the best policy
+2. Time to rethink player interaction
+3. XBLIG jail is no fun
+4. XBLIG competition is no fun
+5. XNA multiplayer is mostly awesome...
+
+게임 이름 : Soulcaster II
+
+잘된 점
+1. Scope
+2. Tools
+3. Playtesting
+4. Music
+5. Indie games winter uprising
+
+아쉬웠던 점
+1. Scheduling
+2. Testing on target
+3. Work habits
+4. Promotion
+5. Self-doubt
+
+----
+[GameDeveloperMagazine]

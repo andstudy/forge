@@ -1,0 +1,9 @@
+Describe jjuiddong here
+
+이름 : 이재정
+이메일 : jjuiddong@hanmail.net
+직업 : 게임 개발
+관심 분야 : 알고리즘, 인공지능, 스크립트, 컴파일러
+사용하는 언어 : C++, Java
+
+많이 부족합니다. ^^;;

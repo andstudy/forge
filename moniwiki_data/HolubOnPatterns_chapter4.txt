@@ -1,0 +1,14 @@
+= HolubOnPatterns/chapter4 =
+== HolubOnPatterns/chapter4_1 == 
+{{{#!html
+<div style="width:575px" id="__ss_4726473"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/dagri82/holubonpatternschapter41" title="holubonpatternschapter41">holubonpatternschapter41</a></strong><object id="__sse4726473" width="575" height="480"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=holubonpatterns-100710115701-phpapp01&stripped_title=holubonpatternschapter41" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4726473" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=holubonpatterns-100710115701-phpapp01&stripped_title=holubonpatternschapter41" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/dagri82">dagri82</a>.</div></div>
+}}}
+
+== HolubOnPatterns/chapter4_2 == 
+{{{#!html
+<div style="width:575px" id="__ss_4777351"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/mintgreen/holubonpatternschapter43-4777351" title="holubonpatternschapter42">holubonpatternschapter42</a></strong><object id="__sse4777351" width="575" height="480"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=100703-100717095409-phpapp02&stripped_title=holubonpatternschapter43-4777351" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4777351" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=100703-100717095409-phpapp02&stripped_title=holubonpatternschapter43-4777351" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mintgreen">mintgreen</a>.</div></div>}}}
+
+== HolubOnPatterns/chapter4_3 == 
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-100703093920-phpapp01&stripped_title=holubonpatternschapter43" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}

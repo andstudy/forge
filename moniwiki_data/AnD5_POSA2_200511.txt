@@ -1,0 +1,31 @@
+=== 11월 12일 ===
+ *참석자
+  *박일,김미선,이동현,전효성,이수안,강대명(저도 왔었다는 ㅋㅋㅋ)
+ *발표자
+  *Proactor - 박일
+  *ACT - 김미선
+  *Double-Checked locking optimization - 이동현
+ *뒷풀이
+  *없음. 간단히 도너츠 하나 먹고 집에감.
+ * 발표자료
+  * Proactor 는 정리 후 다시 올릴 예정
+
+=== 11월 19일 ===
+ * 참석자
+  * 이동현, 박일, 강대명, 안준석, 이수안
+ * 발표자 : 
+  * Scoped Locked 강대명
+  * Active Object 박일
+  * Monitor Object 강대명
+ * 논의사항 :
+  * 다음부터 스터디 시간을 오전으로 조정. 10시나 11시 정도.
+ * 발표 자료
+attachment:/scoped.zip
+attachment:/mo.zip
+attachment:/Strategized_Locking.zip
+attachment:/Acceptor-Connector.zip
+attachment:/ActiveObjectPattern.zip
+attachment:/FuturePattern.zip
+attachment:/reactor-source.zip
+ * 그 외
+  * Active Object locking 문제 있어 보이는 부분 수정 - ParkPD

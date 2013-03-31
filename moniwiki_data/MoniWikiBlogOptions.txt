@@ -1,0 +1,8 @@
+{{{$blog_comments=1}}}
+
+show all blog comments
+----
+{{{$blog_category='MyBlogCategories'}}}
+
+set category index. Plese see BlogCategories
+----

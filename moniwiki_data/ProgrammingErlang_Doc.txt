@@ -1,0 +1,2 @@
+ [http://www.erlang.org/doc/man/erlang.html erlang BIF 목록]
+ [http://www.erlang.org/doc/man/erlang_mode.html Erlang mode for Emacs]

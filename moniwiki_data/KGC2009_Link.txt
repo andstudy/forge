@@ -1,0 +1,244 @@
+ * [http://parkpd.egloos.com/1957958 KGC 09 강연 자료 및 후기 모음입니다(계속 업데이트 됩니다)]
+
+== 강연 자료 ==
+ * [http://parkpd.egloos.com/1957229 KGC09 - '온라인 게임에서 사례로 살펴보는 디버깅' 강연 자료입니다.]
+ * [http://kimsama.egloos.com/1956668 KGC 2009 멀티 코어를 이용한 병렬 처리 게임 엔진과 Nebula3]
+ * [http://chulin28ho.egloos.com/5136159 KGC2009 폐막 키노트 - MMORPG 의 새로운 방향성]
+ * [http://cagetu.egloos.com/5092725 KGC2009 "In-House 환경에서의 Shader 통합" 발표자료]
+ * [http://jacking.tistory.com/463 KGC 2009 - About Visual C++ 10]
+ * [http://mypage.sarang.net/tt/entry/KGC%BF%A1%BC%AD-%B9%DF%C7%A5%C7%D1-%BB%FD%BB%EA%C0%FB%C0%CE-%B0%B3%B9%DF%C0%BB-%C0%A7%C7%D1-%C1%F6%BC%D3%C0%FB%C0%CE-%C5%D7%BD%BA%C6%AE-%B0%AD%BF%AC%C0%DA%B7%E1-%C0%D4%B4%CF%B4%D9 KGC에서 발표한 "생산적인 개발을 위한 지속적인 테스트" 강연자료 입니다.]
+ * [http://www.slideshare.net/TedAhn/kgc2009-online-game-service-with-cloud-computing 클라우딩 컴퓨팅, 구름 속 게임서비스]
+ * [http://eppengine.com/zbxe/2942#0 배문수 - Interface Engine 강연자료]
+ * [http://eppengine.com/zbxe/2939#0 최재영 - Lighting In Screen Space]
+ * [http://pds15.egloos.com/pds/200910/14/00/08-10-10_KGC_NORIA.pdf 김정주 - 망하는 게임의 조직도]
+  * 강연내용까지 포함한 pdf 를 보내주신 김정주님 감사합니다.
+ * [http://emptymind.tistory.com/attachment/cfile21.uf@16532B1E4ACCB9F0549237.pdf 황재식 - Lightmap 시스템 구축하기.pdf]
+ * [http://blog.naver.com/creatune/90071603228 류휘만님 강연 대본]
+ * [http://qubee.jaram.org/moniwiki/wiki.php/C9Rendering 김대일 - C9 랜더링]
+ * [http://www.slideshare.net/GardenerOfEden/designing-sideways-integrating-emergence-with-authorship Adam Russell (Derby Games Studio) - Designing sideways : integrating emergence with authorship]
+ * [http://blogai.igda.jp/article/33936286.html nagaku & miyake - 게임 AI 연속 세미나 "게임 AI를 푸는"전체 강연 자료]
+
+== 강연자 후기 ==
+ * [http://jacking.tistory.com/462 흥배님 강연후기 - KGC 2009 강연을 마쳤습니다.]
+ * [http://blog.naver.com/imays/150071548512 imays KGC09 스폰싱 후기(첫날)]
+ * [http://blog.naver.com/imays/150071687630 imays KGC09 스폰싱 후기(마지막날)]
+ * [http://jerryj.egloos.com/1545338 박중민님]
+ * [http://blog.naver.com/creatune 류휘만님]
+ * [http://emptymind.tistory.com/entry/KGC-강연-자료 황재식님]
+
+== 10월 7일 수요일 ==
+=== Cevat Yerli - "Future of Gaming Graphics" ===
+ * [http://www.thisisgame.com/board/view.php?id=299684&board=0&category=102&subcategory=&page=2&best=&searchmode=&search=&orderby=&token= 게임 그래픽, 이제 중요한 것은 ‘창의성’ - KGC 2009 크라이텍 체밧 얼리 대표 기조강연]
+ * [http://www.thisisgame.com/board/view.php?id=299879&board=0&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= 실사풍 비주얼은 ‘포화상태’ 크라이텍 체밧 얼리 대표의 KGC 2009 기조강연]
+ * [http://blog.naver.com/madmaiz/10071487821 MAIZ - KGC 메모 - "Future of Gaming Graphics"] 
+ * [http://blog.naver.com/zio45/140092316357 지오 - "현재는 창의성과 스타일이 중요, 2013년 뒤에는 그래픽의 르네상스"]
+ * [http://firstwish.tistory.com/128 첫번째 소원 - 그래픽 4~5년 후 변화, 자신만의 스타일 찾는 것이 중요]
+ 
+=== 송재경 (XLGAMES) - MMORPG "변화하는 세계 ===
+ * [http://www.thisisgame.com/board/view.php?id=299654&board=0&category=102&subcategory=&page=2&best=&searchmode=&search=&orderby=&token= 송재경, MMORPG에서 유저의 창발성 강조 - “연출된 즐거움 뿐만 아니라, 창발적 즐거움도 필요”]
+ * [http://blog.naver.com/madmaiz/10071488222 MAIZ - KGC 메모 - 'MMORPG 변화하는 세계']
+ * [http://www.gamemeca.com/news/news_view.html?seq=28&ymd=20091007&page=1&point_ck=1&search_ym=&sort_type=&search_text=&send= 게임메카 - 송재경, “사용자가 변화시키는 월드, 그것이 MMORPG”]
+ * [http://gamenest.co.kr/110071271959 최악이었던 송재경 대표의 MMORPG 변화하는 세계]
+ * [http://www.thisisgame.com/board/view.php?id=299822&board=0&category=203&subcategory=&page=2&best=&searchmode=title&search=&orderby=&token= KGC Ziny´s Key Note 송재경 MMORPG 변화하는 세계]
+ * [http://www.gamemeca.com/news/news_view.html?seq=27&ymd=20091009&page=1&point_ck=1&search_ym=&sort_type=&search_text=&send= 송재경의 신작 MMORPG X2를 기대한다]
+
+=== 김형진 - 시리어스 게임을 시리어스하게 개발하기 ===
+ * [http://www.thisisgame.com/board/view.php?id=299752&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= “시리어스 게임, 시리어스하게 만들자” - KGC 2009 엔씨 김형진 개발실장 “Why SERIOUS?”]
+ * [http://www.betanews.net/article/473281 김형진 실장, "울티마로 영어배우고 리니지로 경제 배웠다"]
+ * [http://www.gamemeca.com/news/news_view.html?seq=28&ymd=20091014&page=1&point_ck=&search_ym=&sort_type=&search_text=&send= 게임메카 - 마법천자문의 모든 것을 말한다- 엔씨소프트 김형진 실장]
+
+=== DJ 나구레오 - MUSIC GAME의 시스템과 미래 ===
+ * [http://www.thisisgame.com/board/view.php?id=299767&board=0&category=102&subcategory=&page=2&best=&searchmode=title&search=&orderby=&token= DJ나구레오 “노래를 만드는 음악게임이 필요” - KGC 2009 DJ 나구레오, 뮤직게임의 미래 강연]
+ * [http://blog.naver.com/madmaiz/10071490433 MAIZ - KGC 메모 - 'MUSIC GAME의 시스템과 미래]
+ * [http://peca.egloos.com/5090486 CALM FEVER - KGC 2009 나구레오씨 강의 리뷰]
+ * [http://webzine.inven.co.kr/news/?news=23884 비트매니아의 아버지가 말하는 음악게임의 미래]
+ 
+=== 박창준 (한국전자통신연구원) - 온라인게임 서버테스트 기술 소개 ===
+ * [http://afire.kr/157 KGC : 박창준 - 온라인게임 서버 테스트 기술 소개. (10/7) + game qa ]
+
+=== 최은정(AMD) - 게임개발을 위한 하드웨어 동향과 AMD의 게임개발사 지원정책 프로그램 소개 ===
+ * [http://www.betanews.net/article/473280 베타뉴스 - AMD 최은정 매니저, "하드웨어의 발전은 게임으로부터"]
+
+=== 서정욱 - 프리스타일 적용 ETRI 인공지능 기술  ===
+ * [http://www.thisisgame.com/board/view.php?id=299776&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= 스포츠게임의 해외진출, 인공지능 모드는 필수 - KGC 2009 프리스타일에 적용된 인공지능 기술]
+
+=== Makoto Ito(SEGA Corporation) - How to eliminate bugs as much as possible ===
+ * [http://roseria.cafe24.com/blogw/archives/33 삶은 RPG - KGC 2009 뒤늦은 -- How to eliminate bugs as much as possible]
+
+=== 신 키요시 - What is next game trend within 5-10 years ===
+ * [http://blog.naver.com/madmaiz/10071491025 MAIZ - KGC 메모 - '기술혁신이 만들어내는 새로운 게임트렌드와 향후 10년의 게임산업 조망']
+ * [http://nomoreid.egloos.com/4250822 KGC 1일차.what is next game trend within 5-10 years 정리 노트]
+ * [http://blog.naver.com/PostView.nhn?blogId=lemocin&logNo=110071272587&categoryNo=&viewdate=&cpage=&li드ttype= 인상 깊었던 신 키요시 - 기술 혁신이 만들어내는 새로운 게임 트랜드]
+
+=== 황재식 (엔트리브 소프트, NTG) - 게임에 Lightmap 시스템 구축하기 ===
+
+=== Peter Lee Gamelab(Co-Founder&COO) - Quest To Learn: 오늘날 디지털 키드를 위한 학교 ===
+ * [http://www.thisisgame.com/board/view.php?id=299882&board=&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= 디스이즈게임즈 - KGC 2009 게임랩 피터 리 COO의 디자인 세션]
+ * [http://blog.naver.com/zio45/140092316646 지오 - 게임처럼 운영하는 학교? Quest To Learn 강연 정리]
+ 
+=== 김남훈(이온소프트) - 게임 시나리오 작성 기법 ===
+  * [http://www.thisisgame.com/board/view.php?id=299881&board=0&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= 게임 시나리오 작성 기법-KGC 2009 이온소프트 김남훈 실장의 디자인 세션]
+
+=== Shinji Yamazaki (아루온게임즈) - Situation of Japan OGA(Online Game Advertisement) ===
+ * [http://www.thisisgame.com/board/view.php?id=299915&board=0&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= 일본 온라인 게임 광고의 현황 - KGC 2009 아루온게임즈 야마야키 신지 부사장 세션]
+ * [http://blog.naver.com/madmaiz/10071489199 MAIZ - KGC 메모 - 'Situation of Online Game Advertisemen리']
+
+=== Thomas Bidaux - 온라인 게임시장: 유럽(Online Games Market: Europe) ===
+ * [http://blog.naver.com/jasonbmw/130071083025 Y군의 게임마케팅&맛집 - 유럽 온라인게임 시장, 3천만유저-연간 4-5억 규모]
+ * [http://webzine.inven.co.kr/news/?news=23880 inven 뉴스 - 유럽 웹게임 강세는 직장 게임 금지 때문]
+
+=== Marian Hartel - 온라인 게임 국제 마케팅 기업과 비지니스 모델 ===
+ * [http://www.thisisgame.com/board/view.php?id=299883&category=102&category=102&subcategory= 온라인게임의 국제마케팅 기법 - KGC 2009 CPMstar.com 마리안 하텔의 비즈니스 세션]
+ * [http://nomoreid.egloos.com/4250972 우주괴물 - 온라인 게임 국제 마케팅 기업과 비지니스 모델 정리노트]
+ * [http://firstwish.tistory.com/129 첫번째 소원 - 자국에서만 있어서는 성공할 수 없다! - 마리안 하텔 - 국제 온라인 게임 비즈니스 모델 강연]
+ 
+=== Malte Behrmann (EGDF(유럽게임개발자협회)) - 유럽 시장에서의 게임 개발 및 한국과의 협력 ===
+ * [http://www.thisisgame.com/board/view.php?id=300217&category=203 thisisgame 게시판 - KGC Ziny´s Key Note Malte Behrmann 온라인게임 : 유럽]
+
+== 10월 8일 목요일 ==
+=== Livia Chu(AMD) - Overview of game market in Greater China, threat and opportunities ===
+ * [http://webzine.inven.co.kr/news/?news=23921 인벤 뉴스 - 중국게이머, 19~25세 남학생 하루 8시간 게임]
+
+=== Jack Porter (Epic Games Korea) - 언리얼 엔진3로 온라인게임 만들기 ===
+
+===  Grayson Edge (Epic Games) - 언리얼엔진3 의 적용 (레벨 제작 & 그래픽 시연) #1, 2 ===
+ * [http://www.thisisgame.com/board/view.php?id=300336&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= 2시간 영상 - 언리얼엔진3 레벨제작, 그래픽 시연. KGC 2009 언리얼 엔진 3의 적용 강연 풀버전 영상]
+
+=== 성석현(한게임) - 게임 제작 프로세스 상에서 게임오븐의 활용 ===
+ * [http://www.thisisgame.com/board/view.php?id=300382&board=0&category=102&subcategory=&page=2&best=&searchmode=title&search=&orderby=&token= thisisgame 참관기 - 게임오븐, 초보도 7일이면 게임제작]
+
+=== 정현석 (㈜ 제로딘게임즈) - MMORPG 제작에 필요한 엔진의 개발 및 문제 해결방안 ===
+
+=== 이주환 (소프트맥스) - 국제공동 프로젝트로서의 콘솔 게임 제작 ===
+ * [http://webzine.inven.co.kr/news/?news=23908 마그나카르타2, 일본의 장인정신을 배우다. 이주환 콘솔사업부장]
+
+=== 홍성민 (㈜스마일게이트) - 대규모 온라인 게임 개발을 위한 실전 애자일 방법론 ===
+
+=== Yoichiro Miyake - 'The History and Fundamental of Digital Game AI' ===
+ * [http://www.thisisgame.com/board/view.php?id=300447&category=102&subcategory= thisisgame - KGC 참관기. 스스로 행동하는 AI ‘플래닝 기법’]
+ * [http://blog.naver.com/madmaiz/10071541581 MAIZ - KGC 메모 - The History and Fundamental of Digital Game AI]
+
+=== Mark Long (Zombie Studios ) - Transmedia? Designing IP for Games, Movies and Comics ===
+ * [http://www.thisisgame.com/board/view.php?id=300055&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= 영화/만화에 접목 가능한 게임 제작 요령 - KGC 2009 좀비 스튜디오 마크롱의 트랜스 미디어 세션]
+ * [http://blog.naver.com/madmaiz/10071542125 마이즈 - Transmedia ? Designing IP for Games, Movies and Comics]
+
+=== 배문수(유니트라이 소프트) - 게임 인터페이스 ===
+ * [http://www.thisisgame.com/board/view.php?id=300498&board=&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= thisisgame 참관기 - 자체개발 UI 엔진의 장점 '병렬개발']
+ * [http://blog.naver.com/zio45/140092452964 지오 - 유연한 인터페이스 엔진을 사용하면 개발이 쉬워진다"]
+
+=== Wade Tinney (Large Animal Games) - Social Network Play의 디자인과 창조 ===
+ * [http://blog.naver.com/madmaiz/10071584856 마이즈님 후기]
+ * [http://www.thisisgame.com/board/view.php?id=300475&board=&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= thisisgame 참관기 - 소셜게임, 감성연결을 활용하라]
+ * [http://firstwish.tistory.com/131 첫번째소원님 후기]
+ 
+=== Ethan Kennerly (University of Southern California) - 전세계 게임 플레이어들을 위한 게임플레이의 원형 만들기 ===
+ * [http://www.thisisgame.com/board/view.php?id=300457&board=&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= thisisgame 참관기 - 실망스러운 예를 먼저 만들어라]
+ * [http://firstwish.tistory.com/130 첫번째 소원 - 에단 케널리의 디자인 세션]
+ 
+=== 최문기(고려대학교 지혜과학연구센터) - 놀이와 학습의 혁명: 기능성 게임 ===
+ * [http://www.thisisgame.com/board/view.php?id=300397&board=0&category=102&subcategory=&page=2&best=&searchmode=title&search=&orderby=&token= thisisgame 참관기 - 기능성 게임, 과학적으로 만들자]
+
+=== 정재범 - 스타크래프트와 바둑에서 나타나는 숙련자와 비숙련자의 뇌 활성화 차이 ===
+ * [http://www.thisisgame.com/board/view.php?id=300180&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= 스타크래프트가 바둑보다 뇌활성화 높다. KGC 2009 스타와 바둑에서 나타나는 뇌활성화 차이]
+
+=== 박종일(게임물등급위원회) - 게임물 등급분류 현황 및 정책 동향 ===
+ * [http://www.gamemeca.com/news/news_view.html?seq=29&ymd=20091008&page=1&point_ck=1&search_ym=&sort_type=&search_text=&send= 게임메카 - 게임위, 오픈마켓 심의 ‘간소화’ 비용은 중소기업 수준]
+ * [http://blog.naver.com/zio45/140092452570 지오 - "게등위, 오픈 마켓의 변화에 발맞추어 갈 것"]
+ 
+== 10월 9일 금요일 ==
+=== 김태곤 - MMORPG의 새로운 방향성 ===
+ * [http://www.thisisgame.com/board/view.php?id=300451&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= 온라인게임, 익숙한 혁신이 필요하다 - KGC 2009 엔도어즈 김태곤 이사 기조강연]
+ * [http://stoo.asiae.co.kr/news/stview.htm?idxno=2009100919350259372 김태곤 - MMORPG의 새로운 방향성, 익숙한 것에서 찾아라]
+
+=== Neal Robison/김대일(AMD/NHN) - 다이렉트X와 테슬레이션을 통한 극사실주의 그래픽 ===
+ * [http://www.thisisgame.com/board/view.php?id=301258&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= thisisgame - 풀버전 영상! C9에 적용된 테슬레이션 강연]
+
+=== 김정주 (노리아) - 망하는 게임의 조직도 ===
+ * [http://news.naver.com/main/read.nhn?mode=LS2D&mid=sec&sid1=105&sid2=229&oid=020&aid=0002082845 김정주 - donga 뉴스 - 성공하는 게임은 만드는 사람과 조직에서 알 수 있다]
+ * [http://kookst.tistory.com/674 Game Analysis Lab - 망하는 게임의 조직도]
+ * [http://www.thisisgame.com/board/view.php?id=300662&board=&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= thisisgame 참관기 - 망하는 게임의 조직도]
+ * [http://firstwish.tistory.com/132 첫번째소원 - 노리아 김정주 대표의 프로덕션 세션]
+
+=== 배현직 (넷텐션) - P2P 통신과 대규모 멀티플레이를 한번에 잡기: ProudNet 소개 ===
+ * 후기
+
+=== 류휘만(펜타비전) - 성공적인 게임 사운드 제작의 길 ===
+ * [http://www.thisisgame.com/board/view.php?id=300692&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= thisisgame 참관기 - 침체된 한국 게임음악, 개혁이 필요하다]
+  
+=== Adam Russell (Derby Games Studio) - Designing sideways : integrating emergence with authorship ===
+ * 후기
+ 
+=== 박중민(마이에트) - 컨셉아트 분야의 성공과 실패 ===
+ * [http://www.thisisgame.com/board/view.php?id=300715&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= thisisgame 참관기 - 도미넨스워 1위 제작과정과 성공 마인드]
+ * [http://www.thisisgame.com/board/view.php?id=300440&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= 좋은 게임 아트? 툴보다 감각을 키워라]
+
+=== 한다윗(바닐라브리즈) - 애플 앱스토어 최신 동향 및 공략법 ===
+ * [http://webzine.inven.co.kr/news/?news=23941 아이폰용 게임 개발은 뒷북? 성공하려면 이렇게]
+
+=== 윤태복(성결대학교) - 온라인 게임에서 지능화되고 자동화된 그룹 형성 시스템 ===
+
+=== 이수희 (조아라) - 2010 국내 웹 게임의 영향 ===
+ * [http://www.gamemeca.com/news/news_view.html?seq=11&ymd=20091009&page=1&다oint_ck=1&search_ym=&sort_type=&search_text=&send= 게임메카 - 조아라 이수희 대표, 웹게임 가치 `무궁무진`]
+ * [http://www.mud4u.com/new/bbs/board.php?bo_table=gamejournal&wr_id=7971 mud4u - 웹게임, "전세계 유저가 같은 서버에서 즐기게 될 것"]
+
+=== 국순신(디스이즈게임닷컴 취재팀 기자) - 유저와 첫만남 : 온라인게임 FGT의 설계와 분석 ===
+ * [http://www.thisisgame.com/board/view.php?id=301262&board=0&category=102&subcategory=&page=1&best=&searchmode=title&search=&orderby=&token= thisisgame - FGT 결과에서 오해하면 안 되는 4가지]
+
+=== Roberto Dillon(DigiPen Institute of Technology) - Retro Games Exposed: 즐거움이 가득한 게임의 디자인을 위한 불변의 요소들 ===
+ * [http://blog.naver.com/zio45/140092453105 지오 - "재미있는 게임은 사람의 감정과 본능을 자극해 재미를 이끌어낸다."]
+
+=== 김다미(바벨미디어) - 글로벌 시장 진출의 열쇠, 현지화 ===
+ * [http://blog.naver.com/gamediz/20091293014 검프 - 글로벌 시장 진출의 열쇠 , 현지화 - 김다미(QA)]
+ 
+=== 종합 ===
+ * [http://www.gpgstudy.com/forum/viewtopic.php?p=125131#125131 잡담 - KGC2009 첫날 감상 ]
+ * [http://elore.egloos.com/1956342 aigolog - KGC 첫날 정리 겸 소감]
+ * [http://elore.egloos.com/1956637 aigolog - KGC 2009 둘째 날 정리 겸 소감]
+ * [http://elore.egloos.com/1956969 aigolog - KGC 2009 마지막 날 정리 겸 소감]
+ * [http://macapen.egloos.com/2453018 막가펜네 - KGC 2009 목요일 요약]
+ * [http://blog.naver.com/elhart/20090905958 elhart - KGC 첫날 후기]
+ * [http://gamenest.co.kr/110071366640 토이솔저 - KGC2009 3일간의 여정을 촌평하다]
+ * [http://blog.naver.com/bfdan?Redirect=Log&logNo=40091605441 bfdan 님 - KGC 2009 10 월 7일 강연내용 정리]
+ * [http://blog.naver.com/PostView.nhn?blogId=bfdan&logNo=40091654459&categoryNo=&viewdate=&cpage=&listtype=  bfdan 님 - KGC 2009 10 월 8일 강연내용 정리]
+ * [http://blog.naver.com/PostView.nhn?blogId=bfdan&logNo=40091713501&categoryNo=&viewdate=&cpage=&listtype= bfdan 님 - KGC 2009 10 월 9일 강연내용 정리]
+ * [http://kr.blog.yahoo.com/nashorn74/1226305 나숑의 블로그 - 1일차]
+ * [http://kr.blog.yahoo.com/nashorn74/1226306 나숑의 블로그 - 2일차]
+ * [http://kr.blog.yahoo.com/nashorn74/1226308 나숑의 블로그 - 3일차]
+ * [http://blog.naver.com/innozz/70071185516 innowind 1일째]
+ * [http://blog.naver.com/innozz/70071236292 innowind 2일째]
+ * [http://blog.naver.com/innozz/70071280966 innowind 3일째]
+ * [http://chauchau0.tistory.com/1165225385 동우리 - KGC 2009 후기]
+ * [http://blog.naver.com/madmaiz/10071589667 마이즈님 전체 후기]
+ * [http://persian8.com/2511366 페르시안님 - KGC 2009 후기]
+ * [http://cagetu.egloos.com/5094649 cagetu 후기 - KGC2009 이야기]
+ * [http://parkpd.egloos.com/1958067 ParkPD - KGC 2009 10월 7일 (수) 후기]
+ * [http://parkpd.egloos.com/1958073 ParkPD - KGC 2009 10월 8일 (목) 후기 1/2]
+ * [http://parkpd.egloos.com/1958258 ParkPD - KGC 2009 10월 8일 (목) 후기 2/2]
+ * [http://parkpd.egloos.com/1958311 ParkPD - KGC 2009 10월 9일 (금) 후기 1/2]
+ * [http://parkpd.egloos.com/1958318 ParkPD - KGC 2009 10월 9일 (금) 후기 2/2]
+ * [http://blog.hanb.co.kr/165 KGC(Korea Games Conference) 2009 다녀와서 by IT 전문서팀 최현우]
+ * [http://gamemook.com/entry/2010-korean-game-industry-view-by-2009-kgc GameMook - 2009 KGC 를 통해 보는 2010 한국 게임업계의 경향성]
+ * [http://waterman.egloos.com/3356229 까탈스럽고 평범한 삼십대 직장인 - 코리아 게임 컨퍼런스(KGC) 2009 참관]
+ * [http://microsoft.tistory.com/644 책 읽은 프로그래머 - 2009 KGC 참관 후기]
+ * [http://chulin28ho.egloos.com/5133944 대충 살아가는 게임개발자 - KGC 기조강연 실시간 중계]
+ * [http://www.criburn.net/blog/mizelan/134 표 블로그 - KGC 2009 간략 소감]
+ * [http://isna기rastory.tistory.com/269 이즈나라님의 후기]
+ * [http://blog.naver.com/zio45/140092724296 지오 - 취재 후기 - 피곤했지만 보람있는 3일]
+ * [http://game.watch.impress.co.jp/docs/series/korea/20091014_321660.html report of Japanese game site for KGC - KGDA／KOCCA、韓?最大のゲ?ム開?者向けカンファレンス「KGC2009」を開催]
+ * [http://www.thisisgame.com/board/view.php?id=302087&category=106&subcategory=2 TIG 카툰 - KGC 2009]
+ * [http://maiet.tistory.com/6493 KGC2009 마이에트 개발자 강연 현장]
+ * [http://naridy.egloos.com/4254354 CookieBox 님 - KGC 2009, 신 키요시 강연 정리 雜相]
+ * [http://firstwish.tistory.com/133 첫번째 소원 - 아쉬웠던 KGC 2009]
+
+=== 그 외 ===
+ * [http://www.gamemeca.com/news/news_view.html?seq=26&ymd=20091009&page=1&point_ck=1&search_ym=&sort_type=&search_text=&send= 오규환 - 아이폰, 휴대폰을 넘어 주요 게임 콘솔로!]
+ * [http://www.thisisgame.com/board/list.php?board=0&page=1&category=102&subcategory=&searchmode=title&search=&orderby=&best= 디스이즈게임 - 취재]
+  * [http://www.thisisgame.com/board/view.php?id=299705&board=0&category=102&subcategory=&page=2&best=&searchmode=&search=&orderby=&token= 크라이엔진3 10분만에 맵 만들기]
+ * [http://www.eppengine.com/zbxe/2978 e++ engine - KGC2009 재강연 일자 및 장소 공지]
+
+=== 프리뷰 ===
+ * [http://gamemook.com/242 Gamemook 3 일째 프리뷰]
+
+=== 공모전 당선 ===
+ * [http://www.thisisgame.com/board/view.php?id=301495&board=&category=102&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= 보이는 것만 존재하는 퍼즐, 컬러심포니. 제 4회 대한민국 인디게임 공모전 금상 입상작]
+ * [http://www.thisisgame.com/board/view.php?id=301812&category=102&subcategory= 무엇이든 접어야 사는 접기 퍼즐, 폴더. 제 4회 대한민국 인디게임 공모전 은상 입상작]

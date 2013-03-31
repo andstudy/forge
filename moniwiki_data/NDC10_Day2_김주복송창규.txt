@@ -1,0 +1,37 @@
+[NDC10]
+[NDC10_Day2]
+
+== 김주복, "M2 아키텍처 리뷰" ==
+ * [http://devcatpublications.wordpress.com/2010/05/28/%EA%B9%80%EC%A3%BC%EB%B3%B5-m2-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%A6%AC%EB%B7%B0-nexon-developer-conference-may-2010/ PT 자료] [http://beforu.egloos.com/4401340 발표자 링크]
+ * 마찬가지로 PT 가 너무 잘 되어 있어 따로 추가할 게 없음.
+ * [http://www.ausgamers.com/files/details/html/9009 Diablo 2: Lord of Destruction Patch v1.10]
+ * 완벽한 설계 관점 : 성능, 완결성, 확장성, 재활용성, 사용성
+ * agenda : 프레임워크 레이어링, 컴퍼넌트 시스템, 루프 시스템, 서킷 모듈, 최적화 이슈
+
+== 송창규, "unity build로 빌드타임 반토막내기" ==
+ * [http://devcatpublications.wordpress.com/2010/05/28/%EC%86%A1%EC%B0%BD%EA%B7%9C-%E2%80%9Cunity-build%EB%A1%9C-%EB%B9%8C%EB%93%9C%ED%83%80%EC%9E%84-%EB%B0%98%ED%86%A0%EB%A7%89%EB%82%B4%EA%B8%B0%E2%80%9D-nexon-developer-conference-may%C2%A02010/ PT 자료]
+ * UnityBuild : EA 에서는 build build 라고 한다고.
+ * {{{cl /E HelloWorld.cpp > Preprocessed.cpp}}} 결과를 보면 깜짝 놀랄 것이다.
+ * unity build 가 땜빵같다 -> 어쩌면 #include 방식이야말로 30년 전부터 하던 오래된 방식일지도 모른다.
+ * 버블파이터에 써 보니 6:50 걸리던 컴파일이 1:50 걸리더라
+  * Quake 2분 -> 30초, [http://peepor.net/loonchew/index.php?p=irrlichtunity Irrlicht 2분 ->1분]
+ * [http://cheind.wordpress.com/2009/12/10/reducing-compilation-time-unity-builds/ Christoph Heindl - Reducing Compilation Time: Unity Builds]
+ * 방법
+  * {{{copy *.cpp AllinOne.cpp}}}
+  * 빌드 -> 끝!
+  * 이를 위해 .cpp 를 include
+  * VS 에서 쓰기 위해 새로운 빌드 설정 추가하고 여기에서는 다른 cpp 는 빌드 제외시킨다.
+  * 디버깅, BP 도 잘 걸린다.
+ * 주의
+  * 파일이 너무 크면 컴파일 오류 생기므로 몇 개로 나눠준다
+   * 버블파이터에서는 10개로, M2 에서는 그룹 설정 후 자동화
+  * static 함수 같은 거는 이름 오류 생길 수 있으므로 주의(이름을 바꿔준다)
+  * unity build 안 써도 빌드 되도록 유지(CI 를 이용하면 될 듯)
+  * 파일 추가/삭제할 때마다 include 추가, 빌드 제외 해야 함 -> 자동화
+   * UnityMaker 라는 자동화 툴은 vcproj 파일을 읽는 방식으로 동작
+   * 이름 충돌 막기 위해 custom grouping 지원
+   * M2 UnityMaker 는 Python 으로 제작
+  * incredibuild 와 중복해서 쓰면 더 빨라질거다. 버블파이터에서는 inc.. 를 썼고, M2 에서는 안 쓰고 있다.
+ * 참고
+  * [http://whonz.egloos.com/2243326 WhoNz Log ver 0.1 BETA - Unity 빌드를 이용한 빌드 시간 단축]
+  * [http://stackoverflow.com/questions/543697/include-all-cpp-files-into-a-single-compilation-unit stackoverflow - include all .cpp files into a single compilation unit?]

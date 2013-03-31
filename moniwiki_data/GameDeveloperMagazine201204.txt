@@ -1,0 +1,18 @@
+Kingdoms of amalur : Reckoning
+
+잘된 점
+1. Combat - RPGs don't have to have boring fights
+2. Usability testing - early and often
+3. Functional groups - sitting together pays off
+4. Scrum development methodology
+5. EA partners - a great relationship
+
+아쉬웠던 점
+1. Preproduction - Entirely too short
+2. Tools and pipelines - Laying down the track when the train is on its way
+3. Demos - Too damn many of them
+4. Main quest - not enough of it fleshed out early enough
+5. Upper management shuffle
+
+----
+[GameDeveloperMagazine]

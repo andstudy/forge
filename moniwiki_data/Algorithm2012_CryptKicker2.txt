@@ -1,0 +1,242 @@
+// 책에 있는 예제는 잘 처리되는데,
+// UVA 에서는 accepted 되지 않았습니다. ㅜㅜ;
+
+//#include "stdafx.h"
+#include <stdio.h>
+#include <iostream>
+#include <sstream>
+#include <string.h>
+#include <string>
+#include <list>
+#include <map>
+#include <algorithm>
+using namespace std;
+
+
+typedef list< list<string> > CryptList;
+typedef CryptList::iterator CryptItor;
+CryptList g_CryptStrings;
+
+
+// 사전로딩
+bool Input(char *fileName)
+{
+	g_CryptStrings.clear();
+
+	string line;
+
+	// 암호화된 스트링 로딩
+	list<string> cryptStrings;
+	while (	getline(cin, line) )
+	{
+		istringstream iss(line);
+		if (line.empty())
+			break;
+
+		while (!iss.eof())
+		{
+			string str;
+			iss >> str;
+			if (!str.empty())
+				cryptStrings.push_back(str);
+		}
+		cryptStrings.push_back("\n");
+	}
+// 	if (!cryptStrings.empty())
+// 		g_CryptStrings.push_back( cryptStrings );
+
+	if (!cryptStrings.empty())
+		g_CryptStrings.push_back( cryptStrings );
+
+	return true;
+}
+
+
+char g_MatchTable[ 26];
+
+// 매치테이블에서 매칭된 스트링을 얻는다.
+string GetMatchString(string &cryptString)
+{
+	string str = cryptString;
+	const int len = cryptString.length();
+	for (int i=0; i < len; ++i)
+		str[ i] = g_MatchTable[ 'z'-cryptString[ i]];
+	return str;
+}
+
+void SetMatchString(const string &cryptString, const string &matchString)
+{
+	const int len = cryptString.length();
+	for (int i=0; i < len; ++i)
+	{
+		g_MatchTable[ 'z'-cryptString[ i]] = matchString[ i];
+	}
+}
+
+bool IsExistUnMatchString(string &matchStr)
+{
+	int len = matchStr.length();
+	for (int i=0; i < len; ++i)
+		if (matchStr[ i] == '*')
+			return true;
+	return false;
+}
+
+bool MakeTable(const list<string>::iterator &cryptStringItor, const list<string>::iterator &cryptEndItor )
+{
+	list<string>::iterator it = cryptStringItor;
+	if (it == cryptEndItor)
+		return true;
+
+	string cryptString = *it;
+	string matchString = GetMatchString(cryptString);
+	if (IsExistUnMatchString(matchString) && cryptString != "\n")
+	{
+		return true;
+	}
+	else
+	{
+		return MakeTable(++it, cryptEndItor);
+	}
+
+	return true;
+}
+
+list<string>::iterator SearchSentence(list<int> &senteceList, list<string>::iterator beginCryptStringIt, list<string>::iterator endCryptStringIt)
+{
+	list<string>::iterator it = beginCryptStringIt;
+	list<string>::iterator matchFirst = endCryptStringIt;
+	list<int>::iterator sentenceIt = senteceList.begin();
+
+	while (endCryptStringIt != it && senteceList.end() != sentenceIt)
+	{
+		const int len = *sentenceIt;
+		if (len == it->length())
+		{
+			if (sentenceIt == senteceList.begin())
+				matchFirst = it;
+
+			++sentenceIt;
+			++it;
+			continue;
+		}
+		else 
+		{
+			if (sentenceIt == senteceList.begin())
+			{
+				++it;
+			}
+			else
+			{
+				sentenceIt = senteceList.begin();
+				it = ++matchFirst;
+			}
+		}
+	}
+	if (it == endCryptStringIt)
+		matchFirst = endCryptStringIt;
+
+	return matchFirst;
+}
+
+void MakeSentenceTable( list<string>::iterator begin )
+{
+	SetMatchString(*begin++, string("the"));
+	SetMatchString(*begin++, string("quick"));
+	SetMatchString(*begin++, string("brown"));
+	SetMatchString(*begin++, string("fox"));
+	SetMatchString(*begin++, string("jumps"));
+	SetMatchString(*begin++, string("over"));
+	SetMatchString(*begin++, string("the"));
+	SetMatchString(*begin++, string("lazy"));
+	SetMatchString(*begin++, string("dog"));
+}
+
+void PrintCryptString(list<string>::iterator beginIt, list<string>::iterator endIt)
+{
+	list<string>::iterator it = beginIt;
+	if (it == endIt)
+		return;
+
+	if (*it == "\n")
+		printf( "\n" );
+	else
+	{
+		string matchString = GetMatchString(*it);
+		printf( "%s ", matchString.c_str() );
+	}
+	PrintCryptString(++it, endIt);
+}
+
+void DecryptLine(list<string> &cryptStrings)
+{
+	list<int> sentenceList;
+	sentenceList.push_back(3);
+	sentenceList.push_back(5);
+	sentenceList.push_back(5);
+	sentenceList.push_back(3);
+	sentenceList.push_back(5);
+	sentenceList.push_back(4);
+	sentenceList.push_back(3);
+	sentenceList.push_back(4);
+	sentenceList.push_back(3);
+
+	list<string>::iterator it = cryptStrings.begin();
+	while (it != cryptStrings.end())
+	{
+		it = SearchSentence(sentenceList, it, cryptStrings.end());
+		if (it == cryptStrings.end())
+			break;
+
+		for (int i=0; i < sizeof(g_MatchTable); ++i)
+			g_MatchTable[ i] = '*';
+		MakeSentenceTable(it);
+		if (!MakeTable(cryptStrings.begin(), cryptStrings.end() ))
+			++it;
+		else
+			break;
+	}
+
+	if (cryptStrings.end() == it)
+	{
+		printf( "No solution.\n" );
+	}
+	else
+	{
+		PrintCryptString(cryptStrings.begin(), cryptStrings.end());
+	}
+}
+
+// 복호화
+void Decrypt()
+{
+	CryptItor it = g_CryptStrings.begin();
+	while (g_CryptStrings.end() != it)
+	{
+		DecryptLine(*it++);
+	}
+}
+
+int main(int argc, char* argv[])
+{
+	cout.setf(ios::fixed, ios::floatfield);
+	cout.precision(2);
+
+	string line;
+	getline(cin, line);
+	istringstream iss(line);
+	int cnt = 0;
+	iss >> cnt;	
+
+	getline(cin, line); // 공백
+	for (int i=0; i < cnt; ++i)
+	{
+		Input(argv[1]);
+		Decrypt();
+
+		if (i < cnt-1)
+			printf( "\n" );
+	}
+
+	return 0;
+}

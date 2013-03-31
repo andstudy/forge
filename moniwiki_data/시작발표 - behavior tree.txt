@@ -1,0 +1,24 @@
+#title 시작발표 - behavior tree
+
+{{{#!html
+<a href="http://www.slideshare.net/codevania/behavior-tree" title="시작발표 - behavior tree">시작발표 - behavior tree</a>
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=codevaniabehaviortree-100426232605-phpapp01&stripped_title=behavior-tree" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480">
+</embed>
+}}}
+
+= 관련 사이트 리스트 =
+== AIGameDev ==
+http://aigamedev.com/open/articles/bt-overview/
+http://aigamedev.com/open/articles/fsm-reusable/
+http://aigamedev.com/open/articles/hfsm-gist/
+http://aigamedev.com/open/articles/sequence/
+http://aigamedev.com/open/articles/selector/
+http://aigamedev.com/open/articles/decorator/
+http://aigamedev.com/open/articles/termination-status/
+http://aigamedev.com/open/reviews/halo-ai/
+
+== Google Search ==
+http://www.bungie.net/Inside/publications.aspx
+http://www.gamasutra.com/gdc2005/features/20050311/isla_01.shtml
+http://electronics.howstuffworks.com/halo2-ai.htm
+http://codevania.springnote.com/pages/5605023/attachments/3247487

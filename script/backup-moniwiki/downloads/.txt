@@ -1,0 +1,165 @@
+여기는 AnD(Architect aNd Design pattern) 스터디 홈페이지 입니다.
+사용 문의는 가입 후 [kukuman] 에게 해 주세요.
+회원 가입 후 바로 글쓰기가 가능합니다.
+[이거스터디합시다]
+[http://andstudy.com/andwiki/wiki.php/RecentChanges?action=rss_rc AndStudy RSS]
+[http://cafe.naver.com/architect1 AndStudy Naver Cafe] 
+
+== 발표 도움 도구 ==
+ * zoom it : [http://technet.microsoft.com/en-us/sysinternals/bb897434.aspx]
+
+== 스트레스 줄이기 ==
+ * [먹거리] : 점심, 회식 장소 리스트. 
+
+== 스트디어 트윗 모음 ==
+ * [트윗목록]
+
+== 현재 스터디 ==
+ * ["The architecture of open source applications"]
+ * ["TCPL"]
+
+== 과거 스터디 ==
+=== 2012 ===
+ * [LegacyCode]
+ * [Algorithm2012]
+ * [수학_Lisp]
+ * [NodeJS]
+ * [WindowsViaCpp]
+=== 2011 ===
+ * ["프로젝트가 서쪽으로 간 까닭은"]
+ * [html5]
+ * [DDD]
+ * [MultiCore] : 프로그래머가 몰랐던 멀티코어 CPU 이야기
+ * [TAOCP1] : The Art of Computer Programming 1
+ * [97things] : 소프트웨어 아키텍트가 알아야할 97가지
+ * [MongoDB] : MongoDB 완벽 가이드
+ * [2011_year_end_event]
+
+=== 2010 ===
+ * [이산수학]
+ * [ProgrammingGameAIByExample]
+ * [HolubOnPatterns] : 실전 코드로 배우는 실용주의 디자인 패턴
+ * [xUnitTestPatternsStudy] : xUnit 테스트 패턴, Debug It
+ * [ApprenticeshipPatterns] : 프로그래머의 길, 멘토에게 묻다
+ * [Clojure] : 프로그래밍 클로저
+ * [ManagingHumans] : IT 개발자가 쓴 통쾌한 인간관리 이야기
+ * [2010_year_end_event]
+
+=== 2009 ===
+ ["레거시 코드 활용 전략"]
+ [HARD CODE]
+ [AdvancedWindowsDebugging]
+ [프로그램은왜실패하는가]
+ [프로그래밍심리학]
+ [SICP]
+=== 2008 ===
+ [Scrum/스터디]
+ ["OS구조와원리"]
+ ["도와주세요팀장이됐어요"]
+ [ProgrammingErlang]
+ [MultithreadPatternsInJava]
+ [Algorithm]
+ [RefactoringToPatterns]
+ [POSA1_2008]
+=== 2007 ===
+ [TestDrivenDevelopment]
+
+== Pages ==
+[세미나]
+
+|| [WellKnownSystems] || [Acme] || [UML-RT] || [CSP] || [MindMap] ||
+|| [CodeComplete] || [POSA1] || [POSA2] || [Patterns] || [GOF] ||
+|| [PEAA] || [PDS] ||[WheelTimer] || [AJAX] || [AOP] ||
+
+----
+
+=== POSA1 ===
+ [AnDGames/POSA1/20060107]
+ [AnDGames/POSA1/20060114]
+ [AnDGames/POSA1/20060211]
+ [AnDGames/POSA1/20060225]
+ [AnDGames/POSA1/20060304]
+
+=== POSA2 ===
+ [AnD5/POSA2/200509]
+ [AnD5/POSA2/200510]
+ [AnD5/POSA2/200511]
+
+=== Framework Design Guidelines ===
+ [AndGames/2006/FrameworkDesignGuideLines]
+=== Documenting Software Architectures: Views and Beyond  ===
+ [AnD_Games_DSA_2006]
+=== 실용 주의 프로그래머 ===
+ [AnD_Gems_PP_2007]
+=== Ruby ===
+ [AnD_Gems_Ruby_2007]
+
+== [And Basic] 스터디 후기 ==
+[AndBasic/ASD/2006]
+== AnD Gems 스터디 목록 ==
+ [AnD_Gems_PP_2007]
+ [AnD_Games_DSA_2006]
+ [AnD_Games_POSA1_2006]
+ [AnD_Games_CodeComplete_2006]
+ [AnD5/AUP/2005]
+ [생각하는프로그래밍]
+ [SoftwareArchitectureInPratice]
+
+== 방명록 ==
+[방명록]
+
+== AnD5 Members ==
+이름이나 필명을 써서 스스로를 나타내 주세요. 그리고 각자의 이름을 제목으로 페이지를 만들어서 소개글을 써 주세요. 각자의 전문분야를 알림으로서 필요할 때 서로 도울 수 있었으면 합니다.
+----
+[ParkPD] :박일
+[CharSyam] : 강대명
+[Jeddli] : 이동현
+[Outbreak] : 안준석
+[kukuman]: 이수안
+[allting]: 김경렬
+[kwbang] : 방경운
+[itmentor] : 전효성
+[sang980] : 안상혁
+[mcgrady99] : 서영덕
+[yuntaek] : 남윤택
+[kghwan82] : 강구환
+[CynicJJ] : 정희종
+[womendev] : 전수현
+[soomong] : 현수명
+[폭풍언덕] : 박경현
+[Mastojun] : 송영준
+[JinuGuru] : 박진욱
+[mrr] : 하세용
+[mathica] : 이동하
+[kimbab] : 배재호
+[ms2003] : 하만석
+[jaejyn] : 신재진
+[wooya58] : 임진우
+[ogmj] : 정희철
+[forhang] : 이기영
+[seedyoon] : 윤석윤
+[firek] : 김강훈
+[bbkwang] : 백광훈
+[eritaka] : 안명환
+[honggu] : 김홍준
+[phoenixex] : 박민욱
+[TTF] : 허승욱
+[ohyecloudy] : 오종빈
+[kongbong] : 공봉식
+[kazuya] : 박상혁
+[dhrim] : 임도형
+[cc612] : 정민철
+[visualwizard] : 김광중
+[jjuiddong] : 이재정
+[dochigun] : 최영만
+[florist] : 최성기
+[whiletrue] : 이영권
+[chois79]: 최현석
+----
+[BookToRead]
+
+== 도움말 ==
+ * [gcode] : 코드 하이라이트
+ * HelpForBeginners: 도움말
+ * WikiSandBox: 편집 도우미입니다. 여기에서 편집을 테스트해 보세요
+ * FindPage: 찾아보기

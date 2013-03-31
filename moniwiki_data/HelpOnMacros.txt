@@ -1,0 +1,42 @@
+[[TableOfContents]]
+
+== Macros ==
+Macros allow the insertion of system features into normal wiki pages; the only thing that makes those pages special is that they contain macros. If you edit pages like RecentChanges or SystemInfo, you'll see what that means.
+
+For more information on the possible markup, see HelpOnEditing. 
+
+=== Search macros ===
+||'''Macro'''||'''Description'''||'''Example'''||
+||{{{[[TitleSearch]]}}}     || search the page titles || FindPage ||
+||{{{[[FullSearch]]}}}      || search the page contents || FindPage ||
+||{{{[[GoTo]]}}}            || directly go to the page you enter || FindPage ||
+||{{{[[PageList(regex)]]}}} || list of pages whose title matches the regex || HelpIndex ||
+
+=== Navigation ===
+||'''Macro'''||'''Description'''||'''Example'''||
+||{{{[[RecentChanges]]}}}   || a list of recently edited pages || RecentChanges ||
+||{{{[[TitleIndex]]}}}      || an index of all page titles || TitleIndex ||
+||{{{[[WordIndex]]}}}       || an index of all words in page titles || WordIndex ||
+||{{{[[RandomPage]]}}}      || a link to a random page || [[RandomPage]] ||
+||{{{[[RandomPage(#)]]}}}   || links to a number of random pages || [[RandomPage(2)]] ||
+||{{{[[TableOfContents]]}}} || display a local table of contents || see below ||
+
+=== System information ===
+||'''Macro'''||'''Description'''||'''Example'''||
+||{{{[[InterWiki]]}}}       || a list of all known InterWiki names || InterWiki ||
+||{{{[[SystemInfo]]}}}      || info on the wiki, the python interpreter and the host system || SystemInfo ||
+||{{{[[PageCount]]}}}       || current page count || [[PageCount]] pages ||
+
+=== Others ===
+||'''Macro'''||'''Description'''||'''Example'''||
+||{{{[[Icon(image)]]}}}     || display system icons || HelpOnNavigation ||
+||{{{[[UserPreferences]]}}} || display a user preferences dialog || UserPreferences ||
+||{{{[[BR]]}}} || insert a line break || 1st line[[BR]]2nd line ||
+||{{{[[Include(HelloWorld[,heading[,level]])]]}}} || include contents of another page || [[Include(HelloWorld)]] ||
+
+== Example Display ==
+We don't show examples for all macros here, because that would make this page quite long. Here is is the replacement text for the {{{[[SystemInfo]]}}} macro:
+ [[SystemInfo]]
+
+----
+[[Navigation(HelpOnEditing)]]

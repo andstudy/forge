@@ -1,0 +1,412 @@
+ * 앗싸~ 간만에 쉬운문제~ 라고 후다닥 풀었으나, 알 수 없는 이 불안함은 뭘까...
+  * 역시나 버그가 있었다. ㅋㅋㅋ
+  * 게다가 근본적인 버그라 설계 완전 뒤집어야 함... -_-
+ * Java 로 바꿔 제출해 보려 했으나 입출력 처리가 너무 귀찮아... -_-
+
+ * 설계 완전 뒤집었음. 입출력 처리도 했음. 아.. 귀찮아.
+ * Java 로 바꿔 제출도 할 예정임. ㅋ
+
+[[TableOfContents([maxdepth])]]
+
+== Is Bigger Smarter ==
+
+=== Elephant.vb ===
+{{{
+Public Class Elephant
+	Implements IComparable
+
+	Sub New(ByVal weight As Integer, ByVal iq As Integer)
+		_weight = weight
+		_iq = iq
+	End Sub
+
+	Function CompareTo(ByVal obj As Object) As Integer Implements IComparable.CompareTo
+		Dim compared As Elephant = obj
+		If Weight > compared.Weight Then
+			Return 1
+		ElseIf Weight < compared.Weight Then
+			Return -1
+		Else
+			Return 0
+		End If
+	End Function
+
+	Sub UpdateMaxSequenceCount(ByVal anElephant As Elephant)
+		Dim bigger As Boolean = (Weight > anElephant.Weight)
+		Dim dumber As Boolean = (IQ < anElephant.IQ)
+
+		If bigger And dumber Then
+			If anElephant.MaxSequenceCount > MaxSequenceCount - 1 Then
+				_maxSequenceCount = anElephant.MaxSequenceCount + 1
+				_smarter = anElephant
+			End If
+		End If
+	End Sub
+
+	Private _weight As Integer
+	Private _iq As Integer
+	Private _maxSequenceCount As Integer = 1
+	Private _smarter As Elephant
+
+	ReadOnly Property Weight() As Integer
+		Get
+			Return _weight
+		End Get
+	End Property
+
+	ReadOnly Property IQ() As Integer
+		Get
+			Return _iq
+		End Get
+	End Property
+
+	ReadOnly Property Smarter() As Elephant
+		Get
+			Return _smarter
+		End Get
+	End Property
+
+	ReadOnly Property MaxSequenceCount() As Integer
+		Get
+			Return _maxSequenceCount
+		End Get
+	End Property
+
+End Class
+}}}
+
+=== !BiggerSmarter.vb ===
+{{{
+Public Class BiggerSmarter
+
+	Shared Function GetSorted(ByVal elephants As List(Of Elephant)) As List(Of Elephant)
+		Dim copiedArray(elephants.Count - 1) As Elephant
+		elephants.CopyTo(copiedArray)
+		Dim copied As New List(Of Elephant)(copiedArray)
+
+		copied.Sort()
+
+		Return copied
+	End Function
+
+	Shared Function GetElephantOfMaxSequenceCount(ByVal elephants As List(Of Elephant)) As Elephant
+		Dim result As Elephant = Nothing
+
+		Dim maxCount As Integer = -1
+		For Each anElephant As Elephant In elephants
+			If anElephant.MaxSequenceCount > maxCount Then
+				maxCount = anElephant.MaxSequenceCount
+				result = anElephant
+			End If
+		Next
+
+		Return result
+	End Function
+
+	Shared Sub UpdateMaxSequenceCount(ByVal elephants As List(Of Elephant))
+		For i As Integer = 0 To elephants.Count - 2
+			For j As Integer = i + 1 To elephants.Count - 1
+				elephants(j).UpdateMaxSequenceCount(elephants(i))
+			Next
+		Next
+	End Sub
+
+	Shared Function GetResultSequence(ByVal elephants As List(Of Elephant)) As List(Of Elephant)
+		Dim sorted As List(Of Elephant) = GetSorted(elephants)
+		UpdateMaxSequenceCount(sorted)
+
+		Dim result As New List(Of Elephant)
+
+		Dim anElephant As Elephant = GetElephantOfMaxSequenceCount(sorted)
+		While anElephant IsNot Nothing
+			result.Insert(0, anElephant)
+			anElephant = anElephant.Smarter
+		End While
+
+		Return result
+	End Function
+
+End Class
+}}}
+
+=== !ModuleMain.vb ===
+{{{
+Module ModuleMain
+
+	Sub Main()
+		Dim input As String = InputHandler.GetInput()
+		Dim strList As List(Of String) = InputHandler.GetStringList(input)
+		Dim elephants As List(Of Elephant) = InputHandler.GetElepahantsFromStringList(strList)
+
+		Dim result As List(Of Elephant) = BiggerSmarter.GetResultSequence(elephants)
+
+		Dim intList As List(Of Integer) = InputHandler.GetIntList(result, elephants)
+		Dim output As String = InputHandler.GetOutput(intList)
+
+		Console.Write(output)
+	End Sub
+
+End Module
+}}}
+
+=== !BiggerSmarterTest.vb ===
+{{{
+<TestClass()> _
+Public Class BiggerSmarterTest
+
+	Private _input As New List(Of Elephant)
+
+	Sub New()
+		_input.Add(New Elephant(400, 700))
+		_input.Add(New Elephant(100, 900))
+		_input.Add(New Elephant(500, 600))
+		_input.Add(New Elephant(300, 800))
+		_input.Add(New Elephant(200, 100))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetSortedTest()
+		Dim sorted As List(Of Elephant) = BiggerSmarter.GetSorted(_input)
+		Assert.AreEqual(_input.Count, sorted.Count)
+		For i As Integer = 0 To sorted.Count - 2
+			Assert.IsTrue(sorted(i).Weight <= sorted(i + 1).Weight)
+		Next
+		Assert.AreEqual(400, _input(0).Weight)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub UpdateMaxSequenceCountTest()
+		Dim sorted As List(Of Elephant) = BiggerSmarter.GetSorted(_input)
+		BiggerSmarter.UpdateMaxSequenceCount(sorted)
+		Assert.AreEqual(1, sorted(0).MaxSequenceCount)
+		Assert.AreEqual(2, sorted(1).MaxSequenceCount)
+		Assert.AreEqual(2, sorted(2).MaxSequenceCount)
+		Assert.AreEqual(3, sorted(3).MaxSequenceCount)
+		Assert.AreEqual(4, sorted(4).MaxSequenceCount)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetElephantOfMaxSequenceCountTest()
+		BiggerSmarter.UpdateMaxSequenceCount(_input)
+		Dim expected As Elephant = BiggerSmarter.GetElephantOfMaxSequenceCount(_input)
+		Dim actual As Elephant = _input(2)
+		Assert.AreEqual(actual.Weight, expected.Weight)
+		Assert.AreEqual(actual.IQ, expected.IQ)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetResultSequenceTest()
+		Dim result As List(Of Elephant) = BiggerSmarter.GetResultSequence(_input)
+		Assert.AreEqual(4, result.Count)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetResultSubsetTestFinal()
+		Dim input As String = _
+		 "200 100" & vbCrLf & _
+		 "400 700" & vbCrLf & _
+		 "100 900" & vbCrLf & _
+		 "300 800" & vbCrLf & _
+		 "500 600" & vbCrLf
+
+		Dim strList As List(Of String) = InputHandler.GetStringList(input)
+		Dim elephants As List(Of Elephant) = InputHandler.GetElepahantsFromStringList(strList)
+
+		Dim result As List(Of Elephant) = BiggerSmarter.GetResultSequence(elephants)
+
+		Dim intList As List(Of Integer) = InputHandler.GetIntList(result, elephants)
+		Dim output As String = InputHandler.GetOutput(intList)
+
+		Dim expected As String = _
+		 "4" & vbCrLf & _
+		 "3" & vbCrLf & _
+		 "4" & vbCrLf & _
+		 "2" & vbCrLf & _
+		 "5" & vbCrLf
+
+		Assert.AreEqual(expected, output)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetResultSubsetTestFinalMore()
+		Dim input As String = _
+		 "6008 1300" & vbCrLf & _
+		 "6000 2100" & vbCrLf & _
+		 "500 2000" & vbCrLf & _
+		 "1000 4000" & vbCrLf & _
+		 "1100 3000" & vbCrLf & _
+		 "6000 2000" & vbCrLf & _
+		 "8000 1400" & vbCrLf & _
+		 "6000 1200" & vbCrLf & _
+		 "2000 1900" & vbCrLf
+
+		Dim strList As List(Of String) = InputHandler.GetStringList(input)
+		Dim elephants As List(Of Elephant) = InputHandler.GetElepahantsFromStringList(strList)
+
+		Dim result As List(Of Elephant) = BiggerSmarter.GetResultSequence(elephants)
+
+		Dim intList As List(Of Integer) = InputHandler.GetIntList(result, elephants)
+		Dim output As String = InputHandler.GetOutput(intList)
+
+		Dim expected As String = _
+		 "4" & vbCrLf & _
+		 "4" & vbCrLf & _
+		 "5" & vbCrLf & _
+		 "9" & vbCrLf & _
+		 "8" & vbCrLf
+
+		Assert.AreEqual(expected, output)
+	End Sub
+
+End Class
+}}}
+
+=== !InputHandler.vb ===
+{{{
+Public Class InputHandler
+
+	Shared Function GetInput() As String
+		Dim input As String = ""
+		Dim str As String
+
+		While True
+			str = Console.ReadLine()
+			If str = Nothing Then Exit While
+			input &= str & vbCrLf
+		End While
+
+		Return input
+	End Function
+
+	Shared Function GetStringList(ByVal input As String) As List(Of String)
+		Dim separator() As Char = vbCrLf.ToCharArray()
+		Dim strs() As String = input.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+		Dim strList As New List(Of String)(strs)
+		Return strList
+	End Function
+
+	Shared Function GetElepahantsFromStringList(ByVal strList As List(Of String)) As List(Of Elephant)
+		Dim elephants As New List(Of Elephant)
+
+		For Each str As String In strList
+			elephants.Add(GetElephantFromString(str))
+		Next
+
+		Return elephants
+	End Function
+
+	Shared Function GetElephantFromString(ByVal str As String) As Elephant
+		Dim separator() As Char = {" "}
+		Dim strs() As String = str.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+
+		Dim weight As Integer = Integer.Parse(strs(0))
+		Dim iq As Integer = Integer.Parse(strs(1))
+
+		Return New Elephant(weight, iq)
+	End Function
+
+	Shared Function GetOutput(ByVal result As List(Of Integer)) As String
+		Dim output As String = result.Count.ToString() & vbCrLf
+		For Each i As Integer In result
+			output &= i.ToString() & vbCrLf
+		Next
+
+		Return output
+	End Function
+
+	Shared Function GetIntList(ByVal result As List(Of Elephant), ByVal input As List(Of Elephant)) As List(Of Integer)
+		Dim intList As New List(Of Integer)
+		For Each anElephant As Elephant In result
+			For i As Integer = 0 To input.Count - 1
+				Dim sameWeight As Boolean = (anElephant.Weight = input(i).Weight)
+				Dim sameIQ As Boolean = (anElephant.IQ = input(i).IQ)
+
+				If sameWeight And sameIQ Then
+					intList.Add(i + 1)
+					Exit For
+				End If
+			Next
+		Next
+
+		Return intList
+	End Function
+
+End Class
+}}}
+
+=== !InputHandlerTest.vb ===
+{{{
+<TestClass()> _
+Public Class InputHandlerTest
+
+	<TestMethod()> _
+	Public Sub GetStringListTest()
+		Dim input As String = _
+		  "100 900" & vbCrLf & _
+		  "200 100" & vbCrLf & _
+		  "300 800" & vbCrLf & _
+		  "400 700" & vbCrLf & _
+		  "500 600" & vbCrLf
+
+		Dim strList As List(Of String) = InputHandler.GetStringList(input)
+		Assert.AreEqual(5, strList.Count)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetElepahantFromStringTest()
+		Dim anElephant As Elephant = InputHandler.GetElephantFromString("100 200")
+		Assert.AreEqual(100, anElephant.Weight)
+		Assert.AreEqual(200, anElephant.IQ)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetElepahantsFromStringListTest()
+		Dim strList As New List(Of String)
+		strList.Add("100 900")
+		strList.Add("200 100")
+		strList.Add("300 800")
+		strList.Add("400 700")
+		strList.Add("500 600")
+
+		Dim result As List(Of Elephant) = InputHandler.GetElepahantsFromStringList(strList)
+		Assert.AreEqual(strList.Count, result.Count)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetOutputTest()
+		Dim ints() As Integer = {1, 3, 4, 5}
+		Dim intList As New List(Of Integer)(ints)
+
+		Dim output As String = InputHandler.GetOutput(intList)
+		Dim expected As String = _
+		  "4" & vbCrLf & _
+		  "1" & vbCrLf & _
+		  "3" & vbCrLf & _
+		  "4" & vbCrLf & _
+		  "5" & vbCrLf
+
+		Assert.AreEqual(expected, output)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetIntListTest()
+		Dim input As New List(Of Elephant)
+		input.Add(New Elephant(100, 900))
+		input.Add(New Elephant(200, 100))
+		input.Add(New Elephant(300, 800))
+		input.Add(New Elephant(400, 700))
+		input.Add(New Elephant(500, 600))
+
+		Dim result As New List(Of Elephant)
+		result.Add(input(0))
+		result.Add(input(2))
+		result.Add(input(3))
+		result.Add(input(4))
+
+		Dim intList As List(Of Integer) = InputHandler.GetIntList(result, input)
+		Assert.AreEqual(4, intList.Count)
+		Assert.AreEqual(3, intList(1))
+	End Sub
+
+End Class
+}}}

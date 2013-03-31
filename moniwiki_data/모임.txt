@@ -1,0 +1,29 @@
+ [Conference]
+
+== 2008 ==
+ * 02.29
+  * [http://sshong.com/2512707 제1회 블로그 축제 '블로그 만남']
+ * 03.01
+  * [http://isdead.egloos.com/4180209 게임당의 여덟번째 정모]
+ * 03.04 ~ 03.07
+  [http://edu.e-drugdiscovery.com/schedule/schedule_view.php?idx=66 Agile Software Development for Bio- and Chem- Informatics]
+ * 03.08
+  * [http://wiki.kldp.org/wiki.php/KLDPConf/20080308 KLDP Conf/20080308]
+ * 03.14
+  * [http://www.creativecommons.or.kr/conference/kor/ CC Korea 컨퍼런스]
+ * 03.16 10am ~ 06.pm
+  * [http://helloblogger.kr/ 대한민국 블로거 컨퍼런스]
+ * 03.19 2시~6시
+  [http://ctnews.kocca.or.kr/ctc/test/qavisit_save_open.html GDC(Game Developer Conference) 2008 기술동향]
+   [http://blog.naver.com/jacking75/140049359288 소개]
+ * 03.20 그랜드 힐튼 호텔
+  [http://blog.naver.com/process3/20048413669 Microsoft C++ 2008]
+ * 03.28 금. 여자개발자 모임터 제2회 릴레이 세미나
+  http://blog.naver.com/mcjura00/140049523899
+ * 03.29 토. Daum DevDay 2008 안내 오전 10시부터
+  http://dna.daum.net/devday/2008/
+ * 04.12 토 1:30
+  [http://msevents.microsoft.com/CUI/EventDetail.aspx?EventID=1032374702&Culture=ko-KR MSDN 토요세미나 - VC++개발자라면 반드시 알아야 할 TR1의 소개 및 사용 예(4월12일)]
+ * 6.11 : P-camp 3번째 
+  http://p-camp.tistory.com/
+  작년에 여기에서 나눈 얘기고 하니, 여기 오셔서 서로의 경험을 공유하면 좋을 거 같네요. 등록은 26 일에 받는다고 합니다.

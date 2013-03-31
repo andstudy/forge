@@ -1,0 +1,158 @@
+= 3.1 덮어쓰기와 같인상태 = 
+
+== 갇힌 상태 변수 ==
+ * 예금에서 돈을 인출하는 예제
+  * 버전 1: 외부변수 사용
+   * (set! <name> <new-value>) : <name> 의 내용을 <new-value>로 바꾼다
+   * (begin <exp1> <exp2> ... <expk>) : <expk> 들을 차례로 실행하고 마지막을 반환
+
+{{{#!gcode
+( define balance 100)
+ (define (withdraw amount)
+  (if (>= balance amount)
+      (begin (set! balance (- balance amount))
+             balance)
+      "Insufficient funds"))
+(withdraw 10)
+(withdraw 20)
+}}}
+  * 버전 2: 함수 안으로 변수 은닉
+   * 맞바꿈 계산법으로 설명이 불가능하고 함수만 보았을때 왜 이렇게 동작 되는지 설명이 되지 않음
+{{{#!gcode
+(define new-withdraw
+  (let ((balance 100))
+    (lambda (amount)
+      (if (>= balance amount)
+          (begin (set! balance (- balance amount))
+                 balance)
+          "Insufficient funds"))))
+
+( new-withdraw 10 ) 
+( new-withdraw 20 ) 
+( new-withdraw (new-withdraw 1)) 
+}}}
+
+  * 버전 3 : 돈 찾는 프로시저를 만들어 낸다
+   * 논리적으로 의미가 들어남
+
+{{{#!gcode
+(define (make-withdraw balance)
+  (lambda (amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds")))
+
+(define W1 (make-withdraw 100))
+(define W2 (make-withdraw 200))
+
+(W1 10)
+(W2 20)
+}}}
+  * 예금을 넣고 빼는 역할을 수행하는 객체 (메세지 이용)
+
+{{{#!gcode
+(define (make-account balance)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch m)
+    (cond ((eq? m 'withdraw) withdraw)
+          ((eq? m 'deposit) deposit)
+          (else (error "Unknown request -- MAKE-ACCOUNT"m))))
+  dispatch)
+
+(define acc (make-account 100))
+((acc 'withdraw) 50)
+((acc 'deposit) 40)
+}}}
+
+== 덮어 쓰기가 있어 좋은점 ==
+p.296~297 소스를 보자
+ * rand 함수구현시 다음 상태를 보관하고 있을 수 있게 되어 구현이 간결
+ * 상태변수이용한 rand를 구현을 이용하여 몬테카를로 정의에 따른 시물레이션 구현이 잘 들어나게 됨
+  * *물체안에 상태를 감춰 넣을 수 있게 되었다~* -> 과연 더 좋게 되었는가?
+
+== 덮어쓰기를 끌어드린 대가 ==
+=== 함수형 프로그래밍 ===
+ * 1,2장 처럼 덮어쓰기 없이 프로그램 하는 법을 함수형 프로그래밍 이라고함
+ * 상태 변수를 사용하면 맞바꿈 계산법을 사용할 수 없음
+
+{{{#!gcode
+(define (make-simplified-withdraw balance)
+  (lambda (amount)
+    (set! balance (- balance amount))
+    balance))
+(define W (make-simplified-withdraw 25))
+(W 20)
+5
+(W 10)
+- 5
+}}}
+ * (W 20) 은 어떻게 동작하는가? (맞바꿈 계산법으로 확인해보기)
+  * ((make-simplified-withdraw 25) 20)
+  * ((lambda (amount) (set! balance (- 25 amount)) 25) 20)
+  * (set! balance (- 25 20)) 25
+  ** balance에 5를 덮어 썼으나 결국 25가 되었다? (뭥니-_-+)
+
+ * 다시 돌아와서 !set 이 해주는 것은 무엇인가?
+  * W1 과 W2는 *같은*일은 하지만 , 서로 다른 결과 영역을 갖고 있기 때문에서로 맞바뀔수는 없다.
+
+{{{#!gcode
+(define W1 (make-simplified-withdraw 25))
+(define W2 (make-simplified-withdraw 25))
+(W1 20)
+5
+(W1 20)
+- 15
+(W2 20)
+5
+}}}
+ * 둘의 차이?
+  * peter와 paul은 각각 은행 개정을 가지고 있다.
+
+{{{#!gcode
+(define peter-acc (make-account 100))
+(define paul-acc (make-account 100))
+}}}
+
+  * peter와 paul은 같은 은행 계정을 사용하고 있다 
+
+{{{#!gcode
+(define peter-acc (make-account 100))
+(define paul-acc peter-acc)
+}}}
+
+=== 명령 중심 프로그래밍 ===
+ * 함수형
+{{{#!gcode
+(define (factorial n)
+  (define (iter product counter)
+    (if (> counter n)
+        product
+        (iter (* counter product)
+              (+ counter 1))))
+  (iter 1 1))
+
+( factorial 10)
+}}}
+ * 명령형
+{{{#!gcode
+(define (factorial n)
+  (let ((product 1)
+        (counter 1))
+    (define (iter)
+      (if (> counter n)
+          product
+          (begin (set! product (* counter product))
+                 (set! counter (+ counter 1))
+                 (iter))))
+    (iter)))
+}}}
+  * 혹여나 set! 이 있는 부분의 순서가 달라지면 잘못된 값을 반환함
+  * 동시에 여러 프로세스가 돌아가는 상황이라면 의도치 안흔 문제가 발생될 수 있음

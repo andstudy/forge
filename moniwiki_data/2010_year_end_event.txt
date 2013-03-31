@@ -1,0 +1,36 @@
+= 포스트모템 =
+== 오전반 ==
+{{{#!html
+<div style="width:425px" id="__ss_6236115"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ohyecloudy/2010-6236115" title="2010 아꿈사 오전반 포스트모템">2010 아꿈사 오전반 포스트모템</a></strong><object id="__sse6236115" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2010-101219010213-phpapp02&stripped_title=2010-6236115&userName=ohyecloudy" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6236115" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2010-101219010213-phpapp02&stripped_title=2010-6236115&userName=ohyecloudy" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ohyecloudy">Jongbin Oh</a>.</div></div>
+}}}
+
+== 오후반 ==
+{{{#!html
+<div style="width:425px" id="__ss_6260271"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/charsyam2/ss-6260271" title="오후반을 소개합니다">오후반을 소개합니다</a></strong><object id="__sse6260271" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-101220092014-phpapp02&stripped_title=ss-6260271&userName=charsyam2" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6260271" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-101220092014-phpapp02&stripped_title=ss-6260271&userName=charsyam2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/charsyam2">charsyam2</a>.</div></div>
+}}}
+
+== 온라인반 ==
+{{{#!html
+<div style="width:425px" id="__ss_6246209"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/zone0000/2010-6246209" title="2010 연말행사 온라인스터디">2010 연말행사 온라인스터디</a></strong><object id="__sse6246209" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2010-101219193337-phpapp01&stripped_title=2010-6246209&userName=zone0000" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6246209" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2010-101219193337-phpapp01&stripped_title=2010-6246209&userName=zone0000" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/zone0000">TTF</a>.</div></div>
+}}}
+
+= 자유발표 =
+== 강대명 : 날로 먹는 Scalable 이야기 ==
+{{{#!html
+<div style="width:500px" id="__ss_6235256"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/charsyam2/scalable" title="Scalable">Scalable</a></strong><object id="__sse6235256" width="500" height="400"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=scalable-101218231558-phpapp02&amp;stripped_title=scalable&amp;userName=charsyam2" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6235256" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=scalable-101218231558-phpapp02&amp;stripped_title=scalable&amp;userName=charsyam2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="500" height="400"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/charsyam2">charsyam2</a>.</div></div>
+}}}
+
+== 박일 : 즉흥연기와 프로그래밍 ==
+{{{#!html
+<div style="width: 425px;" id="__ss_6238122"><strong style="display: block; margin: 12px 0pt 4px;"><a href="http://www.slideshare.net/parkpd/ss-6238122" title="즉흥연기와프로그래밍">즉흥연기와프로그래밍</a></strong><object id="__sse6238122" height="355" width="425"><embed name="__sse6238122" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-101219061131-phpapp02&amp;stripped_title=ss-6238122&amp;userName=parkpd" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="355" width="425"></object><div style="padding: 5px 0pt 12px;">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/parkpd">Ryan Park</a>.</div></div>
+}}}
+
+== 김연기 : C++0x ==
+{{{#!html
+<div style="width:425px" id="__ss_6235186"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/scor7910/cpp-0x-kimryungee" title="Cpp 0x kimRyungee">Cpp 0x kimRyungee</a></strong><object id="__sse6235186" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cpp0xkimryungee-101218230255-phpapp02&stripped_title=cpp-0x-kimryungee&userName=scor7910" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6235186" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cpp0xkimryungee-101218230255-phpapp02&stripped_title=cpp-0x-kimryungee&userName=scor7910" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/scor7910">scor7910</a>.</div></div>
+}}}
+
+== 김경렬 : 마인드맵 개발이야기 ==
+{{{#!html
+<div style="width:425px" id="__ss_6248819"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/allting/iditia" title="Iditia개발이야기">Iditia개발이야기</a></strong><object id="__sse6248819" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=iditia-101220011101-phpapp02&stripped_title=iditia&userName=allting" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6248819" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=iditia-101220011101-phpapp02&stripped_title=iditia&userName=allting" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/allting">Kim Kyungryul</a>.</div></div>
+}}}

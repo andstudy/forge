@@ -1,0 +1,2 @@
+참고 문서 :
+ * http://www4.in.tum.de/~schaetz/papers/UML-RT-Solution.pdf

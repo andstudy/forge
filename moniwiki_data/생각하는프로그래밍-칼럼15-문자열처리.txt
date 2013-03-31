@@ -1,0 +1,255 @@
+[[TableOfContents]]
+ * 우리는 스트링에 둘러싸여 있다. (숫자, 문자, 기호)
+ * 이 칼럼은 스트링에 대한 몇 가지 고전적인 문제를 검토하고 소개한다.
+= 단어 =
+ * 단어란? "공백(white space)으로 둘러싸인 일련의 문자열"
+ * 그렇지 않은 경우도 있다. 연습문제1 참고.
+
+문제1) 어떤 문서에 포함되어 있는 단어의 리스트를 생성하여라.
+{{{
+// 단어를 입력받아 중복을 제거하고 정렬된 순서로 출력하는 프로그램.
+#pragma warning(disable:4786)
+#include <iostream>
+#include <string>
+#include <set>
+using namespace std;
+
+int main(void)
+{
+	set<string> S;
+	set<string>::iterator j;
+	string t;
+	while (cin >> t)
+		S.insert(t);
+	for( j=S.begin(); j != S.end(); ++j )
+		cout << *j << "\n";
+	
+	 return 0;
+}
+}}}
+
+문제2) 문서 내에 있는 각 단어의 개수를 세어라.
+{{{
+// 단어를 입력받아 중복을 제거하고 개수를 세어 정렬된 순서로 출력하는 프로그램.
+#pragma warning(disable:4786)
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+
+int main(void)
+{
+	map<string, int> M;
+	map<string, int>::iterator j;
+	string t;
+	while (cin >> t)
+		M[t]++;
+	for( j=M.begin(); j!=M.end(); ++j )
+		cout << j->first << " " << j->second << "\n";
+
+	return 0;
+}
+}}}
+
+문제3) 문제2의 해시 테이블(hash table) 버젼
+{{{
+// 단어를 읽어들여 각 단어에 대한 카운터를 증가시키고, 해시 테이블의 원소를 하나씩
+// 꺼내 단어와 카운트를 (정렬되지 않은 상태로) 출력한다.
+#pragma warning(disable:4786)
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+
+
+typedef struct node *nodeptr;
+typedef struct node {
+	char *word;
+	int count;
+	nodeptr next;
+} node;
+
+
+#define NHASH 29989
+#define MULT 31
+nodeptr bin[NHASH];
+
+
+unsigned int hash(char *p)
+{
+	unsigned int h=0;
+	for( ; *p; p++)
+		h = MULT * h + *p;
+
+	return h % NHASH;
+}
+
+
+void incword(char *s)
+{
+	nodeptr p=NULL;
+	unsigned int h = hash(s);
+	for( p=bin[h]; p!=NULL; p=p->next )
+	{
+		if( strcmp(s, p->word) == 0 )
+		{
+			(p->count)++;
+			return;
+		}
+	}
+
+	p = (struct node *)malloc(sizeof(node));
+	p->count = 1;
+	p->word = (char *)malloc(strlen(s)+1);
+	strcpy(p->word, s);
+	p->next = bin[h];
+	bin[h] = p;
+}
+
+
+int main(void)
+{
+	nodeptr p=NULL;
+	char buf[128] = {0,};
+
+	for(int i=0; i<NHASH; i++)
+		bin[i] = NULL;
+
+	while( scanf("%s", buf) != EOF )
+		incword(buf);
+
+	for( i=0; i<NHASH; i++ )
+		for( p=bin[i]; p!=NULL; p=p->next )
+			cout << p->word << " " << p->count << endl;
+
+	return 0;
+}
+}}}
+
+
+= 어구 = 
+ * 어구란? "단어의 집합"
+
+문제1) 부분문자열(substring) 검색 : 중복된 가장 긴 부분문자열을 찾아라.
+      ex.) "Ask not what your country can do for you, but what you can do for your country" 에서 중복된 문자열 중 가장 긴 것은 "can do for you"이고, 두 번째로 긴 것은 "your country" 이다.
+{{{
+// 모든 문자열 쌍의 부분문자열을 비교하는 가상코드 => O( n^2 )
+[Pseudo Code]
+maxlen = -1
+for i = [0, n)
+	for j = (i, n)
+		if (thislen = comlen(&c[i], &c[j])) > maxlen
+			maxlen = thislen
+			maxi = j
+			maxj = j
+
+
+int comlen(char *p, char *q)
+	i = 0
+	while *p && (*p++ == *q++)
+		i++
+	return i
+}}}
+
+문제2) 문제1을 접미사 배열(suffix array)을 사용하여 풀어라.
+{{{
+// 입력 문자열 "banana"를 접미사 배열한 결과 => O(n log n)
+a[0]: banana
+a[1]: anana
+a[2]: nana
+a[3]: ana
+a[4]: na
+a[5]: a
+
+// 접미사 배열을 정렬한 결과
+a[0]: a
+a[1]: ana
+a[2]: anana
+a[3]: banana
+a[4]: na
+a[5]: nana
+
+// 위 접미사 배열 전체를 읽으면서 comlen 함수를 이용하여 두 인접 문자열이 공통
+// 으로 가지는 문자의 개수를 샌다.
+for i = [0, n)
+	if comlen(a[i], a[i+1]) > maxlen
+		maxlen = comlen(a[i], a[i+1])
+		maxi = i
+printf("%.*s\n", maxlen, a[maxi])
+}}}
+
+= 텍스트 생성하기 =
+문제) 어떻게 텍스트를 랜덤하게 생성할 수 있을까? (ex. 심심이)
+{{{
+방법1) 원숭이를 타자기 앞에 놓는다.
+   dklfjasasdkf salfdkwqoiejvocx dslkdfjs  dslkf  lksfjlkweo slkfdja
+   s asldkfjsadlkf sdkd sldkfjsaldkfwioe sdlkfjdlsdk sdlkdsfj slkdfj
+   lsd dfksdj slkfdjlsdkjf
+
+방법2) 영단어에서 문자의 빈도수를 보면 A가 Z보다 훨씬 많다.
+   saade ve mw hc n entt da k eethetocusosselawo gw fgrsn
+   oh,tvettaf aetnlbilo fc lhd okleutsndyeoshtbogo eet ib
+   nheaoopefni ngent
+
+방법3) 문자 Q 다음에는 U가 올 확률이 높다. (n차 : 앞의 n 개의 문자를 참조하여 다음 문자 선택)
+   1차 : t I amy, vin. id wht omanly heay atuss n macon aresethe
+        hired boutwhe t, tl, ad, torurest t plur I wit hengamind 
+        tarer-plarody thishand.
+   2차 : Ther I the heingoind of-pleat, blur it dwere wing waske 
+        hat trooss. Yout lar on wassing, an sit. ""Yould," "I that 
+        vide was nots ther.
+   3차 : I has them the saw the secorrow. And wintails on my my ent,
+        thinks, fore voyager lanated the been elsed helder was of 
+        him a very fee bottlemarkable,
+   4차 : His heard. "Exactly he very glad trouble, and by Hopkins! 
+        That is on of the who difficentralia. He rushed likely? " 
+        "Blood night that.
+
+ ※위 방법은 "정상 전이 확률을 가지는 유한 상태 Markov 체인
+              (finite-state Markov chain with stationary transition probabilities)" 이다.
+
+
+방법4) Markov 체인을 단어 수준으로 사용
+    1차 : The table shows how many context; it uses two or equal 
+         to the sparse matrices were not chosen. In Section 13.1, 
+         for a more efficient that "the more time was published 
+         by calling recursive structure translates to build scaffolding 
+         to try to know of selected and testing and more robust 
+         and a binary search).
+    2차 : The program is guided by verification ideas, and the second 
+         errs in the STL implementation (whick guarantees good worst-case
+         performance), and is especially rich in speedups due to Gordon 
+         Bell. Everything should be to use a macro: for n=10,000, its 
+         run time; that point Martin picked up from his desk
+    3차 : A Quicksort would be quite efficient for the main-memory sorts, 
+         and it requires only a few distinct values in this particular 
+         problem, we can write them all down in the program, and they 
+         were making progress towards a solution at a snail's pace.
+
+방법5) Markov 체인을 접미사 배열로 구현
+     // 입력 텍스트가 "of the people, by the people, for the people" 이라면,
+    word[0]: by the
+    word[1]: for the
+    word[2]: of the
+    word[3]: people
+    word[4]: people, for
+    word[5]: people, by
+    word[6]: the people,
+    word[7]: the people
+    word[8]: the people,
+}}}
+
+= 원리 =
+== 문자열 문제 ==
+ * 컴파일러는 심볼 테이블에서 변수 이름을 어떻게 검색할까?
+ * 도움말 시스템은 질의(query)를 위한 문자열의 각 문자를 입력할 때 
+   어떻게 신속하게 전체 CD-ROM을 검색할 수 있을까?
+ * 웹 검색 엔진은 어떻게 어구를 검색하는 것일까?
+== 문자열을 위한 데이터 구조 ==
+ * 해싱 : 빠르고, 구현하기 쉬움
+ * 균형 트리 : 평균적으로 좋은 퍼포먼스를 보장 (STL map, set)
+ * 접미사 배열 : 접미사 배열을 스캔하여 근접한 문자열을 찾거나, 
+               이진 탐색을 사용하여 단어나 어구를 검색할 수 있다.
+== 라이브러리 vs 사용자 정의 컴포넌트 ==
+ * STL이 사용하기 편리하고 범용적이며, 강력한 인터페이스를 제공하지만 
+   특수 목적의 해시 함수 만큼 효율적 이지는 않다.

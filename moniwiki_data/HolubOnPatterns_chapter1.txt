@@ -1,0 +1,10 @@
+= HolubOnPatterns/chapter1 = 
+== HolubOnPatterns/chapter1_1 == 
+{{{#!html
+<div style="width:425px" id="__ss_4501926"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jun0683/1-4501926" title="HolubOnPatterns/chapter1_1">HolubOnPatterns/chapter1_1</a></strong><object id="__sse4501926" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=1-100614194314-phpapp02&stripped_title=1-4501926" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4501926" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=1-100614194314-phpapp02&stripped_title=1-4501926" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jun0683">jun0683</a>.</div></div>
+}}}
+== HolubOnPatterns/chapter1_2 == 
+
+{{{#!html
+<div style="width:425px" id="__ss_4487614"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/stupidfox/holub-on-patterns-1" title="HolubOnPatterns/chapter1_2">HolubOnPatterns/chapter1_2</a></strong><object id="__sse4487614" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=holubonpatterns-100613085639-phpapp01&stripped_title=holub-on-patterns-1" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4487614" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=holubonpatterns-100613085639-phpapp01&stripped_title=holub-on-patterns-1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px"></div></div>
+}}}

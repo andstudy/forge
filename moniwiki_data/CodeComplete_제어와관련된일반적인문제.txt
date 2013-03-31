@@ -1,0 +1,40 @@
+== Boolean 표현식 ==
+ * 복잡한 Boolean 표현식은 Boolean 을 리턴하는 함수로 바꾼다.
+ * 긍정문으로 작성
+ * 단축 회로 평가
+ * 숫자의 크기 순서대로 수치 표현식 작성
+  * 부등호는 항상 < 를 써라. {{{ if (a > 5 || a < 2) }}} 대신 {{{ if (a < 2 || 5 < a) }}} 사용
+
+== 복합문 ==
+
+== NULL 명령문 ==
+
+== 지나치게 깊은 중첩 구조의 처리 ==
+ * if 안에 if, if 안에 또 if
+ * 3중, 4중 loop 문에서 빠져 나오기
+  * GOTO?
+  * Exception?
+
+== 구조적 프로그래밍 ==
+ * 순서(sequence)
+ * 선택(selection)
+ * 반복(iteration)
+
+== 제어 구조와 복잡도 ==
+ * if, while, repeat, for, and, or 를 만날 때 마다 1을 더한다.
+ * case 문의 각 경우마다 1을 더한다.
+
+== 체크 리스트 ==
+ * Do expressions use True and False rather than 1 and 0? 
+ * Are boolean values compared to True and False implicitly? 
+ * Are numeric values compared to their test values explicitly? 
+ * Have expressions been simplified by the addition of new boolean variables and the use of boolean functions and decision tables? 
+ * Are boolean expressions stated positively? 
+ * Do pairs of braces balance? 
+ * Are braces used everywhere they're needed for clarity? 
+ * Are logical expressions fully parenthesized? 
+ * Have tests been written in number-line order? 
+ * Do Java tests uses a.equals(b) style instead of a == b when appropriate? 항등과 
+ * Are null statements obvious? 
+ * Have nested statements been simplified by retesting part of the conditional, converting to if-then-else or case statements, moving nested code into its own routine, converting to a more object-oriented design, or improved in some other way? 
+ * If a routine has a decision count of more than 10, is there a good reason for not redesigning it? 

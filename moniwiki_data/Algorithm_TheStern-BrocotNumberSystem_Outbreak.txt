@@ -1,0 +1,227 @@
+= 문제 요약 =
+ * 스턴-브로콧 숫자 시스템이 Binary Search Tree 인 것을 알아채는 문제
+= 문제 해결 =
+ * Left(m/n), Current(m+M/n+N), Right(M/N) 을 재귀로 돌렸다.
+  * 입력값의 크기가 상당히(?) 클 때 재귀 호출을 하면 스택 오버 플로우가 발생할 수 있다.
+   * Solver2를 C++로 포팅하고 테스트 해본결과, Debug모드로 돌리면 StackOverflow, Relase모드로 돌리면 제대로 수행됩니다. 꼬리재귀가 동작하는듯 한데.. C#은 Debug로하든, Release로 하든 뻗어버리는군요 @_@ (.NET 2005로 테스트했어요)
+     '''└ C# 에는 Tail Recursion 이 구현 안되어 있는 것 같습니다.'''
+     '''└ 그러고 보니 .NET 가상 머신 오버플로우 내서 죽인다고 했을 때 이 방법을 썼었네요'''
+     '''└ http://blogs.msdn.com/abhinaba/archive/2007/07/27/tail-recursion-on-net.aspx'''
+     '''└ 위 자료를 요약하면 ".NET 에는 Tail-Recursion IL 명령이 있지만, C#에서는 지원하지 않는다" 낭패 ^^;'''
+   {{{
+int TestFun()
+{
+	return TestFun();
+}
+}}}
+   위와 같은 코드로도 테스트 해봤는데 마찬가지의 결과가 나옵니다. Debug모드는 꼬리재귀가 안되는건지.... 아니면 C++ Release모드는 스택용량이 재한없는건지....;;;
+  * 스택 사용량을 줄이려고 노력했으나..
+  * 결국 Iteration 버전도 만들었다 ^^
+
+= 기타 =
+ * scheme 으로 하기 딱 좋은 문제라는 생각.. 만 ^^;
+ * Tail Recursion 을 만들려고 했는데 출력 때문에 불가
+
+= '''코드 1 - Recursion ''' =
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Scort
+{   
+    class Solver
+    {
+        int m;
+        int n;
+
+        public Solver(int m, int n)
+        {
+            this.m = m;
+            this.n = n;
+        }
+
+        // invariant : the fraction must be existed between 0/1 and 1/0        
+        public void Traverse(int lM, int lN, int rM, int rN)
+        {
+            // l(left)  c(center)   r(Right)
+            int cM = lM + rM;
+            int cN = lN + rN;
+
+            // c의 왼쪽
+            if (cM * n > m * cN) 
+            {
+                Console.Write("L");
+                Traverse(lM, lN, cM, cN);
+            }
+            // c의 오른쪽
+            else if (cM * n < m * cN) 
+            {
+                Console.Write("R");
+                Traverse(cM, cN, rM, rN);
+            }            
+        }
+
+        public void Run()
+        {
+            if (m > 0 && n > 0)
+            {                
+                Traverse(0, 1, 1, 0);
+                Console.WriteLine();
+            }          
+        }
+    }
+}
+
+}}}
+
+= '''코드 2 - Recursion ''' =
+{{{
+namespace Scort
+{
+    class Solver2
+    {
+        int m, n;
+
+        int lM, lN, rM, rN;
+        int cM, cN;
+
+        public Solver2(int m, int n)
+        {
+            this.m = m;
+            this.n = n;
+
+            lM = 0; lN = 1;
+            rM = 1; rN = 0;
+        }
+
+
+        public void Traverse()
+        {
+            cM = lM + rM;
+            cN = lN + rN;
+
+            if (cM * n > m * cN)
+            {
+                Console.Write("L");
+                rM = cM;
+                rN = cN;
+                Traverse();
+            }
+            else if (cM * n < m * cN)
+            {
+                Console.Write("R");
+                lM = cM;
+                lN = cN;
+                Traverse();
+            }            
+        }
+
+        public void Run()
+        {
+            if (m > 0 && n > 0)
+            {
+                Traverse();
+                Console.WriteLine();
+            }
+        }
+    }
+} 
+}}}
+
+= '''코드 3 - Iteration ''' =
+{{{
+namespace Scort
+{
+    class Solver3
+    {
+        int m, n;
+
+        int lM, lN, rM, rN;
+        int cM, cN;
+
+        public Solver3(int m, int n)
+        {
+            this.m = m;
+            this.n = n;
+
+            lM = 0; lN = 1;
+            rM = 1; rN = 0;
+        }
+
+        public bool Traverse()
+        {
+            cM = lM + rM;
+            cN = lN + rN;
+
+            if (cM * n > m * cN)
+            {
+                Console.Write("L");
+                rM = cM;
+                rN = cN;
+                return false;
+            }
+
+            else if (cM * n < m * cN)
+            {
+                Console.Write("R");
+                lM = cM;
+                lN = cN;
+                return false;
+            }
+
+            return true;
+        }
+
+        public void Run()
+        {
+            if (m > 0 && n > 0)
+            {
+                while(true)
+                {
+                    if( Traverse() == true )
+                    {
+                        break;
+                    }
+                }
+
+                Console.WriteLine();
+            }
+        }
+    }
+}
+}}}
+
+= '''유닛테스트''' = 
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Scort
+{     
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // 눈으로 유닛테스트.. 후후
+
+            // Recursion
+            Solver solver = new Solver(878,323);
+            solver.Run();
+
+            // 스택 덜 쓰는 Recursion
+            Solver2 solver2 = new Solver2(878, 323);
+            solver2.Run();
+
+            // Iteration
+            Solver3 solver3 = new Solver3(878, 323);
+            solver3.Run();
+
+            solver3 = new Solver3(2007777777, 3);
+            solver3.Run();
+        }
+    }
+}
+
+}}}

@@ -1,0 +1,7 @@
+ * [http://www.microsoftpdc.com/ PDC2008]
+ * [https://sessions.microsoftpdc.com/public/timeline.aspx TimeLine]
+  * [http://channel9.msdn.com/pdc2008/TL26/ Parallel Programming for Managed Developers with the Next Version of Microsoft Visual Studio]
+  * [http://blog.naver.com/saltynut/120057812497 PDC2008 Quick Summary - 안재우]
+ * [http://channel9.msdn.com/pdc2008/PC58/ Framework Design Guidelines]
+  * [http://mschnlnine.vo.llnwd.net/d1/pdc08/PPTX/PC58.pptx pptx]
+  * [http://mschnlnine.vo.llnwd.net/d1/pdc08/MP4/PC58.mp4 mp4]

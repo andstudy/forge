@@ -1,0 +1,32 @@
+== Horizontal Rules ==
+You can insert a horizontal rule across the page by typing four or more dashes.  The number of dashes in a horizontal rule markup determines how thick it is, up to a limit of 10.
+
+For more information on the possible markup, see HelpOnEditing. 
+
+=== Example ===
+{{{
+--- (not a rule)
+----
+-----
+------
+-------
+--------
+---------
+----------
+-------------------------------------------- (not thicker than 10)
+}}} 
+
+=== Display ===
+--- (not a rule)
+----
+-----
+------
+-------
+--------
+---------
+----------
+-------------------------------------------- (not thicker than 10)
+
+/!\ thickness is not supported by the MoniWiki
+----
+[[Navigation(HelpOnEditing)]]

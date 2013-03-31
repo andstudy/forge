@@ -1,0 +1,126 @@
+= 출처 =
+ * http://blogs.law.harvard.edu/hoanga/2006/12/14/getting-a-ruby-c-extension-to-compile-on-windows/
+ * http://blogs.law.harvard.edu/hoanga/2006/12/19/getting-a-ruby-c-extension-to-compile-on-windows-part-2/
+  * Part 1, 2 를 다 해야 한다.
+
+= 요약 =
+== 파일 만들기 ==
+=== my_test.c ===
+{{{
+#include "ruby.h"
+static int id_push;
+static VALUE t_init(VALUE self)
+{
+	VALUE arr;
+	arr = rb_ary_new();
+	rb_iv_set(self, "@arr", arr);
+	return self;
+}
+
+static VALUE t_add(VALUE self, VALUE obj)
+{
+	VALUE arr;
+	arr = rb_iv_get(self, "@arr");
+	rb_funcall(arr, id_push, 1, obj);
+	return arr;
+}
+
+VALUE cTest;
+
+void Init_my_test()
+{
+	cTest = rb_define_class("MyTest", rb_cObject);
+	rb_define_method(cTest, "initialize", t_init, 0);
+	rb_define_method(cTest, "add", t_add, 1);
+	id_push = rb_intern("push");
+}
+}}}
+=== extconf.rb ===
+{{{
+require 'mkmf'
+create_makefile("my_test")
+}}}
+
+== Visual Studio 2005 와 Platform SDK 설치하기 ==
+[http://msdn.microsoft.com/vstudio/express/ Visual Studio Express]
+[http://www.microsoft.com/msdownload/platformsdk/sdkupdate/ Platform SDK]
+
+== SDK 에서 windows.h 얻기 ==
+== config.h 수정 ==
+{{{$RUBY_HOME/lib/ruby/1.8/i386-mswin32/config.h}}} 에서 
+{{{
+#if _MSC_VER != 1200
+#error MSC version unmatch		// 여기 주석처리 하기
+#endif
+}}}
+
+== Platform SDK command 들어가기 ==
+시작 -> Platform SDK -> Open Build Environment Window -> 맞는 환경 선택
+
+== makefile 만들기 ==
+{{{
+C:\cygwin\home\foo\exttest>ruby extconf.rb
+creating Makefile
+}}}
+
+== make 하기 ==
+{{{
+C:\cygwin\home\foo\exttest>nmake
+
+Microsoft (R) Program Maintenance Utility Version 8.00.50727.42
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        cl -nologo -I. -Ic:/ruby/lib/ruby/1.8/i386-mswin32 -Ic:/ruby/lib/ruby/1.
+8/i386-mswin32 -I. -MD -Zi -O2b2xg- -G6  -c -Tcmy_test.c
+cl : Command line warning D9035 : option 'Og-' has been deprecated and will be r
+emoved in a future release
+cl : Command line warning D9002 : ignoring unknown option '-G6'
+my_test.c
+        cl -nologo -LD -Femy_test.so my_test.obj msvcrt-ruby18.lib  oldnames.lib
+ user32.lib advapi32.lib wsock32.lib  -link -incremental:no -debug -opt:ref -opt
+:icf -dll -libpath:"c:/ruby/lib" -def:my_test-i386-mswin32.def -implib:my_test-i
+386-mswin32.lib -pdb:my_test-i386-mswin32.pdb
+   Creating library my_test-i386-mswin32.lib and object my_test-i386-mswin32.exp
+}}}
+
+== manifest 지정하기 ==
+{{{
+C:\exttest>mt.exe -manifest my_test.so.manifest -outputresource:my_test.so;2
+}}}
+
+=== 설치하기 ===
+{{{
+C:\exttest>nmake install
+}}}
+이 때 {{{C:\ruby\lib\ruby\site_ruby\1.8\i386-msvcrt}}} 에 {{{my_test.so}}} 가 추가된다.
+
+== 잘 되는지 테스트 하기 ==
+{{{
+C:\cygwin\foo\exttest>irb
+irb(main):001:0> require 'my_test'
+=> true
+irb(main):002:0> test = MyTest.new
+=> #
+}}}
+
+= 사용하기 =
+아래 코드가 잘 돌아가는 걸 확인한다.
+{{{
+require 'my_test'
+require 'test/unit'
+
+class TestTest < Test::Unit::TestCase
+	def test_test
+		t = MyTest.new
+		assert_equal(Object, MyTest.superclass)
+		assert_equal(MyTest, t.class)
+		t.add(1)
+		t.add(2)
+		assert_equal([1,2], t.instance_eval("@arr"))
+	end
+end
+}}}
+
+= 참고 =
+ * http://metaeditor.sourceforge.net/embed/
+ * http://dev.rubycentral.com/book/ext_ruby.html

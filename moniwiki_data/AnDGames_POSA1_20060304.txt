@@ -1,0 +1,3 @@
+1. 참석자 : 박일, 강대명, 이수안
+2. 발표자 :
+ * [Presentation-Abstraction-Control Pattern] : 강대명

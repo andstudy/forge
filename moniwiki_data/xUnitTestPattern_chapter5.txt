@@ -1,0 +1,13 @@
+{{{#!html
+<div style="width:640px;text-align:left" id="__ss_2562388">
+<object style="margin:0px" width="800" height="600"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-091122233024-phpapp02&stripped_title=ss-2562388" />
+	<param name="allowFullScreen" value="true"/>
+	<param name="allowScriptAccess" value="always"/>
+	<embed name="__sse4875849" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-100730200900-phpapp02&stripped_title=ss-4875849" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355">
+</embed></object>
+	<div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more 
+		<a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations </a> from 
+		<a style="text-decoration:underline;" href="http://www.slideshare.net/codevania">codevania</a>.
+		</div>
+</div>
+}}}

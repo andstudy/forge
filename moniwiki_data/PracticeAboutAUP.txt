@@ -1,0 +1,15 @@
+엘리베이터 시스템을 실습과제로 진행합니다.
+
+ * [UseCase_Elevator]
+
+== Elaboration ==
+ * [DomainModel_Elevator]
+ * [OperationContracts_Elevator]
+ * [SystemSequenceDiagrams_Elevator]
+ * [ClassDiagrams_Elevator]
+
+== Reference Links ==
+ * [http://korea.internet.com/channel/list.asp?cid=443&zid=9]
+ 안영회씨의 UML 강좌인데, 현재 우리가 진행중인 소프트웨어 개발 방법론과 관련하여 핵심적인 내용을 브리핑 할 수 있을 정도의 분량입니다. 
+ * [http://www.plasticsoftware.com/download_file/Understanding%20UML.pdf]
+ 플라스틱소프트웨어에서 제공하는 'UML 제대로 이해하기'입니다. UML에 관해 이것만은 짚고 넘어가자.. 이런것들을 정리해 놓은듯 합니다.

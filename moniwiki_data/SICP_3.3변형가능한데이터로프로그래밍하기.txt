@@ -1,0 +1,223 @@
+== 연습문제 12 == 
+{{{#!gcode
+(define (append! x y)
+  (set-cdr! (last-pair x) y)
+  x)
+
+(define (last-pair x)
+  (if (null? (cdr x))
+      x
+      (last-pair (cdr x))))
+
+(define x (list 'a 'b))
+(define y (list 'c 'd))
+(define z (append x y))
+z
+;(cdr x)
+;<response> - (b)
+
+;(define w (append! x y))
+;w
+;(cdr x)
+;<response> - (b c d)
+}}}
+
+== 연습문제 13 ==
+{{{#!gcode
+(define (make-cycle x)
+  (set-cdr! (last-pair x) x)
+  x)
+(define (last-pair x)
+  (if (null? (cdr x))
+      x
+      (last-pair (cdr x))))
+
+(define z (make-cycle (list 'a 'b 'c)))
+z
+
+(last-pair z)
+}}}
+
+== 연습문제 14 ==
+{{{#!gcode
+(define (mystery x)
+  (define (loop x y)
+    (if (null? x)
+        y
+        (let ((temp (cdr x)))
+          (set-cdr! x y)
+          (loop temp x))))
+  (loop x '()))
+
+(define v (list 'a 'b 'c 'd))
+v
+(define w (mystery v))
+w
+}}}
+
+== 연습문제 18 ==
+{{{#!gcode
+;last-pair
+(define (last-pair x)
+  (if (null? (cdr x))
+      x
+      (last-pair (cdr x))))
+
+;make-cycle
+(define (make-cycle x)
+  (set-cdr! (last-pair x) x)
+  x)
+
+;cycle list
+(define z (make-cycle (list 'a 'b 'c)))
+
+;cycle?
+(define (cycle? ls)
+  (define (catch? slow fast)
+    (cond ((eq? slow fast) #t)
+          ((or (null? slow) (null? fast)) #f)
+          ((or (null? (cdr fast))) #f)
+          (else (catch? (cdr slow) (cddr fast)))))
+
+  (if (and (pair? ls) (pair? (cdr ls))) 
+      (catch? (cdr ls) (cddr ls))
+      #f))
+
+(cycle? z)
+(cycle? (list 'a 'b 'c 'd 'e))
+}}}
+
+== 연습문제 24 ==
+{{{#!gcode
+(define false (= 0 1))
+
+;tolerance
+(define (tolerance? key records)
+  (< (abs (- key records)) 2))
+
+(define (make-table same-key?);--same-key? 추가
+  (let ((local-table (list '*table*)))
+    ;assoc
+    (define (assoc key records same-key?);--same-key? 추가
+      (cond ((null? records) false)
+            ((same-key? key (caar records)) (car records));--equal?을 same-key?로 수정
+            (else (assoc key (cdr records) same-key?))));--same-key? 추가
+    ;lookup
+    (define (lookup key-1 key-2)
+      (let ((subtable (assoc key-1 (cdr local-table) same-key?)));--same-key? 추가
+        (if subtable
+            (let ((record (assoc key-2 (cdr subtable) same-key?)));--same-key? 추가
+              (if record
+                  (cdr record)
+                  false))
+            false)))
+    ;insert!
+    (define (insert! key-1 key-2 value)
+      (let ((subtable (assoc key-1 (cdr local-table) same-key?)));--same-key? 추가
+        (if subtable
+            (let ((record (assoc key-2 (cdr subtable) same-key?)));--same-key? 추가
+              (if record
+                  (set-cdr! record value)
+                  (set-cdr! subtable
+                            (cons (cons key-2 value)
+                                  (cdr subtable)))))
+            (set-cdr! local-table
+                      (cons (list key-1
+                                  (cons key-2 value))
+                            (cdr local-table)))))
+      'ok)
+    ;dispatch
+    (define (dispatch m)
+      (cond ((eq? m 'lookup-proc) lookup)
+            ((eq? m 'insert-proc!) insert!)
+            (else (error "Unknown operation -- TABLE" m))))
+    dispatch))
+
+;table make
+(define operation-table (make-table equal?))
+;find value 
+(define get (operation-table 'lookup-proc))
+;insert key and value 
+(define put (operation-table 'insert-proc!))
+
+(put 'letters 'a 97)
+(put 'letters 'b 98)
+(newline)
+(put 'math '+ 43)
+(put 'math '- 45)
+(put 'math '* 42)
+(newline)
+
+(get 'letters 'a)
+(get 'letters 'b)
+(newline)
+(get 'math '+)
+(get 'math '-)
+(get 'math '*)
+(get 'letters 'math)
+(newline)(newline)
+
+;table make
+(define number-table (make-table tolerance?))
+;find value 
+(define get-number (number-table 'lookup-proc))
+;insert key and value 
+(define put-number (number-table 'insert-proc!))
+
+(put-number 1 5 97)
+(put-number 1 8 98)
+(newline)
+(put-number 2 10 43)
+(put-number 2 5 45)
+(put-number 2 1 42)
+(newline)
+
+(get-number 1 5)
+(get-number 2 5)
+(newline)
+(get-number 3 6)
+(get-number 5 1)
+(get-number 1 1)
+(get-number 2 2)
+}}}
+
+== 연습문제 28 ==
+{{{#!gcode
+
+;or-gate
+(define or-gate-delay 1)
+
+(define (or-gate a1 a2 output)
+  (define (or-action-procedure)
+    (let ((new-value
+           (logical-or (get-signal a1) (get-signal a2))))
+      (after-delay or-gate-delay
+                   (lambda ()
+                     (set-signal! output new-value)))))
+  (add-action! a1 or-action-procedure)
+  (add-action! a2 or-action-procedure)
+  'ok)
+
+(define (logical-or a b)
+  (cond ((and (= a 0) (= b 0)) 0)
+        ((or (= a 1) (= b 1)) 1)
+        (else (error "Invalid signal" a b))))
+}}}
+
+== 연습문제 29 ==
+{{{#!gcode
+;or-gate-delay
+(define inverter-delay 1)
+(define and-gate-delay 1)
+(define or-gate-delay 
+  (+ (* 3 inverter-delay)
+     and-gate-delay))
+
+(define (or-gate a1 a2 output)
+  (let ((a (make-wire)) (b (make-wire)) (c (make-wire)))
+    (inverter a1 a)
+    (inverter a2 b)
+    (and-gate a b c)
+    (inverter c output))
+  'ok)
+}}}

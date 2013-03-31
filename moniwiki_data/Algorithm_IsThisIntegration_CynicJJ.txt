@@ -1,0 +1,48 @@
+ * wrong answer. 왜?
+  * UVa에서는 Accepted뜨네요! :D PC쪽이 이상한듯...
+   * 우왕ㅋ굳ㅋ 고맙습니다 ^^
+ * 여기저기 선 그어서 풀이
+ * 적분인가? 라는 질문에 대한 대답은 아니오
+
+{{{#!vim cpp
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+const double PI = 3.14159265359;
+
+double getStripedHeight(double radius)
+{
+	double height = radius * (sqrt(3.0)-1) / 2;
+	return height;
+}
+
+double getStriped(double radius)
+{
+	double circlePart = (PI*radius*radius) / 12;
+	double triangle = radius/2 * getStripedHeight(radius) / 2;
+	double striped = 4 * (circlePart - 2*triangle);
+	return striped;
+}
+
+double getDotted(double radius)
+{
+	double circlePart = (PI*radius*radius)/4 - (radius*radius)/2;
+	double dotted = 4 * (circlePart - getStriped(radius)/2);
+	return dotted;
+}
+
+int main()
+{
+	double length;
+	while (cin >> length)
+	{
+		double striped = getStriped(length);
+		double dotted = getDotted(length);
+		double rest = length*length - striped - dotted;
+		printf("%.3f %.3f %.3f\n", striped, dotted, rest);
+	}
+	return 0;
+}
+}}}

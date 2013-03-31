@@ -1,0 +1,207 @@
+* 알고리즘이해는 영준님 소스와 책을 디버깅함으로써. vector sort 는 박일님소스에서 참고하여 작성해보았습니다. 
+직접 돌려보니까 그래도 DP 라는게 먼지 감이 오는것 같네요 ㅜㅜ. 그래도 어렵습니다.
+
+{{{#!vim c
+#include "stdafx.h"
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+#define _UNIT_TEST
+
+#define MAX 1000
+
+class CDynamic
+{
+public:
+	typedef struct
+	{
+		int key;
+		int weight;
+		int iq;
+	}elephant;
+
+	vector<elephant> data;		/* 코끼리들 */
+
+	typedef struct
+	{
+		int cost;
+		int parent;
+	}dynCell;
+	
+	dynCell dynTable[MAX+1];		/* DP Table */
+
+	CDynamic();
+	
+	void push(int weight,int iq);
+	void makeDP();
+	void getResult();
+
+	static bool sortByWeight(elephant a, elephant b);		/* elephant sort 기준 */
+};
+
+CDynamic::CDynamic()
+{
+	memset(dynTable,0,sizeof(dynTable));
+}
+
+void CDynamic::push(int weight,int iq)
+{
+	elephant e;
+	e.weight = weight;
+	e.iq = iq;
+	e.key = (int)data.size();
+
+	data.push_back(e);
+}
+
+bool CDynamic::sortByWeight(elephant a, elephant b)
+{
+	return (a.weight > b.weight);
+}
+
+void CDynamic::makeDP()
+{
+	sort(data.begin(),data.end(),&CDynamic::sortByWeight);
+
+	int max = 0;
+	int maxIndex = 0;
+
+	/* 정답참고하여 이해라도 하자 ㅜㅜ */
+#if 1
+	for(int i=0; i< (int)data.size(); i++)
+	{
+		max = 1;
+		maxIndex = -1;
+
+		/* i 에 대하여 모든 j 를 체크하여 */
+		for(int j=0; j< (int)data.size(); j++)
+		{
+			if( dynTable[data[j].key].cost + 1 >= max	/* 1. cost 가장 크고 */
+				&& data[i].iq > data[j].iq		/* 2. iq 가장높고 */
+				&& data[i].weight < data[j].weight )	/* 3. weight 가장 가벼운 것을 찾아서 */
+			{
+				max = dynTable[data[j].key].cost + 1;
+				maxIndex = data[j].key;
+			}
+		}
+
+		/* DP Table 에 기록 */
+		dynTable[data[i].key].cost = max;
+		dynTable[data[i].key].parent = maxIndex;
+	}
+#else
+	for(int i=0; i< (int)data.size(); i++)
+	{
+		for(int j=0; j< (int)data.size(); j++)
+		{
+			if( data[i].iq > data[j].iq && data[i].weight < data[j].weight )
+			{
+				dynTable[data[i].key].cost++;
+				dynTable[data[i].key].parent = data[j].key;
+			}
+		}
+	}
+#endif
+}
+
+void CDynamic::getResult()
+{
+	int max = 0;
+	int maxIndex =0;
+	int count = 0;
+	int result[MAX+1];
+
+	/* find the max cost */
+	for(int i=0; i< (int)data.size(); i++)
+	{
+		if( dynTable[i].cost > max )
+		{
+			max = dynTable[i].cost;
+			maxIndex = i;
+		}
+	}
+	
+	/* cost 가 가장큰 것을 시작으로 */
+	result[count] = maxIndex+1;
+	
+	/* sequence 따라가면서 result 에 넣고 */
+	while(maxIndex >= 0)
+	{
+		maxIndex = dynTable[maxIndex].parent;
+		count++;
+		result[count] = maxIndex +1;
+	}
+
+	/* 출력 */
+	printf("%d\n",count);
+
+	for(int j=0; j< count; j++)
+		printf("%d\n",result[j]);
+
+}
+
+#if defined(_UNIT_TEST)
+#include "UnitTest++.h"
+struct ConstructorTest
+{
+	ConstructorTest() : dyn()
+	{
+	}
+	CDynamic dyn,dyn2;
+	stringstream output;
+	
+};
+
+TEST_FIXTURE( ConstructorTest, DynamicTest )
+{
+		
+	/* table 에 값을 집어넣고 */
+	dyn.push(6008,1300);
+	dyn.push(6000,2100);
+	dyn.push(500,2000);
+	dyn.push(1000,4000);
+	dyn.push(1100,3000);
+	dyn.push(6000,2000);
+	dyn.push(8000,1400);
+	dyn.push(6000,1200);
+	dyn.push(2000,1900);
+
+	dyn.makeDP();
+	dyn.getResult();
+
+	//CHECK_EQUAL("4\n4\n5\n9\n8\n",output.str());
+	CHECK_EQUAL(1,1);
+}
+
+TEST_FIXTURE( ConstructorTest, DynamicTest2 )
+{
+		
+	/* table 에 값을 집어넣고 */
+	dyn2.push(100,900);
+	dyn2.push(200,100);
+	dyn2.push(300,800);
+	dyn2.push(400,700);
+	dyn2.push(500,600);
+	dyn2.push(600,600);
+
+	dyn2.makeDP();
+	dyn2.getResult();
+
+	//CHECK_EQUAL("4\n1\n3\n5\n3\n",output.str());
+	CHECK_EQUAL(1,1);
+}
+
+int main(int argc, _TCHAR* argv[])
+{
+   return UnitTest::RunAllTests();
+}
+#else
+int main(int argc, _TCHAR* argv[])
+{
+	return 0;
+}
+#endif
+}}}

@@ -1,0 +1,368 @@
+{{{
+#ifdef _UNIT_TEST
+#include "UnitTest++.h"
+#endif
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+#include <set>
+
+using namespace std;
+
+
+template< class T >
+void Tokenize(const T& str, std::vector< T >& tokens, const T& delimiters )
+{
+	// Skip delimiters at beginning.
+	typename T::size_type lastPos = str.find_first_not_of(delimiters, 0);
+	// Find first "non-delimiter".
+	typename T::size_type pos     = str.find_first_of(delimiters, lastPos);
+
+	while ( T::npos != pos || T::npos != lastPos)
+	{
+		// Found a token, add it to the vector.
+		tokens.push_back(str.substr(lastPos, pos - lastPos));
+		// Skip delimiters.  Note the "not_of"
+		lastPos = str.find_first_not_of(delimiters, pos);
+		// Find next "non-delimiter"
+		pos = str.find_first_of(delimiters, lastPos);
+	}
+}
+
+
+void SortInput( int& i, int& j )
+{
+	if( i > j )
+		std::swap( i, j );
+}
+
+class CGEditor
+{
+public:
+	CGEditor()
+	{		
+		m_CommandHandlers.insert( std::make_pair( "I", &CGEditor::CreateNewBitmap ) );
+		m_CommandHandlers.insert( std::make_pair( "C", &CGEditor::ClearBitmap ) );
+		m_CommandHandlers.insert( std::make_pair( "L", &CGEditor::SetPixel ) );
+		m_CommandHandlers.insert( std::make_pair( "V", &CGEditor::DrawVLine ) );
+		m_CommandHandlers.insert( std::make_pair( "H", &CGEditor::DrawHLine ) );
+		m_CommandHandlers.insert( std::make_pair( "K", &CGEditor::DrawRect ) );
+		m_CommandHandlers.insert( std::make_pair( "F", &CGEditor::DrawRegion ) );
+		m_CommandHandlers.insert( std::make_pair( "S", &CGEditor::PrintImg ) );
+	};
+
+	void Do( std::string strParam )
+	{
+		std::vector< std::string > tokens;
+
+		Tokenize( strParam, tokens,  std::string(" ") );
+
+        if( tokens.empty() || tokens[0] == "X" )
+			return;
+
+		COMMAND_HANDLE_TABLE_ITOR itor = m_CommandHandlers.find( tokens[0] );
+		if( itor != m_CommandHandlers.end() )
+		{
+			COMMAND_HANDLER handler = itor->second;
+			(this->*handler)( tokens );
+		}			
+	}
+    
+	std::string GetResultString()
+	{
+		std::string result = m_BitmapName + "\n";
+		BITMAP_ITOR begin = m_Bitmap.begin();
+		for( ; begin != m_Bitmap.end(); ++begin )
+		{
+			std::string line = (*begin);
+			result += line;
+			result += "\n";
+		}
+
+		return result;
+	}
+
+private:
+	void CreateBitmap( int width, int height )
+	{
+		m_Bitmap.clear();
+		m_Bitmap.resize( height );
+        BITMAP_ITOR begin = m_Bitmap.begin();
+		for( ; begin != m_Bitmap.end(); ++begin )
+		{
+			(*begin).resize( width, 'O' );
+		}
+	}
+	
+	/// commands
+	void CreateNewBitmap( std::vector< std::string >& tokens )
+	{
+		m_ImgWidth = atoi( tokens[1].c_str() );
+		m_ImgHeight = atoi( tokens[2].c_str() );
+
+		CreateBitmap( m_ImgWidth, m_ImgHeight );
+	};
+	void ClearBitmap( std::vector< std::string >& tokens )
+	{			
+		BITMAP_ITOR begin = m_Bitmap.begin();
+		for( ; begin != m_Bitmap.end(); ++begin )
+		{
+			(*begin).clear();
+			(*begin).resize( m_ImgWidth, 'O' );
+		}
+	};
+	void SetPixel( std::vector< std::string >& tokens )
+	{		
+		int xPos = atoi( tokens[1].c_str() ) - 1;
+		int yPos = atoi( tokens[2].c_str() ) - 1;
+		std::string color = tokens[3];
+
+		m_Bitmap[yPos][xPos] = color[0];
+	};
+	void DrawVLine( std::vector< std::string >& tokens )
+	{
+		int column = atoi( tokens[1].c_str() ) - 1;
+		int row1 = atoi( tokens[2].c_str() ) - 1;
+		int row2 = atoi( tokens[3].c_str() ) - 1;
+
+		SortInput( row1, row2 );
+
+		std::string color = tokens[4];
+
+		for( int i = row1; i <= row2; i++ )
+		{
+			m_Bitmap[i][column] = color[0];
+		}
+	};
+	void DrawHLine( std::vector< std::string >& tokens )
+	{
+		int column1 = atoi( tokens[1].c_str() ) - 1;
+		int column2 = atoi( tokens[2].c_str() ) - 1;
+		int row = atoi( tokens[3].c_str() ) - 1;
+		std::string color = tokens[4];
+
+		SortInput( column1, column2 );
+
+		for( int i = column1; i <= column2; i++ )
+		{
+			m_Bitmap[row][i] = color[0];
+		}
+	};
+	void DrawRect( std::vector< std::string >& tokens )
+	{
+		int left = atoi( tokens[1].c_str() ) - 1;
+		int top = atoi( tokens[2].c_str() ) - 1;
+		int right = atoi( tokens[3].c_str() ) - 1;
+		int bottom = atoi( tokens[4].c_str() ) - 1;
+		std::string color = tokens[5];
+
+		SortInput( left, right );
+		SortInput( top, bottom );
+
+		for( int i = top; i <= bottom; i++)
+		{
+			for( int j = left; j <= right; j++ )
+			{
+				m_Bitmap[i][j] = color[0];
+			}
+		}
+
+	};
+	void DrawRegion( std::vector< std::string >& tokens )
+	{
+		int xPos = atoi( tokens[1].c_str() ) - 1;
+		int yPos = atoi( tokens[2].c_str() ) - 1;
+		std::string color = tokens[3];
+
+		char regionColor = m_Bitmap[yPos][xPos];
+
+		if( regionColor == color[0] )
+			return;
+
+		AddRegionNode( xPos, yPos, regionColor, color[0] );
+	};
+
+	void AddRegionNode( int xPos, int yPos, char regionColor, char color )
+	{	
+		if( xPos < 0 || yPos < 0 || xPos >= m_ImgWidth || yPos >= m_ImgHeight )
+			return;
+
+		if( m_Bitmap[yPos][xPos] == regionColor )
+		{
+			m_Bitmap[yPos][xPos] = color;		
+
+			/// UP
+			AddRegionNode( xPos, yPos - 1, regionColor, color );
+			/// DOWN
+			AddRegionNode( xPos, yPos + 1, regionColor, color );
+			/// LEFT
+			AddRegionNode( xPos - 1, yPos, regionColor, color );
+			/// RIGHT
+			AddRegionNode( xPos + 1, yPos, regionColor, color );
+		}		
+	}
+
+
+
+
+
+	void PrintImg( std::vector< std::string >& tokens )
+	{
+		m_BitmapName = tokens[1];
+		std::cout << m_BitmapName << std::endl;
+		
+		BITMAP_ITOR begin = m_Bitmap.begin();
+		for( ; begin != m_Bitmap.end(); ++begin )
+		{
+			std::cout << (*begin) << std::endl;
+		}
+	};
+
+
+private:
+
+
+	typedef std::vector< std::string > BITMAP;
+	typedef BITMAP::iterator		   BITMAP_ITOR;
+
+	typedef void (CGEditor::*COMMAND_HANDLER)( std::vector< std::string >& );
+
+	typedef std::map< std::string, COMMAND_HANDLER >  COMMAND_HANDLE_TABLE;
+	typedef COMMAND_HANDLE_TABLE::iterator			  COMMAND_HANDLE_TABLE_ITOR;
+
+
+
+	int									m_ImgWidth;
+	int									m_ImgHeight;	
+
+	std::string							m_BitmapName;
+	BITMAP								m_Bitmap;
+	COMMAND_HANDLE_TABLE				m_CommandHandlers;
+};
+
+
+
+
+
+int main()
+{
+#ifdef _UNIT_TEST
+	if( UnitTest::RunAllTests() )
+	{
+		;
+	}
+#endif
+
+	CGEditor editor;
+	while(1)
+	{
+		std::string line;
+		getline( std::cin, line );
+
+		if( line[0] == 'X' )
+			break;
+
+		editor.Do( line );
+	}
+
+	return 0;
+}
+
+
+#ifdef _UNIT_TEST
+TEST( test01 )
+{
+	CGEditor editor;
+
+	editor.Do( "I 5 6" );
+	editor.Do( "L 2 3 A" );
+	editor.Do( "S one.bmp" );
+
+	std::string result = editor.GetResultString();
+
+	std::string expected =  "one.bmp\n"
+							"OOOOO\n"
+							"OOOOO\n"
+							"OAOOO\n"
+							"OOOOO\n"
+							"OOOOO\n"
+							"OOOOO\n";
+
+	CHECK_EQUAL( expected, result );
+
+	editor.Do( "G 2 3 J" );
+	editor.Do( "F 3 3 J" );
+	editor.Do( "V 2 3 4 W" );
+	editor.Do( "H 3 4 2 Z" );
+	editor.Do( "S two.bmp" );
+
+	result = editor.GetResultString();
+
+	expected =  "two.bmp\n"
+		"JJJJJ\n"
+		"JJZZJ\n"
+		"JWJJJ\n"
+		"JWJJJ\n"
+		"JJJJJ\n"
+		"JJJJJ\n";
+
+	CHECK_EQUAL( expected, result );
+
+	editor.Do( "C" );
+	editor.Do( "S three.bmp" );
+	result = editor.GetResultString();
+
+	expected =  "three.bmp\n"
+		"OOOOO\n"
+		"OOOOO\n"
+		"OOOOO\n"
+		"OOOOO\n"
+		"OOOOO\n"
+		"OOOOO\n";
+
+	CHECK_EQUAL( expected, result );
+
+	editor.Do( "I 1 1" );
+	editor.Do( "I 5 5" );
+	editor.Do( "S KKK.bmp" );
+
+	result = editor.GetResultString();
+
+	expected =  "KKK.bmp\n"
+		"OOOOO\n"
+		"OOOOO\n"
+		"OOOOO\n"
+		"OOOOO\n"
+		"OOOOO\n";		
+	CHECK_EQUAL( expected, result );
+
+}
+
+TEST( test02 )
+{
+	CGEditor editor;
+
+	editor.Do( "I 6 6" );
+	editor.Do( "K 1 3  3 1 A" );
+	editor.Do( "S one.bmp" );
+
+	std::string result = editor.GetResultString();
+
+	std::string expected =  "one.bmp\n"
+		"AAAOOO\n"
+		"AAAOOO\n"
+		"AAAOOO\n"
+		"OOOOOO\n"
+		"OOOOOO\n"
+		"OOOOOO\n";
+
+	CHECK_EQUAL( expected, result );
+}
+
+#endif
+
+
+
+}}}

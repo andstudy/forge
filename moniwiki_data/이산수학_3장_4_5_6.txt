@@ -1,0 +1,4 @@
+= codevania =
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=chapter3456-100312123740-phpapp01&stripped_title=mathematical-structures-for-cs-chapter3456" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}

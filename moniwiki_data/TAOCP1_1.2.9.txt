@@ -1,0 +1,7 @@
+- 풀어볼 문제 1, 2, 6
+- 풀어보고 싶은 문제 10, 11, 12, 18, 25 (가능하면 많이 준비해 볼께요)
+
+본문 발표자료
+{{{#!html
+<div style="width:425px" id="__ss_7135340"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/dochigun/110218-taocp1-129" title="110218 [아꿈사발표자료] taocp#1 1.2.9. 생성함수">110218 [아꿈사발표자료] taocp#1 1.2.9. 생성함수</a></strong><object id="__sse7135340" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp129-110303084056-phpapp02&stripped_title=110218-taocp1-129&userName=dochigun" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse7135340" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp129-110303084056-phpapp02&stripped_title=110218-taocp1-129&userName=dochigun" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/dochigun">dochigun</a>.</div></div>
+}}}

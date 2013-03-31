@@ -1,0 +1,66 @@
+= 발표자료 모음 = 
+{{{#!html
+<div style="width:540px;margin:auto;"><object style="margin:0px" width="538" height="341"><param name="movie" value="http://static.slidesharecdn.com/swf/egowidget2.swf"/><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/egowidget2.swf" flashVars="feedurl=andstudy/tags/apprenticeshippatterns&widgettitle=Apprenticeship%20Patterns" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="538" height="341"></embed></object><br/><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;text-align:left;"><a title="SlideShare" href="http://www.slideshare.net/?src=egowidget"><img src="http://static.slidesharecdn.com/swf/logo_embd.png" style="border:0px none;margin-bottom:-5px" alt="SlideShare"/></a> | <a href="http://www.slideshare.net/widgets/presentation-pack" title="Get your Presentation Pack">Get your Presentation Pack</a></div></div>
+}}}
+
+
+= 발표자료 =
+
+ [http://apprenticeship-patterns.labs.oreilly.com/index.html  책원문]
+
+ * [ApprenticeshipPatterns/Chapter2]
+ * [ApprenticeshipPatterns/Chapter3]
+ * [ApprenticeshipPatterns/Chapter4]
+ * [ApprenticeshipPatterns/Chapter5]
+ * [ApprenticeshipPatterns/Chapter6]
+ * [ApprenticeshipPatterns/Chapter7]
+ * [ApprenticeshipPatterns/토론회고1]
+ * [ApprenticeshipPatterns/토론회고2]
+
+= 발표 순서 =
+== 1주 2010.09.04 ==
+ * 2장 현수명
+ * 3장 황윤희
+ * 4장 박상혁
+
+== 2주 2010.09.11 ==
+ * 5장 이수안
+ * 6장 박민욱
+ * 7장 정민철
+
+= 참석자 =
+전형일/푸르덴셜
+황윤희/NCsoft
+박숙봉/NCsoft
+박상혁/넥슨
+김광중/NCsoft
+강효원/지티원
+이영권/제페토
+문형태/갈라랩
+양창선/갈라랩
+최기원/이누카
+현수명/삼성전자
+박 일/NCsoft
+이수안/NHN 
+오종빈/NCsoft
+박민욱/T3
+장수윤/삼성전자
+김홍준/모비언스
+윤석윤/화이팅
+이효서/SW_Maestro
+정민철/티비스톰
+김태우/블루사이드
+우정권/갈라랩
+김성안/넥슨
+김명관/중외메디칼
+김민혜/블루홀스튜디오
+
+
+= 회비 =
+|| 날짜 || 수입 || 지출 || 잔고|| 비고||
+|| 이월금 ||  ||  || -75,985 || ||
+|| 2010.09.04 || 220,000 || || 144,015 || 회비입금(전형일,황윤희,박숙봉,박성혁,김광중,강효원,이영권,문형태,양창선,최기원,현수명) ||
+|| 2010.09.04 || || 165,000 || -20,985 || 토즈이용 ||
+|| 2010.09.11 || 240,000 || || 219,015 || 회비입금(오종빈,박일,윤석윤,이수안,박민욱,김홍준,정민철,김태우,우정권,김성안,김명관,이효서-학생할인,김민혜-만원만일단) ||
+|| 2010.09.11 || || 142,900 || 76,115|| 토즈이용 (포인트 22,100 사용) ||
+|| 2010.09.11 || || 126,500 || -50,385 || 책꺼리 ||

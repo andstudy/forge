@@ -1,0 +1,92 @@
+= 14.1 데이터 구조 =
+ * 이진트리의 한 종류
+ * order
+  * 모든 노드의 값은 그 자식노드의 값보다 작거나 같다.
+ * shape
+  * 종단노드가 최대 두 레벨에 걸쳐 있고, 구멍이 없음.
+  * 루트로부터 log_2(N)이상 거리에 위치한 노드 없음.
+ * 주요 함수
+{{{
+rootIndex = 1
+value(i) = x[i]
+leftChildIndex(i) = 2 * i
+rightChildIndex(i) = 2 * i + 1
+parentIndex(i) = Lower(i / 2)
+null(i) = i < rootIndex or i > n
+}}}
+= 14.2 두가지 중요한 함수 =
+ * sift up
+ * sift down
+
+= 14.3 우선순위 큐 =
+ * 우선순위 큐의 데이터 구조
+  * heap은 1회의 삽입/삭제시 O(log N)이 소요
+  * 순차적 구조는 삽입시 O(N) 삭제시 O(1)이나 삽입시 O(1) 삭제시 O(N)의 시간 복잡도를 갖고, n번의 삽입과 삭제시 O(N^2)의 시간복잡도를 가짐.
+ * insert
+{{{
+	void insert(T t)
+	{	
+		int i, p;
+		x[++n] = t;
+		for (i = n; i > 1 && x[p=i/2] > x[i]; i = p)
+			swap(p, i);
+	}
+}}}
+ * extract min
+{{{
+	T extractmin()
+	{	
+		int i, c;
+		T t = x[1];
+		x[1] = x[n--];
+		for (i = 1; (c=2*i) <= n; i = c) 
+		{
+			if (c+1<=n && x[c+1]<x[c])
+			{
+				c++;
+			}
+			
+			if (x[i] <= x[c])
+			{
+				break;
+			}
+			swap(c, i);
+		}
+		return t;
+	}
+}}}
+= 14.4 정렬 알고리즘 =
+ * 최악의 경우 O( n LOG n )의 성능을 가짐
+ * n+1개의 배열 필요
+{{{
+template<class T>
+void pqsort(T v[], int n)
+{	
+	priqueue<T> pq(n);
+	int i;
+	for (i = 0; i < n; i++)
+	{
+		pq.insert(v[i]);   //sift up
+	}
+	for (i = 0; i < n; i++)
+	{
+		v[i] = pq.extractmin(); //sift down
+	}
+}
+}}}
+ * 위의 알고리즘의 문제점? priorityQueue를 위한 메모리, 정렬된 데이터를 보관하는 메모리가 있음. 어떻게 개선할까?
+ * heap sort이용
+  * 동일한 배열에서 siftup / siftdown을 이용하여 배열을 heap으로 바꾸고 heap을 다시 배열로 바꾼다.
+ * http://en.wikipedia.org/wiki/Heapsort
+ * 기존 코드를 이용한 heap sort
+{{{
+for i = [2..n] //정렬되지 않은 배열을 힙으로 만들기
+   siftup(i)
+for (i = n; i >= 2; i--)    //힙을 배열로 만들기
+   swap(1,n)                //마지막 노드를 루트노드와 바꾸고 siftdown
+   siftdown(i-1)
+}}}
+= 14.5 원리 =
+ * 효율성 : 트리의 균형이 유지되기 때문에 logN시간내에 삽입과 삭제가 이루어진다. 추가 메모리를 사용하지 않는다.
+ * 정확성 : 루프 불변식을 사용하여 정확성을 높인다.
+ * 추상화 : 절차 추상화 + 추상 데이터 타입

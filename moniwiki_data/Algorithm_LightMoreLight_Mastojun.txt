@@ -1,0 +1,27 @@
+== 문제풀이 ==
+ * 어처구니 없을정도로 간단 :D
+ * 문제의 요점은 제곱수인지를 묻는 것.
+
+== 소스 ==
+{{{
+#include <stdio.h>
+#include <math.h>
+#define ever (;;)
+
+int main()
+{
+	unsigned int n,t;
+
+	for ever
+	{
+		scanf("%u", &n);
+		if( n == 0 ) break;
+
+		t = (unsigned int)sqrt((double)n);
+
+		printf("%s\n", (t*t == n)?"yes":"no");
+	}
+
+	return 0;
+}
+}}}

@@ -1,0 +1,7 @@
+{{{#!html
+<div style="width:425px" id="__ss_3947091"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jeddli/smcstate-machinecompiler" title="Smc–state machinecompiler">Smc–state machinecompiler</a></strong><object id="__sse3947091" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=smcstatemachinecompiler-100503060823-phpapp02&stripped_title=smcstate-machinecompiler" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3947091" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=smcstatemachinecompiler-100503060823-phpapp02&stripped_title=smcstate-machinecompiler" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jeddli">jeddli</a>.</div></div>
+}}}
+[http://jeddli.tistory.com/attachment/cfile22.uf@166BC8244BDADDC4C95560.pdf jeddli 님 SMC – The State Map Compiler]
+[http://smc.sourceforge.net/ smc.sourceforge.net - The State Machine Compiler]
+[http://www.objectmentor.com/resources/articles/umlfsm.pdf UML Tutorial: Finite State Machines - Robert C. Martin]
+[http://www.slideshare.net/fperrad/the-state-machine-compiler The State Machine Compiler]

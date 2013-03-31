@@ -1,0 +1,12 @@
+이름 : 전효성
+이메일 : itmentor_골뱅이_gmail_dot_com
+직업 : 컴퓨터 그래픽스 프로그래머
+관심 분야 : Architecture and design, 실용적인 Tool(?)
+주로 쓰는 언어 : C++
+
+p-camp 후기 ppt 올려주세요.
+[PatternWriting]
+
+
+----
+CategoryHomepage

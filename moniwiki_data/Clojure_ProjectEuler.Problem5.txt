@@ -1,0 +1,155 @@
+{{{:
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+}}}
+
+{{{#!gcode scheme
+양창선, 박민욱 삽질......
+(defn divedsth [a b] ( = (mod a b) 0 ))
+
+(defn do_ [x y] (loop [a x b y] (if (<= b 10) 
+  (if (divedsth a b) 
+  (recur a (inc b)) 
+  ( recur (inc a) 1)) a )))
+
+(do_ 1 1)
+}}}
+
+{{{#!gcode scheme
+현수명, 강효원 삽질
+(defn cm?[input] 
+  (every? zero? ( map #(rem input %)  (range 1 21) ))
+)
+
+(defn lcmlist? []
+  (take 1
+    (filter cm? (map #(* 20 %) (iterate inc 1))) 
+  )
+)
+
+(defn lcmlist2? []
+  ;(take 1
+    (filter cm? (map #(/ 2432902008176640000 %) (range 1 21))) 
+  ;)
+)
+
+(time (lcmlist?))
+}}}
+
+
+우정권, 이영권
+
+{{{#!gcode scheme
+
+(defn is-divided? [n r]
+  (if ( = (rem n r) 0) true false )
+)
+
+(defn is-divide-range? [n]
+ (every? #(is-divided? n %) (range 1 21))
+)
+
+; 무식하게 구하는 방법 느려서 결과를 확인 못했습니다.
+(defn find-num []
+  (first
+    (filter #(is-divide-range? %) (iterate inc 1)
+)
+))
+
+(defn divisors [n ]
+  (filter #(is-divided? n %) (range 1 (+ n 1)))
+)
+
+(defn my-gcd [a b]
+  (first (sort > (filter #(> % 0 ) (for [_a (divisors a) _b (divisors b)] (if (= _a _b) _a 0)))))
+)
+
+(defn my-lcm [a b]
+  (/ (* a b) (my-gcd a b))
+)
+
+최소공배수 까지만 함수를 만들고 문제는 못풀었습니다 ㅠㅠ
+
+}}}
+
+{{{#!gcode scheme
+최기원, 이수안
+; n의 약수들의 시퀀스를 반환 한다.
+(defn divisors [n]
+  (lazy-seq 
+    (filter #(div? n %) (range 1 (inc n)))))
+
+;최대공약수
+(defn gcd [a b] 
+  ( last
+    ( for [c (divisors a) d (divisors b):when (= c d)] c))  )
+
+;최소공배수
+(defn lcm [a b]
+  (/ (* a b) (gcd a b)))
+
+;
+(defn foo [result x]
+  (if (zero? x)
+    result
+    (recur (lcm x (dec x) (dec x)))))
+}}}
+
+
+= 김명관, 최학윤 =
+
+{{{#!gcode scheme
+; 라이브러리의 lcm 사용
+(ns ch6
+  (:use clojure.contrib.math))
+
+(reduce lcm (range 1 21))
+
+; 라이브러리 코드
+(defn gcd "(gcd a b) returns the greatest common divisor of a and b" [a b]
+  (if (or (not (integer? a)) (not (integer? b)))
+    (throw (IllegalArgumentException. "gcd requires two integers"))  
+    (loop [a (abs a) b (abs b)]
+      (if (zero? b) a,
+	  (recur b (mod a b))))))
+
+(defn lcm
+  "(lcm a b) returns the least common multiple of a and b"
+  [a b]
+  (when (or (not (integer? a)) (not (integer? b)))
+    (throw (IllegalArgumentException. "lcm requires two integers")))
+  (cond (zero? a) 0
+        (zero? b) 0
+        :else (abs (* b (quot a (gcd a b))))))
+
+}}}
+
+= 오종빈 =
+{{{#!gcode scheme
+(ns project-euler)
+(defn calc-GCD [x y]
+  (if (zero? x) y
+    (if (zero? y) x (calc-GCD y (rem x y) ))
+ ))
+(calc-GCD 0 2)
+(calc-GCD 2 0)
+(calc-GCD 6 3)
+
+(defn calc-LCM [x y]
+  (/ (* x y) (calc-GCD x y)))
+(calc-LCM 4 7)
+
+; 1~10까지 LCM은2520
+(range 1 11)
+
+;1~10까지 순차적으로 LCM을 구한다.
+(defn calc-total-LCM [a]
+  (def sum 1)
+; loop를 사용해서 시퀀스에서 하나씩 빼내고 빌때까지 반복
+  (def sum (calc-LCM sum (first a)))
+  sum
+)
+(calc-total-LCM '(8, 4))
+
+}}}

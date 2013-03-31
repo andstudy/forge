@@ -1,0 +1,15 @@
+잘된 점
+1. Took time to polish the game
+2. Workded closely with the publisher
+3. Changed the name and style
+4. Efficient distributed development model
+5. Released a pc demo of a handheld game
+
+아쉬웠던 점
+1. Couldn't get enough copies on shelves
+2. A bug slipped through
+3. Underestimated the amount of work in XBox live arcade
+4. Trouble fitting the game into the DS memory
+5. Difficulty getting the story right
+----
+[GameDeveloperMagazine]

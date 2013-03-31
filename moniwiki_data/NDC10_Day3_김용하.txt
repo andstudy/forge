@@ -1,0 +1,50 @@
+[NDC10]
+[NDC10_Day3]
+
+{{{#!html
+<div style="width:425px" id="__ss_4373449"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ysoya/ss-4373449" title="그럴듯한 랜덤 생성 컨텐츠 만들기">그럴듯한 랜덤 생성 컨텐츠 만들기</a></strong><object id="__sse4373449" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=final-100601031744-phpapp02&stripped_title=ss-4373449" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4373449" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=final-100601031744-phpapp02&stripped_title=ss-4373449" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ysoya">Yongha Kim</a>.</div></div>
+}}}
+
+== 김용하(넥슨) - 그럴듯한 랜덤 생성 컨텐츠 만들기 ==
+ * [http://blog.naver.com/allerias/100104220862 김용하]님은 면접볼 때 꼭 랜점 문제를 낸다고 하니 참고하시길
+ * 랜덤 컨텐츠가 필요한 이유 : 컨텐츠 소모 속도가 너무 빠르다
+ * Diablo 정도로만 만들 수 있어도 선방 : 랜덤 던전, 랜덤 몹, 랜덤 아이템
+ * 창발성은 목표 아님, 10개 만들 노력으로 100개 처럼 보이는 게 목표
+ * 랜덤 생성 예시 : 이름 생성기
+ * variation 늘리려면 파트 재료를 늘리고, 파트 갯수를 늘린다
+ * 하지만 파트를 너무 쪼개면 이상해진다
+  * 파트 반복이 드러나고, 어색한 조합 생기고, 감흥이 없다(재미가 없음)
+ * 그럴싸하게 보이기 -> 반복 숨기기
+  * 파트 자료 늘리기 : 무식하지만 가장 확실하고 품질도 좋다
+  * 반복 느끼기 힘들게 순서 조작
+   * 동전 20 번 던질 때 14 번 정도 앞뒤가 바뀌어야 랜덤하다고 느낀다
+   * 인지적 기억단위(working set) 7 개라고 가정하고, 이전 7 번 이내 나왔던 값은 filtering 하자
+  * 비주얼에는 왕도가 있다
+   * 전체 맥락 깨지지 않도록, 컬러 베리에이션, 데칼은 오프셋 변경
+ * 어색한 조합 없애기
+  * 완결성 있는 파트 사용
+  * 조합 Rule 만들기(묵음 되에는 뭐가 나와야 한다) : 지속적 튜닝 필요
+  * 기각 Rule 만들기(이상한 놈 배제)
+ * "다양"함 만으로는 부족 -> "대박" 났다는 느낌을 줄 수 있어야 한다
+ * 특별한 능력치, 더 이쁜 아이템(마비노기의 리블-리얼블랙, 리화-리얼화이트), 희소성 있는 아이템, 적당한 꽝!
+  * 랜덤 조합 결과가 평등하면 안 된다
+ * 확률 테이블을 정의
+  * 모든 재료에 출현 확률 지정, filtering 에 따라 영향 받지 않도록 주의(전체 N 이 크면 괜찮다)
+ * 실제 생성기 예 : 캐릭터 생성기
+  * 파트 파라메타 : 캐릭터를 정의하는 다섯 성격 축(츤데레가 포함되어 있었음)
+  * 각 축은 직교해야 한다
+  * 각 파트별로 각 축에 대한 점수가 있다.
+  * 이 파트 set 을 fuzzy 하게 추려내어 set 으로 조합한다
+ * 랜덤 퀘스트 생성기
+  * 문제점
+   * 단계가 멀어질수록 인과관계가 없다. 맥락이 없음
+   * 대사 넣기가 어렵다
+ * 던전 생성기
+  * 이런 저런 방법 설명 -> 손으로 만든만큼 이쁘지는 않더라, 역시 맥락이 없다.
+ * 결과
+  * 약간 실망스러움. 중간에 drop 된 프로젝트에서 주로 했기 때문에 제대로 평가를 못 받아본 것도 아쉽다. 
+  * 랜덤 생성기에 초반 개발 비용을 너무 많이 쓴 게 아닌가 하는 아쉬움도 있다.
+ * 교훈
+  * 역시 손으로 만든 게 짱
+  * 하지만 랜덤도 꽤 쓸만하더라
+  * 손으로 만들되 그 가치를 보존하면서 파츠 조합할 방법 고민 필요

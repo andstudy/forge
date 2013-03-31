@@ -1,0 +1,102 @@
+== 설치 및 문서 ==
+[http://www.erlang.org/ erlang]
+[http://erlide.sourceforge.net/ Erlide - the Erlang IDE. Powered by Eclipse.]
+[http://www.erlang.org/doc/ erlang 문서]
+
+=== 설치 후 할 일 ===
+Erlang 콘솔에서 {{{file:get_cwd().}}} 로 현재 working folder 를 파악한 후
+위치에 {{{.erlang}}} 이라는 파일을 만든다.
+p.42 확인.
+
+원하는 폴더에 얼랭 소스 파일을 작성한 후 console 등에서 {{{c(작성한모듈파일이름).}}} 해서 .beam 파일을 만들어야 한다.
+
+[http://pragprog.com/titles/jaerlang/source_code 예제 코드도 보자.]
+
+== 정수 연산 ==
+{{{#!gcode erlang
+2 + 3 * 4.
+(2 + 3) * 4.
+
+16#cafe * 32#sugar.
+}}}
+
+==  변수? ==
+대문자로 시작한다.
+{{{#!gcode erlang
+X = 1234567890.
+X.
+X * X.
+X = 1234.
+}}}
+
+X 는 변수가 아니다?
+ 단일 할당 변수(single assignment variable)
+ bound, unbound
+= 는 할당 연산자가 아니다.
+ 매칭 연산자다.
+
+{{{#!gcode erlang
+X = (2 + 4).
+	{X |-> 6}
+Y = 10.
+	{X |-> 6, Y |-> 10}
+}}}
+변수를 바꿀 수 없기 때문에, 잠금(lock) 이 필요없다.
+
+=== 부동 소수점 수 ===
+{{{#!gcode erlang
+5/3.
+5 div 3.
+5 rem 3.
+}}}
+
+== Atom ==
+enum 과 비슷하다.
+소문자로 시작한다.
+
+== Tuple ==
+중괄호 { 와 } 로 표현한다.
+{{{#!gcode erlang
+Person = {person, 
+	{name, joe},
+	{height, 1.82},
+	{footsize, 42},
+	{eyecolour, brown}
+}.
+
+F = {firstName, joe}.
+L = {lastName, armstrong}.
+P = {person, F, L}.
+
+Point = {point, 10, 45}.
+{point, X, Y} = Point.
+X.
+Y.
+
+Person={person, {name, {first, joe}, {last, armstrong}}, {footsize, 42}}.
+{_, {_, {_, Who}, _}, _} = Person.
+}}}
+
+_ : anonymous variable (익명 변수)
+
+== 리스트 ==
+가변적인 것을 저장할 때 사용
+대괄호{{{ [ ] }}}로 묶기
+
+{{{#!gcode erlang
+[1 + 7, hello, 2 - 2, {cost, apple, 30 - 20}, 3].
+head, tail
+
+ThingsToBuy = [{apples, 10}, {pears, 6}, {milk, 3}].
+ThingsToBuy1 = [{orange, 4}, {newspaper, 1} | ThingsToBuy].
+[Buy1 | ThingsToBuy2] = ThingsToBuy1.
+}}}
+
+== 문자열 ==
+{{{#!gcode erlang
+Name = "Hello"
+[83, 117, 114, 112, 114, 105, 115, 101].
+}}}
+
+== export 가 귀찮으면 ==
+{{{-compile(export_all).}}} 를 선언해 준다.

@@ -1,0 +1,232 @@
+이름 : 이수안
+직업 : 웹 프로그래머
+이메일 : inch772@naver.com
+홈페이지 : http://blog.naver.com/inch772
+관심분야 : 찾는중 T_T
+
+{{{#!gcode cpp
+
+// "File Fragmentation" Solution By Outbreak 
+
+#include <iostream>
+#include <map>
+#include <vector>
+#include <string>
+#include <set>
+#include <algorithm>
+
+using namespace std;
+
+//#define _TDD
+
+// 한 파일의 크기 구할 수 있음.
+
+// 각 조각은 앞부분 아니면 뒷부분!
+
+// 클래스로 리팩토링 할 것!
+namespace Solver
+{
+	static const int MAX_FRAGMENT = 144 * 2;
+
+	static vector<string> VFragment(MAX_FRAGMENT);
+
+	void MakeFragmentTable()
+	{
+		VFragment.clear();
+	}
+
+	void InsertFragment(const string& fragment)
+	{
+		VFragment.push_back(fragment);
+	}
+
+	int FindCompleteFileLength()
+	{
+		int sum = 0;
+		int n = (int)VFragment.size() / 2;
+
+		if(n==0)
+			return -1;
+
+		for( int i=0; i<(int)VFragment.size(); i++ )
+		{
+			sum += (int)VFragment[i].length();
+		}
+
+		return sum / n;
+	}
+
+	bool CheckCompleteFile(string front, string end)
+	{
+		string file = front + end;
+
+		// 검증
+
+		// 모든 조각들이 맞춰지는지 확인해 본다.
+
+		int i;
+
+		// 앞, 뒤에서 찾아봄.
+		for( i=0; i<(int)VFragment.size(); i++ )
+		{			
+			size_t pos = file.find(VFragment[i]);
+
+			// 앞
+			if( pos == 0 )
+				continue;
+
+			// 뒤
+			pos = file.rfind(VFragment[i]);
+			if( pos + VFragment[i].length() == file.length() )
+				continue;
+
+			return false;
+		}
+
+		return true;
+	}
+	
+	string Recovery()
+	{
+		string result = "01110111";
+		
+		// 파일의 크기를 찾는다.
+		int length = FindCompleteFileLength();
+
+		if( length == -1 )
+			return "error";
+
+		const int remain = length - (int)VFragment[0].length();
+		
+		set<string> Set;
+		// 첫번째 조각을 앞이라고 가정
+		// 짝이 될 수 있는 녀석들 조사. set 에다 넣는다.
+		for( int i=0; i<(int)VFragment.size(); i++ )
+		{
+			if( remain == (int)VFragment[i].length() )
+			{
+				Set.insert(VFragment[i]);
+			}
+		}
+
+		// 앞일 경우 Set 에 든 녀석들 합해서 문장 만들기
+		for( set<string>::iterator it = Set.begin(); it != Set.end(); it++ )
+		{
+			if( CheckCompleteFile(VFragment[0],*it) )
+			{
+				result = VFragment[0] + *it;
+				return result;
+			}
+		}
+
+		// 뒤일 경우 Set 에 든 녀석들 합해서 문장 만들기
+		for( set<string>::iterator it = Set.begin(); it != Set.end(); it++ )
+		{
+			if( CheckCompleteFile(*it, VFragment[0]) )
+			{
+				result = *it + VFragment[0];
+				return result;
+			}
+		}
+
+		return "none";		
+	}
+
+}
+
+namespace Runner
+{
+	void Execute(istream& in, ostream& out)
+	{
+		int sample = 0;
+
+        in >> sample;
+
+        while( sample-- )
+        {                
+			// 테이블 초기화
+			Solver::MakeFragmentTable();
+
+            while(true)
+            {               
+				string fragment;
+				in >> fragment;
+
+                if( in.fail() )
+					break;
+
+				// 조각 넣기
+				Solver::InsertFragment(fragment);
+
+				in.get();
+
+                if( in.peek() == '\n')
+                {										
+					break;
+                }				
+            }
+
+			// 처리 하기
+			out << Solver::Recovery() << endl;
+		
+            if( sample > 0 )
+            {
+				out << endl;
+            }
+        }
+
+	}
+}
+
+
+#ifdef _TDD
+
+#include "unittest++.h"
+
+TEST(Output)
+{
+	stringstream input;
+	stringstream output;
+
+	input <<
+			"2\n\n"
+			"011\n"
+			"0111\n"
+			"01110\n"
+			"111\n"
+			"0111\n"
+			"10111\n"
+			"\n"
+			"011\n"
+			"0111\n"
+			"01110\n"
+			"111\n"
+			"0111\n"
+			"10111";
+			
+	Runner::Execute(input, output);
+
+	CHECK_EQUAL("01110111\n01110111",output.str());	
+}
+
+#endif
+
+int main()
+{
+
+#ifdef _TDD	
+	UnitTest::RunAllTests();
+#else
+	Runner::Execute(cin, cout);
+#endif // _TDD
+	return 0;
+
+}
+
+}}}
+== dear kukuman ==
+ * 오.. 이번 syntax 짱인데요.. 설치하는 법 좀 알려주세요~~ [ParkPD]
+  * ㅋ 네네 좀더 다듬어서 설치방법 공유해드릴께횽~
+  
+----
+CategoryHomepage

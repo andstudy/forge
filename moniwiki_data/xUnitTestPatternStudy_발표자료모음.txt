@@ -1,0 +1,16 @@
+{{{#!html
+<DIV style="MARGIN: auto; WIDTH: 540px"><EMBED height=341 type=application/x-shockwave-flash width=538 src=http://static.slidesharecdn.com/swf/egowidget2.swf flashVars="feedurl=andstudy/tags/xunittestpattern&amp;widgettitle=xUnit%20Test%20Patterns" allowscriptaccess="always" allowfullscreen="true"></EMBED><BR>
+<DIV style="TEXT-ALIGN: left; FONT-FAMILY: tahoma,arial; HEIGHT: 26px; FONT-SIZE: 11px; PADDING-TOP: 2px"><A title=SlideShare href="http://www.slideshare.net/?src=egowidget"><IMG style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; MARGIN-BOTTOM: -5px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" id=http://static.slidesharecdn.com/swf/logo_embd.png alt="SlideShare src" src="http://static.slidesharecdn.com/swf/logo_embd.png"></A> | <A title="Get your Presentation Pack" href="http://www.slideshare.net/widgets/presentation-pack">Get your Presentation Pack</A></DIV></DIV>
+<P>&nbsp;</P>
+<P></P>
+<DIV style="MARGIN: auto; WIDTH: 540px"><EMBED height=341 type=application/x-shockwave-flash width=538 src=http://static.slidesharecdn.com/swf/egowidget2.swf allowfullscreen="true" allowscriptaccess="always" flashVars="feedurl=andstudy/tags/debugit&amp;widgettitle=Debug%20It"></EMBED><BR>
+<DIV style="TEXT-ALIGN: left; FONT-FAMILY: tahoma,arial; HEIGHT: 26px; FONT-SIZE: 11px; PADDING-TOP: 2px"><A title=SlideShare href="http://www.slideshare.net/?src=egowidget"><IMG style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; MARGIN-BOTTOM: -5px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" id=http://static.slidesharecdn.com/swf/logo_embd.png alt="SlideShare src" src="http://static.slidesharecdn.com/swf/logo_embd.png"></A> | <A title="Get your Presentation Pack" href="http://www.slideshare.net/widgets/presentation-pack">Get your Presentation Pack</A></DIV></DIV>
+<P>&nbsp;</P>
+<P></P>
+<SCRIPT src="http://b.scorecardresearch.com/beacon.js?c1=7&amp;c2=7400849&amp;c3=1&amp;c4=&amp;c5=&amp;c6="></SCRIPT>
+
+<SCRIPT src="http://b.scorecardresearch.com/beacon.js?c1=7&amp;c2=7400849&amp;c3=1&amp;c4=&amp;c5=&amp;c6="></SCRIPT>
+
+<div style="width:540px;margin:auto;"><object style="margin:0px" width="538" height="341"><param name="movie" value="http://static.slidesharecdn.com/swf/egowidget2.swf"/><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/egowidget2.swf" flashVars="feedurl=andstudy/tags/xunittestpatternsdebugitextra&widgettitle=xunit%20test%20patterns%20%26%20debug%20it%20study%20extra" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="538" height="341"></embed></object><br/><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;text-align:left;"><a title="SlideShare" href="http://www.slideshare.net/?src=egowidget"><img src="http://static.slidesharecdn.com/swf/logo_embd.png" style="border:0px none;margin-bottom:-5px" alt="SlideShare"/></a> | <a href="http://www.slideshare.net/widgets/presentation-pack" title="Get your Presentation Pack">Get your Presentation Pack</a></div></div>
+
+}}}

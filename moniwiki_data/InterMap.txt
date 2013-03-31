@@ -1,0 +1,39 @@
+{{{
+# Please modify the following two lines 
+Uploads /wiki/pds/
+Icons /wiki/imgs/
+
+Whois ?action=whois&amp;q=
+#Whois http://ws.arin.net/cgi-bin/whois.pl?queryinput=
+
+#
+TwinPages ?action=twinpages&amp;value=
+
+MoniWiki ?action=goto&amp;oe=utf-8&amp;url=http://moniwiki.sf.net/wiki.php/
+
+# MetaWiki
+MathWorld http://mathworld.wolfram.com/$PAGE.html
+FOAF http://xml.mfd-consult.dk/foaf/explorer/?foaf=
+IMDB http://us.imdb.com/Title?
+MetaLink http://blogdex.net/metalinker/sources.asp?url=
+BlogDex http://blogdex.net/search.asp?q=
+GtkRef http://developer.gnome.org/doc/API/2.0/gtk/$PAGE.html
+Php http://www.php.net/manual/en/function.$PAGE.php
+
+Ko /~Ko/
+Zh /~Zh/
+Ja /~Ja/
+Fr /~Fr/
+De /~De/
+Fi /~Fi/
+Pt /~Pt/
+Es /~Es/
+Da /~Da/
+It /~It/
+Nl /~Ll/
+Sv /~Sv/
+}}}
+
+ examples IMDB:0117631 GtkRef:GtkTreeView#GtkTreeView Icons:moni-info.gif Php:strstr
+ 
+ Please See InterWiki MoniWiki:InterMapIcon

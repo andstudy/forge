@@ -1,0 +1,5 @@
+[http://ndc2009.no/en/agenda.aspx?cat=1071&id=1813&day=3726 Day1]
+ [http://blog.jonasbandi.net/2009/08/michael-c-feathers-seven-blind-alleys.html Michael Feathers - Seven Blind Alleys in Software Design]
+
+[http://ndc2009.no/en/agenda.aspx?cat=1071&id=1813&day=3727 Day2]
+[http://ndc2009.no/en/agenda.aspx?cat=1071&id=1813&day=3728 Day3]

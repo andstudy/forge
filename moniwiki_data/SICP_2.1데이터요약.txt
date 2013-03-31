@@ -1,0 +1,5 @@
+ 	
+SICP/2.1 데이터 요약
+
+open office 형식 파일
+attachment:2.1절.odp

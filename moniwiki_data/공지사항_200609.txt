@@ -1,0 +1,3 @@
+ * 9월 9일 스터디 신촌 toz 본점 에서  9월 9일 오후 1시 30분 ~ 오후 3시 30분 에서 진행됩니다. http://devpia.com/Forum/BoardView.aspx?no=1223&forumname=and_free
+ * 이번 스터디 교재는[http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200303100007 Documenting Software Architectures: Views and Beyond] 로 정해졌습니다. 교재 내용 파일은 [kukuman]에게 메일 주시면 보내드립니다.
+ * 이번 스터디는 [AnD_Games_DSA_2006]를 이용하시면 됩니다 ^^

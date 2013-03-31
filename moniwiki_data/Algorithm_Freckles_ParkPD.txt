@@ -1,0 +1,315 @@
+Presentation Error 가 나는군요. 무시하려고 노력중입니다. :(
+ * Presentation Error 해결 -_-
+  {{{#!vim c
+   // main 의 마지막 부분 수정
+   output << setprecision(2) << fixed << s.Solve();
+   output << "\n";
+   if (i < testCount-1)		// presentation error 가 나서 넣어준다.
+   {
+        output << "\n";
+   }
+  }}}
+
+각자 서로에게 edge 를 가지는 그래프에서 Minimum Spanning Tree 를 구한다고 생각하고, Prim Algorithm 을 생각하며 풀었습니다.
+
+{{{#!vim c
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <algorithm>
+#include <map>
+#include <limits>
+#include <assert.h>
+#include <iomanip>
+#include <math.h>
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+#include <Windows.h>
+#endif
+
+using namespace std;
+
+// Minimum Spanning Tree -> Prim Algorithm 을 생각하며 풀었음.
+
+namespace ATUtil
+{
+	bool IsInRange(int value, int from, int to)
+	{
+		return (from <= value) && (value <= to);
+	}
+
+	int ConvertToIndex(char c)
+	{
+		if ('a' <= c && c <= 'z')
+		{
+			return c - 'a';
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	char ConvertToChar(int i)
+	{
+		return (char)i + 'a';
+	}
+
+#ifdef _UNIT_TEST
+	class CStopWatch
+	{
+	public:
+		CStopWatch()
+		{
+			m_StartTick = GetTickCount();		// gcc 에서 안 될 수 있으니까
+		}
+
+		~CStopWatch()
+		{
+			cout << "Time passed : " << GetTickCount() - m_StartTick << " milisec.\n";
+		}
+
+		int m_StartTick;
+	};
+#endif
+
+	typedef map<int, int> IntDB;
+	typedef vector<int> Ints;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+#ifdef max
+#undef max
+#endif
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+	//////////////////////////////////////////////////////////////////////////
+	// CPos
+	class CFreckle
+	{
+	public:
+		CFreckle() : m_X(0.0), m_Y(0.0), m_Dist(numeric_limits<double>::max()), m_Checked(false) {}
+		void Set(double x, double y)
+		{
+			m_X = x;
+			m_Y = y;
+		}
+		double GetDistFrom(const CFreckle& s)
+		{
+			return sqrt(((m_X - s.m_X) * (m_X - s.m_X)) + ((m_Y - s.m_Y) * (m_Y - s.m_Y)));
+		}
+
+		double m_X;
+		double m_Y;
+		double m_Dist;
+		bool m_Checked;
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	// CFreckleSolver
+	class CFreckleSolver
+	{
+	public:
+		CFreckleSolver(int n) : m_Num(n), m_Index(0), m_Checked(0) {}
+		void Insert(double x, double y)
+		{
+			m_Freckles[m_Index++].Set(x, y);
+		}
+
+		double Solve()
+		{
+			assert(m_Num == m_Index);
+
+			double ret = 0.0;
+
+			// 시작점 지정
+			int s = 0;
+			m_Freckles[s].m_Dist = 0.0;		// 시작점 거리는 0.0
+
+			m_Checked = 0;
+			while (m_Checked + 1 < m_Num)
+			{
+				CFreckle& newAdded = m_Freckles[s];
+				newAdded.m_Checked = true;
+				m_Checked++;
+
+				// 나를 제외한 모든 노드와 거리 계산 
+				// -> 현재 Freckle 에 저장된 값보다 거리가 짧다면 갱신한다.
+
+				// newAdded 노드와의 인접 노드를 돌면서 거리를 갱신한다.
+				double dist = 0.0;
+				for (int i = 0; i < m_Num; ++i)
+				{
+					CFreckle& iNode = m_Freckles[i];
+					if (iNode.m_Checked)
+					{
+						continue;
+					}
+
+					dist = newAdded.GetDistFrom(iNode);
+					if (dist < iNode.m_Dist)
+					{
+						iNode.m_Dist = dist;
+					}
+				}
+
+				// 검사하지 않은 노드 중 가장 거리가 짧게 지정된 노드를 다음 노드로 선택
+				double minDist = numeric_limits<double>::max();
+				for (int i = 0; i < m_Num; ++i)
+				{
+					CFreckle& iNode = m_Freckles[i];
+					if ((!iNode.m_Checked) && (iNode.m_Dist < minDist))
+					{
+						minDist = iNode.m_Dist;
+						s = i;		// 다음 검사할 node 를 지정
+					}
+				}
+
+				ret += minDist;
+			}
+
+			return ret;
+		}
+
+		int m_Num;
+		int m_Index;
+		int m_Checked;
+		CFreckle m_Freckles[100];
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CConsole
+	class CConsole
+	{
+	public:
+		static void ConsoleTest(istream& input, ostream& output);
+	};
+
+	void CConsole::ConsoleTest(istream& input, ostream& output)
+	{
+		int testCount = 0;
+		input >> testCount;
+
+		for (int i = 0; i < testCount; ++i)
+		{
+			int posNum = 0;
+			input >> posNum;
+
+			CFreckleSolver s(posNum);
+
+			double x, y;
+			for (int j = 0; j < posNum; ++j)
+			{
+				input >> x >> y;
+				s.Insert(x, y);
+			}
+
+			if (1 <= i)		// presentation error 가 나서 넣어준다.
+			{
+				output << "\n\n";
+			}
+			output << setprecision(2) << fixed << s.Solve();
+		}
+	};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase()
+	{
+	}
+
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, Solve)
+{
+	CFreckleSolver s(3);
+	s.Insert(1.0, 1.0);
+	s.Insert(2.0, 2.0);
+	s.Insert(2.0, 4.0);
+	CHECK_CLOSE(3.41, s.Solve(), 0.01);
+}
+
+TEST_FIXTURE(FixtureBase, ConsoleTest)
+{
+	input << 
+		"1\n"
+		"\n"
+		"3\n"
+		"1.0 1.0\n"
+		"2.0 2.0\n"
+		"2.0 4.0\n"
+		;
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("3.41", output.str());
+}
+
+TEST_FIXTURE(FixtureBase, ConsoleTest1)
+{
+	input << 
+		"2\n"
+		"\n"
+		"3\n"
+		"1.0 1.0\n"
+		"2.0 2.0\n"
+		"2.0 4.0\n"
+		"\n"
+		"3\n"
+		"1.0 1.0\n"
+		"2.0 2.0\n"
+		"2.0 4.0\n"
+		;
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("3.41\n\n3.41", output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

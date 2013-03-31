@@ -1,0 +1,17 @@
+BulletStorm
+
+잘된 점
+1. Focus on core combat loop
+2. Pacing and balancing pass
+3. Finding the fun through early focus test
+4. Many compaies, one game
+5. Unreal engine 3
+
+아쉬웠던 점
+1. Creative f-bombs
+2. Slow beginning, debatable ending
+3. Wrong choice for the online mode
+4. Lack of context in the demo
+5. Echo mode : too little, too late
+----
+[GameDeveloperMagazine]

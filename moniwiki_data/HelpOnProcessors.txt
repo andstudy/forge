@@ -1,0 +1,21 @@
+[[TableOfContents]]
+
+== Processors ==
+
+Processors work on the data in a code display. You specify which processor to call by using a ''bang path''-like construct in the first line. A bang path is a concept known from Unix command line scripts, where they serve the exact same purpose: the first line tells the shell what program to start to process the remaining lines of the script.
+
+Similar to a parser, don't confuse them, see ["Parser"].
+
+See also ProcessorMarket.
+=== Colorize ===
+The ColorizeProcessor knows of several source types, and can syntax-highlight them. For more information see ColorizeProcessor.
+
+Example:
+{{{#!php
+<?
+for ($i=1;$i<=100;$++)
+  $sum+=$i;
+?>
+}}}
+----
+[[Navigation(HelpOnEditing)]]

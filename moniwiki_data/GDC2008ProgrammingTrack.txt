@@ -1,0 +1,178 @@
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+== Programming ==
+ * ''' (103) Advanced Visual Effects with Direct3D''' - ''Cem Cebenoyan, Richard Huddy, Natalya Tatarchuk 외''
+  [https://www.cmpevents.com/sessions/GD/S6152i1.pdf PDF]
+ * ''' (104) Core Techniques and Algorithms in Shader Programming''' - ''Wolfgang Engel, Vlad Stamate, Maxime Beaudoin 외''
+  [http://www.coretechniques.info/ 강연 슬라이드]
+ * ''' (106) XNA Game Studio Developer Day''' - ''Shawn Hargreaves, Michael Klucher, Mitch Walker 외''
+ * ''' (202) Physics for Game Programmers''' - ''Jim Van Verth, Erin Catto, Squirrel Eiserloh 외''
+ * ''' (206) Studies of Threading Successes in Popular PC Games and Engines''' - ''Paul Lindberg, Brad Werth''
+  [https://www.cmpevents.com/sessions/GD/S6589i1.ppt Intro]
+  [https://www.cmpevents.com/sessions/GD/S6589i2.ppt]
+  [https://www.cmpevents.com/sessions/GD/S6589i3.ppt Gamebryo]
+  [https://www.cmpevents.com/sessions/GD/S6589i4.ppt Hellgate]
+  [https://www.cmpevents.com/sessions/GD/S6589i5.ppt Smoke]
+  [https://www.cmpevents.com/sessions/GD/S6589i6.ppt Allegorithmic]
+  [https://www.cmpevents.com/sessions/GD/S6589i7.ppt Outro]
+ * ''' (207) Microsoft Game Developer Day''' - ''Ray Thompson, Ian Lewis, Cameron Egbert 외''
+ * ''' A Believable Character Postmortem: Motion Capture on the Virtual Set of BEOWULF''' - ''Parag Havaldar''
+ * ''' A Survey of Font Rendering Techniques''' - ''Cameron Egbert''
+  [https://www.cmpevents.com/sessions/GD/S6150i1.ppt PPT]
+  [http://dev3d.tistory.com/attachment/ek150000000001.pdf 김성익 - A Survey of Font Rendering Techniques]
+ * ''' Advanced Skin Rendering in NVIDIA's Human Head Demo Sponsored by NVIDIA''' - ''Eugene d'Eon''
+ * ''' Adventures in Data Compilation and Scripting for UNCHARTED: DRAKE'S FORTUNE''' - ''Dan Liebgold''
+  [https://www.cmpevents.com/sessions/GD/S6636i1.pdf PDF]
+ * ''' Artificial Intelligence in Computer Games (Day 1)''' - ''Neil Kirby, Steve Rabin''
+ * ''' Artificial Intelligence in Computer Games (Day 2)''' - ''Neil Kirby, Steve Rabin''
+ * ''' Artificial Intelligence in Computer Games (Day 3)''' - ''Neil Kirby, Steve Rabin''
+ * ''' Automating Regression Discovery: Finding the Wrenches in the GEARS OF WAR''' - ''Martin Sweitzer''
+ * ''' Beyond Printf: Debugging Graphics Through Tools''' - ''Dave Aronson, Karen Stevens''
+  [https://www.cmpevents.com/sessions/GD/S6454i1.ppt PPT]
+ * ''' Building a Better Battle: HALO 3 AI Objectives''' - ''Damian Isla''
+  [http://www.bungie.net/images/Inside/publications/presentations/gdc08_damian.pptx 강연 슬라이드]
+  [http://www.ai-blog.net/archives/000142.html#more ai-blog.net 추가 설명]
+  [http://www.aarmstrong.org/journal/2008/03/02/gdc08-notes-building-a-better-battle-halo-3-ai-objectives aarmstrong.org/journal]
+  [http://www.bungie.net/Forums/posts.aspx?postID=18094031 bungie.net/Forums]
+ * ''' Chills and Thrills: Undefined Behavior in C++''' - ''Pete Isensee''
+ * ''' Comparative Analysis of Game Parallelization Sponsored by Intel''' - ''Dmitry Eremin''
+  * [http://softwarecommunity.intel.com/isn/downloads/graphics/GDC/Comparative%20Analysis%20of%20Game%20Parallelization.ppt PPT]
+ * ''' Concurrency, Distribution, and Server Scaling Sponsored by Sun Microsystems''' - ''Jim Waldo''
+ * ''' Creating a Character in DRAKE'S FORTUNE''' - ''Christian Gyrling''
+  [https://www.cmpevents.com/sessions/GD/S6169i1.pdf PDF]
+  [http://tara.teich.net/archives/gdc-creating-a-character-in-uncharted/ Blog]
+ * ''' Creating Havok with Destruction Sponsored by Havok''' - ''Oliver Strunk''
+ * ''' CRYSIS Next-Gen Effects''' - ''Tiago Sousa''
+  [https://www.cmpevents.com/sessions/GD/S6172i1.pdf PDF]
+ * ''' D3D10: Getting From 0 to 60 Hz Sponsored by Microsoft''' - ''Kevin Gee''
+ * ''' Designing and Implementing a Dynamic Camera System''' - ''Phil Wilkins''
+  [https://www.cmpevents.com/sessions/GD/S6174i1.pdf PDF]
+  [http://blog.naver.com/aeris98/90028720274 소개]
+ * ''' Dynamic Closed Captioning for Your Game''' - ''Michelle Hinn, Reid Kimball''
+ * ''' Dynamic Performance Profiling of C++ Code''' - ''Kim Steen Riber''
+  [https://www.cmpevents.com/sessions/GD/S6468i1.jpg JPG]
+ * ''' Fast Water Simulation for Games Using Height Fields''' - ''Matthias M?ller-Fischer''
+  [http://www.matthiasmueller.info/ Speaker]
+  [http://www.matthiasmueller.info/talks/GDC2008.pdf PDF]
+ * ''' Gaming on the Go: Mobility Considerations for Gaming Sponsored by Intel''' - ''Satheesh G. Subramanian''
+ * ''' Getting it into the Game (Day 1)''' - ''Adam Pino''
+ * ''' Getting it into the Game (Day 2)''' - ''Adam Pino''
+ * ''' Getting it into the Game (Day 3)''' - ''Adam Pino''
+ * ''' Getting the Most Out of Intel Graphics Sponsored by Intel''' - ''Raymond Paik, Katen Shah''
+ * ''' GPU Optimization with the Latest NVIDIA Performance Tools Sponsored by NVIDIA''' - ''Jeffrey Kiel''
+ * ''' Harnessing the Power of Multiple GPUs Sponsored by AMD''' - ''Jon Story, Holger Gruen''
+ * ''' How to Go from PC to Console Development without Shooting Yourself in the Foot''' - ''Elan Ruskin''
+  [http://www.valvesoftware.com/publications/2008/GDC2008_CrossPlatformDevelopment.pdf PDF]
+  [http://assemblyrequired.wordpress.com/how-to-go-from-pc-to-crossplatform-development-qa/ QA]
+  [http://assemblyrequired.wordpress.com/ Speaker]
+ * ''' Implementing Ragdoll Physics on the Nintendo DS''' - ''Eric Brown''
+  [https://www.cmpevents.com/sessions/GD/S6215i1.ppt PPT]
+ * ''' Insomniac's SPU Programming Practices''' - ''Mike Acton''
+  [https://www.cmpevents.com/sessions/GD/S6462i1.ppt PPT]
+ * ''' Interactive Ray Tracing in Games Sponsored by Intel''' - ''Daniel Pohl''
+ * ''' Introduction to the Emotiv Software Development Kit Sponsored by Emotiv''' - ''Julian Wixson''
+ * ''' Life on the Bungie Farm: Fun Things to Do with 180 Servers and 350 Processors''' - ''Luis Villegas, Sean Shypula''
+ * ''' Lighting and Material of HALO 3''' - ''Hao Chen  ''
+  [http://www.bungie.net/images/Inside/publications/presentations/lighting_material.zip 강연슬라이드]
+ * ''' Lightmap Compression in HALO 3''' - ''Yaohua Hu''
+  [http://www.bungie.net/images/Inside/publications/presentations/Lightmap_Compression_2008_02_22.pptx 강연슬라이드]
+ * ''' Massive D: STRANGLEHOLD's Breakable Object System''' - ''Steven Ellmore''
+  [https://www.cmpevents.com/sessions/GD/S6229i1.ppt PPT] <-- PPT 2007 로 봐야합니다.
+  [http://xbox360.gamespy.com/xbox-360/stranglehold/854458p1.html GameSpy]
+   [http://play.tm/wire/click/1761713 관련 페이지]
+  [http://www.bairdy.com/?p=23 bairdy]
+ * ''' MERCENARIES 2: Networked Physics in a Large Streaming World''' - ''Glenn Fiedler''
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/20/3536354.html xemu Blog]
+  [http://www.gaffer.org/downloads/NetworkedPhysics-GDC2008.pdf PDF]
+  [http://www.gaffer.org/?s=GDC speaker]
+ * ''' Momentum vs. Character Animation''' - ''David Wu''
+ * ''' New Dog, Old Tricks: Running Halo 3 Without a Hard Drive''' - ''Mat Noguchi''
+ * ''' NVIDIA Developer TechTalk Sponsored by NVIDIA''' - ''Speaker TBA''
+ * ''' NVIDIA FX Composer 2: Shader Development Unleashed Sponsored by NVIDIA''' - ''Christopher Maughan, Aravind Kalaiah''
+ * ''' Optimization Techniques for Attacking CPU Data Bottlenecks in PC Games Sponsored by AMD''' - ''Mike Wall''
+ * ''' Optimizing DirectX Rendering on Multi-Core Hardware Sponsored by Intel''' - ''Leigh Davies''
+ * ''' PhyreEngine - The New Hotness Sponsored by Sony''' - ''Richard Forster''
+ * ''' Post Processing in The Orange Box''' - ''Alex Vlachos''
+  [http://www.valvesoftware.com/publications/2008/GDC2008_PostProcessingInTheOrangeBox.pdf PDF]
+ * ''' Procedural Data Generation in FAR CRY 2''' - ''Dominic Guay''
+ * ''' Real-Time Depth-Buffer-Based Ambient Occlusion''' - ''Miguel Sainz''
+  [https://www.cmpevents.com/sessions/GD/S6856i1.ppt PPT]
+  {{{#!html
+<embed pluginspage='http://www.macromedia.com/go/getflashplayer' src='http://dory.mncast.com/mncHMovie.swf?movieID=10067465320080323190325&skinNum=1' width='420' height='374' type='application/x-shockwave-flash'></embed>
+  }}}
+ * ''' Semantic Environment Sensor System: Data-driven Interactions of Characters with the World''' - ''Julien Hamaide''
+ * ''' Sharing Code (Day 1)''' - ''Brian Sharp''
+ * ''' Sharing Code (Day 2)''' - ''Brian Sharp''
+ * ''' Sharing Code (Day 3)''' - ''Brian Sharp''
+ * ''' Snakes on a Seamless Living World!: Stackless Python as a Scripting Language''' - ''David Hawes, Doug Wolff''
+  [https://www.cmpevents.com/sessions/GD/S6464i1.ppt PPT]
+ * ''' Sparse Virtual Texture Memory''' - ''Sean Barrett''
+  [http://silverspaceship.com/src/svt/ 강연 슬라이드]
+ * ''' Speed Up Synchronization Locks: A Scaleform Case Study Sponsored by Intel''' - ''Abhishek Agrawal''
+ * ''' SQL Considered Harmful: Databases for MMORPGs''' - ''Shannon Posniewski''
+  [http://t-machine.org/index.php/2008/02/21/gdc08-sql-considered-harmful/ Blog]
+  [http://www.crypticstudios.com/index.php?option=com_content&task=view&id=178&Itemid=31 강연 슬라이드] - [http://www.crypticstudios.com/files/SQLConsideredHarmful.ppt PPT]
+  [http://doublebuffered.com/2008/02/26/gdc-08-sql-considered-harmful/ doublebuffered]
+ * ''' Starting with SPUs. Exploiting the Power of the Cell Sponsored by Sony''' - ''Dave Coombes''
+ * ''' Streaming Open World Pathfinding''' - ''Quinn Dunki''
+  mailto:qd@quinndunki.com 
+  [http://quinndunki.com/xfer 강연 슬라이드]
+  [http://quinndunki.com/xfer/GDC08_Presentation.pdf PDF]
+  [http://www.aarmstrong.org/journal/2008/02/28/gdc08-notes-streaming-open-world-pathfinding Blog]
+ * ''' Structure VS. Style''' - ''Chris Hecker''
+  [https://defrag.depaul.edu/gdc/?p=49 Web]
+ * ''' Stupid Spherical Harmonics (SH) Tricks''' - ''Peter-Pike Sloan''
+  [https://www.cmpevents.com/sessions/GD/S6469i1.pdf PDF]
+ * ''' Stylization with a Purpose: The Illustrative World of TEAM FORTRESS 2''' - ''Jason Mitchell''
+  [http://www.valvesoftware.com/publications/2008/GDC2008_StylizationWithAPurpose_TF2.pdf PDF]
+  [http://www.primotechnology.com/2008/02/25/gdc-08-the-illustrative-world-of-team-fortress-2/ WebPage]
+  [http://www.primotechnology.com/audio/gdc08/11_GDC08_0222_TF2StyleJasonMitchell.mp3 mp3]
+ * ''' Tamarin: A Free, Fast, Open Scripting Runtime''' - ''Ben Garney''
+ * ''' Taming the Mob: Creating believable crowds in ASSASSIN'S CREED''' - ''Sylvain Bernard, James Therien''
+  [https://www.cmpevents.com/sessions/GD/S6996i1.ppt PPT]
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/22/3540263.html xemu]
+  [http://tara.teich.net/archives/gdc-creating-believable-crowds-in-assassins-creed/ tara]
+ * ''' Technical Consulting Engineer, Intel C++ Compilers Sponsored by Intel''' - ''Ganesh Rao''
+ * ''' Technical Issues in Tools Development (Day 1)''' - ''John Walker''
+ * ''' Technical Issues in Tools Development (Day 2)''' - ''John Walker''
+ * ''' Technical Issues in Tools Development (Day 3)''' - ''John Walker''
+ * ''' Tesselation in a Low Poly World Sponsored by AMD''' - ''Bill Bilodeau, Peter Lohrmann''
+ * ''' The Art and Technology Behind Bioshock's Special Effects''' - ''Jesse Johnson, Stephen Alexander''
+  [http://www.2kboston.com/powerpoint/The-Art-and-Technology-Behind-Bioshocks-Special-Effects.zip PPT]
+ * ''' The Future of Programming for Multi-core with the Intel Compilers Sponsored by Intel''' - ''Ganesh Rao''
+ * ''' The Technology of FINAL FANTASY''' - ''Taku Murata''
+ * ''' The Technology of UNCHARTED: DRAKE'S FORTUNE''' - ''Christophe Balestra, P?l-Kristian Engstad''
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/20/3536343.html GDC 08: Tech of Uncharted]
+ * ''' The Ultimate Developers Toolkit Sponsored by AMD''' - ''Dan Ginsburg, Jonathan Zarge''
+ * ''' Threading QUAKE 4 and QUAKE WARS Sponsored by Intel''' - ''Anu Kalra, JP van Waveren''
+ * ''' Truer Impostors''' - ''Eric Risser''
+ * ''' Ultimate Graphics Performance for DirectX10 Hardware Sponsored by AMD''' - ''Nicolas Thibieroz''
+ * ''' Using Wavelets on the Xbox360 for Current and Future Games''' - ''Michael Boulton''
+  [https://www.cmpevents.com/sessions/GD/S6467i1.ppt PPT]
+ * [http://www.intrinsicalgorithm.com/IAonAI/2008/02/john-abercrombie-2k-boston-on-ai-in.html John Abercrombie (2K Boston) on the AI in Bioshock]
+  
+== RoundTable ==
+ * [http://www.intrinsicalgorithm.com/GDC/ AI Roundtable Notes]
+  [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay1.doc Day1 - Note] / [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay1.mp3 Day1 - MP3]
+  [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay2.doc Day2 - Note] / [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay2.mp3 Day2 - MP3]
+  [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay3.doc Day3 - Note] / [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay3.mp3 Day3 - MP3]
+ * [http://aigamedev.com/discussion/designers-testers-friend-foe Designers and Testers: Friend, Foe, or Just Frustrating for Programmers?]
+  
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars

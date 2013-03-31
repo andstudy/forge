@@ -1,0 +1,150 @@
+Describe SICP/연습문제1장/이기영 here
+== 1 장 ==
+=== 연습문제 1.9 ===
+{{{#!gcode scheme
+(define (plus a b)
+  (if (= a 0)
+      b
+      (inc (+ (dec a) b))))
+
+(define (plus a b)
+  (if (= a 0)
+      b
+      (+ (dec a) (inc b))))
+
+(define (plus a b)
+  (+ a b))
+  
+(define (dec x)
+  (- x 1))
+
+(define (inc x)
+  (+ x 1))
+}}}
+
+=== 연습문제 1.10 (Ackermann funcion) ===
+{{{#!gcode scheme
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1)
+                 (A x (- y 1))))))
+}}}
+
+=== 연습문제 1.11 ===
+{{{#!gcode scheme
+;;되도는 프로시저
+(define (sum n)
+  (if (< n 3)
+      n
+      (+ (sum(- n 1)) (* 2 (sum(- n 2))) (* 3 (sum(- n 3))))))
+
+;;반복 프로시저
+(define (sum n)
+  (if (< n 3)
+      n
+      (sum-iter 2 1 0 3 n)))
+
+(define (sum-iter f1 f2 f3 cnt n)
+  (if (> cnt n)
+      f1
+      (sum-iter (+ f1 (* 2 f2) (* 3 f3))
+                f1
+                f2                
+                (+ 1 cnt)
+                n)))
+}}}
+
+=== 연습문제 1.12 ===
+{{{#!gcode scheme
+(define (pas-tri row col)
+  (cond ((= col 1) 1)
+        ((= col row) 1)
+        (else
+         (+ (pas-tri (- row 1) (- col 1))
+            (pas-tri (- row 1) col)))))
+}}}
+
+=== 연습문제 1.16 ===
+{{{#!gcode scheme
+(define (fast-expt b n)
+  (fast-expt-iter 1 b n))
+
+(define (fast-expt-iter a b n)
+  (cond ((= n 0) a)
+        ((even? n) (fast-expt-iter a (square b) (/ n 2)))
+        (else (fast-expt-iter (* a b) b (- n 1)))))
+
+(define (square x)
+  (* x x))
+}}}
+
+=== 연습문제 1.19 ===
+{{{#!gcode scheme
+(define (fib n)
+  (fib-iter 1 0 0 1 n))
+
+(define (fib-iter a b p q count)
+  (cond ((= count 0) b)
+        ((even? count)
+         (fib-iter a
+                   b
+                   (+ (square p) (square q))
+                   (+ (* 2 p q) (square q))
+                   (/ count 2)))
+        (else (fib-iter (+ (* b q) (* a q) (* a p))
+                        (+ (* b p) (* a q))
+                        p
+                        q
+                        (- count 1)))))
+
+(define (square x)
+  (* x x))
+}}}
+
+=== 연습문제 1.22 ===
+{{{#!gcode scheme
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+
+(define (square x)
+  (* x x))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (prime? n)
+  (= (smallest-divisor n) n))
+
+(define (timed-prime-test n)
+  (start-prime-test n (current-milliseconds)))
+
+(define (start-prime-test n start-time)
+  (if (prime? n) 
+      (report-prime n (- (current-milliseconds) start-time))
+      false))
+
+(define (report-prime n elapsed-time)
+  (newline)
+  (display n)
+  (display " *** ")
+  (display elapsed-time))
+
+
+(define (search-for-primes start-from)
+  (search-for-primes-iter start-from 3 ))
+
+(define (search-for-primes-iter start-from count )
+  (if (> count 0) 
+      (if (even? start-from) 
+          (search-for-primes-iter (+ start-from 1) count )
+          (if (timed-prime-test start-from )
+              (search-for-primes-iter (+ start-from 2) (- count 1))
+              (search-for-primes-iter (+ start-from 2) count )))))
+}}}

@@ -1,0 +1,15 @@
+자바에서의 Double Checked Locking 오류 문제
+
+요약 :
+어떤 JVM 의 경우 singleton 생성자가 다 실행되기 전에 먼저 m_Instance 에 메모리 값을 할당해 버리는 수가 있기 때문에, 불안전한 객체를 리턴받을 수 있다.
+
+해결 방법은 Double Checked Locking 을 쓰지 말고, 매번 locking 해서 얻거나, 아님 처음부터 static 변수로 지정해서 프로그램 시작과 동시에 객체를 생성하고, Instance() 에서는 이 static 변수의 레퍼런스를 넘기는 방식을 추천하고 있다.
+
+원본 :
+'''Double-checked locking and the Singleton pattern'''
+http://www.ibm.com/developerworks/java/library/j-dcl.html
+
+Modern C++ Design. p.148 에서 같은 문제를 지적하고 있다.
+
+컴파일러는 Meyer Singleton 를 위 원본에서 해결책 중 하나와 비슷한 방식대로 구현한다.
+참고 : Modern C++ Design. p.134.

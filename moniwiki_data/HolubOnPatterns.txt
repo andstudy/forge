@@ -1,0 +1,91 @@
+= 참고 페이지 =
+ * [http://www.holub.com/goodies/patterns/index.html Holub on Patterns: Learning Design Patterns by Looking at Code]
+ * [Patterns]
+
+= 등장하는 디자인 패턴 =
+ * 생성 패턴
+  * abstract factory
+  * builder
+  * factory method
+  * prototype
+  * singleton
+ * 구조 패턴
+  * adapter
+  * bridge
+  * composite
+  * decorator
+  * facade
+  * flyweight
+  * proxy
+ * 행위 패턴
+  * chain of responsibility
+  * command
+  * interpreter
+  * iterator
+  * mediator
+  * memento
+  * observer(publish/subscribe)
+  * state
+  * strategy
+  * template method
+  * visitor
+
+= 참석자 =
+오종빈 / NCSOFT
+박일 / NCSOFT
+박상혁 / NEXON
+김명관 / 중외메디칼
+황윤희 / NCSOFT
+최기원 / INUCA
+장수윤 / 삼성전자
+나철환 / KGCA
+이수안 / NHN
+이태연 / KBONLINE
+공봉식/ 네오위즈
+오진홍/ Intotech
+이금정/ 큐빅테크
+김태우/ BLUESIDE
+정희철/ AEONSOFT
+송치형/ 이노무브
+전효성 / 리얼타임비쥬얼
+현수명 / 삼성전자
+임정환 / NCSOFT
+권영호 / 다음커뮤니케이션
+황승현 / NCSOFT
+김홍준 / 모비언스
+안명환 / BIT
+우정권 / 갈라랩
+김근수 / ncsoft
+정광영
+
+= 발표 자료 =
+ * [HolubOnPatterns/발표자료모음]
+
+ * [HolubOnPatterns/시작발표]
+ * [HolubOnPatterns/chapter1]
+ * [HolubOnPatterns/chapter2]
+ * [HolubOnPatterns/chapter3]
+ * [HolubOnPatterns/chapter4]
+ * [HolubOnPatterns/추가발표]
+ 
+= 발표 순서 =
+ * 6/05 시작 발표 : 신케빈, 임성현, 김명관
+ * 6/12 1장 : 김홍준, 우정권, 오종빈(추가)
+ * 6/19 2장 : 황승현, 임정환, 이수안(추가), 이태연(추가)
+ * 6/26 3장 : 최학윤, 공봉식, 안명환, 박일(추가)
+ * 7/03 4장 : 김명관, 장수윤, 최기원, 전효성(추가)
+ * 7/10 추가발표(다른패턴) : 박상혁, 이금정, 오종빈
+
+= 회비 =
+|| 날짜 || 수입 || 지출 || 잔고|| 비고||
+|| 이월금 ||  ||  || 32,253 || ||
+|| 2010.06.05 || 520,000 ||  || 552,253|| 회비입금(오종빈,박일,박상혁,김명관,최기원,나철환,공봉식,이금정,임정환,황승현,안명환,우정권,신케빈) ||
+|| 2010.06.05 ||  || 162,500 || 389,753|| 토즈이용 ||
+|| 2010.06.12 || 200,000 ||  || 589,753|| 회비입금(장수윤,이태연,권영호,김근수,이수안) ||
+|| 2010.06.19 ||  || 165,000 || 424,753|| 토즈이용 ||
+|| 2010.06.26 || 80000|| 175,000 || 329,753 || 회비 내신 분 2명(김홍준, 전효성), 토즈이용 ||
+|| 2010.07.3 || || 165,000 || 164,753 ||토즈이용||
+|| 2010.07.10 || || 138,688|| 26,065 ||뒷풀이비용 지원||
+
+
+

@@ -1,0 +1,24 @@
+== Setting your UserPreferences ==
+You may self-register and establish your preferences by clicking on the UserPreferences link at the top right corner of every page.  If you have registered and are logged in, your name will be displayed instead of "User``Preferences".
+
+The various fields in User``Preferences are described below:
+
+ * '''[[GetText(Name)]]''': Either your real name or an alias. Best is to use WikiName format.
+  * If ACLs are enabled, it is '''required''' to be a unique WikiName.
+ * '''[[GetText(Password)]]''': Something you can remember but is very hard for friends and family to guess.
+ * '''[[GetText(Password repeat)]]''': if you initially set or later change your password, repeat it here to avoid typos.
+ * '''[[GetText(Email)]]''': Your email address, this is required if you wish to subscribe to wiki pages or wish to have a forgotten login data mailed to you.
+  * If ACLs are enabled, the email address is required to be unique and valid.
+ * '''[[GetText(Preferred theme)]]''': choose a theme to change colours, icons and layout of the wiki
+ * '''[[GetText(User CSS URL)]]''': If you want to override some of the wiki system's css, put your own CSS here.
+ * '''[[GetText(Time zone)]]''': ...
+   * '''[[GetText(Your time is)]]''': If the correct time is not displayed, use the drop down box and select the correct time.
+   * '''[[GetText(Server time is)]]''': Displays the server time.
+ * '''[[GetText(Date format)]]''': The default of year-month-day is least confusing for international use.
+ * '''[[GetText(Preferred language)]]''': The default is taken from your browser setting. It is advisable to set this to a specific language anyway, since then you get notification mails in your native tongue, too.
+ * '''[[GetText(Quick links)]]''': Overrides the standard choices in the gray navigation bar at the top of the page.  Enter one Wiki page name per line. You may also add free-form links, i.e. entries of the form `[url linktext]` just like in wiki pages.
+ * '''[[GetText(Subscribed wiki pages (one regex per line))]]''': Enter '''`.*`''' to receive an email when any page in this Wiki changes (''not recommended'' for busy wikis), or enter the names of any individual pages, one per line.  If you are familiar with '''regular expressions''', you may enter a regex expression to match the pages names of interest (.* matches all page names). With the '''[[GetText(Show icon toolbar)]]''' option checked, subscription to individual pages is made easy by clicking the envelope icon when viewing a page of interest.
+
+/!\ This is an optional feature that only works when email support has enabled for this wiki, see HelpOnConfiguration/EmailSupport for details.
+----
+[[Navigation(HelpContents)]]

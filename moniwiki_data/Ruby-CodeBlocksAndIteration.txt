@@ -1,0 +1,280 @@
+== CodeBlocks and Iteration ==
+
+In Ruby, a code block (or just "block") is an object that contains some Ruby code, and the context neccesary to execute it. Code blocks are the most visually distinctive aspect of Ruby, and also one of the most confusing to newcomers from other languages. Essentially, a Ruby code block is a method that has no name.
+
+루비에서 코드블락(블락)은 루비 코드를 포함하는 오브젝트이다. 블락은 루비의 가장 뚜렷한 차별 요소이지만 타언어에서의 입문자에게는 혼돈의 요소중 하나이다. 본질적으로 루비 코드 블락은 이름이 없는 메소드이다.
+
+루비에서는 블락을 위한 2가지의 문법을 제공한다.
+
+한문장으로 끝날 경우 아래와 같이 작성하는 것이 읽기 좋다.
+{{{
+[1,2,3].each { |i| puts i}
+# 1
+# 2
+# 3
+}}}
+
+한문장 이상일 경우 do, end 키워드를 사용한다.
+{{{
+[1,2,3].each  
+do |i|
+  if i % 2 == 0
+    puts "#{i} is even."
+  else
+    puts "#{i} is odd."
+  end
+end
+# 1 is odd.
+# 2 is even.
+# 3 is odd.
+}}}
+
+블락은 메소드처럼 인자가 여럿 올 수 있는데 파이프 기호안에 콤마로 분리하여 작성한다.
+{{{
+{1=>2, 2=>4}.each { |k,v| puts "Key #{k}, value #{v}" }
+# Key 1, value 2
+# Key 2, value 4
+}}}
+
+
+=== 코드 블락 생성과 호출 ===
+
+코드 블락을 오브젝트에 넣고 인자로 전달하거나 호출하기 위해 오브젝트에 직접대입해서는 안된다.
+
+{{{
+aBlock = { |x| puts x }                  # WRONG
+
+# SyntaxError: compile error
+}}}
+
+Kernel#lambda, Kernel#proc 메소드 또는 Proc.new를 통해 전달한다.
+{{{
+aBlock = lambda { |x| puts x }           # RIGHT
+}}}
+
+블락을 호출할 때는 call을 사용한다.
+{{{
+aBlock.call "Hello World!"
+# Hello World!
+}}}
+
+
+{{{
+   def gen_times(factor)
+     return Proc.new {|n| n*factor }
+   end
+
+   times3 = gen_times(3)
+   times5 = gen_times(5)
+
+   times3.call(12)               #=> 36
+   times5.call(5)                #=> 25
+   times3.call(times5.call(4))   #=> 60
+}}}
+
+
+=== 블락을 처리하는 메소드 생성 ===
+
+메소드 호출에 블락을 연결할 수 있고 yield 키워드를 통해 호출할 수 있다.
+
+{{{
+def call_twice
+  puts "I'm about to call your block."
+  yield
+  puts "I'm about to call your block again."
+  yield
+end
+
+call_twice { puts "Hi, I'm a talking code block." }
+
+# I'm about to call your block.
+# Hi, I'm a talking code block.
+# I'm about to call your block again.
+# Hi, I'm a talking code block.
+}}}
+
+코드 블락이 존재하는지 여부에 따라 행동할 수 있다.
+{{{
+def repeat(n)
+ if block_given?
+   n.times { yield }
+  else
+    raise ArgumentError.new("I can't repeat a block you don't give me!")
+  end
+end
+
+repeat(4) { puts "Hello." }
+
+# Hello.
+# Hello.
+# Hello.
+# Hello.
+
+repeat(4)
+
+# ArgumentError: I can't repeat a block you don't give me!
+}}}
+
+yield 에 인자를 전달하고 리턴값을 받을 수 있다.
+{{{
+def call_twice
+  puts "Calling your block."
+  ret1 = yield("very first")
+  puts "The value of your block: #{ret1}"
+
+  puts "Calling your block again."
+  ret2 = yield("second")
+  puts "The value of your block: #{ret2}"
+end
+
+call_twice do |which_time|
+  puts "I'm a code block, called for the #{which_time} time."
+  which_time == "very first" ? 1 : 2
+end
+
+# Calling your block.
+# I'm a code block, called for the very first time.
+# The value of your block: 1
+# Calling your block again.
+# I'm a code block, called for the second time.
+# The value of your block: 2
+}}}
+
+
+=== 블락 인자 만들기 ===
+블락을 인자로 받아 변수처럼 이용할 수 있다. 인자에 앰퍼샌드(&) 기호를 붙이고, 호출시 call, yield를 사용한다.
+
+{{{
+def repeat(n)
+  n.times { yield } if block_given?
+end
+repeat(2) { puts "Hello." }
+# Hello.
+# Hello.
+def repeat(n, &block)
+  n.times { block.call } if block
+end
+repeat(2) { puts "Hello." }
+# Hello.
+# Hello.
+
+def repeat(n, &block)
+  n.times { yield } if block
+end
+repeat(2) { puts "Hello." }
+# Hello.
+# Hello.
+}}}
+
+
+=== 클로저 : 코드 블락에서 외부 변수 사용하기 ===
+{{{
+def add_to_all(array, number)
+  array.collect { |x| x + number }
+end
+
+add_to_all([1, 2, 3], 10)              # => [11, 12, 13]
+}}}
+
+array.collect에서 number를 사용할 수 있다.
+
+=== 반복자 작성하기 ===
+사용자 정의 자료 구조에 반복자를 생성할 수 있다.
+{{{
+class Tree
+  attr_reader :value
+  def initialize(value)
+    @value = value
+    @children = []
+  end
+
+  def <<(value)
+    subtree = Tree.new(value)
+    @children << subtree
+    return subtree
+  end
+end
+}}}
+Tree 클래스에 value와 children 속성을 선언하고 << 메서드에서 Tree 자신의 클래스를 생성한다.
+
+{{{
+t = Tree.new("Parent")
+child1 = t << "Child 1"
+child1 << "Grandchild 1.1"
+child1 << "Grandchild 1.2"
+child2 = t << "Child 2"
+child2 << "Grandchild 2.1"
+}}}
+
+Parent에 Child 1, Child 2 가 연결되고 Child 1에 Grandchild 1.1, Grandchild 1.2 가 연결되고, Child 2 에 Grandchild 2.1 가 연결된다.
+
+{{{
+class Tree
+  def each
+    yield value
+    @children.each do |child_node|
+      child_node.each { |e| yield e }
+    end
+  end
+end
+}}}
+기본 타입에서 지원되는 each처럼 Tree 클래스에 each를 정의하여 Tree 를 순회하는 반복자를 작성할 수 있다.
+
+{{{
+t.each { |x| puts x }
+# Parent
+# Child 1
+# Grandchild 1.1
+# Grandchild 1.2
+# Child 2
+# Grandchild 2.1
+}}}
+
+=== 반복 중단하기 ===
+break 을 사용하여 루프에서 빠져 나올 수 있다.
+{{{
+1.upto(10) do |x|
+  puts x
+  break if x == 3
+end
+# 1
+# 2
+# 3
+}}}
+
+=== 블락 메소드에서 설정(SetUp)과 해제(CleanUp) 숨기기 ===
+어떤 코드 수행전 설정과 해제 작업이 필요할 경우 begin/ensure 블락을 사용할 수 있다.
+{{{
+def between_setup_and_cleanup
+  setup
+  begin
+   yield
+  ensure
+    cleanup
+  end
+end
+}}}
+
+{{{
+def write_html(out, doctype=nil)
+	  doctype ||= %{<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	           "http://www.w3.org/TR/html4/loose.dtd">}
+  out.puts doctype
+  out.puts '<html>'
+  begin
+    yield out
+  ensure
+    out.puts '</html>'
+  end
+end
+
+write_html($stdout) do |out|
+  out.puts '<h1>Sorry, the Web is closed.</h1>'
+end
+# <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+#      "http://www.w3.org/TR/html4/loose.dtd">
+# <html>
+# <h1>Sorry, the Web is closed.</h1>
+# </html>
+}}}
+

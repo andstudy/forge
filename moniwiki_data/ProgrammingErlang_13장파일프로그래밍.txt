@@ -1,0 +1,163 @@
+= 제 12장 파일 프로그래밍 =
+[[TableOfContents]]
+
+== 라이브러리 구성 ==
+4개의 모듈 : 
+ * file
+ * filename
+ * filelib
+ * io
+
+== 파일을 읽는 여러 방법 ==
+
+=== 파일 안의 모든 텀 읽기 ===
+{{{
+1> file:consult("data1.dat").
+{ok,[{person,"joe","armstrong",
+             [{occupation,programmer},{favoriteLanguage,erlang}]},
+     {cat,{name,"zorro"},{owner,"joe"}}]}
+}}}
+=== 파일 안의 텀을 한 번에 하나씩 읽기 ===
+
+ * @spec file:open(File, read) => {ok, IoDevice} | {error, Why}
+ * @spec file:read(IoDevice, Prompt) => {ok, Term} | {error, Why} | eof
+ * @spec file:close(IoDevice) => ok | {error, Why}
+
+{{{
+1> {ok, S} = file:open("data1.dat", read).
+{ok,<0.34.0>}
+2> io:read(S, '').
+{ok,{person,"joe","armstrong",
+            [{occupation,programmer},{favoriteLanguage,erlang}]}}
+3> io:read(S, '').
+{ok,{cat,{name,"zorro"},{owner,"joe"}} }
+4> io:read(S, '').
+eof
+5> file:close(S).
+ok
+}}}
+
+
+=== 파일 안의 라인을 한 번에 한 줄씩 읽기 ===
+{{{
+1> {ok, S} = file:open("data1.dat",  read).
+{ok,<0.43.0>}
+2> io:get_line(S, '').
+"{person, \"joe\", \"armstrong\",\n"
+3> io:get_line(S, '').
+"\t[{occupation, programmer},\n"
+4> io:get_line(S, '').
+"\t {favoriteLanguage, erlang}]}.\n"
+5> io:get_line(S, '').
+"\n"
+6> io:get_line(S, '').
+"{cat, {name, \"zorro\"},\n"
+7> io:get_line(S, '').
+"      {owner, \"joe\"}}.\n"
+8> io:get_line(S, '').
+eof
+9> file:close(s).
+ok
+}}}
+=== 전체 파일을 바이너리로 읽기 ===
+{{{
+1> file:read_file("data1.dat").
+{ok,<<"{person, \"joe\", \"armstrong\",\n\t[{occupation, programmer},
+\n\t {favoriteLanguage, erlang}]}.\n\n{cat, {name, \"zorr"...>>}
+}}}
+=== 랜덤 액세스로 파일 읽기 ===
+{{{
+1> {ok, S} = file:open("data1.dat", [read, binary, raw]).
+{ok,{file_descriptor,prim_file,{#Port<0.101>,1632}} }
+2> file:pread(S, 22, 46).
+{ok,<<"rong\",\n\t[{occupation, programmer},\n\t {favorite">>}
+3> file:pread(S, 1, 10).
+{ok,<<"person, \"j">>}
+4> file:pread(S, 2, 10).
+{ok,<<"erson, \"jo">>}
+5> file:close(S).
+ok
+}}}
+
+== 파일에 쓰는 여러 방법 ==
+
+=== 텀 리스트를 파일에 쓰기 ===
+
+ * @spec io:format(IoDevice, Format, Args) -> ok
+
+{{{
+unconsult(File, L) ->
+    {ok, S} = file:open(File, write),
+    lists:foreach(fun(X) -> io:format(S, "~p.~n", [X]) end, L),
+    file:close(S).
+}}}
+
+=== 파일에 라인 쓰기 ===
+{{{
+1> {ok, S} = file:open("test2.dat", write).
+{ok,<0.32.0>}
+2> io:format(S, "~s~n", ["Hello readers"]).
+ok
+3> io:format(S, "~w~n", [123]).
+ok
+4> io:format(S, "~s~n", ["that's it"]).
+ok
+5> file:close(S).
+ok
+}}}
+
+=== 한 번의 연산으로 전체 파일 쓰기 ===
+{{{
+-module(scavenge_urls).
+-export([urls2htmlFile/2, bin2urls/1]).
+-import(lists, [reverse/1, reverse/2, map/2]).
+
+
+
+urls2htmlFile(Urls, File) ->         
+    file:write_file(File, urls2html(Urls)).
+
+bin2urls(Bin) ->  gather_urls(binary_to_list(Bin), []).
+
+urls2html(Urls) -> [h1("Urls"),make_list(Urls)]. 
+    
+h1(Title) -> ["<h1>", Title, "</h1>\n"].
+
+make_list(L) ->
+    ["<ul>\n",
+     map(fun(I) -> ["<li>",I,"</li>\n"] end, L),
+     "</ul>\n"]. 
+
+
+
+gather_urls("<a href" ++ T, L) ->
+    {Url, T1} = collect_url_body(T, reverse("<a href")),
+    gather_urls(T1, [Url|L]);
+gather_urls([_|T], L) ->
+    gather_urls(T, L);
+gather_urls([], L) ->
+    L.
+
+collect_url_body("</a>" ++ T, L) -> {reverse(L, "</a>"), T};
+collect_url_body([H|T], L)       -> collect_url_body(T, [H|L]);
+collect_url_body([], _)          -> {[],[]}.
+}}}
+=== 랜덤 액세스로 파일 쓰기 ===
+{{{
+1> {ok, S} = file:open("...", [raw, write, binary]).
+2> file:pwrite(S, 10, <<"new">>).
+3> file:close(S).
+}}}
+== 디렉터리 조작 ==
+{{{
+1> cd("/home/joe/book/erlang/Book/code").
+2> file:list_dir(".").
+}}}
+== 파일에 관한 정보 찾기 ==
+
+== 파일 복사하고 삭제하기 ==
+ * file:copy(Source, Destination)
+ * file:delete(File)
+== 잡동사니 ==
+
+== Find 유틸리티 ==

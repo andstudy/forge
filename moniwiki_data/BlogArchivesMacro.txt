@@ -1,0 +1,11 @@
+{{{[[BlogArchives]]}}}
+
+[[BlogArchives]]
+----
+{{{[[BlogArchives(list)]]}}}
+
+[[BlogArchives(list)]]
+----
+{{{[[BlogArchives("F Y",list)]] [[BlogArchives("F Y")]]}}}
+
+||[[BlogArchives("F Y",list)]]||[[BlogArchives("F Y")]]||

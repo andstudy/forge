@@ -1,0 +1,229 @@
+== 정규 표현식 맛보기 ==
+=== 정규 표현식 생성 ===
+{{{
+a = Regexp.new('/^\s*[a-z]') #Regexp 이용
+b = /^\s*[a-z]/  # /정규식/
+c = %r{^\s*[a-z]} # %r{정규식}
+}}}
+=== 패턴 매칭 ===
+{{{
+name ="Fats Waller"
+puts name =~ /a/ #정규식 검사  아래와 같음
+puts /a/ =~ name #정규식 검사 위와 같음
+
+=> 결과 
+1
+1
+}}}
+
+=== 매칭 수행 ===
+ * RUBY에서 패턴 매칭시에 자동으로 설정되는 값들
+  * $` : 매칭된 부분 앞
+  * $& : 매칭된 부분
+  * $' : 매칭된 부분 뒤
+{{{
+def show_regexp(a, re)
+  if a=~re
+    "#{$`}<<#{$&}>>#{$'}" 
+  else
+    "no match"
+   end   
+end
+
+puts show_regexp('very interesting',/t/)
+puts show_regexp('Fats Waller',/a/)
+puts show_regexp('Fats Waller',/ll/)
+puts show_regexp('very interesting',/z/)
+
+==> 실행결과
+very in<<t>>eresting
+F<<a>>ts Waller
+Fats Wa<<ll>>er
+no match
+
+}}}
+
+== 정규 표현식 적용해보기 ==
+=== 패턴 ===
+ * 패턴 키워드 문자 : . | (  ) [  { + \ ^ $ * ?  
+ ** 위의 문자들을 제외한 모든 문자는 자신에 매칭
+ ** 위의 문자를 패턴에서 검사하기위해서는 앞에 \를 붙여줌
+{{{
+puts show_regexp("kangaroo",/angar/)
+puts show_regexp("!@%&-_=+",/%&/)
+puts show_regexp("yes | no", /\|/)
+puts show_regexp("yes (no)", /\(no\)/)
+puts show_regexp("are you sure?", /e\?/)
+->
+k<<angar>>oo
+!@<<%&>>-_=+
+yes <<|>> no
+yes <<(no)>>
+are you sur<<e?>>
+}}}
+
+=== 앵커 ===
+ * ^ : 맨앞
+ * $ : 맨뒤
+ * \A : 지정된 문자열 첫부문
+ * \Z : 문자열의 끝
+ * \b : 워드 경계
+ * \B : 워드 경계 아닌부분
+{{{
+puts show_regexp("1. this is\nthe time", /^the/)
+puts show_regexp("2. this is\nthe time", /is$/)
+puts show_regexp("3. this is\nthe time", /\Athis/)
+puts show_regexp("4. this is\nthe time", /\Athe/)
+puts show_regexp("5. this is\nthe time", /\bis/)
+puts show_regexp("6. this is\nthe time", /\Bis/)
+->
+1. this is
+<<the>> time
+2. this <<is>>
+the time
+no match
+no match
+5. this <<is>>
+the time
+6. th<<is>> is
+the time
+}}}
+
+=== 문자 클래스 ===
+ * {{{[문자집합]}}} : 한 문자를 나타냄
+ * 문자 클래스 : 92페이지 표 5.1 참조
+{{{
+puts show_regexp('1Price is $12', /[aeiou]/) #모음
+puts show_regexp('2Price is $12', /[\s]/) #공백 
+puts show_regexp('3Price is $12', /[[:digit:]]/) #숫자
+puts show_regexp('4Price is $12', /[[:space:]]/) #공백
+puts show_regexp('5Price is $12', /[[:punct:]aeiou]/) #스페이스,알파벳 숫자를 제외한 출력 가능 문자
+
+puts ""
+a = 'see [Design Patterns-page 123]'
+puts show_regexp(a, /[A-F]/) #A-F 까지 문자 
+puts show_regexp(a, /[A-Fa-f]/) #A-F와 a-F 까지 문자 
+puts show_regexp(a, /[0-9]/) #숫자 
+puts show_regexp(a, /[0-9][0-9]/) #숫자 두문
+
+
+
+->
+1Pr<<i>>ce is $12
+2Price<< >>is $12
+<<3>>Price is $12
+4Price<< >>is $12
+5Pr<<i>>ce is $12
+
+see [<<D>>esign Patterns-page 123]
+s<<e>>e [Design Patterns-page 123]
+see [Design Patterns-page <<1>>23]
+see [Design Patterns-page <<12>>3]
+
+}}}
+
+=== 반복 ===
+ * r* : r이 없거나 1개이상 나타나는 문자열과 매치
+ * r+ : r이 1개이상 나타나는 문자열과 매치
+ * r? : r이 한번 나타나거나, 나타나지 않는 문자열과 매치
+ * r{m,n} : r이 최소 m번 최대 n번 나타나는 문자열과 매치
+ * r(m,} : r이 최소 m번 나타나는 문자열과 매치
+{{{
+a = "The moon is made of cheese"
+puts show_regexp(a, /\w+/) #한워드 매칭 
+puts show_regexp(a, /\s.*\s/) #빈칸 사이의 모든 문자 매칭 
+puts show_regexp(a, /\s.*?\s/) #빈칸 사이의 모든 문자 매칭 
+puts show_regexp(a, /[aeiou]{2,99}/) #모음이 두번 99번 미만  있는 문자 매칭 
+puts show_regexp(a, /mo?o/) #mo 나 moo 찾음 
+->
+<<The>> moon is made of cheese
+The<< moon is made of >>cheese
+The<< moon >>is made of cheese
+The m<<oo>>n is made of cheese
+The <<moo>>n is made of cheese
+}}}
+
+=== 선택 & 그룹 ===
+ * 선택 : /
+ * 그룹 : ( ) ->하나의 정규식으로 인식
+  * 그룹에 선택된 값은 $1~ $10 변수에 설정됨
+  * 정규식 안에서 \n 은 매칭된 n번째 그룹의 결과
+{{{
+a= "red ball blue sky"
+puts show_regexp(a, /d|e/) #선택 
+puts show_regexp(a, /au|lu/) #두글자 이상도 됨
+puts show_regexp(a,/red ball|angry sky/) # 우선 순위가 낮음 
+->
+r<<e>>d ball blue sky
+red ball b<<lu>>e sky
+<<red ball>> blue sky
+
+puts show_regexp(a,/(red|blue) \w+/) # 
+puts show_regexp(a,/(blue|red) \w+/) # 순서 상관없음
+puts show_regexp(a,/red|blue \w+/) # 우선 순위가 낮음 
+->
+<<red ball>> blue sky
+<<red ball>> blue sky
+<<red>> ball blue sky
+
+"12:50am" =~ /(\d\d):(\d\d)(..)/ #메칭 수행후 $1,$2 변수에 메치 된 값 설정됨
+puts "Hours is #$1, minute #$2" 
+"12:50am" =~ /((\d\d):(\d\d))(..)/ #중첩 인 경우  변수값  설정은 연산자 우선순위 에 의해 설정 
+puts "Time is #$1"
+puts "Hours is #$2, minute #$3" 
+puts "AM/PM is #$4" 
+->
+Hours is 12, minute 50
+Time is 12:50
+Hours is 12, minute 50
+AM/PM is am
+
+puts show_regexp('He said "Hello"',/(\w)\1/) #반복되는 문자 매칭 \1은 매칭된 첫번째 문자를 나타냄 
+puts show_regexp('Mississippi',/(\w+)\1/) #반복되는 문자열 매칭 
+puts show_regexp('He said "Hello"',/["'].*["']/) #반복 되는 부분 다시 안쓰고 그룹 이용 
+puts show_regexp('He said "Hello"',/(["']).*\1/) #반복 되는 부분 다시 안쓰고 그룹 이용 
+->
+He said "He<<ll>>o"
+M<<ississ>>ippi
+He said <<"Hello">>
+He said <<"Hello">>
+}}}
+
+=== 패턴을 이용한 치환 ===
+ * String#sub : 문자 치환
+ * String#gsub : 전체 문자 치환
+{{{
+a= "the quick brown fox"
+puts a.sub(/[aeiou]/, "*") #첫번째로 발견되는 모음을 *로 교
+puts a.gsub(/[aeiou]/, "*") #발견되는 모든 모음을 *로 교
+puts a.sub(/\s\S+/, "") #공백 이후 문자 지음
+puts a.gsub(/\s\S+/, "") #공백  이후 문자 전체 지
+->
+th* quick brown fox
+th* q**ck br*wn f*x
+the brown fox
+the
+
+puts a.sub(/^./){|match| match.upcase} #첫번째 문자 대문자로
+puts a.gsub(/[aeiou]/) {|vowel| vowel.upcase} #모음 대문자로 
+->
+The quick brown fox
+thE qUIck brOwn fOx
+
+#단어 단위로 첫글자 대문자로 변환 
+def mixed_case(name)
+  name.gsub(/\b\w/) {|first| first.upcase}
+end
+
+puts mixed_case("fats waller")
+puts mixed_case("louis armstrong")
+->
+Fats Waller
+Louis Armstrong
+
+puts "fred:smith".sub(/(\w+):(\w+)/,'\2, \1')
+puts "nercopyitno".gsub(/(.)(.)/,'\2\1')
+->
+smith, fred
+encrpoiynto
+}}}

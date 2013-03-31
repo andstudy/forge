@@ -1,0 +1,127 @@
+ 2008년 7월 5일 9시
+
+= 스터디 진행 =
+== 1주 (7.05) ==
+
+== 참석자 명단 ==
+ 1. [ParkPD]
+ 1. [Outbreak]
+ 1. [bt22d]
+ 1. [NeBel]
+ 1. MovingSpotlight
+ 1. [soomong]
+ 1. 박주희
+ 1. 하세용
+ 1. [birdkr]
+ 1. [itmentor]
+ 1. [kimbab]
+ 1. [wiki:Guru JinuGuru]
+ 1. [eatist]
+ 1. [ms2003]
+ 1. [mathica]
+
+
+== 발표순서 ==
+7/5
+킥오프 & 소개 - 전효성
+
+2장 - [ProgrammingErlang/2장시작] 박일
+3장 - [ProgrammingErlang/3장순차프로그래밍] 박진욱 <- 아직 못만들었어요;; 요즘 넘 빠쁘네요 ㅠㅠ
+4장 - [ProgrammingErlang/4장예외처리하기] 이수안
+
+5장 - [ProgrammingErlang/5장고급순차프로그래밍] 하세용
+6장 - [ProgrammingErlang/6장프로그램컴파일하고실행하기] 송주영
+7,8장 - [ProgrammingErlang/8장 병행프로그래밍] 안준석
+
+9장 - [ProgrammingErlang/9장 병행 프로그램과 오류] 남기룡
+10장 - [ProgrammingErlang/10장_분산프로그래밍] 전효성
+11장 - [ProgrammingErlang/11장IRCLite] 배재호
+
+12장 - [ProgrammingErlang/12장 인터페이스 기법] 신승백
+13장 - [ProgrammingErlang/13장 파일프로그래밍] 이동하
+14장 - [ProgrammingErlang/14장 소켓프로그래밍] 이수안
+
+15장 - [ProgrammingErlang/15장EtsDets] 박일
+16장 - [ProgrammingErlang/14장 OTP 개론] 백호근
+17장 - [ProgrammingErlang/17장 얼랭데이터베이스] 강대명
+
+18장 - [ProgrammingErlang/18장 OTP롤 시스템 구축하기] 하만석
+19,20장 - [ProgrammingErlang/19_20장 멀티코어CPU프로그래밍] 현수명
+부록E - [ProgrammingErlang/부록E 나머지 유용한 것들] 현수명
+
+8/30
+마무리 - ProgrammingErlang에 대해 공부한 내용을 페차쿠차형식으로 발표할 예정입니다. 참석하시는 분은 한 챕터를 골라 페차쿠차형식으로 준비해주세요. 9시 정각에 바로 시작합니다.
+[ProgrammingErlang/PechaKucha]
+
+
+기타주제1 : 얼랭으로 알고리즘 풀기?
+ * [ProgrammingErlang/Training]
+
+기타주제2
+
+== 참고 ==
+ [http://kr.youtube.com/watch?v=uKfKtXYLG78 YouTube 얼랭소개 동영상]
+ [http://www.gotw.ca/publications/concurrency-ddj.htm 각광 받을 차세대 언어에 대한 허브셔터 아저씨의 글]
+ [http://erlide.sourceforge.net Erlide(Erlang Eclipse 3.3 Plugin)]
+ [ProgrammingErlang/Doc]
+ [http://freesearch.pe.kr/1038 얼랭(Erlang) OTP에 대한 단상]
+
+== 잡담 ==
+ * 참석자 명단에만 이름 올리면 자동으로 참가 신청이 되는건가요? 아니면 네이버 카페에 따로 신청을 해야 하는건가요? NeBel
+  * 둘다 안 하셔도 됩니다. 그냥 나오기만 하시면 됩니다. ㅋ - [CynicJJ]
+   * 넵. 감사합니다. NeBel
+ * 오호라~~ 토요일날 뵙겠습니다. 아침 9시 맞나요? -- MovingSpotlight
+  * 네. 토요일 9시에 뵈요. [ParkPD]
+ * 이번주부터 친구 한명 데리고 가도 되나요? - [kimbab]
+  * 안됩니다. 두명 데리고 오세요. - [CynicJJ]
+   * ㅋㅋㅋㅋ - [kimbab]
+ * 첫날 빠졌더니 주제가 어려운 뒷부분만 남았어요 ㅠ_ㅠ - [soomong]
+  * 난 널 이렇게 약한 소리나 하는 아이로 키운적 없다
+ * 책 42page 에 있는 .erlang 설정은 도대체 어떻게 하는겁니까? ㅜㅜ;; .erlang 파일 만들고 c:cd(path)명령어 주어도 안바뀌네요... [kimbab]
+  * 129page 를 읽어보면 정답이 나오네요..책 더 읽어보면 답이 나오는거였는데 괜히 뻘짓했네요..T.T [kimbab]
+   * 노트북에서는 .erlang 파일 잘 만들었는데, 회사 컴퓨터에서 하니까 파일 이름이 없다면서 만들어지지 않네요. 이게 뭥미... [ParkPD]
+   * 탐색기에서는 못 만들고, 텍스트 에디터에서는 이름 없는 파일을 만들 수 있군요. 쩝. [ParkPD]
+    * 저는 메모장에서 다른이름으로저장 or 콘솔창에서 ren 으로 변경했습니다. [kimbab]
+ * 제가 17장 한다했는데.. 9일날 참석 못할지도 몰라서 그러는데.. 18장으로 바꾸겠습니다.... 문제가 있으면 연락주세요.^^ [ms2003]
+ * 저는 이쯤에서.. 흠.. (맞나.. ) 포기해야 할듯. 스터디 두개는 아무래도 무리인듯에.. 얼랭을 전혀 쫓아가지 못하고 있다는.. [eatist]
+ * 8월 15일~17일전후로 휴가 가시는 분이 많아서 이번주는 쉰다는 이야기를 들었던것도 같은데, 이번주 스터디는 어떻게 되나요? [NeBel]
+  * 16일 쉬기로 하였습니다. 23일날 뵈용~ [kimbab]
+ * erlang HiPE는 윈도우를 지원하지 않는다고 합니다. 쩝... [itmentor]
+
+== 기타 ==
+ * [http://file.naver.com/pc/view.html?fnum=65594&cat=42 뷰렛빌더-동영상 튜토리얼만들기]
+ * [http://www.freesearch.pe.kr/903 Erlang과 Hadoop]
+ * [http://www.planeterlang.org/story.php?title=Facebook_chat_is_developed_in_Erlang Facebook chat is developed in Erlang]
+ * [http://www.wings3d.com Erlang 으로 만든 3D 모델링 툴]
+ * [http://www.xach.com/misc/openpoker/ OpenPoker - 얼랭으로 만든 온라인 포커]
+ * [http://www.devmaster.net/articles/mmo-scalable-server/ Writing Low-Pain Massively Scalable Multiplayer Servers]
+ * [http://code.google.com/p/scalaris/ Scalaris] - 분산 키-밸류 저장소 (암스트롱 아저씨가 밀고 있다고 한다)
+ * [http://fogit.blogspot.com/2008/05/choosing-erlang-ide_19.html Choosing Erlang IDE]
+  * [http://www.erlang.org/download/contrib/ultraedit_erlang.zip UltraEdit 용 Erlang highlight]
+ * [MapReduce]
+
+== 다른 스터디 ==
+ * [http://langstudy.metaschool.org/ 온라인학습생태계 - 프로그래밍 언어 스터디 (얼랭을 스터디 하고 있다.)]
+
+== 회비 ==
+|| '''날짜''' || '''지출''' || '''수입''' || '''잔액''' || '''비고''' ||
+|| ||   || || 209,128|| 회비이월  ||
+|| 2008.7.4 ||   || 280,000 || 489,128 || 회비입금(송주영,배재호,신승백,백호근,박진욱,박일,정희종)  ||
+|| 2008.7.4 || 39,500  ||  || 449,628|| 토즈지출  ||
+||  ||  ||  ||  ||  ||
+|| 2008.7.11 ||   || 310,000 || 723,628 || 회비입금(안준석,권정민,이동하,전효성,하만석,하세용,이수안,최대회)  ||
+||  ||  ||  ||  ||  ||
+|| 2008.7.11 || 39,500  ||  || 684,128 || 토즈지출 ||
+|| 2008.7.19 || || 40,000 || 724,128 || 회비입금(남기룡) ||
+|| 2008.7.19|| 53,500  ||  || 670,628 || 토즈지출 ||
+|| 2008.7.26 || 49,000  ||  || 621,628 || 토즈지출 ||
+|| 2008.7.26 ||  || 40,000 || 661,628 || 회비입금(현수명) ||
+|| 2008.7.28 || 100,000 || || 561,628 || 아꿈사 정모 회비 지원 ||
+|| 2008.8.2 || 42,000  ||  || 519,628 || 토즈지출 ||
+|| 2008.8.9 || 49,000  ||  || 470,628 || 토즈지출 ||
+|| 2008.8.23 || 49,000  ||  || 421,628 || 토즈지출 ||
+|| 2008.8.30 || 49,000   ||  || 372,628 || 토즈지출 ||
+|| 2008.8.30 || 105,600  ||  || 267,028 || 뒷풀이 ||
+||  ||  ||  ||  ||  ||
+
+attachment:erlang.jpg

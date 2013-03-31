@@ -1,0 +1,48 @@
+테스트 코드는 어떻게 적용하는지 아직 모르겠어요 @_@)
+
+{{{
+#include <vector>
+#include <algorithm>
+#define abs(x) ((x)>0?(x):-(x))
+using namespace std;
+
+int main()
+{
+	int TestCase;
+	
+	scanf("%d", &TestCase);
+
+	while( TestCase-- )
+	{
+		int family;
+		vector<int> arrayFamily;
+
+		scanf("%d", &family);
+
+		int temp;
+
+		for(int i = 0; i < family; i++ )
+		{
+			scanf("%d", &temp);
+			arrayFamily.push_back(temp);
+		}
+
+		sort(arrayFamily.begin(), arrayFamily.end());
+		temp = arrayFamily[arrayFamily.size()/2];
+
+		int result = 0;
+
+		for(int i = 0; i < arrayFamily.size(); i++ )
+		{
+			result += abs(temp - arrayFamily[i]);
+		}
+
+		printf("%d\n", result);
+
+		
+	}
+
+	return 0;
+}
+
+}}}

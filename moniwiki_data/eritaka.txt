@@ -1,0 +1,7 @@
+이름: 안명환
+이메일: eritaka_at_gmail_dot_com
+블로그: http://eritaka.net/
+현재하는일: 게임 인프라 서버 개발 (인증, 빌링 등등)
+진짜관심분야: 지구 평화를 지키는 개발자가 되는 법
+----
+CategoryHomepage

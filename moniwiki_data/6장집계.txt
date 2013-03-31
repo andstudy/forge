@@ -1,0 +1,7 @@
+{{{#!html
+<div style="width:425px" id="__ss_8731198"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/soomong/mongodb-8731198" title="MongoDB" target="_blank">MongoDB</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8731198" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/soomong" target="_blank">hyun soomyung</a> </div> </div>
+
+<div style="width:425px" id="__ss_8755840"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/soomong/mapreduce-8755840" title="MapReduce" target="_blank">MapReduce</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8755840" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/soomong" target="_blank">hyun soomyung</a> </div> </div>
+
+
+}}}

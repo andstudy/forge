@@ -1,0 +1,450 @@
+Euler Cycle 을 이용해서 문제 풀었음.
+ [http://en.wikipedia.org/wiki/Eulerian_path Euler Cycle]
+ [http://www.cs.sunysb.edu/~skiena/combinatorica/animations/euler.html Eulerian Cycle Animation]
+ 큰 문제 없어보이는데 Wrong Answer 나오는 거 보면, 뭔가 예외 처리를 안 해 준 거 같기도... -.-;;;
+  희종님 덕분에 버그 하나 찾았습니다만 여전히 Wrong Answer 가 나오는군요 T_T
+  Programming-Challenges 홈페이지의 문제일수도 있습니다. Overall statistics를 보면 152명이나 Submit을 했는데 Best Time에 never solved가 찍혀있는걸로 봐서 오류일 가능성이 커요. UVa에 직접 제출해 봐야 하는데 저지사이트가 연결이 안되네요; 
+
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <deque>
+#include <list>
+#include <stack>
+#include <string>
+#include <algorithm>
+#include <map>
+#include <limits>
+#include <assert.h>
+#include <iomanip>
+#include <math.h>
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+#include <Windows.h>
+#endif
+
+using namespace std;
+
+// Minimum Spanning Tree -> Prim Algorithm 을 생각하며 풀었음.
+
+namespace ATUtil
+{
+	bool IsInRange(int value, int from, int to)
+	{
+		return (from <= value) && (value <= to);
+	}
+
+	int ConvertToIndex(char c)
+	{
+		if ('a' <= c && c <= 'z')
+		{
+			return c - 'a';
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	char ConvertToChar(int i)
+	{
+		return (char)i + 'a';
+	}
+
+#ifdef _UNIT_TEST
+	class CStopWatch
+	{
+	public:
+		CStopWatch()
+		{
+			m_StartTick = GetTickCount();		// gcc 에서 안 될 수 있으니까
+		}
+
+		~CStopWatch()
+		{
+			cout << "Time passed : " << GetTickCount() - m_StartTick << " milisec.\n";
+		}
+
+		int m_StartTick;
+	};
+#endif
+
+	typedef map<int, int> IntDB;
+	typedef vector<int> Ints;
+	typedef list<int> IntList;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+#ifdef max
+#undef max
+#endif
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+	//////////////////////////////////////////////////////////////////////////
+	// CVertex
+	typedef list<int> VectexList;
+
+	class CVertex
+	{
+	public:
+		CVertex(int c) : m_Color(c), m_Checked(false) {}
+		int m_Color;
+		bool m_Checked;
+		
+		VectexList m_Neighbors;
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	// CGraph
+	class CGraph
+	{
+	public:
+		CVertex* GetOrCreate(int c)
+		{
+			VertexMap::iterator it = m_Graph.find(c);
+			if (it == m_Graph.end())
+			{
+				CVertex* p = new CVertex(c);
+				m_Graph.insert(make_pair(c, p));
+				return p;
+			}
+			else
+			{
+				return it->second;
+			}
+		}
+
+		template<typename InputIterator>
+		void AddEdges(InputIterator from, InputIterator to)
+		{
+			for (InputIterator it = from; it != to; it += 2)
+			{
+				AddEdge(*it, *(it + 1));
+			}
+		}
+
+		void AddEdge(int c1, int c2)
+		{
+			CVertex* pV1 = GetOrCreate(c1);
+			CVertex* pV2 = GetOrCreate(c2);
+			pV1->m_Neighbors.push_back(c2);
+			pV2->m_Neighbors.push_back(c1);
+		}
+
+		int Size() const { return (int)m_Graph.size(); }
+		bool IsEulerCycle()
+		{
+			if (m_Graph.empty())
+			{
+				return false;
+			}
+
+			// http://www.aistudy.com/math/koenigsberg_bridge_problem.htm
+			// 그래프 G 가 오일러 사이클을 가지면, G 는 연결되어 있고 각 정점은 짝수 차수이다.
+			// G 가 연결된 그래프이고 모든 정점이 짝수 차수를 가지면 G 는 오일러 사이클을 가진다.
+
+			// 모든 정점이 짝수 차수를 가지는지를 검사 중.
+			for (VertexMap::iterator it = m_Graph.begin(); it != m_Graph.end(); ++it)
+			{
+				CVertex* p = it->second;
+				if (p->m_Neighbors.size() % 2 == 1)
+				{
+					return false;
+				}
+			}
+
+			// G 가 연결된 그래프인지는 어떻게 알 수 있지?
+			// 신장 트리가 존재하는 것을 보이기만 하면 된다는데?
+			// 너비 우선 트리, 깊이 우선 트리도 신장트리다.
+			// BFS 를 써 보자.
+			size_t checkedVertex = 0;
+			deque<int> queue;
+			queue.push_back(m_Graph.begin()->first);
+			while (!queue.empty())
+			{
+				int nodeIndex = queue.front();
+				queue.pop_front();
+				CVertex* p = m_Graph[nodeIndex];
+				if (p->m_Checked)
+				{
+					continue;
+				}
+
+				p->m_Checked = true;
+				checkedVertex++;
+
+				VectexList& neighbors = p->m_Neighbors;
+				for (VectexList::iterator it = neighbors.begin(); it != neighbors.end(); ++it)
+				{
+					CVertex* pNode = m_Graph[*it];
+					queue.push_back(pNode->m_Color);
+				}
+			}
+
+			// BFS 로 가지 못하는 vertex 가 있다. 연결되지 않았음.
+			if (checkedVertex < m_Graph.size())
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		void EraseFromList(VectexList& neighbors, int num)
+		{
+			for (VectexList::iterator it = neighbors.begin(); it != neighbors.end(); ++it)
+			{
+				if (*it == num)
+				{
+					neighbors.erase(it);
+					return;	// 더 찾을 필요도 없고, iterator 도 무효화되므로 나가자
+				}
+			}
+		}
+
+		bool FindEulerSubCycle(int node, stack<int>& intStack)
+		{
+			CVertex* pFrom = m_Graph[node];
+
+			while (!pFrom->m_Neighbors.empty())
+			{
+				CVertex* pTo = m_Graph[*(pFrom->m_Neighbors.begin())];
+				EraseFromList(pTo->m_Neighbors, pFrom->m_Color);
+				EraseFromList(pFrom->m_Neighbors, pTo->m_Color);
+				intStack.push(pTo->m_Color);
+				pFrom = pTo;
+			}
+
+			return true;
+		}
+
+		string EulerCycle()
+		{
+			stack<int> stackNum;
+			int startNode = m_Graph.begin()->first;
+			stackNum.push(startNode);
+			while (!stackNum.empty())
+			{
+				FindEulerSubCycle(startNode, stackNum);
+				while(!stackNum.empty())
+				{
+					// stack 되어 있는 node 를 하나씩 꺼낸다.
+					// isolated 된 node 라면, path 에 추가한 후 버리고,
+					// edge 가 남아 있는 node 라면 stack 에 둔 채로 이웃 node 로 확장시킨다.
+					// [SedgeWick Part5]
+					startNode = stackNum.top();
+					CVertex* pStackedNode = m_Graph[startNode];
+					if (pStackedNode->m_Neighbors.empty())
+					{
+						stackNum.pop();
+						m_Path.push_back(startNode);
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+
+			char buf[1000];
+			string ret;
+
+			for (size_t i = 0; i < m_Path.size() - 1; ++i)
+			{
+				sprintf(buf, "%d %d\n", m_Path[i], m_Path[i + 1]);
+				ret.append(buf);
+			}
+
+			//sprintf(buf, "%d %d\n", m_Path[m_Path.size() - 1], m_Path[0]);
+			//ret.append(buf);
+
+			return ret;
+		}
+
+		typedef map<int, CVertex*> VertexMap;
+		VertexMap m_Graph;
+		vector<int> m_Path;
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CConsole
+	class CConsole
+	{
+	public:
+		static void ConsoleTest(istream& input, ostream& output);
+	};
+
+	void CConsole::ConsoleTest(istream& input, ostream& output)
+	{
+		int testCount = 0;
+		input >> testCount;
+
+		for (int i = 0; i < testCount; ++i)
+		{
+			if (1 <= i)
+			{
+				output << "\n";
+			}
+
+			int num = 0;
+			input >> num;
+
+			CGraph graph;
+
+			int n1, n2;
+			for (int j = 0; j < num; ++j)
+			{
+				input >> n1 >> n2;
+				graph.AddEdge(n1, n2);
+			}
+
+			output << "Case #" << i + 1 << "\n";
+			if (!graph.IsEulerCycle())
+			{
+				output << "some beads may be lost\n";
+			}
+			else
+			{
+				// 해답은 있다. Euler Cycle 을 찾자.
+				output << graph.EulerCycle();
+			}
+		}
+	};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase()
+	{
+	}
+
+	CGraph g;
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, IsEulerCycle3)
+{
+	int input[] = {1, 1, 1, 1, 1, 1, 1, 1};
+	g.AddEdges(&input[0], &input[sizeof(input) / sizeof(int)]);
+	CHECK(g.IsEulerCycle());
+}
+
+TEST_FIXTURE(FixtureBase, IsEulerCycle2)
+{
+	int input[] = {1, 2, 2, 2, 2, 3, 3, 1};
+	g.AddEdges(&input[0], &input[sizeof(input) / sizeof(int)]);
+	CHECK(g.IsEulerCycle());
+	g.AddEdge(3, 4);
+	CHECK(!g.IsEulerCycle());
+}
+
+TEST_FIXTURE(FixtureBase, IsEulerCycle1)
+{
+	int input[] = {2, 3, 2, 3, 3, 4, 3, 4, 4, 5, 4, 5};
+	g.AddEdges(&input[0], &input[sizeof(input) / sizeof(int)]);
+	CHECK(g.IsEulerCycle());
+	CHECK_EQUAL("2 3\n3 4\n4 5\n5 4\n4 3\n3 2\n", g.EulerCycle());
+}
+
+TEST_FIXTURE(FixtureBase, IsEulerCycle)
+{
+	int input[] = {1, 2, 1, 2, 4, 5, 4, 5};
+	g.AddEdges(&input[0], &input[sizeof(input) / sizeof(int)]);
+	CHECK(!g.IsEulerCycle());
+}
+
+TEST_FIXTURE(FixtureBase, EulerCycle)
+{
+	int input[] = {0, 1, 0, 2, 0, 5, 0, 6, 1, 2, 2, 3, 2, 4, 3, 4, 4, 5, 4, 6};
+	g.AddEdges(&input[0], &input[sizeof(input) / sizeof(int)]);
+	CHECK(g.IsEulerCycle());
+	CHECK_EQUAL("0 6\n6 4\n4 3\n3 2\n2 4\n4 5\n5 0\n0 2\n2 1\n1 0\n", g.EulerCycle());
+}
+
+TEST_FIXTURE(FixtureBase, EulerCycle1)
+{
+	int input[] = {1, 3, 1, 2, 1, 5, 2, 3, 2, 5, 2, 4, 3, 4, 4, 5, 3, 6, 4, 6, 4, 7, 5, 7, 1 ,4};
+	g.AddEdges(&input[0], &input[sizeof(input) / sizeof(int)]);
+	CHECK(g.IsEulerCycle());
+	CHECK_EQUAL("1 4\n4 7\n7 5\n5 4\n4 6\n6 3\n3 4\n4 2\n2 5\n5 1\n1 2\n2 3\n3 1\n", g.EulerCycle());
+}
+
+TEST_FIXTURE(FixtureBase, ConsoleTest2)
+{
+	input << 
+		"2\n"
+		"5\n"
+		"1 2\n"
+		"2 3\n"
+		"3 4\n"
+		"4 5\n"
+		"5 6\n"
+		"5\n"
+		"2 1\n"
+		"2 2\n"
+		"3 4\n"
+		"3 1\n"
+		"2 4\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL( 
+		"Case #1\n"
+		"some beads may be lost\n"
+		"\n"
+		"Case #2\n"
+		"1 3\n"
+		"3 4\n"
+		"4 2\n"
+		"2 2\n"
+		"2 1\n", 
+		output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

@@ -1,0 +1,335 @@
+ * [http://twitter.com/#search?q=%23sgpkor 공식 트위터]
+ * [http://antilove.egloos.com/4362139 게임 회사원의 도서관 - 발표식순]
+ * [https://spreadsheets.google.com/ccc?key=0AuOwmnKwxXvodEFKX2ZZR0Z3UVRhSDFoaF9Cek12cUE&hl=en 참가자 게시판]
+ * [http://dbros.tistory.com/?_invi_tistory=invi_list2 간식꺼리를 준비해 주신 Dbros]
+
+== 종합 ==
+ * 20 분 늦게 갔는데, 이미 자리가 꽉 차 있었다. 소셜 게임이 확실히 뜨는 아이템이긴 하구나.
+  * 게임을 만들기 쉬워 보여서라고 생각한다면 고생하실 듯.
+ * 이 행사 때문에 회사 창업하겠다고 커밍아웃 한 분들이 많았다.
+ * SK 컴즈는 (보안문제 등으로) 7시 넘으면 안에서 문을 닫는다. 7시부터 맥주를 마셨는데 화장실을 못 쓰는게 조금 아쉬웠다. 하긴 우리 회사도 보안 문제라면 비슷비슷하니. 다시 한번 좋은 장소 제공해 주셔서 감사합니다.
+ * Nate Apps 준비하는 회사가 생각보다 참 많았다.
+  * 진입장벽 높은 facebook 보다는, Cyworld 가 쉬워보이기 때문이 아닐까?
+
+== 배정현 - Load Complete ==
+ * [http://antilove.egloos.com/4364965 발표자료]
+ * 김문수 경기도지사가 의외로 이런 일도 하는구나.
+
+== 김웅남  (두잇인터미디어 이사) 소셜 게임의 2가지 특징 ==
+ * [http://antilove.egloos.com/4364981 발표자료]
+ * 비동기적 멀티플레이어 게임
+  * [http://www.facebook.com/apps/application.php?id=31435010008 Parking Wars] - 3 년전 게임
+   * 상대방이 접속 안 해야 이길 수 있다. 내가 그와 친해서 그 사람의 일정을 알고 있다면 도움이 된다.
+  * [http://asadal.bloter.net/5946 안철수 연구소의 Catch me if you can]
+ * Sporadic Play(산발성 플레이)
+  * [http://www.playfirst.com/game/dinerdash Diner Dash](1) 와 [http://www.facebook.com/home.php#!/pages/Cafe-World/82747114959?ref=ts Café World](2) 와의 차이점
+  * 1 은 너무 정신없고 쉴세없이 조작해야 하지만, 2 는 느슨하고 천천히 할 수 있다.
+  * 2 에서 햄버거 하나 만드는 데 1일, 비싼 요리는 1주일 걸린다고
+  * 게임이 생활을 해치지 않는다.
+  * [http://www.facebook.com/home.php#!/apps/application.php?id=14916117452&ref=ts SCRABBLE] (Crossword 게임)
+ * 개발 적정 인원은?
+  * 서버 1명(복수 프로젝트 투입), 웹 1명, 클라 1명(플래시 포함), 기획 따로 없음, 그래픽 1-2명(벡터 그림 가능?), 나머지 그래픽은 외주. 이렇게 4-5명.
+ * 딱히 기능성을 생각해서 게임을 만들었다기 보다는, 그렇게 안 만들면 부모들이 안 사 주더라.
+
+== 김기웅 (Ntreev Soft Co., Ltd.) :  소셜 게임은 뭐가 다른가?! ==
+ * [http://antilove.egloos.com/4365223 발표자료]
+ * 경력이 많은 어떤 분 : "소셜이 돈을 많이 벌긴 했지만, 그게 게임이라고 할 수 있느냐"
+ * 팜빌 유저 줄어드는 날 : 주말(이 때는 진짜 소셜 - 가족, 친구 만나기 - 를 하기 때문)
+ * 대상 게이머는 snacking (시간 때우기용) 을 하는 casual or non-gamer 다.
+ * 비동기성 vs 동기성
+  * 사람들은 생각보다 social 하지 않다. 혼자 놀고는 싶지만, 동시에 혼자 있다는 느낌은 받기 싫다.
+  * [http://vimeo.com/10252961 The Loner by Damion Schubert - 2009 오스틴 게임 개발자 컨퍼런스의 게임 디자인 세션]
+  * 사례
+   * 옆에서 같이 빠찡꼬 하는 아바타를 보여주는 빠찡꼬 게임
+   * 쪼꼬도란도?? - 각자 게임은 하지만, 옆에 사람이 하는 것도 같이 보여줌
+ * social interaction vs game mechanics
+  * 컴뱃암즈해 보니 미국인과 브라질인의 플레이방식이 완전 다르더라.
+  * 게임이 돈을 벌 수 있는 이유는 사람들의 감정을 유발시켜주기 때문인데, 친구가 같이 하면 감정이 배가 된다.
+ * win - win 게임이 더 좋다.
+  * 누군가를 공격하는 마피아워즈보다는, 서로 찾아가고 도와줄 수 있는 팜빌
+ * social 과 game 이 서로를 닮아갈 것이다. 사례 : [http://www.habbo.com/ Habbo hotel] 
+ * 이미 사이버머니, 실제 돈과의 구별이 없어진 사회도 있다.
+  * 짐바브웨 공화국(Republic of Zimbabwe) 에서는 [http://story9.tistory.com/36 현금 인플레]가 너무 심해서 돈 대신 선불카드를 사용한다.
+  * 중국 서부 농민들이 농번기에 게임을 했는데, 나중에 그 게임이 인기를 끌면서 동부 도시 사람들이 농민들로부터 아이템을 구매했다. 자본의 이동?
+
+== PolyCube 박기성 CTO ==
+ * [http://antilove.egloos.com/4364999 발표자료]
+ * 모바일 WAP 콘텐츠 서비스(의외로 스타화보를 돈 내고 보는 사람 많다.)
+ * 기존 웹 사업은 Walled Garden Business
+  * 이통사랑만 잘 지내면 된다.
+  * 스마트폰 이후 Walled Garden Business 가 무너지고 있다.
+ * Pet Farm 을 포함해서 올해 4개정도 출시해 볼 생각(이지만 일정에 따라 줄어들지도)
+  * 농장 경영 + 펫 육성 시뮬
+  * 네이트 앱스토어에 먼저 넣을거다. Action Script 3.0
+  * 유저 인터페이스는 최소, 시뮬레이션성은 최대
+ * social game 은 정상적인 삶을 살면서도 할 수 있는 게임
+ * Viral 마켓팅이 key point 인데, 이걸 제공하는 platform 이 아직 한국에 없다.
+  * 싸이월드의 커넥트를 기대한다고...
+  * facebook 에서 farmville 같은 데서 게임 초대, 아이템 제공 막 쏴도 친구가 쏜 거라서 참는다.
+ * 네이트앱과 iphone 간의 사용자 연동을 어떻게 시킬 수 있을지 의문이다.
+  * 마피아워즈는 웹, 아이폰이 서로 연동 안 된다고 한다.
+
+== 변광준 PlayLime 대표, 아주대 정보컴퓨터공학부 교수 ==
+ * facebook [http://www.facebook.com/press/info.php?statistics 통계 페이지]를 봐라.
+  * 180 개국, 1백만 개발자가 달려들고 있다.
+  * 2억 8천만명(facebook 의 70% 가 게임을 한다? 이건 자료를 못 찾겠네요.)
+ * Zynga [http://www.2ndfinger.com/945 1억 - 2억불] 벌었다.
+  * 5 주만에 만들었다고는 하지만, zynga 는 [http://www.businessinsider.com/how-zynga-is-just-like-microsoft-2010-1?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+typepad%2Falleyinsider%2Fsilicon_alley_insider+%28Silicon+Alley+Insider%29 copy and crash](베껴서 다른 놈들 무너뜨리기) 가 전략이다.
+  * GDC 게임 guru 들도 남들이 농장게임 만들면, 너네도 만들어라 라고 한다.
+ * 똑같이 베끼고, 개발기간은 1/10 로 줄여서 여러 번 시도하라.
+ * 우리나라는 네이버 & 싸이월드 때문에 내수시장이 형성 안 된다. 
+  * facebook 은 망하기 직전에야 API 을 열었다. 싸이월드는 가지고 있는 게 많아서 아직 못 열고 있다.
+  * cyworld 의 경우, 한국 유저들은 성향이 다르다. 금방 지겨워하고, ROI 가 안 나온다.
+ * [http://venturebeat.com/2010/03/09/mario-of-facebook-is-yet-to-come/ Mario of Facebook 는 아직 안 나왔다.]
+ * Contents & People & Fund
+ * [http://justingibbs.com/2010/01/28/social-gamers-are-not-looking-for-games/ Social gaming is facebooking]
+ * facebook 대신 myspace 를 시도해 보는 전략도 좋다.
+  * 한국에서 개발하다가 drop 된 게임 있으면 가져와 달라. myspacebook 용 게임으로 만들어 보자.
+ * 지금 소셜 게임은 mature market 이다.
+ * 마시마로와 계약했다.
+ * startup weekend seoul(5.28 - 5.30) @AppCenter (AppCenter.kr) 행사를 준비중이다.
+ * 개발비 10억원 정도는 시원하게 쏠 수 있어야 한다. 특히 5억원은 마켓팅 비용으로.
+
+== Sangeun Kris Gu (Crytek) : 소셜 붐에 대한 개인적 단상 ==
+ * [http://antilove.egloos.com/4365106 발표자료]
+ * 블리자드 코리아 QA -> 게등위 -> Crytek QA
+ * 거품이 되지 않으려면, 소셜이라는 개념에 냉정해져야 할 필요가 있다.
+ * Mafia Wars 같은 영토분쟁형 게임
+  * 친구가 많아야 유리. 친구에게 facebook 가입 유도
+  * 기존 사람 관계를 활용하는가(SNG) vs 새로 사람 관계가 형성되는가(기존 온라인게임)
+ * SNG 의 인간 관계는 게임에 묶여있지 않다. 이런 platform 을 만들어야 하지 않을까?
+  * Blizzard Battlenet 2.0
+  * 게임 플랫폼의 소셜화. 게임의 캐릭터간의 관계가 아닌, 게임을 하는 유저사이의 관계를 형성
+  * 국내에는 마땅한 SNS 가 없다.
+  * 소셜 게임을 만들 비용으로 게임 포탈을 먼저 뜯어 고치자.
+
+== HR맨파워그룹 - 고영혁 Youthinking 님 ==
+ * [http://antilove.egloos.com/4365133 발표자료]
+ * 소개 : NHN games 에서 고스톱 -> 아크로드, R2 -> G마켓 -> 지금은 헤드헌터 등?
+ * 지금은 Paradigm Shift (패러다임 전쟁 중) 이다.
+  * (주석 : 새로운 시장이 생긴거지, 기존 paradigm 이 바뀐다고까지 볼 수는 없지 않나)
+  * tipping point 는 아이폰
+   * app 을 보니, update 가 잦고 유저 feedback 을 빨리 해 주는 app 이 잘 팔리더라.
+ * Your service will eventually evolve, make no determination and do NOT be afraid of losing control.
+ * PT 용 프로그램  : [http://prezi.com/ prezi]
+ * LBS(Location Based Services : 위치 기반 서비스). [http://foursquare.com/ 4 square]
+ * [http://www.game-connection.com/ Game Connection] 이라고 프랑스, 샌프란시스코에서 하는 B2C Game Show
+  * 유럽의 기능성 + 웹게임 성장 곡선이 달라졌다.
+  * 독일, 영국 외의 다른 회사도 많이 성장했다.
+  * linkedin 등의 구인 광고의 99% 가 알고보면 중국 회사(프랑스 IT회사를 중국이 매입)라고 씁쓸해 하더라.
+ * social game 은 이미 mature 해져서 중간 거래상이 생기고 있다.
+
+== 배효진 (인티브소프트) : 새로운 SNG, 목표는 친교다 ==
+ * [http://antilove.egloos.com/4365122 발표자료]
+ * SNG 발생원인 - 상처. 타인을 신뢰하지 않는다. 하지만 친구는 잃고 싶지 않다. 
+ * 네이트의 [http://kiraboshi.egloos.com/1602449 run away] [http://appstore.nate.com/642 app 주소] : 거리 경쟁. 경쟁은 친교가 아니라 싸우자는 거다.
+  * 이거 [http://unity3d.com/ Unity3D] 로 만들었다고 함. 미국에서는 plug-in 설치를 잘 안 해서 실패했지만, 한국에서는 웹 게임치고 괜찮은 3D 다보니 성공함.
+ * 게임 공간의 의미 : RPG 는 레벨업할 수록, SNG 는 친구 숫자가 많을 수록 할게 많아진다.
+  * 어떻게? 지속적입 업그레이드, 유저 creative
+  * 해피가든의 비밀파티, 마비노기식 연주회, 펫 소사이어티의 TV 같은 건 어떨까?
+ * (기존에 현실세계에서 알고 지내는) 친구가 꼭 필요하지는 않다는 점에서 넥슨별은 SNG 는 아니다.
+ * 소셜 게임은 누가 무엇을 보여주는(See) 게 아니라 누가 무엇을 하게(Do) 해줄것인가가 중요하다.
+
+== 황선문. zenith4eva. (NC soft) : 개발 구상 중인 프로젝트 소개  ==
+ * [http://antilove.egloos.com/4365453 발표자료]
+ * 리니지2 해외브랜치 개발팀 - 어쩐지 많이 본 얼굴이다 했는데...
+ * Thumbup 이라는 서비스 개발 중(프로그래머는 미국에 있는 듯?)
+ * SNS 와 SNG 를 한꺼번에 만들고 싶다.
+ * top4 에서 최대 top10 까지의 최고 추천글이 보임
+ * 저작권 문제 때문에, 링크만 넣으면 frame 에 맞게 원래 기사가 보이도록 하는게 기술적 난관임
+ * 게임(SNG)도 추가 : 추천 vs 반대를 어떻게 재화로 만들까?
+  * 반대를 많이 받으면 악마가 될 수 있고, 천사를 공격할 수도 있음
+ * 뒤에서 기사를 읽는 것 자체가 재미있어서 하는 서비스인데, 게임을 하려할까 라고 수근대는 소리가 들렸음.
+
+== 피터 리 - 게임과 교육에 대한 이야기 ==
+ * [http://www.nolgong.com/ 놀공발전소](열공의 반대말이다)
+ * 기능성 게임, Serious Game 이라는 단어 자체가 게임을 모욕하는 거다. 게임은 항상 Serious 했다.
+ * [http://q2l.org/ Quest to Learn](School for digital kids) 라는 6~12학년 대상 학교를 뉴욕시 교육청과 함께 설립
+  * [http://www.koreadaily.com/news/read.asp?art_id=866918 뉴욕시 고교 졸업률 전체 56%, 26학군 77%]. 공교육의 위기감 확산.
+  * 기존 교육은 learning about 과 fact & formula 다.
+   * 평가가 중심이 될 수록, 교육이 평가에 좌우되게 된다.
+  * 대신 Learning to Be 와 Identity 를 하자. (무엇이 되기 위해서 공부하기)
+   * 수학 공부할 때는 수학자, 화학 공부할 때는 화학자가 되어보자.
+   * 이런 진지한 identity 를 주면 아이들도 진지하게 임한다.
+ * 미국은 게임에 대한 인식이 (7년 전부터) 많이 좋아졌다. 이제 결과를 보여줄 단계.
+  * [http://www.amazon.com/Video-Games-Teach-Learning-Literacy/dp/1403961697 James Paul Gee - What video games have to teach us about learning and literacy]
+ * 게임의 이득
+  * 시도와 실패(를 통해 새로운 전략을 세우는 과정을 배울 수 있다)
+  * 맥락과 의미(동기부여가 된다. epic win?)
+   * 폭력이 재미있는 게 아니라, 그 행동의 의미(세상을 구한다) 때문에 재미있는 거다.
+   * Greg Costikyan 는 [http://www.costik.com/medmsg.html The Medium is the Message] 에서 "폭력이 문제가 아니라, 문맥이나 감정이 없는 무의미한 폭력이 문제" 라고 했다고.
+ * 옛날(에디슨 시대) 에는 전구 소켓에 세탁기 전원 꽂다가 많이 감전사 했다.
+  * 지금 게임이 그 단계다. 무한한 가능성이 있다. game is space of possibility.
+
+== 신동원 (엔트리브 / 퍼즐랩) : 퍼즐 장르의 SNG적 접근  ==
+ * [http://puzzlelab.net/tt/index.php?pl=202 퍼즐랩에 올라온 발표자료 및 소감]
+ * [http://antilove.egloos.com/4365211 발표자료]
+ * [http://www.clickr.kr/ Clickr 클리커] 라는 퍼즐 개발했다. 스팀에서 곧 출시
+ * 10 개 정도를 prototyping 해 봤었다.
+ * Popcam 이 롤 모델이다.
+ * [http://puzzlelab.net/tt/index.php?ct1=-1 퍼즐랩] 운영하셨던 분이구나.
+
+== 김영한 (프로자이너 CEO) : 기능성 소셜겜 소개 및 협력파트너(투자,개발) 유치  ==
+ * [http://antilove.egloos.com/4365172 발표자료]
+ * 회사([http://www.prosigner.com/ Prosigner])는 13 년 되었지만, 직원은 4명
+ * facebook 을 학습 놀이터로
+ * 영어 게임 + 소셜
+ * EngWiz(영어 마법사)
+ * EngVille. 우리 학원 온라인 영어마을. 64개 학원에 공급중
+  * 실시간 미니 배틀, 육성, 경영, 학습
+  * 1년 전에 BM 특허 2개 출원 중
+  * [http://beta.battlebada.com/ prototype]
+  * 돈은? virtual book, 영어 교재 출판사로부터 공급받는 컨텐츠, 학원 광고
+ * Nate Apps 준비중
+
+== 최웅규 - 큐빅스튜디오 : 회사 및 게임 소개. 유저 접근성 관점에서 보는 소셜, 웹 게임 개발 ==
+ * [http://antilove.egloos.com/4365361 발표자료]
+ * [http://www.qbigstudio.com/ 큐빅스튜디오]
+ * 웹 -> 그래택 -> 위메이드(마스터 판타지) -> 다시 웹
+ * 작년 10월에 설립
+ * 온라인 게임 플랫폼이 확장되고 있다.
+ * "[http://dev.qbigstudio.com/ 영웅집결 삼국지]" 라는 영웅 전략 웹 게임 개발 중. 70% 완료. 전체 7 명
+  * 유료화 모델 -> 장수 카드 시스템
+  * 소재 접근성 -> 영웅 중심 전쟁(컨트롤을 안 하고 있어도 재미있어야 한다.)
+  * 웹게임 고객층 -> 30대 직장인
+  * flash 가 아닌 pure web 으로 개발했기 때문에 가법고 multi-platform 가능하다.
+  * 웹 로딩할 때 로컬로 animated-gif 를 캐싱해서 사용
+  * [http://nigus.thoth.kr/?vid=blog&document_srl=1364702 자작 웹게임 - 삼국지 모의전투 : 영웅집결] 이라는 게 있다. 이름만 비슷한 건가?
+   * [http://zerojun2.egloos.com/2101347 코에이삼국지11의 시나리오 모드 이름 중 하나를 얘기하는 듯?]
+ * 회사에서 (쉬는 시간에 가볍게 해 보는) 식후땡 개발도 하고 있다.
+
+== 유창석 (NC soft) : "왜 우리 회사가 투자 제안받는 가치는 이렇게도 낮을까?" ==
+ * 게임 개발사 가치 : 1억 ~ 4천억
+ * 회사 가치 요소 : 가장 큰게 기술 리스크
+  * 상용화 이전 : 1 억 ~ 20,30 억, 베타 이후 : 700 ~ 800 억
+  * 스타 개발자가 있으면 기술 리스크가 낮아진다는 점에서 기업 가치가 오를 수도 있다.
+ * 가치 선정 과정
+  * 인터뷰 - 정직함
+  * 추정 재무 재표 - 성실함, 스스로를 냉철하게 바라보는 시각
+  * 실사 - 비용 절감의 의지(구두쇠의 모습)
+   * 실사를 나가서 들어가자마자 '이 회사 투자해야겠다'라는 생각이 드는 회사는 빈티가 묻어나는 구두쇠 회사입니다. (조엘이 들으면 싫어하겠지만, 한국의 현실이라는 것도 고려해야 할 듯)
+  * 커뮤니케이션 - 강한 열정
+
+== 마국성 (IGA WORKS 대표) :  소셜 게임과 광고 ==
+ * [http://www.igaworks.com/ IGA works - In Game AD. Commnication Group]
+ * [http://www.businessinsider.com/breaking-down-facebooks-revenues-2009-7 Facebook Revenue Breakdown]
+ * Zynga 의 매출 60% 가 광고
+ * 광고의 3 종류
+  * CPA(Cost Per Action) - Media 입장에서 용이
+  * Offer - 고객에게 reward 제공
+  * Lead Generation - ??
+ * CPA 를 악용하는 광고주가 많았다.
+  * IQ test 를 해 보라고 해 놓고는, 알고보니 (밑에 작게 약관에) 월 얼마의 서비스에 가입시킴
+ * Ad media 수입이 10% 라고 해도, 비용이 안 드는 수입이라 순이익에 크게 도움이 된다.
+ * SNG 게임 paying rate 는 2% 이하(1.5 ~ 2.0%)
+ * non-paying user 98% 에게는 광고로 돈을 벌자.
+ * Zynga 는 Display Ad 를 왜 포기했나? - 자사 게임을 홍보하기 위해
+ * SNG 에서는 CPA 형태가 맞다고 생각한다. Scam 이라는 욕 안 먹을 방법을 고민중이다.
+ * SNS 는 ARPU(Average revenue per user : 고객 1인당 평균 매출) 가 낮다.
+ * Zynga와 tech crunch의 싸움
+  * [http://techcrunch.com/2009/11/02/scamville-zynga-says-13-of-revenue-comes-from-lead-gen-and-other-offers/ Scamville: Zynga Says 1/3 Of Revenue Comes From Lead Gen And Other Offers]
+  * [http://www.businessinsider.com/exclusive-zynga-says-offers-are-just-10-of-revenues-2009-11 Exclusive: Zynga Says Offers Were Just 10% Of Revenues]
+  * [http://techcrunch.com/2009/11/02/zynga-takes-steps-to-remove-scams-from-games/ Zynga Takes Steps To Remove Scams From Games]
+  * [http://techcrunch.com/2009/11/06/zynga-scamville-mark-pinkus-faceboo/ Zynga CEO Mark Pincus: "I Did Every Horrible Thing In The Book Just To Get Revenues"]
+  * [http://techcrunch.com/2010/01/12/zynga-tiptoes-back-into-offers/ Zynga Tiptoes Back Into Offers]
+  * [http://www.businessinsider.com/fred-wilson-bashes-techcrunchs-scamville-series-defends-zynga-2010-1 TechCrunch's ScamVille "S---storm" Was "Unfair," Says Zynga Investor]
+
+== 오영욱 (플로우게임즈, gamemook.com) : 웹게임 아포칼립스 포스트모텀 - 클라이언트 프로그래머의 시각에서  ==
+ * [http://antilove.egloos.com/4365373 발표자료]
+ * [http://framework.zend.com/ Zend Framework] / [http://www.postgresql.org/ PostgreSQL] / ActionScript 3.0 / Apache / PHP
+ * 개발자 6명이서 7 개월
+ * 좋았던 점
+  * 전략 게임이 아닌 RPG - 새로운 장르
+  * 작고 효율적으로 개발, vision 유지
+  * 웹 + 게임 프로그래머가 같이 있어서 협동 가능
+  * UI 빼고 원화까지 모두 외주, Flash, 단위 테스트, 지속적인 통합 사용
+ * 아쉬웠던 점
+  * 전략이면 더 좋지 않았을까, RPG 다 보니 시행착오 많았다.
+  * 잘 알려지지 않은 프레임워크(Zend?) 라 어려웠고, 사람 구하기도 쉽지 않음
+  * 너무 빨리 open 했다.
+  * 전투가 너무 복잡하다.
+ * 게임이 좀 더 소셜해지기 위해 다음의 [http://yozm.daum.net/ yozm(요즘)]과 연동했다.
+
+== 권혁민 (넥슨 모바일) : SNS 온라인게임 컨셉 접근사례 & SNS 접근 방안 ==
+ * Six Degress ??
+ * DONAT - Monetization of social networks ??
+ * SVW ??
+ * virtual world by section ??
+ * 여성층이 두텁다.
+ * SNS 은 오프라인도 지향해야 하지 않을까
+  * 일본 MIXI 에서 낚시하면 실제로 물고기를 배달해준다.
+  * SNS 의 키는 '사람들간의 소통'
+
+== 김유 (자라자공작소 대표) : 회사소개, 감성컨텐츠 개발 서비스스케치판 소개 ==
+ * [http://antilove.egloos.com/4365379 발표자료]
+ * [http://sketchpan.com/ 스케치판]
+ * 매니아보다는 키즈 시장이 크더라
+ * 댓그림 PCT(Patent Cooperation Treaty. 국제 특허 협약) 출원
+ * '[http://www.yes24.com/24/goods/2984687 그리자, 동물의 숲]' 책 내고 방과후 학습교재로 썼는데, 애들이 너무 몰려서 서비스 종료했다.
+ * [http://characterking.com/184 만다라 서비스](다음달에 오픈)를 만들어 차병원 심리 치료 분야와 협력 모색 중.
+  * 이걸 직접 보여줬으면 임팩트가 있었을 것을
+ * 여러 명이서 같이 그리는 라이브판
+ * Anysketch, Anywhere 를 추구함
+ * 오로라 월드의 [http://ko.wikipedia.org/wiki/%EC%9C%A0%ED%9B%84%EC%99%80_%EC%B9%9C%EA%B5%AC%EB%93%A4 '유후와 친구들'] 작업도 했었다.
+
+== 박준승 (JCE)  : 회사 및 프로젝트 소개 ==
+ * [http://antilove.egloos.com/4365382 발표자료]
+ * JCE : enJoy Creative Energy (JCE 입사 준비하는 사람들은 꼭 외우자.)
+ * 모토 : '세상에 없던 재미를 창조합니다' -> 이거 때문에 재미가 검증 안 된 새로운 게임을 계속 도전하느라 지난 몇 년간 JCE 가 고생한 거 같다. 
+ * SNG 는 기존 online game 과는 다르다.
+  * 후임병이었던 사람이 5년 만에 쪽지 남긴 말이 '배추 좀 가져갈께요'
+  * 결국 게임 덕분에 만나서 술 한잔 할 수 있게 됨. 사회적 고마움을 느꼈다.
+ * SNG 는 나의 관계를 더 가깝게 해 주는 도구다
+ * 우리의 유저들은 너무 외롭다.
+  * 그래서, 합법적인 관음([http://www.afreeca.com/  아프리카]) 이 돈을 벌고 있다.
+
+== 김윤상 - 온라인 게임회사에서 소셜게임 만들기 ==
+ * [http://antilove.egloos.com/4365402 발표자료]
+ * 온라인 게임회사에서 소셜게임 만들기
+ * SNG 의 핵심은 - 친구 목록(내 집 & 다른 사람의 집)과 소셜 인터랙션
+ * 메신저에 게임을 연동하면 어떨까?
+ * 넥슨별이 웹기반이었으면 더 좋지 않았을까
+
+== SK 커뮤니케이션즈  : 네이트 앱스토어 소개 ==
+ * [http://antilove.egloos.com/4366035 발표자료]
+ * 앱스 620만개, uninstall 포함하면 800만개
+  * 160만명이 앱스 설치(싸이월드 전체 2500만의 5%)
+  * 일 평균 UV : 257,000, PV : 3백만, 평균 설치 : 5만 3천 / 일(..인가?)
+ * 이런 정보를 매주 월요일마다 회원 개발사에게 공개 (오늘 발표자료도 공개할 수 있음)
+  * 내부에서 우려도 있었지만, 공개하는 게 맞다고 해서 밀어붙임
+ * 요즘은 [http://appstore.nate.com/Main/View?apps_no=514 Bejeweled] 덕분에 또 사용량 올라가고 있다. (1주일에 5만명?)
+ * 육성 시뮬을 만들어야 한다. 일반 캐주얼 게임은 3개월을 못 가지만, 육성 게임은 sustainable 하다.
+  * 그리고 육성 게임은 싸이월드에 어울린다. 싸이월드 사용자는 self-express 에 돈 쓰는데 익숙하다.
+  * 10 - 15 man/month 가 필요한데, 이걸 몇 번 실패해도 계속 할 수 있도록 지원해 줘야 한다.
+  * 한 업체당 무조건 1억씩 펀딩해 주고 그랬다. (구글?)
+ * viral 이 약하다는 얘기가 있지만, 커넥트가 들어가서 좀 나아질 것이다.
+ * "플랫폼 프로바이더로써 저희가 보여드리려고 하는 철학은 'Humble'입니다."
+ * "가득 차 있으면 채울 수 없죠."
+ * 게임이 재미 없으면 아무리 platform provider 가 잘 해 볼려고 해도 안 되더라.
+ * 개발자 세미나 여러 번 해 봤지만, 개발자는 decision power 가 없어서 크게 도움이 안 되더라.
+ * 서드 파티들에게 IDC 서버 지원같은 계획은 없는지? -> 여러 가지 알아보고 있다.
+ * 75 개 라인업 중에 국내산 앞바퀴(다른 앱을 끌고나갈) 가 4 개는 준비되어 있다.
+ * promotion 요청이 가장 많아서, 매달 좋은 앱을 선택해 프로모션 할 생각이다.
+ * 게임 외에도 에듀케이션 등을 고려하고 있다. 19 금은 허용하지 않는다.
+ * 스마트폰 지원 계획
+  * 옴니아, 안드로이드용 flash player 를 만들었다.
+  * 소셜, 인증 API 준비 중(아이폰 용도 6월 이후에 공개 예정)
+  * 2AM 보다는 현금 이벤트(1등 50만원) 이 더 효과 있더라
+ * 네이트온 버디 리스트 API 는 6 월쯤에 공개 예정
+ * 앱 평가 시스템은 없을 것이다. facebook 도 verify system 없앴다. 평가는 사용자가 하는거다.
+ * 외국인(주민등록 번호 같은 문제) 에 대한 배려는? 정부 정책이 바뀌지 않으면 어렵다.
+ * [http://www.newsprime.co.kr/news/articleView.html?idxno=117580 하지만 2010년 02월 01일. 네이트 앱스토어, 매출 꼴랑 1억원 돌파]
+
+== 카츠로우 발표 ==
+ * [http://antilove.egloos.com/4365418 발표자료]
+ * [http://vimeo.com/10464490 카츠로우 발표 동영상 - 소셜 게임 파티]
+ * 오픈한지 3개월, 팔린 튀김갯수 1100개
+ * 웹 방문 횟수 : 7297 명
+ * NHN 지도 평점 13명이 9.2점
+ * 새우카츠 잘 먹을께요.
+
+== 다른 후기들 ==
+ * [http://characterking.com/185 김유 대표의 소셜 게임 후기]
+
+== 소셜 게임 관련글 ==
+ * [http://beforu.egloos.com/4365608 GDC2010 소셜 & 온라인 게임 서밋, 3월 10일자 요약]

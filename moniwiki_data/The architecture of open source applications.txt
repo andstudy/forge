@@ -1,0 +1,56 @@
+== 참석자 ==
+ * 김명관 : https://twitter.com/mkkim1129, 010-삼삼2사-사4이3
+ * 현수명 : [http://twitter.com/soomong @soomong] , [http://soomong.net Blog]
+
+== 참고자료 ==
+ * http://www.aosabook.org/en/index.html
+
+== 발표순서 ==
+=== 10월 27일 ===
+=== 11월 03일 ===
+ * 신승백 - [http://www.aosabook.org/en/pjs.html Processing.js]
+ * 박일 - [http://www.aosabook.org/en/eclipse.html Eclipse]
+ * 현수명 - [http://www.aosabook.org/en/distsys.html Scalable Web Architecture and Distributed Systems] [http://www.slideshare.net/soomong/aosa]
+  [http://helloworld.naver.com/helloworld/206816 helloworld.naver.com : 확장성 있는 웹 아키텍처와 분산 시스템(번역)]
+
+=== 11월 10일 ===
+ * 김명관 - [http://www.aosabook.org/en/vtk.html VTK] [http://www.slideshare.net/mkkim1129/vtk]
+ * 문현진 - [http://www.aosabook.org/en/audacity.html Audacity] 
+ 
+=== 11월 17일 ===
+ * 장수윤 - [http://www.aosabook.org/en/llvm.html LLVM]
+ * 김지훈 - [http://www.aosabook.org/en/packaging.html Python Packaging] [http://www.slideshare.net/devgrapher/python-packaging-15217997]
+ * 박종석 - [http://www.aosabook.org/en/nosql.html The NoSQL Ecosystem]
+
+=== 11월 24일 ===
+ * 이상훈 - [http://www.aosabook.org/en/gdb.html GDB]
+ * 박진형 - [http://www.aosabook.org/en/pypy.html pypy]
+
+=== 12월 01일 ===
+ * 박진호 - [http://www.aosabook.org/en/git.html Git]
+ * 문대혁 - [http://www.aosabook.org/en/hdfs.html The Hadoop Distributed File System]
+ * 주남정 - [http://www.aosabook.org/en/nginx.html nginx]
+
+=== 12월 08일 ===
+ * 손인엽 - [http://www.aosabook.org/en/bdb.html Berkeley DB]
+ * 전효성 - [http://www.aosabook.org/en/cmake.html CMake]
+ * 문현진 - [http://www.aosabook.org/en/ironlang.html The Dynamic Language Runtime and the Iron Languages]
+ * 변희남 - 
+ * XXX -
+
+=== 12월 15일 ===
+ * 박진형 - [http://www.aosabook.org/en/pypy.html pypy] 고급반
+ 
+=== 후보 ===
+
+
+== 회비 ==
+|| 날짜 || 수입 || 지출 || 잔고 || 비고 ||
+|| 2012-10-27 || 40 ||  || 40 || 회비입금(박진형, 신승백, 장수윤, 박일, 김지훈, 주남정, 손인엽, 전효성) ||
+|| 2012-10-27 ||  || 9.9 || 30.1 || 토즈사용료 ||
+|| 2012-11-03 || 30 ||  || 60.1 || 회비입금(현수명, 박종석, 문대혁, 이상훈, 박진호, 변희남) ||
+|| 2012-11-03 ||  || 14.85 || 45.25 || 토즈사용료 ||
+|| 2012-11-10 ||  || 6.75 || 38.5 || 토즈사용료 ||
+|| 2012-11-17 ||  || 6.075 || 32.425 || 토즈사용료 ||
+|| 2012-11-24 ||  || 6.75 || 25.675 || 토즈사용료 ||
+|| ||  ||  ||  || 회비입금(문현진) ||

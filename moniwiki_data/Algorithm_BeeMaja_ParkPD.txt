@@ -1,0 +1,260 @@
+ 아이큐 테스트 같은 문제군요.
+
+{{{#!vim c
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <deque>
+#include <list>
+#include <stack>
+#include <string>
+#include <algorithm>
+#include <map>
+#include <limits>
+#include <assert.h>
+#include <iomanip>
+#include <math.h>
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+#include <Windows.h>
+#endif
+
+using namespace std;
+
+// Minimum Spanning Tree -> Prim Algorithm 을 생각하며 풀었음.
+
+namespace ATUtil
+{
+	bool IsInRange(int value, int from, int to)
+	{
+		return (from <= value) && (value <= to);
+	}
+
+	int ConvertToIndex(char c)
+	{
+		if ('a' <= c && c <= 'z')
+		{
+			return c - 'a';
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	char ConvertToChar(int i)
+	{
+		return (char)i + 'a';
+	}
+
+#ifdef _UNIT_TEST
+	class CStopWatch
+	{
+	public:
+		CStopWatch()
+		{
+			m_StartTick = GetTickCount();		// gcc 에서 안 될 수 있으니까
+		}
+
+		~CStopWatch()
+		{
+			cout << "Time passed : " << GetTickCount() - m_StartTick << " milisec.\n";
+		}
+
+		int m_StartTick;
+	};
+#endif
+
+	typedef map<int, int> IntDB;
+	typedef vector<int> Ints;
+	typedef list<int> IntList;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+#ifdef max
+#undef max
+#endif
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+	///////////////////////////////////////////////////////////////
+	// CSolver
+	class CSolver
+	{
+	public:
+		enum { MAX_COMB = 100001 };
+
+		struct OffsetData
+		{
+			OffsetData() {}
+			OffsetData(int x, int y) : m_X(x), m_Y(y) {}
+			int m_X;
+			int m_Y;
+		};
+
+		CSolver()
+		{
+			Init();
+		}
+
+		void Init()
+		{
+			// 6:00  ( 0,  1)
+			// 7:30  (-1,  1) (한 개 작게), 
+			// 10:30 (-1,  0)
+			// 12:00 ( 0, -1)
+			// 1:30  ( 1, -1)
+			// 4:30  ( 1,  0)
+			int direction[6][3] = {
+				{0,  0,  1},
+				{1, -1,  1},
+				{0, -1,  0},
+				{0,  0, -1},
+				{0,  1, -1},
+				{0,  1,  0}
+			};
+
+			int index = 1;
+			int iter = 1;
+
+			int x = 0;
+			int y = 0;
+			m_Data[index++] = OffsetData(x, y);
+
+			while (1)
+			{
+				for (int d = 0; d < 6; ++d)
+				{
+					for (int i = 0; i < iter - direction[d][0]; ++i)
+					{
+						if (MAX_COMB <= index)
+						{
+							return;
+						}
+
+						x += direction[d][1];
+						y += direction[d][2];
+						m_Data[index++] = OffsetData(x, y);
+					}
+				}
+
+				++iter;
+			}
+		}
+
+		void Input(int num, int& x, int& y)
+		{
+			x = m_Data[num].m_X;	
+			y = m_Data[num].m_Y;
+		}
+
+		OffsetData m_Data[MAX_COMB];
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CConsole
+	class CConsole
+	{
+	public:
+		static void ConsoleTest(istream& input, ostream& output);
+	};
+
+	void CConsole::ConsoleTest(istream& input, ostream& output)
+	{
+		CSolver s;
+		int num, x, y;
+		while (input >> num)
+		{
+			s.Input(num, x, y);
+			output << x << " " << y << '\n';
+		}
+	};
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase()
+	{
+	}
+
+	int x, y;
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, Input)
+{
+	CSolver g;
+	int tests[] = {1, 0, 0, 2, 0, 1};
+	for (int i = 0; i < sizeof(tests) / sizeof(int); i += 3)
+	{
+		g.Input(tests[i], x, y);
+		CHECK_EQUAL(tests[i + 1], x);
+		CHECK_EQUAL(tests[i + 2], y);
+	}
+}
+
+TEST_FIXTURE(FixtureBase, ConsoleTest)
+{
+	input << 
+		"1\n"
+		"2\n"
+		"3\n"
+		"4\n"
+		"5\n"
+		;
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL( 
+		"0 0\n"
+		"0 1\n"
+		"-1 1\n"
+		"-1 0\n"
+		"0 -1\n",
+		output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

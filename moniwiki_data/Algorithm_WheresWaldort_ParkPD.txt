@@ -1,0 +1,312 @@
+[http://lagoons.net/tt/159 toupper 에러 참고내용]
+ [http://www.devx.com/getHelpOn/Article/9702/1954?pf=true 하나 더]
+ Presentation 에러납니다.
+ * 두 테스트 케이스 사이에서만 개행해야 합니다. 마지막 테스트 케이스 결과를 출력한후 개행이 있으면 PE가 납니다. 
+
+{{{
+/* @JUDGE_ID:parkpd 10038 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <strstream>
+#include <algorithm>
+
+using namespace std;
+
+bool IsInRange(int value, int from, int to)
+{
+	return (from <= value) && (value <= to);
+}
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+class CWordGrid
+{
+public:
+	static bool ConsoleTest(istream& input, ostream& output);
+
+	CWordGrid() : m_Row(0), m_Col(0) {}
+
+	void Init(int row, int col);
+	void InputData(int row, string data);
+	bool FindString(string str, int& row, int& col);
+	bool Find(const string& str, int row, int col);
+	bool IsSame(int row, int col, char c);
+
+	int m_Row;
+	int m_Col;
+	char m_Data[51][51];	//
+};
+
+void CWordGrid::Init(int row, int col)
+{
+	m_Row = row;
+	m_Col = col;
+}
+
+void CWordGrid::InputData(int row, string data)
+{
+	// 전부 대문자로 바꾼다.
+	transform(
+		data.begin(), data.end(), 
+		data.begin(),
+		//toupper);		// gcc 에서 이거 에러남. -.-;;
+		(int(*)(int)) toupper);
+
+	//strcpy_s(m_Data[row], data.c_str());
+	strcpy(m_Data[row], data.c_str());
+}
+
+bool CWordGrid::FindString(string str, int& row, int& col)
+{
+	transform(
+		str.begin(), str.end(), 
+		str.begin(),
+		//toupper);
+		(int(*)(int)) toupper);
+
+	for (int r = 0; r < m_Row; ++r)
+	{
+		for (int c = 0; c < m_Col; ++c)
+		{
+			if (Find(str, r, c))
+			{
+				row = r;
+				col = c;
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+namespace
+{
+	// <- 부터 시계방향으로 이동
+	const int Directions[8][2] = 
+	{
+		{-1,  0},	// <-
+		{-1, -1},
+		{ 0, -1},	// 위로
+		{ 1,  1},
+		{ 1,  0},	// ->
+		{ 1,  1},
+		{ 0,  1},	// 아래로
+		{-1,  1}
+	};
+}
+
+bool CWordGrid::Find(const string& str, int row, int col)
+{
+	if (m_Data[row][col] != str[0])
+	{
+		return false;
+	}
+
+	const int length = (int)str.length();
+
+	// 8 방향으로 테스트하기
+	for (int i = 0; i < 8; ++i)
+	{
+		bool found = true;
+		int r = row;
+		int c = col;
+
+		for (int j = 1; j < length; ++j)
+		{
+			r += Directions[i][0];
+			c += Directions[i][1];
+			if (!IsSame(r, c, str[j]))
+			{
+				found = false;
+				break;
+			}
+		}
+
+		if (found)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool CWordGrid::IsSame(int row, int col, char c)
+{
+	if (!IsInRange(row, 0, m_Row - 1) || !IsInRange(col, 0, m_Col - 1))
+	{
+		return false;
+	}
+
+	return c == m_Data[row][col];
+}
+
+bool CWordGrid::ConsoleTest(istream& input, ostream& output)
+{
+	int num = 0;
+	if (!(input >> num))
+	{
+		return false;
+	}
+
+	// 연산자 우선순위 주의
+	if (num <= 0)
+	{
+		return false;
+	}
+
+	string inputString;
+	int row;
+	int col;
+
+	for (int i = 0; i < num; ++i)
+	{
+		CWordGrid grid;
+
+		input >> row >> col;
+		grid.Init(row, col);
+
+		getline(input, inputString);
+
+		for (int r = 0; r < row; ++r)
+		{
+			getline(input, inputString);
+			grid.InputData(r, inputString);
+		}
+
+		int inputNum = 0;
+		input >> inputNum;
+
+		getline(input, inputString);
+
+		int rowOut = 0;
+		int colOut = 0;
+		for (int i = 0; i < inputNum; ++i)
+		{
+			getline(input, inputString);
+			grid.FindString(inputString, rowOut, colOut);
+			output << rowOut + 1 << ' ' << colOut + 1 << '\n';
+		}
+
+		output << '\n';
+	}
+
+	return true;
+}
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CWordGrid::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureWordGrid : public CWordGrid
+{
+	int row;
+	int col;
+
+	stringstream testCin;
+	stringstream testCout;
+};
+
+TEST_FIXTURE(FixtureWordGrid, InputData)
+{
+	string data1 = "123";
+	string data2 = "567";
+	InputData(0, data1);
+	InputData(1, data2);
+	InputData(1, data1);
+}
+
+TEST_FIXTURE(FixtureWordGrid, FindString)
+{
+	CHECK(!FindString("hi", row, col));
+}
+
+struct FixtureSetupWordGrid : public FixtureWordGrid
+{
+	FixtureSetupWordGrid()
+	{
+		Init(2, 2);
+		InputData(0, "hi");
+		InputData(1, "ab");
+	}
+};
+
+TEST_FIXTURE(FixtureSetupWordGrid, IsSame)
+{
+	CHECK(IsSame(0, 0, 'H'));
+	CHECK(IsSame(0, 1, 'I'));
+	CHECK(!IsSame(1, 0, 'H'));
+	CHECK(!IsSame(1, 1, 'H'));
+
+	// 범위를 벗어나는 녀석들도 false 시켜줘야 한다.
+	CHECK(!IsSame(-1, -1, 'H'));
+	CHECK(!IsSame(5, 3, 'H'));
+}
+
+TEST_FIXTURE(FixtureSetupWordGrid, FindString)
+{
+	CHECK(Find("HI", 0, 0));
+}
+
+TEST_FIXTURE(FixtureWordGrid, ConsoleTest)
+{
+	string input =
+		"1\n\n"
+		"8 11\n"
+		"abcDEFGhigg\n"
+		"hEbkWalDork\n"
+		"FtyAwaldORm\n"
+		"FtsimrLqsrc\n"
+		"byoArBeDeyv\n"
+		"Klcbqwikomk\n"
+		"strEBGadhrb\n"
+		"yUiqlxcnBjf\n"
+		"4\n"
+		"Waldorf\n"
+		"Bambi\n"
+		"Betty\n"
+		"Dagbert";
+
+	testCin << input;
+	CWordGrid::ConsoleTest(testCin, testCout);
+	
+	CHECK_EQUAL("2 5\n2 3\n1 2\n7 8\n", testCout.str());
+};
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

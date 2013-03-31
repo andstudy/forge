@@ -1,0 +1,140 @@
+= 미발표 목록 =
+ * 애플리케이션 아키텍처는 애플리케이션 성능을 결정한다 Randy Stafford 
+ * 요구된 기능에서 가치 추구하기 Einar Landre 
+ * 모든 것은 궁극적으로 실패하게 된다 Michael Nygard 
+ * 한 줄의 실행되는 코드가 500줄의 명세(스펙)만한 가치를 한다 Allison Randal 
+ * 한번에 딱 맞는 해결책은 없다 Randy Stafford
+ * 성능은 조기에 고려해야 한다 Rebecca Parsons 
+ * 아키텍팅이란 균형에 관한 것이다 Randy Stafford 
+ * 한 가지 이상의 방식이 존재할 수 있다 Keith Braithwaite
+ * 비즈니스 추진력 Dave Muirhead 
+ * 지속적으로 통합하라 David Bartlett
+ * 요새 같은 데이터베이스를 구축하라 Dan Chak 
+ * 설계의 기준으로써 불확실성을 사용하라 Kevlin Henney 
+ * 주의 : 거울로 보이는 문제는 보이는 것보다 클 수 있다 Dave Quick 
+ * Architecture에 I는 없다 Dave Quick
+ * 1000피트의 뷰를 가져라 Erik Doernenburg 
+ * 결정하기 전에 시도하라 Erik Doernenburg  
+ * 프로그래밍은 새로운 제품을 설계하는 행위와 같다 Einar Landre 
+ * 소프트웨어 아키텍트는 단지 소문자 a를 나타낸다. 소문자 a처럼 행동하라 Barry Hawkins 
+ * 쇼맨십을 넘는 가치 있는 청지기 정신 Barry Hawkins 
+ * 소프트웨어 아키텍처에도 윤리가 있다 Michael Nygard 
+ * 마천루는 확장할 수 없다 Michael Nygard 
+ * 이질성의 승리 Edward Garson 
+ * 모든 것은 성능에 관한 것이다 Craig Russell 
+ * 백지 위에 아키텍트 Michael Nygard 
+ * 건축물을 짓는 건축가에게 배워라 Keith Braithwaite 
+ * 제어하지 말아라. 대신 관찰하라 Gregor Hohpe 
+ * 아키텍트의 초점은 경계와 인터페이스에 있다 Einar Landre
+ * 개발자에게 권한을… Timothy High
+ * 패턴 중독 Chad LaVigne 
+ * 아키텍처 메타포어를 확대 해석하지 말자 David Ing 
+ * 두 개를 선택할 마음의 준비를 하라 Bill de hora 
+ * 견해, 취향보다는 원리, 원칙, 유추를 먼저 고려하라 Michael Harmer 
+ * 설계하기 전에, 그것을 먼저 코드화할 수 있어야 한다 Mike Brown 
+ * ROI 변수 George Malamidis 
+ * 여러분의 시스템이 레거시인 것을 고려해 설계하라 Dave Anderson 
+ * 단 하나의 솔루션만 있다면, 다른 의견을 구하라 Timothy High
+ * 변화의 충격을 이해하라 Doug Crawford 
+ * 하드웨어 역시 이해해야 한다 Kamal Wickramanayake 
+ * 손쉬운 방법은 훗날 이자가 붙어 되돌려 받게 된다 Scot Mcphee
+ * ‘좋은 아이디어’를 피하라 Greg Nyberg 
+ * 훌륭한 콘텐츠는 훌륭한 시스템을 만든다 Zubin Wadia 
+ * 영업부서와 화가 난 아키텍트의 대결 구도 Chad LaVigne 
+ * 시스템을 검증하기 위해 범위를 늘려라 Stephen Jones 
+ * 장미를 장미라 부르지 않으면, 결국 양배추가 된다 Sam Gardiner 
+ * 자신의 결정에 책임감을 가져라 Yi Zhou 
+ * 영악하지 말자 Eben Hewitt 
+ * 주의깊게 무기를 선택하고, 신중하게 내려 놓아라 Chad LaVigne 
+ * 다른 프레임워크와 잘 어울리는 프레임워크를 선택하라 Eric Hawthorne 
+ * 탄탄한 비즈니스 사례를 만들어라 Yi Zhou 
+ * 코드뿐만 아니라 데이터도 제어하라 Chad LaVigne 
+ * 열정적인 문제 해결사들을 찾고 유지하라 Chad LaVigne 
+ * 소프트웨어는 실제로 존재하지 않는다 Chad LaVigne 
+ * 사용자 수용성 문제 Norman Carnovale 
+ * 훌륭한 소프트웨어는 만들어지는 것이 아니라 성장하는 것이다 Bill de hora 
+ * 정경유착 김동열 
+ * 소프트웨어 아키텍트에게 필요한 세 가지 역량 류한석 
+ * 컨설팅 그리고 사과 손영수 
+ * ‘공통’은 모든 사람들이 접근하는 광장이다 이충헌 
+ * 소프트웨어를 넘어 시스템으로, 아키텍처를 넘어 시스템으로 이해일  
+
+
+== 김성안 ==
+ * 정량화시켜라 Keith Braithwaite 
+ * 경험과 지식을 공유하라 Paul W. Homer 
+ * 운영과 유지 보수에 집중하라 Mncedisi Kasper 
+ * 최종사용자에게는 인터페이스가 시스템이다 Vinayak Hegde 
+ * 근면성이 필요하다 Brian Hart 
+
+== 전효성 ==
+ * 시간은 모든 것을 바꾼다 Philip Nelson 
+ * 범위는 성공의 적이다 Dave Quick 
+ * 결정에 대한 근거를 남겨라 Timothy High
+ * 가정에 도전하라. 특히 여러분이 세운 가정에! Timothy High 
+ * 완벽함은 충분함의 적이다 Greg Nyberg 
+
+
+
+== 이재정 ==
+ * 본질적인 복잡성을 단순화시키고 예상치 못한 복잡성을 줄여라 Neal Ford
+ * 문제가 안정적이어야 높은 품질의 솔루션을 얻을 수 있다. Sam Gardiner
+ * 데이터가 핵심이다. Paul W.Homer
+ * 걸어다니는 해골로 시작하라 Clint Shank
+ * 일어서라 Udi Dahan
+
+== 박일 ==
+ * 고객의 요구사항보다 여러분의 이력에 더 우선순위를 두지 말라 Nitin Borwankar
+ * 일반화 이전에 단순화, 재사용성 이전에 사용성`Kevlin Henney 
+ * 구현 가능한 것만 설계해야 한다 Mike Brown 
+ * 여러분의 고객은 여러분의 진정한 고객이 아니다 Eben Hewitt
+ * 편리한 시스템을 구현하라 Keith Braithwaite
+
+== 김한솔 ==
+ * 여러분은 생각보다 더 자주 협상한다 Michael Nygard 
+ * 소통이 왕이라면, 명확성과 리더십은 그의 신하이다 Mark Richards 
+ * 정황이 왕이다 Edward Garson 
+ * 드워프, 엘프, 마법사, 그리고 왕 Evan Cofsky 
+ * 현실 세계에 오신 것을 환영합니다`Gregor Hohpe 
+
+== 윤덕현 ==
+ * 가장 큰 문제는 기술이 아니다 Mark Ramm 
+ * 아키텍처적인 트레이드오프를 고려하라 Mark Richards
+ * 아키텍트는 직접 실무를 담당해야 한다 John Davies
+ * 불나방과 프로젝트 박현철 
+ * 새로운 언어를 배워라 Burkhardt Hufnagel
+
+== 이영권 ==
+ * 커밋하고 도망가는 것은 범죄다 Niclas Nilsson (p30)
+ * 일정을 지켜라 Norman Carnovale (p42)
+ * 개발자에게 자율성을 부여하라 Philip Nelson (p64)
+ * 간단한 것은 간단하게 하라 Chad LaVigne (p124)
+ * 보이는 것처럼 그렇게 되지 않는다 Peter Gillard-Moss (p166)
+
+== 김민혜 ==
+ * 재사용은 단지 아키텍처뿐 아니라 사람과 교육에 관한 것이다 Jeremy Meyer (52)
+ * 비즈니스 도메인 이해하기 Mark Richards (60)
+ * 반복 작업과 싸워라 Niclas Nilsson (92)
+ * 야누스 아키텍트 David Bartlett (98)
+ * 문제 해결사가 되지 말라 Eben Hewitt (176) 
+
+== 발표자 이름 쓰세요 ==
+ * 미발표 목록에서 발표하고자 하는 항목을 이곳으로 옮기세요.
+2011.06.18 (참석자 12명)
+김성안,김홍준,이재정
+
+2011.06.25 (참석자 12명)
+김한솔,박 일,이영권
+
+2011.07.02
+
+
+= 회비 =
+|| 날짜 || 수입 || 지출 || 잔고|| 비고||
+|| 이월금 ||  ||  || 43,000 || ||
+|| 2011.06.18 || 270,000 || || 313,000 || 회비입금(김민혜,이성훈,현수명,김성안,이재정,박 일,이영권,강효원,박솔이) ||
+|| 2011.06.18 || || 90,000 || 223,000 || 토즈이용 ||
+|| 2011.06.25 || || 90,000 || 133,000 || 토즈이용 ||
+|| 2011.07.02 || 60,000 || || 193,000|| 회비(전효성, 김홍준) ||
+|| 2011.07.02 || || 90,000 || 103,000|| 토즈이용 ||
+

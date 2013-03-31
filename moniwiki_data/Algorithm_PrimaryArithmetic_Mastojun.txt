@@ -1,0 +1,131 @@
+= 문제 풀이 =
+숫자를 입력받아 한자리씩 더하면서 올림이 발생하는지를 알아야 하는데, 한자리씩 접근하는것은 숫자보다 문자열 형태가 편할꺼라는 생각에 그렇게 코딩해서 제출했습니다.
+
+그리고.. 작년에 제출했던 코드를 열어보니 올림이 발생할때 자리수의 규칙을 나름대로 정리해서 만들었던듯 하네요 @_@)
+
+작년 코드를 보니 숫자로 입력받아 한자리씩 더하면서 풀어도 됐을법 하더군요. 왜 문자열로 했지 -_-;;
+
+= 소스코드 ANSI C =
+{{{
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	char a[11], b[11];
+	int len_a, len_b, carry, result;
+
+	while( scanf("%s %s", a, b) )
+	{
+		if( a[0] == '0' && b[0] == '0' ) 
+		{
+			break;
+		}
+
+		len_a = strlen(a)-1;
+		len_b = strlen(b)-1;
+
+		result	= 0;
+		carry	= 0;
+		while( len_a >= 0 && len_b >= 0 )
+		{
+			if( a[len_a]-'0' + b[len_b] - '0' + carry >= 10 )
+			{
+				result++;
+				carry = 1;
+			}
+			else
+			{
+				carry = 0;
+			}
+			len_a--;
+			len_b--;
+		}	
+
+		while( len_a >= 0 )
+		{
+			if( a[len_a]-'0' + carry >= 10 )
+			{
+				result++;
+				carry = 1;
+			}
+			else
+			{
+				carry = 0;
+			}
+			len_a--;
+		}
+
+		while( len_b >= 0 )
+		{
+			if( b[len_b] - '0' + carry >= 10 )
+			{
+				result++;
+				carry = 1;
+			}
+			else
+			{
+				carry = 0;
+			}
+			len_b--;
+		}
+
+		if(result)
+		{
+			printf("%d", result);
+			if( result == 1) printf(" carry operation.\n");
+			else		 printf(" carry operations.\n");
+		}
+		else
+		{
+			printf("No carry operation.\n", result);
+		}
+		
+	}
+
+	return 0;
+}
+}}}
+
+= 작년에 제출했던 코드 =
+{{{
+#include <stdio.h>
+
+int main()
+{
+	int a, b;
+	int add, result;
+
+	while(1)
+	{
+		scanf("%d %d", &a, &b);
+
+		if( !a && !b) break;
+
+		result = 0;
+
+		add = a + b;
+
+		while(add)
+		{
+			if( add%10 < a%10 || add%10 < b%10 ) result++;
+			if( add%10 == a%10 && add%10 == b%10 && a%10 == 9) result ++;
+
+			a /= 10;
+			b /= 10;
+			add /= 10;
+		}
+
+		if(result)
+			if( result == 1)
+				printf("%d carry operation.\n", result);
+			else
+				printf("%d carry operations.\n", result);
+		else
+			printf("No carry operation.\n");
+	}
+
+	return 0;
+}
+
+}}}

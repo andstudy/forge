@@ -1,0 +1,4 @@
+1. 참석자 : 이동현, 강대명, 이수안, 서창우
+2. 발표자 :
+ * [Model-View-Controller architectural Pattern] : 서창우
+ * [Forwarder-Receiver Design Pattern] : 이동현 

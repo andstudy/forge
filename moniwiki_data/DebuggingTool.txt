@@ -1,0 +1,25 @@
+[http://blog.naver.com/PostView.nhn?blogId=process3&logNo=20053674503 LeakDiag]
+[http://support.microsoft.com/kb/268343 UMDH]
+
+[http://www.microsoft.com/whdc/devtools/debugging/default.mspx Debugging Tools for Windows - Overview]
+ [http://msdn.microsoft.com/en-us/library/cc267862.aspx Debugging Tools for Windows. List of Tools and Documentation]
+ [http://msdn.microsoft.com/en-us/library/cc266320.aspx Debugging Tools for Windows. CDB and NTSD]
+ [WinDbg]
+
+Application Verifier
+ [http://www.microsoft.com/DownLoads/details.aspx?familyid=C4A25AB9-649D-4A1B-B4A7-C9D8B095DF18&displaylang=en#filelist Download]
+ [http://www.hoons.kr/Board.aspx?Name=cshaptip&Mode=2&BoardIdx=435&Key=&Value= Windows Application Verifier 로 응용 프로그램 분석]
+
+Gflas
+ [http://technet.microsoft.com/en-us/library/cc738763%28WS.10%29.aspx Gflags.exe]
+ [http://byung.egloos.com/4752325 Gflags.exe - 기억속으로 날다]
+
+[http://technet.microsoft.com/en-us/sysinternals/bb896653.aspx Process Explorer v11.33]
+[http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx Process Monitor v2.6]
+
+[http://www.microsoft.com/whdc/devtools/WDK/default.mspx WinDDK]
+[http://www.wireshark.org/ Wireshark]
+[http://www.microsoft.com/DOWNLOADS/details.aspx?FamilyID=28bd5941-c458-46f1-b24d-f60151d875a3&displaylang=en Debug Diagnostic Tool v1.1]
+[http://www.microsoft.com/downloads/details.aspx?familyid=24da89e9-b581-47b0-b45e-492dd6da2971&displaylang=en Microsoft Application Compatibility Toolkit 5.5]
+[http://www.microsoft.com/downloads/details.aspx?familyid=C4A25AB9-649D-4A1B-B4A7-C9D8B095DF18&displaylang=en Microsoft Application Verifier]
+[http://blogs.msdn.com/lixiong/archive/2007/05/22/pageheap-download-here.aspx heappage]

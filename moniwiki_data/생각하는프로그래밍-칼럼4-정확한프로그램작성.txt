@@ -1,0 +1,179 @@
+[[TableOfContents]]
+
+= 칼럼 4. 정확한 프로그램 작성 =
+
+- 값의 인덱스 찾기 (이진탐색으로)
+[2, 8, 17, 29, 49]
+2 -> 0
+17 -> 2
+49 -> 4
+
+13 -> -1 (없는값)
+
+
+== 4.1 - 생각보다 어려운 이진 탐색 ==
+과제로 내어보았더니 대부분 버그 있었음
+이진 탐색이 발표된것은 1946년
+버그 없는 최초의 이진 탐색 코드는 1962년 (16년) - Knuth
+
+
+== 4.2 - 프로그램 작성 ==
+(책에 코드 설명)
+
+
+== 4.3 - 프로그램에 대한 이해 ==
+assert 사용 (과하다 싶을 정도로)
+
+
+== 4.4 - 원리 ==
+단정문
+ * 순차 구조
+ * 선택 구조
+ * 반복 구조
+  * 초기화에 의한 루프 불변식 성립
+  * 루프의 각 반복 전후에 불변식이 참
+  * 루프 종료시 항상 원하는 결과가 참
+  * 루프가 반드시 종료
+ * 함수
+  * 사전조건, 사후조건
+  * 계약에 의한 프로그래밍
+
+
+== 4.5 - 프로그램 검증의 역할 ==
+ * assert는 좋은것
+ * 어려운 부분보다 쉬운부분에서 버그 발생
+
+= 연습문제 =
+== 연습문제 1. ==
+ * 오버플로, 배열범위 assert(0<=l && l<=n), assert(-1<=u && u<=n)
+ * 정형화
+{{{
+mustbe(l,u) -> x[l-1] < t && x[u+1] > t
+(속임수 경계 요소 x[-1], x[n] 정의)
+}}}
+
+
+== 연습문제 2. ==
+178페이지
+(같은경우 비교 않음. 따라서 바로 리턴하지 않고 범위가 2개일때까지 반복)
+while l+1 != u
+
+
+== 연습문제 5. ==
+풀리지 않는 수학문제(???)
+
+
+== 연습문제 6. ==
+ * 종료증명
+한번 수행시 무조건 콩이 하나씩 줄어들기때문에 언젠가는 종료
+ * 마지막 콩 색 = f( 검은 콩 개수, 하얀 콩 개수) 의 함수 f는?
+하얀콩의 패리티(짝수, 홀수) 유지 (2개가 빠지거나 안 빠지거나)
+최초 하얀콩의 개수가 홀수면 마지막에 하얀콩이 남는다
+
+
+== 연습문제 7. ==
+이진탐색 - 한 점이 이 직선의 위인가 아래인가 비교
+이 기능을 위한 코드를 어떻게 작성 하겠는가? (글쎄?)
+
+
+== 연습문제 8. ==
+181페이지
+
+
+== 연습문제 (재귀적) ==
+result = middleIndex + subResult 주의
+
+{{{
+def binarySearch(aList, aNum)
+  if aList.empty? then return -1 end
+  
+  lower = 0
+  upper = aList.size-1
+
+  while true
+    if aNum < aList[lower] || aNum > aList[upper]
+      return -1
+    end
+
+    middleIndex = (lower + upper) / 2
+    middleValue = aList[middleIndex]
+    
+    if aNum < middleValue
+      lower = lower
+      upper = middleIndex - 1
+    elsif aNum > middleValue
+      lower = middleIndex + 1
+      upper = upper
+    elsif aNum == middleValue
+      return middleIndex
+    end
+  end
+      
+end
+
+def binarySearch2(aList, aNum)
+  if aList.empty? then return -1 end
+  if aNum < aList[0] || aNum > aList[-1]
+      return -1
+  end
+  
+  middleIndex = aList.size / 2
+  middleValue = aList[middleIndex]
+  
+  if aNum < middleValue
+    result = binarySearch(aList[0..middleIndex-1], aNum) 
+  elsif aNum > middleValue
+    subResult = binarySearch(aList[middleIndex..-1], aNum)
+    if subResult == -1
+      return -1
+    else
+      result = middleIndex + subResult
+    end
+  elsif aNum == middleValue
+    result = middleIndex
+  end
+  
+  return result
+end
+require 'test/unit'
+class TestBinarySearch < Test::Unit::TestCase
+  def testSimple
+    assert_equal(0, binarySearch([2], 2))
+    
+    assert_equal(0, binarySearch([2, 5], 2))
+    assert_equal(1, binarySearch([2, 5], 5))
+    
+    assert_equal(0, binarySearch([2, 5, 7], 2))
+    assert_equal(1, binarySearch([2, 5, 7], 5))
+    assert_equal(2, binarySearch([2, 5, 7], 7))
+    
+    assert_equal(0, binarySearch([2, 5, 7, 8], 2))
+    assert_equal(2, binarySearch([2, 5, 7, 8], 7))
+    assert_equal(3, binarySearch([2, 5, 7, 8], 8))
+    
+    aList = [0, 1, 2, 3, 4, 5]
+    assert_equal(0, binarySearch(aList, 0))
+    assert_equal(1, binarySearch(aList, 1))
+    assert_equal(2, binarySearch(aList, 2))
+    assert_equal(3, binarySearch(aList, 3))
+    assert_equal(4, binarySearch(aList, 4))
+    assert_equal(5, binarySearch(aList, 5))
+  end
+  
+  def testNotFound
+    assert_equal(-1, binarySearch([1], 0))
+    assert_equal(-1, binarySearch([1], 2))
+  end
+  
+  def testLoop
+    aList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10]
+    (0..aList.size-1).each do |i|
+      assert_equal(i, binarySearch(aList, aList[i]))
+    end
+    assert_equal(-1, binarySearch(aList, 9))
+    assert_equal(-1, binarySearch(aList, 999))
+    assert_equal(-1, binarySearch(aList, -1))
+  end
+end
+
+}}}

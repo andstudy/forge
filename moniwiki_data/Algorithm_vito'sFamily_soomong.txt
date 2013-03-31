@@ -1,0 +1,102 @@
+vito 가 원하는 지점을 찾지 않고 단순히 각 친척집들의 거리만을 계산해서 합했었네요. --
+다시 수정했습니다.
+
+
+VitoMain
+{{{
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+class VitoMain {
+	
+	public static void main(String args[])
+	{
+		VitoMain vito = new VitoMain();
+		
+		vito.run();
+	}
+	
+	public void run()
+	{
+		int testCase = Integer.parseInt(readLine());
+		String printResult = "";
+		
+		if( testCase <= 0 || testCase >= 500)
+			return;
+		
+		while(testCase != 0)
+		{			
+			printResult += "" + sumDistance(readLine()) + "\n";
+
+			testCase--;
+		}
+		
+		System.out.println(printResult);
+	}
+
+	/* sort 후 중간지점을 vito point 로 */
+	public int sumDistance(String in) 
+	{
+		ArrayList<Integer> famList = new ArrayList<Integer>();
+		String[] data = in.split(" ");
+			
+		for(int i=1; i< data.length ; i++)
+		{
+			famList.add(Integer.parseInt(data[i]));
+		}
+		
+		Collections.sort(famList);
+		
+		
+		int result=0;
+		
+		for(int i=0; i< famList.size(); i++)
+		{
+			result += Math.abs(famList.get(Integer.parseInt(data[0])/2) - famList.get(i));
+		}
+		
+		return result;
+	}
+
+	public String readLine()
+	{
+		String data = null;
+		
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			System.out.println("IOException " +e);
+		}
+		
+		return data;		
+	}
+	
+}
+}}}
+
+Junit
+{{{
+import junit.framework.TestCase;
+
+
+public class VitoMainTest extends TestCase {
+
+	VitoMain vito = new VitoMain();
+	
+	public void testAddVitoFam()
+	{
+		assertEquals("1",2,vito.sumDistance("2 2 4"));
+		assertEquals("1",4,vito.sumDistance("3 2 4 6"));
+		assertEquals("1",3,vito.sumDistance("2 5 2"));
+		assertEquals("1",5,vito.sumDistance("4 4 2 3 6"));
+		assertEquals("1",100,vito.sumDistance("5 2 3 4 5 100"));
+	}
+
+}
+}}}

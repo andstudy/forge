@@ -1,0 +1,93 @@
+== 문제 풀이 ==
+ * 아이디어
+ {{{
+1) 3 * 37 = 111
+    3 * 7 + 0 = 21
+    3 * 3 + 2 = 11
+
+2) 7 * 15873 = 111111
+    7 * 3 + 0 = 21
+    7 * 7 + 2 = 51
+    7 * 8 + 5 = 61
+    7 * 5 + 6 = 41
+    7 * 1 + 4 = 11
+}}}
+ 곱셈을 하는 방식을 응용.
+ 1) a := 0, b := 0, n := input number
+ 2) for i = 1 to 9
+    if n * i + a mod 10 == 1
+     break
+ 3) a := n * i + a divide 10
+ 4) b++
+ 5) if a 가 모두 1로 이루어져 있으면 (영어 능력 한계 -_-;)
+   output b + log10(a)+1;
+ 6) else goto 2)
+ 
+ * 단, 입력된 n의 배수중에 모든자리수가 1로 이루어진 숫자가 있어야함.
+
+== 소스코드 ==
+{{{#!gcode cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+bool isEnd(int);
+
+int main( )
+{
+	int number;
+	int Result;
+	int AddNumber;
+
+	while(~scanf("%d",&number))
+	{		
+		Result = 0;
+		AddNumber = 0;
+
+		if(isEnd(number))
+		{
+			AddNumber = number;
+		}
+		else
+		{
+			while(1)
+			{
+
+				if(isEnd(AddNumber))	break;
+
+				int TimesNumber = 0;
+				for(TimesNumber = 1; TimesNumber <= 9; TimesNumber++)
+				{
+					if((number*TimesNumber + AddNumber)%10 == 1) break;
+				}
+
+				Result++;
+				AddNumber = (number*TimesNumber + AddNumber)/10;
+			}
+		}
+
+		Result += (int)log10((double)AddNumber)+1;
+
+		printf("%d\n", Result);
+
+	}
+
+	return 0;
+
+}
+
+bool isEnd(int number)
+{
+	if(!number) return false;
+
+	while(number)
+	{
+		if(number%10 != 1) return false;
+
+		number /= 10;
+	}
+
+	return true;
+}
+
+}}}

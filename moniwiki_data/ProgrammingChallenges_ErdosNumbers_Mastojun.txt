@@ -1,0 +1,265 @@
+== 문제 풀이 ==
+ 입력된 문자열을 분석후, 저자별로 그래프를 연결시킴
+ BFS를 이용해서 모든 저자들의 Erdos Number를 구함
+
+== 어려운점 ==
+ * 문자열 파싱하기!
+  저자는 최대 5000명까지 입력될 수 있음
+  저자의 이름 길이는 최대 100자까지 입력될 수 있음
+  ., 나 .: 가 아닌 다른 방식으로 이름을 구별할 수 있음
+  성과 이름사이에 공백이 n개 올 수 있음
+  [http://acm.uva.es/board/viewtopic.php?f=9&t=2931&st=0&sk=t&sd=a&hilit=10044&sid=5893fa44603313ef8cc60e0506d4372c#p11497 참고할 페이지]
+
+== 소스코드 ==
+{{{#!gcode cpp
+#include <cstdio>
+#include <cstring>
+#include <string>
+#include <iostream>
+#include <map>
+#include <vector>
+#include <queue>
+#include <set>
+
+using namespace std;
+
+int Scenario;
+int P, N;
+char InputString[10005];
+map< string, int > Name2Number;
+vector<int> IntVectorTemp;
+
+set<int> AuthorLink[5005];
+int Result[5005];
+queue<int> NumberQueue;
+
+int tNumber;
+int ErdosIndex;
+
+void Init()
+{
+	Name2Number.clear();
+	for(int i = 0; i < 5005; i++ )
+	{
+		Result[i] = -1;
+		AuthorLink[i].clear();
+	}
+	tNumber = 0;
+}
+
+void InputPN()
+{
+	cin >> P >> N;
+	cin.getline(InputString, 10005);
+}
+
+void InputName(int s1, int e1, int s2, int e2)
+{
+	char Temp[100] = {0};
+	strncpy(Temp, &InputString[s1], e1-s1+1);
+	strncat(Temp, &InputString[s2], e2-s2+1);
+	Temp[e1-s1+1+e2-s2+1] = 0;
+
+	if( Name2Number.end() == Name2Number.find(Temp) )
+	{
+		Name2Number.insert( make_pair<string, int>(Temp, tNumber));
+		IntVectorTemp.push_back( tNumber );
+		tNumber++;
+	}
+	else
+	{
+		IntVectorTemp.push_back( Name2Number.find(Temp)->second );
+	}
+}
+
+int UpdateS(int i)
+{
+	while( InputString[i] == ' ') i++;
+
+	return i;
+}
+
+void MakeMap()
+{
+	int LastS = 0;
+	int LastE = 0;
+	int FirstS = 0;
+	int FirstE = 0;
+
+	bool isFirstName = false;
+	int i = 0;
+	while( true )
+	{
+		// Skip WhiteSpace
+		while(!isalpha(InputString[i])) i++;
+		LastS = i;
+		// Skip LastName
+		while(InputString[i] != ',' && InputString[i] && InputString[i] != ':' ) i++;
+		if(!InputString[i] || InputString[i] == ':') break;
+		LastE = i++;
+		// Skip WhiteSpace
+		while(InputString[i] == ' ') i++;
+		FirstS = i-1;
+		// Skip FirstName
+		while(InputString[i] != ',' && InputString[i] != ':' && InputString[i] != ' ' && InputString[i] != '\t' && InputString[i] != '\r' && InputString[i]) i++;
+		FirstE = i-1;
+		InputName(LastS, LastE, FirstS, FirstE);
+		if( InputString[i] == ':' || !InputString[i]) break;
+		i++;
+	}
+}
+
+void GroupInit()
+{
+	IntVectorTemp.clear();
+}
+
+void GroupSetting()
+{
+	static int size;
+	size = IntVectorTemp.size();
+	for(int i = 0; i < size; i++ )
+	{
+		for(int j = 0; j < size; j++ )
+		{
+			AuthorLink[IntVectorTemp[i]].insert( IntVectorTemp[j]);			
+		}
+	}	
+}
+
+void InputData()
+{
+	for(int i = 0; i < P; i++ )
+	{
+		cin.getline(InputString, 10005);
+		//파싱하기
+		GroupInit();
+		MakeMap();
+		GroupSetting();
+	}
+}
+
+void SetTable(int index, int value)
+{
+	if( Result[index] == -1 ) 
+	{
+		Result[index] = value;
+
+		set<int>::iterator itr;
+		for( itr = AuthorLink[index].begin(); itr != AuthorLink[index].end(); ++itr)
+		{
+			if( Result[*itr] == -1 )
+			{
+				NumberQueue.push(*itr);
+			}
+		}
+	}
+}
+
+void GetErdosNumber( int value)
+{
+	int start;
+	int end;
+	end = NumberQueue.back();
+
+	while( !NumberQueue.empty() )
+	{
+		start = NumberQueue.front();
+		NumberQueue.pop();
+
+		SetTable(start, value);
+
+		if( start == end && !NumberQueue.empty() )
+		{
+			end = NumberQueue.back();
+			value++;
+		}
+	}
+}
+
+void MakeTable()
+{
+	static int size;
+	
+	static int x, y;
+
+
+	ErdosIndex = Name2Number.find("Erdos, P.")->second;
+	NumberQueue.push(ErdosIndex);
+
+	GetErdosNumber(0);
+}
+
+void MakeName()
+{
+	int i = 0;
+	int iT = 0;
+	char Temp[200];
+
+	// Skip WhiteSpace
+	while(InputString[i] == ' ' || InputString[i] == '\t' || InputString[i] == '\r') i++;
+	// Skip LastName
+	while(InputString[i] != ',' ) Temp[iT++] = InputString[i++];
+	Temp[iT++] = InputString[i++];
+	// Skip WhiteSpace
+	while(InputString[i] == ' ') i++;
+	// Skip FirstName
+	Temp[iT++] = ' ';
+	while(InputString[i] != ',' && InputString[i] != ':' && InputString[i] != ' ' && InputString[i] != '\t' && InputString[i] != '\r' && InputString[i]) Temp[iT++] = InputString[i++];
+	Temp[iT] = 0;
+
+	strcpy(InputString, Temp);
+}
+
+void InputName_GetResult()
+{
+	static int Index;
+	static int result;
+	for( int i = 0; i < N; i++ )
+	{
+		cin.getline(InputString, 10005);
+		MakeName();
+		if( Name2Number.find(InputString) != Name2Number.end() )
+		{
+			Index = Name2Number.find(InputString)->second;
+		
+			if( Index == ErdosIndex )
+			{
+				printf("%s 0\n", InputString);
+			}
+			else
+			{
+				result = Result[Index];
+				if( result > 0 )
+					printf("%s %d\n", InputString, result);
+				else
+					printf("%s infinity\n", InputString);
+			}
+		}
+		else
+		{
+			printf("%s infinity\n", InputString);
+		}
+	}
+}
+
+int main()
+{
+	cin >> Scenario;
+	int index = 1;
+
+	while( Scenario --> 0 )
+	{
+		Init();
+		InputPN();
+		InputData();
+		MakeTable();
+		printf("Scenario %d\n", index++);
+		InputName_GetResult();
+	}
+
+	return 0;
+}
+
+
+}}}

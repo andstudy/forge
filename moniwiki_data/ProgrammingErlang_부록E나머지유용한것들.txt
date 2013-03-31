@@ -1,0 +1,91 @@
+
+[[TableOfContents]]
+
+== 부록E 나머지 유용한 것들 ==
+
+=== 분석과 프로파일링 도구 ===
+ * Coverage
+  * 코드중에 많이 수행되는 줄은? 전혀 수행되지 않는 줄은?
+ * Profiling
+  * 함수가 몇번 호출되는가? 함수가 호출되는 시간은?
+ * xref
+  * undefined 함수 찾기
+=== 디버깅 ===
+ * 컴파일러 진단
+  1. 헤드 불일치
+  1. 언바운드 변수
+  1. 종료되지 않은 문자열
+  1. 분안전한 변수
+  1. 그림자 변수
+
+ * 런타임 진단
+  1. 스택 추적
+
+ * 디버깅 기법
+  1. io:format 디버깅
+  1. 파일로 덤프하기
+  1. 오류 로거 사용하기
+
+ * 디버거
+  * 코드분석에도 유용
+{{{#!gcode
+ c(lib_misc,[debug_info]).   % 디버그정보 포함해서 컴파일하고
+
+ im().   % 창 띄우고
+
+ ii(lib_misc).   % lib_misc 모듈을 attach
+
+ iaa([init]).   % 초기화
+
+ lib_misc:.... 사용
+}}}
+
+=== 추적 ===
+ * trace 출력
+  * erlang:trace
+  * erlang:trace_pattern
+
+=== 동적 코드 로딩 ===
+ * 컴파일 하면 알아서 새버전을 실행.
+  * a 가 루프에서 b 를 호출 -> b 를 변경하고 새로 컴파일 -> 다음번 b 호출부터 새버전의 b 실행
+{{{#!gcode
+-module(b).
+-export([x/0]).
+
+x() -> 1.
+}}}
+{{{#!gcode
+-module(a).
+-compile(export_all).
+    
+ start(Tag) ->
+    spawn(fun() -> loop(Tag) end).
+
+loop(Tag) ->
+    sleep(),
+    Val = b:x(),
+    io:format("Vsn1 (~p) b:x() = ~p~n",[Tag, Val]),
+    loop(Tag).
+
+sleep() ->
+    receive
+	after 3000 -> true
+    end.
+}}}
+
+실행
+{{{#!gcode
+a:start(one).
+a:start(two).
+Vsn1 (one) b:x() = 1
+Vsn1 (two) b:x() = 1
+Vsn1 (one) b:x() = 1
+Vsn1 (two) b:x() = 1
+
+b 를 변경 x() -> 2 하고 재컴파일
+
+c(b).
+Vsn1 (one) b:x() = 2
+Vsn1 (two) b:x() = 2
+
+}}}

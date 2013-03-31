@@ -1,0 +1,96 @@
+ * 한글로 코딩 해봤습니다. -0-
+   * 재귀로 문제를 해결
+ * 코드
+{{{
+
+public class Main {
+	private StringBuilder result ;
+	public String SBTreeTravelResult(분수 찾을값) {
+		분수 오른쪽 = new 분수(1,0);
+		분수 왼쪽 = new 분수(0,1);
+		result = new StringBuilder();
+		SBTreeTravelResult(찾을값, 오른쪽,왼쪽);
+		return result.toString();
+	}
+
+	private void SBTreeTravelResult(분수 찾을값, 분수 오른쪽, 분수 왼쪽) {
+		분수 현재노드 = 오른쪽.add(왼쪽);
+		if(찾을값.compareTo(현재노드) ==0){
+			return ;
+		}
+
+		if(찾을값.compareTo(현재노드) >0){
+			왼쪽 = 현재노드;
+			result.append("R");
+		}else if(찾을값.compareTo(현재노드) <0){
+			오른쪽 = 현재노드;
+			result.append("L");
+		}
+		SBTreeTravelResult(찾을값,  오른쪽, 왼쪽);
+	}
+
+
+	
+
+}
+
+}}}
+
+ * 분수
+{{{
+
+public class 분수 implements Comparable<분수>{
+	private int 분모;
+	private int 분자;
+	public 분수(int 분자, int 분모) {
+		this.분자 = 분자;
+		this.분모 = 분모;
+	}
+	public int compareTo(분수 비교대상) {
+		long 가= 비교대상.분모 * this.분자;
+		long 나 = this.분모 * 비교대상.분자;
+		if(가 == 나){
+			return 0;
+		}else if(가 > 나 ){
+			return 1;
+		}else{
+			return -1;
+		}
+			
+		
+	}
+	public 분수 add(분수 덧수) {
+		int 분자 = this.분자 + 덧수.분자;
+		int 분모 = this.분모 + 덧수.분모;
+		return new 분수(분자,분모);
+	}
+
+}
+
+}}}
+
+ * 테스트 
+{{{
+import junit.framework.TestCase;
+
+
+public class MainTestCase extends TestCase {
+	public void test분수비교하기(){
+		분수 bun1 = new 분수(3,4);
+		분수 bun2 = new 분수(3,4);
+		분수 bun3 = new 분수(1,2);
+		분수 bun4 = new 분수(1,1);
+		assertEquals(0, bun1.compareTo(bun2));
+		assertEquals(1, bun1.compareTo(bun3));
+		assertEquals(-1, bun3.compareTo(bun4));
+		
+	}
+	
+	public void test결과계산(){
+		Main main = new Main();
+		assertEquals("LRRL", main.SBTreeTravelResult(new 분수(5,7)));
+		assertEquals("RRLRRLRLLLLRLRRR", main.SBTreeTravelResult(new 분수(878 ,323)));
+	}
+}
+
+}}}

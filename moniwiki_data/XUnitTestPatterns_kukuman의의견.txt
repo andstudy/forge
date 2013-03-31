@@ -1,0 +1,68 @@
+[xUnitTestPatterns] 상위로 가기
+이름을 써 주세요. [ParkPD]
+
+ * 전체적으로 괄호 안의 페이지 번호가 원서의 페이지 번호로 되어 있는 것 확인 되었습니다. 이 페이지 번호들은 번역본 기준으로 모두 변경이 되어야 될 것 같습니다.
+
+ * 원서는 3개의 파트로 나눠져 있는데 번역본의 편집에는 파트 구분에 대한 페이지들이 누락 되어 있는 것 같습니다. 원서대로 파트 구분이 되게 편집 되는거겠죠? ^^
+
+= 1장 =
+ * Page 5. 
+|| 본문 ||단위 테스트를 자주 돌려볼 수 있게 하려고 단위 테스트를 통합 빌드 과정의 일부로 실행되는 스모크 테스트SCM 안에 추가할 수 있다.  ||
+|| 원서원문 ||  To ensure that the unit tests are run frequently, we can include them in the Smoke Tests [ SCM ] that are run as part of the Integration Build [ SCM ]. ||
+|| 의견 || 번역에서 스모크 테스트SCM 으로 되어 있는데 SCM이 스모크 테스트 약자처럼 보이게 편집이 되어 있는 것 같습니다. 여기서 SCM은 Software Configuration Management 약자로 의미를 갖는 것으로 추정되므로 원문의 느낌이 나게 [ SCM ]로 붙일 수 있으면 좋을것 같습니다. ||
+
+|| 본문 ||테스트 주도 개발을 하면 소프트웨어를 테스트할 수 있게 보장할 수 있다.즉, 코드를 작성하기 전에 단위 테스트를 먼저 작성하게하고 테스트가 소프트웨어 설계 정의에 도움을 줄 수 있게 한다.이런 전략은 데이터베이스와는 별개로 테스트 할 수 있는 잘 정의된 객체 안에서 검증해야 하는 모든 비즈니스 로직에 집중 할 수 있게 도와준다. ||
+|| 원서원문 || We can ensure that our software is testable by doing test-driven development (TDD).  That is, we write the unit tests before we write the code, and we use the tests to help us define the software’s design.  This strategy helps concentrate all the business logic that needs verification in well-defined objects that can be tested independently of the database.  ||
+|| 의견 || 테스트 주도 개발을 하면 소프트웨어를 테스트 가능하게 할 수 있다. 이는 코드를 작성하기 전에 단위 테스트를 먼저 작성 하게 하고 테스트들을 이용하여 소프트웨어 설계를 돕는다. 이러한 전략은 데이터베이스에 독립적인 테스트를 위해 잘 정의된 객체를 통해서 검증이 필요한 비지니스 로직에 집중 하도록 도움을 준다. (번역문같아 수정해보았는데 역시 번역문체이네요 ^^)||
+ * page 6.
+  * Facade : 퍼사드 vs 파사드
+    * 파사드가 외국어 표기법에 맞기는 한데 컴퓨터 관련 패턴에서는 퍼사드로 주로 사용하고 있어 이질감이 느껴지는데 어떠신지요? (구글이나 네이버 검색시 퍼사드로 검색하면 주로 관련 패턴들이 나오고 있습니다.)
+ * page 16
+  * "테스트 만든다고 시간 낭비하지 마라 '''""'''
+   * "" 따옴표가 두개들어가 있습니다. ^^
+
+= 3장 = 
+ * page 30 
+   * 오타 ^^:  '''반본 ''' 안되는 테스트 만큼이나 나쁜것은 .. ->  '''반복 ''' 안되는
+
+= 13장 = 
+ * 제목 : '''테스터베이스'''와 테스트 -> '''데이터베이스''와 테스트
+
+= 15 장 = 
+ * page 209
+ || 본문 || 보통 테스트 코드를 깔끔하고 간단하게 유지하려는 관심이 없는 것이 애매한 테스트의 근본원인이다. ||
+ || 원문 || The root cause of an Obscure Test is typically a lack of attention to keeping the test code clean and simple. ||
+ || 의견 || 보통 테스트 코드를 깔끔하고 간단하게 유지하려는 것에 관심이 없는 것이 애매한 테스트의 근본원인이다. || 
+
+ * page 241
+  * 오타 : "잘라 붙이이" -> "잘라 '''붙이기'''"
+
+= 18장 =
+ * 18장 전체의 오른쪽 페이지의 장 표기가 17장으로 표기 되고 있습니다.
+ * page 339
+   * 오타 : 마켓팅 -> 마케팅
+
+= 21장 = 
+ * page 530
+   * 오타 : 바꾸므로 ->'''바꿈으로'''
+
+= 24장 =
+ * page 697
+   * 본문 : 아마도 이런 기법이 다른 xUnit에도 포팅돼 있지 않을까?(누구 아는 분 없으세요?)
+    * 역자주로 추가할 만한 내용 적어 봅니다. (저자의  물음에 응답하는 구현이 추가되었지요)
+     * JUnit 4.x 부터 테스트케이스에 파라메터를 전달하는 기법이 추가 되었습니다.
+     테스트 클래스 정의부에 @RunWith(Parameterized.class)추가, 파라메터 정보는 @Parameters 를 붙인 메소드를 이용하여 사용함
+       * 자세한 방법은 아래 링크 참조해주세요 ^^
+         * http://www.ibm.com/developerworks/kr/library/tutorial/j-junit4/section6.html : 가장 잘 정리된 문서 같습니다. ^^
+         * http://www.java2go.net/blog/62 의 7. 파라미터를 이용하여 테스트하기
+         * http://www.javabeat.net/tips/159-junit-40-example.html
+   * 아예 역자주(혹은 베타리더 주)를 써 주세요. 저는 JUnit 은 잘 모르겠네요. [ParkPD]
+     * 간단하게 써보겠습니다. (역자님께서 잘 다듬어 주시면 나쁘지 않을것 같습니다.)    
+       * JUnit 4 부터 인자를 받는 테스트를 작성할 수 있는 기능을 지원한다. 자세한 내용은 http://www.ibm.com/developerworks/kr/library/tutorial/j-junit4/section6.html 를 참조 하면 된다.
+
+= 후기 = 
+드디어 다 봤습니다. ^^;
+마지막 부록까지 열심히 본책은 처음 입니다. ㅋ ^^
+책에 많이 나오는 SUT , DOC 약자의 정확한 의미를 용어집으로 배울 수 있었네요 ㅋ 
+방대한 용어 정리와 참고문헌을 보니 공부 해야 될 것 많구나 느낄 수 있었습니다. 
+엄청난 양의 책 번역 하시느라 고생하셨습니다. ^^

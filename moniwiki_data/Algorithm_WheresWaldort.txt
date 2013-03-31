@@ -1,0 +1,9 @@
+[http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110302&format=html 문제보기]
+[http://icpcres.ecs.baylor.edu/onlinejudge/index.php?option=com_onlinejudge&Itemid=8&category=12&page=show_problem&problem=951 uva링크]
+
+[Algorithm/WheresWaldort/ParkPD]
+[Algorithm/WheresWaldort/kukuman]
+[Algorithm/WheresWaldort/Outbreak]
+
+----
+CategoryProblem

@@ -1,0 +1,64 @@
+[POSA1]
+[[TableOfContents]]
+= Command Processor =
+Command Processor 디자인 패턴은 서비스의 요청과 실행을 분리한다. 하나의 command processor 컴포넌트는 서비스의 요청을 객체로 관리하고 그 객체의 실행을 스케줄 하며 undo 같은 기능을 위해 요청 객체를 저장하기도 한다.
+
+== Example ==
+다단계 Undo 기능이 가능한 텍스트 에디터.
+
+== Context ==
+ * 유연하고 확장성 좋은 UI 가 필요한 어플리케이션.
+ * 스케줄링이나 Undo와 같은 사용자 기능의 실행을 위한 서비스를 제공하는 어플리케이션.
+ 
+== Problem ==
+ * 사용자마다 사용방법은 틀리다.
+ * 코드 수정 없이 어플리케이션을 확장.
+ * Undo 같은 기능이 모든 서비스 요청에 일관되게 작용되어야 한다.
+=== Forces ===
+
+== Solution ==
+ * 서비스 요청을 객체로 캡슐화 한다.
+ * Command Processor 패턴은 GOF의 Command 패턴을 기반으로 하고 Command 객체가 어떻게 관리되는지에 더 상세히 묘사.
+ * Command Processor 가 핵심 컴포넌트.
+
+== 해결책이 나오게 된 이유 ==
+
+== 구조 ==
+ * Abstract command
+ * Controller 
+ * Command processor
+ * Supplier
+ 
+== Dynamics ==
+ * Undo 의 과정
+== Implementation ==
+ 1. Abstract command 의 인터페이스를 정의
+ 2. Command 컴포넌트를 디자인
+ 3. Macro command 를 제공해서 유연성을 증가
+ 4. Controller 컴포넌트를 구현한다.
+ 5. Command processor 의 추가적인 서비스 구현
+ 6. Command processor 컴포넌트 구현.
+ 
+== Variants ==
+ * Controller 기능을 확산
+ * Interpreter 패턴과 조합
+ 
+== Known Uses ==
+ * ET++
+ * MacApp
+ * InterViews
+ * ATM-P
+ * SICAT
+ 
+== Consequences ==
+=== Benefits ===
+ * 서비스 요청에 유연
+ * 기능확장에 유연
+ * 실행시간에 동적인 서비스 프로그래밍 가능
+ * App 레벨에서 테스트 가능
+ * 동시성 확보
+=== Liabilities ===
+ * 효율성 감소
+ * 지나치게 많은 command 클래스 난무
+
+== Related Patterns ==

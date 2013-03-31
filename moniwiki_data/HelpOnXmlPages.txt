@@ -1,0 +1,32 @@
+== XML Pages & XSLT Processing ==
+If you have Python4Suite installed in your system, it is possible to save XML documents as pages. It's important to start those pages with an XML declaration "{{{<?xml ...>}}}" in the very first line. Also, you have to specify the stylesheet that is to be used to process the XML document to HTML. This is done using a [http://www.w3.org/TR/xml-stylesheet/ standard "xml-stylesheet" processing instruction], with the name of a page containing the stylesheet as the "{{{href}}}" parameter.
+
+See the following example for details, which can also be found on the XsltVersion page.
+----
+/!\ MoniWiki support two type of XSLT processors. One is the xslt.php, the other is xsltproc.php. xslt.php need a xslt module for PHP and xsltproc.php need the xsltproc.
+
+MoniWiki use xsltproc.php by default.
+=== Example ===
+{{{
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<?xml-stylesheet href="XsltVersion" type="text/xml"?>
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+   <xsl:output method="html" omit-xml-declaration="yes" indent="no"/>
+
+   <xsl:template match="/">
+     This Wiki is running an XSLT engine by
+     <xsl:value-of select="system-property('xsl:vendor')"/>
+     (<a href="{system-property('xsl:vendor-url')}"><xsl:value-of select="system-property('xsl:vendor-url')"/></a>)
+     implementing XSLT v<xsl:value-of select="system-property('xsl:version')"/>
+   </xsl:template>
+
+</xsl:stylesheet>
+}}} 
+
+=== Display ===
+[[Include(XsltVersion)]]
+----
+[[Navigation(HelpOnEditing)]]

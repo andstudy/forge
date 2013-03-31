@@ -1,0 +1,292 @@
+[[TableOfContents]]
+
+= 3.5 스트림 =
+'''3.1 ~ 4 장의 내용'''
+- 계산 물체 속에 변수를 숨겨서 상태가 있는 진짜 물체를 흉내내고,
+- 컴퓨터의 계산 시간으로 진짜 시간의 변화를 나타냈다
+- 계산 물체의 변수 값을 덮어쓰는 것으로 시간에 따라 물체의 상태가 달라지는 현상을 표현
+
+'''3.5 장은? '''
+- 스트림 데이터 구조 : 덮어쓰기(assignment) 때문에 생겨나는 복잡한 문제들을 발생시키지 않으면서 시간 함수를 흉내내기 위해 스트림이라는 차례열의 한 형태를 이용하여 시간에 따른 시스템의 변화를 표현한다.
+- 셈미룸 계산법(delayed evaluation) : 스트림을 리스트로 구현하면 스트림 처리 방식의 모든 표현력을 제대로 담아내지 못하기 때문에 도입한 방법. 아주 큰 차례열, 끝없는 차례열도 나타낼 수 있다.
+
+== 3.5.1 스트링과 (계산을) 미룬 리스트 ==
+=== 되새김질 ===
+ [SICP/2.2계층구조데이터와닫힘성질]에서 공부한 차례열 연산 (map, filter, accumulate)
+
+=== 차례열 연산의 한계 ===
+ * ''' 구간의 소수를 모두 더하는 프로그램 '''
+ {{{#!gcode
+;; 되풀이 방식
+(define (sum-primes a b)
+  (define (iter count accum)
+    (cond ((> count b) accum)
+	  ((prime? count) (iter (+ count 1) (+ count accum)))
+	  (else (iter (+ count 1) accum))))
+  (iter a 0))
+
+;; 차례열 연산 방식
+(define (sum-primes a b)
+  (accumulate +
+	      0
+	      (filter prime? (enumerate-interval a b))))
+ }}}
+ - 차례열 프로그램을 리스트의 변환 과정으로 표현하는 경우, 데이터 구조를 새로 만들어서 복사해야 함 
+ vs 더한 값을 넣어둘 자리만 있으면 된다.
+ - 단계별 처리 과정을 거치기 전에 다음 단계로 넘어가지 못함 
+ vs 구간 속의 수를 하나씩 꺼내면서 곧바로 소수 검사와 더하기 수행
+
+ -> 이건 어쩔건데? 
+
+ * '''10000rhk 1000000 사이에 있는 두 번째 소수 찾기'''
+ {{{#!gcode
+(car (cdr (filter prime?
+		  (enumerate-interval 10000 1000000))))
+ }}}
+ - 쓸데없는 계산이 너무 많다. 100만 개 가까운 정수 리스트를 만들지만 대부분은 쓸모 없음
+ vs 수를 하나씩 만들어가면서 조건에 맞는지 따져보고 두 번째 소수에서 곧바로 계산을 끝냄
+
+=== 스트림 ===
+ - 차례열 패러다임으로 프로그램을 깔끔하게 짤 수 있으며, 조금씩 필요한 만큼 계산을 처리해 나가는 효율성까지 얻을 수 있다.
+ - 바탕이 되는 아이디어 : 스트림을 인자로 받는 경우, 스트림을 "덜 만든" 상태 그대로 넘긴 다음, 스트림을 쓰는 쪽에서 아직 만들어지지 않은 스트림의 일부를 쓰려고 할 때, 스트림 자체가 딱 쓸 만큼만 알아서 원소를 만들어 내게끔 하자.
+
+ * 스트림 구현 e1
+ {{{#!gcode
+(car (cons 1 2))
+(cdr (cons 1 2))
+(stream-car (cons-stream 'x 'y))
+(stream-cdr (cons-stream 'x 'y))
+
+(cons-stream <a> <b>) ==> (cons <a> (delay <b>))
+
+(delay <exp>) ==> (lambda () <exp>)
+
+(define (force delayed-object)
+  (delayed-object))
+ }}}
+ - delay : special form. (delay <exp>)를 계산하면 <exp>의 값이 아니라 셈미룬 물체(delayed object)가 나온다. 언젠가 <exp>를 구하리라는 약속.
+ - force : 셈미룬 물체를 인자로 받아서 그 값을 억지로 구하는 프로시저
+
+ * 스트림 연산 e3
+ {{{#!gcode
+(define (stream-ref s n)
+  (if (= n 0)
+      (stream-car s)
+      (stream-ref (stream-cdr s) (- n 1))))
+
+(define (stream-map proc s)
+  (if (stream-null? s)
+      the-empty-stream
+      (cons-stream (proc (stream-car s))
+		   (stream-map proc (stream-cdr s)))))
+
+(define (stream-for-each proc s)
+  (if (stream-null? s)
+      'done
+      (begin (proc (stream-car s))
+	     (stream-for-each proc (stream-cdr s)))))
+ }}}
+
+ * 리스트 버전의 소수 구하기 vs 스트림 버전의 소수 구하기 e2
+ {{{#!gcode
+(stream-car
+ (stream-cdr
+  (stream-filter prime?
+		 (stream-enumerate-interval 10000 1000000))))
+; 자세한 동작은 책 418p, 420p 참고
+
+(car (cdr (filter prime?
+		  (enumerate-interval 10000 40000))))
+ }}}
+ - 리스트에서는 리스트를 만들 때 car과 cdr을 모두 계산하지만 스트림에서는 cdr를 뽑아쓸 때 cdr를 계산한다.
+
+== 3.5.2 무한 스트림 ==
+ * 무한 스트림 구현1 e04
+ {{{#!gcode
+; 정수
+(define (integers-starting-from n)
+  (cons-stream n (integers-starting-from (+ n 1))))
+(define integers (integers-starting-from 1))
+; 7로 나누어떨어지지 않는 정수
+(define (divisible? x y) (= (remainder x y) 0))
+(define no-sevens
+  (stream-filter (lambda (x) (not (divisible? x 7)))
+		 integers))
+; 피보나치 수열
+(define (fibgen a b)
+  (cons-stream a (fibgen b (+ a b))))
+(define fibs (fibgen 0 1))
+ }}}
+
+ * 무한 스트림 구현2 e05
+ {{{#!gcode
+; 소수 스트림
+(define (sieve stream)
+  (cons-stream
+   (stream-car stream)
+   (sieve (stream-filter
+	   (lambda (x)
+	     (not (divisible? x (stream-car stream))))
+	   (stream-cdr stream)))))
+(define primes (sieve (integers-starting-from 2)))
+ }}}
+
+ * 스트림을 드러나지 않게 정의하는 방법
+ {{{#!gcode
+; 재귀 정의 소수 스트림
+(define primes
+  (cons-stream
+   2
+   (stream-filter prime? (integers-starting-from 3))))
+
+(define (prime? n)
+  (define (iter ps)
+    (cond ((> (square (stream-car ps)) n) true)
+	  ((divisible? n (stream-car ps)) false)
+	  (else (iter (stream-cdr ps)))))
+  (iter primes))
+ }}}
+ - 어떤 계산 시점에서 다음에 소수인지 따져 보는 데 필요한 만큼 primes 스트림이 만들어져있음.
+
+ * ex3-55
+ {{{#!gcode
+;; ex3-55.scm
+(define (partial-sums ps)
+  (cons-stream (stream-car ps)
+	       (add-streams (stream-cdr ps)
+			   (partial-sums ps))))
+ }}}
+== 3.5.3 스트림 패러다임 ==
+ - 순간순간 변하는 상태가 아니라, 전체 시간의 흐름에 초점을 두고 생각할 수 있다.
+ - 서로 다른 시점의 상태들을 한데 묶거나 서로 비교하기 편하다.
+
+=== 스트림 프로세스로 반복을 표현하는 방법 ===
+ - 스트림으로 상태를 표현하는 방식이 상태변수 값을 바꾸는 방식과 크게 다르지 않다.
+ - 하지만 몇 가지 재주를 부릴 수 있다는 점, 계산에 필요한 모든 상태를 한결같이 차례열 데이터 구조로 표현하고 일관된 연산을 적용할 수 있다는 점이 다르다.
+
+ * sqrt 프로시저
+ {{{#!gcode
+(define (sqrt-stream x)
+  (define guesses
+    (cons-stream 1.0
+		 (stream-map (lambda (guess)
+			       (sqrt-improve guess x))
+			     guesses)))
+  guesses)
+ }}}
+ * ex3-64
+ * pi-stream
+ {{{#!gcode
+;; pi/4 = 1 - 1/3 + 1/5 - 1/7 ....
+(define (pi-summands n)
+  (cons-stream (/ 1.0 n)
+	       (stream-map - (pi-summands (+ n 2)))))
+
+(define pi-stream
+  (scale-stream (partial-sums (pi-summands 1)) 4))
+ }}}
+ * pi-stream 가속 1 : 차례열 가속기 (438p)
+ {{{#!gcode
+(define (euler-transform s)
+  (let ((s0 (stream-ref s 0))
+	(s1 (stream-ref s 1))
+	(s2 (stream-ref s 2)))
+    (cons-stream (- s2 (/ (square (- s2 s1))
+			  (+ s0 (* -2 s1) s2)))
+		 (euler-transform (stream-cdr s)))))
+;(display-stream (euler-transform pi-stream))
+ }}}
+ * pi-stream 가속 2 : 태블로 (439p)
+ {{{#!gcode
+(define (make-tableau transform s)
+  (cons-stream s
+	       (make-tableau transform
+			     (transform s))))
+
+(define (accelerated-sequence transform s)
+  (stream-map stream-car
+	      (make-tableau transform s)))
+
+(display-stream (accelerated-sequence euler-transform pi-stream))
+ }}}
+=== 쌍으로 이루어진 무한 스트림 ===
+ - 차례열 패러다임으로 중첩 루프를 표현 -> 무한 스트림에 적용해보자
+ - 2.2.3의 prime-sum-pairs (161p) 응용
+
+ * i+j가 소수이고 i<=j인 모든 정수 쌍(i,j)의 차례열 구하기
+ {{{#!gcode
+;;;;;;;; 간단히 이렇게...
+(define prime-pairs
+  (stream-filter (lambda (pair)
+		   (prime? (+ (car pair) (cadr pair))))
+		 int-pairs))
+
+;;;;;;;; 문제는 int-pairs (442p)
+(define (interleave s1 s2)
+  (if (stream-null? s1)
+      s2
+      (cons-stream (stream-car s1)
+		   (interleave s2 (stream-cdr s1)))))
+
+(define (pairs s t)
+  (cons-stream
+   (list (stream-car s) (stream-car t)) ;;;;;;;;; (S0 T0)
+   (interleave ;;;;;;;; stream-append 같은 접근법은 불가능 (443p)
+    (stream-map (lambda (x) (list (stream-car s) x))
+		(stream-cdr t)) ;;;;;;;;;; (S0 T1) (S0 T2) (S0 T3) ...
+    (pairs (stream-cdr s) (stream-cdr t))))) ;;;;;;;;;;;; 재귀
+
+(define int-pairs (pairs integers integers))
+ }}}
+=== 신호를 표현하는 스트림 ===
+ - 신호 처리 시스템의 '신호'를 컴퓨터 계산 방식으로 흉내낸 것이 스트림
+ - 연속하는 시간 간격의 신호 값들을 줄줄이 이어진 스트림의 원소로 나타내면 된다.
+
+ * 적분기 (447-448p)
+ {{{#!gcode
+(define (integral integrand initial-value dt)
+  (define int
+    (cons-stream initial-value
+		 (add-streams (scale-stream integrand dt)
+			      int)))
+  int)
+ }}}
+== 3.5.4 스트림과 셈미룸 계산법 ==
+
+== 3.5.5 모듈로 바라본 함수와 물체 ==
+ - 덮어쓰기(assignment) 방식의 장점 : 큰 시스템의 상태를 여러 부품 속에 변수로 감추거나 캡슐화하여 모듈(조립식) 방식으로 시스템을 짜맞추기 좋다.
+ - 스트림 기법으로 조립식 설계를 해보자
+
+ * 스트림 방식의 pi값 구하기(몬테 카를로 방법 296p)
+ {{{#!gcode
+(define random-numbers
+  (cons-stream random-init
+	       (stream-map rand-update random-numbers)))
+
+(define (map-successive-pairs f s)
+  (cons-stream
+   (f (stream-car s) (stream-car (stream-cdr s)))
+   (map-successive-pairs f (stream-cdr (stream-cdr s)))))
+
+(define cesaro-stream
+  (map-successive-pairs (lambda (r1 r2) (= (gcd r1 r2) 1))
+			random-numbers))
+
+(define (monte-carlo experiment-stream passed failed)
+  (define (next passed failed)
+    (cons-stream
+     (/ passed (+ passed failed))
+     (monte-carlo
+      (stream-cdr experiment-stream) passed failed)))
+  (if (stream-car experiment-stream)
+      (next (+ passed 1) failed)
+      (next passed (+ failed 1))))
+
+(define pi
+  (stream-map (lambda (p) (sqrt (/ 6 p)))
+	      (monte-carlo cesaro-stream 0 0)))
+
+(stream-ref pi 100)
+ }}}
+
+=== 함수형 프로그래밍에서 시간의 문제 ===

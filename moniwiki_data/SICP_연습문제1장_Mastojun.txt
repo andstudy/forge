@@ -1,0 +1,392 @@
+== 1 장 ==
+=== 연습문제 1.5 ===
+ 문제에서 의도한 데로 실행되기 위해선 DrScheme의 Language를 [http://en.wikipedia.org/wiki/R5RS R5RS] 로 바꾸고 해야 합니다. Lazy Scheme으로 하면 아무런 문제 없이 실행되네요.
+ 코드 생략 ^^
+
+=== 연습문제 1.7 ===
+ {{{#!gcode scheme
+
+(define (square x) (* x x))
+
+(define (cube x) (* x x x))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+; on book
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.001))
+
+(define (sqrt2 x) (sqrt-iter 1.0 x))
+
+; 1.7
+(define (sqrt-iter2 guess x)
+  (if (good-enough2? guess x)
+      guess
+      (sqrt-iter2 (improve guess x) x)))
+
+; 이전의 guess와 수정된 guess를 비교
+; sqrt-iter2에서 한번더 improve guess x를 호출 -> 효율 저하
+; 여기서 값을 변경하고 sqrt-iter2에 그 값을 반영시키는 방법은 없을까?
+(define (good-enough2? guess x)
+  (< (abs (- (improve guess x) guess)) 0.001))
+
+(define (sqrt22 x) (sqrt-iter2 1.0 x))
+
+(sqrt2  9)
+(sqrt22 9) ; 같음
+
+(sqrt2  0.0001)
+(sqrt22 0.0001) ; 더 정확해짐
+
+(sqrt2  1000000000000000000)
+(sqrt22 1000000000000000000) ; 더 부정확
+
+}}}
+
+=== 연습문제 1.10 ===
+ 노가다 노가다. (A 2 n)에 대한 결과는 [http://www.research.att.com/~njas/sequences/ Sequences알아내기]를 참고 :$
+ [http://www.research.att.com/~njas/sequences/?q=2%2C4%2C16%2C65536&language=english 참고한 검색 결과]
+ {{{#!gcode scheme
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1)
+                 (A x (- y 1))))))
+
+(A 1 10)
+; (A 0 (A 1 9))
+; (A 0 (A 0 (A 1 8))
+; (A 0 (A 0 (A 0 (A 1 7)))
+; (A 0 (A 0 (A 0 (A 0 ... (A 0 ( A 0 1 ))... ))))
+; (A 0 (A 0 (A 0 (A 0 ... (A 0 2) ... ))))
+; (A 0 (A 0 (A 0 (A 0 2^6))))
+; (A 0 (A 0 (A 0 2^7)))
+; (A 0 (A 0 2^8))
+; (A 0 2^9)
+; 2^10
+
+(A 2 4)
+; (A 1 (A 2 3))
+; (A 1 (A 1 (A 2 2)))
+; (A 1 (A 1 (A 1 (A 2 1))))
+; (A 1 (A 1 (A 1 2)))
+; (A 1 (A 1 2^2))
+; (A 1 2^(2^2))
+; 2^(2^(2^2))
+
+(A 3 3)
+; (A 2 (A 3 2))
+; (A 2 (A 2 (A 3 1)))
+; (A 2 (A 2 2))
+; (A 2 2^2)
+; (A 2 4)
+; 2^(2^(2^2))
+
+(define (f n) (A 0 n))  ; 2n
+(define (g n) (A 1 n))  ; 2^n
+(define (h n) (A 2 n))  ; h(1) = 2, if n >= 2 : h(n) = 2^h(n-1)
+(define (k n) (* 5 n n)); 5n^2
+}}}
+
+=== 연습문제 1.16 ===
+  {{{#!gcode scheme
+(define (square n) (* n n))
+
+(define (fast-expt-iter b n)
+  (define (fast-expt-func b n product )
+    (cond ((<= n 0) product)
+          ((even? n) (fast-expt-func b (- n 2) (* (square b) product)))
+          (else (fast-expt-func b (- n 1) (* b product)))))
+  (fast-expt-func b n 1 ))
+}}}
+
+=== 연습문제 1.17 ===
+ {{{#!gcode scheme
+(define (double x) (* 2 x))
+(define (halve x) (/ x 2))
+
+(define (time-fast a b)
+  (cond ((= a 0 ) 0)
+        ((even? a) (double (time-fast (halve a) b)))
+        (else (+ b (time-fast (- a 1) b)))))
+}}}
+
+=== 연습문제 1.19 ===
+ {{{#!gcode math
+ #고정폭폰트를 이용하기 위해 gcode 사용
+ T = (a, b)
+ Tpq = (bq + aq + ap, bp + aq)
+ (Tpq)^2 = Tp'q' = ((bp + aq)q + (bq + aq + ap)(q+p), (bp+aq)p + (bq+aq+ap)q)
+                 = (bpq + aq^2 + bq^2 + bqp + aq^2 + aqp + apq + ap^2,
+                    bp^2 + aqp + bq^2 + aq^2 + apq )
+                 = (b(2pq + q^2) + a(2pq+q^2) + a(q^2+p^2),
+                    b(q^2+p^2) + a(2qp+q^2))
+                 = (bq' + aq' + ap', bp' + aq')
+ ∴ q' = 2pq + q^2
+    p' = q^2 + p^2
+}}}
+
+=== 연습문제 1.22 ===
+ Root(10)배 정도로 증가하나, 그냥 Run하면 실행 속도를 보장받지 못한다 =_=
+ Language를 Module로 수정하고 아래와 같이 코드를 작성한후 Debug로 실행 하면 약 3배씩 증가되는 모습을 확인할 수 있다.
+ 실행속도를 좀더 느리게 하기 위해서 Choose Language에서 Show Details을 클릭 후 Dynamic Properties에서 Debugging and profiling을 선택.
+ {{{#!gcode Scheme
+#lang scheme
+;69p
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (current-milliseconds)))
+
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (current-milliseconds) start-time))
+      (newline)))
+
+(define (report-prime elapsed-time)
+  (display " *** ")
+  (display elapsed-time))
+
+; 64p
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (square x) (* x x))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
+; search-for-primes
+(define (search-for-primes n a)
+  (define (search-for-primes-func n a count)
+    (cond ((= a count) (newline))
+          ((prime? n) (and (timed-prime-test n)
+                       (search-for-primes-func (+ n 1) a (+ count 1))))
+          (else (search-for-primes-func (+ n 1) a count))))
+  (search-for-primes-func n a 0))
+
+(search-for-primes 1000000 3)
+(search-for-primes 10000000 3)
+(search-for-primes 100000000 3)
+}}}
+
+ 실행결과
+ {{{
+Welcome to DrScheme, version 4.1.4 [3m].
+Language: Module custom; memory limit: 128 megabytes.
+
+1000003 *** 31
+1000033 *** 32
+1000037 *** 16
+
+10000019 *** 94
+10000079 *** 94
+10000103 *** 93
+
+100000007 *** 266
+100000037 *** 282
+100000039 *** 281
+>
+}}}
+
+=== 연습문제 1.31 ===
+ a와 b
+ {{{#!gcode Scheme
+ #lang scheme
+(define (product term a next b)
+  (cond ((> a b) 1)
+        (else (* (term a) (product term (next a) next b)))))
+
+(define (term x)
+    (cond ((even? x) (/ x (+ x 1)))
+          (else (/ (+ x 1) x))))
+(define (next x) (+ x 1))
+
+(define (product-iter term a next b)
+  (define (iter a result)
+    (cond ((> a b) result)
+          (else (iter (next a) (* result (term a))))))
+  (iter a 1))
+  
+    
+(define (pi x)
+  (* 4 (product term 2 next (+ 1 x))))
+
+(define (pi-iter x)
+  (* 4 (product-iter term 2 next (+ 1 x))))
+
+}}}
+
+=== 연습문제 1.35 ===
+ {{{#!gcode Scheme
+#lang scheme
+
+; Φ² = Φ + 1
+; Φ  = 1 + 1/Φ
+; Φ -> x
+; x = 1 + 1/x
+
+(define tolerance 0.00001)
+
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+(fixed-point (lambda (y) (+ 1 (/ 1 y))) 1.0)
+}}}
+
+=== 연습문제 1.36 ===
+ average damping을 한것이 더 빠르게 값을 구한다.
+ {{{#!gcode Scheme
+
+#lang scheme
+
+(define tolerance 0.00001)
+(define (average x y ) (/ (+ x y) 2))
+
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (and 
+           (display next)
+           (newline)
+           (try next)))))
+  (try first-guess))
+
+(fixed-point (lambda (y) (/ (log 1000) (log y))) 2.0)
+(newline)
+(fixed-point (lambda (y) (average y (/ (log 1000) (log y)))) 2.0)
+}}}
+ 실행결과
+ {{{
+Welcome to DrScheme, version 4.1.4 [3m].
+Language: Module; memory limit: 128 megabytes.
+9.965784284662087
+3.004472209841214
+6.279195757507157
+3.759850702401539
+5.215843784925895
+4.182207192401397
+4.8277650983445906
+4.387593384662677
+4.671250085763899
+4.481403616895052
+4.6053657460929
+4.5230849678718865
+4.577114682047341
+4.541382480151454
+4.564903245230833
+4.549372679303342
+4.559606491913287
+4.552853875788271
+4.557305529748263
+4.554369064436181
+4.556305311532999
+4.555028263573554
+4.555870396702851
+4.555315001192079
+4.5556812635433275
+4.555439715736846
+4.555599009998291
+4.555493957531389
+4.555563237292884
+4.555517548417651
+4.555547679306398
+4.555527808516254
+4.555540912917957
+4.555532270803653
+
+5.9828921423310435
+4.922168721308343
+4.628224318195455
+4.568346513136242
+4.5577305909237005
+4.555909809045131
+4.555599411610624
+4.5555465521473675
+4.555537551999825
+> 
+}}}
+
+=== 연습문제 1.37 ===
+ {{{#!gcode Scheme
+#lang scheme
+; 되도는 프로세스
+(define (cont-frac Ni Di k)
+  (define (func i)
+    (cond ((>= i k) (/ (Ni i) (Di i)))
+          (else (/ (Ni i) (+ (Di i) (func (+ i 1)))))))
+  (func 1))
+; 반복하는 프로세스
+(define (cont-frac-iter Ni Di k)
+  (define (func result k)
+    (cond ((= k 0) result)
+          (else (func (/ (Ni k) (+ (Di k) result)) (- k 1)))))
+  (func 0 k))
+}}}
+
+=== 연습문제 1.38 ===
+ {{{#!gcode Scheme
+#lang scheme
+(define (cont-frac-iter Ni Di k)
+  (define (func result k)
+    (cond ((= k 0) result)
+          (else (func (/ (Ni k) (+ (Di k) result)) (- k 1)))))
+  (func 0 k))
+
+(define (find-e k)
+  (+ 2 (cont-frac-iter (lambda (i) 1.0)
+                       (lambda (i)
+                         (cond ((= (remainder (+ i 1) 3) 0)
+                                (* (/ (+ i 1) 3) 2))
+                               (else 1))) k)))
+}}}
+
+=== 연습문제 1.44 ===
+ {{{#!gcode Scheme
+#lang scheme
+
+(define (compose fun1 fun2)
+  (lambda (x) (fun1 (fun2 x))))
+
+(define (repeated infunc k)
+    (if (= 1 k) infunc 
+        (compose infunc (repeated infunc (- k 1)))))
+
+(define dx 0.00001)
+
+(define (smoothing fun)
+  (lambda (x)
+    (/ (+ (fun (- x dx)) (fun x) (fun (+ x dx))) 3)))
+
+(define (smoothing-repeat fun n)
+  (repeated (smoothing fun) n))
+}}}

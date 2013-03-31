@@ -1,0 +1,6 @@
+이름 : 공봉식
+이메일 : kongbong23_at_gmail_dot_com
+블로그 : http://kongbong.tistory.com
+직업 : 게임 서버 클라이언트 개발
+관심 분야 : C++, .NET, 서버 프로그래밍, 병렬 프로그래밍
+주로 쓰는 언어 : C++, C#

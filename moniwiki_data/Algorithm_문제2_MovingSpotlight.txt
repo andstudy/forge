@@ -1,0 +1,156 @@
+= 1차 풀이 =
+ * 코드가 꽤 지저분합니다만 일단...
+ * 결과적으로 wrong answer입니다.
+{{{#!vim cpp
+   1. #include <iostream>
+      #include <cassert>
+      #include <vector>
+
+      using namespace std;
+
+      struct FieldSection
+      {
+          int      row;        // height
+          int      col;        // width
+
+          char    *pBufIn;
+          char    *pBufOut;
+
+          int      fieldNum;
+      };
+
+      void ComputeMinePos(vector<FieldSection> &vField)
+      {
+          assert(vField.size() > 0);
+
+          int width, height, mineCount;
+
+          for(int i = 0; i < vField.size(); i++)
+          {
+              width        = vField[i].col;
+              height       = vField[i].row;       
+              mineCount    = 0;
+
+              for(int h = 0; h < height; h++)
+              {
+                  for(int w = 0; w < width; w++)
+                  {
+                      if(vField[i].pBufIn[h * width + w] == '*')
+                      {
+                          vField[i].pBufOut[h * width + w] = '*';
+                      }
+                      else
+                      {
+                          for(int maskH = h - 1; maskH <= h + 1; maskH++)
+                          {
+                              for(int maskW = w - 1; maskW <= w + 1; maskW++)
+                              {
+                                  if(maskH < 0 || maskW < 0 || maskH > height-1 || maskW > width-1)
+                                      continue;
+
+                                  if(vField[i].pBufIn[(maskH * width + maskW)] == '*')
+                                      mineCount++;                           
+                              }
+                          }
+                          vField[i].pBufOut[h * width + w] = mineCount;
+                          mineCount = 0;
+                      }               
+                  }
+              }
+
+          }
+      }
+      void PrintResult(vector<FieldSection> &vField)
+      {
+          assert(vField.size() > 0);
+
+          for(int i = 0; i < vField.size(); i++)
+          {
+              cout << "Field #" << vField[i].fieldNum << endl;
+
+              int width = vField[i].col;
+
+              for(int row = 0; row < vField[i].row; row++)
+              {
+                  for(int col = 0; col < vField[i].col; col++)
+                  {
+                      if(vField[i].pBufOut[row * width + col] == '*')
+                          cout << vField[i].pBufOut[row * width + col];
+                      else
+                          cout << (int)(vField[i].pBufOut[row * width + col]);
+                  }
+
+                  cout << endl;
+              }
+          }
+      }
+
+      int main()
+      {
+          int      row, col;
+          int      count    = 1;
+          char    *pIn    = 0;
+          char    *pOut    = 0;
+
+          const int MAX_BUF = 100;
+          char    buf[MAX_BUF] = {0, };
+
+          vector<FieldSection>    vField;
+
+          while(1)
+          {
+              cin >> row >> col;
+
+              //if(row == 0 || col == 0)
+              //    continue;
+
+              if(row == 0 && col == 0)
+              {
+                  break;
+              }
+              else
+              {
+                  pIn     = new char[sizeof(char) * row * col + 1];
+                  pOut    = new char[sizeof(char) * row * col + 1];
+
+                  memset(pIn, 0x00, sizeof(char) * row * col + 1);
+                  memset(pOut, 0x00, sizeof(char) * row * col + 1);
+                 
+                  for(int i = 0; i < row; i++)
+                  {
+                      cin >> buf;
+                      assert(strlen(buf) == col);
+
+                      strcat(pIn, buf);
+                      buf[0] = 0;
+                  }
+
+                  FieldSection myField;
+                  myField.row         = row;
+                  myField.col         = col;
+                  myField.pBufIn      = pIn;
+                  myField.pBufOut     = pOut;
+                  myField.fieldNum    = count;
+
+                  vField.push_back(myField);
+                 
+                  pIn   = 0;
+                  pOut  = 0;
+                  count++;
+              }
+          }
+
+          ComputeMinePos(vField);
+          PrintResult(vField);
+
+          for(int i = 0; i < vField.size(); i++)
+          {
+              delete[] vField[i].pBufIn;
+              delete[] vField[i].pBufOut;
+          }
+
+          return 0;
+      }
+}}}
+
+

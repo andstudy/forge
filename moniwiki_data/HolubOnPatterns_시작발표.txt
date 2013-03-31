@@ -1,0 +1,9 @@
+= 김명관 = 
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cmake-100605060316-phpapp02&stripped_title=cmake-4416835" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}
+
+= 달노래 = 
+{{{#!html
+<div style="width:425px" id="__ss_4729187"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/andstudy/art-of-project-management" title="Art of project management">Art of project management</a></strong><object id="__sse4729187" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=artofprojectmanagement-100711051905-phpapp02&stripped_title=art-of-project-management" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4729187" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=artofprojectmanagement-100711051905-phpapp02&stripped_title=art-of-project-management" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/andstudy">andstudy</a>.</div></div>
+}}}

@@ -1,0 +1,92 @@
+이것도 풀어봤던 문제이긴한데, 도무지 어떻게 풀었는지 떠오르지 않아서 무지 애먹었습니다. ㅠ_ㅠ 머리가 퇴화한 기분을 느꼈다능...
+
+= 이 문제 풀면서 발견한 Programming-Challenges로봇의 문제점 =
+
+{{{
+copy(Data.begin(), Data.end(),ostream_iterator<SData>(cout, " "));
+}}}
+위코드는 컴파일 에러입니다. 컴파일 에러 내용은 아래와 같습니다.
+{{{
+pgdaemon.tmp.cpp: In function 'int main()':
+pgdaemon.tmp.cpp:55: error: 'ostream_iterator' was not declared in this scope
+pgdaemon.tmp.cpp:55: error: expected primary-expression before '>' token
+}}}
+ostream_iterator가 선언하지 않았다고해서 헤더파일 문제인지 일았는데 여러가지 삽질끝에..
+{{{
+copy(Data.begin(), Data.end(),ostream_iterator<struct SData>(cout, " "));
+}}}
+위와 같이 수정을 했더니 정상적인 컴파일이 되었습니다._no
+하지만 오랫동안 애썻는데도 불구하고 각 줄마다 마지막에 ' ' 가 하나 더 들어가서 PE(Presentation error)가 발생하더군요 :D
+
+vector<SData>는 제대로 되었는데 ostream_iterator만 안되는게 특별한 이유라도 있을까요? 아니면 단순히 G++이나 홈페이지의 문제일까요?
+
+= 문제 풀이 코드 =
+{{{
+#include <iostream>
+#include <vector>
+#include <iterator>
+#include <algorithm>
+
+using namespace std;
+
+struct SData
+{
+	int T;
+	int S;
+	int n;
+
+	bool operator<(const SData &rhs) const
+	{
+		return rhs.T*S > rhs.S*T;
+	}
+
+};
+
+vector<SData> Data;
+
+void InputData()
+{
+	int n;
+	SData TempData;
+	Data.clear();
+
+	cin >> n;
+
+	for(int i = 1; i <= n; ++i )
+	{
+		cin >> TempData.T >> TempData.S;
+		TempData.n = i;
+
+		Data.push_back(TempData);
+	}		
+}
+
+void OutputData()
+{
+	for(int i = 0; i < Data.size(); ++i )
+	{
+		cout << Data[i].n;
+		if( i != Data.size()-1 ) cout << " ";
+	}
+}
+
+int main()
+{
+	
+	int n;
+
+	cin >> n;
+	while(n--)
+	{
+		InputData();
+		sort(Data.begin(), Data.end());
+		OutputData();
+		cout << endl;
+
+		if(n) cout << endl;
+	}
+
+	return 0;
+}
+
+}}}

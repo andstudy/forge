@@ -1,0 +1,89 @@
+(비토와 친척들도 마찬가지지만)작년에 한번 풀어봤던거여서 문제를 보니 어떻게 풀었는지 기억나서 그대로 작성했습니다. 하지만 작년에 작성했던 코드를 보니 코드가 너무 다르더군요 ^^;
+
+역시 테스트는 적용하지 않았습니다. 모임에 나가서 배워와야겠어요.
+
+{{{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char Input[200];
+int count;
+int PanCake[31];
+
+void InputPanCake()
+{
+	char *word;
+	count = 0;
+
+	word = strtok(Input," ");
+	while(word != NULL)
+	{
+		PanCake[count] = atoi(word);
+
+		word = strtok(NULL, " ");
+		count++;
+	}	
+}
+
+void Reverse(int s, int e)
+{
+	int temp;
+	while( s < e )
+	{
+		temp = PanCake[s];
+		PanCake[s] = PanCake[e];
+		PanCake[e] = temp;
+		s++;
+		e--;
+	}
+}
+
+void CalResult()
+{
+	int CompleteStak = 1;
+	int BiggerNum;
+	int BiggerIndex;
+
+	while( CompleteStak < count )
+	{
+		BiggerNum = PanCake[count-CompleteStak];
+		BiggerIndex = count-CompleteStak;
+		for(int i = count-CompleteStak; i >= 0; --i )
+		{
+			if( BiggerNum < PanCake[i] )
+			{
+				BiggerNum = PanCake[i];
+				BiggerIndex = i;
+			}
+		}
+
+		if( BiggerIndex == 0 )
+		{
+			printf("%d ", CompleteStak);
+			Reverse(0, count-CompleteStak);
+		}
+		else if( BiggerIndex != count-CompleteStak )
+		{
+			printf("%d ", count-BiggerIndex);
+			Reverse(0, BiggerIndex);
+			CompleteStak--;
+		}
+		CompleteStak++;
+	}
+
+}
+
+int main()
+{
+	while( gets(Input) && Input[0] )
+	{
+		puts(Input);
+		InputPanCake();
+		CalResult();
+		printf("0\n");
+	}
+
+	return 0;
+}
+}}}

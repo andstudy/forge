@@ -1,0 +1,59 @@
+{{{#!html
+<HTML>
+    <HEAD>
+        <TITLE>직급별 회식비 계산기</TITLE>
+        <SCRIPT LANGUAGE="JavaScript">
+        <!--
+			// _e : 직급계수 coefficient, _n : 직급별 인원, _r : 직급별 내야할 돈
+            function calc(form) {
+                avg = form.sum.value / (form.a_e.value * form.a_n.value + form.b_e.value * form.b_n.value + form.c_e.value * form.c_n.value + form.d_e.value * form.d_n.value + form.e_e.value * form.e_n.value)
+				if (0 < form.a_n.value) {
+	                form.a_r.value = avg * form.a_e.value
+				} else {
+	                form.a_r.value = 0
+				}
+
+				if (0 < form.b_n.value) {
+					form.b_r.value = avg * form.b_e.value
+				} else {
+	                form.b_r.value = 0
+				}
+
+				if (0 < form.c_n.value) {
+					form.c_r.value = avg * form.c_e.value
+				} else {
+	                form.c_r.value = 0
+				}
+
+				if (0 < form.d_n.value) {
+					form.d_r.value = avg * form.d_e.value
+				} else {
+	                form.d_r.value = 0
+				}
+
+				if (0 < form.e_n.value) {
+					form.e_r.value = avg * form.e_e.value
+				} else {
+	                form.e_r.value = 0
+				}
+				form.sum2.value = form.a_r.value * form.a_n.value + form.b_r.value * form.b_n.value + form.c_r.value * form.c_n.value + form.d_r.value * form.d_n.value + form.e_r.value * form.e_n.value
+            }
+        // 자바스크립트 끝 -->
+        </SCRIPT>
+    </HEAD>
+    <BODY>
+        <H1>직급별 회식비 계산기</H1> <BR>
+총합과, 직급별 인원수를 입력한 뒤 '계산' 버튼을 눌러주세요.
+        <FORM NAME="myform1">
+            총합 : <INPUT TYPE="text" NAME="sum" VALUE=0><BR>	
+            부장이상 : <INPUT TYPE="text" NAME="a_e" VALUE=1.6> <INPUT TYPE="text" NAME="a_n" VALUE=0>명 <INPUT TYPE="text" NAME="a_r" VALUE=0 readonly="readonly">원 <BR>
+			차장 : <INPUT TYPE="text" NAME="b_e" VALUE=1.3> <INPUT TYPE="text" NAME="b_n" VALUE=0>명 <INPUT TYPE="text" NAME="b_r" VALUE=0 readonly="readonly">원<BR>
+			과장 : <INPUT TYPE="text" NAME="c_e" VALUE=1.0> <INPUT TYPE="text" NAME="c_n" VALUE=0>명 <INPUT TYPE="text" NAME="c_r" VALUE=0 readonly="readonly">원 <BR>
+			대리 : <INPUT TYPE="text" NAME="d_e" VALUE=0.8> <INPUT TYPE="text" NAME="d_n" VALUE=0>명 <INPUT TYPE="text" NAME="d_r" VALUE=0 readonly="readonly">원<BR>
+			주임이하 : <INPUT TYPE="text" NAME="e_e" VALUE=0.5> <INPUT TYPE="text" NAME="e_n" VALUE=0>명 <INPUT TYPE="text" NAME="e_r" VALUE=0 readonly="readonly">원<BR>
+			검산 : <INPUT TYPE="text" NAME="sum2" VALUE=0 readonly="readonly"><BR>
+            <INPUT TYPE="button" VALUE="계산" onClick="calc(this.form)">
+        </FORM>
+    </BODY>
+</HTML>
+}}}

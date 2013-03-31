@@ -1,0 +1,28 @@
+== 강연자 및 자료 ==
+ * [http://chulin28ho.egloos.com/4732541 아틀란티카]
+ * [http://rhea.pe.kr/entry/KGC-2008-가상의-온라인-게임으로-살펴보는-리팩토링의-솔직한-이야기-PPT-입니다 KGC 2008 "가상의 온라인 게임으로 살펴보는 리팩토링의 솔직한 이야기" PPT 입니다]
+ * [http://javawork.egloos.com/2138344 Python으로 만드는 코드생성기 PPT및 소스파일]
+ * [http://www.gamtoon.com/new/gs/interview/view.gam?num=178 KGC 2008 - 블리자드, 디아블로3의 아트 철학은?]
+
+== 후기 ==
+ * [http://blog.kogia.or.kr/37 한국게임산업 진흥원- 2008 KGC, 세계게임컨퍼런스로 비상(飛上)]
+ * [http://monac.egloos.com/2137361 monac 2일째 후기]
+ * [http://monac.egloos.com/2136147 monac 1일째 후기]
+ * [http://criburn.net/blog/mizelan/118 표블로그 - kgc 후기]
+ * [http://digitz.tistory.com/422?_new_tistory=new_text Digitzetre 4th - 마지막환상 - KGC 2008 강의노트]
+ * [http://blog.naver.com/luicypher?Redirect=Log&logNo=110037651602 Rare Lair 님 후기]
+ * [http://persian8.com/2511268 페르시안, 생각하는 고양이 : Blizzard]
+ * [http://ayablare.egloos.com/1109136 Diablo III Environment Art]
+ * [http://reiot.com/2008/11/13/kgc2008/ reiot 님 KGC 1일 후기]
+ * [http://reiot.com/2008/11/14/kgc2008-2/ reiot 님 KGC 2일 후기]
+
+----
+
+[http://www.kgconf.com/2008_nex/kgc/conference/pop13.html 목요일 시간표]
+[http://www.kgconf.com/2008_nex/kgc/conference/pop14.html 금요일 시간표]
+
+[http://gamemook.com/entry/KGC-2008-recommend-session-for-junior-designor KGC 2008 추천세션 : 기획실무 편]
+[http://gamemook.com/entry/KGC-2008-recommend-session-for-senior-designor KGC 2008 추천 세션 - 기획 총괄 편]
+[http://gamemook.com/entry/KGC-2008-recommend-session-for-artist KGC 2008 추천 세션 - 아티스트 편]
+[http://gamemook.com/entry/KGC-2008-recommend-session-for-programmer KGC 2008 추천 세션 - 프로그래머 편]
+[http://gamemook.com/entry/httpgamemookcomentryKGC-2008-recommend-session-keynote-and-etc KGC 2008 추천 세션 - 키노트. 기타정리]

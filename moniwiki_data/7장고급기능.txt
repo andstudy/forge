@@ -1,0 +1,3 @@
+{{{#!html
+<div style="width:595px" id="__ss_8729221"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/hiscale/110730-mongo-db-7" title="[110730/아꿈사발표자료] mongo db 완벽 가이드 : 7장 &#39;고급기능&#39;" target="_blank">[110730/아꿈사발표자료] mongo db 완벽 가이드 : 7장 &#39;고급기능&#39;</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8729221" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/hiscale" target="_blank">sung ki choi</a> </div> </div>
+}}}

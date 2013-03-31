@@ -1,0 +1,23 @@
+== Usage ==
+{{{[[Draw(Picture name)]]}}}
+
+/!\ HotDraw does not work correctly with java_1.3.1_09 :(
+----
+[[Draw(stadia)]]
+
+[[Draw(test2)]]
+
+[[Draw(test)]]
+----
+[[Draw(hello)]]
+----
+[[Draw(hello2)]]
+----
+[[Draw(hanadulset)]]
+----
+[[UploadedFiles]]
+----
+
+:*) 
+----
+안녕하세요. -- WkPark [[Date(2004-12-04T17:14:17)]]

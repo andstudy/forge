@@ -1,0 +1,183 @@
+
+= 아꿈사 스터디 후보에 올랐으나 채택되지 못한 책들 정리 =
+
+= 2010년 =
+===== 1. 이산수학 =====
+  * CleanCode http://www.yes24.com/24/goods/3732893
+  * Art of UNIX Programming http://www.yes24.com/24/goods/1405887
+  * Intel(R) 64 and IA-32 Architectures Optimization Reference Manual http://www.intel.com/Assets/PDF/manual/248966.pdf
+  * 프로그래머 두뇌 단련 퍼즐 44제 http://www.yes24.com/24/goods/2836904?scode=032&srank=1
+
+===== 2. Programming GameAI =====
+  * 컴파일러 http://kangcom.com/sub/view.asp?sku=200904060003
+  * Programming Language Processors in Java http://www.yes24.com/24/goods/466489?scode=032&srank=1
+  * 컴파일러 제작 원리와 실제
+  * 인사이드 머신 http://www.yes24.com/24/goods/2505514
+
+===== 3. 실전 코드로 배우는 실용주의 디자인 패턴 =====
+
+===== 4. xUnit Test Pattern =====
+  * 뇌를 자극하는 윈도우즈 시스템 프로그래밍 http://kangcom.com/sub/view.asp?sku=200703220002
+  * 메모리 덤프 분석과 활용
+  * C, C++ 병렬 프로그래밍: MMX, SSE를 이용한 고속 프로그래밍 http://www.yes24.com/24/goods/4038142
+  * 불확실성과 화해하는 프로젝트 추정과 계획 http://book.naver.com/bookdb/book_detail.nhn?bid=4765524
+  * Posa1/2
+
+===== 5. 프로그래머의 길, 멘토에게 묻다 =====
+  * 선정테마 : 새로운 언어
+  * "PROLOG PROGRAMMING FOR ARTIFICIAL INTELLIGENCE" http://bit.ly/9s9PHF
+  * HASKELL http://bit.ly/bC7FUL
+  * Dive Into Python http://coreapython.hosting.paran.com/dive/chap00.html
+  * Windows PowerShell http://technet.microsoft.com/ko-kr/library/aa973757(VS.85).aspx
+
+===== 6. Clojure =====
+  * Git
+  * Slack
+  * 고약한문제 합당한해결
+  * CODE
+  * 뷰티풀 아키텍쳐
+
+==== 7. IT 개발자가 쓴 통쾌한 인간관리 이야기 ====
+
+====== 2011년 ======
+===== 1. TAOCP =====
+
+===== 2. 아키텍트97 =====
+  * Unity 3D Game Development 한국어판 http://www.yes24.com/24/goods/5223019?scode=032&OzSrank=1
+  * 오픈소스 게임 엔진 SIO2를 다룬 http://www.yes24.com/24/goods/4107157
+  * Getting Real http://gettingreal.37signals.com/GR_kor.php 
+  * rework http://www.yes24.com/24/goods/4623315?scode=032&OzSrank=1 
+  * 과학철학입문 http://www.yes24.com/24/goods/12336?scode=032&OzSrank=37
+  * 집단지성 프로그래밍(파이썬) - http://kangcom.com/sub/view.asp?sku=200804160046
+  * 실전 예제로 살펴보는 집단지성 프로그래밍(자바) - http://kangcom.com/sub/view.asp?sku=201012290002
+  * 최신선형대수 - http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788970859699&orderClick=LEB
+  * 클라우드 구현 기술 - http://kangcom.com/sub/view.asp?sku=201012070002&mcd=571
+  * 퍼소나로 완성하는 인터랙션 디자인 - http://kangcom.com/sub/view.asp?sku=201011090005&mcd=571
+
+
+===== 3. MongoDB =====
+
+===== 4. DDD =====
+  * 24시간 365일 서버/인프라를 지탱하는 기술 http://www.yes24.com/24/goods/3377489
+  * 뷰티풀 아키텍쳐 http://www.yes24.com/24/goods/3718226
+
+===== 5. HTML5 & CSS3 =====
+  * Dive Into Python http://coreapython.hosting.paran.com/dive/chap00.html - 온라인 교재로 진행.
+
+===== 6. 프로젝트가 서쪽으로 간 까닭은 =====
+
+====== 2012년 ======
+===== 1. Windows Via c/c++ =====
+  * 멀티프로세서 프로그래밍 http://www.yes24.com/24/Goods/3461480?Acode=101
+  * Node.js 노드제이에스 프로그래밍 http://www.yes24.com/24/goods/6271069
+  * 자바스크립트 완벽 가이드 http://me2.do/xMo3nx
+  * 더글라스 크락포드의 자바스크립트 핵심 가이드 http://me2.do/xrrwCp
+  * 새로쓴 대용량 데이터베이스 솔루션 Vol.1 http://www.yes24.com/24/goods/1820583?scode=032&OzSrank=2 
+  * Concrete Mathematics: A Foundation for Computer Science
+  * hacker's delight
+  * 예제로 배우는 CUDA 프로그래밍 http://kangcom.com/sub/view.asp?sku=201110050001&mcd=571
+
+
+
+= 스터디 후보 정해보아요 =
+ * [http://www.yes24.com/24/goods/466489?scode=032&srank=1 Programming Language Processors in Java]
+  * 하지만 품질 크리...
+ * [http://www.yes24.com/24/goods/3563799 More Joel on Software 조엘 온 소프트웨어를 넘어서]
+ * [http://www.yes24.com/24/goods/3451289 WinDbg로 쉽게 배우는 Windows Debugging 윈도우 디버깅]
+ * [http://www.yes24.com/24/goods/1376522 DEBUGGING APPLICATIONS FOR .NET AND WINDOWS]
+ * [http://www.yes24.com/24/goods/2935600 디버깅 .NET 응용 프로그램 John Robbins 저/서우석 역 | 정보문화사]
+ * [http://www.amazon.com/Pragmatic-Thinking-Learning-Refactor-Wetware/dp/1934356050 Pragmatic Thinking and Learning: Refactor Your Wetware (Paperback)]
+ * [http://moai.tistory.com/679 헤드퍼스트 소프트웨어개발 번역 작업 마무리중 입니다.]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200801140004 패턴 지향 소프트웨어 아키텍처 : 패턴 시스템 Volume 1]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200806260004 도와주세요! 팀장이 됐어요]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200511220001 새로 쓴 대용량데이터베이스솔루션 1 - 관계형 데이터베이스 활용원리편]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200802140008 프로그래밍 수련법]
+  * MovingSpotlight - Back to the basic
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200804240021 Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드 편] - 개정판
+   * [CynicJJ], ;) ;) ;) ;) ;)
+ * POSA 2 
+ * POSA 4
+  * [Outbreak]
+ * Domain Driven Design - Evans
+ * Modern Multithreading
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=199901210001 Pattern Hatching -Design Patterns Applied]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200407290003 ACE 프로그래머 가이드] - POSA 2 실습용
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=199602060003 C로 배우는 알고리즘 2 - 이재규]
+  * [ParkPD], [Mastojun]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200702080002 IT COOKBOOK 쉽게 배우는 알고리즘 : 관계 중심의 사고법]
+  * [ParkPD], [Outbreak], [Mastojun], [bt22d], [kimbab]
+   * [http://blog.naver.com/adinpjh/80001877713 문병로씨 글] 이거 읽고 호감 상승..
+   * 우왕!
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200205200012 Algorithms in C++ (3/E) -Parts 1-4]
+  * [ParkPD], [Outbreak], [Mastojun], [bt22d], [jjuiddong]
+ *[http://www.yes24.com/Goods/FTGoodsView.aspx?goodsNo=2817847&CategoryNumber=001001003016002001 The Art of Computer Programming Vol.3] - 이런 책은 스터디에서 해야 한번이라도 보겠죠? ^^;
+  * [Outbreak], [jjuiddong]
+ *[http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200612280010 xUnit Test Patterns]
+  * [Outbreak]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200804230012 SOA, What & How: A Road to SOA]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200804110011 IT CookBook 쉽게 배우는 유전 알고리즘: 진화적 접근법]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200310140001 Professional 소프트웨어 개발 ]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200708130026 애자일 프랙티스]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200411020003 실용주의 프로그래머를 위한 단위 테스트 with JUnit]
+ * [https://kangcom.com/common/myzone/order/order_process_detail.asp?order_id=20070914104633D3BDA3FA Xunit Test Patterns: Refactoring Test Code]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200610110033 프리팩토링 ]
+ * [http://agile.egloos.com/3680867 린 소프트웨어 개발, Implementing Lean Software Development 번역판 9월달 출시 예정!]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200606220012#0 Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to Ooa&d ]
+  * 왠지~곧 번역판이 나올듯한 분위기...
+  * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200705250001 번역판입니다!]
+   읽어보고 괜찮으면 바로 다음 스터디에 써도 좋을 듯 합니다. [ParkPD]
+  * [http://www.joltawards.com/2007 JoltAwards]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200612230002 해킹,파괴의 광학(개정판) ]
+  * 저는 1판 읽어보았습니다만... 정말 재미있습니다~~ :)
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200605230024 Interface oriented design : with patterns]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200310070026 UML Distilled]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200508270012 UML2 & UP 객체 지향 설계]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200509100003#0 운명적 존재를 위한 UML]
+
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200703260001 아키텍트 이야기]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200509070012 Python]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200603290001 Lua]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=199705260003 Large-Scale C++ Software Design]
+  * 굳이 C++을 사용하지 않더라도 할만한 가치가 있을거 같습니다.
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200706200020 완벽한 컨설팅 Flawless Consulting]
+ * [http://www.intel.com/Assets/PDF/manual/248966.pdf Intel(R) 64 and IA-32 Architectures Optimization Reference Manual]
+ * [http://www.yes24.com/24/goods/1405887 Art of UNIX Programming]
+ * 뇌를 자극하는 윈도우즈 시스템 프로그래밍
+  * http://kangcom.com/sub/view.asp?sku=200703220002
+ * Dive Into Python 
+  * http://coreapython.hosting.paran.com/dive/chap00.html
+ * 프로그래머가 몰랐던 멀티코어 CPU 이야기
+  * http://kangcom.com/sub/view.asp?sku=201005200001
+ * C, C++ 병렬 프로그래밍: MMX, SSE를 이용한 고속 프로그래밍
+  * http://www.yes24.com/24/goods/4038142
+ * 불확실성과 화해하는 프로젝트 추정과 계획
+  * http://book.naver.com/bookdb/book_detail.nhn?bid=4765524
+
+= 스터디 한 책 =
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200704260053 SAIP]
+  * 번역서가 나왔습니다.
+  * 오래간만에 Architecture 스러운 책이군요. 원서를 이미 사 버린 터라 T_T;; 다행이 PPT 는 이미 있으니까 스터디 하긴 좋겠군요.
+  * 생.프 다음 스터디로 이 책에 한표~! ([Outbreak])
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200301140012 생각하는 프로그래밍]
+  * 이번에 배운 루비를 이용해서 문제를 풀어보는 것도 좋을 듯?
+  * 이책에 한표~! ([Outbreak])
+  * 저도 이책에 한표~! ([sang980])
+  * Head First 번역서 나올때까지 이책이 좋겠네요 (정희종)
+  * 저도 이쪽에 한표~ ([Itmentor])
+  * 이 책 생각보다 어려워요. 각오하세요~ ㅎㅎ 저도 한 표([ParkPD])
+  * 이 책으로 결정되는 분위기...ㅋㅋ ([kwbang])
+ * [http://www.yes24.com/24/goods/3432834 HARD CODE 하드 코드: 나잘난 박사의 IT 정글 서바이벌 가이드]
+ * [http://www.aladdin.co.kr/shop/wproduct.aspx?ISBN=8955508603 프로그램은 왜 실패하는가?]
+ * [http://www.yes24.com/24/goods/3079484 실전 윈도우 디버깅: 애플리케이션에서 시스템 프로그래밍까지 윈도우 프로그래밍 오류 분석과 툴 활용 기법 Mario Hewardt,Daniel Pravat 공저/김점갑 역 | 에이콘출판사 | 원서 : Advanced Windows Debugging]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200810130001 레거시 코드 활용 전략 손대기 두려운 낡은 코드, 안전한 변경과 테스트 기법]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200809300002 스크럼: 팀의 생산성을 극대화시키는 애자일 방법론]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200409030002 이산수학]
+  * [Outbreak], [Mastojun]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200706260004 Programming ERLANG: Software for a Concurrent World]
+  * [Outbreak], [itmentor], [ParkPD]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200410110002 Working Effectively with Legacy Code - TDD 공부를 위한 최고의 책]
+  * [Outbreak], [itmentor], [ParkPD], MovingSpotlight, [soomong], [bt22d]
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200805150002 The art of multiprocessor programming]
+  * 병행프로그래밍 관련 스터디 흐름을 이어가기에 딱 좋은 책인 것 같습니다.
+  * 앞 부분에선 쉬운 척(?) 하다가 갑자기 난이도가 올라가네요 ^^;
+

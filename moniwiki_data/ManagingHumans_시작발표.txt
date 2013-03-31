@@ -1,0 +1,17 @@
+ManagingHumans 시작발표
+
+{{{#!html
+<div style="width:425px" id="__ss_5949968"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/soomong/a-pattern-language-for-study-groups" title="스터디그룹 패턴 (A PATTERN LANGUAGE FOR STUDY GROUPS)">스터디그룹 패턴 (A PATTERN LANGUAGE FOR STUDY GROUPS)</a></strong><object id="__sse5949968" width="575" height="480"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=studypattern-101128093250-phpapp02&stripped_title=a-pattern-language-for-study-groups&userName=soomong" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse5949968" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=studypattern-101128093250-phpapp02&stripped_title=a-pattern-language-for-study-groups&userName=soomong" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/soomong">hyun soomyung</a>.</div></div>
+}}}
+
+
+
+{{{#!html
+<div style="width:425px" id="__ss_6035179"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/kyruie/analysis-of-gitandhg" title="Analysis of git_and_hg">구글은 왜 GIT를 선택했는가(Analysis of Git & Hg)</a></strong><object id="__sse6035179" width="575" height="480"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=analysisofgitandhg-101205042110-phpapp02&stripped_title=analysis-of-gitandhg&userName=kyruie" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6035179" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=analysisofgitandhg-101205042110-phpapp02&stripped_title=analysis-of-gitandhg&userName=kyruie" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/kyruie">kyruie</a>.</div></div>}}}
+
+
+PREMORTEM 
+
+http://pds18.egloos.com/pds/201011/07/81/PREMORTEM.pptx
+
+

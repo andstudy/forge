@@ -1,0 +1,377 @@
+여러가지 방법으로 풀 수 있다고 하는데 저는 일단 A*로 풀어보았습니다.
+
+{{{#!plain cpp
+#include <cassert>
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+#include <map>
+#include <vector>
+
+
+static const int num_rows = 4;
+static const int num_columns = 4;
+static const int num_cells = num_rows * num_columns;
+
+typedef unsigned long long BoardStateType;
+
+
+int calculate_heuristic_cost(int board[num_cells])
+{
+	int score = 0;
+	for(int i = 0; i < num_cells; ++i)
+	{
+		if (board[i] == i + 1)
+		{
+			++score;
+		}
+	}
+	return num_cells - 1- score;
+}
+
+BoardStateType calculate_board_state(int board[num_cells])
+{
+	BoardStateType result = 0;
+	for (int i = 0; i < num_cells; ++i)
+	{
+		result |= static_cast<unsigned long long>(board[i]) << (i * 4);
+	}
+	return result;
+}
+
+int find_empty_cell_index(int board[num_cells])
+{
+	return static_cast<int>(std::find(board, board + num_cells, 0) - board);
+}
+
+struct ClosedNodeData
+{
+	ClosedNodeData() : previous(0), direction_character('\0') {}
+	ClosedNodeData(const ClosedNodeData* previous, char direction_character)
+		: previous(previous), direction_character(direction_character)
+	{
+	}
+
+	const ClosedNodeData* previous;
+	char direction_character; // 'L', 'T', 'U', 'D';
+};
+
+struct Node
+{
+	static Node make_initial(int board[num_cells]);
+
+	Node get_linked(int direction, const ClosedNodeData* previous) const;
+
+	BoardStateType board_state;
+	char empty_cell_index;
+	char past_cost;
+	char heuristic;
+	char total_cost;
+	ClosedNodeData closed;
+};
+
+Node Node::make_initial(int board[num_cells])
+{
+	Node result;
+	result.board_state = calculate_board_state(board);
+	result.empty_cell_index = (char)find_empty_cell_index(board);
+	result.past_cost = 0;
+	result.heuristic = calculate_heuristic_cost(board);
+	result.total_cost = result.heuristic;
+	result.closed.previous = 0;
+	result.closed.direction_character = 0;
+	return result;
+}
+
+Node Node::get_linked(int direction, const ClosedNodeData* previous) const
+{
+	Node result = *this;
+	int destination_index = empty_cell_index + direction;
+	assert(destination_index >= 0 && destination_index < num_cells);
+
+	int destination_shift = (destination_index * 4);
+	BoardStateType destination_value = (board_state >> destination_shift) & 15;
+	result.board_state &= ~(15ULL << destination_shift);
+	result.board_state |= (destination_value << (empty_cell_index * 4));
+	result.empty_cell_index = destination_index;
+
+	++result.past_cost;
+	if (destination_value == destination_index + 1)
+	{
+		++result.heuristic;
+	}
+	else if (destination_value == empty_cell_index + 1)
+	{
+		--result.heuristic;
+	}
+
+	result.total_cost = result.past_cost + result.heuristic;
+	result.closed.previous = previous;
+	result.closed.direction_character = '\0';
+	switch (direction)
+	{
+	case -1: result.closed.direction_character = 'L'; break;
+	case 1: result.closed.direction_character = 'R'; break;
+	case -num_columns: result.closed.direction_character = 'U'; break;
+	case num_columns: result.closed.direction_character = 'D'; break;
+	}
+	
+	return result;
+}
+
+bool operator ==(const Node& lhs, const Node& rhs)
+{
+	return lhs.board_state == rhs.board_state;
+}
+
+struct GreaterCost
+{
+	bool operator ()(const Node& lhs, const Node& rhs) const
+	{
+		return lhs.total_cost > rhs.total_cost;
+	}
+};
+
+typedef std::vector<Node> NodeVector;
+typedef std::map<BoardStateType, ClosedNodeData> ClosedNodeMap;
+NodeVector opened;
+ClosedNodeMap closed;
+
+void insert_to_opened(const Node& node)
+{
+	NodeVector::iterator begin = opened.begin();
+	NodeVector::iterator end = opened.end();
+	NodeVector::iterator it = std::find(begin, end, node);
+	if (it == end)
+	{
+		opened.push_back(node);
+		std::push_heap(opened.begin(), opened.end(), GreaterCost());
+	}
+	else
+	{
+		if ((*it).past_cost > node.past_cost)
+		{
+			(*it) = node;
+			std::make_heap(opened.begin(), opened.end(), GreaterCost());
+		}
+	}
+}
+
+Node pop_from_opened()
+{
+	if (opened.empty())
+	{
+		assert(0);
+		return Node();
+	}
+
+	std::pop_heap(opened.begin(), opened.end(), GreaterCost());
+	Node result = opened.back();
+	opened.pop_back();
+	return result;
+}
+
+bool is_in_closed(BoardStateType board_state)
+{
+	return closed.find(board_state) != closed.end();
+}
+
+ClosedNodeData* insert_to_closed(BoardStateType board_state, const ClosedNodeData& data)
+{
+	std::pair<ClosedNodeMap::iterator, bool> result =
+		closed.insert(std::make_pair(board_state, data));
+	if (result.second)
+	{
+		return &((*result.first).second);
+	}
+	return 0;
+}
+
+bool is_valid_up(int empty_cell_index)
+{
+	return (empty_cell_index >= num_columns);
+}
+
+bool is_valid_down(int empty_cell_index)
+{
+	return (empty_cell_index + num_columns < num_cells);
+}
+
+bool is_valid_left(int empty_cell_index)
+{
+	const int next_empty_cell_index = empty_cell_index - 1;
+	if (next_empty_cell_index < 0) return false;	
+	return
+		(empty_cell_index / num_columns) == 
+		(next_empty_cell_index / num_columns);
+}
+
+bool is_valid_right(int empty_cell_index)
+{
+	const int next_empty_cell_index = empty_cell_index + 1;
+	if (next_empty_cell_index >= num_cells) return false;	
+	return
+		(empty_cell_index / num_columns) == 
+		(next_empty_cell_index / num_columns);
+}
+
+void init(int board[num_cells])
+{
+	Node node = Node::make_initial(board);
+	opened.clear();
+	closed.clear();
+	opened.push_back(node);
+}
+
+void print_result_path(const ClosedNodeData* data)
+{
+	std::vector<char> s;
+	s.reserve(closed.size());
+	while (data)
+	{
+		if (data->direction_character != '\0')
+		{
+			s.push_back(data->direction_character);
+		}
+		data = data->previous;
+	}
+
+	while (!s.empty())
+	{
+		std::cout << s.back();
+		s.pop_back();
+	}
+	std::cout << '\n';
+}
+
+bool is_valid_puzzle(int board[num_cells])
+{
+	int value = 0;
+	for (int i= 0; i < num_rows; ++i)
+	{
+		for (int j = 0; j < num_columns; ++j)
+		{
+			if (board[i * 4 + j] == 0 && (i + j) % 2 == 1)
+			{
+				++value;
+			}
+
+			for (int k = 0; k < 4; ++k)
+			{
+				int l = 0;
+				if (k == i)
+				{
+					l = j + 1;
+				}
+
+				for (; l < 4; ++l)
+				{
+					if (board[i * 4 +j] == 0 || 
+						(board[k * 4 +l] == 0 && board[i * 4 +j] > board[k * 4 +l]))
+					{
+						++value;
+					}
+				}
+			}
+		}
+	}
+
+	return value % 2 != 1;
+}
+
+bool solve_problem(int board[num_cells])
+{
+	if (is_valid_puzzle(board))
+	{
+		init(board);
+	}
+
+	bool result = false;
+	while (!opened.empty())
+	{
+		Node node = pop_from_opened();
+		if (node.heuristic == 0)
+		{
+			print_result_path(&node.closed);
+			result = true;
+			break;
+		}
+
+		if (node.total_cost > 50)
+		{
+			continue;
+		}
+
+		ClosedNodeData* parent = insert_to_closed(node.board_state, node.closed);
+		if (!parent)
+		{
+			continue;
+		}
+
+		if (is_valid_left(node.empty_cell_index))
+		{
+			Node left = node.get_linked(-1, parent);
+			if (!is_in_closed(left.board_state))
+			{
+				insert_to_opened(left);
+			}
+		}
+		if (is_valid_right(node.empty_cell_index))
+		{
+			Node right = node.get_linked(1, parent);
+			if (!is_in_closed(right.board_state))
+			{
+				insert_to_opened(right);
+			}
+		}
+		if (is_valid_up(node.empty_cell_index))
+		{
+			Node up = node.get_linked(-num_columns, parent);
+			if (!is_in_closed(up.board_state))
+			{
+				insert_to_opened(up);
+			}
+		}
+		if (is_valid_down(node.empty_cell_index))
+		{
+			Node down = node.get_linked(num_columns, parent);
+			if (!is_in_closed(down.board_state))
+			{
+				insert_to_opened(down);
+			}
+		}
+	}
+
+	if (!result)
+	{
+		std::cout << "This puzzle is not solvable.\n";
+	}
+
+	opened.clear();
+	closed.clear();
+
+	return result;
+}
+
+
+int main()
+{
+	opened.reserve(256);
+
+	int board[num_cells];
+
+	int set_count = 0;
+	std::cin >> set_count;
+	for (int i = 0; i < set_count; ++i)
+	{
+		for(int j = 0; j < num_cells; ++j)
+		{
+			std::cin >> board[j];
+		}
+		solve_problem(board);
+	}
+
+	return 0;
+}
+
+}}}

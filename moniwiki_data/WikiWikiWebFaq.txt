@@ -1,0 +1,6 @@
+'''Q:''' So what is this WikiWiki thing exactly?
+
+'''A:''' A set of pages of information that are open and free for anyone to edit as they wish.  The system creates cross-reference hyperlinks between pages automatically. See WikiWikiWeb for more info.
+
+----
+See Wiki:WikiWikiWebFaq for more questions & answers.

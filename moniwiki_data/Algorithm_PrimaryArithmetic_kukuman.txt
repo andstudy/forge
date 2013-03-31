@@ -1,0 +1,124 @@
+ * 풀이
+  * 입력된 숫자들 뒷자리부터 각자리수별로 더하여 Carry가 있는지 검사한다.
+  * 10자리 숫자는 int형의 범위를 넘기때문에 문자열로 읽어들여 각자리를 처리 하였다
+ * 소스
+
+{{{
+
+import java.io.IOException;
+
+class Main implements Runnable{
+    static String ReadLn(int maxLength){  // utility function to read from stdin,
+                                          // Provided by Programming-challenges, edit for style only
+        byte line[] = new byte [maxLength];
+        int length = 0;
+        int input = -1;
+        try{
+            while (length < maxLength){//Read untill maxlength
+                input = System.in.read();
+                if ((input < 0) || (input == '\n')) break; //or untill end of line ninput
+                line [length++] += input;
+            }
+
+            if ((input < 0) && (length == 0)) return null;  // eof
+            return new String(line, 0, length);
+        }catch (IOException e){
+            return null;
+        }
+    }
+
+    public static void main(String args[])  // entry point from OS
+    {
+        Main myWork = new Main();  // Construct the bootloader
+        myWork.run();            // execute
+    }
+
+    public void run() {
+    	String line = null;
+    	Adder adder = new Adder();
+    	while((line = ReadLn(22).trim()) != null){
+    		if(line.equals("0 0")){
+    			break;
+    		}
+    		String [] nums = line.split(" ");
+    		if(nums.length != 2){
+    			break;
+    		}
+    		int carryCount = adder.getCarryCount(nums[0], nums[1]);
+    		if(carryCount == 0){
+    			System.out.println("No carry operation.");
+    		} else if(carryCount==1){
+    			System.out.println(carryCount+" carry operation.");
+    		}else{
+    			System.out.println(carryCount+" carry operations.");
+    		}
+    	}
+    }
+}
+
+
+class Adder {
+
+	public boolean isMakeCarry(int i, int j,boolean hasCarry) {
+		int carray = hasCarry?1:0;
+		return i+j+carray>=10;
+	}
+
+	public int getCarryCount(String adder, String addend) {
+		int maxLen = Math.max(adder.length(), addend.length());
+		boolean hasCarry = false;
+		int carryCount = 0;
+		for(int index=0;index<maxLen;index++){
+			int a = getValueByPos(adder, index);
+			int b = getValueByPos(addend, index);
+			hasCarry = isMakeCarry(a, b, hasCarry);
+			if(hasCarry){
+				carryCount++;
+			}
+		}
+		return carryCount;
+	}
+	public int getValueByPos(String value,int pos){
+		if(value.length() <= pos)
+			return 0;
+		int cutPos = value.length()-pos-1;
+		return Integer.parseInt( value.substring( cutPos,cutPos+1) );
+	}
+
+}
+
+}}}
+
+* TestCase
+{{{
+import junit.framework.TestCase;
+
+
+public class AdderTest extends TestCase {
+	public void testIsMakeCarry(){
+		Adder adder = new Adder();
+		assertTrue(adder.isMakeCarry(5,5,false));
+		assertTrue(adder.isMakeCarry(5,4,true));
+		assertTrue(adder.isMakeCarry(5,6,false));
+		assertFalse(adder.isMakeCarry(5,3,false));
+	}
+	
+	public void testValuePos(){
+		Adder adder = new Adder();
+		assertEquals(1, adder.getValueByPos("1234", 3));
+		assertEquals(4, adder.getValueByPos("1234", 0));
+	}
+	
+	public void testGetCarryCount(){
+		Adder adder = new Adder();
+		assertEquals(0, adder.getCarryCount("123","456"));
+		assertEquals(3, adder.getCarryCount("555","555"));
+		assertEquals(2, adder.getCarryCount("55","555"));
+		assertEquals(1, adder.getCarryCount("123" ,"594"));
+		assertEquals(0, adder.getCarryCount("0","0"));
+	}
+	
+	
+}
+
+}}}
