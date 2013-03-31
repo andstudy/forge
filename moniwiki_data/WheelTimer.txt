@@ -1,0 +1,77 @@
+[[TableOfContents]]
+
+= Wheel Timer 만들어 보기 =
+Cycle Id, Slot Id, IndexInSlotId 세 개의 값을 이용해서 query 가능한 wheel timer 를 만들어 본다.
+
+[WheelTimer_FourthTrial]
+
+= Hashed and Hierarchical Timing Wheels =
+PPT 자료 : attachment:TimerIsNotFreeLunch.zip
+
+== 타이머 routines ==
+ * StartTimer(Interval, RequestId, ExpiryAction)
+    타이머 등록
+ * StopTimer(RequestId)
+    타이머 해제
+ * PerTickBookkeeping
+    T unit 당 현재 시간에 등록된 타이머 있는지 확인하고, 있다면 실행시켜준다.
+ * ExpiryProcessing
+    타이머에 등록된 함수. 타이머 실행될 때 이 루틴이 실행된다.
+ 
+== Scheme 비교 ==
+ * Scheme 1 
+     단순, 메모리 사용 작다. 타이머 시작,종료 비용 낮다.
+ * Scheme 2
+     하나의 타이머를 가지고 하드웨어적으로 지원 가능할 때 효과적.
+     VMS, UNIX 에서 사용하는 구현 방식.
+ * Scheme 3
+     하드웨어 타이머 없으면 즐?
+ * Scheme 4
+     대부분의 타이머가 작은 시간 범위를 가질때 사용
+ * Scheme 5
+     hash 에 크게 의존적. X-kernel 이 이 방법 사용
+ * Scheme 6
+     UNIX 같은 범용적 상황에 적합.  아주 낮은 오버헤드로 동작 가능. (메모리 좀 필요)
+ * Scheme 7
+     Scheme 6 과 비슷하나 메모리 사용이 상대적으로 작다. 대신 StartTimer 에 명령어가 좀 더 필요
+
+== Scheme 1 ==
+등록된 타이머를 tick 당 1씩 줄이다가 0이 되면 실행시킨다.
+타이머가 작을 때만 가능
+메모리 사용 작다.
+
+=== Class Diagram ===
+attachment:Scheme1_DCDs.GIF
+
+=== Sequential Diagram ===
+attachment:Scheme1_Seq.GIF
+
+== Scheme 2 : Ordered List/Timer Queues ==
+더블 링크드 리스트에 Expire time 이 기록된 타이머를 sorted 시켜놓는다.
+매 tick 마다 현재 타임을 줄인 후 head 에 있는 타이머와 비교, 그 크기가 작으면 그것을 실행시킨다.
+     
+== Scheme 3 : Tree-based Algorithms ==
+Priority queue 를 unbalanced binary tree 로 만들어서 StartTime 를 O(n) 에서 O(log(n)) 으로 줄인다.
+ 
+== Scheme 4 : 전형적인 wheel timer ==
+타이머 Period 가 MaxInterval 이하라고 보장할 수 있을 때 사용     
+(현재 타이머 index + 원하는 expire time) % MaxInterval 로 나온 인덱스 안에 있는 list 에 타이머 task 가 있을 경우 trigger 시켜준다.
+StopTimer 할 때는 제거하지 않고 단순히 Canceled 라는 테그만 붙여준다.
+
+== Scheme 5. Hash Tables with Sorted Lists ==
+% 대신 hash 알고리즘을 통해서 slot 에 집어넣는다.
+
+== Scheme 6. Hash Tables with Unsorted Lists ==
+StartTimer 가 O(n) 드는게 맘에 들지 않고 같은 slot 안의 타이머는 FIFO 가 아니어도 상관없을 경우 sort 안 하고 그냥 집어넣는다.
+
+== Scheme 7. 계층 구조 만들기 ==
+최대 100 일 짜리 타이머를 만들 경우, 100 일 * 24시간 * 60분 * 60초 개의 크기를 가지는 하나의 배열을 만들지 말고, 100 일 + 24시간 + 60분 + 60초 이렇게 네 개의 배열을 만든다.
+11일 14시 20초에 실행되는 타이머의 경우 우선 11일에 집어넣고, 11일이 되면 여기에서 빼서 14시에 넣고, 14시가 되면 20초에 집어넣어서 20초가 되었을 때 실행시킨다.
+즉 타이머 task 는 원하는 날짜가 되었을 때에만 시간 단위로 검사하기 시작하고 그 하위 단위에 대해서도 마찬가지로 동작한다.
+
+= 참고 =
+ * http://citeseer.ist.psu.edu/ 에서 검색하자.
+ * http://citeseer.ist.psu.edu/cache/papers/cs/1218/http:zSzzSzwww.ccrc.wustl.eduzSz~varghesezSzPAPERSzSztwheel.pdf/varghese96hashed.pdf
+ * https://portal.acm.org/citation.cfm?id=270876&coll=portal&dl=ACM&CFID=63330099&CFTOKEN=89342793
+    로그인 필요. 로그인 해도 full-text 안 봐짐. 방법은? 위에거 써라.
+ * http://www.parkpd.x-y.net/moniwiki/wiki.php/WheelTimer

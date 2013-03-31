@@ -1,0 +1,5 @@
+ * 지난 스터디 [AndGames/2006/FrameworkDesignGuideLines]페이지 가 추가되었습니다. 후기 부탁 리겠습니다.
+ * 8.26일 스터디는 4회 워크샵 참가로 진행됩니다. http://devpia.com/Forum/BoardView.aspx?no=1209&forumname=and_free 참조하세요
+ * 다음 스터디 교재는 [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200303100007 Documenting Software Architectures: Views and Beyond] 로 정해졌습니다.
+ * [이름정하기] AnD - Games 의 새 이름을 정해 보아요~
+ * 이번주에는 토,일 1박 2일 동안 이동현님, 이수안씨랑 저 세 명이서 대안언어축제 (http://altlang.org/) 를 다녀옵니다. 많이 배워오겠습니다.

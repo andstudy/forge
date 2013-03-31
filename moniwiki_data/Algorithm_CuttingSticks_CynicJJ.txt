@@ -1,0 +1,238 @@
+ * DP가 도대체 뭘까?
+ * 부르트 포스~
+ * 느리다. 자르는 위치가 최대 50곳인데 9개 정도가 한계.
+ * 이상한 아이디어가 떠올라 별 지랄을 다 해봤으나 모두 실패. ㅋ
+
+[[TableOfContents([maxdepth])]]
+
+== Cutting Sticks ==
+
+=== Stick.vb ===
+{{{
+Public Class Stick
+
+	Shared Function GetCost(ByVal length As Integer, ByVal cutPositions As List(Of Integer)) As Integer
+		If cutPositions.Count = 0 Then Return 0
+		If cutPositions.Count = 1 Then Return length
+
+		Dim leftLenth As Integer = cutPositions(0)
+		Dim rightLenth As Integer = length - leftLenth
+
+		Dim left As New List(Of Integer)
+		Dim right As New List(Of Integer)
+
+		For i As Integer = 1 To cutPositions.Count - 1
+			Dim pos As Integer = cutPositions(i)
+			If pos > leftLenth Then
+				right.Add(pos - leftLenth)
+			Else
+				left.Add(pos)
+			End If
+		Next
+
+		Return length + GetCost(leftLenth, left) + GetCost(rightLenth, right)
+	End Function
+
+	Shared Function GetMinCost(ByVal length As Integer, ByVal cutPositions() As Integer) As Integer
+		Dim minCost As Integer = Integer.MaxValue
+
+		Dim every As List(Of List(Of Integer)) = GetEveryPossible(length, cutPositions)
+		For Each posList As List(Of Integer) In every
+			If posList.Count = cutPositions.Length Then
+				Dim cost As Integer = Stick.GetCost(length, posList)
+				If cost < minCost Then minCost = cost
+			End If
+		Next
+
+		Return minCost
+	End Function
+
+	Shared Function GetEveryPossible(ByVal length As Integer, ByVal cutPositions() As Integer) As List(Of List(Of Integer))
+		Dim every As New List(Of List(Of Integer))
+		For Each pos As Integer In cutPositions
+			Dim aList As New List(Of Integer)
+			aList.Add(pos)
+			every.Add(aList)
+		Next
+
+		For i As Integer = 0 To cutPositions.Length - 1
+			For k As Integer = 0 To every.Count - 1
+				Dim aList As List(Of Integer) = every(k)
+				If aList.Contains(cutPositions(i)) Then Continue For
+				If aList.Count < i Then Continue For
+				For j As Integer = 1 To aList.Count
+					Dim subList As New List(Of Integer)(aList)
+					subList.Insert(j, cutPositions(i))
+					every.Add(subList)
+				Next
+			Next
+		Next
+
+		'Dim m As Integer = 0
+		'While m < every.Count
+		'	If every(m).Count <> cutPositions.Length Then
+		'		every.RemoveAt(m)
+		'	Else
+		'		m += 1
+		'	End If
+		'End While
+
+		Return every
+	End Function
+
+End Class
+}}}
+
+=== !StickTest.vb ===
+{{{
+<TestClass()> _
+Public Class StickTest
+
+	<TestMethod()> _
+	Public Sub GetEveryPossibleTest()
+		Dim cutPositions() As Integer = {2, 4, 7}
+		Dim every As List(Of List(Of Integer)) = Stick.GetEveryPossible(10, cutPositions)
+
+		Dim m As Integer = 0
+		While m < every.Count
+			If every(m).Count <> cutPositions.Length Then
+				every.RemoveAt(m)
+			Else
+				m += 1
+			End If
+		End While
+
+		Assert.AreEqual(3 * 2, every.Count)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetMinCostTest()
+		Dim cutPositions1() As Integer = {2, 4, 7}
+		Assert.AreEqual(20, Stick.GetMinCost(10, cutPositions1))
+
+		Dim cutPositions2() As Integer = {25, 50, 75}
+		Assert.AreEqual(200, Stick.GetMinCost(100, cutPositions2))
+
+		Dim cutPositions3() As Integer = {4, 5, 7, 8}
+		Assert.AreEqual(22, Stick.GetMinCost(10, cutPositions3))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetMinCostTestFinal()
+		Dim input As String = _
+		 "100" & vbCrLf & _
+		 "3" & vbCrLf & _
+		 "25 50 75" & vbCrLf & _
+		 "10" & vbCrLf & _
+		 "3" & vbCrLf & _
+		 "2 4 7" & vbCrLf & _
+		 "10" & vbCrLf & _
+		 "4" & vbCrLf & _
+		 "4 5 7 8" & vbCrLf
+
+		Dim strList As List(Of String) = InputHandler.GetStringList(input)
+
+		Dim minCosts As New List(Of Integer)
+		For i As Integer = 0 To strList.Count - 1 Step 3
+			Dim length As Integer = Integer.Parse(strList(i))
+
+			Dim cutPositions() As Integer = InputHandler.GetCutPositios(strList(i + 2))
+
+			minCosts.Add(Stick.GetMinCost(length, cutPositions))
+		Next
+
+		Dim output As String = InputHandler.GetOutput(minCosts)
+
+		Dim expected As String = _
+		 "The minimum cutting is 200." & vbCrLf & _
+		 "The minimum cutting is 20." & vbCrLf & _
+		 "The minimum cutting is 22." & vbCrLf
+
+		Assert.AreEqual(expected, output)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetMinCostTestBigCase()
+		' 시간이 얼마나 걸리나 테스트
+		Dim cutPositions(7) As Integer
+		For i As Integer = 0 To cutPositions.Length - 1
+			cutPositions(i) = i * 3 + 1
+		Next
+
+		Stick.GetMinCost(999, cutPositions)
+	End Sub
+
+End Class
+}}}
+
+=== !ModuleMain.vb ===
+{{{
+Module ModuleMain
+
+	Sub Main()
+		Dim input As String = InputHandler.GetInput()
+
+		Dim strList As List(Of String) = InputHandler.GetStringList(input)
+
+		Dim minCosts As New List(Of Integer)
+		For i As Integer = 0 To strList.Count - 1 Step 3
+			Dim length As Integer = Integer.Parse(strList(i))
+			Dim cutPositions() As Integer = InputHandler.GetCutPositios(strList(i + 2))
+
+			minCosts.Add(Stick.GetMinCost(length, cutPositions))
+		Next
+
+		Dim output As String = InputHandler.GetOutput(minCosts)
+		Console.Write(output)
+	End Sub
+
+End Module
+}}}
+
+=== !InputHandler.vb ===
+{{{
+Public Class InputHandler
+
+	Shared Function GetInput() As String
+		Dim input As String = ""
+		Dim str As String
+
+		While True
+			str = Console.ReadLine()
+			If str = "0" Then Exit While
+			input &= str & vbCrLf
+		End While
+
+		Return input
+	End Function
+
+	Shared Function GetStringList(ByVal input As String) As List(Of String)
+		Dim separator() As Char = vbCrLf.ToCharArray()
+		Dim strs() As String = input.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+		Dim strList As New List(Of String)(strs)
+		Return strList
+	End Function
+
+	Shared Function GetCutPositios(ByVal str As String) As Integer()
+		Dim separator() As Char = {" "}
+		Dim strs() As String = str.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+
+		Dim cutPositions(strs.Length - 1) As Integer
+		For i As Integer = 0 To strs.Length - 1
+			cutPositions(i) = Integer.Parse(strs(i))
+		Next
+		Return cutPositions
+	End Function
+
+	Shared Function GetOutput(ByVal minCosts As List(Of Integer)) As String
+		Dim output As String = ""
+
+		For Each cost As Integer In minCosts
+			output &= "The minimum cutting is " & cost.ToString() & "." & vbCrLf
+		Next
+
+		Return output
+	End Function
+
+End Class
+}}}

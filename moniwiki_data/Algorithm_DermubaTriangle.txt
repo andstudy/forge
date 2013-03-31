@@ -1,0 +1,11 @@
+[http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=111207&format=html 문제보기]
+[http://www.programming-challenges.com/pg.php?page=studenthome&threshold=0&perpage=8&pagenum=11&orderby=12 12장 Summit Pages]
+
+[Algorithm/Dermuba Triangle/CynicJJ]
+[Algorithm/Dermuba Triangle/Mastojun]
+[Algorithm/Dermuba Triangle/Outbreak]
+[Algorithm/Dermuba Triangle/ParkPD]
+[Algorithm/Dermuba Triangle/itmentor]
+
+----
+CategoryProblem

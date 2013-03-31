@@ -1,0 +1,18 @@
+게임이름 : SQUARE ENIX'S FINAL FANTASY XIII
+
+잘된 점
+1. Realizing a shared vision through the demo
+2. Clarification of elements and processes through developing the demo
+3. Creating the locatio nmanager role
+4. Resolving the universal engine dilemma
+5. Narrrowing down polishing points through focus groups
+
+아쉬웠던 점
+1. Lack of a shared vision
+2. The universal engine and narrowing down the specs
+3. Getting started anyway
+4. The limits of the traditional team structure
+5. International player tests that came too late
+
+----
+[GameDeveloperMagazine]

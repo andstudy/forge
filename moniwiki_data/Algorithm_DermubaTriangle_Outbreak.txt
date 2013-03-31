@@ -1,0 +1,286 @@
+= 문제 요약 =
+ * 정삼각형 그리드에서 두 지점간 거리 구하는 문제!
+
+= 문제 해결 =
+ * (Row, Col) 그리드를 (x, y) 실수 좌표계로 변환
+  * Row 는 n*n 으로 구하고
+  * Col 은 구하지 않음. 
+  * 역삼각형으로 돌려서 1,2 사분면 사용.
+ * 각 (x,y) 좌표간 거리를 구한다.
+
+= 소감 =
+ * IF 가 거슬리지만.. 패스..
+ * 이번 주는 이거 한 문제만.. ^^;
+
+= ''' 풀이 ''' =
+{{{#!vim cpp
+
+// "Dermuba Triangle" Solution By Outbreak 
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+//#define _TDD
+
+
+// 1 + 2 + 3 + 4 + 5...     = n(n+1) / 2
+//     1 + 2 + 3 + 4 + 5... = (n-1)n / 2
+//--------------------------------------
+// 1 + 3 + 5 + 7 + 9 ...    = n * n
+
+// 1   4   9   12  21       = 각 행의 첫 숫자
+
+// 역삼각형으로 뒤집어서 풀이
+
+
+//---------------------------------------------------------------------------
+
+namespace Solver
+{
+
+	// 정삼각형 한변의 길이
+	static const double WIDTH	= 1;
+	// 정삼각형 높이
+	static const double HEIGHT	= sqrt((double)3) / 2;
+	// 정삼각형 꼭지점에서 외심까지 긴 길이
+	static const double UPPER_HEIGHT= HEIGHT * 2 / 3; 
+	// 정삼각형 꼭지점에서 외심까지 짧은 길이
+	static const double LOWER_HEIGHT= HEIGHT * 1 / 3; 
+	
+
+	// * 좌표 변환기
+	class Converter
+	{
+	public:
+		Converter(int value)
+		{	
+			X = GetX(value);
+			Y = GetY(value);
+		}
+
+		static double GetX(int value)
+		{
+			int distance = GetColDistace(value);
+			
+			return distance * WIDTH / 2;
+		}
+
+		static double GetY(int value)
+		{
+			int row = GetRow(value);
+			int distance = GetColDistace(value);
+
+			double y = HEIGHT * row;
+			
+			if( row & 1 )
+			{
+				if( distance & 1 )
+				{
+					y += UPPER_HEIGHT;
+				}
+				else
+				{
+					y += LOWER_HEIGHT;
+				}
+			}
+			else
+			{
+				if( distance & 1 )
+				{
+					y += LOWER_HEIGHT;
+				}
+				else
+				{
+					y += UPPER_HEIGHT;
+				}
+			}
+
+			return y;
+		}
+		
+		// Row 구하기 - 몇 번째 줄에 있냐? 
+		static int GetRow(int value)
+		{			
+			if( value <= 0 )
+				return 0;
+
+			return (int)sqrt((double)(value));
+		}
+
+		// 해당 Row 의 중간 삼각형 Column
+		static int GetCenterCol(int value)
+		{
+			double row = GetRow(value);
+			double center = (((row+1)*(row+1)-1) + row*row) / 2 ;
+
+			return (int)center;			
+		}
+
+		// 해당 Row 의 중간 삼각형과의 Column 수 차이
+		static int GetColDistace(int value)
+		{
+			int center = GetCenterCol(value);
+			int distance = center - value;
+
+			return distance;
+		}
+	
+	public:
+		double X, Y;
+	};
+
+
+	// * 집 - 좌표간 거리 계산기
+	class House
+	{
+	public:
+		House(double x, double y) : x(x), y(y) {}
+		
+		double operator- (const House& rhs)
+		{
+			double xx = this->x - rhs.x;
+			double yy = this->y - rhs.y;
+			return sqrt(xx*xx + yy*yy); 
+		}
+		
+	private:
+		double x, y;		
+	};	
+
+
+	// * 답 구하기
+	double Calculate(int n, int m)
+	{			
+		// 1. > 정수 (Row, Col) 그리드를 실수 (X, Y) 좌표계로 변환한다.
+		Converter c1(n), c2(m);
+		
+		// 2. > X, Y 좌표계를 쓰는 집을 만든다.
+		House h1(c1.X, c1.Y), h2(c2.X, c2.Y);
+
+		// 3. > 두 집간에 거리를 구한다.
+		return h1 - h2;
+	}
+}
+
+//---------------------------------------------------------------------------
+
+namespace Runner
+{
+	void Execute(istream& in, ostream& out)
+	{
+		int n = 0, m = 0;
+
+		while( in >> n >> m )
+		{		
+			if( in.fail() )
+				break;			
+			
+			out << setprecision(3) << fixed << Solver::Calculate(n,m) << endl;
+		}
+	}
+}
+
+//---------------------------------------------------------------------------
+
+#ifdef _TDD
+
+#include "unittest++.h"
+using namespace Solver;
+
+TEST(Converter_GetRow)
+{
+	// (Row, Col) 정수 그리드 좌표계
+	CHECK_EQUAL(0, Converter::GetRow(0));
+	CHECK_EQUAL(1, Converter::GetRow(1));
+	CHECK_EQUAL(2, Converter::GetRow(4));
+	CHECK_EQUAL(2, Converter::GetRow(7));
+	CHECK_EQUAL(2, Converter::GetRow(8));
+	CHECK_EQUAL(3, Converter::GetRow(9));
+	CHECK_EQUAL(3, Converter::GetRow(11));	
+}
+
+TEST(Converter_GetCol)
+{
+	// (Row, Col) 정수 그리드 좌표계
+	CHECK_EQUAL(6, Converter::GetCenterCol(4));
+
+	CHECK_EQUAL(2, Converter::GetColDistace(4));
+	CHECK_EQUAL(-2, Converter::GetColDistace(8));
+	CHECK_EQUAL(-1, Converter::GetColDistace(3));
+}
+
+TEST(Converter_GetX)
+{
+	// (X, Y)  실수 좌표계
+	CHECK_CLOSE( 0,		Converter::GetX(0), 0.001);
+	CHECK_CLOSE( 0.5,	Converter::GetX(1), 0.001);
+	CHECK_CLOSE( -0.5,	Converter::GetX(3), 0.001);
+	CHECK_CLOSE( 1,		Converter::GetX(4), 0.001);
+	CHECK_CLOSE( -1,	Converter::GetX(8), 0.001);
+
+}
+
+TEST(Converter_GetY)
+{
+	// (X, Y)  실수 좌표계
+	CHECK_CLOSE( HEIGHT * Converter::GetRow(6) + UPPER_HEIGHT, Converter::GetY(6), 0.001 );
+	CHECK_CLOSE( HEIGHT * Converter::GetRow(0) + UPPER_HEIGHT, Converter::GetY(0), 0.001 );
+	
+	CHECK_CLOSE( HEIGHT * Converter::GetRow(2) + UPPER_HEIGHT / 2, Converter::GetY(2), 0.001 );
+}
+
+TEST(House)
+{
+	House h1(0,0), h2(3,4);
+	CHECK_EQUAL( 5, h1-h2);
+}
+
+TEST(Output1)
+{
+	stringstream input;
+	stringstream output;
+
+	input << "0 7\n";
+
+	Runner::Execute(input, output);
+
+	CHECK_EQUAL("1.528\n", output.str());
+}
+
+TEST(Output)
+{
+	stringstream input;
+	stringstream output;
+
+	input <<
+		"0 7\n"
+		"2 8\n"
+		"9 10\n"
+		"10 11\n";
+
+	Runner::Execute(input, output);
+
+	CHECK_EQUAL("1.528\n1.528\n0.577\n0.577\n", output.str());
+}
+
+#endif
+
+//---------------------------------------------------------------------------
+
+int main()
+{
+
+#ifdef _TDD	
+	UnitTest::RunAllTests();
+#else
+	Runner::Execute(cin, cout);
+#endif // _TDD
+	return 0;
+
+}
+
+}}}
+

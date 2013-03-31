@@ -1,0 +1,4 @@
+{{{#!html
+<div style="width:425px" id="__ss_10026913"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/whiletrue0222/html5css3-8" title="HTML5&amp;CSS3 8장. 눈을 즐겁게" target="_blank">HTML5&amp;CSS3 8장. 눈을 즐겁게</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10026913" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/whiletrue0222" target="_blank">Youngkwon Lee</a> </div> </div>
+}}}
+...

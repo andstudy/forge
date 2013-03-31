@@ -1,0 +1,71 @@
+GDC2008 바로가기
+
+== Mobile: 3D ==
+ Strategic Briefing: Khronos Mobile Graphics Ecosystem	| Neil Trevett
+
+
+== Mobile: Deals & Distribution ==
+ 10 Things Journalists Love AND Hate about Your Games	| Stuart Dredge
+ Bringing Mobile Gaming to the Global Masses: Case Study on EARTH DEFENSE FORCE	| Atsushi Miyamoto, Toshio Takekawa
+ Indy Games Distribution that Works-What Mobile Can Learn from Casual Web Portals	| Matthew Bellows
+ Legal Nuts & Bolts for Mobile Game Developers	| Daniel Offner
+ Mobile Games and Advertising: Kicking Tires on the?	| Michael Chang, Matthew Bellows
+ Publisher Under the Microscope	| Eric Goldberg, Michael Breslin, Mark Ollila 외
+ Put the Fun in Funding: Mobile Games Investments of Yesterday, Today & Tomorrow	| John Szeder, Mitch Lasky, Richard Moran 외
+ The Rise and Fall of the Operator Game Deck?	| Kristian Segerstrale
+ The Road Not Taken: Alternative Channels to Tier-1 Distribution	| Dave Bell, Mitch Rotter, Thomas Richter 외
+ TV Play Along: Play a Mobile Game Synchronized to TV	| Jeroen Elfferich
+
+
+== Mobile: Design ==
+ Bringing a Console Quality Games Experience to Mobile Phones	| Martin Dunsby
+ Challenges of Mobile Medium & Approaches to Design for Constrained Platform	| Dan Scott
+ Connecting Mobile Games and MMOs	| Dan Roy
+ Cross Platform ‘Convergence’ Critical to Consumer Adoption of Mobile Content	| Don Ryan
+ Designing a Casual Social Gaming Experience for Generation C	| Kars Alfrink
+ Embracing the Mobile Constraints or: How I Learned to Stop Worrying and Love the Phone	| Jeferson Valadares
+ Hardware Accelerated 3D Game on the N-Gage Platform Sponsored by Nokia	| Peter Lykke Nielsen
+ Lessons Learned in Location-based Gaming	| Jeremy Irish
+ Pervasive Multiuser Mobile Gaming: Reality Overlays for Virtual Worlds to Create an Addictive, Collaborative Experience Sponsored by Nokia	| Mark Ollila, Peter Molettiere
+ Social Media, Virtual Worlds, Mobile, and Other Platforms	| Peter Marx
+ TETRIS: Best/Worst Mobile Game Ever	| Rick Marazzani
+
+
+== Mobile: Original Innovation ==
+ A Look Ahead: The Future for Mobile Gaming in the US	| James Song
+ Console Game Experience on Mobile Phones with Immersive Games and Innovative Gadgets	| Michael Schade
+ Disruptive Forces in Gaming Sponsored by Zeemote	| Beth Marcus
+ IGF Mobile Awards Ceremony	| Robert Tercek, Mathew Kumar
+ iPhone and Beyond: A New Hope for Mobile Gaming	| Tom Hubina
+ Is Now a Crazy Time to Start a New Mobile Studio?	| John Chasey, Fergus McNeill
+ Micro-billing Business Model in Mobile Gaming	| Don Lim
+ Mobile Game 2.0: The Rise of the Widget?	| Paul Coulton, Will Bamford
+ Mobile Social Entertainment: Next Big Thing from Japan	| David Collier
+
+
+== Mobile: Production ==
+ 10 Ways to Run a Porting Team like Genghis Khan	| Tom Park
+ Agility and Mobility: Applying Agile Practices to Mobile Game Development	| Peter Paul Gadi
+ Creativity Techniques in Game Design	| Annakaisa Kultima
+ Improving the End User Experience: Advances in Playtesting for Mobile Games	| Elina Ollila
+ In Search of...The Quest for Games in the Mobile Universe	| John Puterbaugh
+ Mobile Social Gaming ? Breaking Down Barriers to Connectivity Sponsored by Exit Games	| Christof Wegmann
+ Pushing the Mobile Gaming State of the art with Nokia 1st Party Games Sponsored by Nokia	| Dan Scott
+ The Top 10 Reasons Why Publishing Even Good Mobiles Games isn’t Easy	| Jill Braff
+ Why Use Location in a Mobile Game and How Best Should You Use It	| John Carpenter
+
+
+== Mobile: Programming ==
+ Client-Server Strategies for Mobile	| Jeffrey Miller
+ Migrating from OpenGL ES 1.x to OpenGL ES 2.0	| Dave Astle, Jonathan Feldstein
+ Next-Gen Tile-Based GPUs	| Maurice Ribble
+ Quick Tips for Tighter ARM Assembly Code	| Ed Plowman
+ The Watershed in 3D Mobile Gaming	| David Ligon
+
+
+== Mobile: Vision ==
+ Fast Life, Fast Media	| Michel Guillemot
+ Play with Anybody Everywhere: Context, the New Paradigm for Game Play	| Anssi Vanjoki
+
+
+GDC2008 바로가기

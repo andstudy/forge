@@ -1,0 +1,27 @@
+== Creating a New Page ==
+
+To create a page, add its WikiName to an existing page and save it. After that, you can click on it on the revised page, since it automatically becomes a hyperlink.
+
+You will then be presented with your new page, which you can edit in the normal way. After you ''first'' saved it, it will be automatically created. Pages normally[[FootNote(Deleting pages can be activated by the wiki administrator (which you'll normally do in intranet sites only).)]] cannot be deleted, so be sure to spell new WikiName''''''s correctly.
+
+On details on how to create and link to subpages, see HelpOnEditing/SubPages. 
+
+== Creating and Using Template Pages ==
+To create a template, follow the above description and create a page with a name ending in "'''Template'''"[[FootNote(If the wiki administrator changed the default settings, rules for what names are template pages might be different.)]]. This page will then be added to the list of template pages displayed when you try to show a non-existent page. For example, NonExistentHelpPage has a link to HelpTemplate that loads the content of HelpTemplate into the editor box, when you click on that link.
+
+== Variable Substitution when Saving a Page ==
+
+[[Anchor(variablesubstitution)]]
+The following variables are substituted when a page is ''finally'' saved. Note that they'll appear unreplaced in the preview!
+
+|| @''''''PAGE@     || Name of the page (useful for template pages) ||
+|| @''''''DATE@     || Current date in the system's format ||
+|| @''''''TIME@     || Current date and time in the user's format ||
+|| @''''''USERNAME@ || Just the user's name (or his domain/IP) ||
+|| @''''''USER@     || Signature "-- loginname" ||
+|| @''''''SIG@      || Dated Signature "-- loginname date time" ||
+|| @''''''MAILTO@   || A fancy mailto: link with the user's data ||
+
+Note that saving template or form definition pages and using preview does ''not'' expand variables. Other than that, variable expansion is very global and happens anywhere on the page, including code displays, comments, processing instructions and other "special" areas of a page you might think are excluded.
+----
+[[Navigation(HelpContents)]]

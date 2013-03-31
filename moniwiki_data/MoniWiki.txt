@@ -1,0 +1,11 @@
+#keywords MoniWiki, WikiEngine
+MoniWiki is a PHP based WikiEngine. WikiFormattingRules are imported and inspired from the MoinMoin. '''Moni''' is slightly modified sound means '''What ?''' or '''What is it ?''' in Korean and It also shows MoniWiki is nearly compatible with the MoinMoin.
+
+If you are familiar with the PHP Script language you can easily add features or enhancements.
+----
+http://sourceforge.net/projects/moniwiki/
+{{{#!html
+<img src="http://sourceforge.net/sflogo.php?group_id=51905&amp;type=1" alt='SF.net' />
+}}}
+== MoniWiki:MoniWikiFeatures ==
+== /DownLoad ==

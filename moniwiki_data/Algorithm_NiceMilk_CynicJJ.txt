@@ -1,0 +1,569 @@
+ * 마지막 문제라 그런지 기력이 쇠진하여 완벽하게 풀지 못함
+ * 코드도 지저분함
+ * 안 되는 것
+  1. n각형을 n번 적실 때
+  1. 적신면이 불연속적일 때
+  1. 모든 면적이 다 적셔질 때
+  1. 적셔진 면이 5각형 이상일 때
+ * 예제 입력은 정답 나오긴 함
+ * 기력을 보충하여 나중에 다시 풀자...
+
+[[TableOfContents([maxdepth])]]
+
+== Nice Milk ==
+
+=== !ModuleMain.vb ===
+{{{#!vim vb
+Public Module ModuleMain
+
+	Sub Main()
+		Try
+			While True
+				Dim input As String = InputHandler.GetInput()
+				If input = "0 0 0" Then Exit While
+
+				Dim output As String = Run(input)
+				Console.WriteLine(output)
+			End While
+		Catch ex As Exception
+
+		End Try
+	End Sub
+
+	Function Run(ByVal input As String) As String
+		Dim aCase As List(Of String) = InputHandler.GetStringList(input)
+
+		Dim info() As Integer = InputHandler.GetInfo(aCase(0))
+
+		Dim vertexCount As Integer = info(0)
+		Dim dipTimes As Integer = info(1)
+		Dim milkHeight As Integer = info(2)
+
+		Dim aNiceMilk As New NiceMilk()
+		aNiceMilk.SetDipTimes(dipTimes)
+		aNiceMilk.SetMilkHeight(milkHeight)
+
+		For i As Integer = 1 To vertexCount
+			Dim vertex As Point = InputHandler.CreatePoint(aCase(i))
+			aNiceMilk.AddVertex(vertex)
+		Next
+
+		Dim result As Double = aNiceMilk.GetLargestMilkedArea()
+		Dim output As String = String.Format("{0:F}", Math.Round(result, 2))
+		Return output
+	End Function
+
+End Module
+}}}
+
+=== Line.vb ===
+{{{#!vim vb
+Public Class Line
+
+	Shared Function GetCross(ByVal line1 As Line, ByVal line2 As Line) As Point
+		Dim x As Double
+		Dim y As Double
+
+		If line1.yFactor <> 0 AndAlso line2.yFactor <> 0 Then
+			x = (line2.intercept - line1.intercept) / (line1.slope - line2.slope)
+			y = line1.slope * x + line1.intercept
+		ElseIf line1.yFactor = 0 AndAlso line2.yFactor <> 0 Then
+			x = line1.intercept
+			y = line2.slope * x + line2.intercept
+		ElseIf line1.yFactor <> 0 AndAlso line2.yFactor = 0 Then
+			x = line2.intercept
+			y = line1.slope * x + line1.intercept
+		Else
+			Return Nothing
+		End If
+
+		Return New Point(x, y)
+	End Function
+
+	Private _p1 As Point
+	Private _p2 As Point
+
+	ReadOnly Property p1() As Point
+		Get
+			Return _p1
+		End Get
+	End Property
+
+	ReadOnly Property p2() As Point
+		Get
+			Return _p2
+		End Get
+	End Property
+
+	Sub New(ByVal p1 As Point, ByVal p2 As Point)
+		_p1 = p1
+		_p2 = p2
+
+		If p1._x <> p2._x Then
+			_yFactor = 1
+			_slope = (p2._y - p1._y) / (p2._x - p1._x)
+			_intercept = p1._y - (_slope * p1._x)
+		Else
+			_yFactor = 0
+			_slope = -1
+			_intercept = p1._x
+		End If
+	End Sub
+
+	Sub New(ByVal slope As Double, ByVal intercept As Double, Optional ByVal yFactor As Double = 1)
+		_slope = slope
+		_intercept = intercept
+		_yFactor = yFactor
+	End Sub
+
+	Sub New(ByVal slope As Double, ByVal aPoint As Point)
+		_slope = slope
+		_intercept = aPoint.y - slope * aPoint.x
+		_yFactor = 1
+	End Sub
+
+	Function GetMilkLine(ByVal height As Integer) As Line
+		If yFactor <> 0 Then
+			Dim aPoint As Point = GetMilkLinePoint(height)
+			Return New Line(slope, aPoint)
+		Else
+			Dim newIntercept = intercept + height
+			Return New Line(slope, newIntercept, yFactor)
+		End If
+	End Function
+
+	Function GetMilkLinePoint(ByVal height) As Point
+		Dim px As Double = -(slope * height) / Math.Sqrt(slope ^ 2 + 1)
+		Dim py As Double = intercept + height / Math.Sqrt(slope ^ 2 + 1)
+
+		Return New Point(px, py)
+	End Function
+
+	Function IsContain(ByVal aPoint As Point) As Boolean
+		Dim high As Integer
+		Dim low As Integer
+
+		high = Math.Max(_p1.x, _p2.x)
+		low = Math.Min(_p1.x, _p2.x)
+		If aPoint.x > high OrElse aPoint.x < low Then
+			Return False
+		End If
+
+		high = Math.Max(_p1.y, _p2.y)
+		low = Math.Min(_p1.y, _p2.y)
+		If aPoint.y > high OrElse aPoint.y < low Then
+			Return False
+		End If
+
+		Return True
+	End Function
+
+	Private _slope As Double
+	Private _intercept As Double
+	Private _yFactor As Double = 1	' 1 or 0
+
+	ReadOnly Property slope() As Double
+		Get
+			Return _slope
+		End Get
+	End Property
+
+	ReadOnly Property intercept() As Double
+		Get
+			Return _intercept
+		End Get
+	End Property
+
+	ReadOnly Property yFactor() As Double
+		Get
+			Return _yFactor
+		End Get
+	End Property
+
+End Class
+}}}
+
+=== !NiceMilk.vb ===
+{{{#!vim vb
+Public Class NiceMilk
+
+	Private _vertices As New List(Of Point)
+
+	Sub AddVertex(ByVal vertex As Point)
+		_vertices.Add(vertex)
+	End Sub
+
+	Private _lines As New List(Of Line)
+
+	Sub CreateLines()
+		For i As Integer = 0 To _vertices.Count - 2
+			_lines.Add(New Line(_vertices(i), _vertices(i + 1)))
+		Next
+		_lines.Add(New Line(_vertices(_vertices.Count - 1), _vertices(0)))
+	End Sub
+
+	Function IsPlusHeight(ByVal baseLine, ByVal aLine, ByVal height) As Boolean
+		Dim milkLine As Line = baseLine.GetMilkLine(height)
+		Dim cross As Point = Line.GetCross(aLine, milkLine)
+		If aLine.IsContain(cross) Then
+			Return True
+		Else
+			Return False
+		End If
+	End Function
+
+	Private _milkLines As New List(Of Line)
+
+	Sub CreateMilkLines()
+		For i As Integer = 0 To _lines.Count - 1
+			Dim baseLine As Line = _lines(i)
+			Dim aLine As Line
+			If i < _lines.Count - 1 Then
+				aLine = _lines(i + 1)
+			Else
+				aLine = _lines(0)
+			End If
+
+			Dim height As Integer
+			If IsPlusHeight(baseLine, aLine, _milkHeight) Then
+				height = _milkHeight
+			Else
+				height = -_milkHeight
+			End If
+
+			Dim milkLine As Line = baseLine.GetMilkLine(height)
+			_milkLines.Add(milkLine)
+		Next
+	End Sub
+
+	Function GetLargestMilkedArea() As Double
+		CreateLines()
+		CreateMilkLines()
+
+		Dim milked As New List(Of Double)
+		Dim duplicated As New List(Of Double)
+
+		Dim baseLine As Line
+		Dim milkLine As Line
+		Dim nextLine As Line
+		Dim prevLine As Line
+		Dim prevMilkLine As Line
+
+		For i As Integer = 0 To _lines.Count - 1
+			baseLine = _lines(i)
+			milkLine = _milkLines(i)
+
+			If i <= _lines.Count - 2 Then
+				nextLine = _lines(i + 1)
+			Else
+				nextLine = _lines(0)
+			End If
+
+			If i > 0 Then
+				prevLine = _lines(i - 1)
+				prevMilkLine = _milkLines(i - 1)
+			Else
+				prevLine = _lines(_lines.Count - 1)
+				prevMilkLine = _milkLines(_milkLines.Count - 1)
+			End If
+
+			Dim points As New List(Of Point)
+			points.Add(baseLine.p1)
+			points.Add(baseLine.p2)
+			points.Add(Line.GetCross(milkLine, nextLine))
+			points.Add(Line.GetCross(milkLine, prevLine))
+
+			Dim s As Double = GetArea(points)
+			milked.Add(s)
+
+			Dim pts As New List(Of Point)
+			pts.Add(baseLine.p1)
+			pts.Add(Line.GetCross(prevMilkLine, baseLine))
+			pts.Add(Line.GetCross(prevMilkLine, milkLine))
+			pts.Add(Line.GetCross(milkLine, prevLine))
+
+			Dim a As Double = GetArea(pts)
+			duplicated.Add(a)
+		Next
+
+		Dim area As Double
+		Dim sorted As New List(Of Double)(milked)
+		sorted.Sort()
+		sorted.Reverse()
+		Dim copied As New List(Of Double)(milked)
+		For i As Integer = 0 To _dipTimes - 1
+			Dim index As Integer
+			For j As Integer = 0 To copied.Count - 1
+				If sorted(i) = copied(j) Then
+					index = j
+					copied(index) = -1.0
+					Exit For
+				End If
+			Next
+
+			area += milked(index) - duplicated(index)
+		Next
+
+		Dim firstIndex As Integer
+		Dim copied2 As New List(Of Double)(milked)
+		For j As Integer = 0 To copied2.Count - 1
+			If sorted(0) = copied2(j) Then
+				firstIndex = j
+				Exit For
+			End If
+		Next
+
+		area += duplicated(firstIndex)
+		Return area
+	End Function
+
+	Function GetArea(ByVal points As List(Of Point)) As Double
+		' 각 점의 좌표로 다각형 넓이 구하기
+		Dim p1 As Point = points(0)
+		Dim p2 As Point
+		Dim p3 As Point
+
+		Dim area As Double
+		For i As Integer = 1 To points.Count - 2
+			p2 = points(i)
+			p3 = points(i + 1)
+
+			area += GetTriangleArea(p1, p2, p3)
+		Next
+
+		Return area
+	End Function
+
+	Function GetTriangleArea(ByVal p1 As Point, ByVal p2 As Point, ByVal p3 As Point) As Double
+		' 세점의 좌표로 넓이 구하기
+		Dim plusPart As Double = p1.x * p2.y + p2.x * p3.y + p3.x * p1.y
+		Dim minusPart As Double = p2.x * p1.y + p3.x * p2.y + p1.x * p3.y
+		Dim area As Double = Math.Abs(plusPart - minusPart) / 2
+		Return area
+	End Function
+
+	Private _milkHeight As Integer
+	Private _dipTimes As Integer
+
+	Sub SetMilkHeight(ByVal milkHeight As Integer)
+		_milkHeight = milkHeight
+	End Sub
+
+	Sub SetDipTimes(ByVal dipTimes As Integer)
+		_dipTimes = dipTimes
+	End Sub
+
+End Class
+}}}
+
+=== Point.vb ===
+{{{#!vim vb
+Public Class Point
+
+	Public _x As Double
+	Public _y As Double
+
+	Sub New(ByVal x As Integer, ByVal y As Integer)
+		_x = x
+		_y = y
+	End Sub
+
+	Sub New(ByVal x As Double, ByVal y As Double)
+		_x = x
+		_y = y
+	End Sub
+
+
+	ReadOnly Property x() As Double
+		Get
+			Return _x
+		End Get
+	End Property
+
+	ReadOnly Property y() As Double
+		Get
+			Return _y
+		End Get
+	End Property
+
+End Class
+}}}
+
+=== !InputHandler.vb ===
+{{{#!vim vb
+Public Class InputHandler
+
+	Shared Function GetInfo(ByVal str As String) As Integer()
+		Dim strs() As String = str.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+
+		Dim vertexCount As Integer = Integer.Parse(strs(0))
+		Dim dipTimes As Integer = Integer.Parse(strs(1))
+		Dim milkHeight As Integer = Integer.Parse(strs(2))
+
+		Dim info() As Integer = {vertexCount, dipTimes, milkHeight}
+		Return info
+	End Function
+
+	Shared Function GetStringList(ByVal input As String) As List(Of String)
+		Dim strs() As String = input.Split(vbCrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+		Return New List(Of String)(strs)
+	End Function
+
+	Shared Function CreatePoint(ByVal str As String) As Point
+		Dim strs() As String = str.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+
+		Dim x As Integer = Integer.Parse(strs(0))
+		Dim y As Integer = Integer.Parse(strs(1))
+
+		Return New Point(x, y)
+	End Function
+
+	Shared Function GetInput() As String
+		Dim input As String = Console.ReadLine()
+		If input = "0 0 0" Then Return input
+
+		input &= vbCrLf
+
+		Dim vertices As Integer = InputHandler.GetInfo(input)(0)
+		For i As Integer = 1 To vertices
+			input &= Console.ReadLine() & vbCrLf
+		Next
+
+		Return input
+	End Function
+
+End Class
+}}}
+
+=== !LineTest.vb ===
+{{{#!vim vb
+<TestClass()> _
+Public Class LineTest
+
+	<TestMethod()> _
+	Public Sub ConstructorTest()
+		Dim p1 As Point
+		Dim p2 As Point
+		Dim aLine As Line
+
+		' 일반
+		p1 = New Point(0, 1)
+		p2 = New Point(2, 6)
+		aLine = New Line(p1, p2)
+
+		Assert.AreEqual(5 / 2, aLine.slope)
+		Assert.AreEqual(1.0, aLine.intercept)
+
+		' 수평선
+		p1 = New Point(2, 1)
+		p2 = New Point(9, 1)
+		aLine = New Line(p1, p2)
+
+		Assert.AreEqual(0.0, aLine.slope)
+		Assert.AreEqual(1.0, aLine.intercept)
+
+		' 수직선
+		p1 = New Point(5, 5)
+		p2 = New Point(5, 9)
+		aLine = New Line(p1, p2)
+
+		Assert.AreEqual(0.0, aLine.yFactor)
+		Assert.AreEqual(-1.0, aLine.slope)
+		Assert.AreEqual(5.0, aLine.intercept)
+	End Sub
+
+
+	<TestMethod()> _
+	Public Sub GetMilkLineTest()
+		Dim p1 As Point
+		Dim p2 As Point
+		Dim aLine As Line
+
+		' 수평선
+		p1 = New Point(2, 1)
+		p2 = New Point(9, 1)
+		aLine = New Line(p1, p2)
+
+		Assert.AreEqual(0.0, aLine.GetMilkLine(2).slope)
+		Assert.AreEqual(1 + 2.0, aLine.GetMilkLine(2).intercept)
+
+		' 수직선
+		p1 = New Point(5, 5)
+		p2 = New Point(5, 9)
+		aLine = New Line(p1, p2)
+
+		Assert.AreEqual(0.0, aLine.GetMilkLine(2).yFactor)
+		Assert.AreEqual(-1.0, aLine.GetMilkLine(2).slope)
+		Assert.AreEqual(5 + 2.0, aLine.GetMilkLine(2).intercept)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetCrossTest()
+		Dim line1 As Line
+		Dim line2 As Line
+		Dim cross As Point
+
+		' 수평, 수직 선
+		line1 = New Line(0.0, 1.0)
+		line2 = New Line(-1.0, 1.0, 0.0)
+		cross = Line.GetCross(line1, line2)
+
+		Assert.AreEqual(1.0, cross.x)
+		Assert.AreEqual(1.0, cross.y)
+
+		' 일반 선
+		line1 = New Line(1.0, 0.0)
+		line2 = New Line(-1.0, 2.0)
+		cross = Line.GetCross(line1, line2)
+
+		Assert.AreEqual(1.0, cross.x)
+		Assert.AreEqual(1.0, cross.y)
+	End Sub
+
+End Class
+}}}
+
+=== !NiceMilkTest.vb ===
+{{{#!vim vb
+<TestClass()> _
+Public Class NiceMilkTest
+
+	<TestMethod()> _
+	Public Sub GetAreaTest()
+		Dim points As New List(Of Point)
+		points.Add(New Point(0, 0))
+		points.Add(New Point(5, 0))
+		points.Add(New Point(5, 3))
+		points.Add(New Point(0, 3))
+
+		Dim target As NiceMilk = New NiceMilk
+		Assert.AreEqual(15.0, target.GetArea(points))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub InputOutputTest()
+		Dim input As String
+
+		input = _
+		 "4 2 1" & vbCrLf & _
+		 "1 0" & vbCrLf & _
+		 "3 0" & vbCrLf & _
+		 "5 2" & vbCrLf & _
+		 "0 4" & vbCrLf & _
+		 "0 0 0" & vbCrLf
+
+		Assert.AreEqual("7.46", ModuleMain.Run(input))
+
+		input = _
+		 "4 3 1" & vbCrLf & _
+		 "0 0" & vbCrLf & _
+		 "3 0" & vbCrLf & _
+		 "3 3" & vbCrLf & _
+		 "0 3" & vbCrLf & _
+		 "0 0 0" & vbCrLf
+
+		Assert.AreEqual("7.00", ModuleMain.Run(input))
+	End Sub
+
+End Class
+}}}

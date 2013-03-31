@@ -1,0 +1,8 @@
+Describe TAOCP1/1.4.2 here
+
+{{{#!html
+
+<div style="width:425px" id="__ss_8084145"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/weasel87/taocp142" title="Taocp1.4.2">Taocp1.4.2</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8084145" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/weasel87">weasel87</a> </div> </div>
+
+<div style="width:425px" id="__ss_7445112"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/suitzero/142" title="1.4.2 코루틴연습문제">1.4.2 코루틴연습문제</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/7445112" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/suitzero">suitzero</a> </div> </div>
+}}}

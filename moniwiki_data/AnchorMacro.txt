@@ -1,0 +1,14 @@
+== Anchor Macro ==
+{{{[[Anchor(anchorname1)]]}}} [[Anchor(anchorname1)]]
+
+{{{[[Anchor(anchorname2 #)]]}}} [[Anchor(anchorname2 #)]]
+
+{{{[[Anchor]]}}} [[Anchor]]
+
+== Builtin anchor ==
+{{{[#achorname3]}}} [#anchorname3]
+----
+== Link to anchors ==
+[#anchorname1 Anchorname #1] [#anchorname2 Anchor name #2] [#anchor-1 Anchor #1]
+
+[#anchorname3 Anchor #3]

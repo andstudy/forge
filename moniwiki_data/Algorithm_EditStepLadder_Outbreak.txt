@@ -1,0 +1,232 @@
+= 문제 요약 =
+ * 단어에 한 문자를 추가, 삭제, 변경한 다른 단어가 사전에 있는 경우 단방향 에지 생성
+ * 단방향 에지를 따라 최대 이동 가능한 단어의 개수는?
+
+= 문제 해결 =
+ * 맵을 이용해 단어 Pool 생성.
+ * 한 문자를 추가, 삭제, 변경 하는 EditStep 을 실행했을 때 단어가 Pool 에 있으면 에지 생성
+ * EditStep 이 가능한 단어들끼리 에지 관계 테이블 생성(메모리 절약을 위해 맵사용)
+ * 단어 관계 테이블에 DFS!
+
+  
+= 계획 =
+ * 내일 이 코드도 예쁘게 만들어 보도록 하겠습니다~
+
+
+= ''' 풀이 ''' =
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+using NUnit.Framework;
+
+namespace ACM_EditStepLadders
+{
+    class Program
+    {
+        public static string[] input = 
+        {
+            "cat",
+            "dig",
+            "dog",
+            "fig",
+            "fin",
+            "fine",
+            "fog",
+            "log",
+            "wine"
+        };
+        
+        static Dictionary<string, List<string>> rDic = new Dictionary<string, List<string>>();
+        static int 답 = 0;
+
+        static void Dfs(string src, int depth)
+        {
+            if (!rDic.ContainsKey(src))
+            {
+                if (답 < depth)
+                    답 = depth;
+
+                return;
+            }
+
+            foreach (string s in rDic[src])
+            {
+                Dfs(s, depth + 1);
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            // 1. > word pool 만들기
+            Dictionary<string, int> wDic = new Dictionary<string, int>();            
+            List<string> wList = new List<string>();
+            Dictionary<int, List<string>> lenDic = new Dictionary<int, List<string>>();
+
+            for (int i = 0; i < input.GetLength(0); i++)
+            {
+                wList.Add(input[i]);
+                wDic[input[i]] = i;
+
+                if (!lenDic.ContainsKey(input[i].Length))
+                {
+                    lenDic[input[i].Length] = new List<string>();
+                }
+
+                lenDic[input[i].Length].Add(input[i]);
+            }
+
+            // 2.1 > 단어간 관계 만들기
+            foreach (string src in wList)
+            {
+                // 고침
+                for (int i = 0; i < src.Length; i++)
+                {
+                    char[] tmp = src.ToCharArray();
+
+                    char init = tmp[i];
+                    init++;
+
+                    for (char c = init; c <= 'z'; c++)
+                    {
+                        tmp[i] = c;
+
+                        string key = new string(tmp);
+                        if (string.Compare(key, src, StringComparison.Ordinal) > 1)
+                        {
+                            if (wDic.ContainsKey(key))
+                            {
+                                if (!rDic.ContainsKey(src))
+                                {
+                                    rDic[src] = new List<string>();
+                                }
+
+                                rDic[src].Add(key);
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (string src in wList)
+            {
+                // 추가
+                for (int i = 0; i <= src.Length; i++)
+                {
+                    char[] tmp = src.ToCharArray();
+
+                    // 끝에 한개 어떻게 하느냐가 문제. 
+                    // dog -> do 가 되는 케이스 때문에 헷갈.
+                    char init = 'a';
+
+                    if (i < src.Length)                   
+                    {
+                        init = tmp[i];
+                        init++;
+                    }
+                   
+                    for (char c = init; c <= 'z'; c++)
+                    {
+                        string key = src.Insert(i, new string(c,1));
+
+                        if (string.Compare(key, src, StringComparison.Ordinal) > 1)
+                        {
+                            if (wDic.ContainsKey(key))
+                            {
+                                if (!rDic.ContainsKey(src))
+                                {
+                                    rDic[src] = new List<string>();
+                                }
+
+                                rDic[src].Add(key);
+                            }
+                        }
+                    }                    
+                }                                        
+            }
+
+            foreach (string src in wList)
+            {   
+                // 삭제
+                for (int i = 0; i < src.Length; i++)
+                {
+                    string key = src.Remove(i,1);
+
+                    if (string.Compare(key, src, StringComparison.Ordinal) > 1)
+                    {
+                        if (wDic.ContainsKey(key))
+                        {
+                            if (!rDic.ContainsKey(src))
+                            {
+                                rDic[src] = new List<string>();
+                            }
+
+                            rDic[src].Add(key);
+                        }
+                    }
+                    
+                }
+                                  
+            }
+
+            // 2.2 > 단어 관계 확인
+            foreach (KeyValuePair<string, List<string>> p in rDic)
+            {
+                Console.Write("{0} - ", p.Key);
+
+                foreach (string s in p.Value)
+                {
+                    Console.Write("{0} ", s);
+                }
+
+                Console.WriteLine();
+            }
+                       
+            // 3. > DFS
+            foreach( string s in rDic.Keys )
+            {
+                Dfs(s, 1);
+                break;
+            }
+                                           
+            // 4. > 문제 풀기
+            Console.WriteLine("\n최대 편집 사다리 단어 개수는 {0} 입니다.\n", 답);
+
+        }
+    }
+
+    [TestFixture]
+    public class Unitest
+    {
+
+        [TestFixtureSetUp]
+        public void SetUp()
+        {
+
+        }
+
+
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+
+
+        }
+    }
+}
+
+
+}}}
+
+
+= 문제 질문 =
+ * 예제의 출력값이 5가 맞나요?
+  * wine -> fine -> fin -> fig -> dig -> dog -> fog -> log
+  * 여덟개가 넘는 경우도 나오는데 문제를 잘못 이해한가요? ^^;
+  * edit step ladder 는 lexicographically ordered sequence 라고 되어 있네요.
+   * 아 그렇네요~! ^^
+ * 그리고 이제서야 문제를 이해하자면 어떡하자는 건가욤? 지금 제가 안 간다고 군기 빠진 건가욤?  버럭 -_-+
+  * 후후 벼락치기 하는거 아시면서.. ^^;
+
+ * dog -> do 이게 사전 시퀀스 순서에 안맞는거 같아요;;

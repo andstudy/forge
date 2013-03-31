@@ -1,0 +1,15 @@
+Uploads:theme-blue.tgz 현재 보고계신 테마입니다.
+
+/!\ 아직 테스트중입니다. 테이블은 철저히 배제시키고 css로만 테마를 고칠수 있게 할 예정. 테마 이름은 바뀔 수 있습니다. 라이센스는 GPL
+
+----
+IE에서 레이아웃이 사라지는 버그가 있습니다.
+급하게나마 css wikiBody background-color: #fff; 부분을 주석처리하니 제대로 보입니다.
+attachment:WikiIEbug.PNG
+ -- cocowest [[Date(2004-11-03T08:35:43)]]
+----
+{{{background-color: #fff;}}}를 쓰면 페이지가 길어질때 이상하게 보일 가능성이 있습니다. -- WkPark [[Date(2004-11-03T09:09:02)]]
+----
+아 그리고, 모질라에서는 색감이 제대로 나오는데, IE에서는 색감이 맞지 않게 나오더군요 ㅡㅡ;; --WkPark
+----
+IE의 경우 display:block 또는 display:table 을 통해 2개 이상의 블록모델 레이어를 중첩시킬 때 width 속성을 각각 주지 않으면 마우스 스크롤이나 리플레시 동작에 컨텐츠가 지워지는 특징(버그?)이 있습니다. width 속성을 주면 괜찮아 지더군요. 최근 저도 CSS만으로 테마를 구현하고 있습니다. --[http://scrapnote.com 고미다]

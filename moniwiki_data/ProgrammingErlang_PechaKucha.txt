@@ -1,0 +1,35 @@
+[ProgrammingErlang]
+[http://www.storyq.net/ PT 업로드는 StoryQ 를 이용해 주세요]
+
+== 박일 ==
+{{{#!html
+<object id="Q1764" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420">
+    <param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001220194403001056" />
+    <param name='allowFullScreen' value='true' />
+    <param name='allowScriptAccess' value='always' /> 
+    <embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001220194403001056" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' width="500" height="420"  />
+  </object>
+}}}
+
+== 이수안 ==
+{{{#!html
+<object id="Q1765" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420">
+    <param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001220227338001057" />
+    <param name='allowFullScreen' value='true' />
+    <param name='allowScriptAccess' value='always' /> 
+    <embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001220227338001057" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' width="500" height="420"  />
+  </object>
+}}}
+
+== 정희종 ==
+["함수형 언어에 대한 낯설음"]
+
+=== 하세용 ===
+{{{#!html
+<object id="Q1770" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420">
+    <param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001220325643001062" />
+    <param name='allowFullScreen' value='true' />
+    <param name='allowScriptAccess' value='always' /> 
+    <embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001220325643001062" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' width="500" height="420"  />
+  </object>
+}}}

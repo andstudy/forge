@@ -1,0 +1,3 @@
+{{{#!html
+<div style="width:425px" id="__ss_9154850"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/HansolKim/110903ddd03" title="110903_아꿈사_DDD_03" target="_blank">110903_아꿈사_DDD_03</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9154850" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/HansolKim" target="_blank">Hansol Kim</a> </div> </div>
+}}}

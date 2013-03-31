@@ -1,0 +1,186 @@
+ * 싸이클을 이룰 수 있는지 여부는 각 색상의 개수의 합이 짝수인지를 채크하는걸로 함
+
+ * http://endic.naver.com/small_search.nhn?&query=nacklace
+ * 헛점 투성이야... 버럭!
+  {{{#!vim java
+public void testTwoCircle() {
+        	NacklaceMaker nacklace = new NacklaceMaker();
+        	nacklace.add(1,2);        	
+        	nacklace.add(1,2);        	
+        	nacklace.add(4,5);        	
+        	nacklace.add(4,5);        	
+        	ArrayList<Bead> beads =  nacklace.makeNacklace();
+        	assertFalse(nacklace.isCircle());
+        	checkBeads(beads);
+        }
+        
+        public void testLine() {
+        	NacklaceMaker nacklace = new NacklaceMaker();
+            nacklace.add(2,3);
+            nacklace.add(2,3);
+            nacklace.add(3,4);
+            nacklace.add(3,4);
+            nacklace.add(4,5);
+            nacklace.add(4,5);
+            ArrayList<Bead> beads =  nacklace.makeNacklace();
+            assertEquals(6,beads.size());
+            checkBeads(beads);
+        }
+  }}}
+
+ * JAVA
+{{{#!vim java
+import java.util.ArrayList;
+
+
+public class NacklaceMaker {
+	private ArrayList<Bead> beads;
+	public NacklaceMaker(){
+		beads = new ArrayList<Bead>();
+	}
+	public void add(int leftColor, int rightColor) {
+		Bead bead = new Bead(leftColor,rightColor);
+		beads.add(bead);
+	}
+	
+	public boolean isCircle() {
+		int [] colorsCount = new int[51];
+		for(int i=1;i<colorsCount.length;i++){
+			colorsCount[0] = 0;
+		}
+		//양쪽의 칼라의 합을 저장한다.
+		for(Bead bead : beads){
+			colorsCount[bead.getLeftColor()]++;
+			colorsCount[bead.getRightColor()]++;
+		}
+		
+		//모두 연결 될 수 있다면 입력된  칼라의 합은  모두 2로 나눠떨어져야 된다.
+		for(int i=1;i<colorsCount.length;i++){
+			if((colorsCount[i]%2)!=0){
+				return false;
+			}
+		}
+		return true;
+	}
+	public ArrayList<Bead> makeNacklace() {
+		ArrayList<Bead> resultList = new ArrayList<Bead>(beads.size()); //결과
+		boolean [] isTraveled = new boolean[beads.size()]; // 순회 했는지 여부
+		for(int i=0;i<isTraveled.length;i++){
+			isTraveled[i] = false;
+		}
+		
+		//시작은 첫번째의 오른쪽색
+		Bead curBead = getNextBead(beads.get(0).getLeftColor(), isTraveled);
+		while(curBead != null){
+			resultList.add(curBead);
+			curBead = getNextBead(curBead.getRightColor(), isTraveled);
+		}
+		return resultList;
+	}
+	
+	private Bead getNextBead(int searchColor,boolean [] isTraveled){
+		for(int i=0;i<beads.size();i++){
+			if(!isTraveled[i]){
+				Bead curBean = beads.get(i);
+				if(curBean.getLeftColor() == searchColor || curBean.getRightColor() == searchColor){
+					if(curBean.getRightColor() == searchColor ){ //오른쪽이 같으면 뒤집는다
+						curBean.switchColor();
+					}
+					isTraveled[i] = true;
+					return curBean;
+				}
+			}
+		}
+		return null;
+	}
+	
+
+}
+
+
+public class Bead {
+	private int leftColor;
+	private int rightColor;
+	
+	public Bead(int color1, int color2) {
+		this.leftColor = color1;
+		this.rightColor = color2;
+	}
+
+	public void switchColor(){
+		int temp = leftColor;
+		leftColor = rightColor;
+		rightColor = temp;
+	}
+	
+	public int getLeftColor() {
+		return leftColor;
+	}
+
+	public int getRightColor() {
+		return rightColor;
+	}
+
+	public boolean hasColor(int searchColor) {
+		return false;
+	}
+	
+	public String toString(){
+		return leftColor + " " + rightColor;
+	}
+	
+}
+
+}}}
+
+* TestCase
+{{{#!vim java
+import java.util.ArrayList;
+
+import junit.framework.TestCase;
+
+
+public class NacklaceTestCase extends TestCase {
+	public void testCheckCircle(){
+		NacklaceMaker nacklace = new NacklaceMaker();
+		nacklace.add(1,2);
+		nacklace.add(2,3);
+		assertFalse(nacklace.isCircle());
+	}
+	public void testCheckCircle2(){
+		NacklaceMaker nacklace = new NacklaceMaker();
+		nacklace.add(1,50);
+		nacklace.add(50,1);
+		assertTrue(nacklace.isCircle());
+	}
+	
+	public void testBeadSwitch(){
+		Bead bead = new  Bead(1,2);
+		bead.switchColor();
+		assertEquals(bead.getLeftColor(), 2);
+		assertEquals(bead.getRightColor(), 1);
+	}
+	public void testMakeNacklace(){
+		NacklaceMaker nacklace = new NacklaceMaker();
+		nacklace.add(2,1);
+		nacklace.add(2,2);
+		nacklace.add(3,4);
+		nacklace.add(3,1);
+		nacklace.add(2,4);
+		ArrayList<Bead> beads =  nacklace.makeNacklace();
+		assertEquals(5,beads.size());
+		checkBeads(beads);
+	}
+	private void checkBeads(ArrayList<Bead> beads){
+		int prvColor = beads.get(beads.size()-1).getRightColor();
+		for(Bead bead : beads){
+			System.out.println(bead);
+			assertEquals(prvColor, bead.getLeftColor());
+			prvColor = bead.getRightColor();
+		}
+		assertEquals(beads.get(0).getLeftColor(),beads.get(beads.size()-1).getRightColor());
+		
+	}
+}
+
+}}}

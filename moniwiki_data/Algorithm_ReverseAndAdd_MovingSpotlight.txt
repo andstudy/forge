@@ -1,0 +1,114 @@
+== 1차 풀이 ==
+ * 웹에서 검사는 안받았으나, wrong answer이지 않을까 싶네요... 
+
+{{{
+#include <iostream>
+#include <vector>
+
+#ifdef	_UNITTEST
+	#include "../UnitTest++/src/UnitTest++.h"
+	#include "../UnitTest++/src/TestReporterStdout.h"
+#endif	//_UNITTEST
+
+using namespace std;
+
+int GetReverseInt(int n)
+{
+	int reverse_int = 0;
+	int each_digit = 0;
+
+	while(n > 0)
+	{
+		reverse_int *= 10;
+		reverse_int += n % 10;
+		n /= 10;
+	}
+
+	return reverse_int;
+}
+
+bool IsPalindromeInt(int n)
+{
+	int org = n;
+	int cmp = GetReverseInt(n);
+
+	return (org == cmp);
+}
+
+bool GetCountMakePalindrome(int n, int *out_count, int *out_palindrome)
+{
+	bool bRet = true;
+	*out_count = 0;
+	*out_palindrome = 0;
+
+	int reverse_int = 0;
+	int temp_int = n;
+
+	while(1)
+	{
+		(*out_count)++;			
+
+		reverse_int = GetReverseInt(n);
+		temp_int = reverse_int + n;
+
+		if(!IsPalindromeInt(temp_int))		
+			n = temp_int;		
+		else
+		{
+			*out_palindrome = temp_int;
+			break;
+		}
+
+		if(*out_count >= 1000)
+		{
+			*out_count = 0;
+			*out_palindrome = 0;
+			bRet = false;
+			break;
+		}
+	}
+
+	return bRet;
+}
+
+int main()
+{
+#ifdef	_UNITTEST
+	UnitTest::RunAllTests();
+#endif	//_UNITTEST
+
+	return 0;
+}
+
+#ifdef	_UNITTEST
+//TEST(testSetUp)
+//{
+//}
+//TEST(testTearDown)
+//{
+//}
+
+TEST(testGetReverseInt)
+{
+	CHECK_EQUAL(321, GetReverseInt(123));
+	CHECK_EQUAL(591, GetReverseInt(195));
+}
+
+TEST(testIsPalindromeInt)
+{
+	CHECK_EQUAL(true, IsPalindromeInt(9339));
+	CHECK_EQUAL(false, IsPalindromeInt(9338));
+}
+
+TEST(testGetCountMakePalindrome)
+{
+	int count;
+	int palindrome;
+
+	CHECK_EQUAL(true, GetCountMakePalindrome(195, &count, &palindrome));
+	CHECK_EQUAL(4, count);
+	CHECK_EQUAL(9339, palindrome);
+}
+
+#endif	//_UNITTEST
+}}}

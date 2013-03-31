@@ -1,0 +1,34 @@
+Total [[PageCount]] pages
+
+[[HTML(<a href="?action=blogrss&all=1">)]][[Icon(moni-rss.png)]] [[HTML(</a>)]]
+
+----
+{{{[[BlogChanges('Blog/.*',10,simple)]]}}}
+
+[[BlogChanges('Blog/.*',10,simple)]]
+
+----
+{{{[[BlogChanges(".*Blog",10,simple)]]}}}
+
+[[BlogChanges(".*Blog",10,simple)]]
+
+----
+{{{[[BlogChanges('Blog/Beta',simple)]]}}}
+
+[[BlogChanges('Blog/Beta',simple)]]
+
+----
+
+{{{[[BlogChanges('Blog/Beta',10,simple)]]}}}
+
+[[BlogChanges('Blog/Beta',10,simple)]]
+--''''''--
+{{{[[BlogChanges('Blog/Beta',simple,10)]]}}}
+
+[[BlogChanges('Blog/Beta',simple,10)]]
+----
+{{{[[BlogChanges('Blog/.*',10,all,simple,summary)]]}}}
+
+[[BlogChanges('Blog/.*',10,all,simple,summary)]]
+----
+[[BlogChanges('Blog/.*',3,all,simple,summary,noaction)]]

@@ -1,0 +1,10 @@
+== Template for Help Pages ==
+Text.
+
+=== Example ===
+{{{
+xxx
+}}} 
+
+=== Display ===
+xxx

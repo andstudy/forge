@@ -1,0 +1,329 @@
+또 Time limit exceeded 가!!
+뭔가 요령이 없는 걸까.. 냠..
+
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <strstream>
+#include <algorithm>
+#include <map>
+#include <math.h>
+
+//#define _UNIT_TEST
+
+using namespace std;
+
+namespace ATUtil
+{
+
+bool IsInRange(int value, int from, int to)
+{
+	return (from <= value) && (value <= to);
+}
+
+int ConvertToIndex(char c)
+{
+	if ('a' <= c && c <= 'z')
+	{
+		return c - 'a';
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+char ConvertToChar(int i)
+{
+	return (char)i + 'a';
+}
+
+typedef map<int, int> IntDB;
+typedef vector<int> Ints;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+
+///////////////////////////////////////////////////////////////
+// CLittleBishops
+class CLittleBishops
+{
+public:
+	CLittleBishops(int n, int b) : m_Size(n), m_Boards(m_Size * m_Size), m_Bishops(b), m_Result(0) 
+	{
+		for (int r = 0; r < 8; ++r)
+		{
+			for (int c = 0; c < 8; ++c)
+			{
+				m_Board[r][c] = false;
+			}
+		}
+	}
+	
+	int Result();
+	void Find(int nBishopIndex, int startPos);
+	bool CheckAndPutBishop(int nBishopIndex, int startPos);
+	void RemoveBishop(int pos);
+	void GetRowCol(int pos, int& r, int& c) const;
+
+protected:
+	const int m_Size;
+	const int m_Boards;
+	const int m_Bishops;
+	int m_Result;	
+	bool m_Board[8][8];
+};
+
+int CLittleBishops::Result()
+{
+	m_Result = 0;
+
+	for (int i = 0; i < m_Boards; ++i)
+	{
+		Find(1, i);
+	}
+
+	return m_Result;
+}
+
+void CLittleBishops::Find(int nBishopIndex, int startPos)
+{
+	if (!CheckAndPutBishop(nBishopIndex, startPos))
+	{
+		return;
+	}
+	
+	if (m_Bishops <= nBishopIndex)	// 다 찾았다.
+	{
+		++m_Result;
+	}
+	else	// startPos 에 비숍 하나 놓을 수 있었다. 나머지 케이스에 대해서 backtrack 한다.
+	{	
+		for (int i = startPos + 1; i < m_Boards; ++i)
+		{
+			Find(nBishopIndex + 1, i);
+		}
+	}
+			
+	// startPos 에 놓고 해 볼 거 다 해 봤다. 제거해주자.
+	RemoveBishop(startPos);
+}
+
+// nBishopIndex : 1 ~ m_Bishops 까지
+bool CLittleBishops::CheckAndPutBishop(int nBishopIndex, int startPos)
+{
+	if (m_Boards < startPos + (m_Bishops - nBishopIndex))		// 현재 위치 + 남은 비숍 갯수가 넘치면 return
+	{
+		return false;
+	}
+
+	int r, c;
+	GetRowCol(startPos, r, c);
+
+	if (m_Board[r][c])		// 이미 bishop 이 들어있다.
+	{
+		return false;
+	}
+
+	// 대각선 테스트.
+	int test_r, test_c;
+	//for (int i = -1; i <= 1; i += 2)	// 최적화 1 - 아래로 검사할 필요 없음.
+	{
+		for (int j = -1; j <= 1; j += 2)	
+		{
+			// 테스트 cursor 위치 초기화
+			test_r = r;
+			test_c = c;
+
+			while(1)
+			{
+				// 대각선으로 위치 이동
+				//test_r += i;
+				test_r -= 1;		// 최적화 1
+				test_c += j;
+
+				// 검사
+				if (IsInRange(test_r, 0, m_Size - 1) && IsInRange(test_c, 0, m_Size - 1))
+				{
+					if (m_Board[test_r][test_c])	// 대각선에 bishop 이 있다.
+					{
+						return false;
+					}
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+	}
+
+	m_Board[r][c] = true;
+
+	return true;
+}
+
+void CLittleBishops::RemoveBishop(int pos)
+{
+	int r, c;
+	GetRowCol(pos, r, c);
+	m_Board[r][c] = false;
+}
+
+void CLittleBishops::GetRowCol(int pos, int& r, int& c) const
+{
+	r = pos / m_Size;
+	c = pos - (r * m_Size);
+}
+
+///////////////////////////////////////////////////////////////
+// CConsole
+class CConsole
+{
+public:
+	static void ConsoleTest(istream& input, ostream& output);
+};
+
+void CConsole::ConsoleTest(istream& input, ostream& output)
+{
+	int scenarioIndex = 1;
+
+	while (1)
+	{
+		int nSize = 0;
+		int nBishops = 0;
+	
+		input >> nSize >> nBishops;
+
+		if ((0 == nSize) && (0 == nBishops))
+		{
+			break;
+		}
+
+		CLittleBishops bishop(nSize, nBishops);
+		output << bishop.Result() << "\n";
+	}
+};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase() : b_2_1(2, 1), b_2_2(2, 2), b_4_1(4, 1)
+	{
+	}
+
+	CLittleBishops b_2_1;
+	CLittleBishops b_2_2;
+	CLittleBishops b_4_1;
+
+	int r, c;
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, Result)
+{
+	CHECK_EQUAL(4, b_2_2.Result());
+	
+	CLittleBishops b_4_4(4, 4);
+	CHECK_EQUAL(260, b_4_4.Result());
+
+	CLittleBishops b_8_6(8, 6);
+	CHECK_EQUAL(5599888, b_8_6.Result());
+}
+
+TEST_FIXTURE(FixtureBase, GetRowCol)
+{
+	CHECK_EQUAL(4, b_2_1.Result());
+		
+	b_2_1.GetRowCol(1, r, c);
+	CHECK(r == 0 && c == 1);
+	b_2_1.GetRowCol(2, r, c);
+	CHECK(r == 1 && c == 0);
+
+	CHECK_EQUAL(16, b_4_1.Result());
+
+	b_4_1.GetRowCol(1, r, c);
+	CHECK(r == 0 && c == 1);
+	b_4_1.GetRowCol(5, r, c);
+	CHECK(r == 1 && c == 1);
+}
+
+// 0 : Bishop 위치
+// OO
+// XX
+TEST_FIXTURE(FixtureBase, CheckAndPutBishop1)
+{
+	CHECK(b_2_2.CheckAndPutBishop(1, 0));
+	CHECK(!b_2_2.CheckAndPutBishop(2, 0));
+	CHECK(b_2_2.CheckAndPutBishop(2, 1));
+	CHECK(!b_2_2.CheckAndPutBishop(2, 2));
+	CHECK(!b_2_2.CheckAndPutBishop(2, 3));
+}
+
+// XO
+// X0
+TEST_FIXTURE(FixtureBase, CheckAndPutBishop2)
+{
+	CHECK(b_2_2.CheckAndPutBishop(1, 1));
+	CHECK(!b_2_2.CheckAndPutBishop(2, 2));
+	CHECK(b_2_2.CheckAndPutBishop(2, 3));
+}
+
+TEST_FIXTURE(FixtureBase, ConsoleTest1)
+{
+	input << 
+		"4 4\n"
+		"0 0\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("260\n", output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

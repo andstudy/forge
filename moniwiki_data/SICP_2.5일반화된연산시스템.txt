@@ -1,0 +1,308 @@
+= 2.5 일반화된 연산 시스템 =
+
+== 지금까지 공부 한 것 ==
+ * 2.1 데이터요약
+  * 프로시저를 어떻게 짰는지 모르더라도 같은 일을 하기만 한다면, 서로 달리 만든 프로시저를 맞바꿔 쓸 수 있다.
+ * 2.4 요약된 데이터의 표현이 여러 가지일 때
+  * 여러 표현 방식과 그에 따른 데이터 연산 코드를 서로 연결하기 위해 일반화된 연산을 정의해 사용
+   * 데이터 중심 프로그래밍
+   * 메시지 패싱
+
+== 목표 ==
+ * 데이터 중심 기법을 바탕으로 지금까지 만든 산술 연산 꾸러미를 모두 합쳐서, 한 덩어리 산술 연산 꾸러미로 짜 맞추자
+
+== 2.5.1 일반화된 산술 연산 ==
+ * 일반화된 프로시저가 인자의 타입에 따라 알맞은 꾸러미로 일을 넘기게 만든다
+  * 예) 일반수, 유리수, 복소수를 더하는 add 프로시저
+  {{{#!gcode
+;; 일반수
+(add (make-scheme-number 10)
+     (make-scheme-number 5))
+;; 유리수
+(add (make-rational 1 5)
+     (make-rational 1 10))
+;; 복소수
+(add (make-complex-from-real-imag 3 4)
+     (make-complex-from-real-imag 1 2))
+}}}
+
+ * 2.4장의 일반화된 고르개 연산과 마찬가지로 데이터중심프로그래밍을 통해 구현 할 수 있다.
+ {{{#!gcode
+; 2.4장에서 구현한 일반화된 고르개연산
+(define (real-part_ z) (apply-generic 'real-part_ z))
+
+; 직교좌표 꾸러미
+;; 갇힌 프로시저
+(define (real-part_ z) (car z))
+;; 인터페이스
+(put 'real-part_ '(rectangular) real-part_)
+
+; 극좌표 꾸러미
+;; 갇힌 프로시저
+(define (real-part_ z) (* (magnitude_ z) (cos (angle_ z))))
+;; 인터페이스
+(put 'real-part_ '(polar) real-part_)
+}}}
+
+ * 일반화된 산술 연산 구현
+ {{{#!gcode
+; 일반화된 산술 연산
+(define (add x y) (apply-generic 'add x y))
+(define (sub x y) (apply-generic 'sub x y))
+(define (mul x y) (apply-generic 'mul x y))
+(define (div x y) (apply-generic 'div x y))
+}}}
+  * 일반수, 유리수, 복소수 꾸러미에서 add, sub, mul, div의 인터페이스와 갇힌 프로시저를 정의하면 된다.
+
+== 연습문제 ==
+=== 2.77 ===
+ * 3+4i를 직교좌표로 표현하면 아래와 같은 형대로 저장되어있다
+  * ('complex . ('rectangular . (3 . 4)))
+
+ * real-part 호출시 프로시저가 적용되는 순서
+  * 일반화된 real-part
+   * apply-generic
+  * complex 꾸러미의 real-part
+   * apply-generic
+  * rectangular 꾸러미의 real-part
+
+ * 데이터의 변화
+  * 일반화된 real-part 인자
+   * ('complex . ('rectangular . (3 . 4)))
+  * complex 꾸러미의 real-part 인자
+   * ('rectangular . (3 . 4))
+  * rectangular 꾸러미의 real-part 인자
+   * (3 . 4)
+  * 결과
+   * 3
+=== 2.78 ===
+ * scheme-number 대신 기본수를 사용하도록 해야 한다.
+ * 태그가 없는 기본수일 경우 'scheme-number의 태그가 있는 것으로 처리
+ {{{#!gcode
+(define (type-tag datum)
+  (cond ((pair? datum) (car datum))
+        ((number? datum) 'scheme-number)
+        (else (display (list "Bad tagged datum -- TYPE-TAG" datum)))))
+
+(define (contents datum)
+  (cond ((pair? datum) (cdr datum))
+        ((number? datum) datum)
+        (else (display (list "Bad tagged datum -- CONTENTS" datum)))))
+
+(define (install-scheme-number-package)
+  (put 'add '(scheme-number scheme-number)
+       (lambda (x y) (+ x y)))
+  (put 'sub '(scheme-number scheme-number)
+       (lambda (x y) (- x y)))
+  (put 'mul '(scheme-number scheme-number)
+       (lambda (x y) (* x y)))
+  (put 'div '(scheme-number scheme-number)
+       (lambda (x y) (/ x y)))
+  'done)
+}}}
+=== 2.79 ===
+ {{{#!gcode
+; 일반화된 연산
+(define (equ? x y) (apply-generic 'equ? x y))
+
+(define (install-scheme-number-package)
+   ...
+  (put 'equ? '(scheme-number scheme-number)
+       (lambda (x y) (= x y)))
+
+(define (install-rational-package)
+  ...
+  (put 'equ? '(rational rational)
+       (lambda (x y) (and (= (numer x) (numer y))
+                          (= (denom x) (denom y)))))
+
+(define (install-complex-package)
+  ...
+  (put 'equ? '(complex complex)
+       (lambda (z1 z2) (and (= (real-part_ z1) (real-part_ z2))
+                            (= (imag-part_ z1) (imag-part_ z2)))))
+}}}
+=== 2.80 ===
+ {{{#!gcode
+; 일반화된 연산
+(define (=zero? x) (apply-generic '=zero? x))
+
+(define (install-scheme-number-package)
+  ...
+  (put '=zero? '(scheme-number)
+       (lambda (x) (= x 0)))
+
+(define (install-rational-package)
+  ...
+  (put '=zero? '(rational)
+       (lambda (x) (= 0 (numer x))))
+
+(define (install-complex-package)
+  ...
+  (put '=zero? '(complex) =zero?)
+
+(define (install-rectangular-package)
+  ...
+  (put '=zero? '(rectangular)
+       (lambda (z) (and (= 0 (real-part_ z))
+                        (= 0 (imag-part_ z)))))
+
+(define (install-polar-package)
+  ...
+  (put '=zero? '(polar) 
+       (lambda (x) (= 0 (magnitude_ x))))
+  'done)
+}}}
+
+== 2.5.2 타입이 다른 데이터를 엮어 쓰는 방법 ==
+ * 지금까지 정의한 연산은 꼴이 다른 데이터를 서로 완전히 독립된 데이터로 받아들이고 있다.
+  * 지금까지는 데이터 타입의 경계를 가로지르는 연산이 없다.
+
+=== 섞붙이기 연산 ===
+ * 서로 다른 타입 사이에서 일어날 수 있는 연산마다 그에 해당하는 프로시저를 하나씩 설계
+ {{{#!gcode
+(define (install-complex-package)
+  ...
+  ; 갇힌 프로시저
+  (define (add-complex-to-schemenum z x)
+    (make-from-real-imag (+ (real-part_ z) x)
+                         (imag-part_ z)))
+  ; 인터페이스
+  (put 'add '(complex scheme-number)
+       (lambda (z x) (tag (add-complex-to-schemenum z x))))
+}}}
+ * 문제점
+  * 번거롭다
+  * 덧붙이듯 엮어 쓰는데 방해 된다
+
+=== 타입 바꾸기 ===
+ * 데이터 타입이 서로 완전히 독립되지 않았을 때 사용 가능
+  * ex) 복소수와 일반수의 산술연산 시 일반수를 허수부가 0인 복소수로 처리
+  {{{#!gcode
+(define (scheme-number->complex n)
+  (make-complex-from-real-imag (contents n) 0))
+(put-coercion 'scheme-number 'complex scheme-number->complex)
+}}}
+ * 데이터 타입 바꿈표를 만든다
+ * apply-generic 프로시저를 고쳐야 한다.
+  * 연산이 인자타입에 맞게 정의 되어있지 않을때 타입 바꾸기를 시도한다
+  {{{#!gcode
+(define (apply-generic op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          (if (= (length args) 2)
+              (let ((type1 (car type-tags))
+                    (type2 (cadr type-tags))
+                    (a1 (car args))
+                    (a2 (cadr args)))
+                (let ((t1->t2 (get-coercion type1 type2))
+                      (t2->t1 (get-coercion type2 type1)))
+                  (cond (t1->t2
+                         (apply-generic op (t1->t2 a1) a2))
+                        (t2->t1
+                         (apply-generic op a1 (t2->t1 a2)))
+                        (else
+                         (error "No method for these types"
+                                (list op type-tags))))))
+              (error "No method for these types"
+                     (list op type-tags)))))))
+}}}
+ * 장점
+  * 타입 한 쌍에 프로시저 하나씩만 정의하면 된다
+   * 섞붙이기 연산을 이용하면 데이터 타입이 n개 일 때 최대 n^2개의 프로지서가 필요
+ * 위와 같이 구현 했을때의 한계
+  * 두 물체 사이에서 서로 어느 쪽 타입으로도 바꿀 방법이 없지만 두 물체를 아예 다른 타입으로 바꾸면 바라던 연산이 가능할 수 있는 경우가 있다.
+
+=== 타입의 계층 관계 ===
+ * 탑
+  * 데이터 타입마다 그 위 타입이나 아래 타입이 많아야 하나인 계층 관계
+ * 장점
+  * 위 타입과 아래 타입만 밝히면 된다.
+  * 새로운 데이터 타입을 집어 넣기 쉽다.
+  * 물려 받는 개념을 쉽게 구현 가능
+  * 끌어 내리기 쉽다.
+
+=== 계층 구조가 지닌 문제점 ===
+ * 한 데이터 타입에 아래 타입이 여럿 있을 경우
+ * 한 데이터 타입에 위 타입이 여럿 있을 경우
+ * 모듈 방식의 장점을 유지하며 데이터 타입을 다루기 어렵다.
+
+== 연습문제 ==
+=== 2.81 ===
+ * a
+  * apply-generic 프로시저가 무한루프가 된다
+  {{{#!gcode
+(apply-generic 'exp_ <complex> <complex>)
+(apply-generic 'exp_ (complex->complex <complex>) <complex>)
+(apply-generic 'exp_ (complex->complex (complex->complex <complex>)) <complex>)
+...
+(apply-generic 'exp_ (complex->complex ... (complex->complex <complex>)) <complex>)
+}}}
+
+ * c
+  * 타입이 같을 경우 에러로 처리한다
+  {{{#!gcode
+(define (apply-generic-c op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          (if (= (length args) 2)
+              (let ((type1 (car type-tags))
+                    (type2 (cadr type-tags))
+                    (a1 (car args))
+                    (a2 (cadr args)))                    
+                (let ((t1->t2 (get-coercion type1 type2))
+                      (t2->t1 (get-coercion type2 type1)))
+                  ; 이곳이 추가
+                  (if (equal? type1 type2)
+                      (error "No method for these types"
+                             (list op type-tags))
+                      (cond (t1->t2
+                             (apply-generic op (t1->t2 a1) a2))
+                            (t2->t1
+                             (apply-generic op a1 (t2->t1 a2)))
+                            (else
+                             (error "No method for these types"
+                                    (list op type-tags)))))))
+              (error "No method for these types"
+                     (list op type-tags)))))))
+}}}
+
+=== 2.83 === 
+ {{{#!gcode 
+(define (raisex) (apply-generic 'raise x)) 
+ 
+(define (install-scheme-number-package)  
+  ...  
+  (put 'raise '(scheme-number) 
+       (lambda (x) (make-rational x 1))) 
+ 
+(define (install-rational-package)  
+  ...  
+  (put 'raise '(rational)
+       (lambda (x) (make-real (/ (numer x) (denom x)))))
+
+(define (install-real-package)
+  (define (tag x) (attach-tag 'real x))
+  (put 'add '(real real)
+       (lambda (x y) (tag (+ x y))))
+  (put 'sub '(real real)
+       (lambda (x y) (tag (- x y))))
+  (put 'mul '(real real)
+       (lambda (x y) (tag (* x y))))
+  (put 'div '(real real)
+       (lambda (x y) (tag (/ x y))))
+  (put 'make 'real
+       (lambda (x) (tag x)))
+  (put 'raise '(real)
+       (lambda (x) (make-complex-from-real-imag x 0)))
+  'done)
+
+(define (make-real n)
+  ((get 'make 'real) n)) 
+
+(install-real-package)
+}}} 

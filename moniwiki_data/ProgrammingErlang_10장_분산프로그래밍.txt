@@ -1,0 +1,172 @@
+== Chapt 10. 분산 프로그래밍 ==
+[[TableOfContents]]
+
+=== 분산 모델 ===
+ 1. 분산 얼랭 : LAN환경
+ 1. 소켓-기반 분산 : WAN환경
+
+=== 저자의 작업 절차 ===
+ 1. 비분산 얼랭 세션에서 작업
+ 1. 동일한 PC에서 테스트
+ 1. 물리적으로 분리된 두 PC에서 테스트
+
+=== 이름서버 ===
+ * 작업절차
+  * 단계1: 비분산 얼랭 시스템에서 이름 서버 작성, 테스트
+{{{#!gcode erlang
+-module(kvs).
+-export([start/0, store/2, lookup/1]). 
+% compile(export_all)은 작동하지 않음 -> rpc라이브러리때문..
+
+start() -> register(kvs, spawn(fun() -> loop() end)). 
+
+store(Key, Value) -> 
+	rpc({store, Key, Value}). 
+
+lookup(Key) -> rpc({lookup, Key}). 
+
+rpc(Q) ->  kvs ! {self(), Q},  
+	receive
+	    {kvs, Reply} -> Reply  
+	end. 
+
+loop() ->  
+	receive
+	    {From, {store, Key, Value}} ->
+		put(Key, {ok, Value}), %프로세스사전의 put이용
+		From ! {kvs, true},
+		loop();
+	    {From, {lookup, Key}} ->
+		From ! {kvs, get(Key)}, %프로세스사전의 get이용
+		loop()
+	end.
+}}}
+  * 단계2: 동일머신의 두 노드에서 테스트
+   * gandalf노드 생성
+{{{
+$ erl -sname gandalf
+(gandalf@localhost) 1> kvs:start().
+true
+}}}
+   * bilbo노드 생성 및 기능 테스트
+{{{
+$ erl -sname bilbo
+(bilbo@localhost) 1> kvs:start().
+true
+(bilbo@localhost) 2> rpc:call('gandalf@localhost', kvs, store, [weather, fine]).
+true
+(bilbo@localhost) 3> rpc:call('gandalf@localhost', kvs, lookup, [weather]).
+{ok,fine}
+}}}
+
+  * 단계3: 동일 로컬 영역 네트워크 상에 서로 다른 PC에서 테스트
+   * 코드
+{{{
+%첫번째 pc
+PC1> erl -sname foo -setcookie abc
+
+%두번째 pc
+PC2> erl -sname bar -setcookie abc
+}}}
+   * 설명
+    * sname : short name -> DNS서비스 사용할 수 없을때 유일한 방법
+    * 두 노드는 같은 쿠키를 갖아야 한다.
+    * 실행하려는 코드 버전이 같아야 한다.
+
+  * 단계4: 다른 도메인에 속해있는 두대의 머신에서 이름 서버 테스트
+   * epmd를 사용하여 4369포트가 열려있는지 확인.
+   * 분산 얼랭이 사용할 포트 범위를 정하고 포트가 열려있는지 확인
+{{{
+$ erl -name ... -setcookie ,,, -kernel inet_dist_listen_min Min inet_dist_listen_max Max
+}}}
+
+=== 분산 프리미티브 ===
+ * 분산 프로그램의 BIF
+{{{
+ @spec spawn(Node, Fun) -> Pid
+ @spec spawn(Node, Mod, Func, ArgList) -> Pid    % apply에 의해 수행되는 프로세스 생성
+ @spec spawn_link(Node, Fun) -> Pid
+ @spec spawn_link(Node, Mod, Func, ArgList) -> Pid    % 새 프로세스가 현재 프로세스와 연결
+ @spec disconnect_node(Node) -> bool() | ignore  % 강제 노드 끊기
+ @spec moniter_node(Node, Flag) -> true % Flag가 true면 모니터링 켜짐, false면 모니터링 꺼짐, {nodeup, Node}와 {nodedown, Node}를 받음
+ @spec node() -> Node
+ @spec node(Arg) -> Node
+ @spec nodes() -> [Node]
+ @spec is_alive() -> bool()
+ {RegName, Node} ! Msg   %등록된 노드에 메시지 전송
+}}}
+ * 원격 띄우기
+{{{#!gcode erlang
+-module(dist_demo).
+-export([rpc/4, start/1]).
+
+start(Node) ->
+	spawn(Node, fun() -> loop() end).
+
+rpc(Pid, M, F, A) ->
+	Pid ! {rpc, self(), M, F, A},
+	receive
+		{Pid, Response} ->
+			Response
+	end.
+
+loop() -> receive
+		{rpc, Pid, M, F, A} ->
+			Pid ! {self(), (catch apply(M, F, A))},
+			loop()
+	end.
+	
+}}}
+ * 원격 노드 실행
+{{{
+(foo@localhost) Pid = dist_demo:start( bar@localhost ).
+<0.49.0>j
+(bar@localhost)5> dist_demo:rpc( Pid, os, cmd, [notepad]).
+}}}
+
+=== 분산프로그래밍용 라이브러리 ===
+ * 원격노드 실행의 표준배포판
+{{{
+call(Node, Mod, Function, Args) -> Result | {badrpc, Reason}
+}}}
+=== 쿠키 보호 시스템 ===
+ * 쿠키 설정 방법
+  1. $HOME/.erlang.cookie파일에 동일한 쿠키 저장
+  1. 명령행 인수 -setcookie로 매직 쿠키 설정
+  1. BIF erlang:set_cookie(node(), Cookie)사용
+
+=== 소켓-기반 분산 ===
+ * 분산얼랭 문제점 : 보안이 취약하다.
+ * 부록 D -> lib_chan 사용한 소켓 기반 분산
+ * 구성 설정 파일
+{{{#!gcode erlang
+{port, 2223}.
+{service, chat, password,"AsDT67aQ",mfa,mod_chat_controller,start,[]}.
+}}}
+ * 서버 코드
+{{{#!gcode erlang
+-module(mod_name_server).
+-export([start_me_up/3]).
+
+start_me_up(MM, _ArgsC, _ArgS) ->
+    loop(MM).
+
+loop(MM) ->
+    receive
+	{chan, MM, {store, K, V}} ->
+	    kvs:store(K, V),
+	    loop(MM);
+	{chan, MM, {lookup, K}} ->
+	    MM ! {send, kvs:lookup(K)},
+	    loop(MM);
+	{chan_closed, MM} ->
+	    true
+    end.
+}}}
+ * 클라이언트 코드
+{{{#!gcode erlang
+{ok, Pid} = lib_chan:connect( "localhost", 1234, nameServer, "ABXy45", "").
+lib_chan:cast(Pid, {store, joe, "write a book"}).
+lib_chan:rpc(Pid, {lookup, joe}).
+lib_chan:rpc(Pid, {lookup, jim}).
+}}}

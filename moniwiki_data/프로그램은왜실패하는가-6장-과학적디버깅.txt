@@ -1,0 +1,10 @@
+Describe 프로그램은왜실패하는가-6장-과학적디버깅 here
+{{{#!html
+<object id="Q10139" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420">
+    <param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001249348920022592" />
+    <param name='allowFullScreen' value='true' />
+    <param name='allowScriptAccess' value='always' />
+    <param name="wmode" value="opaque" />
+    <embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001249348920022592" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' wmode="opaque" width="500" height="420"  />
+  </object>
+}}}

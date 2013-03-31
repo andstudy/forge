@@ -1,0 +1,158 @@
+Wrong Answer 라는군요. 냠... 어떤 case 가 문제가 된 걸까요?
+ *  carry operations 을  carry operations. 으로 수정하셔야 할듯 ^^;
+
+그나저나 수안씨 C++ syntax 언제 해줄껴~~
+
+{{{
+/* @JUDGE_ID:parkpd 10038 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
+#define _CRT_SECURE_NO_DEPRECATE 1 
+
+#include <stdlib.h>
+#include <iostream>
+#include <vector>
+#include <set>
+#include <deque>
+#include <strstream>
+#include <algorithm>
+
+using namespace std;
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+
+#include "../../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+class CPrimaryArithmetic 
+{
+public:
+	static int GetCarryCount(int left, int right);
+	static void GetInts(int num, vector<int>& nums);
+};
+
+int CPrimaryArithmetic::GetCarryCount( int left, int right )
+{
+	vector<int> lefts;
+	vector<int> rights;
+	GetInts(left, lefts);
+	GetInts(right, rights);
+
+	int carryCount = 0;
+	int additionalCarry = 0;
+	for (int i = 9; i >= 0; --i)
+	{
+		if (10 <= lefts[i] + rights[i] + additionalCarry)
+		{
+			carryCount++;
+			additionalCarry = 1;
+		}
+	}
+
+	return carryCount;
+}
+
+// string 으로 하는 거랑 속도 비교해 볼 것.
+void CPrimaryArithmetic::GetInts( int num, vector<int>& nums )
+{
+	nums = vector<int>(10, 0);
+
+	int index = 9;
+	while (10 <= num)
+	{
+		nums[index] = (num % 10);
+		num /= 10;
+		--index;
+	}
+
+	nums[index] = num;
+}
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	vector<pair<int, int> > testNums;
+
+	while(1)
+	{
+		int left, right;
+		cin >> left >> right;
+		if ((0 == left) && (0 == right))
+		{
+			break;
+		}
+
+		testNums.push_back(make_pair<int, int>(left, right));
+	}
+
+	int count = (int)testNums.size();
+	for (int i = 0; i < count; ++i)
+	{
+		int carryCount = CPrimaryArithmetic::GetCarryCount(testNums[i].first, testNums[i].second);
+		if (0 == carryCount)
+		{
+			cout << "No carry operation.\n";
+		}
+		else if (1 == carryCount)
+		{
+			cout << "1 carry operation.\n";
+		}
+		else
+		{
+			cout << carryCount << " carry operations\n";
+		}
+	}
+
+	return 0;
+}
+
+#else
+
+struct FixturePrimaryArithmetic : public CPrimaryArithmetic
+{
+	vector<int> nums;
+};
+
+TEST_FIXTURE(FixturePrimaryArithmetic, GetInts)
+{
+	int expect[] = {0, 0, 0, 0, 0, 1, 2, 3, 4, 5};
+	GetInts(12345, nums);
+	CHECK_ARRAY_EQUAL(expect, nums, 10);
+}
+
+TEST_FIXTURE(FixturePrimaryArithmetic, GetCarryCount)
+{
+	CHECK_EQUAL(0, GetCarryCount(1, 1));
+	CHECK_EQUAL(1, GetCarryCount(2, 9));
+	CHECK_EQUAL(9, GetCarryCount(999999999, 1));
+
+	CHECK_EQUAL(0, GetCarryCount(123, 456));
+	CHECK_EQUAL(3, GetCarryCount(555, 555));
+	CHECK_EQUAL(1, GetCarryCount(123, 594));
+	CHECK_EQUAL(0, GetCarryCount(123, 0));
+
+	CHECK_EQUAL(1, GetCarryCount(4821, 311));
+	CHECK_EQUAL(3, GetCarryCount(999, 1));
+	CHECK_EQUAL(4, GetCarryCount(99099, 1001));
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

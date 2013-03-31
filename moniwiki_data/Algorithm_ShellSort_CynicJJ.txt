@@ -1,0 +1,30 @@
+ * 간만에 깔끔히 풀려서 기분이 좋다
+ attachment:ShellSort.zip
+
+{{{#!vim vb
+Public Class ShellSort
+
+	Function GetMovingOrder(ByVal originalOrder As List(Of String), ByVal desiredOrder As List(Of String)) As List(Of String)
+		Dim original As New List(Of String)(originalOrder)
+		original.Reverse()
+		Dim desired As New List(Of String)(desiredOrder)
+		desired.Reverse()
+
+		Dim movedCount As Integer
+		Dim i As Integer
+		While i < original.Count - 1
+			If original(i) <> desired(i) Then
+				movedCount += 1
+				original.RemoveAt(i)
+			Else
+				i += 1
+			End If
+		End While
+
+		Dim result As List(Of String) = desiredOrder.GetRange(0, movedCount)
+		result.Reverse()
+		Return result
+	End Function
+
+End Class
+}}}

@@ -1,0 +1,68 @@
+[POSA1]
+[[TableOfContents]]
+[attachment:ProxyPattern.zip]
+= Proxy =
+Proxy 디자인 패턴은 클라이언트가 컴포넌트와 직접 통신하지 않고 컴포넌트의 대리(representative)와 통신하게 한다. 이런 placeholder는 효율성을 확장하거나 엑세스를 쉽게하거나 보안에 이바지 할 수 있다.
+
+== Example ==
+Remote 와 Cache proxy 를 사용하여 리모트 데이터 엑세스를 해결.
+
+== Context ==
+클라이언트가 어떤 컴포넌트의 서비스를 엑세스 해야 하는데 직접 엑세스가 가능하지만 그것이 최선이 아닐 때.
+
+== Problem ==
+ * 컴포넌트 엑세스가 실행시 효율적이어야 하고 비용이 낮고 클라이언트와 컴포넌트 양쪽에 안전해야 한다.
+ * 컴포넌트 엑세스는 클라이언트 입장에서 분명하고 단순해야 한다.
+ * 클라이언트가 리모트 엑세스를 하는데 있어서 가능한 성능, 금융적 제제등을 잘 알아야 한다.
+=== Forces ===
+
+== Solution ==
+ * 클라이언트가 컴포넌트 자체를 엑세스 하지 말고 컴포넌트의 대리와 통신하도록 한다.
+ * 이 ‘대리’ 를 proxy 라고 부르며 컴포넌트의 인터페이스를 제공할 뿐 아니라 사전,사후 작업도 한다.
+
+== 해결책이 나오게 된 이유 ==
+
+== 구조 ==
+ * Original
+ * Client
+ * Abstract original
+ 
+== Dynamics ==
+
+== Implementation ==
+ 1. 모든 책임을 식별
+ 2. Abstract base 클래스를 소개
+ 3. Proxy의 기능을 구현
+ 4. Original과 클라이언트 사이의 책임을 proxy로 옮김.
+ 5. Proxy 와 original 을 연결
+ 6. Original 과 클라이언트의 모든 관련성을 제거
+ 
+== Variants ==
+ * Remote Proxy
+ * Protection Proxy
+ * Cache Proxy
+ * Synchronization Proxy
+ * Counting Proxy
+ * Virtual Proxy
+ * Firewall Proxy
+ 
+== Known Uses ==
+ * NeXTSTEP
+ * OMG-CORBA
+ * Orbix
+ * World Wide Web Proxy
+ * OLE
+ 
+== Consequences ==
+ * 튜닝같은 경우 문제가 있다. 만능은 아니다.
+=== Benefits ===
+  * 효율성을 확장하고 엑세스 비용을 줄인다.
+  * 클라이언트가 서버 컴포넌트의 위치로 부터 자유로워진다.
+  * 기능구현과 housekeeping 코드가 분리된다.
+=== Liabilities ===
+  * Indirection 때문에 효율성 저하
+  * 지나친 기교
+=== Benefits & Liabilities ===
+
+== Related Patterns ==
+ * [DecoratorPattern]

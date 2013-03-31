@@ -1,0 +1,64 @@
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+
+== Visual Arts ==
+ * ''' (205) Normal Mapping Industry Survey''' - ''Gio Nakpil, Scott Spencer, Rich Diamant 외''
+  [https://www.cmpevents.com/sessions/GD/S6526i1.pdf Normal Maps Tutorial pdf Part 1]
+  [https://www.cmpevents.com/sessions/GD/S6526i2.pdf Normal Maps Tutorial pdf Part 2]
+ * ''' Art Directors/Lead Artists Roundtable (Day 1)''' - ''Seth Spaulding''
+ * ''' Art Directors/Lead Artists Roundtable (Day 2)''' - ''Seth Spaulding''
+ * ''' Art Directors/Lead Artists Roundtable (Day 3)''' - ''Seth Spaulding''
+ Art Outsourcing: Client Best Practices''' - ''Paul Steed, William Podurgiel, Sherry Floyd 외
+ * ''' Art Outsourcing: Provider Best Practices''' - ''Paul Steed, Manvendra Shukul, Jason Manley 외''
+ * ''' Autodesk 3ds Max and Autodesk Maya: Integrating High-Level Shading Effects Sponsored by Autodesk''' - ''Neil Hazzard, Bernard Kwok''
+ * ''' Autodesk 3ds Max Tips and Tricks Sponsored by Autodesk''' - ''Adrien Cho, Mike Trottier''
+ Autodesk HumanIK Middleware Introduction: Complementing Your FK Animation Sponsored by Autodesk''' - ''Eric Bibeau, Jason Walter
+ * ''' Autodesk Maya Tips and Tricks Sponsored by Autodesk''' - ''Sam Sharit, Steven Roselle''
+ * ''' Autodesk MotionBuilder: Cross Product Integration - Autodesk 3ds Max and Autodesk Maya - of Animation Assets to Develop Workable Motion Libraries''' - ''Justin Muir''
+ Autodesk Mudbox: Integration and Use with Autodesk 3ds Max and Autodesk Maya''' - ''Rich Diamant, Louis Marcoux
+ Building and Maintaining an Art Department''' - ''Steve Reid, Mike Haynes
+ * ''' Creating Scalable and Dynamic Graphics for WORLD IN CONFLICT''' - ''Rodrigo Cortes''
+ Dr. Strangeflow or: How I Learned to Stop Worrying and Love the Pipeline''' - ''Lane Daughtry
+ Engaging the User''' - ''Ernesto Perez, Jeremy Rawls
+ * ''' Environment Design in HALO 3''' - ''Mike Zak''
+ * ''' From Mundane to Epic: The Making of the STARCRAFT II Cinematic Teaser''' - ''Nick Carpenter''
+ * ''' GOD OF WAR: Deconstructing an Epic''' - ''Nathan Phail-Liff''
+ * ''' Improve Your Game Lighting Using Illuminate Labs' Beast Sponsored by Illuminate Labs''' - ''Rasmus Bonnedal, David Larsson''
+ * ''' Internal & Outsourcer Management Of Tools & Pipelines''' - ''Adam Pletcher, Brendan Holloway''
+  [https://www.cmpevents.com/sessions/GD/S6460i1.ppt PPT]
+ * ''' NaturalMotion: Runtime Character Animation with Morpheme Sponsored by NaturalMotion''' - ''Simon Mack''
+ * ''' Never Say Die: Breathing life into Game Characters with Havok Behavior Sponsored by Havok''' - ''Jeff Yates''
+ * ''' Next-Gen Lighting Using Illuminate Labs' Turtle Sponsored by Illuminate Labs''' - ''Niklas Harrysson, Jens Olsson''
+ * ''' Practical Light and Color''' - ''Jeremy Vickery''
+ * ''' PROTOTYPE: The Artistic Vision Uncensored''' - ''Maurice Kimball''
+ * ''' Python for Technical Artists''' - ''Adam Pletcher''
+  [https://www.cmpevents.com/sessions/GD/S6459i1.ppt PPT]
+ * ''' Real World Texture Painting Tips for Game Developers Sponsored by Maxon''' - ''Ben Mathis''
+ * ''' Substance: Redefining the Nature of Texturing Sponsored by Allegorithmic''' - ''Sebastien Deguy, Brennan Priest, Jay Koottarappallil 외''
+ * ''' Technical Art Techniques: State of the Industry''' - ''Christopher Evans, Jason Parks, Paul Thuriot 외''
+ * ''' Technical Artist Roundtable (Day 1)''' - ''Jeff Hanna''
+ * ''' Technical Artist Roundtable (Day 2)''' - ''Jeff Hanna''
+ * ''' Technical Artist Roundtable (Day 3)''' - ''Jeff Hanna''
+ * ''' The Art and Science of Lighting''' - ''Julian Davis''
+ * ''' The Art of FINAL FANTASY ?Interview with Isamu Kamikokuryo''' - ''Isamu Kamikokuryo, Steve Theodore''
+ * ''' The HALO 3 Cinematic Process''' - ''CJ Cowan''
+ * ''' Uncharted Animation: An In-depth Look at the Character Animation Workflow and Pipeline''' - ''Judd Simantov, Jeremy Lai-Yates''
+  [https://defrag.depaul.edu/gdc/?p=48 Web]
+
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars

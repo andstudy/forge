@@ -1,0 +1,12 @@
+[KGC2012]
+[KGC2011]
+[KGC2010]
+[KGC2009/Link]
+[KGC2008]
+[KGC2007]
+
+----
+ [http://www.swsc.co.kr/down/data/KGC.ppt 김학규 Online Game 개발을 위한 기획기법 세미나]
+ [http://virtuallaw.tistory.com/attachment/ek7.pdf MMORPG 의 법적 정체성 탐구]
+ [http://digibath.com/repository/kgc2004_noerror.pdf KGC2004 김성익 - 게임에서의 실시간 애니메이션 이해와 응용]
+  [http://digibath.com/repository/kgc04_anim.zip 예제]

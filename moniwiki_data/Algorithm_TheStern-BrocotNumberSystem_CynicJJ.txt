@@ -1,0 +1,227 @@
+ * 트리라는 개념에 낚여 한참 헤맸음
+  * Mastojun님 코드보고 완전 OTL
+ * 입출력 처리는 대충 했음. 종료 조건 처리하지 않음.
+ * 테스트코드는 너무 길어서 뺐음
+
+[[TableOfContents([maxdepth])]]
+
+== The Stern-Brocot Number System ==
+=== !SternBrocotTree.vb ===
+{{{
+' $Id: SternBrocotTree.vb 111 2008-02-26 01:37:22Z 정희종 $
+
+Public Class SternBrocotTree
+
+	Private _root As Node
+	ReadOnly Property Root() As Node
+		Get
+			If _root Is Nothing Then
+				_root = TreeMaker.CreateRoot()
+			End If
+			Return _root
+		End Get
+	End Property
+
+	Function GetPath(ByVal aRational As Rational) As String
+		Dim path As String = ""
+
+		Dim aNode As Node = Root
+		While aRational <> aNode.Rational
+			If aRational < aNode.Rational Then
+				path += "L"
+				aNode = aNode.Left
+			ElseIf aRational > aNode.Rational Then
+				path += "R"
+				aNode = aNode.Right
+			End If
+		End While
+
+		Return path
+	End Function
+
+End Class
+}}}
+
+=== Rational.vb ===
+{{{
+' $Id: Rational.vb 109 2008-02-26 01:16:04Z 정희종 $
+
+Public Class Rational
+
+	Sub New(ByVal numerator As Integer, ByVal denominator As Integer)
+		_numerator = numerator
+		_denominator = denominator
+	End Sub
+
+	Sub New(ByVal leftVal As Rational, ByVal rightVal As Rational)
+		_numerator = leftVal.Numerator + rightVal.Numerator
+		_denominator = leftVal.Denominator + rightVal.Denominator
+	End Sub
+
+	Private _numerator As Integer
+	ReadOnly Property Numerator() As Integer
+		Get
+			Return _numerator
+		End Get
+	End Property
+
+	Private _denominator As Integer
+	ReadOnly Property Denominator() As Integer
+		Get
+			Return _denominator
+		End Get
+	End Property
+
+	Shared Operator <(ByVal leftVal As Rational, ByVal rightVal As Rational) As Boolean
+		If leftVal = rightVal Then
+			Return False
+		Else
+			Return Not (leftVal > rightVal)
+		End If
+	End Operator
+
+	Shared Operator >(ByVal leftVal As Rational, ByVal rightVal As Rational) As Boolean
+		Return (leftVal.Numerator * rightVal.Denominator) > (rightVal.Numerator * leftVal.Denominator)
+	End Operator
+
+	Shared Operator =(ByVal leftVal As Rational, ByVal rightVal As Rational) As Boolean
+		Return (leftVal.Numerator * rightVal.Denominator) = (rightVal.Numerator * leftVal.Denominator)
+	End Operator
+
+	Shared Operator <>(ByVal leftVal As Rational, ByVal rightVal As Rational) As Boolean
+		Return Not (leftVal = rightVal)
+	End Operator
+
+	Overrides Function Equals(ByVal compared As Object) As Boolean
+		Return Me = compared
+	End Function
+
+End Class
+}}}
+
+=== Node.vb ===
+{{{
+' $Id: Node.vb 113 2008-02-26 02:06:51Z 정희종 $
+
+Public Class Node
+
+	Private _left As Node
+	ReadOnly Property Left() As Node
+		Get
+			If _left Is Nothing Then
+				_left = TreeMaker.CreateLeftNode(Me)
+			End If
+			Return _left
+		End Get
+	End Property
+
+	Private _right As Node
+	ReadOnly Property Right() As Node
+		Get
+			If _right Is Nothing Then
+				_right = TreeMaker.CreateRightNode(Me)
+			End If
+			Return _right
+		End Get
+	End Property
+
+	Private _rational As Rational
+	Property Rational() As Rational
+		Get
+			Return _rational
+		End Get
+		Set(ByVal value As Rational)
+			_rational = value
+		End Set
+	End Property
+
+End Class
+}}}
+
+=== !TreeMaker.vb ===
+{{{
+' $Id: TreeMaker.vb 113 2008-02-26 02:06:51Z 정희종 $
+
+Module TreeMaker
+
+	Private _rationals As List(Of Rational)
+
+	Sub InitRationals()
+		_rationals = New List(Of Rational)
+		_rationals.Add(New Rational(0, 1))
+		_rationals.Add(New Rational(1, 1))
+		_rationals.Add(New Rational(1, 0))
+	End Sub
+
+	Function CreateRoot() As Node
+		InitRationals()
+
+		Dim root As Node = New Node
+		root.Rational = _rationals(1)
+
+		Return root
+	End Function
+
+	Function CreateLeftRational(ByVal parentRational As Rational) As Rational
+		Dim matchIndex As Integer = _rationals.IndexOf(parentRational)
+
+		Dim left As Rational = _rationals(matchIndex - 1)
+
+		Dim leftRational As Rational = New Rational(left, parentRational)
+		_rationals.Insert(matchIndex, leftRational)
+
+		Return leftRational
+	End Function
+
+	Function CreateRightRational(ByVal parentRational As Rational) As Rational
+		Dim matchIndex As Integer = _rationals.IndexOf(parentRational)
+
+		Dim right As Rational = _rationals(matchIndex + 1)
+
+		Dim rightRational As Rational = New Rational(parentRational, right)
+		_rationals.Insert(matchIndex + 1, rightRational)
+
+		Return rightRational
+	End Function
+
+	Function CreateLeftNode(ByVal parentNode As Node) As Node
+		Dim left As Node = New Node
+		left.Rational = CreateLeftRational(parentNode.Rational)
+
+		Return left
+	End Function
+
+	Function CreateRightNode(ByVal parentNode As Node) As Node
+		Dim right As Node = New Node
+		right.Rational = CreateRightRational(parentNode.Rational)
+
+		Return right
+	End Function
+End Module
+}}}
+
+=== !ModuleMain.vb ===
+{{{
+Module ModuleMain
+
+	Sub Main()
+		While True
+			Dim input As String = Console.ReadLine()
+			Dim tree As SternBrocotTree = New SternBrocotTree
+			Dim rational As Rational = GetRationalFromInput(input)
+			Console.WriteLine(tree.GetPath(rational))
+		End While
+	End Sub
+
+	Function GetRationalFromInput(ByVal input As String) As Rational
+		Dim separator() As Char = {" "c}
+		Dim strs() As String = input.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+
+		Dim numerator As Integer = Integer.Parse(strs(0))
+		Dim denominator As Integer = Integer.Parse(strs(1))
+
+		Return New Rational(numerator, denominator)
+	End Function
+
+End Module
+}}}

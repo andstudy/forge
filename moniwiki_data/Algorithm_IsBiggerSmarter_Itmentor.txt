@@ -1,0 +1,137 @@
+ * 초벌구이용 코드입니다
+
+[[TableOfContents([maxdepth])]]
+
+== Is Bigger Smarter ==
+
+=== Elephant.cs ===
+{{{
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace BiggerSmarter
+{
+
+    public class Elephant : IComparable
+    {
+        public int Id = -1;
+        public int Weight = 0;
+        public int Inteligence = 0;
+
+        public Elephant Parent = null;
+        public int Level = 0;
+
+        public Elephant(int id, int weight, int inteligence)
+        {
+            Id = id;
+            Weight = weight;
+            Inteligence = inteligence;
+        }
+
+        #region IComparable Members
+
+        public int CompareTo(object obj)
+        {
+            Elephant elephant = obj as Elephant;
+
+            if (elephant.Weight > this.Weight)
+                return 1;
+
+            return -1;
+        }
+
+        #endregion
+    }
+}
+
+}}}
+
+=== Program.cs ===
+{{{
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace BiggerSmarter
+{
+    class Program
+    {
+        static void constructPath(System.Collections.ArrayList arr, int beginIndex)
+        {
+            //종료조건
+            if (beginIndex >= arr.Count)
+                return;
+
+            Elephant srcObject = arr[beginIndex] as Elephant;
+            for (int i = beginIndex; i < arr.Count; i++)
+            {
+                Elephant targetObject = arr[i] as Elephant;
+
+                if (srcObject != targetObject)
+                {
+                    bool weightCheck = srcObject.Weight > targetObject.Weight;
+                    bool intelCheck = srcObject.Inteligence > targetObject.Inteligence;
+                    bool levelCheck = srcObject.Level >= targetObject.Level;
+
+                    if (weightCheck == true && intelCheck == true && levelCheck == true)
+                    {
+                        targetObject.Parent = srcObject;
+                        targetObject.Level = srcObject.Level + 1;
+                        srcObject = targetObject;
+                    }
+                }
+            }
+
+            constructPath(arr, beginIndex + 1);
+        }
+
+        static void Main(string[] args)
+        {
+            System.Collections.ArrayList arr = new System.Collections.ArrayList();
+
+            arr.Add(new Elephant(0, 6000, 4000));
+            arr.Add(new Elephant(1, 6000, 3000));
+            arr.Add(new Elephant(2, 7000, 4100));
+            arr.Add(new Elephant(3, 8000, 1000));
+            arr.Add(new Elephant(4, 6100, 4000));
+
+            arr.Sort();
+
+            constructPath(arr, 0);
+
+            List<int> output = extractList(arr);
+         }
+
+        private static List<int> extractList(System.Collections.ArrayList arr)
+        {
+            int maxLevel = 0;
+            Elephant leafElephant = null;
+            foreach (Elephant e in arr)
+            {
+                if (maxLevel < e.Level)
+                {
+                    maxLevel = e.Level;
+                    leafElephant = e;
+                }
+            }
+
+            List<int> outputArray = new List<int>();
+            outputArray.Add(leafElephant.Id);
+
+            while (leafElephant.Parent != null)
+            {
+                leafElephant = leafElephant.Parent;
+                outputArray.Add(leafElephant.Id);
+            }
+
+            outputArray.Reverse();
+
+            return outputArray;
+        }
+    }
+}
+
+}}}

@@ -1,0 +1,133 @@
+ * 풀이
+  * 분수를 나타내는 FraExpress 를 이용하여 문제를 해결함
+  * 분수 간의 크기 비교는 분자 분모 항이동을 통해 비교하였다. 소숫점 비교를 피함
+   * a/b 와 x/y의 비교는 a*y 와 b*x의 값의 비교를 통해 구했다
+  * 실제 트리 순회는 1/1로부터 현재 노드 값보다 크면 오른쪽 작으면 왼쪽으로 이동 되게 구현 하였다
+   * 이동 작업은 현재 노드,왼쪽 노드,오른쪽 노드의 변경으로 구현
+ * 소스
+{{{
+import java.io.IOException;
+
+public class Main implements Runnable {
+	static String ReadLn(int maxLength) { // utility function to read from
+											// stdin,
+		// Provided by Programming-challenges, edit for style only
+		byte line[] = new byte[maxLength];
+		int length = 0;
+		int input = -1;
+		try {
+			while (length < maxLength) {// Read untill maxlength
+				input = System.in.read();
+				if ((input < 0) || (input == '\n'))
+					break; // or untill end of line ninput
+				line[length++] += input;
+			}
+
+			if ((input < 0) && (length == 0))
+				return null; // eof
+			return new String(line, 0, length);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public static void main(String[] args) {
+		Main main = new Main();
+		main.run();
+	}
+	public void run() {
+		while(true){
+			String line = ReadLn(255).trim();
+			if(line == null || line.equals("1 1")){
+				break;
+			}
+			String [] strSplit = line.split(" ");
+			if(strSplit.length!=2){
+				break;
+			}
+			String result = SBTreeTravelResult(new FraExpress( Integer.parseInt(strSplit[0]), Integer.parseInt(strSplit[1])));
+			System.out.println(result);
+		}
+	}
+
+	public String SBTreeTravelResult(FraExpress searchVal) {
+		FraExpress curNode = new FraExpress(1, 1);
+		FraExpress leftNode = new FraExpress(0, 1);
+		FraExpress rightNode = new FraExpress(1, 0);
+		StringBuilder builder = new StringBuilder();
+		while (curNode.compareTo(searchVal) != 0) {
+			int compareResult = searchVal.compareTo(curNode);
+			if (compareResult > 0) {
+				// 찾을 값이 현재 노드보다 크다면 오른쪽으로 서칭
+				builder.append("R");
+				leftNode = curNode;
+				curNode = curNode.add(rightNode);
+			} else if (compareResult < 0) {
+				// 찾을 값이 현재 노드보다 작으면 왼쪽으로 서칭
+				builder.append("L");
+				rightNode = curNode;// 현재 노드는 오른쪽으로 이동됨
+				curNode = curNode.add(leftNode);
+			} else {
+				// 현제노드값이 찾는 값이면 검색 종료
+				break;
+			}
+		}
+		return builder.toString();
+	}
+
+}
+
+class FraExpress implements Comparable<FraExpress> {
+	private int denominator; // 분자
+
+	private int numerator; // 분모
+
+	public FraExpress(int denominator, int numerator) {
+		this.denominator = denominator;
+		this.numerator = numerator;
+	}
+
+	public int compareTo(FraExpress o) {
+		/**
+		 * x a -- 와 -- 의 비교는 xb 와 ay의 비교와 같다 y b
+		 */
+		int left = this.denominator * o.numerator;
+		int right = this.numerator * o.denominator;
+		if (left < right)
+			return -1;
+		else if (left > right)
+			return 1;
+		else
+			return 0;
+	}
+
+	public FraExpress add(FraExpress addend) {
+		return new FraExpress(this.denominator + addend.denominator,
+				this.numerator + addend.numerator);
+	}
+}
+}}}
+ * 테스트 케이스 
+{{{
+import junit.framework.TestCase;
+
+
+public class SternBrocot extends TestCase {
+	public void testFraExpressCompare(){
+		FraExpress a = new FraExpress(1,2);
+		FraExpress b = new FraExpress(1,1);
+		FraExpress c = new FraExpress(2,1);
+		assertEquals(0,a.compareTo(a));
+		assertEquals(-1,a.compareTo(b)); // a<b
+		assertEquals(1,b.compareTo(a)); // b<a
+		assertEquals(-1,a.compareTo(c)); // a<c
+	}
+	
+	public void testSBTreeTravelResult(){
+		Main main = new Main();
+		assertEquals("LRRL", main.SBTreeTravelResult(new FraExpress(5,7)));
+		assertEquals("RRLRRLRLLLLRLRRR", main.SBTreeTravelResult(new FraExpress(878 ,323)));
+	}
+}
+
+}}}

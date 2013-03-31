@@ -1,0 +1,413 @@
+[CSP]
+[[TableOfContents]]
+== CSP third trial ==
+=== 프로젝트 ===
+[attachment:CspMultiProcessPrj.zip]
+=== Result ===
+[attachment:CSP_MultiProcess_Result.gif]
+=== DCDs ===
+[attachment:CSP_Third_DCDs.GIF]
+=== 문서 ===
+ * 숫자는 포트 번호
+ * 화살표 기준으로 오른쪽에 있는 pipe 는 (데이타를 받아 들이는 pipe) 포트를 listen 한다.
+  * 이 pipe 는 항상 데이타를 읽기만 한다.
+ * 화살표 기준으로 왼쪽에 있는 pipe 는 (데이타를 내 보내는 pipe) 포트로 connect 한다.
+  * connect 된 후에는 계속 데이타를 push 만 한다.
+{{{
++-->(8886) succ --(8887) --> plus -- (8889) --> print --> 출력
+^           |                 ^                   |
+|           |                 |                 (8886)  
+|           +---> (8888)------+                   |
+|                                                 |
+|                                                 |
++-------------------------------------------------+ 
+}}}
+
+=== Mylib 라이브버리 ===
+{{{
+#define _WIN32_WINNT 0x0500
+
+#include <vector>
+#include <string>
+#include <deque>
+#include <strstream>
+#include <Windows.h>
+#include <process.h>
+#include <iostream>
+#include <crtdbg.h>
+
+// boost
+#include <boost/shared_ptr.hpp>
+
+// ACE
+#include <ace/Log_Msg.h>
+#include <ace/SOCK_Connector.h>
+#include <ace/SOCK_Acceptor.h>
+#include <ace/SOCK_Stream.h>
+#include <ace/Singleton.h>
+#include <ace/Mutex.h>
+
+using namespace std;
+using namespace boost;
+
+namespace mylib
+{
+class AutoLock
+{
+public:
+	AutoLock() { InitializeCriticalSectionAndSpinCount(&m_CriticalSection, 4000); }
+	virtual ~AutoLock() { DeleteCriticalSection(&m_CriticalSection); }
+	void Lock() { EnterCriticalSection(&m_CriticalSection); }
+	void Unlock() { LeaveCriticalSection(&m_CriticalSection); }
+	bool TryLock() { return TRUE == TryEnterCriticalSection(&m_CriticalSection); }		// chap4.
+private:
+	CRITICAL_SECTION m_CriticalSection;
+};
+
+template <typename T>
+class LockGuard
+{
+public:
+	LockGuard(T& lock) : m_lock(lock) { m_lock.Lock(); }
+	~LockGuard() { m_lock.Unlock(); }
+	void Lock() { m_lock.Lock(); }
+	void Unlock() { m_lock.Unlock(); }
+
+private:
+	T& m_lock;
+};
+
+typedef LockGuard<AutoLock> AutoGuard;
+class Thread
+{
+public:
+	Thread() : m_handle(INVALID_HANDLE_VALUE), m_threadId(0), m_ended(0) {}
+	virtual ~Thread() { CloseHandle(m_handle); }
+
+	HANDLE Handle() const { return m_handle; }
+	virtual void Start() { ::ResumeThread(m_handle); }
+	virtual void Stop() { ::SuspendThread(m_handle); }
+
+	static unsigned __stdcall ThreadFunc(void* pData) {
+		Thread* pThread = (Thread*)pData;
+		pThread->OnThread();
+		return 0;
+	}
+	HANDLE Create(bool start = true) {
+		m_handle = (HANDLE)_beginthreadex(NULL, 0, &Thread::ThreadFunc, (void*)this, start ? 0 : CREATE_SUSPENDED, &m_threadId);
+		return m_handle;
+	}
+	virtual void OnThread() {	 // overriding.
+	}
+	virtual void NotifyToEnd() { // overriding.
+	}
+protected:
+	LONG IsEnded() const {
+		return m_ended;
+	}
+private:
+	HANDLE m_handle;
+	unsigned m_threadId;
+	volatile LONG m_ended;
+};
+
+typedef boost::shared_ptr<Thread> ThreadPtr;
+
+class ThreadManager
+{
+public:
+	inline void Spawn(ThreadPtr spThread, bool start = true);
+	inline bool WaitForAll(DWORD waiting);
+
+private:
+	std::vector< ThreadPtr > m_threads;
+};
+
+inline void ThreadManager::Spawn(ThreadPtr spThread, bool start)
+{
+	spThread->Create(start);
+	m_threads.push_back(spThread);
+}
+
+inline bool ThreadManager::WaitForAll(DWORD waiting)
+{
+	vector<HANDLE> handles;
+	handles.resize(m_threads.size());
+	for (size_t i = 0; i < m_threads.size(); ++i) {
+		handles[i] = m_threads[i]->Handle();
+		m_threads[i]->NotifyToEnd();
+	}
+
+	return WAIT_TIMEOUT == ::WaitForMultipleObjects((DWORD)m_threads.size(), &handles[0], true, waiting);
+}
+
+typedef ACE_Singleton<ThreadManager, ACE_Mutex> theThreadManager;
+
+template <typename T>
+class LockAndWaitQueue
+{
+public:
+	LockAndWaitQueue() : m_event(INVALID_HANDLE_VALUE) { m_event = CreateEvent(NULL, FALSE, FALSE, NULL); }
+	~LockAndWaitQueue() { CloseHandle(m_event); }
+	void PushRequest(T n)
+	{
+		mylib::AutoGuard guard(m_lock);
+		m_deque.push_back(n);
+		if (m_deque.size() == 1)
+		{
+			SetEvent(m_event);
+		}
+	}
+	T PopRequest()
+	{
+		AutoGuard guard(m_lock);
+		while (m_deque.empty())
+		{
+			guard.Unlock();
+			WaitForSingleObject(m_event, INFINITE);
+			guard.Lock();
+		}
+		T n = m_deque.front();
+		m_deque.pop_front();
+		return n;
+	}
+	T PeekRequest()
+	{
+		AutoGuard guard(m_lock);
+		while (m_deque.empty())
+		{
+			guard.Unlock();
+			WaitForSingleObject(m_event, INFINITE);
+			guard.Lock();
+		}
+		return m_deque.front();
+	}
+private:
+	HANDLE m_event;
+	AutoLock m_lock;
+	deque<T> m_deque;
+};
+
+typedef LockAndWaitQueue<int> Channel;
+
+class Pipe;
+typedef boost::shared_ptr<Pipe> PipePtr;
+
+class Pipe : public Thread
+{
+public:
+	static inline PipePtr Listen(u_short port, Channel& channel);
+	static inline PipePtr Connect(u_short port, Channel& channel);
+
+protected:
+	Pipe(u_short port, Channel& channel, bool listen) 
+		:m_port(port),
+		m_channel(channel), 
+		m_listen(listen)
+	{}
+
+	virtual void OnThread()
+	{
+		char buf[4];
+
+		if (m_listen)
+		{
+			// listen and accept
+			ACE_INET_Addr port_to_listen(m_port, static_cast<ACE_UINT32>(INADDR_ANY));
+			ACE_SOCK_Acceptor acceptor;
+			if (acceptor.open(port_to_listen, 1) == -1)
+			{
+				ACE_ERROR((LM_ERROR, ACE_TEXT("%p\n"), ACE_TEXT("acceptor.open")));
+				return;
+			}
+
+			ACE_INET_Addr peer_addr;
+			ACE_Time_Value timeout(10, 0);		// TODO : 10 초 기다려라. 영원히 기다리려면?
+
+			while (acceptor.accept(m_peer, &peer_addr, &timeout, 0) == -1)
+			{
+			}
+
+			// pumping from pipe
+			ssize_t bytes_received = -1;
+			while ((bytes_received = m_peer.recv(buf, sizeof(buf))) != -1)
+			{
+				_ASSERT(bytes_received == 4);	// 이렇게 짜면 안 된다.
+
+				int n = 0;
+				memcpy(&n, buf, sizeof(buf));
+				m_channel.PushRequest(n);
+			}
+
+			m_peer.close();
+		}
+		else
+		{
+			// TODO : connect
+			ACE_INET_Addr srvr(m_port, ACE_LOCALHOST);
+			ACE_SOCK_Connector connector;
+
+			while (1)
+			{
+				if (-1 != connector.connect(m_peer, srvr))
+				{
+					break;
+				}
+				else
+				{
+					Sleep(100);
+				}
+			}
+
+			// push into pipe
+			while (!IsEnded())
+			{
+				int n = m_channel.PopRequest();
+				memcpy(buf, &n, 4);
+				m_peer.send_n(buf, 4);
+			}
+
+			m_peer.close();
+		}
+	}
+
+private:
+	u_short m_port;
+	Channel& m_channel;
+	bool m_listen;	// accept? connect?
+	ACE_SOCK_STREAM m_peer;
+};
+
+inline PipePtr Pipe::Listen(u_short port, Channel& channel)
+{
+	return PipePtr(new Pipe(port, channel, true));
+}
+
+inline PipePtr Pipe::Connect(u_short port, Channel& channel)
+{
+	return PipePtr(new Pipe(port, channel, false));
+}
+
+//typedef ACE_Singleton<Process, ACE_Mutex> PROCESS;
+}
+}}}
+=== Succ Project ===
+{{{
+class Succ
+{
+public:
+	void Do() 
+	{
+		theThreadManager::instance()->Spawn(Pipe::Listen(8886, m_in));
+		theThreadManager::instance()->Spawn(Pipe::Connect(8887, m_out1));
+		theThreadManager::instance()->Spawn(Pipe::Connect(8888, m_out2));
+
+		while (1)
+		{
+			int n1 = m_in.PopRequest();
+			m_out1.PushRequest(n1);
+			int n2 = m_in.PeekRequest();
+			m_out2.PushRequest(n2);
+			cout << n1 << ' ' << n2 << '\n';
+		}
+	}
+
+private:
+	Channel m_in;
+	Channel m_out1;
+	Channel m_out2;
+};
+
+int ACE_TMAIN(int argc, ACE_TCHAR* argv[])
+{
+	Succ succ;
+	succ.Do();
+	
+	return 0;
+}
+}}}
+=== Plus Project ===
+{{{
+#include "../Mylib/mylib.h"
+using namespace mylib;
+
+class Plus
+{
+public:
+	void Do()
+	{
+		theThreadManager::instance()->Spawn(Pipe::Listen(8887, m_in1));
+		theThreadManager::instance()->Spawn(Pipe::Listen(8888, m_in2));
+		theThreadManager::instance()->Spawn(Pipe::Connect(8889, m_out));
+
+		while (1)
+		{
+			int n1 = m_in1.PopRequest();
+			int n2 = m_in2.PopRequest();
+			m_out.PushRequest(n1 + n2);
+
+			// Linking 에서 다음과 같은 에러 발생. 왜?
+			// PlusComponent.obj : error LNK2005: 
+			// "class std::basic_ostream<char,struct std::char_traits<char> > & __cdecl std::operator
+			// <<<struct std::char_traits<char> >(class std::basic_ostream<char,struct std::char_traits<char> > &,char const *)" 
+			// (??$?6U?$char_traits@D@std@@@std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@0@AAV10@PBD@Z)
+			// already defined in msvcprtd.lib(MSVCP80D.dll)
+			//cout << "Push " << n1 << ' + ' << n2 << '\n';
+
+			// 이렇게 해도 안 된다. 왜?
+			//string text("Push ");
+			//cout << text.c_str() << n1 << ' + ' << n2 << '\n';
+			cout << n1 << ' ' << '+' << ' ' << n2 << '\n';
+		}
+	}
+private:
+	Channel m_in1;
+	Channel m_in2;
+	Channel m_out;
+};
+
+int ACE_TMAIN(int argc, ACE_TCHAR* argv[])
+{
+	Plus plus;
+	plus.Do();
+
+	return 0;
+}
+}}}
+=== Print Project ===
+{{{
+#include "../Mylib/mylib.h"
+using namespace mylib;
+
+class Print
+{
+public:
+	void Do()
+	{
+		m_in.PushRequest(1);
+		m_in.PushRequest(1);
+
+		theThreadManager::instance()->Spawn(Pipe::Listen(8889, m_in));
+		theThreadManager::instance()->Spawn(Pipe::Connect(8886, m_out));
+
+		while (1)
+		{
+			int n = m_in.PopRequest();
+			cout << n << '\n';
+			m_out.PushRequest(n);
+			Sleep(1000);		// to see result
+		}
+	}
+private:
+	Channel m_in;
+	Channel m_out;
+};
+
+int ACE_TMAIN(int argc, ACE_TCHAR* argv[])
+{
+	Print print;
+	print.Do();
+
+	return 0;
+}
+}}}

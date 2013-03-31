@@ -1,0 +1,76 @@
+== 문제 풀이 ==
+ 처음엔 욕심쟁이 기법으로 접근했다가 실패!
+ 책 뒤쪽 보니 "재귀함수를 이용할수 있지 않을까?" 라는 힌트가 있어서 재귀로 접근.
+ 불필요한 반복 재귀를 피하기 위해서 DP사용 :D
+
+== 소스 ==
+{{{#!vim cpp
+#include <stdio.h>   
+#define ever (;;)   
+  
+int l;   
+int n;   
+int position[51];   
+int DynamicTable[51][51];   
+  
+void input()   
+{   
+    scanf("%d", &n);   
+  
+    for(int i = 1; i <= n; i++ )   
+    {   
+        scanf("%d", position+i);   
+    }   
+}   
+  
+int GetResult(int prelen, int len, int s, int e)   
+{   
+    int min = len*50, t;   
+  
+    if( s == e ) return len;   
+    if( s >= e ) return 0;   
+    if( DynamicTable[s][e] ) return len+DynamicTable[s][e];   
+  
+    for( int i = s; i <= e; i++ )   
+    {   
+        t  = GetResult( prelen, position[i] - prelen, s, i-1);   
+        t += GetResult( position[i] , len - position[i] + prelen, i+1, e);   
+  
+        if( t < min )   
+        {   
+            min = t;   
+        }   
+    }   
+  
+    DynamicTable[s][e] = min;   
+  
+    return  len + min;   
+}   
+  
+void InitTable()   
+{   
+    for(int i = 1; i <= n; i++ )   
+    {   
+        for(int j = 1; j <= n ;j++ )   
+        {   
+            DynamicTable[i][j] = 0;   
+        }   
+    }   
+}   
+  
+int main()   
+{   
+    for ever   
+    {   
+        scanf("%d", &l);   
+  
+        if( l == 0 ) break;   
+  
+        input();   
+        InitTable();   
+        printf("The minimum cutting is %d.\n", GetResult(0, l, 1, n));   
+    }   
+  
+    return 0;   
+}  
+}}}

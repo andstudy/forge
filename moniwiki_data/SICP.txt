@@ -1,0 +1,106 @@
+컴퓨터 프로그램의 구조와 해석 스터디 페이지입니다.
+스터디는 매주토요일 토즈 강남점 09:00 ~ 11:30 입니다.
+
+== 스터디 ==
+ * [SICP/발표순서]
+ 
+ * SICP/1장. 프로시저를 써서 요약하는 방법
+  * SICP/1-1. 프로그램 짤때 바탕이 되는 것
+  * SICP/1-2. 프로시저와 프로세스
+  * SICP/1-3. 차수 높은 프로시저로 요약하는 방법
+  * [SICP/연습문제1장]
+
+ * SICP/2장. 데이터를 요약해서 표현력을 끌어올리는 방법
+  * [SICP/2.1 데이터요약]
+  * [SICP/2.2 계층구조 데이터와 닫힘성질]
+  * [SICP/2.3 글자 데이터]
+  * ["SICP/2.4 요약된 데이터의 표현 방식이 여러가지일 때"]
+  * [SICP/2.5 일반화된 연산 시스템]
+  * [SICP/연습문제2장]
+
+ * SICP/3장. 모듈, 물체, 상태
+  * [SICP/3.1 덮어쓰기와 갇힌 상태]
+  * [SICP/3.2 환경 계산법]
+  * [SICP/3.3 변형 가능한 데이터로 프로그래밍하기]
+  * SICP/3.4 병행성 : 시간은 중요하다
+  * [SICP/3.5 스트림]
+  * [SICP/연습문제3장]
+ * SICP/4장. 언어를 처리하는 기법
+  * [SICP/4.1 메타써큘러 실행기]
+  * Scheme 바꿔보기 -제때 계산법
+  * [SICP/4.3 Scheme 바꿔보기 - 비결정적 계산]
+  * 논리로 프로그램 짜기
+  * [SICP/연습문제4장]
+
+ * SICP/5장. 레지스터
+  * [SICP/5.1 레지스터 기계 설계하기]
+  * [SICP/5.2 레지스터 기계 시뮬레이터] 
+  * [SICP/5.3 메모리 할당과 재활용] 
+  * [SICP/5.4 제어가 다 보이는 실행기]
+  * [SICP/5.5 번역]
+  * [SICP/연습문제5장]
+
+== 자료 == 
+[http://www.swiss.ai.mit.edu/classes/6.001/abelson-sussman-lectures/ 저자 강연 비디오]
+
+연습문제 풀이
+ http://www.buggymind.com/category/Books%20by%20Example
+ http://nosyu.pe.kr/category/in%20OCW
+ 
+[http://kr.youtube.com/profile?user=kizoomac&view=videos 번역자(김수정님)분이 진행하시는 한글 동영상 강좌. 그밖에 youtube에서 다수의 영문 동영상 강좌가 있습니다.]
+
+[http://download.plt-scheme.org/ DrScheme 다운로드]
+
+DrScheme 튜토리얼
+ http://flaxia-iii.tistory.com/entry/DrScheme-%EC%89%AC%EC%9A%B4-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC
+ http://kr.youtube.com/watch?v=vgQO_kHl39g
+ http://kr.youtube.com/watch?v=GnQV4je9wTQ
+
+[http://insightbook.springnote.com/pages/519576 인사이트 공식 정오표]
+
+[http://mitpress.mit.edu/sicp/full-text/book/book.html SICP 책 내용 보기]
+[http://docs.plt-scheme.org/reference/index.html scheme 도움말]
+ [http://docs.plt-scheme.org/reference/numbers.html 3.2 Numbers]
+[http://deptinfo.unice.fr/~roy/sicp.pdf SICP PDF]
+[http://groups.csail.mit.edu/mac/ftpdir/mit-scheme/7.7/7.7.1/doc-pdf/scheme.pdf MIT Scheme Reference Manual - PDF]
+
+[http://groups.csail.mit.edu/mac/classes/6.001/abelson-sussman-lectures/ Structure and Interpretation of Computer Programs - Video Lectures by Hal Abelson and Gerald Jay Sussman]
+[http://webcast.berkeley.edu/course_details.php?seriesid=1906978342 CS 61A The Structure and Interpretation of Computer Programs - Instructor Brian Harvey]
+
+[http://www.ibm.com/developerworks/kr/library/s_issue/20070807/ 해커 문화의 뿌리를 찾아서 Part 5: Fixed Point 계산과 고차 함수]
+
+[http://inst.eecs.berkeley.edu/~cs61a/sp09/library/ Index of /~cs61a/sp09/library]
+[http://git.wizardbook.org/wizardbook/tree/ Solutions, answers to SICP (Wizard Book)]
+
+GDC 2009 코지마 히데오씨의 기조연설 동영상(Making the 'impossible' possible)
+[http://gamevideos.1up.com/video/id/24173 part1]
+[http://gamevideos.1up.com/video/id/24175 part2]
+[http://gamevideos.1up.com/video/id/24177 part3]
+[http://gamevideos.1up.com/video/id/24178 part4]
+
+== 회비 == 
+|| '''날짜''' || '''지출''' || '''수입''' || '''잔액''' || '''비고''' ||
+|| ||  ||   || 309,798 || 회비이월   ||
+|| 2009.01.10 || 14,600 ||   || 295,198 || AS2008 지원 ||
+|| 2009.01.31 ||  || 350,000  || 645,198 || 회비입금(이기영,박일,송영준,안상혁,송주영,이수안,김은영) ||
+|| 2009.01.31 || 182,500 ||   || 462,698 || 토즈이용 ||
+|| 2009.02.07 ||  || 300,000  || 762,698 || 회비입금(김강훈,안현정,윤석윤,배재호,신재진,현수명) ||
+|| 2009.02.07 || 110,000 ||   || 652,698 || 토즈이용 ||
+|| 2009.02.14 ||  || 150,000  || 802,698 || 회비입금(김명관,정희철,송정석) ||
+|| 2009.02.14 || 202,500 ||   || 600,198 || 토즈이용  ||
+|| 2009.02.21 || 165,000 ||   || 435,198 || 토즈이용  ||
+|| 2009.02.21 ||  || 50,000  || 485,198 || 회비입금(박민욱)||
+|| 2009.02.28 ||  || 50,000  || 535,198 || 회비입금(오종빈)||
+|| 2009.02.28 ||  90,000 ||  || 445,198 || 토즈이용 ||
+|| 2009.03.07 ||  90,000 ||  || 355,198 || 토즈이용 ||
+|| 2009.03.14 || 90,000 || || 265,198 || 토즈이용 ||
+|| 2009.03.21 || 90,000 || || 175,198|| 토즈이용 ||
+|| 2009.03.28 || 90,000 || || 85,198|| 토즈이용 ||
+|| 2009.04.4 ||  || 60,000 || 145,198|| 회비입금( 박일,송영준,송정석) ||
+|| 2009.04.4 || 60,000 || || 85,198|| 토즈이용 ||
+|| 2009.04.11 ||  || 100,000 || 185,198|| 회비입금 (이수안,정희철,김명관,박민욱,송주영) ||
+|| 2009.04.11 || 60,000 || || 125,198|| 토즈이용 ||
+|| 2009.04.18 ||  || 20,000 || 145,198|| 회비입금 (김강훈) ||
+|| 2009.04.18 ||  || 116,500 || 28,698|| 회식 ||
+
+

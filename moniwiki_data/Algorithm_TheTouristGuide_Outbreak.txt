@@ -1,0 +1,153 @@
+= 문제 요약 =
+ * 몇개의 노드를 거치는지 상관 없이 최대 대역폭으로 목적지까지 데이터 전송하는 문제
+ * 몇번만에 데이터 전송을 마칠 수 있는가?
+
+= 문제 해결 =
+ * DFS 그래프 순회를 통한 최대 대역폭 찾기
+ * 입력 노드가 100개 이상이 될 수 있으므로, 효율적인 DFS 찾기를 하는데, DP 이용
+ * 인원수에 약간의 트릭이 있었음 
+  
+= 계획 =
+ * 내일 이 코드를 예쁘게 만들어 보도록 하겠습니다~
+ * 내일은 칠판을 많이 써야 할 것 같아요~ ㄱㄱ
+
+
+= ''' 풀이 ''' =
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+using NUnit.Framework;
+
+namespace ACM_TheTouristGuide
+{
+    class Program
+    {
+        public static int[,] input = 
+        {
+            { 1, 2, 30 },
+            { 1, 3, 15 },
+            { 1, 4, 10 },
+            { 2, 4, 25 },
+            { 2, 5, 60 },
+            { 3, 4, 40 },
+            { 3, 6, 20 },
+            { 4, 7, 35 },
+            { 5, 7, 20 },
+            { 6, 7, 30 }
+        };
+        static void Main(string[] args)
+        {
+            // DP 생성
+              int nodeCnt = 7 + 1;
+            int[,] dp = new int[nodeCnt,nodeCnt];
+            int rowCnt = input.GetLength(0);
+            int colCnt = input.GetLength(1);
+
+            for (int i = 0; i < rowCnt; i++)
+            {
+                int src = input[i, 0];
+                int dst = input[i, 1];
+                int val = input[i, 2];
+                dp[src, dst] = val;
+                dp[dst, src] = val;
+            }
+
+            // DP 확인
+              for (int i = 1; i < dp.GetLength(0); i++)
+            {
+                for (int j = 1; j < dp.GetLength(1); j++)
+                {
+                    Console.Write("{0:d2} ", dp[i, j]);
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine();
+
+            // DP 갱신하기
+              for (int i = 1; i < dp.GetLength(0); i++)
+            {
+                for (int j = 1; j < dp.GetLength(1); j++)
+                {
+                    if (i == j)
+                        continue;
+
+                    if (dp[i, j] == 0)
+                        continue;
+
+                    int src = i;
+                    int dst = j;
+
+                    // dst 에서 갈 수 있는 1단계 더 전진
+                      for (int newDst = 1; newDst < dp.GetLength(1); newDst++)
+                    {
+                        // src -> dst -> newDst
+                        if (newDst == src)
+                            continue;
+
+                        if (dp[dst, newDst] == 0)
+                            continue;
+
+                        // src -> dst 의 대역폭이 더 작을 때!
+                        // dp[src, newDst] 는 src->dst->newDst 를 의미한다.
+                        int max = dp[src, newDst];
+                        if (dp[src, dst] < dp[dst, newDst])
+                        {
+                            if (max < dp[src, dst])
+                                dp[src, newDst] = dp[src, dst];
+                        }
+                        else
+                        {
+                            if (max < dp[dst, newDst])
+                                dp[src, newDst] = dp[dst, newDst];
+                        }
+                    }
+                }
+                
+            }
+
+            // DP 확인
+              for (int i = 1; i < dp.GetLength(0); i++)
+            {
+                for (int j = 1; j < dp.GetLength(1); j++)
+                {
+                    Console.Write("{0:d2} ", dp[i, j]);
+                }
+                Console.WriteLine();
+            }
+
+            // 문제풀이
+              int 출발지 = 1;
+            int 도착지 = 7;
+            int 총인원 = 101; //왜 101일까요?? 흐흐
+
+            Console.WriteLine("\n{0} 번 왔다갔다 해야 합니다.", 
+                System.Math.Ceiling((float)총인원/(float)dp[출발지, 도착지]));
+        }
+    }
+
+    [TestFixture]
+    public class UnitTest
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            Console.WriteLine("");
+        }
+
+        [Test]
+        public void MakeDP()
+        {
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Console.WriteLine("");
+        }
+    }
+}
+
+
+}}}

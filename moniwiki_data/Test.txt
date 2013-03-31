@@ -1,0 +1,7 @@
+ [TestDrivenDevelopment]
+
+== How to breaker Software ==
+ [http://www.math.uaa.alaska.edu/~afkjm/cs470/handouts/breaking.pdf How to break Software PPT]
+ [http://www.mrtc.mdh.se/rtis2003/pres/Keynote1Whittaker.pdf How to break Software Other PPT]
+ [http://moai.tistory.com/583 테스트 전문가, James A. Whittaker 소개]
+ [http://msdn.microsoft.com/ko-kr/magazine/cc507646.aspx 침투 테스트]

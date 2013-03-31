@@ -1,0 +1,105 @@
+= 11장. IRC Lite =
+
+=== 차례 ===
+ * 1.lib_chan 살펴보기
+ * 2.gs 라이브러리 살펴보기
+ * 3.IRC 프로그램 제작
+
+=== 1.lib_chan 살펴보기 ===
+ * TCP/IP 위에 네트워킹의 전체 레어어를 구현
+ * 구성 
+ lib_chan : 메인 모듈
+ lib_chan_mm : 미들맨
+ lib_chan_cs : 클라이언트<->서버 통신 모듈
+ lib_chan_auth : 인증 모듈
+ * 부록D 소켓 애플리케이션 참고(Page447)
+ * 설정파일
+ {port,<Port>}.
+ {service,<Name>,password,<P>,mfa,<Mod>,<Func>,<ArgList>}. 로 구성
+ * mod_math 예제
+ {{{#!gcode erlang
+{port,2233}.
+{service,math,password,"1234",mfa,mod_math,run,[]}.
+ }}} 
+
+ {{{#!gcode erlang
+-module( mod_math ).
+-export( [run/3] ).
+
+run( MM, ArgC, ArgS ) ->
+	io:format( "mod_math:run starting~n ArgC=~p ArgS=~p~n", [ArgC,ArgS] ),
+	loop(MM).
+	
+loop(MM)->
+	receive
+		{chan,MM,{factorial,N}} ->
+			MM ! {send, fac(N) },
+			loop(MM);
+			
+		{chan,MM,{fibonacci,N}} ->
+			MM ! {send,fib(N) },
+			loop(MM);
+			
+		{chan_closed,MM} ->
+			io:format( "mod_math stopping~n" ),
+			exit(normal)
+			
+	end.
+	
+ fac(0) -> 1;
+ fac(N) -> N*fac(N-1).
+
+ fib(1) -> 1;
+ fib(2) -> 1;
+ fib(N) -> fib(N-1) + fib(N-2).
+ }}}
+
+=== 2.gs 라이브러리 살펴보기 ===
+ * gs 라이브러리 예제
+ {{{#!gcode erlang
+-module( gs_sample0 ).
+-export( [start/0] ).
+
+start() ->
+
+	S = gs:start(),
+	Win = gs:create( window, S, [{width,200},{height,100}] ),
+	Butt = gs:create( button, Win, [{label, {text,"Press Me"}} ] ),
+	gs:config( Win, {map,true} ),
+	loop( Win,Butt ).
+	
+loop( Win,Butt ) ->
+
+	receive
+	
+		{gs,Butt,click,_Data,_Args} ->
+		
+			io:format( "Click~n" ),
+			loop(Win,Butt);
+
+		{gs,Win,destroy,_Data,_Args} ->
+			true
+				
+	end.
+ }}}
+ * gs 라이브러리 매뉴얼(http://www.erlang.org/doc/pdf/gs.pdf)
+
+=== 3.IRC 프로그램 제작 ===
+ === 클라이언트 구성 ===
+ * 사용자 인터페이스 위짓
+ * 채팅 클라이언트
+ === 서버 구성 ===
+ * 채팅 컨트롤러
+ * 그룹 컨트롤러
+ * 채팅서버
+ === 메시지 시퀀스 다이어그램(MSD) ===
+ * 로그인
+ || client || || M1 || || M2 || group_controller ||
+ || || {login,Group,Nick } || -> || <<Bin>> || -> || {login,M2,Nick } ||
+ || || {M1,ack} || <- || <<bin>> || <- || {M2,ack} ||
+ * 메시지
+ || widget || || client || || M1 || || M2 || group_controller ||
+ || || {W,Nick,Str} || -> || {relay,Nick,Str} || -> || <<Bin>> || -> || {M2,{relay,Nick,Str}} ||
+ || || {insert,...} || <- || {M1,{msg,Nick,Pid,Str}} || <- || <<bin>> || <- || {msg,Nick,M2,Str} ||
+   
+ 

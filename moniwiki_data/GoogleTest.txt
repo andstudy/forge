@@ -1,0 +1,220 @@
+[GoogleTestInstall]
+
+구글에서 나온 [http://code.google.com/p/googletest/ C++ Unit Test Framework]
+[http://parang94.egloos.com/1690439 Google Test Framework (gtest) 시작하기 ]
+[http://javawork.egloos.com/2282768 javawork - UnitTest++ 사용자를 위한 Google Test 가이드]
+[http://www.npteam.net/656 GoogleTest 기본 샘플 프로젝트 - for VS2005]
+시작문서 : [http://code.google.com/p/googletest/wiki/GoogleTestPrimer Google C++ Testing Framework Primer]
+예제 : [http://code.google.com/p/googletest/wiki/GoogleTestSamples GoogleTestSamples]
+더 다양한 기능 : [http://code.google.com/p/googletest/wiki/GoogleTestAdvancedGuide Google C++ Testing Framework Advanced Guide]
+[http://code.google.com/p/googletest/wiki/GoogleTestFAQ GoogleTestFAQ]
+
+[http://altprog.com/blog/1281 Altruistic Programmer's Blog - Google C++ Testing Framework]
+[http://altprog.com/blog/1280 Altruistic Programmer's Blog - Google C++ Mocking Framework]
+[http://mobilism.tistory.com/entry/Google-Test-Framework-gtest-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0 mobilism - Google Test Framework (gtest) 시작하기]
+
+GoogleTest가 UnitTest++ 대비 장점들은 아래와 같습니다.
+1. 작성된 test case 들 중에 이름을 주어서 선별적으로 실행할 수 있는 기능
+2. Private 멤버나 함수를 접근하기 위한 FRIEND macro 지원
+3. 값이나 type만 달리해서 동일한 test를 여러번 해야할 경우 이를 손쉽게 지원
+4. Program이 죽을 때 어떠한 Exit 코드로 죽는 지 테스트하는 기능
+5. 치명적인 test와 비치명적인 test 를 구분
+
+다만 UnitTest++에서 지원되는 Time Contraint 매크로가 없는데,
+이는 UnitTest++ 코드에서 가져와서 GoogleTest에 간단히 추가하실 수 있습니다.
+
+[http://groups.google.com/group/xper/browse_thread/thread/881f55e5ee68ad9f/8bc57104398ed28b?show_docid=8bc57104398ed28b UnitTest++ -> GoogleTest]
+attachment:googletest_patch.diff.txt
+
+"python.exe toGoogleTest.py mymodule src\mymodule src\mymoule_result"
+여기서 mymodule은 GoogleTest로 옮겨야할 test module이름입니다.
+그 다음 src\mymodule은 UnitTest++로 작성된 test 코드들 폴더이구요.
+그 다음 src\mymodule_result는 GoogleTest로 변환된 결과 코드들이 들어갈 폴더 입니다.
+
+windows 쪽에서만 test된 코드입니다. 변경 이후 main은 GoogleTest에 맞게 수정해주셔야하구요.
+코드상에 만약 CHECK_ARRAY_EQUAL 와 UNITTEST_TIME_CONSTRAINT 을 사용했으면
+이를 EXPECT_EQ_ARRAY 와 GTEST_TIME_CONSTRAINT 로 각각 변경하는데,
+이 두 Macro는 기본 GoogleTest에 없어서 제가 UnitTest++을 참고해서 추가한 것이구요. 이것도 patch를 공개해드리겠습니다. 
+
+{{{#!gcode python
+# This script converts macros of UnitTest++ framework within source
+codes into macros of GoogleTest
+# Usage : python toGoogleTest.py moduleName sourceFolder targetFolder
+import os
+import sys
+import re
+import string
+
+#
+-------------------------------------------------------------------------------------------------------------
+#              SubRoutines
+#
+-------------------------------------------------------------------------------------------------------------
+def findFixtures(sourceFile) :
+        fixtures = set([])
+        while sourceFile :
+                line = sourceFile.readline()
+                if len(line) == 0 :
+                        break;
+                matchObj = re.search('TEST_FIXTURE\s*\(\s*([a-zA-Z0-9_]+)\s*,',
+line)
+                if matchObj != None :
+                        fixtures.add(matchObj.group(1))
+        return fixtures
+
+#
+-------------------------------------------------------------------------------------------------------------
+def toGoogleTest(sourceFile, outFile, fixtures) :
+        print 'Fixtures : ', fixtures
+        first = True
+        while sourceFile :
+                line = sourceFile.readline()
+                if len(line) == 0 :
+                        break;
+                # add 'include <gtest/gtest.h>'
+                if first and re.search('#include', line) != None :
+                        if re.search('#include\s*<gtest/gtest.h>', line) == None :
+                                outFile.write('#include <gtest/gtest.h>\n')
+                        first = False
+                # process the fixture
+                out = line
+                matchObj = re.search('(struct|class)\s*([a-zA-Z0-9_]+)\s*\{', out)
+                matchObj2 = re.search('(struct|class)\s*([a-zA-Z0-9_]+)\s*\n', out)
+                if matchObj != None :
+                        if matchObj.group(2) in fixtures :
+                                print 'match Obj : ', matchObj.group(2)
+                                out = re.sub('(struct|class)\s*([a-zA-Z0-9_]+)\s*\{', '\g<1> ' +
+modName + '_\g<2> : public ::testing::Test {', out)
+                elif matchObj2 != None :
+                        if matchObj2.group(2) in fixtures :
+                                print 'match Obj : ', matchObj2.group(2)
+                                out = re.sub('(struct|class)\s*([a-zA-Z0-9_]+)\s*\n', '\g<1> ' +
+modName + '_\g<2> : public ::testing::Test\n', out)
+                else :
+                        for fixture in fixtures :
+                                if re.search('[^1-9A-Za-z_]*' + fixture + '[^1-9A-Za-z_]+',out) !=
+None :
+                                        out = re.sub(fixture, modName + '_' + fixture, out)
+                out = re.sub('#include\s*<.*UnitTest\+\+\.h.*>\s*\n', '\n', out)
+                out = re.sub('using\s+namespace\s+UnitTest\s*;\n', '\n', out)
+                out = re.sub('^\s*TEST\s*\(', 'TEST(' + modName + ', ', out)
+                out = re.sub('^\s*TEST_FIXTURE\s*\(', 'TEST_F(', out)
+                out = re.sub('CHECK\s*\(', 'EXPECT_TRUE(', out)
+                out = re.sub('CHECK_EQUAL\s*\(', 'EXPECT_EQ(', out)
+                out = re.sub('CHECK_THROW\s*\(', 'EXPECT_THROW(', out)
+                out = re.sub('CHECK_ARRAY_EQUAL\s*\(', 'EXPECT_EQ_ARRAY(', out)
+                out = re.sub('UNITTEST_TIME_CONSTRAINT\s*\(',
+'GTEST_TIME_CONSTRAINT(', out)
+                outFile.write(out)
+
+#
+-------------------------------------------------------------------------------------------------------------
+#              Main Body
+#
+-------------------------------------------------------------------------------------------------------------
+modName = sys.argv[1]
+inputPath = sys.argv[2]
+outputPath = sys.argv[3]
+
+for root, dirs, files in os.walk(inputPath) :
+        subFolder = string.replace(root, inputPath, '')
+        print 'Check foler :', subFolder
+        for name in files :
+                if re.search('.*\.cpp$', name) != None :
+                        print 'file :', name
+                        outputFolder = outputPath + '\\' + subFolder
+                        if os.path.exists(outputFolder) == False :
+                                os.makedirs(outputFolder)
+                        inFileName = root + '\\' + name
+                        sourceFile = open(inFileName)
+                        outFile = open(outputFolder+'\\'+name,"wb")
+                        fixtures = findFixtures(sourceFile)
+                        sourceFile.seek(0)
+                        toGoogleTest(sourceFile, outFile, fixtures)
+                        outFile.close()
+                        sourceFile.close() 
+}}}
+
+[http://reiot.com/2008/07/04/google-test/ 출처]
+[http://mypage.sarang.net/tt/entry/GoogleMock GoogleMock 프레임워크]
+
+대체적으로 다른 프레임워크와 유사한데 몇몇 특징적인 기능들이 눈에 띄어서 요약해본다.
+
+Custom Failure Message
+
+테스트 실패시 에러 메시지를 보다 친절하게 쓸 수 있다. 아래 예제처럼 i 값을 출력할 수 있다는 점이 멋지다.
+
+{{{#!gcode cpp
+for (int i = 0; i < x.size(); ++i) {
+EXPECT_EQ(x[i], y[i]) << "Vectors x and y differ at index " << i;
+}
+}}}
+
+Predicate Assertions
+
+테스트 코드에서 함수를 호출했다가 실패하면, 파라미터로 뭘 넘겼는지를 출력해준다.
+
+{{{#!gcode cpp
+bool MutuallyPrime(int m, int n) { ... }   
+const int a = 3;   
+const int b = 4;   
+const int c = 10;   
+EXPECT_PRED2(MutuallyPrime, b, c);   
+.....   
+MutuallyPrime(b, c) is false,   
+where   
+b is 4   
+c is 10  
+}}}
+
+Scoped Assert
+
+다른 함수에 테스트 코드가 들어있고, 이걸 여러 테스트에서 사용할 경우 도대체 어느 테스트에서 실패했는지를 알려주는 기능이다.
+
+{{{#!gcode cpp
+10: void Sub1(int n) {
+11:   EXPECT_EQ(1, Bar(n));
+12:   EXPECT_EQ(2, Bar(n + 1));
+13: }
+14:
+15: TEST(FooTest, Bar) {
+16:   {
+17:     SCOPED_TRACE("A");  // This trace point will be included in
+18:                         // every failure in this scope.
+19:     Sub1(1);
+20:   }
+21:   // Now it won't.
+22:   Sub1(9);
+23: }
+...
+path/to/foo_test.cc:11: Failure
+Value of: Bar(n)
+Expected: 1
+Actual: 2
+Trace:
+path/to/foo_test.cc:17: A
+path/to/foo_test.cc:12: Failure
+Value of: Bar(n + 1)
+Expected: 2
+Actual: 3
+}}}
+
+–gtest_break_on_failure
+
+테스트를 디버거로 실행할 경우, 주요 에러 발생시 바로 해당 라인에서 브레이크가 걸리게해주는 커맨드라인 명령. 이 기능이면 테스트 실행 -> 실패 발견 -> 해당 라인에 브레이크 걸기 -> 디버거 붙여서 재시작 이라는 귀찮은 작업에서 해방된다.
+
+–gtest_filter
+
+특정 테스트만 실행하고 싶을 때, 기존 코드를 건드리지 않고 커맨드라인에서 필터링을 할 수 있다. 이거야말로 대박 기능인 듯! 
+
+–gtest_filter=FooTest.* : FooTest 하위 테스트를 모두 실행 
+–gtest_filter=*Null*:*Constructor* : 이름에 “Null” 또는 “Constructor”를 포함한 모든 테스트를 실행 
+–gtest_filter=-*DeathTest.* : DeathTest 가 아닌 모든 테스트를 실행 
+–gtest_filter=FooTest.*-FooTest.Bar : FooTest 중에서 FooTest.Bar를 제외한 나머지 테스트를 실행 
+–gtest_repeat
+
+테스트를 N번 실행할 수 있다. –gtest_filter 와 함께 쓰면 특정 테스트만 반복해서 수행할 수 있다.
+
+DISABLED_
+
+임시로 테스트를 실행하지 않으려면 코멘트로 막는 대신 이름 앞에다가 DISABLED_ 를 붙이면 된다.

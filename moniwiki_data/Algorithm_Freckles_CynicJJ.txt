@@ -1,0 +1,140 @@
+ * 준석씨 풀이와 같음
+
+[[TableOfContents([maxdepth])]]
+
+== Freckles ==
+=== Point.vb ===
+{{{
+Public Class Point
+
+	Sub New(ByVal x As Double, ByVal y As Double)
+		_x = x
+		_y = y
+	End Sub
+
+	Private _x As Double
+	Private _y As Double
+
+	ReadOnly Property x() As Double
+		Get
+			Return _x
+		End Get
+	End Property
+
+	ReadOnly Property y() As Double
+		Get
+			Return _y
+		End Get
+	End Property
+
+End Class
+}}}
+
+=== Freckles.vb ===
+{{{
+Public Class Freckles
+
+	Shared Function GetDistance(ByVal p1 As Point, ByVal p2 As Point) As Double
+		Dim xDiff As Double = p1.x - p2.x
+		Dim yDiff As Double = p1.y - p2.y
+
+		Return Math.Sqrt(Math.Pow(xDiff, 2) + Math.Pow(yDiff, 2))
+	End Function
+
+	Shared Function FormatNumber(ByVal number As Double, ByVal digitsAfterDot As Integer) As Double
+		Dim strNumber As String = Microsoft.VisualBasic.FormatNumber(number, digitsAfterDot)
+		Return Double.Parse(strNumber)
+	End Function
+
+	Shared Function GetDistanceSum(ByVal points As List(Of Point)) As Double
+		Dim copied(points.Count - 1) As Point
+		points.CopyTo(copied)
+		Dim freckles As List(Of Point) = New List(Of Point)(copied)
+
+		Dim distanceSum As Double = 0
+
+		Dim checked As List(Of Point) = New List(Of Point)
+		checked.Add(freckles(0))
+		freckles.RemoveAt(0)
+
+		While freckles.Count > 0
+			Dim minDistance As Double = Double.MaxValue
+			Dim indexOfMin As Integer
+			For Each aChecked As Point In checked
+				For i As Integer = 0 To freckles.Count - 1
+					Dim distance As Double = GetDistance(aChecked, freckles(i))
+					If distance < minDistance Then
+						minDistance = distance
+						indexOfMin = i
+					End If
+				Next
+			Next
+
+			checked.Add(freckles(indexOfMin))
+			freckles.RemoveAt(indexOfMin)
+
+			distanceSum += minDistance
+		End While
+
+		Return FormatNumber(distanceSum, 2)
+	End Function
+
+End Class
+}}}
+
+=== !FrecklesTest.vb ===
+{{{
+<TestClass()> _
+Public Class FrecklesTest
+
+	Private _points As List(Of Point) = New List(Of Point)
+
+	Sub New()
+		_points.Add(New Point(1.0, 1.0))
+		_points.Add(New Point(2.0, 2.0))
+		_points.Add(New Point(2.0, 4.0))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub FormatNumberTest()
+		Assert.AreEqual(1.41, Freckles.FormatNumber(1.40834, 2))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetDistanceTest()
+		Dim p1 As Point = New Point(1.0, 1.0)
+		Dim p2 As Point = New Point(2.0, 2.0)
+
+		Dim distance As Double = Freckles.GetDistance(p1, p2)
+		Assert.AreEqual(1.41, Freckles.FormatNumber(distance, 2))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetDistanceSumTest()
+		Assert.AreEqual(3.41, Freckles.GetDistanceSum(_points))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetDistanceSumTestMore()
+		Dim points As List(Of Point) = New List(Of Point)
+		points.Add(New Point(1.0, 1.0))
+		points.Add(New Point(2.0, 1.0))
+		points.Add(New Point(1.0, 2.0))
+		points.Add(New Point(1.0, 3.0))
+
+		Assert.AreEqual(3.0, Freckles.GetDistanceSum(points))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetDistanceSumTestMoreMore()
+		Dim points As List(Of Point) = New List(Of Point)
+		points.Add(New Point(1.0, 1.0))
+		points.Add(New Point(2.0, 1.0))
+		points.Add(New Point(1.0, 5.0))
+		points.Add(New Point(2.0, 5.0))
+
+		Assert.AreEqual(6.0, Freckles.GetDistanceSum(points))
+	End Sub
+
+End Class
+}}}

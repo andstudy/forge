@@ -1,0 +1,7 @@
+이름 : 방경운
+이메일 : kwbang81_at_gmail_dot_com
+엠에센 : bangga77_at_hotmail_dot_com
+전공 분야 : 1. CAD 기반 기술(곡선 및 곡선 이론, 솔리드 비다양체 자료구조), 2.Simulation 이론 
+관심 분야 : Pattern, Architecture, TDD
+주로 쓰는 언어 : C++, C#
+아직 배울 것이 많음 ^^;;

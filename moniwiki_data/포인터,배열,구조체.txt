@@ -1,0 +1,5 @@
+ 포인터,배열,구조체
+
+{{{#!html
+<iframe src="http://www.slideshare.net/slideshow/embed_code/16562618" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/questionname/130216" title="The C++ Programming Language 5장 포인터, 배열, 구조체" target="_blank">The C++ Programming Language 5장 포인터, 배열, 구조체</a> </strong> from <strong><a href="http://www.slideshare.net/questionname" target="_blank">questionname</a></strong> </div>
+}}}

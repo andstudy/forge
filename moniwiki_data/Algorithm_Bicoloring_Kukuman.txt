@@ -1,0 +1,88 @@
+ * 배열 배열로 그래프를 처리했습니다
+ * 소스
+{{{
+
+public class Graph {
+	private int pointCount;
+	private boolean[][] nodes;
+	
+	private final int RED=1;
+	private final int BLUE=2;
+	public Graph(int pointCount) {
+		this.pointCount = pointCount;
+		nodes = new boolean[pointCount][pointCount];
+		for(int i=0;i<pointCount;i++){
+			for(int j=0;j<pointCount;j++){
+				nodes[i][j] = false;
+			}
+		}
+	}
+	public void insertNode(int fromPoint, int toPoint) {
+		nodes[fromPoint][toPoint] = true;
+		nodes[toPoint][fromPoint] = true;
+		
+	}
+	public boolean checkBio() {
+		//방문했으면 색갈번호가 설정되어 있음 아니면 0
+		int [] traveledPoint = new int[this.pointCount];
+		for(int i=0;i<pointCount;i++){
+			traveledPoint[i] = 0;
+		}
+		
+		for(int fromPoint=0;fromPoint<pointCount;fromPoint++){
+			for(int toPoint=0;toPoint<pointCount;toPoint++){
+				//자신과 자신의 검사이라면 skip
+				if(fromPoint==toPoint)
+					continue;
+				
+				//해당 노드가 mark 되어 있으면 검사 수행
+				if(nodes[fromPoint][toPoint]){
+					//만약 시작점의 색깔이 안칠해져 있으면  기본색으로 칠함
+					if(traveledPoint[fromPoint]==0){
+						traveledPoint[fromPoint] = RED;
+					}
+					//만약 종료점의 색깔이 안칠해져있으면 시작점과 반대색
+					if(traveledPoint[toPoint] ==0){
+						traveledPoint[toPoint] = traveledPoint[fromPoint] == RED? BLUE:RED;
+					}
+					
+					//종료점과 시작점의 색깔이 같은지 검사 만일 같다면 false리턴
+					if(traveledPoint[fromPoint] == traveledPoint[toPoint]){
+						return false;
+					}
+					
+				}
+			}
+		}
+		
+		return true;
+	}
+
+}
+}}}
+ * 테스트케이스
+{{{
+import junit.framework.TestCase;
+
+
+public class GraphTestCase extends TestCase {
+	public void testInitGraph(){
+		Graph graph = new Graph(3);
+		graph.insertNode(0,1);
+		graph.insertNode(1,2);
+		graph.insertNode(2,0);
+		assertFalse(graph.checkBio());
+	}
+	public void testInitGraph2(){
+		Graph graph = new Graph(7);
+		graph.insertNode(0,1);
+		graph.insertNode(0,2);
+		graph.insertNode(0,3);
+		graph.insertNode(0,4);
+		graph.insertNode(0,5);
+		graph.insertNode(0,6);
+		assertTrue(graph.checkBio());
+	}
+}
+
+}}}

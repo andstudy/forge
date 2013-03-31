@@ -1,0 +1,177 @@
+유닛테스트 경험이 없어서 테스트 코드는 포함하지 않았습니다.
+
+MineSweeper.java
+{{{
+import java.util.*;
+import java.io.*;
+
+public class MineSweeper 
+{
+	static Vector<Matrix> matrixVec;
+	
+	public static void main(String[] args) throws IOException
+	{
+		matrixVec = new Vector<Matrix>();
+		
+		// 입력이 (0,0)일때가지 반복한다.
+		while (true)
+		{		
+			// (row, col)을 읽는다.
+			BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); 
+		
+			String line = in.readLine();
+			StringTokenizer tokens = new StringTokenizer(line, " ");
+		
+			// 오류 체크
+			if (tokens.countTokens() != 2)
+			{
+				System.out.println("Error : Invalid Matrix Size!!");
+				return;
+			}
+		
+			int row = Integer.parseInt(tokens.nextToken());
+			int col = Integer.parseInt(tokens.nextToken());
+			
+			// (0, 0) 이면 결과를 출력하고 종료한다.
+			if (row == 0 && col == 0)   // if close then print results
+			{
+				showMatrixVec();
+				return;
+			}
+			
+			// matrix 생성
+			Matrix matrix = new Matrix(row, col);
+		
+		
+			// 입력을 읽어 matrix에 저장한다.
+			for (int i=0; i<row; i++)
+			{
+				BufferedReader rowIn = new BufferedReader(new InputStreamReader(System.in));
+				String rowLine = rowIn.readLine();
+			
+				// 입력 데이터 오류 체크
+				if (rowLine.length() != col)
+				{
+					System.out.println("Error: Invalid Input Data!!");
+					return;
+				}
+			
+				for (int j=0; j<col; j++)
+				{
+					matrix.setValue(i, j, rowLine.charAt(j));
+				}
+			}
+		
+			// 매트릭스를 읽어 지뢰를 발견하면 카운트를 계산한다.
+			for (int i=0; i<row; i++)
+			{
+				for (int j=0; j<col; j++)
+				{
+					if (matrix.findMine(i,j))
+						matrix.addMineCount(i, j);
+				}
+			}
+			
+			// 매트릭스를 저장한다.
+			matrixVec.add(matrix);
+		}
+
+	}
+	
+	// 매트릭스를 출력한다.
+	public static void showMatrixVec()
+	{
+		for (int i=0; i<matrixVec.size(); i++)
+		{
+			Matrix mat = matrixVec.elementAt(i);
+			mat.show();
+		}	
+	}
+}
+}}}
+
+Matrix.java
+{{{
+public class Matrix {
+	private int row;
+	private int col;
+	
+	private char[][] mat;		// 입력 데이터를 저장하기 위한 배열
+	private int[][] val;		// 출력 데이터를 저장하기 위한 배열
+
+	
+	// 배열을 생성하고 0으로 초기화한다.
+	Matrix(int _row, int _col)
+	{
+		row = _row;
+		col = _col;
+		
+		mat = new char[row][col];
+		val = new int[row][col];
+		
+		for (int i=0; i<row; i++)
+		{
+			for (int j=0; j<col; j++)
+			{
+				mat[i][j] = '.';
+				val[i][j] = 0;
+			}
+		}
+	}
+	
+	void setValue(int _row, int _col, char value)
+	{
+		mat[_row][_col] = value;
+	}
+	
+	boolean findMine(int _row, int _col)
+	{
+		if (mat[_row][_col] == '*')
+			return true;
+		
+		return false;
+	}
+	
+	// 지뢰 주위의 셀들을 찾아서 카운트를 1씩 증가시킨다.
+	void addMineCount(int _row, int _col)
+	{
+		for (int i=-1; i<2; i++)
+		{
+			for (int j=-1; j<2; j++)
+			{
+				int x = _row + i;
+				int y = _col + j;
+				
+				if (isValid(x, y) && val[x][y] != -1)
+					val[x][y]++;			
+			}
+		}
+		val[_row][_col] = -1;
+	}
+	
+	// 셀의 범위가 메트릭스 안에 있는지 체크한다.
+	boolean isValid(int x, int y)
+	{
+		if ((x>= 0 && x<row) && (y>=0 && y<col))
+			return true;
+		
+		return false;
+	}
+	
+	// 매트릭스를 출력한다.
+	void show()
+	{
+		for (int i=0; i<row; i++)
+		{
+			for (int j=0; j<col; j++)
+			{
+				if (val[i][j] == -1)
+					System.out.print("*");
+				else
+					System.out.print(val[i][j]);
+			}
+			System.out.println();
+		}
+	}
+}
+}}}

@@ -1,0 +1,68 @@
+[[TableOfContents]]
+= 맴버 =
+|| 이름 || 이메일 || 엠에센 || 전번 ||
+|| 이동현 || jeddli_at_gmail.com || jeddli_at_hotmail.com || 공일칠.이오칠.사삼사일 ||
+|| 박일 || rigmania_at_empal.com || rigmania_at_hotmail.com || 공일육.구삼구구.구칠구구 ||
+|| 강대명 || charsyam_at_hanmail.com || charsyam_at_hotmail.com || 공일육.오사오.공일구팔 ||
+|| 안준석 || outbreak@empal.com ||ssay99_at_hanmail.net || 018-379-3193||
+|| 이수안 || inch772_at_naver.com||inch772_at_hanmail.net||공일일.이구육.육오팔육||
+|| 이의호 ||||||||
+|| 이광현 ||||||||
+|| 방경운 ||||||||
+|| 윤종복 || antonio5_at_nate.com || nantonio79_at_hotmail.com || 공일육.구이칠공.오삼사이 ||
+|| 박진시 || lycion_at_gmail.com || parkjinsi_at_hotmail.com || 공일공.이사이이.사오이일 ||
+|| 김미선 || jams_at_ncsoft.net || jjamq7_at_hotmail.com || 공일팔.이일구.사오구공 ||
+|| 한원규 || asholic_at_hotmail.com || asholic_at_hotmail.com || 공일일.구구구오.공팔팔공 <== 스터디 불참 의사 ||
+|| 서창우 || uhahaa_at_gmail.com || uhahaa_at_orgio.net || 공일육.육칠구.일오구육 || 
+
+= 회비 납부자 =
+박일, 강대명, 이수안, 서창우, 안준석, 이동현, 윤종복
+280,000
+
+= 회비 관리 =
+
+1주차 - 1월 7    40,000  -> 40,000
+2주차 - 1월 14   52,400  -> 92,400  
+3주차 - 1월 21   40,000  ->132,400
+4주차 - 2월 4일   33,000  ->165,400
+5주차 - 2월 11일  29,000  ->194,400
+6주차 - 2월 18일  쉼
+6주차 - 2월 25일 27,000   ->221,400
+7주차 - 3월 4일 27,000    ->248,400
+8주차 - 3월 11일 27,000   ->275,400
+9주차 - 3월 18일 27,000   ->302,400
+10주차 - 4월 15일 27,000  ->327,400
+
+280,000 + 90,000 = 370,000
+370,000 - 327,400 = 42,600
+ 
+회비 고갈.. 이월된 금액 9만여원 사용예정..
+
+
+= 발표순서 =
+ * 1주차:(2006/1/14) - 완료
+  * Layers Architectural Pattern : 강대명
+ * 2주차:(2006/1/21)
+  * Proxy Design Pattern : 이의호
+  * Pipes and Filters Architectural Pattern : 박일
+ * 3주차:(2006/02/04)
+  * Blackboard Architectural Pattern : 이동현
+  * Command Processor Design Pattern : 이수안
+ * 4주차:(2006/02/11)
+  * View Handler Design Pattern : 강대명
+ * 5주차:(2006/02/25)
+  * Model-View-Controller architectural Pattern : 서창우
+  * Forwarder-Receiver Design Pattern : 이동현
+ * 6주차:(2006/03/4)
+  * Client-Dispatcher-Server : 윤종복
+  * Presentation-Abstraction-Control architectural Pattern : 강대명
+  * Publisher-Subscriber Design Pattern : 이의호
+ * 7주차:(2006/03/11)
+  * Broker Architectural Pattern : 안준석
+  * Whole-Part Design Pattern : 서창우
+ * 8주차:(2006/03/18)
+  * Master-Slave Design Pattern : 강대명
+  * Reflection Architectural Pattern : 이수안
+  * Microkernel Architectural Pattern : 박일
+ * 9주차:(2006/03/25)
+  * 총정리

@@ -1,0 +1,478 @@
+ * 50단계는 커녕 20단계 넘기기도 힘드네...
+ * 이번 스터디도 참석 못함. 3번 연속 불참하니 갑갑하네...
+
+[[TableOfContents([maxdepth])]]
+
+== 15 Puzzle Problem ==
+=== !ModuleMain.vb ===
+{{{
+Module ModuleMain
+
+	Sub Main()
+
+		Dim notSolvable(,) As Byte = New Byte(,) { _
+		 {13, 1, 2, 4}, _
+		 {5, 0, 3, 7}, _
+		 {9, 6, 10, 12}, _
+		 {15, 8, 11, 14}}
+
+		Dim solvable(,) As Byte = New Byte(,) { _
+		 {2, 3, 4, 0}, _
+		 {1, 5, 7, 8}, _
+		 {9, 6, 10, 12}, _
+		 {13, 14, 11, 15}}
+
+		Console.WriteLine(GetPuzzleResult(notSolvable))
+		Console.WriteLine(GetPuzzleResult(solvable))
+	End Sub
+
+	Function GetPuzzleResult(ByVal board As Byte(,)) As String
+		Dim aPuzzle As Puzzle = New Puzzle
+
+		aPuzzle.Setup(board)
+		aPuzzle.DoSolve()
+
+		If aPuzzle.IsSolved() Then
+			Return aPuzzle.SolvingPath
+		Else
+			Return "This puzzle is not solvable."
+		End If
+
+	End Function
+
+End Module
+}}}
+
+=== Position.vb ===
+{{{
+Public Class Position
+
+	Public Row As Integer
+	Public Column As Integer
+
+	Sub New(ByVal row As Integer, ByVal column As Integer)
+		Me.Row = row
+		Me.Column = column
+	End Sub
+End Class
+}}}
+
+=== Puzzle.vb ===
+{{{
+' 결론부터 말하면 문제 풀이 실패
+' 50단계까지 검토하라고 했으나 20단계 넘으면 실행시간이 1분을 넘긴다 -_-
+' 여러 방법들을 시도해 봤으나 효과가 없어서 삭제
+' 뭔가 요령이 없는 걸까.. 냠..
+' 어떻게 해야 되는걸까... 쩝쩝
+
+Public Class Puzzle
+
+	' 입력된 경로에 따라 이동
+	Sub MoveByPath(ByVal path As String)
+		Dim dirs() As Char = path.ToCharArray()
+		For Each dir As Char In dirs
+			Select Case dir
+				Case "R"c
+					MoveRight()
+				Case "L"c
+					MoveLeft()
+				Case "U"c
+					MoveUp()
+				Case "D"c
+					MoveDown()
+			End Select
+		Next
+	End Sub
+
+	' 모든 가능한 경로를 만든다
+	' 경로는 공백부터 시작해서 4의 지수승으로 갯수가 늘어난다
+	' 기하급수적으로 늘어나는 경로를 어떻게 줄일것인가가 관건
+	' 이동없음 : ""
+	' 한번이동 : R L U D
+	' 두번이동 : RR LR UR DR LR LL UL DL RU LU UU DU RD LD UD DD
+	' 세번이동 : RRR LRR URR DRR LRR LLR ...
+	' 네번이동 : RRRR LRRR ...
+	' ...
+	Sub GetNextTryPaths(ByVal tryPaths As List(Of String))
+		' 이전 단계 경로들 임시 보관
+		Dim oldPaths As List(Of String) = New List(Of String)
+		oldPaths.AddRange(tryPaths)
+
+		' 몇번이동 하는가
+		Dim steps As Integer = tryPaths(0).Length
+
+		' 시도해 볼 경로들을 새로 만든다
+		tryPaths.Clear()
+
+		Dim dirs() As String = {"R", "L", "U", "D"}
+		For Each dir As String In dirs
+			For Each path As String In oldPaths
+
+				' 이전 자리로 되돌아 가는 경로는 추가하지 않음
+				If steps >= 1 Then
+					Dim lastDir As String = path.Substring(path.Length - 1)
+					If lastDir = "L" And dir = "R" Then Continue For
+					If lastDir = "R" And dir = "L" Then Continue For
+					If lastDir = "D" And dir = "U" Then Continue For
+					If lastDir = "U" And dir = "D" Then Continue For
+				End If
+
+				' 다른 여러 방법을 써 봤으나 별 효과 없었음. 뭔가 요령이 없는 걸까.. 냠..
+
+				' 새로운 경로가 유효한 경로(퍼즐 밖으로 나가지 않는)라면 추가
+				Dim newPath As String = path + dir
+				If IsValidMove(newPath) Then tryPaths.Add(newPath)
+			Next
+		Next
+	End Sub
+
+	' 문제 풀이
+	Sub DoSolve()
+		Dim stepCount As Integer = 0
+
+		Dim tryPaths As List(Of String) = New List(Of String)
+		tryPaths.Add("")
+
+		While stepCount <= 12		' 50단계는 커녕 20단계 넘기기도 힘들다
+			For i As Integer = 0 To tryPaths.Count - 1
+				' 초기상태로 만들고 경로에 따라 이동
+				Reset()
+				MoveByPath(tryPaths(i))
+
+				' 풀렸으면 중단
+				If IsSolved() Then
+					_solvingPath = tryPaths(i)
+					Exit While
+				End If
+			Next
+
+			' 풀리지 않았다면 다음 단계로
+			GetNextTryPaths(tryPaths)
+			stepCount += 1
+		End While
+	End Sub
+
+	' 다 풀렸나?
+	Function IsSolved() As Boolean
+		If 0 <> _board(3, 3) Then Return False
+		If 15 <> _board(3, 2) Then Return False
+		If 14 <> _board(3, 1) Then Return False
+		If 13 <> _board(3, 0) Then Return False
+		If 12 <> _board(2, 3) Then Return False
+		If 11 <> _board(2, 2) Then Return False
+		If 10 <> _board(2, 1) Then Return False
+		If 9 <> _board(2, 0) Then Return False
+		If 8 <> _board(1, 3) Then Return False
+		If 7 <> _board(1, 2) Then Return False
+		If 6 <> _board(1, 1) Then Return False
+		If 5 <> _board(1, 0) Then Return False
+		If 4 <> _board(0, 3) Then Return False
+		If 3 <> _board(0, 2) Then Return False
+		If 2 <> _board(0, 1) Then Return False
+		If 1 <> _board(0, 0) Then Return False
+
+		Return True
+	End Function
+
+	' 유효한 경로인지 판단 (퍼즐 밖으로 벗어나는가 아닌가)
+	Function IsValidMove(ByVal path As String) As Boolean
+		Dim movedRow As Integer = _inputZeroPosition.Row
+		Dim movedColumn As Integer = _inputZeroPosition.Column
+
+		Dim dirs() As Char = path.ToCharArray()
+		For Each dir As Char In dirs
+			Select Case dir
+				Case "R"c
+					movedColumn += 1
+					If movedColumn > 4 Then Return False
+				Case "L"c
+					movedColumn -= 1
+					If movedColumn < 1 Then Return False
+				Case "U"c
+					movedRow -= 1
+					If movedRow < 1 Then Return False
+				Case "D"c
+					movedRow += 1
+					If movedRow > 4 Then Return False
+			End Select
+		Next
+
+		Return True
+	End Function
+
+	' 최초 입력
+	Private _input(,) As Byte
+	Private _inputZeroPosition As Position = New Position(-1, -1)
+
+	' 현재 이동 중인 퍼즐
+	Private _board(3, 3) As Byte
+	Private _zeroPosition As Position = New Position(-1, -1)
+
+	Sub MoveLeft()
+		If _zeroPosition.Column <= 1 Then Return
+
+		Dim left As Byte = _board(_zeroPosition.Row - 1, _zeroPosition.Column - 2)
+		_board(_zeroPosition.Row - 1, _zeroPosition.Column - 1) = left
+		_board(_zeroPosition.Row - 1, _zeroPosition.Column - 2) = 0
+
+		_zeroPosition.Column -= 1
+	End Sub
+
+	Sub MoveRight()
+		If _zeroPosition.Column >= 4 Then Return
+
+		Dim right As Byte = _board(_zeroPosition.Row - 1, _zeroPosition.Column)
+		_board(_zeroPosition.Row - 1, _zeroPosition.Column - 1) = right
+		_board(_zeroPosition.Row - 1, _zeroPosition.Column) = 0
+
+		_zeroPosition.Column = _zeroPosition.Column + 1
+	End Sub
+
+	Sub MoveDown()
+		If _zeroPosition.Row >= 4 Then Return
+
+		Dim down As Byte = _board(_zeroPosition.Row, _zeroPosition.Column - 1)
+		_board(_zeroPosition.Row - 1, _zeroPosition.Column - 1) = down
+		_board(_zeroPosition.Row, _zeroPosition.Column - 1) = 0
+
+		_zeroPosition.Row = _zeroPosition.Row + 1
+	End Sub
+
+	Sub MoveUp()
+		If _zeroPosition.Row <= 1 Then Return
+
+		Dim up As Byte = _board(_zeroPosition.Row - 2, _zeroPosition.Column - 1)
+		_board(_zeroPosition.Row - 1, _zeroPosition.Column - 1) = up
+		_board(_zeroPosition.Row - 2, _zeroPosition.Column - 1) = 0
+
+		_zeroPosition.Row = _zeroPosition.Row - 1
+	End Sub
+
+	' 해답 경로
+	Private _solvingPath As String
+	ReadOnly Property SolvingPath() As String
+		Get
+			Return _solvingPath
+		End Get
+	End Property
+
+	' 초기화
+	Sub Reset()
+		For i As Integer = 0 To 3
+			For j As Integer = 0 To 3
+				_board(i, j) = _input(i, j)
+			Next
+		Next
+
+		_solvingPath = ""
+		_zeroPosition.Row = _inputZeroPosition.Row
+		_zeroPosition.Column = _inputZeroPosition.Column
+	End Sub
+
+	' 최초 입력
+	Sub Setup(ByVal input As Byte(,))
+		_input = input
+
+		Reset()
+
+		UpdateZeroPosition()
+		_inputZeroPosition.Row = _zeroPosition.Row
+		_inputZeroPosition.Column = _zeroPosition.Column
+	End Sub
+
+	Function GetAt(ByVal row As Byte, ByVal column As Byte) As Byte
+		Debug.Assert(row >= 1 And row <= 4)
+		Debug.Assert(column >= 1 And column <= 4)
+
+		Return _board(row - 1, column - 1)
+	End Function
+
+	' 0 위치 찾기
+	Sub UpdateZeroPosition()
+		For row As Integer = 1 To 4
+			For column As Integer = 1 To 4
+				If _board(row - 1, column - 1) = 0 Then
+					_zeroPosition.Row = row
+					_zeroPosition.Column = column
+				End If
+			Next
+		Next
+	End Sub
+
+End Class
+}}}
+
+=== !PuzzleTest.vb ===
+{{{
+<TestClass()> _
+Public Class PuzzleTest
+
+	Private _puzzle As New Puzzle
+
+	<TestInitialize()> _
+	Public Sub TestInitialize()
+		Dim input(,) As Byte = New Byte(,) { _
+		{2, 3, 4, 0}, _
+		{1, 5, 7, 8}, _
+		{9, 6, 10, 12}, _
+		{13, 14, 11, 15}}
+
+		_puzzle.Setup(input)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub MoveTest()
+		Assert.AreEqual(CByte(0), _puzzle.GetAt(1, 4), "o1")
+		Assert.AreEqual(CByte(4), _puzzle.GetAt(1, 3), "o2")
+
+		_puzzle.MoveLeft()
+		Assert.AreEqual(CByte(0), _puzzle.GetAt(1, 3), "l1")
+		Assert.AreEqual(CByte(4), _puzzle.GetAt(1, 4), "l2")
+
+		_puzzle.MoveRight()
+		Assert.AreEqual(CByte(0), _puzzle.GetAt(1, 4), "r1")
+		Assert.AreEqual(CByte(4), _puzzle.GetAt(1, 3), "r2")
+
+		_puzzle.MoveDown()
+		Assert.AreEqual(CByte(0), _puzzle.GetAt(2, 4), "d1")
+		Assert.AreEqual(CByte(8), _puzzle.GetAt(1, 4), "d2")
+
+		_puzzle.MoveUp()
+		Assert.AreEqual(CByte(0), _puzzle.GetAt(1, 4), "u1")
+		Assert.AreEqual(CByte(8), _puzzle.GetAt(2, 4), "u2")
+	End Sub
+
+	<TestMethod()> _
+	Public Sub SetupTest()
+		Assert.AreEqual(CByte(2), _puzzle.GetAt(1, 1))
+		Assert.AreEqual(CByte(6), _puzzle.GetAt(3, 2))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsValidMoveTest()
+		Assert.IsFalse(_puzzle.IsValidMove("R"))
+		_puzzle.MoveByPath("DLDLLUUR")
+		Assert.IsTrue(_puzzle.IsValidMove("DL"))
+		Assert.IsFalse(_puzzle.IsValidMove("R"))
+		Assert.IsFalse(_puzzle.IsValidMove("U"))
+		Assert.IsTrue(_puzzle.IsValidMove("LLLDRDRDR"))
+		Assert.IsFalse(_puzzle.IsValidMove("LLLDRDRDRR"))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsSolvedTest()
+		Assert.IsFalse(_puzzle.IsSolved())
+
+		Dim input(,) As Byte = New Byte(,) { _
+		{1, 2, 3, 4}, _
+		{5, 6, 7, 8}, _
+		{9, 10, 11, 12}, _
+		{13, 14, 15, 0}}
+
+		Dim aPuzzle As Puzzle = New Puzzle
+		aPuzzle.Setup(input)
+		Assert.IsTrue(aPuzzle.IsSolved())
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetNextTryPathsTest()
+		Dim paths As List(Of String) = New List(Of String)
+		paths.Add("")
+
+		_puzzle.GetNextTryPaths(paths)
+		Assert.AreEqual(2, paths.Count)
+		Assert.AreEqual("L", paths(0))
+		Assert.AreEqual("D", paths(1))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub MoveByPathTest()
+		_puzzle.MoveByPath("LLLDRDRDR")
+		Assert.IsTrue(_puzzle.IsSolved())
+		Assert.AreEqual(CByte(0), _puzzle.GetAt(4, 4))
+		Assert.AreEqual(CByte(15), _puzzle.GetAt(4, 3))
+	End Sub
+
+	<TestMethod()> _
+	 Public Sub DoSolveTestSimple()
+		Dim input(,) As Byte = New Byte(,) { _
+		{1, 2, 3, 4}, _
+		{5, 6, 7, 8}, _
+		{9, 10, 11, 12}, _
+		{13, 14, 15, 0}}
+
+		Dim aPuzzle As Puzzle = New Puzzle
+		aPuzzle.Setup(input)
+		aPuzzle.DoSolve()
+		Assert.IsTrue(aPuzzle.IsSolved())
+		Assert.AreEqual("", aPuzzle.SolvingPath)
+	End Sub
+
+	<TestMethod()> _
+	 Public Sub DoSolveTestMoveOneRight()
+		Dim input(,) As Byte = New Byte(,) { _
+		{1, 2, 3, 4}, _
+		{5, 6, 7, 8}, _
+		{9, 10, 11, 12}, _
+		{13, 14, 0, 15}}
+
+		Dim aPuzzle As Puzzle = New Puzzle
+		aPuzzle.Setup(input)
+		aPuzzle.DoSolve()
+		Assert.IsTrue(aPuzzle.IsSolved())
+		Assert.AreEqual("R", aPuzzle.SolvingPath)
+	End Sub
+
+	<TestMethod()> _
+	 Public Sub DoSolveTestMoveOneDown()
+		Dim input(,) As Byte = New Byte(,) { _
+		{1, 2, 3, 4}, _
+		{5, 6, 7, 8}, _
+		{9, 10, 11, 0}, _
+		{13, 14, 15, 12}}
+
+		Dim aPuzzle As Puzzle = New Puzzle
+		aPuzzle.Setup(input)
+		aPuzzle.DoSolve()
+		Assert.IsTrue(aPuzzle.IsSolved())
+		Assert.AreEqual("D", aPuzzle.SolvingPath)
+	End Sub
+
+	<TestMethod()> _
+	 Public Sub DoSolveTestMoveTwoRD()
+		Dim input(,) As Byte = New Byte(,) { _
+		{1, 2, 3, 4}, _
+		{5, 6, 7, 8}, _
+		{9, 10, 0, 11}, _
+		{13, 14, 15, 12}}
+
+		Dim aPuzzle As Puzzle = New Puzzle
+		aPuzzle.Setup(input)
+		aPuzzle.DoSolve()
+		Assert.IsTrue(aPuzzle.IsSolved())
+		Assert.AreEqual("RD", aPuzzle.SolvingPath)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub DoSolveTest()
+		_puzzle.DoSolve()
+		Assert.IsTrue(_puzzle.IsSolved())
+		Assert.AreEqual("LLLDRDRDR", _puzzle.SolvingPath)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub NotSolvableTest()
+		Dim input(,) As Byte = New Byte(,) { _
+		  {13, 1, 2, 4}, _
+		  {5, 0, 3, 7}, _
+		  {9, 6, 10, 12}, _
+		  {15, 8, 11, 14}}
+
+		Dim aPuzzle As Puzzle = New Puzzle
+		aPuzzle.Setup(input)
+		aPuzzle.DoSolve()
+		Assert.IsFalse(aPuzzle.IsSolved())
+	End Sub
+
+End Class
+}}}

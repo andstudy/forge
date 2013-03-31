@@ -1,0 +1,51 @@
+[NDC10] 첫 날 후기입니다.
+발표자료가 거의 잘리는 거 없이 올라오고 있기 때문에, 추가 내용이나 PT 에서 빠진 내용만 약간 추가합니다.
+많이 배우고 갑니다. 고마워요.
+
+==  전형규, “마비노기2 캐릭터 렌더링 기술” ==
+ * [http://devcatpublications.wordpress.com/2010/05/28/%EC%A0%84%ED%98%95%EA%B7%9C-%EB%A7%88%EB%B9%84%EB%85%B8%EA%B8%B02-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%A0%8C%EB%8D%94%EB%A7%81-%EA%B8%B0%EC%88%A0-nexon-developer-conference-may-2010/ PT 자료]
+ * Object Motion-Blur : Lost Planet
+ * VTF 스키닝(Vertex Texture Fetch Skinning) : [http://developer.download.nvidia.com/SDK/10/direct3d/Source/SkinnedInstancing/doc/SkinnedInstancingWhitePaper.pdf Skinned Instancing, Nvidia] [http://developer.download.nvidia.com/SDK/10.5/Samples/SkinnedInstancing.zip Source Code]
+ * ATI 의 R2VB 스키닝 : Renter To Vertex Buffer Skinning ([http://developer.amd.com/downloads/R2VB-Animation.zip R2VB Animation, ATI]) [http://developer.amd.com/gpu/radeon/pages/radeonsdksamplesdocuments.aspx 참고]
+ * Demo
+  * Demo 용 마비노기2 '실험녀' 캐릭터가 애니메이션 하는 순간을 pause 해서 실제로 Object Motion Blur 를 하고 있음을 보여줌
+  * VT Lighting 쓰는 걸 보여주기 위해 실시간으로 구형 라이트를 박는 걸 보여줬음
+ * 요약 : PT 가 훌륭하기 때문에 딱히 추가할 내용이 많이 없었음. 샘플코드까지 보여주는 대인배 정신에 감동.
+
+== [안태훈 옷을 입어봅시다-BSP를 활용한 의상 조합 시스템] ==
+ * [http://devcatpublications.wordpress.com/2010/05/28/%EC%95%88%ED%83%9C%ED%9B%88-%E2%80%9C%EC%98%B7%EC%9D%84-%EC%9E%85%EC%96%B4%EB%B4%85%EC%8B%9C%EB%8B%A4-bsp%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%9D%98%EC%83%81-%EC%A1%B0%ED%95%A9-%EC%8B%9C%EC%8A%A4/ PT 자료]
+ * 기본적으로는 NDC 2007 영웅전 진선웅님의 '자유도 높은 코스춤' 과 맥략이 비슷(하다고 발표자가 얘기함)
+  * [http://www1.thisisgame.com/board/view.php?id=171312&board=&page=&category=5001&subcategory=&best=&searchmode=&search=&orderby= 데브캣 이은석 실장 - 마비노기 영웅전의 캐릭터 비주얼 시스템] 여기에서 나온 얘기를 참고하면 될 듯?
+ * 즉, '잉여 폴리곤은 자르고, 스냅 포인터로 양쪽 옷 사이의 벌어져 있는 vertex 를 합쳐준다(조인다)' 가 중심인 듯.
+ * 영웅전에서는 Clip Plane 을 사용했고, 마비노기 2 에서는 그걸 BSP 로 썼다는 얘기인 듯 한데, 어떤 점이 더 좋아졌는지 사실 잘 감이 오지 않았음
+ * 어떤 옷이 어떤 옷을 덮을 것인가에 대해서는 재질, 말단 폭등을 보고 결정하는데, 이거는 (아마도 데이터로 빼 놓은) table 로 관리하는 듯. 
+ * 장점 : 표현 가능 의상 개수 증가
+  * 영웅전에서는 3D Max 용 plug-in 이 있어서 artist 가 옷을 잘라낼 평면을 지정할 수 있다고 함.
+  * 디버깅 렌더로 지원한다고 하는데, 이게 마비노기2(이하 M2)에만 들어갔다고 한 거 같기도 하고...
+ * 단점
+  * 레이어드 스타일이나 롱치마 + 롱부츠 같은 조합이 골치 아프다고
+  * 옷에 붙어있는 장식물 처리도 곤란. 결국 마비노기1 처럼 하드데이터 코딩 기법도 혼용한다고 한 듯.
+  * 스냅 주위 vertex 를 합치면 texture 가 늘어나기 때문에 보기 안 좋다.
+  * 이렇게 자르고, 조이는 작업을 매번 랜더링 할 때마다 하기 때문에 속도가 나지 않는다.
+   * 캐릭터당 (평균?) 58 ms 가 걸린다고.
+  * 이 부분은 최적화 가능할 거 같다고 함.
+  * 얼굴 모자부분은 이 방식으로 도저히 해결이 안 되어서 다른 방법을 썼다고 하는데, '모자를 씌워봅시다' 라는 비공개 세션이라 들을 수 없었다. 아쉽.
+
+== 김재석, “패킷 지옥으로부터 탈출” ==
+ * [http://devcatpublications.wordpress.com/2010/05/28/%EA%B9%80%EC%9E%AC%EC%84%9D-%E2%80%9C%ED%8C%A8%ED%82%B7-%EC%A7%80%EC%98%A5%EC%9C%BC%EB%A1%9C%EB%B6%80%ED%84%B0-%ED%83%88%EC%B6%9C%E2%80%9D-nexon-developer-conference-may%C2%A02010/ PT 자료]
+ * [http://www.red-gate.com/products/reflector/ Red Gate's .NET Reflector] 같은 거 쓰면 disassemble 쉽다
+ * .NET 3.0 의 WCF 영향 받았다.
+ * 제대로 이해한 건지 모르겠지만, .NET assembly DLL 파일을 컴파일한 후에, 해당 DLL 를 reflector 로 disassemble 한 후 패킷용 구조체를 확인해 lookup 을 만들어서 다시 한 번 DLL 를 빌드한다고 한 듯
+  * 그리고, C++ 용 static 함수가 들어있는 .h, .cpp 파일도 이 시점에 같이 생성한다고(30페이지)
+ * 목적
+  * 최적화와 생산성을 같이 추구
+  * 코드가 자동생성 -> '버그 생길 가능성' + '최적화를 캘 수 있는 여지'를 줄일 수 있다고.
+ * 단점
+  * DLL 깨먹을 때가 문제 -> InvalidProgramException 예외 발생하기 쉽다.
+  * reflector 가 항상 믿을 수 있는 것도 아니라고
+  * 문서, 자동화 커버, 로그, 예외처리 부족
+   * imays 님 발표에서 나온 얘기처럼 라이브러리를 개발한 쪽에서는 그걸 사용하는 사람이 실수를 하더라도 그걸 알 수 있도록 로그를 남기는 과정이 꼭 필요할 듯.
+ * Q : .NET C# 으로 서버 작성했을 때의 문제가 어떤게 있었는가?
+  * A : dangling pointer 가 없어지는 장점이 분명 있다. 하지만, 구현이 쉽다보니 오히려 메모리 leak 찾기가 어려워지는 것 같은 점도 있다. GC구현은 .NET 에 되어 있기 때문에 GC 친화적인 최적화(stack 에 value object 로 생성 같은)가 필요한데 .NET 에 익숙하지 않은 개발자들은 처음에 이 부분에서 어려움을 겪는 듯 한다. Java 같이 GC 를 제어할 수 있는 여지가 많은 언어가 더 좋은 거 같기도 하다.
+ * Q : (실제로 이걸 쓰고 있는 개발자인듯) skeleton 코드 생성기 때문에 오히려 생산성이 떨어진다는 생각도 드는데 어떻게 생각하는가?
+  * A : Needs 를 파악해서 계속 개선해 나가겠다.

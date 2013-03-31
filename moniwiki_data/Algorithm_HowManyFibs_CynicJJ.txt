@@ -1,0 +1,122 @@
+ * Solved. 우왕ㅋ굳ㅋ
+  * 온라인 판정에는 신경 끄려고 해도 잘 안됨 -_-
+  * 자바에서 너무 지나치게 편의를 제공하는 class는 사용 못하도록 만들었다는 규정을 본적이 있는데.. BigInteger는 아니였군요 _no....대회가 아니여서 풀어준건가;;
+ * BigInteger 클래스 없었다면 그냥 GG 했을 듯
+
+[[TableOfContents([maxdepth])]]
+
+== How Many Fibs ==
+=== Main.java ===
+{{{
+import java.math.BigInteger;
+import java.io.*;
+
+class Main implements Runnable{
+    static String ReadLn(int maxLength){  // utility function to read from stdin,
+                                          // Provided by Programming-challenges, edit for style only
+        byte line[] = new byte [maxLength];
+        int length = 0;
+        int input = -1;
+        try{
+            while (length < maxLength){//Read untill maxlength
+                input = System.in.read();
+                if ((input < 0) || (input == '\n')) break; //or untill end of line ninput
+                line [length++] += input;
+            }
+
+            if ((input < 0) && (length == 0)) return null;  // eof
+            return new String(line, 0, length);
+        }catch (IOException e){
+            return null;
+        }
+    }
+
+    public static void main(String args[])  // entry point from OS
+    {
+        Main myWork = new Main();  // Construct the bootloader
+        myWork.run();            // execute
+    }
+
+    public void run() {
+        new myStuff().run();
+    }
+}
+class myStuff implements Runnable{
+    public void run() {
+    	HowManyFibs fibs = new HowManyFibs();
+    	
+    	while(true) {
+    		String input = Main.ReadLn(99999).trim();
+    		String first = input.split(" ")[0];
+    		String second = input.split(" ")[1];
+    		
+    		if (first.equals("0") && second.equals("0")) {
+    			break;
+    		}
+    		
+    		int count = fibs.getFibsCount(first, second);
+    		System.out.println(count);
+    	}
+    }
+}
+
+class HowManyFibs {
+	public int getFibsCount(String begin, String end) {
+		BigInteger beginBig = new BigInteger(begin);
+		BigInteger endBig = new BigInteger(end);
+		
+		BigInteger before = new BigInteger("1");
+		BigInteger fib = new BigInteger("1");
+		BigInteger newFib;
+		
+		int count = 0;
+		
+		while(fib.compareTo(endBig) <= 0) {
+			if( (fib.compareTo(beginBig) >= 0)&& fib.compareTo(endBig) <= 0) {
+				count++;
+			}
+			newFib = fib.add(before);
+			before = fib;
+			fib = newFib;
+		}
+		
+		return count;
+	}
+}
+
+}}}
+
+=== HowManyFibsTest.java ===
+{{{
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class HowManyFibsTest {
+	@Test
+	public void getFibsCountTest() {
+		HowManyFibs fibs = new HowManyFibs();
+		assertEquals(1, fibs.getFibsCount("1", "1"));
+		assertEquals(2, fibs.getFibsCount("1", "2"));
+		assertEquals(5, fibs.getFibsCount("10", "100"));
+	}
+	
+	@Test
+	public void getFibsCountTestLarge() {
+		HowManyFibs fibs = new HowManyFibs();
+		assertEquals(4, fibs.getFibsCount("1234567890", "9876543210"));		
+	}
+
+	@Test
+	public void getFibsCountTestHuge() {
+		HowManyFibs fibs = new HowManyFibs();
+		
+		StringBuilder strHugeNumber = new StringBuilder();
+		strHugeNumber.append("1");
+		for(int i=0 ; i<100 ; i++) {
+			strHugeNumber.append("0");
+		}
+
+		assertEquals(435, fibs.getFibsCount("1234567890", strHugeNumber.toString()));		
+	}
+}
+}}}

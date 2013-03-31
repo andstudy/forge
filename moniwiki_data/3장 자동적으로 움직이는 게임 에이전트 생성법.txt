@@ -1,0 +1,6 @@
+= codevania =
+{{{#!html
+<a href="http://www.slideshare.net/codevania/3-3866609" title="3장 자동적으로 움직이는 게임 에이전트 생성법">3장 자동적으로 움직이는 게임 에이전트 생성법</a>
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=codevaniasteering-100426232608-phpapp01&stripped_title=3-3866609" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480">
+</embed>
+}}}

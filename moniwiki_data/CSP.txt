@@ -1,0 +1,130 @@
+[[TableOfContents]]
+= CSP =
+Communicating Sequential Processes
+결국 Multithread 에 국한하기 보다는 PipesAndFiltersPattern 혹은 BlackboardPattern 으로 이해할 수 있을 듯
+(Singlethread 로도 만들 수 있으니까.)
+
+= 1차 시도 =
+== 설명 ==
+'''CSP로 피보나치 수열 출력하기'''
+ * Process(전체 Process의 부모 클래스)
+  * Succ(채널 안의 값 두 개를 out 채널에 넘김)
+  * Plus (두 입력 채널 값을 더해서 출력 채널에 넘김)
+  * Printer(입력 채널값을 cout 으로 출력한 후 출력 채널에 넘김)
+ 이 세 가지 블럭을 이용해서 피보나치 수열을 출력하는 CSP 만든다.
+ 밑의 설명은 김창준씨가 http://xper.org/wiki/seminar/CommunicatingSequentialProcesses 에서 설명한 내용을 그대로 가져온 불펌 자료다.
+
+{{|
+일단 어찌되건 plus가 필요하다는 생각을 한다. 그리고 무엇을 더해야 하는가. i1+i2, i2+i3, i3+i4식으로 엇갈리게 더해야 한다. 그러면 누군가가 plus에 (i1,i2), (i2,i3), ... 식의 쌍을 제공해 주면 좋겠다. 이걸 succ이라고 부르기로 하자.
+
+succ을 다음과 같이 정의하자.
+
+{{{
+1               2
+----> succ ------>
+       |
+       |        3 
+       +----------> 
+
+1: a,b,c,d,...
+2: a,b,c,d,...
+3: b,c,d,....
+
+여기에서 2와 3을 쌍으로 보면 (a,b), (b,c) ,... 가 나오는 셈이다.
+}}}
+
+그러면 이 succ과 plus를 합해서 들어오는 애들을 엇갈리게 더해주는 pairplus라는 프로세스를 정의할 수 있다. 일단 이 놈은 다음과 같이 정의할 수 있다.
+
+{{{
+1                      2
+------> pairplus ------->
+
+1: a,b,c,d,...
+2: a+b,b+c,c+d,...
+}}}
+
+이 놈은 다음과 같이 구현할 수 있다.
+
+{{{
+->succ->plus--> 
+   |     ^  
+   |     | 
+   +-----+ 
+}}}
+
+자, 그러면 pairplus를 어떻게 사용해서 fib를 만드나.
+
+일단 맨 처음에 1, 1이 나와야 한다. cons(1), cons(1)을 덧붙이자. 그 결과를 출력하되 하나는 뽑아내고 하나는 다시 되먹임 시키자. dup이 필요하다. 되먹임시켜서 pairplus로 들어가면 1+1이 된다. 그리고 다음부터는 그 더한 값이 하나씩 들어가게 된다. ok. 
+
+fib라는 프로세스는 다음과 같다.
+{{{
+pairplus -> cons(1) -> cons(1) -> dup -> 
+     ^                              |  
+     |                              | 
+     +------------------------------+ 
+}}}
+
+mathematical induction을 이용, 약식으로 간단히 검증해 본다. 맞다.
+
+이제 succ을 구현하면 끝난다. succ은 하나씩 격차를 두고 씨퀀스를 만드는 것이다. 어떻게 할까. out1, out2가 있다고 치자. out1은 in1 그대로 나간다. out2는 i2, i3, i4, ... 식으로 나간다. dup을 해서 한쪽만 tail을 하면 되겠다. 
+
+succ은 다음과 같이 구현하면 된다.
+{{{
+->dup---------> 
+   | 
+   +--->tail--> 
+}}}
+완성. 
+|}}
+
+attachment:CSP_Fibo.gif
+attachment:CSP_Fibo_Proecess.gif
+attachment:CSP_Fibo.zip
+
+== Source ==
+ * [CSP_first_trial.cpp]
+
+== 느낀 점 ==
+ * Multithread 방식으로 짜 본다.
+ * MultiProcess 방식으로 짜 본다.
+ * C++ 용 framework 을 확인해 본다.
+    http://www.twistedsquare.com/cppcsp/
+
+= 2차 시도 =
+== 설명 ==
+ * 1차 시도와 달리 실제 multithread 방식으로 짜 본다.
+ * 라이브러리는 MayLib 에서 확인한다.
+== Source ==
+ * [CSP_second_trial.cpp]
+
+== 느낀 점 ==
+ * 성능은 어떨까?
+  * lock 이 자주 발생하지는 않나?
+  * 각 채널을 핸들링 하는 thread 는 그 핸들에 연결되어 있는 블럭뿐이다. 전체 공유 storage 를 쓰는 것보다 성능이 좋을 수 있다.
+  * CPU 사용이 한쪽에 치우치지는 않은가?
+  
+= 3차 시도 =
+== 설명 ==
+ * multiprocess 방식으로 짜본다.
+ * ACE 을 사용한다.
+ * LayerPattern 을 응용해서 logic code 는 최대한 그대로 쓸 수 있게 한다.
+
+== Source ==
+ * [CSP_third_trial.cpp]
+
+== 느낀 점 ==
+ * packet 다루는 방법을 확실히 이해한다.
+  * ACE 이용해서 TCP 패킷 잘라내는 코드 만들어본다.
+ * cout 에 " " 넘기면 link 에러나는 이유는?
+ 
+= 생각해 볼 점 =
+ * Quest 시스템을 CSP 를 이용해서 동적으로 구성할 수 있게 해 본다.
+  * Unreal III 시스템 참고
+
+= 참고 자료 =
+ * http://xper.org/wiki/seminar/CommunicatingSequentialProcesses
+ * http://xper.org/wiki/seminar/CspInPython
+ * http://xper.org/wiki/seminar/UnitTestingCsp
+ * http://www.twistedsquare.com/cppcsp/
+ * [PipesAndFiltersPattern]
+ * http://se.ce.pusan.ac.kr/data_bank/2001/data_bank2_3_9.html

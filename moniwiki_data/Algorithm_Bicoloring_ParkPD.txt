@@ -1,0 +1,332 @@
+생각보다 시간이 걸리는군요. :(
+
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <strstream>
+#include <algorithm>
+#include <map>
+
+//#define _UNIT_TEST
+
+using namespace std;
+
+namespace ATUtil
+{
+
+bool IsInRange(int value, int from, int to)
+{
+	return (from <= value) && (value <= to);
+}
+
+int ConvertToIndex(char c)
+{
+	if ('a' <= c && c <= 'z')
+	{
+		return c - 'a';
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+char ConvertToChar(int i)
+{
+	return (char)i + 'a';
+}
+
+typedef map<int, int> IntDB;
+typedef vector<int> Ints;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+
+///////////////////////////////////////////////////////////////
+// CBicoloring
+class CBicoloring
+{
+public:
+	enum
+	{
+		MAX_SIZE = 200
+	};
+
+	enum Color
+	{
+		EMPTY = 0,
+		RED = 1,
+		BLUE = 2,
+		INVALID
+	};
+
+	CBicoloring();
+	void SetVerticesNum(int num);
+	void Connect(int from, int to);
+	bool IsBicolorable();
+	bool _IsBicolorable(int from);
+	int GetAdjectiveVertex(int from, Ints& ints);
+	string Result();
+
+	struct Vertex
+	{
+		Vertex(int index) : m_Index(index), m_Color(EMPTY) {}
+		Color GetOppositeColor()
+		{
+			if (m_Color == RED)
+			{
+				return BLUE;
+			}
+			else if (m_Color == BLUE)
+			{
+				return RED;
+			}
+			else
+			{
+				//_ASSERT(0);
+				return INVALID;
+			}
+		}
+
+		int m_Index;
+		Color m_Color;
+	};
+
+	std::vector<Vertex> m_Vertex;
+	int m_nVertexNum;
+	bool m_GraphEdges[MAX_SIZE][MAX_SIZE];
+};
+
+CBicoloring::CBicoloring() : m_nVertexNum(0)
+{
+	for (int i = 0; i < MAX_SIZE; ++i)
+	{
+		for (int j = 0; j < MAX_SIZE; ++j)
+		{
+			m_GraphEdges[i][j] = false;
+		}
+	}
+}
+
+void CBicoloring::SetVerticesNum(int num)
+{
+	m_Vertex.reserve(num);
+	for (int i = 0; i < num; ++i)
+	{
+		m_Vertex.push_back(Vertex(i));
+	}
+
+	m_nVertexNum = num;
+}
+
+void CBicoloring::Connect(int from, int to)
+{
+	m_GraphEdges[from][to] = true;
+	m_GraphEdges[to][from] = true;
+}
+
+bool CBicoloring::IsBicolorable()
+{
+	// 전체 vertex 를 쭉 돌면서 starting 지점으로 삼고,
+	// 인접 vertex 색이 
+		// 안 칠해져 있다면, 나와 다른 색으로 칠하고,
+		// 다르면 통과
+		// 같으면 실패
+
+	Vertex& s = m_Vertex[0];
+	s.m_Color = BLUE;
+
+	return _IsBicolorable(0);
+}
+
+bool CBicoloring::_IsBicolorable(int from)
+{
+	Vertex& s = m_Vertex[from];
+
+	Ints adjectives;
+	GetAdjectiveVertex(from, adjectives);
+
+	bool ret = false;
+
+	for (size_t i = 0; i < adjectives.size(); ++i)
+	{
+		int to = adjectives[i];
+		Vertex& v = m_Vertex[to];
+
+		// 인접 vertex 색이 
+		if (EMPTY == v.m_Color)	// 안 칠해져 있다면, 나와 다른 색으로 칠하고,
+		{
+			v.m_Color = s.GetOppositeColor();
+			ret = _IsBicolorable(to);
+		}
+		else if (s.m_Color != v.m_Color)
+		{
+			// OK
+			ret = _IsBicolorable(to);
+		}
+		else	// 인접 vertex 가 나와 같은 색. 췟...
+		{
+			ret = false;
+		}
+
+		if (!ret)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int CBicoloring::GetAdjectiveVertex(int from, Ints& ints)
+{
+	for (int to = 0; to < m_nVertexNum; ++to)
+	{
+		// edge 연결되어 있고, 아직 확인 안 된 vertex 라면
+		if (m_GraphEdges[from][to] && (m_Vertex[to].m_Color == EMPTY))
+		{
+			ints.push_back(to);
+		}
+	}
+
+	return (int)ints.size();
+}
+
+string CBicoloring::Result()
+{
+	if (IsBicolorable())
+	{
+		return "BICOLORABLE.\n";
+	}
+	else
+	{
+		return "NOT BICOLORABLE.\n";
+	}
+}
+
+///////////////////////////////////////////////////////////////
+// CConsole
+class CConsole
+{
+public:
+	static void ConsoleTest(istream& input, ostream& output);
+};
+
+void CConsole::ConsoleTest(istream& input, ostream& output)
+{
+	//ostrstream tempOutput;
+
+	while (1)
+	{
+		int vertices = 0;
+		input >> vertices;
+
+		if (0 == vertices)
+		{
+			break;
+		}
+
+		int edges = 0;
+		input >> edges;
+
+		CBicoloring s;
+		s.SetVerticesNum(vertices);
+
+		int from;
+		int to;
+		for (int i = 0; i < edges; ++i)
+		{
+			input >> from >> to;
+			s.Connect(from, to);
+		}
+
+		output << s.Result();
+
+		//tempOutput << ends;
+		//output << tempOutput.str();
+	}
+};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureConsole
+{
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureConsole, ConsoleTest1)
+{
+	input << "3\n3\n0 1\n1 2\n2 0\n0\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("NOT BICOLORABLE.\n", output.str());
+}
+
+TEST_FIXTURE(FixtureConsole, ConsoleTest2)
+{
+	input << "9\n8\n0 1\n0 2\n0 3\n0 4\n0 5\n0 6\n0 7\n0 8\n0\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("BICOLORABLE.\n", output.str());
+}
+
+TEST_FIXTURE(FixtureConsole, ConsoleTest3)
+{
+	input << "3\n2\n0 1\n1 2\n0\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("BICOLORABLE.\n", output.str());
+}
+
+TEST_FIXTURE(FixtureConsole, ConsoleTest4)
+{
+	input << "3\n2\n0 2\n2 1\n0\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("BICOLORABLE.\n", output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

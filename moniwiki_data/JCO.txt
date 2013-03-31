@@ -1,0 +1,10 @@
+== 9회 ==
+ [http://toby.epril.com/upload/JCO9-SpringDM_For_OSGi.pdf 9회: SpringDM for OSGi]
+ [http://arload.wordpress.com/2008/04/07/servicestory/ 누구도 들려주지 않는 Service 이야기]
+
+== 8회 ==
+ [http://toby.epril.com/upload/JCO8-FromSpring1.x_To_Spring2.0.pdf 8회: From Spring 1.x To Spring 2.0]
+
+== 7회 ==
+ [http://toby.epril.com/upload/JCO7-Enterprise_Application_Framework.pdf 7회: 오픈소스 프레임워크를 이용한 엔터프라이즈 애플리케이션 프레임워크 개발전략]
+

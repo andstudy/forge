@@ -1,0 +1,18 @@
+게임이름 : Access Games : Deadly premonition
+
+잘된 점
+1. Character building and backstory (especially york and zach)
+2. Story and worldbuilding(Both initially too extreme)
+3. Distinctive music
+4. Casting and voiceover
+5. Out love and passion for deadly premonition
+
+아쉬웠던 점
+1. Memory allocation and processing speed
+2. Lghting and shadow processing
+3. Using the physics engine
+4. Sound effects and surround sound
+5. Schedule management and motivation
+
+----
+[GameDeveloperMagazine]

@@ -1,0 +1,55 @@
+Daum DevOn (디브온) 2011 정리 - 정재승 : 창의적인 리더들의 7가지 초능력
+
+동영상이 없다. 발표자료라도 올라오겠거니 생각하고 대강 메모를 했는데 아직까지 올라오질 않는다. 다른 곳에서 강연한 자료라도 있을 줄 알았는데 아직은 검색으로 못 찾았다. 대강 적어놓은 것 만큼만이라도 정리해 둔다.
+
+[http://devon.daum.net/2011/ DevOn 공식 사이트]
+[http://devondaum.tistory.com/ DevOn 공식 블로그]
+[http://devondaum.tistory.com/6 행사 동영상 및 발표 자료, 여러분의 후기! - 대담 동영상 볼 수 있음]
+[http://hur.posterous.com/82300818 "개발자와 대박" 논란에 대한 생각]
+[http://goodhyun.com/1000 goodhyun - 개발자의 시대]
+[http://www.inven.co.kr/webzine/news/?news=40472 inven - 김택진과 김학규, 개발자의 존재이유와 미래를 논하다.]
+[http://news.inews24.com/php/news_view.php?g_serial=620851&g_menu=020310 아이뉴스24 - 이재웅·김택진·허진호, 그들이 나눈 대화는? 개발자 선배로서 후배 격려]
+[http://hur.posterous.com/jsjeong3 정재승 @jsjeong3 교수가 이야기하는, "아이 키우기" 몇 가지 팁]
+
+== 정재승 : 창의적인 리더들의 7가지 초능력 ==
+뉴로, Brain Leadership
+[http://www.mapageweb.umontreal.ca/gosselif/labogo/highlights.pdf The look of fear - How the brain detects emotion(Nature 지) January 2005] [http://www.innovations-report.com/html/reports/medicine_health/report-38481.html 설명]
+eye tracker 로 시선 추적을 추적해 보니 정상인은 눈과 입을 보는데 편도체가 망가져 사람의 감정(특히 두려움)을 잘 읽지 못하는 환자 SM 은 코와 턱?을 보더라. ([http://h21.hani.co.kr/arti/culture/culture_general/25594.html '정재승 + 진중권 크로스'에서도 언급])
+[http://blog.daum.net/blue_gngp/4943351 서양 이모티콘은 입, 동양 이모티콘은 눈으로 감정을 표시한다.] [https://twitter.com/#!/insudla/status/140078006298349568 사진]
+'헬로 키티'의 눈은 중립적이라 동양에서는 통하나, 서양사람들은 입이 없어 감정을 읽기 어려워한다.
+
+먼저 십자가에 달린 예수를 그려보라. 다른 각도에서 문제를 보라 - [http://en.wikipedia.org/wiki/Christ_of_Saint_John_of_the_Cross 살바도르 달리(Cross of Jesus Christ)]
+창의성은 생각방식을 변주하는데서 시작된다.
+
+인간은 왜 과시적 소비를 하는가?
+진화심리학적 관점
+99% 가 이 차가 좋다는 걸 알아야 1%가 과시용으로 차를 사는 의미가 있다. 아무도 모르면 과시가 안 된다.
+BMW 코리아 - 한국에서 처음으로 외제차를 매중매체에 광고했다.
+
+예술의 최고 level 은 은유다 - 아리스토텔레스(창조력의 원천)
+은유 : 'A is B 이다' 에서 A 와 B 의 거리가 멀수록 좋다.
+
+[http://dare.uva.nl/document/192938 Brain never rest! Default mode network]
+막상 일할때는 여기가 deactivate 된다. 산책하면서 멍때릴때 창의적인 생각이 많이 나온다. 그런 면에서 멍때릴 틈을 주지 않는 스마트폰은 문제가 있다.
+
+[http://en.wikipedia.org/wiki/Open-space_technology OST(open space technology)]
+Serious Play
+
+5. 확실한 증거로 직관을 증명하라.
+팀장에게 기획서를 계속 딱지맞다보면 세상의 고객이 아니라 팀장(CEO)가 좋아할만한 아이디어를 내기 시작한다. 하지만 CEO 는 승진하는 동안 점점 대중과 멀어져 있는 상태라 대중의 마음을 읽지 못한다. 이러다보면 처음에는 성공할지 몰라도 나중에는 의사 결정을 잘 못해 한번에 훅 갈 수 있다.
+
+6. 지도 보는 법에서 지도를 만드는 법으로
+PathFinding Planner 208??
+우리 교육은 지도 보는 법(찾는 법)을 가르친다.
+하지만 정말 필요한 것은 (해야할 일은) 지도를 그리는 일이다.
+세상을 바꾸는 사람은 자신만의 관점에서 지도를 그리는 사람이다.
+
+7. 빠른 의사결정, 그리고 그것을 상황에 맞게 조정하는 유연성
+ 1. 틀리더라도 신중하게 빠르게 의사결정
+ 2. 상황에 따라 의사를 바꿀 수 있는 유연성 필요
+ 3. 늦추면 안 됨. 안 바꿔도 안 됨. 가장 나쁜 것은 느리게 결정하고 그걸 번복하지 않는 것이다.
+ 말을 바꾼다는 얘기를 듣지 않으려면 의사소통 능력이 필요하다.
+[http://grewordlist.wordpress.com/2010/10/04/hubris/ HUBRis(자만심) : excessive pride or self-confidence. (in Greek tragedy) excessive pride toward or defiance of the gods, leading to nemesis]. SCHADENFREUDE(남의 불행에 대해 갖는 쾌감)
+나이가 들면, 자기 결정을 바꾸는 능력이 떨어진다. 예전의 성공모델 때문에 나이가 들면 반드시 실패할 가능성이 있다. (이건 AgileConference 2011 키노트 발표때 김창준님이 한 얘기와 유사. 다시 포스팅하겠음).
+
+지적 능력은 얼마나 많은 방법을 알고 있느냐가 아니라 방법을 모를 때 어떻게 행동하느냐에 따라 측정된다. - 존 홀트

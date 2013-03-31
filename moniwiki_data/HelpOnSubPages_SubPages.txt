@@ -1,0 +1,5 @@
+This is a example page
+
+ * ../SubPages
+ * ["../"] (anonymous parent link)
+ * [wiki:../ free parent link]

@@ -1,0 +1,10 @@
+= 문제 설명, 홀수 연습문제 풀이 =
+= 짝수 연습문제 풀이 =
+{{{#!html
+<div style="width:595px" id="__ss_7236938"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ohyecloudy/taocp-131-mix" title="[TAOCP] 1.3.1 MIX 설명, 짝수 연습문제 풀이">[TAOCP] 1.3.1 MIX 설명, 짝수 연습문제 풀이</a></strong> <object id="__sse7236938" width="595" height="497"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp131-110311160803-phpapp01&stripped_title=taocp-131-mix&userName=ohyecloudy" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <embed name="__sse7236938" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp131-110311160803-phpapp01&stripped_title=taocp-131-mix&userName=ohyecloudy" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="595" height="497"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ohyecloudy">Jongbin Oh</a> </div> </div>
+}}}
+
+= MIX 설명 = 
+{{{#!html
+<div style="width:425px" id="__ss_7265395"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ssuser239f08/mix-7265395" title="Mix 설명">Mix 설명</a></strong><object id="__sse7265395" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=mix-110314201943-phpapp01&stripped_title=mix-7265395&userName=ssuser239f08" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse7265395" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=mix-110314201943-phpapp01&stripped_title=mix-7265395&userName=ssuser239f08" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ssuser239f08">재정 이</a>.</div></div>
+}}}

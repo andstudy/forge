@@ -1,0 +1,25 @@
+[[MoniCalendar(column,oneweek,공휴일,시간표)]]
+----
+[[MoniCalendar(oneweek)]]
+----
+ * 9/9 (!) 6:00am 좋은날
+ * 9/10 /!\ 생일
+ * 9/11 {*} 8:00pm '''Meeting'''
+ * 05/9/11 :( 별로
+ * 9/11-9/15 {*} 셤기간
+ * 9/13-9/18 /!\ 걍 기간..
+ * 9/9-9/13 (!) 흠..
+ * 9/12-9/15 <!> KLDP CodeFest
+ * 9/7 {*} Happy Happy :( ;)
+ * 9/12-9/17 gray 어쩌구 :( 저쩌구 어쩌구...
+----
+[[MoniCalendar(공휴일,시간표)]]
+
+== 메모 ==
+ * MozillaFirefox에 "overflow:hidden"이 버그가 있어서, colorbar (기간 막대기)의 hover가 제대로 작동하지 않음
+ * Firefox 1.0.6에서는 테두리 라운딩이 깔끔한데, 1.5 beta에서는 테두리가 밉게 랜더링된다.
+----
+See also [공휴일], [시간표]
+----
+http://chemie.skku.ac.kr/wiki/monket-calendar/monket-cal/ 테스트
+ 이것의 비밀은 http://chemie.skku.ac.kr/wiki/monket-calendar/monket-cal/t.html 걍 테이블로 했군요...

@@ -1,0 +1,67 @@
+[http://www.yes24.com/Goods/FTGoodsView.aspx?goodsNo=2922297&CategoryNumber=001001003016001006 Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드 편 - 개정판] 으로 
+2008 년 5월 17일(토) 부터 스터디를 시작합니다.
+관심있으신 분들은 여기 참석이라고 써 주세요. 감사합니다.
+
+= 스터디 진행 =
+== 1주 (5.17) ==
+ Chapter 01. Single Threaded ExecutionChapter  발표 : [Outbreak]
+ [1주 발표&기타 자료]
+
+== 2주 (5.24) ==
+ Chapter 02. Immutable [CharSyam]
+ Chapter 03. Guarded Suspension [eatist]
+
+== 3주 (5.31) ==
+ Chapter 04. [Balking] - [CynicJJ]
+ Chapter 05. Producer-Consumer [JinuGuru]
+
+== 4주  (6.7) ==
+ Chapter 06. Read-Write Lock [kukuman]
+ Chapter 07. Thread-Per-Message  [itmentor]
+
+== 5주 ==
+ Chapter 08. Worker Thread  [ParkPD]
+ Chapter 09. Future [Windist]
+ Chapter 10. Two-Phase Termination [soomong]
+
+== 6주 ==
+ Chapter 11. Thread-Specific Storage [jh_park12] 
+ Chapter 12. [Active Object] [Outbreak]
+
+ 총정리
+
+== 참석자 명단 ==
+ 1. [ParkPD]
+ 1. [Outbreak] 
+ 1. [soomong]
+ 1. [CharSyam]
+ 1. [kukuman]
+ 1. [itmentor]
+ 1. [CynicJJ]
+ 1. [wiki:Guru JinuGuru]
+ 1. [Windist]
+ 1. [jh_park12]
+ 1. [eatist]
+
+
+== 잡담 ==
+ * 모임 장소를 씽크스타에서 해보는게 어떨까요? 8인기준으로 3시간에 39200원 나오는군요.. 1960원 적립(5%)되고요.. 애자일 블로그에 올라온 내용을 보니 괜찮아보이네요.. [itmentor]
+  * 거기 문 닫는다고 애자일 블로그에 올라온 거 같은데요? 토즈 신촌 본점에서 기존대로 진행합니다. [ParkPD]
+   * 문 안닫는다고 합니다. [http://agile.egloos.com/4320350#10132447]. [Windist]
+ * 스터디 모임에 처음 참석하게 되었습니다. 무엇을 준비해 가면 좋을까요? 미리 어디까지 공부해 와야하는지요? [Windist]
+ * 다들 발표 자료 좀 올려주세요. :) [ParkPD]
+
+== 회비 ==
+|| '''날짜''' || '''지출''' || '''수입''' || '''잔액''' || '''비고''' ||
+|| || ||  ||  211,600   || 회비이월 ||
+|| 2008.5.16 ||  ||  200,000 ||  411,600 || 회비입금( 박일,강대명,현수명,박진욱)  ||
+|| 2008.5.16 || 39,500 || || 372,100 || 토즈지출  ||
+|| 2008.5.23 ||  ||  80,000 ||  452,100 || 회비입금( 장용호 전효성)  ||
+|| 2008.5.23 || 39,500  || || 412,600 || 토즈지출  ||
+|| 2008.5.31 || 39,500  || || 373,100 || 토즈지출  ||
+|| 2008.6.7 ||   || 120,000 || 493,100 || 회비입금(박주희,정희종,안준석)  ||
+|| 2008.6.7 ||  35,550 ||  || 457,550 || 토즈지출  ||
+|| 2008.6.14 || 39,500  || || 418,050 || 토즈지출  ||
+|| 2008.6.21 || 39,500  || || 378,550 || 토즈지출  ||
+|| 2008.6.21 || 169,422  || || 209,128|| 뒷풀이 (아웃백)  ||
+

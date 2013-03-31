@@ -1,0 +1,227 @@
+[[TableOfContents]]
+
+= 삽입 정렬 =
+ == 의사 코드 ==
+{{{
+for i = [1,n]
+  /* invariant: x[0..i-1] is sorted */
+  /* goal : shift x[i] down to its proper place in x[0..i] */
+}}}
+ == 동작 ==
+{{{
+3|1 4 2 
+1 3|4 2
+1 3 4|2
+1 3 2 4|
+}}}
+ == 코드 ==
+{{{
+/* Simplest insertion sort */
+void isort1()
+{	int i, j;
+	for (i = 1; i < n; i++)
+		for (j = i; j > 0 && x[j-1] > x[j]; j--)
+			swap(j-1, j);
+}
+/* Write swap function inline */
+void isort2()
+{	int i, j;
+	DType t;
+	for (i = 1; i < n; i++)
+		for (j = i; j > 0 && x[j-1] > x[j]; j--) {
+			t = x[j];
+			x[j] = x[j-1];
+			x[j-1] = t;
+		}
+}
+
+/* Move assignments to and from t out of loop */
+void isort3()
+{	int i, j;
+	DType t;
+	for (i = 1; i < n; i++) {
+		t = x[i];
+		for (j = i; j > 0 && x[j-1] > t; j--)
+			x[j] = x[j-1];
+		x[j] = t;
+	}
+}
+}}}
+ == 분석 ==
+  * 최악의 경우를 포함한 임의의 데이터에 대한 실행시간은 n²에 비래
+  * 단 입력된 배열이 거의 정렬된 상태라면 짧은 거리에 대해서 이동이 일어나므로 속도가 빠르다
+
+= 퀵정렬 = 
+ == 원리 ==
+ * 정렬하기위해 배열을 두부분으로 나눈 다음 각각을 재귀적으로 정렬 (divide-and-conquer 접근 방식을 통해 정렬)
+
+ == 동작 ==
+ * 배열의 첫 숫자를 기준으로 두분으로 나눔
+ || '''55''' || 41 || 59 || 26 || 53 || 58 || 97 || 93 ||
+ * 55를 기준으로 작은 숫자는 왼쪽에 큰 숫자는 오른쪽에
+ || 41 || 26 || 53 || '''55''' || 59 || 58 || 97 || 93 ||
+ * 55를 기준으로 왼쪽과 오른쪽 부분도 같은 원리로 정렬
+
+ == 의사 코드 ==
+{{{
+ void qsort(l,u)
+   if l >= u then
+     /* at most one element, do nothing */
+     return
+   /* goal : partition array around a particular value
+      which is eventually placed in its correct position p */
+   qsort(1,p-1)
+   qsort(p+1,u)
+}}}
+ == 한 숫자를 기준으로 두 부분으로 나누는 방법 ==
+ * 루프 불변식을 아래와 같이 표현
+||t||&nbsp;&nbsp;<t&nbsp;&nbsp;||&nbsp;&nbsp;≥t&nbsp;&nbsp;||&nbsp;&nbsp;?&nbsp;&nbsp;&nbsp;&nbsp;||
+&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑
+&nbsp;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u
+* 종료 된 루프
+||t||&nbsp;&nbsp;<t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≥t&nbsp;&nbsp;||
+&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑
+&nbsp;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u
+* 마지막 작업
+||&nbsp;&nbsp;<t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||t||&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≥t&nbsp;&nbsp;||
+&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑
+&nbsp;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u
+ == 코드 == 
+{{{
+/* Simplest version, Lomuto partitioning */
+void qsort1(int l, int u)
+{	int i, m;
+	if (l >= u)
+		return;
+	m = l;
+	for (i = l+1; i <= u; i++)
+		if (x[i] < x[l])
+			swap(++m, i);
+	swap(l, m);
+	qsort1(l, m-1);
+	qsort1(m+1, u);
+}
+}}}
+ == 분석 == 
+ * 퀵정렬은 서로 다른 요소들이 랜덤하게 나열 되어 있는 경우 평균적으로 O(n log n)의 실행시간과 O(log n)의 스택 공간을 사용한다
+ * 특정형태의 입력 에 대해서는 n²의 시간이 소요 되기도 함(모두 같은 숫자)
+
+
+= 개선된 퀵정렬  =
+ == 개선 1 : 두개의 인덱스 사용 == 
+ === 원리 ===
+ * 두개의 인덱스 i,j각각 증가 감소가 하면서 서로 교차할때까지 t를 중심으로 숫자 배치 
+||t||&nbsp;&nbsp;<t&nbsp;&nbsp;||&nbsp;&nbsp;?&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;≥t&nbsp;&nbsp;||
+&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑
+&nbsp;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u
+ === 코드 === 
+{{{
+ /* Two-way partitioning */
+void qsort3(int l, int u)
+{	int i, j;
+	DType t;
+	if (l >= u)
+		return;
+	t = x[l];
+	i = l;
+	j = u+1;
+	for (;;) {
+		do i++; while (i <= u && x[i] < t);
+		do j--; while (x[j] > t);
+		if (i > j)
+			break;
+		swap(i, j);
+	}
+	swap(l, j);
+	qsort3(l, j-1);
+	qsort3(j+1, u);
+}
+}}}
+ === 분석 ===
+ * 항목이 모두 같은 경우에도 빠르게 잘 처리함
+ * qsort1보다 요소 교환 횟수도 적음
+ * 이미 오름 차순으로 정렬된 경우 전체 배열에대해서 분할 작업을 수행하게 되어 O(n²) 소요됨 
+ == 개선 2 ==
+ === 원리 ===
+  * 분할의 중심이 될 요소를 랜덤으로 선택 
+  * qsort가 진행을 절절한 최소 항목 개수 까지 진행하고 남은 항목들은 삽입 정렬로 마무리
+ === 코드 ===
+{{{
+/* qsort3 + randomization + isort small subarrays + swap inline */
+int cutoff = 50;
+void qsort4(int l, int u)
+{	int i, j;
+	DType t, temp;
+	if (u - l < cutoff)
+		return;
+	swap(l, randint(l, u));
+	t = x[l];
+	i = l;
+	j = u+1;
+	for (;;) {
+		do i++; while (i <= u && x[i] < t);
+		do j--; while (x[j] > t);
+		if (i > j)
+			break;
+		temp = x[i]; x[i] = x[j]; x[j] = temp;
+	}
+	swap(l, j);
+	qsort4(l, j-1);
+	qsort4(j+1, u);
+}
+qsort4(0, n-1); isort3(); 
+}}}
+
+= 연습 문제 =
+2. 
+ * 뒤로 부터 수행 하게 수정 마지막 swap 삭제
+{{{
+/* Sedgewick's version of Lomuto, with sentinel */
+void qsort2(int l, int u)
+{	int i, m;
+	if (l >= u)
+		return;
+	m = i = u+1;
+	do {
+		do i--; while (x[i] < x[l]);
+		swap(--m, i);
+	} while (i > l);
+	qsort2(l, m-1);
+	qsort2(m+1, u);
+}
+}}}
+
+4. 정렬할 배열의 중간 값(median)을 얻어온후 중간 값을 중간으로 배치하여 정렬한다.
+9. 
+{{{
+/* selection */
+
+void select1(int l, int u, int k)
+{	int i, j;
+	DType t, temp;
+	if (l >= u)
+		return;
+	swap(l, randint(l, u));
+	t = x[l];
+	i = l;
+	j = u+1;
+	for (;;) {
+		do i++; while (i <= u && x[i] < t);
+		do j--; while (x[j] > t);
+		if (i > j)
+			break;
+		temp = x[i]; x[i] = x[j]; x[j] = temp;
+	}
+	swap(l, j);
+	if (j < k)
+		select1(j+1, u, k);
+	else if (j > k)
+		select1(l, j-1, k);
+}
+
+
+}}}
+
+
+[생각하는프로그래밍-칼럼11-정렬-소스코드]
+[http://www.joinc.co.kr/modules/moniwiki/wiki.php/Site/Database/algorithm/bubble_Sort 정렬 기법 눈으로 보기]

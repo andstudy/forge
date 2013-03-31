@@ -1,0 +1,136 @@
+== 문제 9번 유쾌한 점퍼 (Jolly Jumpers) ==
+아아 계속 Wrong Answer 네요 ㅜ_ㅜ
+== Java 버전 ==
+Jolly.java
+{{{
+import java.io.*;
+
+public class Jolly 
+{
+	
+	public static void main(String args[])
+	{
+		Jolly j = new Jolly();	
+		String[] token = new String[3000];
+		token = j.ReadLine().split(" ");
+		
+		if(Integer.parseInt(token[0]) < 0 || Integer.parseInt(token[0]) > 3000)
+			return;
+		
+		if( j.ParseInput(token) )
+			System.out.println("Jolly");
+		else
+			System.out.println("Not Jolly");
+	}
+	
+	public boolean ParseInput(String[] token)
+	{
+		boolean IsJully = true;
+		int subResult;
+		
+		//System.out.print("Input : "+input+",Result :");
+
+		for(int i=0; i < token.length; i++)
+		{
+			//System.out.println(i + " :" + Integer.parseInt(t[i]));
+			
+			if( i != 0 )
+			{
+				subResult = Math.abs(Integer.parseInt(token[i])-Integer.parseInt(token[i-1]));
+				//System.out.print(" "+subResult);
+				
+				if(!IsContainData(token,subResult))
+				{
+					IsJully = false;
+					break;
+				}
+			}
+			
+		}
+		
+		//System.out.println("\nIsJully : " + IsJully);
+		return IsJully;
+	}
+	
+	public boolean IsContainData(String[] source, int data)
+	{
+		boolean result = false;
+		
+		for(int i=0; i< source.length; i++)
+		{
+			if( Integer.parseInt(source[i]) == data )
+			{
+				result = true;
+				break;
+			}
+		}
+		
+		return result;
+	}
+	
+	public String ReadLine()
+	{
+		String data = null;
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			System.out.println("IOException " +e);
+		}
+		
+		return data;		
+	}
+	
+	
+}
+
+}}}
+
+JollyTest.java
+{{{
+import junit.framework.TestCase;
+
+public class JollyTest extends TestCase 
+{
+	Jolly j = new Jolly();
+	
+	public void testParseInput() 
+	{
+
+		assertEquals("Result1",j.ParseInput("1 2 3".split(" ")),true);
+		assertEquals("Result2",j.ParseInput("1 9 10".split(" ")),false);
+		assertEquals("Result3",j.ParseInput("1 5 3".split(" ")),false);
+		assertEquals("Result4",j.ParseInput("1 2 5 3".split(" ")),true);
+		assertEquals("Result5",j.ParseInput("1 50 -30".split(" ")),false);
+		assertEquals("Result6",j.ParseInput("1 -1 1 2".split(" ")),true);
+		assertEquals("Result7",j.ParseInput("4 1 4 2 3".split(" ")),true);
+		assertEquals("Result8",j.ParseInput("5 1 4 2 -1 6".split(" ")),false);
+		assertEquals("Result9",j.ParseInput("0 100 99".split(" ")),false);
+		
+	}
+
+	public void testIsContainData() 
+	{
+		assertEquals("Result1",j.IsContainData("1 2 3 7".split(" "),7),true);
+		assertEquals("Result1",j.IsContainData("1 2 3 7".split(" "),3),true);
+		assertEquals("Result1",j.IsContainData("1 2 3 7".split(" "),-4),false);		
+		assertEquals("Result2",j.IsContainData("1 2 3 7".split(" "),4),false);
+	}
+
+}
+}}}
+
+== 풀이 ==
+[Algorithm/문제9/Study 결과]
+[Algorithm/문제9/MovingSpotlight]
+[Algorithm/문제9/폭풍언덕]
+[Algorithm/문제9/ParkPD]
+[Algorithm/문제9/kukuman]
+[Algorithm/Jolly Jumpers/jeddli]
+
+
+----
+CategoryProblem

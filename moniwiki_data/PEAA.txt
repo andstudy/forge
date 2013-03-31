@@ -1,0 +1,68 @@
+[[TableOfContents]]
+Patterns of Enterprise Application Architecture
+
+== 패턴들 ==
+=== Domain Logic Patterns ===
+ * [TransactionScriptPattern]
+ * [DomainModelPattern]
+ * [TableModulePattern]
+ * [ServiceLayerPattern]
+=== Data Source Architectural Patterns ===
+ * [TableDataGatewayPattern]
+ * [RowDataGatewayPattern]
+ * [ActiveRecordPattern]
+ * [DataMapperPattern]
+=== Object-Relational Behavioral Patterns ===
+ * [UnitOfWorkPattern]
+ * [IdentityMapPattern]
+ * [LazyLoadPattern]
+=== Object-Relational Structural Patterns ===
+ * [IdentityFieldPattern]
+ * [ForeignKeyMappingPattern]
+ * [AssociationTableMappingPattern]
+ * [DependentMappingPattern]
+ * [EmbeddedValuePattern]
+ * [SerializedLobPattern]
+ * [SingleTableInheritancePattern]
+ * [ClassTableInheritancePattern]
+ * [ConcreteTableInheritancePattern]
+ * [InheritanceMappersPattern]
+=== Object-Relational Metadata Mapping Patterns ===
+ * [MetadataMappingPattern]
+ * [QueryObjectPattern]
+ * [RepositoryPattern]
+=== Web Presentation Patterns ===
+ * [ModelViewControllerPattern]
+ * [PageControllerPattern]
+ * [FrontControllerPattern]
+ * [TemplateViewPattern]
+ * [TransformViewPattern]
+ * [TwoStepViewPattern]
+ * [ApplicationControllerPattern]
+=== Distribution Patterns ===
+ * [RemoteFacadePattern]
+ * [DataTransferObjectPattern]
+=== Offline Concurrency Patterns ===
+ * [OptimisticOfflineLockPattern]
+ * [PessimisticOfflineLockPattern]
+ * [CoarseGrainedLockPattern]
+ * [ImplcitLockPattern]
+=== Session State Patterns ===
+ * [ClientSessionStatePattern]
+ * [ServerSessionStatePattern]
+ * [DatabaseSessionStatePattern]
+=== Base Patterns ===
+ * [GatewayPatternPattern]
+ * [MapperPatternPattern]
+ * [LayerSupertypePattern]
+ * [SeparatedInterfacePattern]
+ * [RegistryPattern]
+ * [ValueObjectPattern]
+ * [MoneyPattern]
+ * [SpecialcasePattern]
+ * [PluginPattern]
+ * [ServiceStubPattern]
+ * [RecordSetPattern]
+
+== 참고자료 ==
+[PEAA] : Patterns of Enterprise Application Architecture

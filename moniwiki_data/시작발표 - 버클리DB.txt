@@ -1,0 +1,15 @@
+{{{#!html
+<img style="visibility:hidden;width:0px;height:0px;" border=0 width=0 height=0 src="http://counters.gigya.com/wildfire/IMP/CXNID=2000002.0NXC/bT*xJmx*PTEyNzE4MDkxNjk*OTgmcHQ9MTI3MTgwOTI*NDU1NyZwPTEwMTkxJmQ9c3NfZW1iZWQmZz*yJm89N2ZjYzU3MDI4MDUz/NGEwODg1N2ZmOTZkODMyY2YxZDgmb2Y9MA==.gif" /><div style="width:425px" id="__ss_3728581"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/kongbong/db-3728581" title="버클리Db 를 이용한 게임 서버 제작">버클리Db 를 이용한 게임 서버 제작</a></strong><object width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=db-100414183752-phpapp02&stripped_title=db-3728581" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=db-100414183752-phpapp02&stripped_title=db-3728581" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/kongbong">kongbong</a>.</div></div>}}}
+
+== 참고 자료 ==
+오라클 버클리DB
+http://www.oracle.com/technology/products/berkeley-db/index.html
+
+다크스타 프로젝트
+http://projectdarkstar.com/
+
+TBB
+http://www.threadingbuildingblocks.org/
+
+== 데모 프로그램 소스 ==
+http://kongbong.tistory.com/attachment/cfile8.uf@1245D5284BC6571D363520.zip

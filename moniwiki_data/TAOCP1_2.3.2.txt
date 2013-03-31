@@ -1,0 +1,4 @@
+{{{#!html
+<div style="width:425px" id="__ss_8114197"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/soomong/the-art-of-computer-programming-232-tree" title="The Art of Computer Programming 2.3.2 Tree">The Art of Computer Programming 2.3.2 Tree</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8114197" width="620" height="517" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/soomong">hyun soomyung</a> </div> </div>
+}}}
+

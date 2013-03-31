@@ -1,0 +1,28 @@
+[[TableOfContents]]
+Pattern-Oriented Software Architecture volumn2 (Patterns for Concurrent and Networked Objects)
+
+== 패턴들 ==
+=== Service Access and Configuration Patterns ===
+ * [WrapperFacadePattern]
+ * [ComponentConfiguratorPattern]
+ * [InterceptorPattern]
+ * [ExtensionInterfacePattern]
+=== Event Handling Patterns ===
+ * [ReactorPattern]
+ * [ProactorPattern]
+ * [AsynchronousCompletionTokenPattern]
+ * [AcceptorConnectorPattern]
+=== Synchronization Patterns ===
+ * [ScopedLockingPattern]
+ * [StrategizedLockingPattern]
+ * [ThreadSafeInterfacePattern]
+ * [DoubleCheckedLockingOptimizationPattern]
+=== Concurrency Patterns ===
+ * [ActiveObjectPattern]
+ * [MonitorObjectPattern]
+ * [HalfSyncHalfAsyncPattern]
+ * [LeaderFollowersPattern]
+ * [ThreadSpecificStoragePattern]
+ 
+== 참고자료 ==
+[POSA2] : Pattern-Oriented Software Architecture. Vol2

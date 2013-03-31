@@ -1,0 +1,7 @@
+http://www.heddley.com/edd/php/search.html
+
+5000여개의 파일이 있을 때 FastSearch는 2초 걸렸다. php는 파일 처리속도가 늦다는 이유로 FullSearchMacro를 쓰면 약 15여초 걸린다. 그 대신에, wiki_indexer.pl은 하루에 한두번정도 돌려야 되며, 5분여 동안의 시간이 걸린다.
+
+[[FastSearch(Moniwiki)]]
+----
+[[FastSearch]]

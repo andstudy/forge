@@ -1,0 +1,18 @@
+게임이름 : HARMONIX' DANCE CENTRAL
+
+잘된 점
+1. Keeping it real
+2. Break it down!
+3. Adapting workspaces and tools for kinect
+4. Hitting a moving skeleton
+5. The right scope, the right moves
+
+아쉬웠던 점
+1. Moving from "Good" to "Flawless" detection
+2. Behind the beat
+3. Getting low
+4. Brand new routine - Underestimating the new process
+5. It's getting late : Let's and vo and narrative!
+
+----
+[GameDeveloperMagazine]

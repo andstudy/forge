@@ -1,0 +1,704 @@
+올해도 [http://andstudy.com/andwiki/wiki.php/GDC2011 AnD Wiki - GDC2011] 에 GDC2011 강연내용을 정리합니다. 다른 분들의 도움도 환영합니다.
+제목은 [http://schedule.gdconf.com/session 여기 GDC Session] 에 있는 제목과 강연자를 그대로 사용합니다.
+강연은 요일별로 정리합니다.
+관련 링크는 '출처 - 제목' 으로 적습니다.
+[http://www.gdcvault.com/ GDC Vault] 열렸네요.
+[http://www.gdcvault.com/free/gdc-11 GDC Vault Free] 버전도 있군요.
+
+= 월 =
+== DX11 Performance Gems (Jon Jansen, NVIDIA) - GDC Tutorial Advanced Visual Effects with DirectX 11 ==
+ * [http://www.nvidia.com/content/PDF/GDC2011/Jon_Jansen.pdf 발표자료 PDF]
+== Deferred Shading Optimizations (Nicolas Thibieroz, AMD) - GDC Tutorial Advanced Visual Effects with DirectX 11 ==
+ * [http://developer.amd.com/gpu_assets/Deferred%20Shading%20Optimizations.pps 발표자료 pps]
+== Civilization 5 DX11 Technology (Dan Baker, Firaxis) - GDC Tutorial Advanced Visual Effects with DirectX 11 ==
+ * [http://www.pcgameshardware.com/aid,776086/Civilization-5-Tech-Interview-What-DirectX-11-is-good-for/News/ Civ 5 and DX 11 - Civilization 5 Tech Interview - What DirectX 11 is good for]
+== Dragon Age 2 DX11 Technology (Andreas Papathanasis, BioWare) - GDC Tutorial Advanced Visual Effects with DirectX 11 ==
+== AMDs Favorite Techniques Contd (Jon Story 30mins) - GDC Tutorial Advanced Visual Effects with DirectX 11 ==
+== High Performance Post-Processing (Nathan Hoobler, NVIDIA) - GDC Tutorial Advanced Visual Effects with DirectX 11 ==
+ * [http://www.nvidia.com/content/PDF/GDC2011/Nathan_Hoobler.pdf 발표자료 PDF]
+== Pathfinding in Dragon Age - Nathan Sturtevant ==
+ * [http://web.cs.du.edu/~sturtevant/papers.html 발표자 홈페이지
+ * [https://moodle.cs.ualberta.ca/file.php/133/Lecture21.pdf 이전 발표자료]
+== Pathfinding in Static and Dynamic Environments and the Future of Multi-core HPA ==
+ * [http://aigamedev.com/open/reviews/hpa-future-multicore/ aigamedev - Pathfinding in Static and Dynamic Environments and the Future of Multi-core HPA]
+== Influence Maps - Strategic Decision Making - Kevin Dill ==
+ * [http://www.third-helix.com/blog/?p=1166 third Helix - GDC 2011: AI Summit]
+== Creating Your Building Blocks: Modular Component AI Systems - Alex Champandard (AiGameDev.com), Brett Laming (Rockstar Leeds) and Joel McGinnis (CCP Games North America) ==
+ * [http://www.gamedev.net/blog/984/entry-2249608-modular-component-based-ai-systems/ gamedev - Modular Component-Based AI Systems]
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/#component malvasia bianca - gdc 2011: monday]
+ * [http://www.third-helix.com/blog/?p=1166 third Helix - GDC 2011: AI Summit]
+== AI Navigation: It's Not a Solved Problem - Yet - James Anhalt (Blizzard Entertainment), Alexander Kring (Nihilistic) and Nathan Sturtevant (University of Denver) ==
+ * [http://www.third-helix.com/blog/?p=1166 third Helix - GDC 2011: AI Summit]
+== Lay of the Land: Smarter AI Through Influence Maps - Damian Isla (Moonshot Games), Alex Champandard (AiGameDev.com) and Kevin Dill (Lockheed Martin) ==
+== From AAA to Indie: Three Start-Up Stories - Daniel Cook (Spry Fox), Ichiro Lambe (Dejobaan Games, LLC) and Jake Kazdal (Haunted Temple Studios) ==
+ * [http://gdc.gamespot.com/story/6301320/startup-lessons-from-aaa-veterans?tag=top_stories%3Bstory%3B1 gamespot - Startup lessons from AAA veterans]
+ * [http://www.gamasutra.com/view/news/33288/GDC_2011_Indie_Revelations_From_Experienced_Developers.php Gamasutra - GDC 2011: Indie Revelations From Experienced Developers]
+ * [http://www.realvisiongaming.net/forums/showthread.php?t=1790 realvisiongaming - Start-up lessons from AAA veterans]
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/#aaa-indie malvasia bianca - gdc 2011: monday]
+ * [http://bfiggins.wordpress.com/2011/03/06/gdc-report-monday/ Barry Figgins - GDC Report -- Monday]
+ * [http://insearchofsecrets.com/2011/03/01/day-one-of-the-gdc-meat-money-and-maybe-meaning/ In Search of Secrets - Day One of the GDC: Meat, Money, and (Maybe) Meaning]
+== Localization and Development: A Love Story...That Leads to Great Business! - Gordon Walton (Playdom Austin) and Ian Mitchell (BioWare) ==
+ * [http://www.gamasutra.com/view/news/33312/GDC_2011_The_Travails_of_Localizing_Star_Wars_The_Old_Republic.php Gamasutra - GDC 2011: The Travails of Localizing Star Wars: The Old Republic]
+== ANGRY BIRDS - An Entertainment Franchise in the Making - Peter Vesterbacka (Rovio) ==
+ * [http://gdc.gamespot.com/story/6301293/angry-birds-lessons-learned-from-mobile-development?tag=top_stories%3Bstory%3B3 gamespot - Angry Birds: lessons learned from mobile development]
+ * [http://www.gamasutra.com/view/news/33287/GDC_2011_Rovios_Vesterbacka_Thanks_iPhone_For_Enabling_Angry_Birds_Success.php Gamasutra - GDC 2011: Rovio's Vesterbacka Thanks iPhone For Enabling Angry Birds' Success]
+ * [http://www.next-gen.biz/news/gdc-2011-rovio-hits-back-at-nintendo-app-comments next-gen.biz - GDC 2011: Rovio Hits Back At Nintendo App Comments]
+ * [http://www.tuaw.com/2011/03/01/gdc-2011-building-the-angry-birds-franchise/ tuaw - GDC 2011: Building the Angry Birds franchise]
+ * [http://www.develop-online.net/news/37169/GDC11-Rovio-on-Nintendos-099-app-warning Develop - GDC11: Rovio on Nintendo's $0.99 app warning]
+ * [http://www.develop-online.net/news/37171/GDC11-How-the-Box-2D-hero-caught-Rovio-out Develop - GDC11: How the Box 2D hero caught Rovio out]
+== Team Meat Presents: SUPER MEAT BOY, A Team Meat Meatmortem - Edmund McMillen (Cryptic Sea) and Tommy Refenes (Team Meat) ==
+ * [http://gdc.gamespot.com/story/6301170/birthing-super-meat-boy?tag=top_stories%3Bstory%3B8 gamespot - Birthing Super Meat Boy]
+ * [http://www.gamasutra.com/view/news/33286/GDC_2011_Team_Meat_Discusses_Super_Meat_Boys_Nearly_Lethal_Development.php Gamasutra - GDC 2011: Team Meat Discusses Super Meat Boy's Nearly Lethal Development]
+ * [http://www.next-gen.biz/news/gdc-2011-team-meat%E2%80%99s-groundhog-day next-gen.biz - http://www.next-gen.biz/news/gdc-2011-team-meat%E2%80%99s-groundhog-day]
+ * [http://bfiggins.wordpress.com/2011/03/06/gdc-report-monday/ Barry Figgins - GDC Report -- Monday]
+ * [http://insearchofsecrets.com/2011/03/01/day-one-of-the-gdc-meat-money-and-maybe-meaning/ In Search of Secrets - Day One of the GDC: Meat, Money, and (Maybe) Meaning]
+== New Technology and New Interfaces: Localizing Video Games for Kinect - Kate Edwards (Englobe), Yumiko Murphy (Microsoft) and Lief Thompson (Microsoft) ==
+ * [http://www.next-gen.biz/news/gdc-2011-localising-kinect next-gen.biz - GDC 2011: Localising Kinect]
+== Social Mechanics for Social Games (SOGS Design) - Raph Koster (Playdom) ==
+ * [http://www.raphkoster.com/2011/02/28/gdc11-slides-for-social-mechanics-talk/ Raph Koster - GDC11: slides for Social Mechanics talk]
+ * [http://www.gamasutra.com/view/news/33285/GDC_2011_Kosters_Big_List_Of_Social_Mechanics_For_Social_Games.php Gamasutra - GDC 2011: Koster's Big List Of Social Mechanics For Social Games]
+ * [https://www.thisisgame.com/board/view.php?id=602387&category=8101 TIG - 라프 코스터 “소셜게임의 기본은 무한경쟁”. 소셜게임을 위한 소셜역학, GDC 2011 강연]
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+== Click Zen: Zynga's Evolution from FARMVILLE to CITYVILLE (SOGS Business) - Mark Skaggs (Zynga) ==
+ * [http://www.gamasutra.com/view/news/33282/GDC_2011_Zyngas_Skaggs_On_How_The_Company_Achieved_The_Impossible.php Gamasutra - GDC 2011: Zynga's Skaggs On How The Company Achieved The Impossible]
+ * [https://www.thisisgame.com/board/view.php?id=601811&category=8101 TIG - 팜빌에서 시티빌까지, 징가의 성공 비결은? - 징가 제품개발 마크 스캑스 부사장 GDC 2011 강연]
+ * [http://www.next-gen.biz/news/gdc-2011-zynga%E2%80%99s-evolution-from-farmville-to-cityville next-gen.biz - GDC 2011: Zynga’s Evolution From FarmVille To CityVille]
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/#skaggs malvasia bianca - gdc 2011: monday]
+ * [http://www.develop-online.net/news/37168/GDC11-Zyngas-five-tips-for-social-game-success Develop - GDC11: Zynga's five tips for social game success]
+ * [http://www.develop-online.net/news/37167/GDC11-Zynga-opens-its-heart-on-studio-culture Develop - GDC11: Zynga opens its heart on studio culture]
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+== LEAGUE OF LEGENDS Postmortem -- Beta, Launch and Beyond (SOGS Design) - Tom Cadwell (Riot Games) and Steve Snow (Riot Games) ==
+ * [http://www.gamasutra.com/view/news/33279/GDC_2011_Riot_Games_League_of_Legends_Postmortem.php Gamasutra - GDC 2011: Riot Games' League of Legends Postmortem]
+ * [https://www.thisisgame.com/board/view.php?id=601739&category=8101 TIG - 리그오브레전드 라이브 개발에서 배운 것들. 라이엇게임즈 프로듀서·디자인디렉터의 GDC 강연]
+ * [http://www.next-gen.biz/news/gdc-2011-league-of-legends-postmortem next-gen.biz - GDC 2011: League Of Legends Postmortem]
+== Hakkar's Corrupted Blood Plague: How an Outbreak in WoW is Helping Epidemiologists Create Better Diseas... - Nina H. Fefferman (Rutgers University) ==
+ * [http://www.gamasutra.com/view/news/33276/GDC_2011_An_Epidemiologists_View_Of_World_Of_Warcrafts_Corrupted_Blood_Plague.php Gamasutra - GDC 2011: An Epidemiologist's View Of World Of Warcraft's Corrupted Blood Plague]
+ * [http://www.next-gen.biz/news/gdc-2011-disease-modelling-in-world-of-warcraft next-gen.biz - GDC 2011: Disease Modelling In World Of Warcraft]
+== The Humble Indie Bundle - John Graham (Wolfire Games) and Jeffrey Rosen (Wolfire) ==
+ * [http://gdc.gamespot.com/story/6301143/creating-the-humble-indie-bundle?tag=top_stories%3Bstory%3B1 gamespot - Creating the Humble Indie Bundle]
+ * [http://www.gamasutra.com/view/news/33272/GDC_2011_Humble_Indie_Bundle_Creators_Talk_Inspiration_Execution.php Gamasutra - GDC 2011: Humble Indie Bundle Creators Talk Inspiration, Execution]
+ * [http://www.next-gen.biz/news/gdc-2011-the-humble-indie-bundle next-gen.biz - GDC 2011: The Humble Indie Bundle]
+ * [http://bfiggins.wordpress.com/2011/03/06/gdc-report-monday/ Barry Figgins - GDC Report -- Monday]
+== Social & Online Game Design 2010: A Year in Review (SOGS Design) - Juan Gril (Joju Games) and Nick Fortugno (Playmatics) ==
+ * [http://www.gamasutra.com/view/news/33270/GDC_2011_Welcome_To_Masocore_The_Evolution_Of_Arcade.php Gamasutra - GDC 2011: Welcome To 'Masocore', The Evolution Of Arcade]
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+== Leave Enough Room: Design that Supports Player Expression - Randy Smith (Tiger Style) ==
+ * [http://www.next-gen.biz/features/gdc-2011-preview-randy-smith next-gen.biz - GDC 2011 Preview: Randy Smith]
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/#smith malvasia bianca - gdc 2011: monday]
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+ * [http://bfiggins.wordpress.com/2011/03/06/gdc-report-monday/ Barry Figgins - GDC Report -- Monday]
+ * [http://insearchofsecrets.com/2011/03/01/day-one-of-the-gdc-meat-money-and-maybe-meaning/ In Search of Secrets - Day One of the GDC: Meat, Money, and (Maybe) Meaning]
+== Ethics for Developers - Miguel Sicart (IT University of Copenhagen) ==
+ * [http://www.develop-online.net/news/37173/GDC11-Should-game-dev-have-a-code-of-ethics Develop - GDC11: Should game dev have a code of ethics?]
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/#sicart malvasia bianca - gdc 2011: monday]
+== Game Design by Accidents - Steph Thirion (Game Designer) ==
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/#thirion malvasia bianca - gdc 2011: monday]
+ * [http://bfiggins.wordpress.com/2011/03/06/gdc-report-monday/ Barry Figgins - GDC Report -- Monday]
+== Turning Depression into Inspiration - Michael Todd (Spyeart.com) ==
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/#todd malvasia bianca - gdc 2011: monday]
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+ * [http://bfiggins.wordpress.com/2011/03/06/gdc-report-monday/ Barry Figgins - GDC Report -- Monday]
+ * [http://insearchofsecrets.com/2011/03/01/day-one-of-the-gdc-meat-money-and-maybe-meaning/ In Search of Secrets - Day One of the GDC: Meat, Money, and (Maybe) Meaning]
+== Tapping Into Innovation - Strategies for Developing Successful Apps - Ge Wang (Smule) ==
+ * [http://www.develop-online.net/news/37160/GDC11-Tech-is-in-the-past-the-future-is-people Devlop - GDC11: 'Tech is in the past, the future is people']
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+== The ngmoco:) Live Team Playbook: Life After Launch - Caryl Shaw (ngmoco:)) ==
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+== Top 7 Social Metrics for 2011 (SOGS Essentials) - Albert Lai (Kontagent) ==
+ * [http://www.slideshare.net/kontagent/kontagents-top-7-metrics-gdc-presentation 발표자료 : Albert Lai - Kontagent's Top 7 Social Game Metrics] 
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약] 
+== Turning Data Into Better Social Games (SOGS Essentials) - David Stern (Playfish) ==
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약] 
+== Games on Smart TVs: Lessons Learned from the Development of GoogleTV (SOGS Vision) - Ian Ni-Lewis (Google) and Andres Ferrate (Google) ==
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+== Using Your Friends: Identifying the Top Interaction Mechanics in Current Social Games & Media [SOGS... - Mia Consalvo (MIT, Comparative Media Studies) ==
+ * [http://www.slideshare.net/miaconsalvo/using-your-friends-top-interaction-mechanics-in-social-games 발표자료 : Mia Consalvo - Using Your Friends: Top Interaction Mechanics in Social Games] 
+ * [http://wildcard-consulting.tistory.com/15 소셜게임당 & 와일드카드 컨설팅 - Using Your Friends: Top Interaction Mechanics in Social Games]
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+== Level Design in a Day: Best Practices from the Best in the Business - Neil Alphonso (Splash Damage), Matthias Worch (LucasArts), Coray Seifert (Arkadium), Jim Brown (Epic Games), Joel Burgess (Beth... ==
+ * [http://www.slideshare.net/LevelDesigninaDay/gdc-2011-level-design-in-a-day 발표자료 - GDC 2011 Level Design in a Day]
+ * [http://lawrencejung.wordpress.com/2011/02/28/game-developers-conference-day-1-1/ Lawrence Jung's Memories - Game Developers Conference Day 1 -- 1]
+== Level Design in a Day: Best Practices from the Best in the Business - Neil Alphonso (Splash Damage), Matthias Worch (LucasArts), Coray Seifert (Arkadium), Jim Brown (Epic Games), Joel Burgess (Beth... ==
+ * [http://www.slideshare.net/JoelBurgess/gdc2011-motivating-players-in-open-worlds Joel Burgess - Motivating Players in Open Worlds] 
+ * [http://lawrencejung.wordpress.com/2011/02/28/game-developers-conference-day-1-2/ Lawrence Jung's Memories - Game Developers Conference Day 1 -- 2]
+== Monetizing International Audiences: Asia & Latin America (SOGS Business) - James Gwertzman (PopCap Games, Inc.) and Esteban Sosnik (Atakama Labs) ==
+ * [http://www.slideshare.net/gwertzman/social-network-gaming-in-china-and-japan James Gwertzman - Social Network Gaming in China and Japan] 
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+== Smart Gamification: Virtual Systems Shaping the Physical World (SOGS Design) - Brian Morrisroe (Booyah), Amy Jo Kim (Shufflebrain) and Fiona O'Donnell-McCarthy (ModCloth) ==
+ * [http://www.slideshare.net/amyjokim/smart-gamification-gdc2011 발표자료 : Amy Jo Kim - Smart Gamification: Design The Player Journey] 
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+== Care and Feeding of Your Independent Game Studio - Arthur Humphrey (Last Day of Work) ==
+ * [http://bfiggins.wordpress.com/2011/03/06/gdc-report-monday/ Barry Figgins - GDC Report -- Monday]
+== Applifier Postmortem: From Zero to 55M Users in 100 Days (SOGS Business) - Jussi Laakkonen (Applifier) ==
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약] 
+== The Fantasy of Labor: How Social Games Create Meaning (SOGS Design) - Eric Zimmerman (Independent) and Naomi Clark (Fresh Planet) ==
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약] 
+== Community Management: Efficiencies and Economies of Scale (SOGS Essentials) - Richard Weil (Metaverse Mod Squad) ==
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]  
+== Social Network Games in Retrospective - Are We Being Social? (SOGS Essentials) - Patricia Pizer (Consultant) ==
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+== AI Pr0n: Maximum Exposure of Your Debug Info! - Brian Schwab (Blizzard Entertainment), Michael Dawe (Big Huge Games/38 Studios) and Rez Graham (Electronic Arts (Sims Divisio ==
+ * [http://www.third-helix.com/blog/?p=1166 third Helix - GDC 2011: AI Summit]
+== Staffing the Extras: Creating Convincing Background Character AI - Paul Kruszewski (Grip Entertainment) and Ben Sunshine-Hill (University of Pennsylvania) ==
+ * [http://www.third-helix.com/blog/?p=1166 third Helix - GDC 2011: AI Summit]
+
+= 화 Tues 3월 1일 =
+== Keith Self-Ballard “In Advocacy of Tech Art” ==
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_KeithSelf-Ballard_Advocacy.pdf 발표자료]
+== Scott Goffman “Making Tools Your Artists Will Use” ==
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_ScottGoffman_MakingGoodTools.pdf 발표자료]
+== Seth Gibson “TA Personality Assessment” ==
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_SethGibson_TAPersonalityAssessment.pptx 발표자료]
+== Steve Theodore “Epic Fail” ==
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_SteveTheodore_EpicFail.pdf 발표자료]
+== Adam Pletcher “Tech Art and Databases” ==
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_AdamPletcher_Databases.pdf 발표자료]
+== Bryan Moss “Using Sim Data In Realtime With Video Textures” ==
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_BryanMoss_VideoCloth.pdf 발표자료]
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_BryanMoss_VideoCloth_VIDEOS.zip 비디오]
+== Bronwen Grimes “Shader Techniques in Portal 2” ==
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_BronwenGrimes_NonstandardTextures.pdf 발표자료]
+== Technical Artist Boot Camp: Lessons in How to Create and Be an Effective TA ==
+ * [http://bcloward.blogspot.com/2011/03/gdc-2011-tuesday.html Ben's Learning Log  - GDC 2011 - Tuesday ]
+== Ending the Curture War - Rob Galanakis - Technical Artist Boot Camp: Lessons in How to Create and Be an Effective TA ==
+ * [http://tech-artists.org/downloads/GDC2011/robgalanakis_endingculturewar_gdc2011.pdf 발표자료 PDF]
+ * [http://tech-artists.org/downloads/GDC2011/GDC2011_RobGalanakis_EndingCultureWar.pdf 발표자료 + note]
+ * [http://www.robg3d.com/ 홈페이지]
+== AI Development Postmortems: Inside DARKSPORE and THE SIMS: MEDIEVAL - Rez Graham (Electronic Arts (Sims Division)), Lauren McHugh (Maxis) and Dan Kline (Maxis) ==
+ * [http://dankline.wordpress.com/ 발표자(dankline) 블로그]
+ * [http://dankline.files.wordpress.com/2011/03/abilities_ai_summit_gdc_2011_widescreen.ppt GDC 2011: Abilities in Darkspore 발표자료]
+== Flirting with the Dark Side: Scripting and AI - Damian Isla (Moonshot Games) and Mike Lewis (EGOSOFT) ==
+ * [http://members.gamedev.net/bag-of-holding/gdc2011/darkside.html 발표자료]
+== AI Unplugged: How Experienced Devs Think Through AI - Dave Mark (Intrinsic Algorithm), Brian Schwab (Blizzard Entertainment), Borut Pfeifer (Independent), Chris Jurney (Double Fine Pro..) ==
+== A Debate: Are Social Games Legitimate? (SOGS Vision) - Daniel James (Three Rings), Ian Bogost (The Georgia Institute of Technology), Curt Bererton (ZipZapPlay Inc.), Margaret Robertson ... ==
+ * [http://gdc.gamespot.com/story/6301485/are-social-games-evil?tag=top_stories%3Bstory%3B8 gamespot - Are social games evil?]
+ * [http://www.gamasutra.com/view/news/33316/GDC_2011_Debating_The_Relative_Evils_Of_Social_Games.php Gamasutra - GDC 2011: Debating The Relative Evils Of Social Games]
+ * [http://www.next-gen.biz/news/gdc-2011-are-social-games-legitimate next-gen.biz - GDC 2011: Are Social Games Legitimate?]
+ * [http://www.gamedev.net/blog/984/entry-2249571-gdc-2011-day-2/ gamedev - GDC 2011: Day 2]
+== The Great Gamification Debate! SGS Gamification - Jesse Schell (Schell Games), Jane McGonigal (Social Chocolate), Ian Bogost (The Georgia Institute of Technology), Noah Falstein (The... ==
+ * [http://gdc.gamespot.com/story/6301575/the-pros-and-cons-of-gamification-?tag=top_stories%3Bstory%3B5 gamespot - The pros and cons of gamification]
+ * [http://www.gamasutra.com/view/news/33315/GDC_2011_Time_To_Ditch_The_Term_Gamification.php Gamasutra - GDC 2011: Time To Ditch The Term 'Gamification'?]
+ * [http://haralab.net/note/?p=2137 HaraWish - 2011년 샌프란시스코 넷째 날, GDC 둘째 날]
+== Intuition vs Metrics: How Social Game Design Has Evolved (SOGS Design) - Brenda Brathwaite (Loot Drop) and Laralyn McWilliams (Sony Online Entertainment) ==
+ * [http://public.iwork.com/document/ko/?a=p1301804960&d=GDC11_IntvsMet.key 발표자료]
+ * [http://www.gamasutra.com/view/news/33308/GDC_2011_What_IntuitionLed_And_MetricLed_Game_Design_Can_Learn_From_One_Another.php Gamasutra - GDC 2011: What Intuition-Led And Metric-Led Game Design Can Learn From One Another]
+ * [http://bbrathwaite.wordpress.com/2011/03/01/gdc-2011-slides-for-gdc-education-vs-intuition-talk/ Applied Game Design - GDC 2011: Slides for GDC Education vs. Intuition Talk]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-tuesday/#mcwilliams-brathwaite bianca - gdc 2011: tuesday]
+== How to Win the IGF in 15 Weeks or Less - Andy Schatz (Pocketwatch Games) ==
+ * [http://gdc.gamespot.com/story/6301497/want-to-win-the-igf-in-under-4-months-heres-how?tag=top_stories%3Bstory%3B6 gamespot - Want to win the IGF in under 4 months? (Here's how)]
+ * [http://www.gamasutra.com/view/news/33313/GDC_2011_Andy_Schatz_Ill_Make_My_Last_Game_When_I_Die.php Gamasutra - GDC 2011: Andy Schatz: 'I'll Make My Last Game When I Die']
+ * [http://www.gamedev.net/blog/984/entry-2249571-gdc-2011-day-2/ gamedev - GDC 2011: Day 2]
+ * [http://insearchofsecrets.com/2011/03/02/day-two-of-the-gdc-what-does-it-mean-to-be-indie/ In Search of Secrets - Day Two of the GDC: What Does It Mean to Be “Indie”?]
+ * [http://stachmo.wordpress.com/2011/03/09/the-epic-gdc-adventure-11-day-2/ The Epic GDC’11 Adventure -- Day 2]
+ * [http://www.third-helix.com/blog/?p=1167 third Helix - GDC 2011: Indie Games Summit]
+== We Don't Need No Stinkin' Badges: How to Re-invent Reality Without Gamification (SGS Gamification) - Jane McGonigal (Social Chocolate) ==
+ * [http://www.slideshare.net/avantgame/we-dont-need-no-stinkin-badges-how-to-reinvent-reality-without-gamification 발표자료]
+ * [http://www.gamasutra.com/view/news/33309/GDC_2011_McGonigal_Says_Dont_Exploit_Gamers_Extrinsic_Rewards_Missing_The_Point.php Gamasutra - GDC 2011: McGonigal Says, 'Don't Exploit Gamers,' Extrinsic Rewards 'Missing The Point' ]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-tuesday/#mcgonigal bianca - gdc 2011: tuesday]
+ * [http://haralab.net/note/?p=2137 HaraWish - 2011년 샌프란시스코 넷째 날, GDC 둘째 날]
+ * [http://www.gamedev.net/blog/984/entry-2249571-gdc-2011-day-2/ gamedev - GDC 2011: Day 2]
+== How to Survive the Inevitable Enslavement of Developers by Facebook (SOGS Vision) - Daniel Cook (Spry Fox) ==
+ * [http://www.gamasutra.com/view/news/33306/GDC_2011_Game_Developers_And_The_Platform_Power_Struggle.php Gamasutra - GDC 2011: Game Developers And The Platform Power Struggle]
+ * [https://www.thisisgame.com/board/view.php?id=602389&category=8101 TIG - 소셜게임들이여, 페이스북을 떠나라? 페이스북의 노예가 되는 개발자의 생존법, GDC 2001]
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== iPad Games: Touching the World on the Other Side of the Glass - Graeme Devine (GRL Games) ==
+ * [http://www.gamasutra.com/view/news/33310/GDC_2011_The_Brand_New_Paradigm_Of_iPad_Development.php Gamasutra - GDC 2011: The 'Brand New Paradigm' Of iPad Development]
+ * [http://www.next-gen.biz/news/gdc-2011-industry-veteran-graeme-devine-defends-social-games next-gen.biz - GDC 2011: Industry Veteran Graeme Devine Defends Social Games]
+ * [http://www.tuaw.com/2011/03/05/gdc-2011-graeme-devine-on-the-ipad-for-gaming/ tuaw - GDC 2011: Graeme Devine on the iPad for gaming]
+== The Full Spelunky on SPELUNKY XBLA - Derek Yu (Independent) and Andy Hull (Story Fort) ==
+ * [http://www.gamasutra.com/view/news/33302/GDC_2011_Derek_Yu_Andy_Hull_Discuss_Spelunky_XBLA_Move_Multiplayer.php Gamasutra - GDC 2011: Derek Yu, Andy Hull Discuss Spelunky XBLA Move, Multiplayer]
+ * [http://www.third-helix.com/blog/?p=1167 third Helix - GDC 2011: Indie Games Summit]
+== INFINITY BLADE: How We Made a Hit, What We Learned, and Why You Can Do it Too! - Donald Mustard (ChAIR Entertainment Group) ==
+ * [http://www.gamasutra.com/view/news/33300/GDC_2011_Chairs_Core_Tenets_For_Infinity_Blade_Success.php Gamasutra - GDC 2011: Chair's Core Tenets For Infinity Blade Success]
+ * [http://www.next-gen.biz/news/gdc-2011-the-secrets-of-chair%E2%80%99s-success next-gen.biz - GDC 2011: The Secrets Of Chair’s Success]
+ * [http://haralab.net/note/?p=2137 HaraWish - 2011년 샌프란시스코 넷째 날, GDC 둘째 날]
+== Changing the Way We Make Games: Lessons Learned in the Transition from AAA to Mobile Development - Vijay Thakkar (Zynga With Friends) ==
+ * [http://www.gamasutra.com/view/news/33299/GDC_2011_Zynga_with_Friends_Thakkar_On_Transitioning_from_AAA_To_Mobile.php Gamasutra - GDC 2011: Zynga with Friends’ Thakkar On Transitioning from AAA To Mobile]
+== Game Educators Rant! - Frank Lantz (Area/Code/Zynga), Brenda Brathwaite (Loot Drop), Michael Mateas (University of California, Santa Cruz), Ian Schreib. ==
+ * [http://bbrathwaite.wordpress.com/2011/03/01/built-on-a-foundation-of-code-game-edu-rant/ Applied Game Design - Built on a Foundation of Code -- Game Edu Rant]
+ * [http://teachingdesign.blogspot.com/2011/03/my-education-rant.html Ian Schreiber - My Education Rant]
+== Indie Fund: Lessons from the First Year - Nathan Vella (Capybara Games), Kellee Santiago (thatgamecompany), Ron Carmel (Indie Fund), Mystery Developer #1 (TBA), Mys... ==
+ * [http://www.next-gen.biz/features/gdc-2011-preview-ron-carmel next-gen.biz - GDC 2011 Preview: Ron Carmel]
+ * [http://www.lead411.com/Erin_Catto_5365894.html Physics for Game Programmers]
+ * [http://insearchofsecrets.com/2011/03/02/day-two-of-the-gdc-what-does-it-mean-to-be-indie/ In Search of Secrets - Day Two of the GDC: What Does It Mean to Be “Indie”?]
+== CITY OF WONDER: Postmortem (SOGS Design) - Troy Whitlock (Playdom) and Scott Jon Siegel (Playdom) ==
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-tuesday/#siegel malvasia bianca - gdc 2011: tuesday]
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== Humanities Unlocked: The Value of Liberal Arts for Your Game Design Program - Mia Consalvo (MIT, Comparative Media Studies) ==
+ * [http://www.slideshare.net/miaconsalvo/humanities-unlocked-the-value-of-liberal-arts-for-your-game-design-program 발표자료 : Mia Consalvo - Humanities Unlocked: The Value of Liberal Arts for your Game Design Program] 
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-tuesday/#consalvo malvasia bianca - gdc 2011: tuesday]
+== Rapid-Fire Indies - Chris Hecker (definition six, inc.), Petri Purho (Kloonigames), David Hellman (The Hellman Studio LLC), Eddy Boxerman (Hemispher .. ==
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-tuesday/#rapid-fire-indies bianca - gdc 2011: tuesday]
+ * [http://www.scribd.com/doc/50304169/Chris-DeLeon-IGS-Rapid-Fire-Indies Chris DeLeon - Chris DeLeon IGS Rapid-Fire Indies]
+ * [http://www.gamedev.net/blog/984/entry-2249571-gdc-2011-day-2/ gamedev - GDC 2011: Day 2]
+ * [http://insearchofsecrets.com/2011/03/02/day-two-of-the-gdc-what-does-it-mean-to-be-indie/ In Search of Secrets - Day Two of the GDC: What Does It Mean to Be “Indie”?]
+== People in Your Pocket: High-Quality AI on Mobile Devices - Andrew Stern (ngmoco), Richard Evans (Little Text People) and Emily Short (Independent) ==
+ * [http://haralab.net/note/?p=2137 HaraWish - 2011년 샌프란시스코 넷째 날, GDC 둘째 날]
+== The Fun in Blending Digital and Real Worlds - Keith Lee (Booyah) ==
+ * [http://haralab.net/note/?p=2137 HaraWish - 2011년 샌프란시스코 넷째 날, GDC 둘째 날]
+== Escape from Crazyville: How to Publish Social Games Online without Dependence on Facebook (Presented by... - Alex St. John (hi5) ==
+ * [http://www.slideshare.net/hi5network/hi5-at-gdc-2011-escape-from-crazyville-how-to-publish-social-games-online-without-dependence-on-facebook 발표자료]
+== Learn Better Game Writing in a Day - Evan Skolnick (Independent) ==
+ * [http://bfiggins.wordpress.com/2011/03/08/gdc-report-tuesday/ Barry Figgins - GDC Report -- Tuesday]
+ * [http://lawrencejung.wordpress.com/2011/03/01/game-developers-conference-day-2-1/ Lawrence Jung's Memories - Game Developers Conference Day 2 -- 1]
+ * [http://lawrencejung.wordpress.com/2011/03/01/game-developers-conference-day-2-%E2%80%93-2/ Lawrence Jung's Memories - Game Developers Conference Day 2 -- 2]
+== Finding Your Way with Havok AI (Presented by Havok) - Chris Elion (Havok) and Brett Vickers (ArenaNet) ==
+ * [http://bfiggins.wordpress.com/2011/03/08/gdc-report-tuesday/ Barry Figgins - GDC Report -- Tuesday]
+== The Next Steps of Indie: Four Perspectives - Luke Schneider (Radiangames), Brian Provinciano (Vblank Entertainment), Dajana Dimovska (Copenhagen Game Productions) and Je. ==
+ * [http://insearchofsecrets.com/2011/03/02/day-two-of-the-gdc-what-does-it-mean-to-be-indie/ In Search of Secrets - Day Two of the GDC: What Does It Mean to Be “Indie”?]
+== Behavioral Economics and Social Games (SOGS Business) - David Botkin (Playdom) and Elena Rykhlevskaia (Playdom) ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== Scaling Social Games: What Game Development Can Learn from the Cloud (SOGS Tech) - Dan Borthwick (Playfish) ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== What's the Story Morning Glory? (SOGS Design) - Kenny Shea Dinkin (Independent) and James Portnow (Rainmaker Games) ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== IP and Brands: 4 Postmortems (SOGS Business) - CJ Wolf (iWin), Steve Meretzky (Playdom), Robert Ollett (Bigpoint) and Robert Tomkinson (Playfish) ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== Retain Your Customers by Letting Go: Fixing the Short Term Tactics that Threaten Player Loyalty - Scott Rigby (Immersyve) ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== Social Speed - Improving Flash Performance for Social Games (SOGS Tech) - Amitt Mahajan (Zynga) ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== Emerging Technologies Review (SOGS Tech) - Vladimir Vukicevic (Mozilla Corporation), Brad Edelman (Cleverfocus LLC), Lee Thomason (Adobe Systems) and Cory Ondrejka ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+== Bringing a Design Culture to Social Games Developers: Trial and Error (SOGS Business) - Bernie Yee (Episode Technologies) ==
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+ 
+= 수 Wed =
+== Player-Driven Stories: How Do We Get There? - Kent Hudson (LucasArts) ==
+ * [http://gdc.gamespot.com/story/6301773/putting-players-behind-the-story-wheel?tag=top_stories%3Bstory%3B1 gamespot - Putting players behind the story wheel]
+ * [http://www.next-gen.biz/features/gdc-2011-preview-kent-hudson next-gen.biz - GDC 2011 Preview: Kent Hudson]
+ * [http://www.gamedev.net/blog/984/entry-2249578-gdc-2011-day-3/ gamedev - GDC 2011: Day 3]
+== Video Games Turn 25: A Historical Perspective and Vision for the Future - Satoru Iwata (Nintendo Co., Ltd.) ==
+ * [http://gdc2011.nintendo.com/ 강연 영상]
+ * [http://www.gamasutra.com/view/news/33328/GDC_2011_Nintendos_Iwata_On_Design_Lessons_Social_Mobile_Risks.php Gamasutra - GDC 2011: Nintendo's Iwata On Design Lessons, Social, Mobile Risks]
+ * [http://www.gamasutra.com/view/news/33324/GDC_2011_Nintendo_Announces_Netflix_Super_Mario_For_3DS.php Gamasutra - GDC 2011: Nintendo Announces Netflix, Super Mario For 3DS]
+ * [https://www.thisisgame.com/board/view.php?id=603060&category=8101 Gamasutra - 3D로 점프를? 3DS용 ‘슈퍼마리오’ 발표. 닌텐도 이와타 사토루 사장, GDC 2011 기조강연]
+ * [http://www.next-gen.biz/news/gdc-2011-super-mario-3ds-announced next-gen - GDC 2011: Super Mario 3DS Announced]
+ * [http://www.next-gen.biz/news/gdc-2011-netflix-for-3ds next-gen - GDC 2011: Netflix For 3DS]
+ * [http://www.next-gen.biz/news/gdc-2011-iwata-hits-out-at-mobile-social-games next-gen - GDC 2011: Iwata Hits Out At Mobile, Social Games]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-wednesday/#iwata malvasia bianca - gdc 2011: wednesday]
+ * [http://vaders.blog.me/80125663212 MUST HAVE 게임을 만드는 방법 (GDC2011 닌텐도 이와타 사토루 기조연설)]
+ * [http://chulin28ho.egloos.com/5494823 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 수요일 강연내용]
+== Fighting Real Time - Jacky Mallett (CCP) ==
+== Forensic Debugging: How to Autopsy, Repair, and Reanimate a Release-built Game - Elan Ruskin (Valve Corporation) ==
+ * [http://assemblyrequired.crashworks.org/gdc-2011-crash-analysis-and-forensic-debugging/ GDC 2011: Crash Analysis and Forensic Debugging]
+== The Failure Workshop - Chris Hecker (definition six, inc.), Kyle Gabler (2D Boy), Matthew Wegner (Flashbang Studios), Kyle Gray (Tomorrow Corporation) ==
+ * [http://www.gamasutra.com/view/news/33339/GDC_2011_Game_Designers_Confront_Learn_From_Failure.php Gamasutra - GDC 2011: Game Designers Confront, Learn From Failure]
+ * [http://bfiggins.wordpress.com/2011/03/08/gdc-report-wednesday/ Barry Figgins - GDC Report -- Wednesday]
+== Living Crowds: AI & Animation in ASSASSIN'S CREED: BROTHERHOOD - Nicolas Barbeau (Ubisoft) and Aleissia Laidacker (Ubisoft) ==
+== Classic Game Postmortem - PAC-MAN - Toru Iwatani (Namco) ==
+ * [http://gdc.gamespot.com/video/6301784/?hd=1&tag=top_stories%3Bplay_btn%3B7 gamespot - 발표비디오]
+ * [http://gdc.gamespot.com/video/6301784/ 영상 - Classic Postmortem - Pac-Man] 
+ * [http://gdc.gamespot.com/story/6301768/pac-man-man-talks-pac-man-to-pack-of-men?tag=top_stories%3Bstory%3B2 gamespot - Pac-Man man talks Pac-Man to pack of men]
+ * [http://www.gamasutra.com/view/news/33338/GDC_2011_PacMan_Creator_Iwatani_Discusses_FemaleFriendly_Design_Lessons.php Gamasutra - GDC 2011: Pac-Man Creator Iwatani Discusses Female-Friendly Design Lessons]
+ * [http://www.thisisgame.com/board/view.php?id=603327&category=8101 TIG - ‘여성을 겨냥한 1인 게임’ 팩맨의 탄생 비화. 이와타니 토루 ‘팩맨’ 원작자의 GDC 2011 강연]
+ * [http://www.next-gen.biz/news/gdc-2011-classic-game-postmortem-%E2%80%93-pac-man next-gen.biz - GDC 2011: Classic Game Postmortem -- Pac-Man]
+ * [http://www.nintendoworldreport.com/feature/25579 NintendoWorldReport - GDC 2011: Toru Iwatani - Pac-Man Postmortem]
+== Classic Game Postmortem: PRINCE OF PERSIA - Jordan Mechner ==
+ * [http://gdc.gamespot.com/story/6301654/prince-of-persia-postmortem?tag=top_stories%3Bstory%3B10 gamespot - Prince of Persia postmortem]
+ * [http://www.gamasutra.com/view/news/33331/GDC_2011_Prince_Of_Persia_Was_Almost_Derailed_By_Screenwriting_Project.php Gamasutra - GDC 2011: Prince Of Persia Was Almost Derailed By Screenwriting Project]
+ * [http://www.thisisgame.com/board/view.php?id=603224&category=8101 TIG - 영화작가 지망생, 페르시아의 왕자가 되다 : 원작자 조던 매크너의 개발 비화, GDC 2011 강연]
+== Remaking the WORLD OF WARCRAFT through CATACLYSM - Tom Chilton (Blizzard Entertainment) ==
+ * [http://wow.joystiq.com/2011/03/02/gdc-2011-tom-chilton-discusses-cataclysm-design-talent-and-zon/ joystiq - GDC 2011: Tom Chilton discusses Cataclysm design, talent and zone revamps]
+ * [http://www.gamasutra.com/view/news/33335/GDC_2011_Blizzards_Cataclysm_And_Retaining_A_Games_Soul.php Gamasutra - GDC 2011: Blizzard's Cataclysm And Retaining A Game's 'Soul']
+ * [http://www.thisisgame.com/board/view.php?id=604646&category=8101 ‘1/3의 법칙’ 대격변으로 WoW 다시 만들[기 - ‘1/3의 법칙’ 대격변으로 WoW 다시 만들기]
+== Development Process of Nintendo 3DS - Hideki Konno (Nintendo) ==
+ * [http://www.gamasutra.com/view/news/33351/GDC_2011_Nintendos_Konno_3DS_Social_Innovation_Complex_Prototyping.php Gamasutra - GDC 2011: Nintendo's Konno: 3DS' Social Innovation, Complex Prototyping]
+ * [https://www.thisisgame.com/board/view.php?id=603221&category=8101 TIG - ‘플레이가 곧 믿음’ 닌텐도 3DS의 제작과정. 3DS 개발책임자 콘노 히데키의 GDC 2011 강연]
+== The Future is Now: Why Japan's Mobile Market is a Leading Indicator - Neil Young (ngmoco:)) ==
+ * [http://www.gamasutra.com/view/news/33337/GDC_2011_Ngmocos_Young_Tells_Game_Entrepreneurs_Dont_Be_A_Pussy.php Gamasutra - GDC 2011: Ngmoco’s Young Tells Game Entrepreneurs 'Don't Be A Pussy']
+== Beyond Horror: Art Directing DEAD SPACE 2 - Ian Milham (Electronic Arts Redwood Shores) ==
+ * [http://www.gamasutra.com/view/news/33336/GDC_2011_Dead_Space_2s_Milham_Double_Down_On_Successes.php Gamasutra - GDC 2011: Dead Space 2's Milham: 'Double Down On Successes']
+ * [http://chulin28ho.egloos.com/5494911 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 수요일 강연내용2]
+== Seven Ways a Video Game Can Be Moral - Richard Rouse III (Ubisoft Montreal) ==
+ * [http://www.next-gen.biz/features/gdc-2011-preview-richard-rouse-iii next-gen.biz - GDC 2011 Preview: Richard Rouse III]
+ * [http://www.gamasutra.com/view/news/33333/GDC_2011_Ubisofts_Rouse_On_Making_Games_Moral.php Gamastura - GDC 2011: Ubisoft's Rouse On Making Games Moral]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-wednesday/#rouse malvasia bianca - gdc 2011: wednesday]
+ * [http://insearchofsecrets.com/2011/03/03/day-three-of-the-gdc-the-state-of-the-art/ In Search of Secrets - Day Three of the GDC: The State of the Art]
+== Life and Death and Middle Pair: Go, Poker and the Sublime - Frank Lantz (Area/Code/Zynga) ==
+ * [http://www.gamasutra.com/view/news/33334/GDC_2011_AreaCodes_Frank_Lantz_On_Finding_The_Sublime_In_Game_Design.php Gamastura - GDC 2011: Area/Code's Frank Lantz On Finding The Sublime In Game Design]
+ * [http://www.gamedev.net/blog/984/entry-2249578-gdc-2011-day-3/ gamedev - GDC 2011: Day 3]
+ * [http://insearchofsecrets.com/2011/03/03/day-three-of-the-gdc-the-state-of-the-art/ In Search of Secrets - Day Three of the GDC: The State of the Art]
+ * [http://www.third-helix.com/blog/?p=1169 third Helix - GDC 2011: Game Design Talks]
+== Yu Suzuki's Gameworks: A Career Retrospective - Mark Cerny (Cerny Games) and Yu Suzuki (SEGA) ==
+ * [http://www.gamasutra.com/view/news/33332/GDC_2011_Yu_Suzuki_Describes_Arcade_Successes_Near_Death_Experiences.php Gamastura - GDC 2011: Yu Suzuki Describes Arcade Successes, Near Death Experiences]
+ * [http://www.gamasutra.com/view/news/33329/GDC_2011_Yu_Suzuki_Sega_Will_Probably_Let_Me_Make_Shenmue_3.php Gamastura - GDC 2011: Yu Suzuki: 'Sega Will Probably Let Me Make Shenmue 3']
+ * [http://www.gamasutra.com/view/news/33281/GDC_2011_Shenmue_Town_Likely_Getting_Smartphone_Port_Says_Suzuki.php Gamastura - GDC 2011: Shenmue Town Likely Getting Smartphone Port, Says Suzuki]
+ * [http://www.next-gen.biz/news/gdc-2011-suzuki-will-%E2%80%9Cprobably%E2%80%9D-make-shenmue-iii next-gen - GDC 2011: Suzuki Will “Probably” Make Shenmue III]
+ * [http://bfiggins.wordpress.com/2011/03/08/gdc-report-wednesday/ Barry Figgins - GDC Report -- Wednesday]
+== GDC Microtalks 2011: One Hour, Ten Speakers, Hundreds of Fun New Ideas - David Jaffe (Eat Sleep Play), Michael John (Electronic Arts), Richard Lemarchand (Naughty Dog), Brenda Brathwaite (Loot Drop) ==
+ * [http://gdc.gamespot.com/story/6301782/gdc-microtalks-jaffe-lemarchand-brathwaite-on-gamings-future?tag=top_stories%3Bstory%3B8 gamespot - GDC Microtalks: Jaffe, Lemarchand, Brathwaite on gaming's future]
+ * [http://www.next-gen.biz/news/gdc-2011-jaffe-bemoans-console-%E2%80%9Cramp-up-time%E2%80%9D next-gen.biz - GDC 2011: Jaffe Bemoans Console “Ramp-Up Time”]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-wednesday/#microtalks malvasia bianca - gdc 2011: wednesday]
+ * [http://www.gamedev.net/blog/984/entry-2249578-gdc-2011-day-3/ gamedev - GDC 2011: Day 3]
+ * [http://bfiggins.wordpress.com/2011/03/08/gdc-report-wednesday/ Barry Figgins - GDC Report -- Wednesday]
+ * [http://insearchofsecrets.com/2011/03/03/day-three-of-the-gdc-the-state-of-the-art/ In Search of Secrets - Day Three of the GDC: The State of the Art]
+ * [http://www.third-helix.com/blog/?p=1169 third Helix - GDC 2011: Game Design Talks]
+== Creating an Emotional Rollercoaster in HEAVY RAIN - David Cage (Quantic Dream) ==
+ * [http://gdc.gamespot.com/story/6301812/david-cage-on-creating-emotion-in-heavy-rain?tag=top_stories%3Bstory%3B3 gamespot - David Cage on creating emotion in Heavy Rain]
+ * [http://www.next-gen.biz/news/gdc-2011-david-cage-considering-war-game-next next-gen.biz - GDC 2011: David Cage Considering War Game Next]
+ * [http://insearchofsecrets.com/2011/03/03/day-three-of-the-gdc-the-state-of-the-art/ In Search of Secrets - Day Three of the GDC: The State of the Art]
+ * [http://gamegameblog.wordpress.com/2011/03/03/games-as-art-part-4-david-cage-gdc-2011/ GameGameBlog - Games as Art -- Part 4 (David Cage GDC 2011)]
+== Prototype Through Production: Pro Guitar in ROCK BAND 3 - Jason Booth (Harmonix Music Systems) and Sylvain Dubrofsky (Harmonix Music Systems) ==
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-rock-band-3-pro-guitar/ malvasia bianca - gdc 2011: rock band 3 pro guitar]
+ * [http://bfiggins.wordpress.com/2011/03/08/gdc-report-wednesday/ Barry Figgins - GDC Report -- Wednesday]
+== Dynamics: The State of the Art - Clint Hocking (LucasArts) ==
+ * [http://gdc.gamespot.com/story/6301644/how-dynamics-create-meaning-in-games?tag=top_stories%3Bstory%3B9 gamespot - How dynamics create meaning in games]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-clint-hocking-on-dynamics/ malvasia bianca - gdc 2011: clint hocking on dynamics]
+ * [http://www.gamedev.net/blog/984/entry-2249578-gdc-2011-day-3/ gamedev - GDC 2011: Day 3]
+ * [http://doublebuffered.com/2011/03/15/gdc-2011-dynamics-the-state-of-the-art/ Double Buffered - GDC 2011: Dynamics, The State of the Art]
+ * [http://insearchofsecrets.com/2011/03/03/day-three-of-the-gdc-the-state-of-the-art/ In Search of Secrets - Day Three of the GDC: The State of the Art]
+ * [http://www.third-helix.com/blog/?p=1169 third Helix - GDC 2011: Game Design Talks]
+== Designing LIMBO's Puzzles - Jeppe Carlsen (Playdead) ==
+ * [http://gdc.gamespot.com/story/6301771/playdead-on-limbos-puzzles?tag=top_stories%3Bstory%3B4 gamespot - Playdead on Limbo's puzzles]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-wednesday/#carlsen malvasia bianca - gdc 2011: wednesday]
+ * [http://haralab.net/note/?p=2141 HaraWish - 2011년 샌프란시스코 다섯째 날, GDC 셋째 날]
+== Designing Games for the 43-Year-Old Woman - Chris Trottier (Zynga) ==
+ * [http://www.slideshare.net/ctrottier1/designing-games-for-the-43yearold-woman 강연 슬라이드] 
+ * [http://haralab.net/note/?p=2141 HaraWish - 2011년 샌프란시스코 다섯째 날, GDC 셋째 날]
+ * [http://pbkim.egloos.com/3591954 Yu Chun 만쉐이! - GDC2011. 43세 여성이 즐기고 싶은 게임은? ]
+== 1-Hour Video Game MBA - Charlie Cleveland (Unknown Worlds Entertainment) ==
+ * [http://pbkim.egloos.com/3594401 Yu Chun 만쉐이! - GDC2011 1시간 비디오 게임 MBA ]
+== Culling the Battlefield: Data Oriented Design in Practice - Daniel Collin (EA DICE) ==
+ * [http://publications.dice.se/attachments/CullingTheBattlefield.pdf 발표자료]
+== SPU-Based Deferred Shading in BATTLEFIELD 3 for Playstation 3 - Christina Coffin (DICE) ==
+ * [http://publications.dice.se/attachments/Christina_Coffin_Programming_SPU_Based_Deferred.pptx 발표자료]
+== IGDA Business and Legal SIG Meeting - Dan Rosenthal (GamePolitics.com) ==
+ * [http://www.gamedev.net/blog/984/entry-2249580-igda-business-and-legal-sig-official/ gamedev - IGDA Business and Legal SIG official]
+== Data Management For Modern Game Pipelines (Presented by Autodesk) - Mathieu Mazerolle (Autodesk Inc.) and Alexandre Jean-Claude (Autodesk) ==
+ * [http://area.autodesk.com/gdc2011/spon_dna?KeepThis=true&TB_iframe=true&height=520&width=840 발표비디오]
+== Oh my.Maya is Qt! (Presented by Autodesk) - Kristine Middlemiss (Autodesk) ==
+ * [http://area.autodesk.com/gdc2011/spon_mayaqt?KeepThis=true&TB_iframe=true&height=520&width=840 발표비디오]
+== Exploring the Maya Entertainment Creation Suite (Presented by Autodesk) - Lee Fraser (Autodesk) and Craig Barr (Autodesk) ==
+ * [http://area.autodesk.com/gdc2011/spon_explomaya?KeepThis=true&TB_iframe=true&height=520&width=840 발표비디오]
+== 3ds Max Tips & Tricks (Presented by Autodesk) - Louis Marcoux (Autodesk) ==
+ * [http://area.autodesk.com/gdc2011/spon_maxtips?KeepThis=true&TB_iframe=true&height=520&width=840 발표비디오]
+== Take Your Lighting Tools to the Next Level with Autodesk Beast 2012 (Presented by Autodesk) - David Larsson (Autodesk) ==
+ * [http://area.autodesk.com/gdc2011/spon_beast?KeepThis=true&TB_iframe=true&height=520&width=840 발표비디오]
+== Classic Game Postmortem - ELITE - David Braben (Frontier Developments) ==
+ * [http://gdc.gamespot.com/story/6301740/how-elite-took-flight?tag=top_stories%3Bstory%3B6 gamespot - How Elite took flight]
+== Making Game Trailers: Cost-effective Results for All Budgets ==
+ * [http://chulin28ho.egloos.com/5494823 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 수요일 강연내용]
+== Cinematic Character Lighting in STAR WARS: THE OLD REPUBLIC ==
+ * [http://chulin28ho.egloos.com/5494823 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 수요일 강연내용]
+== Punching Above Your Weight: Small Art Teams, Big Games ==
+ * [http://chulin28ho.egloos.com/5494911 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 수요일 강연내용2]
+== Efficient Scaling in a Task-Based Game Engine (Presented by Intel) - Yannis Minadakis (Intel) ==
+ * [http://software.intel.com/file/34615 발표자료]
+== MAXIS-mizing Darkspore Game Performance with Intel GPA 4.0! (Presentedy by Intel) - Omar A Rodriguez (Intel Corporation) and David Swenson (Electronic Arts) ==
+ * [http://software.intel.com/file/34642/ 발표자료]
+== Monetizing Games on Devices: Intel's AppUp 'Stores on Store' Model (Presented by Intel) - Scott Crabtree (Intel) ==
+ * [http://software.intel.com/file/34649 발표자료]
+== NBA JAM 2010 - Bringing Back the BOOMSHAKALAKA! - Trey Smith (Electronic Arts) ==
+ * [http://bfiggins.wordpress.com/2011/03/08/gdc-report-wednesday/ Barry Figgins - GDC Report -- Wednesday]
+
+= 목 Thurs  =
+== Biofeedback in Gameplay: How Valve Measures Physiology to Enhance Gaming Experience - Mike Ambinder (Valve Software) ==
+ * [http://www.next-gen.biz/features/gdc-2011-preview-mike-ambinder next-gen.biz - GDC 2011 Preview: Mike Ambinder]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-thursday/#ambinder malvasia bianca - gdc 2011: thursday]
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-thursday/ Barry Figgins - GDC Report -- Thursday]
+== Keep it Together: Encouraging Cooperative Behavior During Co-op Play - Patrick Redding (Ubisoft Toronto) ==
+ * [http://holesinteeth.typepad.com/blogginess/2011/03/gdc-2011-getting-my-act-together.html 발표자 홈페이지]
+ * [http://holesinteeth.typepad.com/blogginess/files/Patrick_Redding_Design_KeepItTogether.pdf 발표자료]
+ * [http://www.gamedev.net/blog/984/entry-2249579-keep-it-together-encouraging-cooperative-behavior-during-co-op-play/ gamedev - Keep it Together: Encouraging Cooperative Behavior During Co-Op Play]
+ * [http://www.next-gen.biz/features/gdc-2011-preview-patrick-redding next-gen.biz - GDC 2011 Preview: Patrick Redding]
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-thursday/ Barry Figgins - GDC Report -- Thursday]
+== 1000s of Zombies, 1000s of Problems: The DEAD RISING 2 Multiplayer Experience - Dee Jay Randall (Capcom Game Studio Vancouver) ==
+ * http://www.gdcvault.com/free/gdc-11 에 발표자료 있음
+== CRYSIS 2: Getting More Interactivity out of Animation-Data - Ivo Herzeg (Crytek) ==
+ * http://www.gdcvault.com/free/gdc-11 에 발표자료 있음
+== I Shot You First: Networking the Gameplay of HALO: REACH - David Aldridge (Bungie LLC) ==
+ * http://www.gdcvault.com/free/gdc-11 에 발표자료 있음
+== Animating NPC's in UNCHARTED - John Bellomy (Naughty Dog) ==
+ * http://www.gdcvault.com/free/gdc-11 에 발표자료 있음
+== Basically, We Sold Our Souls: The Art Implementation of INFINITY BLADE - Geremy Mustard (Chair Entertainment) and Donald Mustard (ChAIR Entertainment Group) ==
+ * [http://chulin28ho.egloos.com/5495306 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 목요일 강연내용]
+== Industry Lessons Learned and Applying Them to the Road Ahead - Cliff Bleszinski (Epic Games) ==
+ * [http://gdc.gamespot.com/video/6302264/?tag=latest-highlights;thumb;5 Gamespot 발표비디오 - GDC Panel: Industry Lessons Learned and Applying Them to the Road (Xbox 360)]
+ * [http://gdc.gamespot.com/story/6302338/cliffy-b-on-building-the-power-creative-?tag=top_stories%3Bstory%3B10 gamespot - Cliffy B on building the power creative]
+ * [http://www.gamasutra.com/view/news/33355/GDC_2011_Epics_Bleszinski_On_The_Rise_Of_The_Power_Creative.php Gamasutra - GDC 2011: Epic's Bleszinski On The Rise Of The 'Power Creative']
+ * [http://www.thisisgame.com/board/view.php?id=603989&category=8101&subcategory - TIG - “왜 개발자들은 자기 홍보를 안 하는가?”]
+ * [http://haralab.net/note/?p=2143 HaraWish - 2011년 샌프란시스코 여섯째 날, GDC 넷째 날]
+ * [http://www.youtube.com/watch?v=5fkSUQEMwV4 youtube - Cliff Bleszinski - Industry Lessons Learned and Applying Them to the Road] 
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-thursday/ Barry Figgins - GDC Report -- Thursday]
+== Monster Teams: How One Producer Tamed the Beast and Lives to Tell About It - Alex Parizeau (Ubisoft Toronto) ==
+ * [http://www.thisisgame.com/board/view.php?id=604149&category=8101 TIG - 200명 이상의 블록버스터급 개발팀 이끌기. 유비소프트 토론토 ‘스플린터 셀: 컨빅션’의 사례]
+== Classic Game Postmortem - MARBLE MADNESS - Mark Cerny (Cerny Games) ==
+ * [http://gdc.gamespot.com/story/6301997/marble-madness-played-for-keepsies?tag=top_stories%3Bstory%3B1 gamespot - Marble Madness played for keepsies]
+ * [http://www.gamasutra.com/view/news/33375/GDC_2011_Mark_Cerny_Discusses_Marble_Madness_Turbulent_Development.php Gamasutra - GDC 2011: Mark Cerny Discusses Marble Madness' Turbulent Development]
+ * [http://www.joystiq.com/2011/03/06/the-marble-madness-of-mark-cerny/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+weblogsinc%2Fjoystiq+%28Joystiq%29 joystiq - The (Marble) Madness of Mark Cerny]
+== Paying to Win? BATTLEFIELD HEROES, Virtual Goods and Selling Gameplay Advantages - Ben Cousins (Easy (EA)) ==
+ * [http://www.slideshare.net/bcousins/paying-to-win 발표자료]
+ * [http://www.gamasutra.com/view/news/33371/GDC_2011_Perfecting_The_FreeToPlay_Battlefield_Heroes.php Gamasutra - GDC 2011: Perfecting The Free-To-Play Battlefield Heroes]
+== Classic Game Postmortem - BEJEWELED - Jason Kapalka (PopCap Games) ==
+ * [http://www.gamasutra.com/view/news/33350/GDC_2011_PopCap_Bejeweleds_Sexy_Action_Cool_Origins.php Gamasutra - GDC 2011: PopCap, Bejeweled's 'Sexy Action Cool' Origins]
+ * [http://pbkim.egloos.com/3592864 어떤 사람의 금지 목록 : GDC2011 bejeweled 어떻게 만들어졌나?]
+ * [http://www.next-gen.biz/news/gdc-2011-classic-game-postmortem-%E2%80%93-bejeweled next-gen.biz - GDC 2011: Classic Game Postmortem -- Bejeweled]
+== Lighting You Up in BATTLEFIELD 3 - Kenny Magnusson (EA DICE) ==
+ * [http://www.thisisgame.com/board/view.php?id=603902&board=0&category=8101&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= TIG - (영상) 타협이 없는 괴물 엔진! 배틀필드3. 프로스트바이트 2 엔진의 라이팅 시스템 소개]
+ * [http://www.geomerics.com/downloads/radiosity_architecture.pdf Enlighten 의 개발사 Geometrics 가 SIGGRAPH 2010 에서 Realtime radiosity 에 대해 발표한 PT]
+ * [http://chulin28ho.egloos.com/5495306 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 목요일 강연내용]
+== No Freaking Respect! Social Game Developers Rant Back - Chris Hecker (definition six, inc.), Eric Zimmerman (Independent), Trip Hawkins (Digital Chocolate), Brenda Brathwaite (Loot Drop) ==
+ * [http://www.gamasutra.com/view/news/33363/GDC_2011_Social_Game_Developers_Direct_Their_Rage_Outward_Inward.php Gamasutra - GDC 2011: Social Game Developers Direct Their Rage Outward, Inward]
+ * [http://bbrathwaite.wordpress.com/2011/03/03/gdc-2011-social-game-developers-rant-back/ Applied Game Design - GDC 2011: Social Game Developers Rant Back]
+ * [http://gdc.gamespot.com/story/6302231/social-game-developers-rant-back?tag=top_stories%3Bstory%3B10 gamespot - Social game developers rant back]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-thursday/#rant malvasia bianca - gdc 2011: thursday]
+ * [http://kotaku.com/#!5777930/the-social-games-rant-you-didnt-hear-from-gdc kotaku - The Social Games Rant You Didn’t Hear from GDC]
+== DONKEY KONG: Swinging Across Oceans - Aaron Walker (Retro Studios), Bryan Walker (Retro Studios), Michael Kelbaugh (Retro Studios), Kensuke Tanabe (Nintendo), Chris V... ==
+ * [http://gdc.gamespot.com/story/6301842/retro-dissects-donkey-kong-country-returns-?tag=top_stories%3Bstory%3B2 gamespot - Retro dissects Donkey Kong Country Returns ]
+ * [http://www.gamasutra.com/view/news/33362/GDC_2011_Retro_Talks_Moving_From_Metroid_to_Donkey_Kong_Country.php Gamasutra - GDC 2011: Retro Talks Moving From Metroid to Donkey Kong Country]
+== Game Design in the Coffee. Lovable Game Design by SWERY - Hidetaka 'Swery' Suehiro (ACCESSGAMES Inc) ==
+ * [http://www.gamasutra.com/view/news/33361/GDC_2011_Deadly_Premonitions_7_Steps_To_A_Memorable_Story.php Gamasutra - GDC 2011: Deadly Premonition's 7 Steps To A Memorable Story]
+ * [http://gdc.gamespot.com/story/6302247/swerys-20-20-hindsight-on-deadly-premonition?tag=top_stories%3Bstory%3B6 gamespot - Swery's 20/20 hindsight on Deadly Premonition]
+== Experimental Gameplay Sessions - Frank Lantz (Area/Code/Zynga), Robin Hunicke (thatgamecompany), Richard Lemarchand (Naughty Dog), Daniel Benmergui (Indep... ==
+ * [http://www.gamasutra.com/view/news/33357/GDC_2011_Highlights_From_The_Experimental_Gameplay_Sessions.php Gamasutra - GDC 2011: Highlights From The Experimental Gameplay Sessions]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-thursday/#experimental malvasia bianca - gdc 2011: thursday]
+ * [http://insearchofsecrets.com/2011/03/04/day-four-of-the-gdc-old-and-new/ In Search of Secrets - Day Four of the GDC: Old and New]
+== Scoping Success - Rod Fergusson (Epic Games) ==
+ * [http://parkpd.egloos.com/3754581 GDC 2011 - 성공 측정하기(scoping success by Rod Ferguson - 기어즈 오브 워3)]
+ * [http://www.gamasutra.com/view/news/33359/GDC_2011_Epics_Fergusson_Describes_Timeliness_As_Key_To_Success.php Gamasutra - GDC 2011: Epic’s Fergusson Describes Timeliness As Key To Success]
+== Classic Game Postmortem - OUT OF THIS WORLD/ANOTHER WORLD - Eric Chahi (Ubisoft)  ==
+ * [http://www.gamasutra.com/view/news/33356/GDC_2011_Eric_Chahis_Retro_Postmortem_Another_World.php Gamasutra - GDC 2011: Eric Chahi's Retro Postmortem: Another World]
+ * [http://www.gamasutra.com/view/news/33354/GDC_2011_Eric_Chahi_Announces_Another_World_For_iOS.php Gamasutra - GDC 2011: Eric Chahi Announces Another World For iOS]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-eric-chahi/ malvasia bianca - gdc 2011: eric chahi]
+ * [http://www.gamesetwatch.com/2011/03/gdc_2011_eric_chahis_retro_pos.php gamesetwatch - GDC 2011: Eric Chahi's Retro Postmortem: Another World]
+ * [http://insearchofsecrets.com/2011/03/04/day-four-of-the-gdc-old-and-new/ In Search of Secrets - Day Four of the GDC: Old and New]
+== In Days of Yore - Chris Crawford (Storytron) ==
+ * [http://www.gamasutra.com/view/news/33352/GDC_2011_CGDC_Founder_Chris_Crawford_Ask_Yourself_What_Does_The_User_Do.php Gamasutra - GDC 2011: CGDC Founder Chris Crawford: Ask Yourself 'What Does The User Do?']
+ * [http://www.gamasutra.com/view/news/33213/GDC_2011_Opinion_Understanding_Crawford__Why_Chris_Crawford_Is_Misunderstood.php Gamasutra - GDC 2011: Opinion: Understanding Crawford - Why Chris Crawford Is Misunderstood]
+ * [http://blog.foobt.net/?p=346 foobt blog - GDC Day Four, Chris Crawford]
+ * [http://insearchofsecrets.com/2011/03/04/day-four-of-the-gdc-old-and-new/ In Search of Secrets - Day Four of the GDC: Old and New]
+== Fast and Efficient Facial Rigging in GEARS OF WAR 3 - Jeremy Ernst (Epic Games) ==
+ * [https://www.thisisgame.com/board/view.php?id=603894&category=8101 TIG - (영상) 기어스오브워3, 캐릭터의 표정에 주목하라. 에픽, GDC 2011에서 언리얼엔진3 페이스 리깅 시연]
+== The Science of Play Testing: EA's Methods for User Research - Veronica Zammitto (Electronic Arts) ==
+ * [http://www.thisisgame.com/board/view.php?id=603769&category=8101 TIG - 감정의 변화까지 살핀다, EA의 게임 QA 과학. 아이 트래킹에 감정의 변화까지 체크해 개발에 반영]
+ * [http://haralab.net/note/?p=2143 HaraWish - 2011년 샌프란시스코 여섯째 날, GDC 넷째 날]
+ * [http://www.third-helix.com/blog/?p=1180 third Helix - GDC 2011: User Research Talks]
+== Classic Game Postmortem - POPULOUS - Peter Molyneux (Lionhead Studios) ==
+ * [http://gdc.gamespot.com/story/6302263/molyneux-on-building-populous-?tag=top_stories%3Bstory%3B10 gamespot - Molyneux on building Populous ]
+ * [http://www.next-gen.biz/news/gdc-2011-peter-molyneux%E2%80%99s-accidental-career next-gen.biz - GDC 2011: Peter Molyneux’s Accidental Career]
+== ONE FALLS FOR EACH OF US: The Prototyping of Tragedy - Brenda Brathwaite (Loot Drop) ==
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-brenda-brathwaite-the-prototyping-of-tragedy/ malvasia bianca - gdc 2011: brenda brathwaite, the prototyping of tragedy]
+ * [http://insearchofsecrets.com/2011/03/04/day-four-of-the-gdc-old-and-new/ In Search of Secrets - Day Four of the GDC: Old and New]
+== No Explanation Necessary: Minimizing Exposition in Games - Jeremy Bernstein (Electric Entertainment) ==
+ * [http://haralab.net/note/?p=2143 HaraWish - 2011년 샌프란시스코 여섯째 날, GDC 넷째 날]
+== The Environment is the Orchestra: Soundscape Composition in LIMBO - Martin Stig Andersen (Playdead) ==
+ * [http://haralab.net/note/?p=2143 HaraWish - 2011년 샌프란시스코 여섯째 날, GDC 넷째 날]
+== EpicWin - Doing Good With a Social Game - Tak Fung (Supermono Limited) ==
+ * [http://haralab.net/note/?p=2143 HaraWish - 2011년 샌프란시스코 여섯째 날, GDC 넷째 날]
+== Creating Satisfying Combat Experiences at Insomniac Games - Joel Goodsell (Insomniac Games) ==
+ * [http://www.insomniacgames.com/research_dev/articles/2011/152568379 발표자료 - Creating Satisfying Combat Experiences #GDC11]
+== NVIDIA Tegra: Zooming to Bang Bang Racing & Next-Gen Mobile Gaming (Presented by NVIDIA) - Lars Bishop (NVIDIA) and Mike Clarke (Playbox Limited) ==
+ * [http://nvidia.fullviewmedia.com/gdc2011/12-playbox.html 발표 동영상]
+ * [http://www.nvidia.com/content/PDF/GDC2011/Tegra.pdf 발표자료 pdf]
+== NVIDIA Parallel Nsight: Accelerating GPU Development in BioWare's DRAGON AGE 2 (Presented by NVIDIA) - Jeffrey Kiel (NVIDIA) ==
+ * [http://www.nvidia.com/content/PDF/GDC2011/Parallel_Nsight.pdf 발표자료 pdf]
+== Stereoscopic 3D Demystified: From Theory to Implementation in STARCRAFT II (Presented by NVIDIA) - Dominic Filion (Blizzard Entertainment) and Samuel Gateau (NVIDIA) ==
+ * [http://www.nvidia.com/content/PDF/GDC2011/Stereoscopy.pdf 발표자료 pdf]
+== The Technology Behind the DirectX 11 Unreal Engine Samaritan Demo (Presented by NVIDIA) - Bryan Dudash (NVIDIA) and Martin Mittring (Epic Games) ==
+ * [http://www.nvidia.com/content/PDF/GDC2011/Epic.pdf 발표자료 pdf]
+ * [http://www.gametrailers.com/video/debut-trailer-samaritan/711467?type=flv gametrailers - GDC2011 사마리탄 테크데모 정식 영상]
+== Realistic and Interactive Clothing in Epic Games' Samaritan Demo Using NVIDIA APEX (Presented by NVIDIA) - Dane Johnston (NVIDIA), Monier Maher (NVIDIA) and Jeremy Ernst (Epic Games) ==
+ * [http://www.nvidia.com/content/PDF/GDC2011/Apex_Clothing.pdf 발표자료 pdf]
+== 3ds Max in their Workflow and Casual Games (Presented by Autodesk) - Jamie Gotch (Subatomic Studios) and Speaker TBA ==
+ * [http://area.autodesk.com/gdc2011/spon_casual?KeepThis=true&TB_iframe=true&height=520&width=840 발표비디오]
+== Classic Game Postmortem - DOOM - Tom Hall (Loot Drop) and John Romero (Loot Drop) ==
+ * [http://gdc.gamespot.com/story/6302251/romero-and-hall-on-creating-doom-?tag=top_stories%3Bstory%3B3 gamespot - Romero and Hall on creating Doom]
+== Experimenting Your Way to Learning and Success: Applying Lean Startup Principles to Product Development ... - James Birchler (IMVU, Inc.) ==
+ * [http://www.slideshare.net/jamesbirchler/experimenting-your-way-to-success-applying-lean-startup-principles-to-product-development-at-imvu James Birchler - Experimenting Your Way to Success: Applying Lean Startup Principles to Product Development at IMVU] 
+== PS3 & Xbox360 NARUTO SHIPPUDEN: ULTIMATE NINJA STORM 2 Exploring the 'Other Side' of Super Anime-like... ==
+ * [http://chulin28ho.egloos.com/5495306 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 목요일 강연내용]
+== Adaptive Order Independent Transparency: A Fast and Practical Approach to Rendering Transparent Geometr... - Marco Salvi (Intel Corporation) ==
+ * [http://software.intel.com/file/34621 발표자료]
+== Design in Detail: Tuning the Muzzle Velocity of the Plasma Rifle Bolt on Legendary Difficulty Across the... - Jaime Griesemer (Bungie) ==
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-thursday/ Barry Figgins - GDC Report -- Thursday]
+== Art Direction Tools for Photo Real Games - Henry LaBounta (Electronic Arts Games) ==
+ * [http://stachmo.wordpress.com/2011/03/12/the-epic-gdc11-adventure-day-5/ The Epic GDC’11 Adventure -- Day 5]
+
+= 금 =
+== Automated Level of Detail Generation for HALO: REACH - Xi Wang (Bungie LLC) ==
+== HALO: REACH Effects Tech - Chris Tchou (Bungie LLC) ==
+== Implementation and Application of the Real-Time Procedural Helper-Joint System - Ju Bok Kim (Nexon) and Choong-Hyo Kim (Nexon) ==
+ * [http://www.thisisgame.com/board/view.php?id=604879&category=8101 TIG - (영상) 마비노기2를 위한 애니메이션 시스템]
+ * [http://www.slideshare.net/eiaserinnys/kgc2010-m2 KGC2010 김주복, 김충효 - M2 프로젝트의 절차적 리깅 시스템]
+ * [http://chulin28ho.egloos.com/5495308 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 금요일 강연내용]
+== Iterating Realistic Human Rendering: Boxers in FIGHT NIGHT CHAMPION - Vicki Ferguson (Electronic Arts) ==
+ * [http://www.gamasutra.com/view/news/33307/Critical_Reception_EA_Canadas_Fight_Night_Champion.php Gamasutra - Critical Reception: EA Canada's Fight Night Champion]
+ * [http://chulin28ho.egloos.com/5495308 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 금요일 강연내용]
+== Classic Game Postmortem - RAID ON BUNGELING BAY - Will Wright (StupidFunClub) ==
+ * [http://www.gamasutra.com/view/news/33376/GDC_2011_Wright_Talks_Raid_On_Bungeling_Bay_Origins.php Gamasutra - GDC 2011: Wright Talks Raid On Bungeling Bay Origins by Brandon Sheffield]
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-friday/ Barry Figgins - GDC Report -- Friday]
+ * [http://insearchofsecrets.com/2011/03/05/day-five-of-the-gdc-whats-next/ In Search of Secrets - Day Five of the GDC: What’s Next?]
+== The Story of CAVE STORY - Daisuke 'Pixel' Amaya (Independent) ==
+ * [http://www.gamasutra.com/view/news/33373/GDC_2011_Daisuke_Amaya_Draws_Lessons_From_Cave_Storys_Development.php Gamasutra - GDC 2011: Daisuke Amaya Draws Lessons From Cave Story's Development]
+ * [http://www.1up.com/news/gdc-cave-story-triumph-pragmatic-design 1up - GDC: Cave Story and the Triumph of Pragmatic Game Design]
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-friday/ Barry Figgins - GDC Report -- Friday]
+ * [http://insearchofsecrets.com/2011/03/05/day-five-of-the-gdc-whats-next/ In Search of Secrets - Day Five of the GDC: What’s Next?]
+== Strategy Games: The Next Move - Ian Fischer (Robot Entertainment), Soren Johnson (EA2D), Dustin Browder (Blizzard Entertainment), Jon Shafer (Stardock) and Tom ... ==
+ * [http://gdc.gamespot.com/story/6302465/the-state-of-the-strategy-genre?tag=top_stories%3Bstory%3B8 gamespot - The state of the strategy genre]
+ * [http://www.gamasutra.com/view/news/33374/GDC_2011_Strategy_Game_Veterans_Look_At_The_Genres_Biggest_Challenges.php Gamasutra - GDC 2011: Strategy Game Veterans Look At The Genre's Biggest Challenges]
+== The Game Design Challenge 2011: Bigger than Jesus - Eric Zimmerman (Independent), Jenova Chen (thatgamecompany), John Romero (Loot Drop) and Jason Rohrer (Independent) ==
+ * [http://www.gamespot.com/features/6302307/p-6.html 발표 비디오]
+ * [http://www.gamasutra.com/view/news/33370/GDC_2011_Rohrer_Wins_Game_Design_Challenge_With_Unique_Minecraft_Mod.php Gamasutra - GDC 2011: Rohrer Wins Game Design Challenge With Unique Minecraft Mod]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-friday/#game-design-challenge malvasia bianca - gdc 2011: friday]
+ * [http://www.youtube.com/watch?v=UAG6XzGah8Q youtube - The Game Design Challenge 2011: Bigger Than Jesus] 
+ * [http://insearchofsecrets.com/2011/03/05/day-five-of-the-gdc-whats-next/ In Search of Secrets - Day Five of the GDC: What’s Next?]
+== Classic Game Postmortem - MANIAC MANSION - Ron Gilbert (Double Fine Productions) ==
+ * [http://www.gamasutra.com/view/news/33372/GDC_2011_Ron_Gilberts_Odd_Collection_Of_Maniac_Mansion_Memories.php Gamasutra - GDC 2011: Ron Gilbert's 'Odd Collection' Of Maniac Mansion Memories]
+ * [http://haralab.net/note/?p=2147 HaraWish - 2011년 샌프란시스코 일곱째 날, GDC 다섯째 날]
+== The Game Design of STARCRAFT II: Designing an E-Sport - Dustin Browder (Blizzard Entertainment) ==
+ * [http://www.gamasutra.com/view/news/33368/GDC_2011_Developing_StarCraft_II_Like_Inventing_Basketball_2.php Gamasutra - GDC 2011: Developing StarCraft II Like Inventing 'Basketball 2']
+ * [http://www.next-gen.biz/news/gdc-2011-starcraft-ii-%E2%80%93-designing-an-e-sport next-gen.biz - GDC 2011: StarCraft II -- Designing An E-Sport]
+ * [http://gdc.gamespot.com/story/6302329/starcraft-ii-the-making-of-an-e-sport?tag=top_stories%3Bstory%3B1 gamespot - Starcraft II: The making of an e-sport]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-friday/#browder malvasia bianca - gdc 2011: friday]
+== Hybrid Orchestration - Scoring NEED FOR SPEED - Troels Folmann (Tonehammer) and Charles Deenen (Electronic Arts) ==
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-friday/#need-for-speed malvasia bianca - gdc 2011: friday]
+== An Apology for Roger Ebert - Brian Moriarty (Worcester Polytechnic Institute) ==
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-friday/#moriarty malvasia bianca - gdc 2011: friday]
+ * [http://insearchofsecrets.com/2011/03/05/day-five-of-the-gdc-whats-next/ In Search of Secrets - Day Five of the GDC: What’s Next?]
+ * [http://insearchofsecrets.com/2011/03/07/day-five-of-the-gdc-part-two-an-apology-for-roger-ebert/ In Search of Secrets - Day Five of the GDC, Part Two: An Apology for Roger Ebert]
+== Message Queuing on a Large Scale: IMVU's Stateful Event Architecture - Jon Watte (IMVU) ==
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-friday/#watte malvasia bianca - gdc 2011: friday]
+== 15 Games in 15 Years - Stone Librande (EA/Maxis) ==
+ * [http://www.stonetronix.com/gdc-2011/ 연사 홈페이지: 발표자료]
+ * [http://haralab.net/note/?p=2147 HaraWish - 2011년 샌프란시스코 일곱째 날, GDC 다섯째 날]
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-friday/ Barry Figgins - GDC Report -- Friday]
+== THE SIMS 3 Create-a-Sim User Experience - Sammi Kim (Electronic Arts) ==
+ * [http://haralab.net/note/?p=2147 HaraWish - 2011년 샌프란시스코 일곱째 날, GDC 다섯째 날]
+== The Loner: Why Some People Play MMOs Alone ==
+ * [http://ruliweb.daum.net/ruliboard/read.htm?num=30498&table=game_online&main=online 온라인겜을 혼자하는 사람들의 10가지 유형]
+ * [http://naridy.egloos.com/4547912 어째서 사람은 MMO를 혼자서 플레이하는가? by 나리디]
+== Approximating Translucency for a Fast, Cheap and Convincing Subsurface Scattering Look - Colin Barre-Brisebois (Electronic Arts Montreal) ==
+ * [http://publications.dice.se/attachments/Colin_BarreBrisebois_Programming_ApproximatingTranslucency.pptx 발표자료 pptx]
+ * [http://zigguratvertigo.com/2011/03/07/gdc-2011-approximating-translucency-for-a-fast-cheap-and-convincing-subsurface-scattering-look/ 발표자 블로그]
+ * [http://www.slideshare.net/colinbb/colin-barrebrisebois-gdc-2011-approximating-translucency-for-a-fast-cheap-and-convincing-subsurfacescattering-look-7170855 slideshare - Colin Barre-Brisebois - Approximating Translucency for a Fast, Cheap and Convincing Subsurface-Scattering Look] 
+== From College to Industry: 20 Lessons for Getting the Most out of Your Early Career - Jeff Ward (Fire Hose Games) ==
+ * [http://www.fuzzybinary.com/talks/GDCCS_20Lessons.pptx 발표자료 pptx]
+ * [http://www.jeffongames.com/2011/03/gdc-career-seminar-talk-20-lessons-learned/ 발표자 블로그]
+== Mega Meshes - Modeling, Rendering and Lighting a World Made of 100 Billion Polygons - Ben Sugden (Lionhead Studios) and Michal Iwanicki (Lionhead Studios) ==
+ * [http://miciwan.com/GDC2011/GDC2011_Mega_Meshes.pdf 발표자료 pdf]
+== Classic Game Postmortem - PITFALL! - David Crane ==
+ * [http://www.gamespot.com/features/6302307/p-7.html gamespot - 발표비디오 GDC 2011 Panel: Pitfall Classic Postmortem With David Crane (PlayStation 2)]
+ * [http://www.youtube.com/watch?v=MBT1OK6VAIU Pitfall Classic Postmortem With David Crane] 
+== HTML5: The New UI Library for Games - Chad Austin (IMVU) ==
+ * [http://www.slideshare.net/chadaustin/html5-new-ui-library-for-games-chad-austin 발표자료 : Chad Austin - HTML5: New UI Library for Games] 
+ * [http://zho.pe.kr/blog/index.html?pageId=2011#20110310085342 최지호의 블로그]
+== Dynamic Resolution Rendering (Presented by Intel) - Doug Binks (Intel)  ==
+ * [http://software.intel.com/file/34647 발표자료]
+== Increase your FPS with CPU Onload (Presented by Intel) - Joshua Doss (Intel) and Doug McNabb (Intel) ==
+ * [http://software.intel.com/file/34669 발표자료]
+== Hotspots, FLOPS, and uOps: To-The-Metal CPU Optimization (Presented by Intel) - Stan Melax (Intel) and Deepak Vembar (Intel) ==
+ * [http://software.intel.com/file/34646 발표자료]
+== Faster, Better, Cheaper: Pushing the Artistic Bar in Portable Game Development ==
+ * [http://chulin28ho.egloos.com/5495308 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 금요일 강연내용]
+== Introduction to 3ds Max Customization and Plug-in Development ==
+ * [http://chulin28ho.egloos.com/5495308 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 금요일 강연내용]
+== How Art Was Used to Create a Unique Cinematic Experience in HEAVY RAIN ==
+ * [http://chulin28ho.egloos.com/5495308 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 금요일 강연내용]
+== From Student to Start Up: Case Studies - Jesse Schell (Schell Games) ==
+ * [http://bfiggins.wordpress.com/2011/03/09/gdc-report-friday/ Barry Figgins - GDC Report -- Friday]
+== Turning Mobile Games into Moneymakers: Google's Charles Yim Interviews Top Mobile Game Developers... - Charles Yim (Google) ==
+ * [http://www.ditii.com/2011/03/23/video-googles-mobile-monetization-panel-at-game-developer-conference-gdc-2011/ Video: Google’s Mobile Monetization Panel At Game Developer Conference (GDC) 2011]
+ 
+== 트위터 해시 ==
+ * [http://twitter.com/#!/search?q=%23gdckr Twitter hashtag #gdckr]
+ * [http://twitter.com/#!/search?q=%23gdc_kr Twitter hashtag #gdc_kr]
+ * [http://twitter.com/#!/search?q=%23gdc2011kr Twitter hashtag #gdc2011kr]
+ * [http://twitter.com/#!/search?q=%23gdc11 Twitter hashtag #gdc11]
+
+= 관련링크 =
+ * [http://ozlael.egloos.com/3657536 GDC 2011 슬라이드들]
+ * [http://www.askajedi.com/2011/03/24/gdc-2011-presentation-available-satele-shan-in-game/ GDC 2011: Presentation Available -- Satele Shan In-Game?]
+ * [http://www.next-gen.biz/news/our-pick-of-gdc-2011-sessions-now-online Our Pick Of GDC 2011 Sessions Now Online]
+ * [http://www.gamasutra.com/gdc2011/ Gamasutra 의 GDC2011]
+ * [http://wow.joystiq.com/tag/gdc-2011/ joystiq 의 tag gdc-2011]
+ * [http://www.thisisgame.com/gdc/gdc2011/main.php TIG GDC2011]
+ * [http://www.slideshare.net/naughty_dog naughty_dog 의 slideshare]
+ * [http://gamemook.com/475 GameMook - GDC 2011 글 모음들!!]
+ * [https://docs.google.com/document/d/1Uy2htGt9StynTRhl3ERik9nU6FziwX37rNp8Kn77BME/edit?authkey=CKDK99cM&pli=1# Google docs - 공동강연노트 정리]
+ * [http://www.next-gen.biz/features/gdc-2011-roundup next-gen.biz - GDC 2011 Roundup]
+ * [http://nvidia.fullviewmedia.com/gdc2011/agenda.html# nvidia GDC2011 video streaming]
+ * [http://gdc.gamespot.com/ gamespot 의 GDC 모음]
+ * [http://area.autodesk.com/gdc2011/guestpresentations Autodesk at GDC2011]
+ * [http://www.nvidia.com/content/PDF/GDC2011/John_McDonald.pdf Tessellation on Any Budget (John McDonald, NVIDIA)]
+ * [https://www.thisisgame.com/board/view.php?id=604422&category=8101 TIG - (영상) 차세대 언리얼 엔진 3, 이렇게 바뀐다. 에픽게임스, GDC 2011에서 차세대 기능 최초 공개]
+ * [http://cagetu.egloos.com/5451505 CrazyXIII - Next Generation : Unreal Technology Demo]
+ * [http://www.gamasutra.com/view/news/33318/GDC_2011_UserGenerated_Missions_For_Infamous_2.php Gamasutra - GDC 2011: User-Generated Missions For Infamous 2]
+ * [http://www.gamasutra.com/view/news/33261/GDC_2011_Interview__Mojangs_Jakob_Porser_on_New_Game_Scrolls.php Gamasutra - GDC 2011: Interview - Mojang's Jakob Porser on New Game Scrolls]
+ * [http://www.gamesetwatch.com/2011/03/gdc_2011_interview_mojangs_jak.php gamesetwatch - GDC 2011: Interview - Mojang's Jakob Porser on New Game Scrolls]
+ * [http://www.gamasutra.com/view/news/33260/GDC_2011_Minecraft_Developer_Mojang_Reveals_Its_Second_Game_Scrolls.php Gamasutra - GDC 2011: Minecraft Developer Mojang Reveals Its Second Game 'Scrolls']
+ * [http://www.next-gen.biz/features/gdc-2011-preview next-gen.biz - GDC 2011 Preview]
+ * [http://www.next-gen.biz/news/gdc-2011-infamous-2-to-feature-user-generated-missions next-gen.biz - GDC 2011: Infamous 2 To Feature User-Generated Missions]
+ * [http://www.next-gen.biz/news/gdc-2011-bigpoint%E2%80%99s-ruined-enters-closed-beta next-gen.biz - GDC 2011: Bigpoint’s Ruined Enters Closed Beta]
+ * [http://www.next-gen.biz/news/gdc-2011-gaikai-enters-open-beta next-gen.biz - GDC 2011: Gaikai Enters Open Beta]
+ * [http://www.next-gen.biz/features/gdc-2011-ngp-card-format-detailed next-gen.biz - 뭐지?]
+ * [http://www.next-gen.biz/news/gdc-2011-red-dead-minecraft-clean-up-at-gdca next-gen.biz - Game Developers Choice Awards]
+ * [http://www.next-gen.biz/news/gdc-2011-amnesia-minecraft-dominate-igf-awards next-gen.biz - GDC 2011: Amnesia, Minecraft Dominate IGF Awards]
+ * [http://www.next-gen.biz/news/gdc-2011-loot-drop%E2%80%99s-brathwaite-defends-social-games next-gen.biz - GDC 2011: Loot Drop’s Brathwaite Defends Social Games]
+ * [http://www.next-gen.biz/news/gdc-2011-women-in-gaming-awards next-gen.biz - GDC 2011: Women In Gaming Awards]
+ * [http://www.next-gen.biz/news/gdc-2011-jesse-schell-on-the-importance-of-women-to-development next-gen.biz - GDC 2011: Jesse Schell On The Importance Of Women To Development]
+ * [http://www.next-gen.biz/news/gdc-2011-dice-not-keen-on-mmo-shooter next-gen.biz - GDC 2011: DICE Not Keen On MMO Shooter]
+ * [http://code.google.com/p/bullet/downloads/detail?name=physics_artifacts_gdc_widescreen.pdf&can=2&q= GDC 2011 presentation about game physics artifacts]
+ * [http://publications.dice.se/ EA DICE 팀 프레젠테이션 발표자료 모음]
+ * [http://www.gamedev.net/blog/984/entry-2249602-the-circle-of-gdc-life/ gamedev - The Circle of GDC Life]
+ * [http://code.google.com/p/netgame/downloads/detail?name=Networked%20Physics%202011.key&can=2&q=#makechanges Networking for Physics Programmers 2011]
+ * [http://www.dissidentlogic.com/#Normal%20Offset%20GDC%20Materials Normal Offset GDC Materials]
+ * [http://www.essentialmath.com/GDC11_JMV_Integration.pdf Physic Tutorial - Numerical Integration 발표자료]
+ * [http://msinilo.pl/blog/?p=724 .mischief.mayhem.soap. - GDC 2011 링크모음]
+ * [http://www.bungie.net/Inside/publications.aspx Bungie Publications]
+ * [http://software.intel.com/en-us/articles/intelgdc2011/ 인텔 GDC2011 발표자료]
+ * [http://developer.amd.com/documentation/presentations/pages/default.aspx amd GDC 발표자료]
+ * [http://www.volition-inc.com/gdc/ volition 의 GDC 문서]
+ * [http://members.gamedev.net/bag-of-holding/gdc2011/turingtantrums.html Turing Tantrums: Iterate or DIE! 발표자료]
+ * [http://strabase.tistory.com/1551 유료자료 : 격변하는 게임 업계 미래상 제시한 `GDC 2011`]
+ * [http://tech-artists.org/forum/showthread.php?t=1500 tech-artists.org TA 발표자료 전체 링크 제공]
+
+== 영상 모음 == 
+ * [http://www.youtube.com/watch?v=wJcQxAHNVXI 2011 Game Developers Choice Awards] 
+ * [http://www.youtube.com/watch?v=A3_aun7BqbY 2011 Independent Games Festival Awards] 
+ * [http://www.youtube.com/watch?v=OrSaE2V2N9I Yu Suzuki Career Retrospective] 
+ * [http://www.youtube.com/watch?v=7sqh5nkMZPk Recruit Profitable Players through Advanced Multi-Channel Marketing Methods] 
+ * [http://www.youtube.com/watch?v=qX6yXNT42lc Deus Ex: Human Revolution] 
+ * [http://www.youtube.com/watch?v=_ipnfzAz8Ak Guild Wars 2 Gameplay Developer Walkthrough] 
+ * [http://vimeo.com/20765017 hi5 - Presentation on SocioPay and SocioPath Platforms] 
+ 
+== 슬라이드셰어 모음 == 
+ * [http://www.slideshare.net/tobias_persson/bstech-gdc2011 Tobias Persson - BitSquid Tech: Benefits of a data-driven renderer] 
+ * [http://www.slideshare.net/jesseschell/women-in-games Jesse Schell - Women in Games] 
+
+== 날짜 전체 요약 ==
+ * [http://www.gamasutra.com/view/news/33378/GDC_2011_Gamasutras_Complete_Lecture_Roundup.php?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+GamasutraNews+%28Gamasutra+News%29 GDC 2011: Gamasutra's Complete Lecture Roundup]
+ * [http://www.gamedev.net/blog/984/entry-2249571-gdc-2011-day-2/ gamedev - GDC 2011: Day 2]
+ * [http://www.gamedev.net/blog/984/entry-2249578-gdc-2011-day-3/ gamedev - GDC 2011: Day 3]
+ * [http://www.indiepubgames.com/news/gdc-2011-day-1-roundup indie pub - GDC 2011: Day 1 roundup]
+ * [http://www.indiepubgames.com/news/gdc-2011-day-2-roundup indie pub - GDC 2011: Day 2 roundup]
+ * [http://www.indiepubgames.com/news/gdc-2011-day-3-roundup indie pub - GDC 2011: Day 3 roundup]
+ * [http://www.indiepubgames.com/news/gdc-2011-pre-expo-roundup indie pub - GDC 2011: Pre-expo roundup]
+ * [http://malvasiabianca.org/archives/2011/02/gdc-2011-monday/ malvasia bianca - gdc 2011: monday]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-tuesday/ malvasia bianca - gdc 2011: tuesday]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-wednesday/ malvasia bianca - gdc 2011: wednesday]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-thursday/ malvasia bianca - gdc 2011: thursday]
+ * [http://malvasiabianca.org/archives/2011/03/gdc-2011-friday/ malvasia bianca - gdc 2011: friday]
+ * [http://portsnake.tistory.com/791 유나이티드 센터 - 2011 GDC Smartphone Summit 리포트 1]
+ * [http://haralab.net/note/?p=2101 HaraWish - 2011년 샌프란시스코 첫 날]
+ * [http://haralab.net/note/?p=2119 HaraWish - 2011년 샌프란시스코 둘째날]
+ * [http://haralab.net/note/?p=2134 HaraWish - 2011년 샌프란시스코 셋째 날, GDC 첫째 날]
+ * [http://haralab.net/note/?p=2137 HaraWish - 2011년 샌프란시스코 넷째 날, GDC 둘째 날]
+ * [http://haralab.net/note/?p=2141 HaraWish - 2011년 샌프란시스코 다섯째 날, GDC 셋째 날]
+ * [http://haralab.net/note/?p=2143 HaraWish - 2011년 샌프란시스코 여섯째 날, GDC 넷째 날]
+ * [http://haralab.net/note/?p=2147 HaraWish - 2011년 샌프란시스코 일곱째 날, GDC 다섯째 날]
+ * [http://chulin28ho.egloos.com/5494823 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 수요일 강연내용]
+ * [http://chulin28ho.egloos.com/5494911 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 수요일 강연내용2]
+ * [http://chulin28ho.egloos.com/5495306 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 목요일 강연내용]
+ * [http://chulin28ho.egloos.com/5495308 대충 살아가는 게임 개발자 - GDC 강연 참관기 : 금요일 강연내용]
+ * [http://blog.naver.com/misarang75/40124549880 미사랑님의 GDC 2일차 후기]
+ * [http://blog.naver.com/misarang75/40125507259 미사랑님의 GDC 4일차 후기]
+ * [http://www.denuology.com/gdc11-recap-101/ GDC11: Recap 101 - Posted by Benny Torres]
+ * [http://beforu.egloos.com/4553467#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 28일자 요약]
+ * [http://beforu.egloos.com/4553513#none 매운맛나리 - GDC2011 소셜 & 온라인 게임 서밋, 2월 29일자 요약]
+ * [http://elore.egloos.com/3600283 aigolog - GDC 2011 간략후기]
+
+----
+ * [http://www.gdconf.com/news/gdc_europe/gdc_europe_2011_debuts_new_sum.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+GameDevelopersConference+%28Game+Developers+Conference%29 GDC Europe 2011 Debuts New Summits, Call For Submissions]

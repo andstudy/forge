@@ -1,0 +1,284 @@
+ * Time limit 에 걸립니다. :(
+ * Invert distance 가 이해가 안 됩니다.
+ * 전도수 구하는 부분도 모르겠네요.
+
+{{{
+// ACM_Puzzle.cpp : 콘솔 응용 프로그램에 대한 진입점을 정의합니다.
+//
+
+//#include "stdafx.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+const int MAXMOVE = 50;
+
+static int MAXDEPTH;
+static int move[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+static char movechar[4] = {'U', 'R', 'D', 'L'};
+static int solved, puzzle[4][4];
+
+static int mtop, movestack[MAXMOVE];
+
+void input()
+{
+	int i , j;
+	for (i = 0; i < 4; ++i)
+	{
+		for (j = 0; j < 4; ++j)
+		{
+			scanf("%d", &puzzle[i][j]);
+		}
+	}
+}
+
+int cost()
+{
+	int i, j;
+	int md1, md2;		// md?
+	int inv1, inv2, id1, id2;
+	int lowb1, lowb2;	// 좌우, 상하에 대한 lower_bound 를 저장하는 장소
+	int board[16];		// puzzle 을 1차원 배열로 바꿔서 저장하기 위한 장소
+	int conv[16] = {
+		 0,  1,  5,  9, 
+		13, 2,  6, 10, 
+		14, 3,  7, 11, 
+		15, 4,  8, 12
+	};		// ?
+	int cnvp[16] = {
+		0, 4, 8, 12, 
+		1, 5, 9, 13, 
+		2, 6, 10, 14, 
+		3, 7, 11, 15
+	};		// ?
+
+	// Manhattan Distance 구하기
+
+	// 상하 이동에 의한 MD
+	md1 = 0;
+	for (i = 0; i < 4; ++i)
+	{
+		for (j = 0; j < 4; ++j)
+		{
+			if (puzzle[i][j] != 0)
+			{
+				// 필요한 row 값을 구해서, 실제 i 값과 비교한다.
+				md1 += abs(i - ((puzzle[i][j] - 1) / 4));
+			}
+		}
+	}
+
+	// 좌우 이동에 의한 MD
+	md2 = 0;
+	for (i = 0; i < 4; ++i)
+	{
+		for (j = 0; j < 4; ++j)
+		{
+			if (puzzle[i][j] != 0)
+			{
+				// 목표에 대한 
+				md2 += abs(j - ((puzzle[i][j] - 1) % 4));
+			}
+		}
+	}
+
+	// Invert Distance
+
+	// ID 를 좀더 쉽게 구하기 위해 1차원 배열로 옮긴다.
+	for (i = 0; i < 4; ++i)
+	{
+		for (j = 0; j < 4; ++j)
+		{
+			board[i * 4 + j] = puzzle[i][j];
+		}
+	}
+
+	// 상하 이동에 의한 ID
+	inv1 = 0;
+	for (i = 0; i < 16; ++i)
+	{
+		if (!board[i])
+		{
+			continue;
+		}
+		// goal 이 1,2,3,4 이어야 하니까, 항상 뒤에 있는 숫자가 앞의 숫자보다 커야한다.
+		// 뒤의 숫자가 앞의 숫자보다 작은 갯수를 구하고 있다.
+		for (j = i + 1; j < 16; ++j)
+		{
+			if (board[j] && (board[j] < board[i]))
+			{
+				inv1++;
+			}
+		}
+	}
+
+	// 좌우 이동에 의한 ID
+	inv2 = 0;
+	for(i = 0; i < 16; ++i)
+	{
+		if (!conv[board[cnvp[i]]])
+		{
+			continue;
+		}
+
+		for (j = i + 1; j < 16; ++j)
+		{
+			if (!conv[board[cnvp[j]]] && conv[board[cnvp[j]]] < conv[board[cnvp[i]]])
+			{
+				inv2++;
+			}
+		}
+	}
+
+	id1 = (inv1 / 3) + (inv1 % 3);
+	id2 = (inv2 / 3) + (inv2 % 3);
+
+	// MD 와 ID 중 더 좋은 lower bound 를 선택한다.
+	lowb1 = (id1 > md1) ? id1 : md1;
+	lowb2 = (id2 > md2) ? id2 : md2;
+
+	return lowb1 + lowb2;
+}
+
+// a = call stack count
+void back(int a, int nowx, int nowy)
+{
+	int i, c;
+	int nextx, nexty;
+
+	// 앞으로 남은 이동 거리에 대한 lower bound 를 구한다.
+	c = cost();
+	if (c == 0)
+	{
+		solved = 1;
+		return;
+	}
+
+	// 끝까지 가지 않아도, cost 값이 원하는 depth 이상이면 리턴한다!
+	if (a + c > MAXDEPTH)
+	{
+		return;
+	}
+
+	for (i = 0; i < 4; ++i)
+	{
+		if ((movestack[mtop - 1] + 2) % 4 == i)
+		{
+			continue;
+		}
+
+		nextx = nowx + move[i][0];
+		nexty = nowy + move[i][1];
+
+		// 갈 수 있는지 여부 확인
+		if (nextx < 0 || nextx >= 4 || nexty < 0 || nexty >= 4)
+		{
+			continue;
+		}
+
+		// 퍼즐 이동
+		puzzle[nowx][nowy] = puzzle[nextx][nexty];
+		puzzle[nextx][nexty] = 0;
+
+		movestack[mtop++] = i;
+		back(a + 1, nextx, nexty);
+		if (solved)
+		{
+			return;
+		}
+
+		// 이동했던 상태를 되돌려 주고 있다.
+		mtop--;
+		puzzle[nextx][nexty] = puzzle[nowx][nowy];
+		puzzle[nowx][nowy] = 0;
+	}
+}
+
+void solve()
+{
+	int i, j, k, l, value, x, y;
+
+	// 해결 가능한 퍼즐인지를 확인한다.
+	value = 0;
+	for (i = 0; i < 4; ++i)
+	{
+		for (j = 0; j < 4; ++j)
+		{
+			if (puzzle[i][j] == 0 && (i + j) % 2 == 1)
+			{
+				value++;
+			}
+
+			// 0 의 위치 저장
+			if (puzzle[i][j] == 0)
+			{
+				x = i;
+				y = j;
+			}
+
+			for (k = i; k < 4; ++k)
+			{
+				if (k == i)
+				{
+					l = j + 1;
+				}
+				else
+				{
+					l = 0;
+				}
+				for (; l < 4; ++l)
+				{
+					if (puzzle[i][j] == 0 || (puzzle[k][l] != 0 && puzzle[i][j] > puzzle[k][l]))
+					{
+						value++;
+					}
+				}
+			}
+		}
+	}
+
+	if (value % 2 == 1)
+	{
+		return;
+	}
+
+	// 반복심화(IDA*) 탐색 알고리즘으로 15-퍼즐을 해결한다.
+	for (MAXDEPTH = cost(); !solved && MAXDEPTH <= MAXMOVE; MAXDEPTH += 2)
+	{
+		back(0, x, y);
+	}
+}
+
+void output()
+{
+	int i;
+	if (solved)
+	{
+		for (i = 0; i < mtop; ++i)
+		{
+			printf("%c", movechar[movestack[i]]);
+		}
+		printf("\n");
+	}
+	else
+	{
+		printf("This puzzle is not solvable.\n");
+	}
+}
+
+int main()
+{
+	int i, t;
+	scanf("%d", &t);
+	for (i = 0; i < t; ++i)
+	{
+		input();
+		mtop = 0;
+		solved = 0;
+		solve();
+
+		output();
+	}
+
+	return 0;
+}
+}}}

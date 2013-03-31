@@ -1,0 +1,125 @@
+ * 입출력 처리하지 않음
+ * 다른 분들 코드에 비해 오버플로우에 취약
+  * 몇자리 숫자까지 될라나?
+
+[[TableOfContents([maxdepth])]]
+
+== Primary Arithmetic ==
+=== !PrimaryArithmetic.vb ===
+{{{
+' $Id: PrimaryArithmetic.vb 100 2008-02-25 06:33:34Z 정희종 $
+
+Public Class PrimaryArithmetic
+
+	Function GetCarryCount(ByVal addend As Integer, ByVal augend As Integer) As Integer
+		Dim addends() As Integer = GetDigits(addend)
+		Dim augends() As Integer = GetDigits(augend)
+
+		' 길이 맞추기
+		If addends.Length > augends.Length Then
+			PadDigits(augends, addends.Length)
+		Else
+			PadDigits(addends, augends.Length)
+		End If
+
+		' 각 자리 숫자 더하여 carry 갯수 구하기
+		Dim carryCount As Integer
+		Dim carry As Integer
+		For i As Integer = 0 To addends.Length - 1
+			Dim digitSum = addends(i) + augends(i) + carry
+			If digitSum >= 10 Then
+				carryCount += 1
+				carry = 1
+			Else
+				carry = 0
+			End If
+		Next
+
+		Return carryCount
+	End Function
+
+	Function GetDigits(ByVal number As Integer) As Integer()
+		Dim digits As List(Of Integer) = New List(Of Integer)
+		While number > 0
+			digits.Add(number Mod 10)
+			number = Math.Floor(number / 10)
+		End While
+		Return digits.ToArray()
+	End Function
+
+	Sub PadDigits(ByRef digits() As Integer, ByVal length As Integer)
+		If digits.Length < length Then
+			ReDim Preserve digits(length - 1)
+		End If
+	End Sub
+
+End Class
+}}}
+
+=== !PrimaryArithmeticTest.vb ===
+{{{
+' $Id: PrimaryArithmeticTest.vb 100 2008-02-25 06:33:34Z 정희종 $
+
+
+<TestClass()> _
+Public Class PrimaryArithmeticTest
+
+	Private pr As PrimaryArithmetic = New PrimaryArithmetic
+
+	<TestMethod()> _
+	Public Sub GetDigitsTest()
+		Dim expected() As Integer = {3, 2, 1}
+		Dim actual() As Integer = pr.GetDigits(123)
+
+		Assert.AreEqual(expected.Length, actual.Length)
+		For i As Integer = 0 To expected.Length - 1
+			Assert.AreEqual(expected(i), actual(i))
+		Next
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetDigitsTestMore()
+		Dim expected() As Integer = {9, 9, 9}
+		Dim actual() As Integer = pr.GetDigits(999)
+
+		Assert.AreEqual(expected.Length, actual.Length)
+		For i As Integer = 0 To expected.Length - 1
+			Assert.AreEqual(expected(i), actual(i))
+		Next
+	End Sub
+
+	<TestMethod()> _
+	Public Sub PadDigitsTest()
+		Dim actual() As Integer = {3, 2, 1}
+		pr.PadDigits(actual, 5)
+
+		Dim expected() As Integer = {3, 2, 1, 0, 0}
+
+		Assert.AreEqual(expected.Length, actual.Length)
+		For i As Integer = 0 To expected.Length - 1
+			Assert.AreEqual(expected(i), actual(i))
+		Next
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetCarryCountTestNoCarry()
+		Assert.AreEqual(0, pr.GetCarryCount(22, 33))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetCarryCountTest()
+		Assert.AreEqual(0, pr.GetCarryCount(123, 456))
+		Assert.AreEqual(3, pr.GetCarryCount(555, 555))
+		Assert.AreEqual(1, pr.GetCarryCount(123, 594))
+	End Sub
+
+
+	<TestMethod()> _
+	Public Sub GetCarryCountTestMore()
+		Assert.AreEqual(1, pr.GetCarryCount(4821, 311))
+		Assert.AreEqual(3, pr.GetCarryCount(999, 1))
+		Assert.AreEqual(4, pr.GetCarryCount(99099, 1001))
+	End Sub
+
+End Class
+}}}

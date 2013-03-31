@@ -1,0 +1,89 @@
+== 루비 코드 ==
+{{{
+#Chap.14 Ruby and Its World
+#~ ARGV
+#~ ARGV.each {|arg| p arg}
+#~ ruby -w test.rb "Hello World" a1 1.6180
+
+#~ doens't work
+#~ fork {exit 99}
+#~ Process.wait
+#~ puts "Child exits with status: #{$?.exitstatus}"
+#~ begin
+	#~ exit
+	#~ puts "never get here"
+	#~ rescue SystemExit
+	#~ puts "rescued a SystemExit exception"
+#~ end
+#~ puts "after begin block"
+
+#~ doens't work
+#~ fork do 
+	#~ 3.times {|i| puts "Child: #{i}" }
+#~ end
+
+#Where Ruby Finds its Modules
+#~ puts $:
+
+#~ require 'rbconfig'
+#~ include Config
+#~ puts CONFIG["host"]
+#~ puts CONFIG["libdir"]
+
+# Chap 17. RubyGems
+#~ require 'bluecloth'
+#~ require 'rubygems'
+#~ gem 'BlueCloth'
+#~ doc = BlueCloth::new <<MARKUP
+	#~ This is _some sample_ [Text][1]. Just learning to use [BlueCloth][1].
+	#~ Just a simple test.
+	#~ [1]: http://ruby-lang.org
+#~ MARKUP
+#~ puts doc.to_html
+
+#Char20. Ruby and MS-Windows
+#~ require 'Win32API'
+#~ fname = "D:\down\Ruby_C_Extensions.pdf"
+#~ shell = Win32API.new("shell32", "ShellExecute", ['L', 'P', 'P', 'P', 'P', 'L'], 'L')
+#~ shell.Call(0, "print", fname, 0, 0, SW_SHOWNORMAL)
+#~ shell.Call(0, "print", fname, 0, 0, 1)
+
+#~ require 'win32ole'
+#~ ie = WIN32OLE.new('InternetExplorer.Application')
+#~ ie.visible = true
+#~ ie.gohome
+#~ ie.navigate("http://www.pragmaticprogrammer.com")
+#C:\ruby\doc\ruby\ruby-1.8.5\sample\win32ole 참고.
+
+#Optimizing
+#C:\ruby\doc\ruby\ruby-1.8.5\sample\win32ole
+#ruby olegen.rb 'NetMeeting 1.1 Type Library' >netmeeting.rb
+#~ require 'netmeeting'
+#~ require 'benchmark'
+#~ include Benchmark
+#~ bmbm(10) do |test|
+  #~ test.report("Dynamic") do
+    #~ nm = WIN32OLE.new('NetMeeting.App.1')
+    #~ 10000.times{nm.Version}
+  #~ end
+  
+  #~ test.report("Via Proxy") do
+    #~ nm = NetMeeting_App_1.new
+    #~ 10000.times {nm.Version}
+  #~ end
+#~ end
+
+#~ require 'dl'
+#~ User32 = DL.dlopen("user32")
+#~ MB_OKCANCEL = 1
+#~ message_box = User32['MessageBoxA', 'ILSSI']
+#~ r, rs = message_box.call(0, 'OK?', 'Please Confirm', MB_OKCANCEL)
+#~ case r
+#~ when 1
+  #~ print ("OK!\n")
+#~ when 2
+  #~ print ("Cancel!\n")
+#~ end
+}}}
+
+http://rubyforge.org/projects/win32utils

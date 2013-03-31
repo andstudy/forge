@@ -1,0 +1,6 @@
+문제 풀이 번호
+#1 ~ 7, 10, 12, 16, ...
+
+{{{#!html
+<div style="width:425px" id="__ss_6751463"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/soomong/taocp-125" title="Taocp 1.2.5">Taocp 1.2.5</a></strong><object id="__sse6751463" width="575" height="480"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp1-2-5-110130074317-phpapp01&stripped_title=taocp-125&userName=soomong" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6751463" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp1-2-5-110130074317-phpapp01&stripped_title=taocp-125&userName=soomong" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/soomong">hyun soomyung</a>.</div></div>
+}}}

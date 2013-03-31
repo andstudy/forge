@@ -1,0 +1,74 @@
+[김명관] 
+
+== 문제 1.11 ==
+=== 풀이 ===
+번역본 1쇄에 오탈자가 있었네요.
+원래 문제는
+f(n)=f(n-1)+2f(n-2)+3f(n-3) 인데
+f(n)=(n-1)+2f(n-2)+3f(n-3) 을 풀었습니다.
+{{{#!gcode scheme
+; recursive
+(define (prac1-11-recur n)
+  (if (< n 3)
+      n
+      (+ (- n 1) 
+         (* 2 (prac1-11-recur (- n 2)))
+         (* 3 (prac1-11-recur (- n 3))))))
+
+; iterative
+(define (prac1-11-iter n)
+  (define (iter fn-1 fn-2 fn-3 n-1)
+  (if (= n n-1)
+      fn-1
+      (iter (+ n-1 (* 2 fn-2) (* 3 fn-3)) 
+            fn-1 
+            fn-2 
+            (+ n-1 1))))
+  (if (< n 3)
+      n
+      (iter 2 1 0 2)))
+}}}
+
+== 문제 1.12 ==
+{{{#!gcode scheme
+(define (prac1-12 n m)
+  (if (or (= m n) (= m 1))
+      1      
+      ( + (prac1-12 (- n 1) (- m 1))
+          (prac1-12 (- n 1) m))))
+}}}
+
+== 문제 1.29 ==
+{{{#!gcode scheme
+(define (inc n) (+ n 1))
+(define (cube x) (* x x x))
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+         (sum term (next a) next b))))
+
+(define (integral f a b dx)
+  (define (add-dx x) (+ x dx))
+  (* (sum f (+ a (/ dx 2.0)) add-dx b)
+     dx))
+
+; 풀이
+(define (prac1-29 f a b n)
+  (define h (/ (- b a) n))
+  (define (yk k)
+    (f (+ a (* k h))))
+  (define (num k)
+    (if (or (= 0 k) (= n k))
+        1
+        (if (= 0 (remainder k 2)) 2 4)))
+  (define (simpson-term k)
+    (* (num k) (yk k)))
+  (* (/ h 3) 
+     (sum simpson-term 0 inc n)))
+
+(integral cube 0 1 0.01)
+(integral cube 0 1 0.001)
+(prac1-29 cube 0 1 100)          
+(prac1-29 cube 0 1 1000)
+}}}

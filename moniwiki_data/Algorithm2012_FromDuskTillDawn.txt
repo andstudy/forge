@@ -1,0 +1,226 @@
+ * http://devnote.tistory.com/231
+
+{{{#!plain cpp
+#include <vector>
+#include <map>
+#include <queue>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+
+using namespace std;
+
+struct Route;
+
+struct Terminal
+{
+    Terminal() : timeArrive( 10000 ), count( 10000 ) {}
+
+    int				count;			// 해당 역 도착까지 필요한 리터 수.
+    int				timeArrive;		// 해당 역에 도착한 시각.
+    string			strName;		// 역 이름
+    vector<Route*>	routes;			// 역에서 출발하는 노선 데이터.
+};
+
+struct Route
+{
+    Route() : pStart( NULL ), pEnd( NULL ), timeStart( 0 ), timeDuration( 0 ) {}
+
+    Terminal*	pStart;			// 출발역
+    Terminal*	pEnd;			// 도착역
+    int			timeStart;		// 출발시각
+    int			timeDuration;	// 소요시간
+
+    int GetArriveTime() const { return timeStart + timeDuration; }
+};
+
+class Graph
+{
+public:
+    Graph( istream& stm ) : m_stmIn( stm ) {}
+    void Solve();
+
+protected:
+    void Init();
+
+    Terminal* RegistTerminal( const string& strTerminal );
+    Terminal* GetTerminal( const string& strTerminal );
+
+    // search
+    void Bfs( Terminal* pStart, Terminal* pEnd );
+
+    //------------------------------------------------------------------------
+
+    map<string,Terminal>	m_terminals;		// 정류장 리스트
+    vector<Route*>          m_routes;			// 노선 리스트
+    istream&                m_stmIn;			// 파일입력 or STDIN 입력.
+};
+
+void Graph::Init()
+{
+    for( size_t i = 0; i < m_routes.size(); i++ )
+    {
+        delete m_routes[i];
+        m_routes[i] = NULL;
+    }
+
+    m_terminals.clear();
+    m_routes.resize(0);
+}
+
+Terminal* Graph::RegistTerminal( const string& strTerminal )
+{
+    map<string,Terminal>::iterator mit;
+    mit = m_terminals.find( strTerminal );
+    if( mit != m_terminals.end() )
+        return &mit->second;
+
+    // insertion.
+    m_terminals[strTerminal].strName = strTerminal;
+
+    return &m_terminals[strTerminal];
+}
+
+void Graph::Bfs( Terminal* pStart, Terminal* pEnd )
+{
+    queue<Terminal*> queue;
+
+    queue.push( pStart );
+    pStart->count = 0;
+    pStart->timeArrive = 0;
+
+    while( !queue.empty() )
+    {
+        Terminal* pTerminal = queue.front();
+        queue.pop();
+
+        // 목적지에 한 번 도달했더라도 다음으로 진행. 더 짧은 경로를 찾을 수 있다.
+        if( pTerminal == pEnd )
+        {
+            continue;
+        }
+
+        const vector<Route*>& edges = pTerminal->routes;
+        vector<Route*>::const_iterator vit;
+        for( vit = edges.begin(); vit != edges.end(); vit++ )
+        {
+            const Route& route = *(*vit);
+
+            // 당일에 잠을 자지 않고 다시 여행할 수 있는 조건
+            // 1. 출발역에 도착한 시간보다 더 뒤에 출발하는 열차일 것.
+            // 2-1. 도착역에 이미 더 빠른 경로로 방문한 적이 없거나
+            // 2-2. 동일한 소요기간이라도 도착시간을 단축할 수 있는 경우.
+            if( pTerminal->timeArrive <= route.timeStart &&
+                ( route.pEnd->count > pTerminal->count ||
+                  ( route.pEnd->count == pTerminal->count && 
+                    route.pEnd->timeArrive > route.GetArriveTime() ) ) )
+            {
+                queue.push( route.pEnd );
+                route.pEnd->count = pTerminal->count;
+                route.pEnd->timeArrive = route.GetArriveTime();
+            }
+
+            // 한숨 자고 다음날 여행하는 경로의 탐색 조건
+            // 1-1. 도착역에 현재 소요일자+1 만큼 짧은 방문기록이 없거나
+            // 1-2. 현재 소요일자+1의 기록이 있더라도 도착시간 단축이 가능한 경우.
+            else if( route.pEnd->count > pTerminal->count + 1 ||
+                ( route.pEnd->count == pTerminal->count + 1 && 
+                  route.pEnd->timeArrive > route.GetArriveTime() ) )
+            {
+                queue.push( route.pEnd );
+                route.pEnd->count = pTerminal->count + 1;
+                route.pEnd->timeArrive = route.GetArriveTime();
+            }
+        }
+    }
+
+}
+
+Terminal* Graph::GetTerminal( const string& strTerminal )
+{
+    map<string,Terminal>::iterator mit = m_terminals.find( strTerminal );
+
+    if( mit == m_terminals.end() )
+        return NULL;
+
+    return &mit->second;
+}
+
+void Graph::Solve()
+{
+    int caseCount = 0;
+    m_stmIn >> caseCount;
+    m_stmIn.get();
+
+    for( int i = 0; i < caseCount; i++ )	// 테스트 케이스 개수만큼 루프.
+    {
+        Init();
+
+        int edgeCount = 0;
+        string inputLine;
+        m_stmIn >> edgeCount;
+        m_stmIn.get();
+        for( int j = 0; j < edgeCount; j++ ) // 열차노선 개수만큼 루프.
+        {
+            string strStart, strEnd;
+            int timeStart, timeDuration;
+            m_stmIn >> strStart >> strEnd >> timeStart >> timeDuration;
+            m_stmIn.get();
+
+            timeStart %= 24;
+
+            int timeArrive = timeStart + timeDuration;
+            if( (6 <= timeStart && timeStart < 18) ||	// 출발시각이 6:00 ~ 18:00 사이
+                (timeStart < 6 && timeArrive > 6) ||	// 새벽 출발인데 도착시간 06:00 초과
+                (timeStart >= 18 && timeArrive > 30) )	// 저녁 출발인데 도착시간 다음날 06:00 초과
+            {
+                continue;
+            }
+
+            Route* pRoute = new Route;
+            pRoute->pStart = RegistTerminal( strStart );
+            pRoute->pEnd = RegistTerminal( strEnd );
+            pRoute->timeStart = (timeStart + 12) % 24;
+            pRoute->timeDuration = timeDuration;
+            pRoute->pStart->routes.push_back( pRoute );
+
+            m_routes.push_back( pRoute );
+        }
+
+        string strStart, strEnd;
+        m_stmIn >> strStart >> strEnd;
+        m_stmIn.get();
+
+        Terminal* pStart = GetTerminal( strStart );
+        Terminal* pEnd = GetTerminal( strEnd );
+
+        cout << "Test Case " << i + 1 << "." << endl;
+        if( pStart && pEnd )
+        {
+            Bfs( pStart, pEnd );
+        }
+
+        if( pEnd && pEnd->timeArrive < 30 )
+            cout << "Vladimir needs " << pEnd->count << " litre(s) of blood." << endl;
+        else
+            cout << "There is no route Vladimir can take." << endl;
+    }
+}
+
+int main( int argc, char* argv[] )
+{
+    if( argc > 1 ) // 명령행 인자를 받는다면 해당 이름의 파일을 인풋으로 삼는다.
+    {
+        ifstream fstm( argv[1] );
+        Graph g( fstm );
+        g.Solve();
+    }
+    else // 그냥 실행하면 표준입력으로 인풋을 받음.
+    {
+        Graph g( cin );
+        g.Solve();
+    }
+
+    return 0;
+}
+}}}

@@ -1,0 +1,8 @@
+## @DATE@
+== Your Name ==
+
+Email: you@them.com
+
+== Dear @PAGE@ ==
+----
+CategoryHomepage

@@ -1,0 +1,28 @@
+= ohyecloudy =
+{{{#!html
+<div style="width:595px" id="__ss_10433704"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ohyecloudy/chap-17-18-26-33-81" title="[프로젝트가 서쪽으로 간 까닭은] chap 17, 18, 26, 33, 81" target="_blank">[프로젝트가 서쪽으로 간 까닭은] chap 17, 18, 26, 33, 81</a></strong> <object id="__sse10433704" width="595" height="497"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=1718263381-111202080142-phpapp01&rel=0&stripped_title=chap-17-18-26-33-81&userName=ohyecloudy" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <param name="wmode" value="transparent"/> <embed name="__sse10433704" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=1718263381-111202080142-phpapp01&rel=0&stripped_title=chap-17-18-26-33-81&userName=ohyecloudy" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" width="595" height="497"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/ohyecloudy" target="_blank">Jongbin Oh</a> </div> </div>
+}}}
+
+= whiletrue =
+
+{{{#!html
+<div style="width:595px" id="__ss_10435335"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/whiletrue0222/56152540" title="프로젝트가 서쪽으로 간 까닭은 5,6,15,25,40" target="_blank">프로젝트가 서쪽으로 간 까닭은 5,6,15,25,40</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10435335" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/whiletrue0222" target="_blank">Youngkwon Lee</a> </div> </div>
+}}}
+
+= YouLim Choi =
+
+{{{#!html
+<div style="width:595px" id="__ss_10437330"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/tedypicker/ss-10437330" title="프로젝트가 서쪽으로 간 까닭은" target="_blank">프로젝트가 서쪽으로 간 까닭은</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10437330" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/tedypicker" target="_blank">tedypicker</a> </div> </div>
+}}}
+
+= honggu =
+
+{{{#!html
+<div style="width:425px" id="__ss_10492389"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jun0683/ss-10492389" title="[프로젝트가 서쪽으로 가는 까닭] chep 3,23,37,43,55,77" target="_blank">[프로젝트가 서쪽으로 가는 까닭] chep 3,23,37,43,55,77</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10492389" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/jun0683" target="_blank">홍준 김</a> </div> </div>
+}}}
+
+= kernel0 =
+
+{{{#!html
+<div style="width:595px" id="__ss_10648292"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/kernel0/chap-332466782" title="[프로젝트가 서쪽으로 간 까닭은] chap 3,32,46,67,82" target="_blank">[프로젝트가 서쪽으로 간 까닭은] chap 3,32,46,67,82</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10648292" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/kernel0" target="_blank">SeungHyun Hwang</a> </div> </div>
+}}}

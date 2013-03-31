@@ -1,0 +1,14 @@
+[[Clip(test)]]
+----
+새로운 자바 애플릿 플러그인입니다. 테스트해보세요. -- 211.106.173.4 [[Date(2005-03-09T17:15:41)]]
+
+----
+[[Clip(bot-environment)]]
+
+잘 안되네요. 윈XP pro !SP2 , Internet Explore 6.0 !SP2 에서 테스트 했습니다. paste와 copy는 별 반응없고, Unload 괜히 눌렀다가 위의 그림만 지웠네요 ^^; 
+클립보드에는 그림이 잘 들어가 있었구요. 포토샵7.0에서 copy했는데 그림판이나 워드등에는 잘붙여지고 있네요...
+되면 좋겠는데 왜 안될까요? ^^ -- -- Anonymous [[DateTime(2005-03-31T10:58:46)]]
+----
+MozillaFirefox에서는 잘 됩니다. -- WkPark [[DateTime(2005-03-31T16:51:27)]]
+----
+익스플로러 XP프로 SP2에서 잘 되는군요. print screen키를 누르신다음에 paste해보세요 -- Anonymous [[DateTime(2005-03-31T16:55:09)]]

@@ -1,0 +1,18 @@
+게임이름 : Super Meat Boy
+
+잘된 점
+1. Using our own engine and toolset
+2. The design environment
+3. Back to basics design innovation
+4. Soundtrack
+5. Steam
+
+아쉬웠던 점
+1. Personal expenses
+2. Losing sight of WIIWare
+3. PC launch
+4. Last two months of crunch for XBLA launch
+5. XBLA launch
+
+----
+[GameDeveloperMagazine]

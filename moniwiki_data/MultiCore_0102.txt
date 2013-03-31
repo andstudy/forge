@@ -1,0 +1,3 @@
+{{{#!html
+<div style="width:595px" id="__ss_7959710"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/hiscale/110514-cpu" title="[아꿈사/110514] 멀티코어cpu이야기">[아꿈사/110514] 멀티코어cpu이야기</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/7959710" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/hiscale">sung ki choi</a> </div> </div>
+}}}

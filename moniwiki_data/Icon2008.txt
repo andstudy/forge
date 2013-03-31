@@ -1,0 +1,5 @@
+{{{#!html
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420"><param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001220886743001363" ></param> <param name='allowFullScreen' value='true' /><param name='allowScriptAccess' value='always' /><embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001220886743001363" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' width="500" height="420" ></embed></object>
+}}}
+
+ [http://blog.empas.com/dragonjoon/30497779 한국게임산업진흥원 게임아카데미 교수 김용준]

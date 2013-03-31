@@ -1,0 +1,48 @@
+[POSA1]
+[[TableOfContents]]
+= Model-View-Controller =
+ * Model : 중요 기능과 데이타를 관리
+ * View : 데이타를 사용자에게 보여주기
+ * Controller : 사용자의 입력 처리
+
+== Example ==
+
+== Context ==
+
+== Problem ==
+ * UI 는 변경되기 마련이다.
+ * 사용자마다 다른 UI 를 원한다.
+ * UI 기술은 급속하게 변한다.
+ * 다른 표준 "look and feel" UI 를 제공해야 할 수도 있다.
+ * core 코드는 UI 코드와 분리되어야 한다.
+
+== Solution ==
+ * IO 에 독립적인 core 모델을 개발한다.
+ * 다른 view 들를 정의한다.
+ * 각 view 는 model 에서 데이타를 가져와서 출력한다.
+ * 각 view 는 사용자 입력을 담당하는 연관된 controller 를 가진다.
+ * model 은 데이타가 변경될때 적절한 view 에 통지한다.
+
+== structure ==
+
+== Dynamics ==
+
+== Implementation ==
+
+== Variants ==
+
+== Known Uses ==
+
+== Consequences ==
+=== Benefits ===
+ * 한 model 을 다양한 view 로 보여줄 수 있다.
+ * view 를 동기화 시키기 쉽다.
+ * view 컴포넌트를 plug-in 시킬 수 있다.
+ * UI 만 변경시킬 수 있다.
+=== Liabilities ===
+ * 단순한 UI 프로그램의 경우 오히려 복잡도를 증가시킬 수 있다.
+ * update 가 너무 잦을 수 있다. 필요없는 update 는 전파하지 말것.
+ * view 와 controller 가 강하게 커플링되는 경우.
+ * view, controller, model 서로간에 커플링 발생
+
+== Related Patterns ==

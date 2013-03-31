@@ -1,0 +1,191 @@
+한 번에 Accepted. 왠 일이래...
+
+{{{
+/* @JUDGE_ID:parkpd 10038 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <strstream>
+
+using namespace std;
+
+bool IsInRange(int value, int from, int to)
+{
+	return (from <= value) && (value <= to);
+}
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+class CKeyMap
+{
+public:
+	static char FindNextKey(char input, char& output);
+	static bool FindNextKey(const string& str, char input, char& output);
+	static string ConvertString(const string& input);
+	static bool ConsoleTest(istream& input, ostream& output);
+
+	const static string KeyboardLine[4];
+};
+
+const string CKeyMap::KeyboardLine[4] = {	
+	string("`1234567890-="),
+	string("QWERTYUIOP[]\\"),
+	string("ASDFGHJKL;'"),
+	string("ZXCVBNM,./")
+};
+
+char CKeyMap::FindNextKey(char input, char& output)
+{
+	if (' ' == input)
+	{
+		output = ' ';
+		return true;
+	}
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (FindNextKey(KeyboardLine[i], input, output))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool CKeyMap::FindNextKey(const string& str, char input, char& output)
+{
+	string::size_type it = str.find(input);
+	if ((it != string::npos) && (it != 0))
+	{
+		output = str[it - 1];
+		return true;
+	}
+
+	output = '?';	// 절대 나오지 않는 키
+	return false;
+}
+
+string CKeyMap::ConvertString(const string& input)
+{
+	char o;
+	string output;
+
+	for (size_t i = 0; i < input.size(); ++i)
+	{
+		if (FindNextKey(input[i], o))
+		{
+			output.push_back(o);
+		}
+		else
+		{
+			return "\n";
+		}
+	}
+
+	output.push_back('\n');
+	return output;
+}
+
+bool CKeyMap::ConsoleTest(istream& input, ostream& output)
+{
+	string inputString;
+	while (getline(input, inputString))
+	{
+		string outputString = ConvertString(inputString);
+		output << outputString;
+	}
+
+	return true;
+}
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CKeyMap::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureKeyMap : public CKeyMap
+{
+	char output;
+
+	stringstream testCin;
+	stringstream testCout;
+};
+
+TEST_FIXTURE(FixtureKeyMap, FindNextKey)
+{
+	string test = "tesp";
+
+	CHECK(FindNextKey(test, 'e', output));
+	CHECK_EQUAL('t', output);
+
+	CHECK(FindNextKey(test, 's', output));
+	CHECK_EQUAL('e', output);
+
+	CHECK(FindNextKey(test, 'p', output));
+	CHECK_EQUAL('s', output);
+
+	CHECK(!FindNextKey(test, 't', output));
+	CHECK_EQUAL('?', output);
+}
+
+TEST_FIXTURE(FixtureKeyMap, FindNextKey1)
+{
+	CHECK(FindNextKey('1', output));
+	CHECK_EQUAL('\'', output);
+}
+
+TEST_FIXTURE(FixtureKeyMap, FindNextKey_Except)
+{
+	CHECK(FindNextKey(' ', output));
+	CHECK_EQUAL(' ', output);
+}
+
+TEST_FIXTURE(FixtureKeyMap, ConvertString)
+{
+	string output = ConvertString("O S, GOMR YPFSU/");
+	CHECK_EQUAL("I AM FINE TODAY.", output);
+}
+
+TEST_FIXTURE(FixtureKeyMap, ConsoleTest)
+{
+	testCin << "O S, GOMR YPFSU/\n";
+	ConsoleTest(testCin, testCout);
+
+	CHECK_EQUAL("I AM FINE TODAY.", testCout.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

@@ -1,0 +1,4 @@
+= holykss = 
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=1-1-100302101904-phpapp01&stripped_title=1-1-3317325" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}

@@ -1,0 +1,70 @@
+#keywords WikiWyg,wiki
+http://www.ajaxian.com/archives/2005/09/wikiwyg_rich_te.html
+
+http://kwiki.org/?KwikiFormattingRules
+----
+==  TODO ==
+ * 키워드
+ * ProcessingInstrunction
+ * 코멘트
+##Hello World
+----
+##[[TableOfContents]]
+------
+Wow
+== Basic Wiki text ==
+안녕 HelloWorld WikiName Hello World 안녕
+SixSingleQuote Wiki''''''Wiki WikiName ddd test 2
+----
+'''인터위키'''
+
+MoniWiki:FrontPage Wiki:RecentChanges
+----
+'''스마일리'''
+
+:) :( >:>
+== Macro ==
+[[BR]] [[TableOfContents]] [[Icon(diff)]] [[Icon(home)]]
+
+[[FootNote(매크로도 됩니다)]]
+
+[[Calendar]]
+== Processor ==
+{{{#!vim c
+int main() {
+    printf("Hello world!\n");
+}
+}}}
+attachment:file_iso.png
+{{{#!latex
+$\sum_i^n x_i^2$
+}}}
+----
+inline latex: $ \alpha $ $ \beta $
+==  InterWiki links ==
+Wiki:RecentChanges and MoinMoin:FrontPage are '''sss ''ssd ssdsd sdsds ds ds  ''sssdsd s'''interwiki. Wiki:Hello
+----
+http://wiki.splitbrain.org/wiki:tips:wikiwyg
+
+dokuwiki에서도 WikiWyg 를 지원한다. MediaWiki식 section editing은 아직 지원하지 않는듯
+
+test
+----
+/!\ IE에서 안된다. [[Date(2006-02-01T05:30:42)]]
+----
+Hello Wow
+== 6 test ==
+ 1. '''훌륭합니다'''
+ 1. '''멋집니다'''
+ 1. '''항상 개발에 전념하시는 모습에 존경을 ^^'''
+ 1. file:///C:/DOCUME%7E1/jsey/LOCALS%7E1/Temp/moz-screenshot.jpg
+
+와우 나이스 하군요. +_+
+
+오.. 멋지군요..  파이어폭스의 킬러애플리케이션이 될듯 ^^
+
+IE로 해서 안되어서 얼마나 삽질한지 모릅니다.
+----
+test -- 59.25.183.20 [[Date(2006-02-14T01:12:29)]]
+----
+오 신기하삼 -- LinDol [[Date(2006-07-20T07:00:54)]]

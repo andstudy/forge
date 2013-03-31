@@ -1,0 +1,27 @@
+6월 9일(토) 
+스터디 시간 : 11시 ~ 1시 
+
+칼럼11 정렬 : 이수안 [kukuman]
+칼럼12 표본 선정 문제 : 박일 [ParkPD]
+
+== 다음 스터디 준비 ==
+생각하는 프로그래밍 스터디도 이제 3주 남았습니다.
+슬슬 다음 스터디를 준비해야 겠네요.
+
+ * 소프트웨어 아키텍처: 이론과 실제 [제9회 JOLT상 수상작]
+  * 발표 PPT 가 있다는 게 장점
+ * Head First Object Oriented Analysis & Design : 세상을 설계하는 객체지향 방법론
+  * 읽기 쉬워 보인다는 게 장점
+이 지금까지 후보로 나왔습니다.
+다른 책도 추천하고 싶은 거 있으시면 알려주세요.
+http://andstudy.com/andwiki/wiki.php/LetsStudy
+
+새로 참가하고 싶은 분들도 언제나 환영입니다.
+[http://cafe.naver.com/architect1.cafe 아키텍트를 꿈꾸는 사람들] 과 위키[http://AndStudy.com] 에 스터디 신청 의사를 써 주세요.
+
+그리고 위키를 공개로 수정했습니다.
+이제 누구든지 로그인만 하시면(메뉴 상단의 Login -> 가입 -> Make Profile) 글을 쓰고 고칠 수 있습니다.
+AnD-Gem 뿐만 아니라 AnD-Basic 여러분들도 많은 참여 바랍니다.
+
+스터디 장소는 여기입니다.
+http://www.toz.co.kr/v2/01about/pop_map_sin.gif

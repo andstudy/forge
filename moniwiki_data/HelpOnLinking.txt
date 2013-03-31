@@ -1,0 +1,88 @@
+== Arbitrary Page Names ==
+If you enclose a sequence of characters in square brackets and double quotes {{{["like this"]}}}, that makes it a page name. That can be used for specific uses of MoinMoin (like organizing a list of items, e.g. your CD collection, by their "natural" name), or if you want to create a wiki with a non-western character encoding.
+
+== URLs and Inline Images ==
+There are several way to insert external references[[FootNote(The opposite of external references are the internal, automatic WikiName links.)]] into the text:
+ * direct URL insertion; if the URL ends in an image extension ("{{{.gif}}}", "{{{.jpg}}}" or "{{{.png}}}"), the URL is converted to an image tag.
+ * bracketed URLs.
+ * InterWiki links.
+ * email addresses with {{{mailto:}}} tag.
+
+If you enter URLs into normal text, there is the problem of detecting what belongs to the URL and what not. There are four ways to force the ending of an URL:
+ * put a space after the URL.
+ * use the Wiki:SixSingleQuotes escaping.
+ * put the URL into double quotes.
+ * use the bracketed URL syntax.
+
+The supported URL schemas are: `http:`, `https:`, `ftp:`, `nntp:`, `news:`, `mailto:`, `telnet:`, and `file:`. Please see HelpOnConfiguration to extend this schemas.
+
+In addition to the standard schemas, there are MoinMoin-specific ones: `wiki:`, `attachment:`, `inline:`, and `drawing:`. "`wiki:`" indicates an InterWiki link, so `MoniWiki:FrontPage` and `wiki:MoniWiki:FrontPage` are equivalent; you will normally prefer the shorter form, the "`wiki`" scheme becomes important when you use bracketed links, since there you always need a scheme. The other three schemes are related to file attachments and are explained on HelpOnActions/AttachFile.
+
+/!\ `inline:` and `drawing:` are not supported by MoniWiki.
+
+You can surpress WikiName linking by putting an exclamation mark (''bang'') before the WikiName, i.e. {{{!WikiName}}} `!WikiName`. and you can force linking by putting a question mark before any word, i.e. {{{?Hello}}} `?Hello`.
+
+/!\ MoinMoin does not support force linking feature.
+
+For more information on the possible markup, see HelpOnEditing.
+
+[[FootNote]]
+
+=== Example ===
+{{{
+ * http://moniwiki.sourceforge.net/
+ * [http://moniwiki.sourceforge.net/]
+ * [http://moniwiki.sourceforge.net/ MoniWiki Sourceforge Homepage]
+ * http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif
+ * [http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif]
+ * [http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif moniwiki-logo.gif]
+ * [http://moniwiki.sourceforge.net/ http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif]
+ * InterWiki
+  * MeatBall:InterWiki
+  * wiki:MeatBall:InterWiki
+  * [wiki:MeatBall:InterWiki]
+  * [wiki:MeatBall:InterWiki InterWiki page on MeatBall]
+ * jh@web.de
+ * mailto:jh@web.de
+ * [#20030702 Anchor Name]
+}}} 
+
+=== Display ===
+ * http://moniwiki.sourceforge.net/
+ * [http://moniwiki.sourceforge.net/]
+ * [http://moniwiki.sourceforge.net/ MoniWiki Sourceforge Homepage]
+ * http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif
+ * [http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif]
+ * [http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif moniwiki-logo.gif]
+ * [http://moniwiki.sourceforge.net/ http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif]
+ * InterWiki
+  * MeatBall:InterWiki
+  * wiki:MeatBall:InterWiki
+  * [wiki:MeatBall:InterWiki]
+  * [wiki:MeatBall:InterWiki InterWiki page on MeatBall]
+ * jh@web.de
+ * mailto:jh@web.de
+ * [#20030702 Anchor Name]
+----
+/!\ To get rid of confusion, {{{wiki:InterWiki/Page}}} link method is not supported by MoniWiki.
+{{{wiki:MeatBall/InterWiki}}} is interpreted as {{{wiki:MeatBall:InterWiki}}} in the MoinMoin. But it confuse users with {{{wiki:WikiPage/SubPage}}} syntax.
+
+== etc. ==
+ * ftp://ftp.nuri.net [ftp://ftp.nuri.net]
+ * irc://irc.lojban.org/lojban [irc://irc.lojban.org/lojban]
+ * telnet://hackerslab.org [telnet://hackerslab.org]
+ * nntp://news.kreonet.re.kr [nntp://news.kreonet.re.kr]
+ * news://news.kreonet.re.kr [news://news.kreonet.re.kr]
+== Moniwiki Extension ==
+=== single bracketed page ===
+ * {{{[Hello World]}}} link to [HelloWorld] (no space inserted)
+If you want to insert a space, use {{{["Hello World"]}}}
+=== force linking with a question mark ===
+{{{?Hello}}}
+=== braketed link with image ===
+{{{
+ * [http://moniwiki.sourceforge.net/ http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif]
+}}}
+ * [http://moniwiki.sourceforge.net/ http://moniwiki.sourceforge.net/imgs/moniwiki-logo.gif]
+----
+[[Navigation(HelpOnEditing)]]

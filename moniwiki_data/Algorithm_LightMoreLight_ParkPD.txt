@@ -1,0 +1,289 @@
+ 정답일 듯하나, never solved 문제라서 확인해 보지 못함.(wrong answer 로 나옴)
+  * 입력 범위가 2^32-1 까지 입니다. int형의범위를 넘어서 Wrong answer 나오는 겁니다. [Mastojun]
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <deque>
+#include <list>
+#include <stack>
+#include <string>
+#include <algorithm>
+#include <map>
+#include <limits>
+#include <assert.h>
+#include <iomanip>
+#include <complex>
+#include <math.h>
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+#include <Windows.h>
+#include "../UnitTest++/src/UnitTest++.h"
+#endif
+
+using namespace std;
+
+#ifdef max
+#undef max
+#endif
+
+#ifdef min
+#undef min
+#endif
+
+// Minimum Spanning Tree -> Prim Algorithm 을 생각하며 풀었음.
+
+namespace ATUtil
+{
+	bool IsInRange(int value, int from, int to)
+	{
+		return (from <= value) && (value <= to);
+	}
+
+	int ConvertToIndex(char c)
+	{
+		if ('a' <= c && c <= 'z')
+		{
+			return c - 'a';
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	char ConvertToChar(int i)
+	{
+		return (char)i + 'a';
+	}
+
+#ifdef _UNIT_TEST
+	class CStopWatch
+	{
+	public:
+		CStopWatch()
+		{
+			m_StartTick = GetTickCount();		// gcc 에서 안 될 수 있으니까
+		}
+
+		~CStopWatch()
+		{
+			cout << "Time passed : " << GetTickCount() - m_StartTick << " milisec.\n";
+		}
+
+		int m_StartTick;
+	};
+#endif
+
+	typedef map<int, int> IntDB;
+	typedef vector<int> Ints;
+	typedef list<int> IntList;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+	///////////////////////////////////////////////////////////////
+	// CSolver
+	class CSolver
+	{
+	public:
+		int GetDivisorNum(int num)
+		{
+			if (num == 1)
+			{
+				return 1;
+			}
+
+			int divisor = 2;	// 1 과 자기 자신.
+			int s = num;
+			for (int i = 2; i < s; ++i)
+			{
+				int remain = num % i;
+				if (0 == remain)
+				{
+					s = num / i;
+
+					if (i == s)	// 1, 2, 4 의 2와 같은 경우는 한 번만 더한다.
+					{
+						divisor++;
+					}
+					else
+					{
+						divisor += 2;
+					}
+				}
+			}
+
+			return divisor;
+		}
+
+		bool Input(int index)
+		{
+			// 최적화
+			//if (0 == GetDivisorNum(index) % 2)
+			//{
+			//	return false;
+			//}
+			//else
+			//{
+			//	return true;
+			//}
+			int s = (int)sqrt((double)index);
+			if (index == s * s)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CConsole
+	class CConsole
+	{
+	public:
+		static void ConsoleTest(istream& input, ostream& output);
+	};
+
+	void CConsole::ConsoleTest(istream& input, ostream& output)
+	{
+		CSolver s;
+		int index;
+		while (input >> index)
+		{
+			if (0 == index)
+			{
+				break;
+			}
+
+			if (s.Input(index))
+			{
+				output << "yes" << '\n';
+			}
+			else
+			{
+				output << "no" << '\n';
+			}			
+		}
+	};
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase()
+	{
+	}
+
+	int x, y;
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, GetDivisorNum)
+{
+	CSolver g;
+	int tests[] = {
+		1, 1,
+		2, 2, 
+		3, 2,
+		4, 3,
+		5, 2,
+		6, 4,
+		7, 2,
+		8, 4,
+		9, 3,
+		10, 4,
+		11, 2,
+		12, 6,
+		13, 2,
+		14, 4
+	};
+
+	for (int i = 0; i < sizeof(tests) / sizeof(int); i += 2)
+	{
+		cout << tests[i] << '\n';
+		CHECK_EQUAL(tests[i + 1], g.GetDivisorNum(tests[i]));
+	}
+}
+
+TEST_FIXTURE(FixtureBase, Input)
+{
+	CSolver g;
+	int tests[] = {
+		3, 0,
+		6241, 1,
+		8191, 0,
+		9, 1,
+		14, 0
+	};
+
+	for (int i = 0; i < sizeof(tests) / sizeof(int); i += 2)
+	{
+		//cout << i / 2 << '\n';
+		CHECK_EQUAL(tests[i + 1], g.Input(tests[i]) ? 1 : 0);
+	}
+}
+
+TEST_FIXTURE(FixtureBase, ConsoleTest)
+{
+	input << 
+		"3\n"
+		"6241\n"
+		"8191\n"
+		"0\n"
+		;
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL( 
+		"no\n"
+		"yes\n"
+		"no\n",
+		output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

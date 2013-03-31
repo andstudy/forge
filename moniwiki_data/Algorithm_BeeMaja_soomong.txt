@@ -1,0 +1,182 @@
+ * ㅜㅜ 무지막지한 if 문의 향연
+
+{{{
+
+public class BeeMaja {
+
+	int x,y;	// Maja's System
+	int index;	// Willi's System
+	int result;
+	
+	public BeeMaja() {
+		x = 0;
+		y = 0;
+		index = 1;
+	}
+
+	public void moveCycle(int number) {
+		
+		int depth = 1;
+		
+		while(true)
+		{
+			moveDown();
+			if( index == number )
+				return;			
+			
+			if( depth != 1 )
+			{
+				for(int i=0;i<depth-1; i++){
+					moveLeftDown();
+					if( index == number )
+						return;
+				}
+			}
+			
+			for(int i=0;i<depth; i++)	{
+				moveLeftUp();
+				if( index == number )
+					return;
+			}
+			for(int i=0;i<depth; i++)	{
+				moveUp();
+				if( index == number )
+					return;
+			}
+			
+			for(int i=0;i<depth; i++)	{
+				moveRightUp();
+				if( index == number )
+					return;
+			}
+			
+			for(int i=0;i<depth; i++)	{
+				moveRightDown();
+				if( index == number )
+					return;
+			}
+			
+			for(int i=0;i<depth; i++)	{
+				moveDown();
+				if( index == number )
+					return;
+			}
+		
+			depth++;
+		}
+		
+	}
+
+	public void moveUp() {
+		y--;	// (0,-1)
+		index++;
+	}
+
+	public void moveLeftUp() {
+		x--;	// (-1,0)
+		index++;
+	}
+
+	public void moveLeftDown() {
+		x--;	// (-1,1)
+		y++;
+		index++;
+	}
+
+	public void moveRightUp() {
+		x++;	// (1,-1)
+		y--;
+		index++;
+	}
+
+	public void moveRightDown() {
+		x++;	// (1,0)
+		index++;
+	}
+
+	public void moveDown() {
+		y++;	// (0,1)
+		index++;
+	}
+
+	public static void main(String args[])	{
+		BeeMaja b = new BeeMaja();
+	}
+	
+}
+
+}}}
+
+{{{
+import junit.framework.TestCase;
+
+public class BeeMajaTest extends TestCase {
+
+	BeeMaja b = new BeeMaja();
+	
+	public void testMove()
+	{		
+		b.moveUp();
+		assertEquals(0,b.x);
+		assertEquals(-1,b.y);
+		
+		b.moveLeftUp();
+		assertEquals(-1,b.x);
+		assertEquals(-1,b.y);
+		
+		b.moveLeftDown();
+		assertEquals(-2,b.x);
+		assertEquals(0,b.y);
+		
+		for(int i=0; i<3; i++)
+			b.moveRightUp();
+		assertEquals(1,b.x);
+		assertEquals(-3,b.y);
+		
+		for(int i=0; i<5; i++)
+			b.moveRightDown();
+		assertEquals(6,b.x);
+		assertEquals(-3,b.y);
+		
+		for(int i=0; i<2; i++)
+			b.moveDown();
+		assertEquals(6,b.x);
+		assertEquals(-1,b.y);		
+	}
+	
+	public void testMoveCycle()
+	{
+		b.moveCycle(2);
+		assertEquals(0,b.x);
+		assertEquals(1,b.y);
+
+		b.x = 0;
+		b.y = 0;
+		b.index = 1;
+		b.moveCycle(22);
+		assertEquals(0,b.x);
+		assertEquals(3,b.y);
+
+		b.x = 0;
+		b.y = 0;
+		b.index = 1;
+		b.moveCycle(8);
+		assertEquals(1,b.x);
+		assertEquals(1,b.y);
+		
+		b.x = 0;
+		b.y = 0;
+		b.index = 1;
+		b.moveCycle(12);
+		assertEquals(-2,b.x);
+		assertEquals(1,b.y);
+
+		b.x = 0;
+		b.y = 0;
+		b.index = 1;
+		b.moveCycle(99999);
+		assertEquals(103,b.x);
+		assertEquals(80,b.y);
+	}
+}
+}}}

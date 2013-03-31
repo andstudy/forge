@@ -1,0 +1,193 @@
+= 문제 요약 =
+ * n by n의 체스판에 k개의 비숍이 서로 공격받지 않도록 놓는 방법의 수는?
+
+= 문제 해결 中 =
+ * 결국 재귀를 이용한 백트래킹
+ * 비숍의 공격 가능은 간단한 수식 활용
+  * y - x = d
+  * y + x = d
+ * 중복을 제거하기 위해 체스판을 1차원 배열로 계산
+ * 8x8 64개가 최대므로 double 형 비트연산 사용
+  
+= 소감 中 =
+ * 졸리더라도 밤에 하고 잘 것.
+ * 아침에 하니 잘 안되네요 ^^;
+ * 걍 C#으로 할 걸.. 갑자기 submit 욕심이..
+ * 이제 집에서 출발하니 40분정도 지각이요~ 흐;
+ 
+= ''' 풀이 中 ''' =
+{{{
+/* @JUDGE_ID:present 110801 Cpp "LittleBishops" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <map>
+#include <vector>
+
+using namespace std;
+
+#define _TDD
+
+// 1. > 직선의 방정식으로 푼다.
+//		기울기는 1 과 -1
+//		즉, y = x + d  또는 y = -x + d
+//		즉, y - x = d 또는 y + x = d 두 가지 경우가 같지 않으면 됨.
+//		두 경우에 대해 d 가 다르면 킬하지 않으면 됨.
+
+// 2. > 2차원 좌표를 1차원으로 생각한다!
+//		체스판의 최대 크기가 8x8 이므로 64비트 double 형 사용
+//		비트셋 연산 활용
+
+namespace Solver
+{	
+	class Bishop
+	{
+	public:
+		Bishop(int x, int y) : X(x), Y(y){};
+
+		bool operator == ( Bishop const& rhs )
+		{					
+			return IsAttackable(X, Y, rhs.X, rhs.Y);			
+		}
+
+		static bool IsAttackable(int x1, int y1, int x2, int y2)
+		{
+			if( (y1-x1) == (y2-x2) || (y1-x1) == (y2+x2) )
+				return true;
+			
+			return false;
+		}
+
+	public:
+		int X, Y;
+
+	};
+
+	class Board
+	{
+	public:
+		Board(int n, int k) : w(n), h(n), max(k), result(0){}
+
+		int GetOneDimIndex( int x, int y)
+		{
+			return x*w + y;
+		}
+
+		int GetXFromOneDim( int index )
+		{
+			return index%w;
+		}
+
+		int GetYFromOneDim( int index )
+		{
+			return index/w;
+		}
+		
+		void SetBishops(double currentBoard, int cnt)
+		{	
+			if( cnt == max )
+			{			
+				result = result + 1;										
+				return;
+			}
+
+			// 64bit 연산 재귀
+				
+		}
+
+		int Find()
+		{		
+			result = 1;
+			return result;
+		}
+
+	private:
+		int w, h, max;
+	
+		// MastoJun 님이 만들어 놓은 BigNumber 사용하기
+		int result;
+	};
+	
+	int Execute( int n, int k )
+	{	
+		Board board( n, k );
+		return board.Find();	
+	}
+}
+
+namespace Runner
+{
+	void Execute(istream& in, ostream& out)
+	{
+		int n = 0, k = 0;
+
+		do
+		{
+			in >> n >> k;
+
+			out << Solver::Execute(n,k) << endl;
+		}		
+		while( n != 0 || k != 0 );		
+	}
+}
+
+
+#ifdef _TDD
+#include "UnitTest++.h"
+
+using Solver::Bishop;
+using Solver::Board;
+
+TEST( Attackable )
+{
+	CHECK_EQUAL( true, Bishop::IsAttackable(1,1, 1,1) );
+	CHECK_EQUAL( true, Bishop::IsAttackable(1,1, 2,2) );
+	CHECK_EQUAL( true, Bishop::IsAttackable(1,1, 3,3) );
+
+	CHECK_EQUAL( false, Bishop::IsAttackable(1,1, 4,3) );
+	CHECK_EQUAL( false, Bishop::IsAttackable(1,1, 1,4) );
+}
+
+TEST( AttackableOperator)
+{
+	Bishop bs(0,0);
+	Bishop bss(1,1);
+	Bishop bsss(2,1);
+
+	CHECK_EQUAL( true, bs == bs );
+	CHECK_EQUAL( true, bs == bss );
+	CHECK_EQUAL( false, bs == bsss );
+}
+
+TEST( BoardOperation)
+{
+
+
+}
+
+TEST( 2x2 )
+{
+	Board bd(2,2);
+	
+	CHECK_EQUAL( 4, bd.Find() );
+}
+
+#endif // _TDD
+
+
+int main()
+{
+
+#ifdef _TDD	
+	UnitTest::RunAllTests();
+#else
+	Runner::Execute(cin, cout);
+#endif // _TDD
+	return 0;
+
+}
+
+/* @END_OF_SOURCE_CODE */
+
+}}}

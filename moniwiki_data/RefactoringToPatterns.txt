@@ -1,0 +1,96 @@
+=== 참가자 ===
+ 1. 이동현
+ 1. 정희종
+ 1. 안준석
+ 1. 박주희
+ 1. 마야 - 고보성
+ 1. 재가니 - 김재관
+ 1. 깨졍 - 최준호3
+ 1. 김경렬
+ 1. 고용준
+ 1. 강대명
+ 1. 구루 - 박진욱
+ 1. 지금어때 - 오상민
+ 1. 이정민
+ 1. 초코로 - 서정호
+ 1. 김명관 - 
+ 1. 박진호 
+ 1. 김광훈 
+
+ 1. 빛의자녀 - 
+ 1. 쭝이 - 
+ 
+
+
+=== 회비납부 내역 ===
+|| 4월 12일 || 김경렬, 박주희 || 80,000 원 ||
+|| 4월 19일 || 이동현, 정희종, 김광훈, 서정호, 오상민, 김재관, 최준호, 고보성, 강대명, 박진욱, 안준석 || 440,000 원 ||
+|| 4월 26일 || 김명관,  고용준, 박진홍 || 120,000 원 ||
+|| 5월 31일 || 이정민 || 40,000 원 ||
+|| 총액 || - || 680,000 원 ||
+
+|| 회비 입금액   ||       680,000원|| ||
+|| 4월 12일 토즈 비용 || || 36,000원 ||
+|| 4월 19일 토즈 비용 || || 50,400원 ||
+|| 4월 26일 토즈 비용 || || 50,400원 ||
+|| 5월 3일 토즈 비용 || || 56,000원 ||
+|| 5월 10일 토즈 비용 || || 50,400원 ||
+|| 5월 17일 토즈 비용 || || 50,400원 ||
+|| 5월 24일 토즈 비용 || || 50,400원 ||
+|| 5월 31일 토즈 비용 || || 50,400원 ||
+|| 6월 7일 토즈 비용 || || 50,400원 ||
+|| 6월 7일 책걸이 비용 || || 130,000원 ||
+||||||---------------------------------||
+|| 소 계 ||  || 524,400원||
+||||||=================================||
+|| 총 계 || 155,600 원 ||||
+
+
+=== 발표 순서 ===
+
+ * 4월 19일
+  * ch1.안준석
+  * ch2. 안준석
+  * ch3. 이동현
+  * ch4. 정희종
+
+ * 4월 26일
+  1. 박주희 - Replace constructors with Creation Methods
+  1. 고보성 - Chain Constructors 
+  1. 최주희 - Encapsulate Classes with Factory 
+  1. 김재관 - Introduce Polymorphic Creation With Factory Method
+
+ * 5월 3일
+  1. 이정민 - Replace Conditional Logic with Strategy
+  1. 고용준 - Form Template Method
+  1. 강대명 - Compose Method
+  1. 박진욱 - Replace Implicit Tree with Composite
+
+ * 5월 10일
+  1. 오상민 - Encapsulate Composite with Builder
+  1. 김경렬 - Move Accumulation to Collecting Parameter
+  1. 서정호 - Extract Composite
+  1. 김명관 - Replace One/Many Distinctions with Composite
+
+ * 5월 17일
+  1. 박진호 - Extract Adapter
+  1. 김광훈 - Unify Interfaces with Adapter
+
+ * 5월 24일
+  1. 강대명 - Replace Conditional Dispatcher with Command
+  1. 오상민 - Replace Type Code with Class
+  1. 정희종 - ["Replace State-Altering Conditionals with State"]
+  1. 박주희 - Introduce Null Object
+  1. 박진호 - Inline Singleton 
+  1. 박진호 - Unify Interfaces
+
+ * 5월 31일  
+  1. 이정민 - Limit Instantiation with Singleton 
+  1. 박진욱 - Replace Hard-Coded Notifications with Observer
+  1. 이동현 - Move Embellishment to Decorator
+
+ * 6월 7일   
+  1. 최준호 - Extract Parameter 
+  1. 김경렬 - Move Creation Knowledge to Factory
+  1. 서정호 - Move Accumulation to Visitor
+  1. 김광훈 - Replace Implicit Language with Interpreter

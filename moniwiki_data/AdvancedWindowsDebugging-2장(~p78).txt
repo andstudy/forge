@@ -1,0 +1,8 @@
+{{{#!html
+<object id="Q11324" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420">
+    <param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001254101865024720" />
+    <param name='allowFullScreen' value='true' />
+    <param name='allowScriptAccess' value='always' />
+    <param name="wmode" value="opaque" />
+    <embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001254101865024720" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' wmode="opaque" width="500" height="420"  />
+  </object>}}}

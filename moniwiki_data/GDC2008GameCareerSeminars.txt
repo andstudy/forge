@@ -1,0 +1,30 @@
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+
+== Game Career Seminar ==
+ * ''' A Leap of Faith: When to Leave your Job and go Independent''' - ''Brandon Sheffield, Charles Nicholson, Andy Schatz 외''
+ * ''' All About Art''' - ''Carey Chico''
+ * ''' From Grunt to God to Startup: Career Lessons From the Edge of Game Development by David Jaffe''' - ''David Jaffe''
+ * ''' Hottest Jobs at the Hottest Companies''' - ''Jill Duffy, Jason Pankow, Matthew Jeffrey 외''
+ * ''' Networking 201: Navigating Corporate Culture''' - ''Darius Kazemi''
+
+
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars

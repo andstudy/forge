@@ -1,0 +1,15 @@
+= ohyecloudy = 
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-091030204402-phpapp01&stripped_title=ss-2388227" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}
+
+
+= codevania =
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=optimizingthecontentpipeline-100223215305-phpapp01&stripped_title=optimizing-the-content-pipeline-3261804" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}
+
+= mkkim =
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=gpgpu-100225174310-phpapp02&stripped_title=gpgpu" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}

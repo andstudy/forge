@@ -1,0 +1,9 @@
+이름 : phoenixex
+이메일 : phoenixex@hotmail.com
+블로그 : http://mupark.egloos.com/
+직업 : 게임 클라이언트 개발
+관심 분야 : C++, TDD, 애자일, 디자인패턴, 아키텍트, 그래픽스
+주로 쓰는 언어 : C++
+
+----
+ * 위키 입문 환영합니다. :) [ParkPD]

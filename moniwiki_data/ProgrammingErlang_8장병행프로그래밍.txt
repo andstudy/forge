@@ -1,0 +1,70 @@
+== Chapt 8. 병행 프로그래밍 ==
+[[TableOfContents]]
+
+=== 스터디 前 ===
+{{{#!gcode erlang
+-module(abc).
+-compile(export_all).
+
+%%"프로세스 생성 : 실행 흐름 추가"
+process() ->
+	receive
+		Any -> Any
+	end.
+
+
+%%"RPC (CS모델)"
+
+start(FUN) -> spawn(FUN).
+
+rpc(Pid, Request) ->
+	Pid ! Request,
+	receive
+		Response -> Response
+	end.
+
+loop() ->
+	receive
+		{ rectangle, W, H }
+			-> io:format("area rectangle.. ~p~n", [W * H]),
+			loop();		
+	end.
+
+
+%%"타임아웃 사용"
+
+sleep(T) ->
+	receive
+		
+	after T ->
+		io:format("timeout..~n")
+	end.
+
+
+
+%%"타이머"
+
+timer(T) ->
+	receive
+
+	after T ->
+		io:format("do something..~n"),
+		timer(T)
+	end.
+
+%%"시계"
+
+clock(T) ->
+	receive
+
+	after T->
+		io:format("time ~p~n", [erlang:now()]),
+		clock(T)
+	end.
+
+}}}
+
+=== 스터디 後 ===
+{{{#!gcode erlang
+
+}}}

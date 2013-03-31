@@ -1,0 +1,209 @@
+{{{
+#include <memory.h>
+#include <iostream>
+#include <list>
+
+const int MINE_CONSTANT = 10000;
+
+
+//struct POINT
+//{
+//	int x;
+//	int y;
+//};
+const char searchMatrix[][2] = { {-1, -1}, { 0, -1 }, { 1, -1 }, 
+								 {-1,  0},            { 1,  0 }, 
+								 {-1,  1}, { 0,  1 }, { 1,  1 } };
+
+
+class CGameMatrix
+{
+public:
+	CGameMatrix()
+	{
+		m_Row = 0;
+		m_Column = 0;
+
+		m_Matrix = NULL;
+	};
+
+	~CGameMatrix()
+	{
+		if( m_Matrix )
+		{
+			for( int i = 0; i < m_Row; i++ )
+			{
+				if( m_Matrix[i] != NULL )
+					delete m_Matrix[i];			
+			}
+
+			delete m_Matrix;
+		}		
+	};
+
+
+	void Init( int row, int column )
+	{ 
+		m_Column	= column;
+		m_Row		= row;
+
+		m_Matrix = new int*[row];
+		for( int i = 0; i < row; i++ )
+		{
+			m_Matrix[i] = new int[column];
+			memset( m_Matrix[i], 0, sizeof(m_Matrix[i])*column );
+		}
+	}
+
+	void	SetMine( int row, int column )
+	{
+		m_Matrix[row][column] = MINE_CONSTANT;
+	}
+
+	int		GetMineCount( int row, int column )
+	{
+		return m_Matrix[row][column];
+	}
+
+
+	/// 하나의 위치값 계산
+	/// 1.내가 주위에 지뢰가 있는 검사하는 능동적 방벙..
+	int		GetAdjacentMineCount( int row, int column )
+	{
+		int mineCount = 0;
+		int searchCount = sizeof(searchMatrix) / sizeof(searchMatrix[0]);
+		for( int i = 0; i < searchCount; i++ )
+		{
+			int tc = column + searchMatrix[i][0];
+			int tr = row + searchMatrix[i][1];
+
+			if( IsValidPosition( tr, tc ) )
+			{
+				if( m_Matrix[tr][tc] == MINE_CONSTANT )
+					mineCount++;
+			}
+		}
+
+		return mineCount;
+	}
+
+	/// 2. 지뢰가 주변의 위치에 자신의 존재를 알리는 수동적 방법
+	void	IncreaseMineCount( int row, int column )
+	{
+		int mineCount = 0;
+		int searchCount = sizeof(searchMatrix) / sizeof(searchMatrix[0]);
+		for( int i = 0; i < searchCount; i++ )
+		{
+			int tc = column + searchMatrix[i][0];
+			int tr = row + searchMatrix[i][1];
+
+			if( IsValidPosition( tr, tc ) )
+			{
+				if( m_Matrix[tr][tc] != MINE_CONSTANT )
+					m_Matrix[tr][tc]++;
+			}
+		}
+	}
+
+
+
+	/// 전체 계산
+	void	ComputeAdjacentMineCount()
+	{		
+		for( int i =0; i < m_Row; i++)
+		{
+			for( int j = 0; j < m_Column; j++ )
+			{
+				if( GetMineCount(i,j) == MINE_CONSTANT )
+					IncreaseMineCount(i,j);
+					//continue;
+
+				//int count = GetAdjacentMineCount( i, j );
+				//m_Matrix[i][j] = count;
+			}
+		}
+	}
+
+	/// 출력
+	void PrintOutput()
+	{	
+		for( int i = 0; i < m_Row; i++ )
+		{
+			for( int j = 0; j < m_Column; j++ )
+			{
+				int mineCount = GetMineCount(i, j);
+				if( mineCount == MINE_CONSTANT )
+					std::cout << '*';
+				else
+					std::cout << mineCount;				
+			}
+
+			std::cout << std::endl;
+		}	
+	}
+
+
+private:
+	bool	IsValidPosition( int row, int column )
+	{
+		if( column < 0 || row < 0 )
+			return false;
+
+		if( column >= m_Column || row >= m_Row )
+			return false;
+
+		return true;
+	}
+
+	
+
+private:
+	
+
+	int		m_Column;
+	int		m_Row;
+
+	int**	m_Matrix;	
+};
+
+
+
+int main()
+{
+	int column, row;
+		
+	int fieldNO = 1;
+	while( std::cin >> row >> column )
+	{	
+		if( row == 0 || column == 0 )
+			break;
+
+		CGameMatrix* pMatrix = new CGameMatrix();
+		pMatrix->Init( row, column );
+
+		/// input
+		for( int i = 0; i < row; i++ )
+		{
+			for( int j = 0; j < column; j++ )
+			{
+				char input;
+				std::cin >> input;
+				if( input == '*' )
+					pMatrix->SetMine( i, j );
+			}
+		}		
+
+		pMatrix->ComputeAdjacentMineCount();		
+
+		if( fieldNO > 1 )
+			std::cout << std::endl;
+		std::cout << "Field #" << fieldNO << ":" << std::endl;
+		pMatrix->PrintOutput();
+		fieldNO++;				
+		//std::cout << std::endl;
+	}
+
+	return 0;
+}
+
+}}}

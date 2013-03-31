@@ -1,0 +1,11 @@
+ * [http://www.artoflean.com/tps_history.htm TSP history 동영상 받을 수 있다.]
+ * http://www.toyota.co.jp/en/vision/production_system/video.html
+ * [http://www.informaworld.com/index/776078186.pdf Toyota production system and Kanban system Materialization of just-in-time and respect-for-human.pdf]
+ * [http://samma.org/177 경영혁신의 History(4)]
+  즉, 기존 방식이 컨베이어 밸트를 통해서 부품을 Push 하는 방식이라면, Kanban 방식은 부품이 필요한 사람이 부품 제조자에게 찾아가 Pull 하는 방식이라고 할 수 있다. 이래서 JIT 이라고 하는 듯.
+ * [http://j2k.naver.com/j2k_frame.php/korean/diamond.jp/series/analysis/10003/ 토요타 그룹. 「파워 포인트」자숙령!?]
+
+== [Kanban] ==
+[http://www.chosun.com/site/data/html_dir/2008/12/05/2008120500618.html 한 라인서 모델 20개가 '쑥쑥'. '생산성 제왕' LG전자 창원공장의 비밀]
+ http://groups.google.com/group/xper/browse_thread/thread/4b5ee70e383a3c27/a8a185f8afbe5045?show_docid=a8a185f8afbe5045
+[http://www.yonhapnews.co.kr/economy/2009/07/13/0302000000AKR20090713085100008.HTML "도요타, 美합작공장 폐쇄 고려"< WSJ >]

@@ -1,0 +1,143 @@
+[http://www.programming-challenges.com]
+[http://www.yes24.com/Goods/FTGoodsView.aspx?goodsNo=1396784&CategoryNumber=001001003016002001#04 Programming Challenges : 알고리즘 트레이닝 북]
+
+== 1장. 시작하면서 ==
+문제 1. 3n+1 문제(The 3n+1 Problem) - [wiki:ProgrammingChallenges/The3n%2B1Problem Programming Challenges/The 3n+1 Problem]
+문제 2. 지뢰 찾기(Minesweeper) - [Programming Challenges/Minesweeper]
+문제 3. 여행(The Trip) - [Programming Challenges/The Trip]
+문제 4. LCD 디스플레이(LC-Display) - [Programming Challenges/LC-Display]
+문제 5. 그래픽 편집기(Graphical Editor)- [Programming Challenges/Graphical Editor]
+문제 6. 인터프리터(Interpreter) - [wiki:Algorithm/문제6 Programming Challenges/Interpreter] 
+문제 7. 체크 확인(Check the Check) - [Programming Challenges/Check the Check]
+문제 8. 호주식 투표법(Australian Voting) - [Programming Challenges/Australian Voting] 
+
+== 2장. 자료 구조 ==
+문제 9. 유쾌한 점퍼(Jolly Jumpers) - [wiki:Algorithm/문제9 Programming Challenges/Jolly Jumpers]
+문제 10. 포커 패(Poker Hands) 
+문제 11. 동맹 휴업(Hartal) 
+문제 12. 암호 깨기(Crypt Kicker) - [Programming Challenges/Crypt Kicker]
+문제 13. 쌓아 올리기(Stack 'em Up) 
+문제 14. 에르되시 수(Erdos Numbers) - [Programming Challenges/Erdos Numbers]
+문제 15. 경시 대회 점수판(Contest Scoreboard) - [wiki:Algorithm/문제15 Programming Challenges/Contest Scoreboard]
+문제 16. 야찌(Yahtzee) - [Programming Challenges/Yahtzee]
+
+== 3장. 문자열 ==
+문제 17. WERTYU - [wiki:Algorithm/WERTYU Programming Challenges/WERTYU]
+문제 18. 월도르프를 찾아라(Where's Waldorf?) [wiki:Algorithm/WheresWaldort Programming Challenges/Where's Waldorf?]
+문제 19. 공통된 변경 문자열(Common Permutation) - [Programming Challenges/Common Permutation]
+문제 20. 암호 깨기 II(Crypt Kicker II) - [Programming Challenges/Crypt Kicker II]
+문제 21. 자동 심사 스크립트(Automated Judge Script) 
+문제 22. 파일 조각(File Fragmentation) - [wiki:Algorithm/FileFragmentation Programming Challenges/File Fragmentation]
+문제 23. 더블릿(Doublets) 
+문제 24. Fmt 
+
+== 4장. 정렬 ==
+문제 25. 비토와 친척들(Vito's Family) - [wiki:Algorithm/Vito'sFamily Programming Challenges/Vito's Family]
+문제 26. 팬 케이크(Stacks of Flapjacks) - [wiki:Algorithm/StacksOfFlapjacks Programming Challenges/Stacks of Flapjacks]
+문제 27. 다리(Bridge) - [Programming Challenges/Bridge]
+문제 28. 낮잠 오래 자기(Longest Nap) - [Programming Challenges/Longest Nap]
+문제 29. 구두 수선공 문제(Shoemaker's Problem) - [wiki:Algorithm/Shoemaker'sProblem Programming Challenges/Shoemaker's Problem]
+문제 30. CDVII 
+문제 31. 셸 정렬(ShellSort) - [wiki:Algorithm/ShellSort Programming Challenges/ShellSort]
+문제 32. 축구(Football(aka Soccer)) 
+
+== 5장. 계산과 대수 ==
+문제 33. 자리 올림(Primary Arithmetic) - [wiki:Algorithm/PrimaryArithmetic Programming Challenges/Primary Arithmetic]
+문제 34. 뒤집어서 더하기(Reverse and Add) - [wiki:Algorithm/ReverseAndAdd Programming Challenges/Reverse and Add]
+문제 35. 고고학자의 딜레마(The Archeologist's Dilemma) 
+문제 36. 1의 개수(Ones) - [Programming Challenges/Ones]
+문제 37. 곱하기 게임(A Multiplication Game) - [Programming Challenges/A Multiplication Game]
+문제 38. 다항식의 계수(Polynomial Coefficients) 
+문제 39. 스턴-브로콧 수체계(The Stern-Brocot Number System) - [wiki:Algorithm/TheStern-BrocotNumberSystem Programming Challenges/The Stern-Brocot Number System]
+문제 40. 모든 쌍의 합(Pairsumonious Numbers) 
+
+== 6장. 조합론 ==
+문제 41. 피보나치 수의 개수(How many Fibs?) - [wiki:Algorithm/HowManyFibs? Programming Challenges/How many Fibs?]
+문제 42. 땅 나누기(How Many Pieces of Land?) 
+문제 43. 셈(Counting) 
+문제 44. 표현식(Expressions) - [wiki:Algorithm/Expressions Programming Challenges/Expressions]
+문제 45. 완전 트리 레이블링(Complete Tree Labeling) 
+문제 46. 수도사 수학자(The Priest Mathematician) 
+문제 47. 자기기술 수열(Self-describing Sequence) - [wiki:Algorithm/Self-describingSequence Programming Challenges/Self-describing Sequence]
+문제 48. 단계(Steps) 
+
+== 7장. 정수론 ==
+문제 49. 빛, 더 많은 빛(Light, More Light) - [wiki:Algorithm/LightMoreLight Programming Challenges/Light, More Light]
+문제 50. 카마이클 수(Carmichael Numbers) 
+문제 51. 유클리드 문제(Euclid Problem) 
+문제 52. 팩토리얼 나누기(Factovisors) 
+문제 53. 소수 네 개의 합(Summation of Four Primes) 
+문제 54. 스미스 수(Smith Numbers) 
+문제 55. 유리 구슬(Marbles) 
+문제 56. 재포장(Repackaging) 
+
+== 8장. 백트래킹 ==
+문제 57. 작은 비숍(Little Bishops) - [wiki:Algorithm/LittleBishops Programming Challenges/Little Bishops] 
+문제 58. 15-퍼즐 문제(15-Puzzle Problem) - [wiki:Algorithm/15PuzzleProblem Programming Challenges/15-Puzzle Problem]
+문제 59. 줄(Queue) 
+문제 60. 서비스 센터(Servicing Stations) 
+문제 61. 줄다리기(Tug of War) 
+문제 62. 에덴동산(Garden of Eden) 
+문제 63. 컬러 해시(Color Hash) 
+문제 64. 더 큰 사각형(Bigger Square Please) 
+
+== 9장 그래프 순회 ==
+문제 65. 두 색으로 칠하기(Bicoloring) - [wiki:Algorithm/Bicoloring Programming Challenges/Bicoloring]
+문제 66. 원판 돌리기(Playing With Wheels)
+문제 67. 여행자 가이드(The Tourist Guide) - [wiki:Algorithm/TheTouristGuide Programming Challenges/The Tourist Guide] 
+문제 68. 슬래시 미로(Slash Maze) 
+문제 69. 편집 단계 사다리(Edit Step Ladders) - [wiki:Algorithm/EditStepLadder Programming Challenges/Edit Step Ladders]
+문제 70. 정육면체 탑(Tower of Cubes) 
+문제 71. 황혼에서 새벽까지(From Dusk Till Dawn) 
+문제 72. 하노이의 탑 문제 다시 보기(Hanoi Tower Troubles Again!) 
+
+== 10장. 그래프 알고리즘 ==
+문제 73. 주근깨(Freckles) - [wiki:Algorithm/Freckles Programming Challenges/Freckles] 
+문제 74. 목걸이(The Necklace) - [wiki:Algorithm/TheNecklace Programming Challenges/The Necklace]
+문제 75. 소방서(Fire Station) 
+문제 76. 철로(Railroads) 
+문제 77. 전쟁(War) 
+문제 78. 여행자 가이드(Tourist Guide) 
+문제 79. 대만찬(The Grand Dinner) 
+문제 80. 문제 출제 문제(The Problem With the Problem Setter) 
+
+== 11장. 동적 프로그래밍 ==
+문제 81. 큰 것이 똑똑하다?(Is Bigger Smarter?) - [wiki:Algorithm/IsBiggerSmarter? Programming Challenges/Is Bigger Smarter?]
+문제 82. 서로 다른 부분열(Distinct Subsequences) 
+문제 83. 거북이 쌓기(Weights and Measures) 
+문제 84. 단방향 TSP(Unidirectional TSP) 
+문제 85. 막대 자르기(Cutting Sticks) - [wiki:Algorithm/CuttingSticks Programming Challenges/Cutting Sticks] 
+문제 86. 페리 탑승(Ferry Loading) 
+문제 87. 젓가락(Chopsticks) 
+문제 88. 여행: 제4부(Adventures in Moving: Part IV) - [wiki:Algorithm/AdventuresInMovingPartIV Programming Challenges/Adventures in Moving: Part IV]
+ 
+
+== 12장. 격자 ==
+문제 89. 체스판 위의 개미(Ant on a Chessboard) 
+문제 90. 외발자전거(Monocycle) 
+문제 91. 별(Star) 
+문제 92. 꿀벌 마야(Bee Maja) - [wiki:Algorithm/BeeMaja Programming Challenges/Bee Maja]
+문제 93. 강도(Robbery) 
+문제 94. 2, 3, 4차원 정사각형/직사각형/정육면체/육면체((2/3/4)-D Sqr/Rects/Cubes/Boxes?) 
+문제 95. 더뮤바 삼각지대(Dermuba Triangle) - [wiki:Algorithm/DermubaTriangle Programming Challenges/Dermuba Triangle]
+문제 96. 항공노선(Airlines) 
+
+== 13장. 기하 ==
+문제 97. 개와 땅다람쥐(Dog and Gopher) 
+문제 98. 밧줄나라의 밧줄 파동(Rope Crisis in Ropeland!) 
+문제 99. 원탁의 기사(The Knights of the Round Table) 
+문제 100. 초코칩 쿠키(Chocolate Chip Cookies) 
+문제 101. 생일 케이크(Birthday Cake) 
+문제 102. 최대/최소 상자(The Largest/Smallest Box) 
+문제 103. 적분?(Is This Integration?) - [wiki:Algorithm/IsThisIntegration? Programming Challenges/Is This Integration?] 
+문제 104. 얼마나 클까?(How Big Is It?) 
+
+== 14장. 계산기하 ==
+문제 105. 신입생 관리(Herding Frosh) 
+문제 106. 가장 가까운 두 지점(The Closest Pair Problem) 
+문제 107. 전기톱 학살사건(Chainsaw Massacre) 
+문제 108. 뜨겁워 차갑워 게임(Hotter Colder) 
+문제 109. Useless Tile Packers 
+문제 110. 레이더 추적(Radar Tracking) 
+문제 111. 섬과 나무(Trees on My Island) 
+문제 112. 우유(Nice Milk) - [wiki:Algorithm/NiceMilk Programming Challenges/Nice Milk]

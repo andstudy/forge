@@ -1,0 +1,12 @@
+[http://www.cs.wustl.edu/~schmidt/ACE.html The ADAPTIVE Communication Environment (ACE)]
+
+== ACE 강의 ==
+ [http://javawork.springnote.com/pages/971284 ACE_Message_Block Pool 만들기]
+  [http://javawork.springnote.com/pages/971284/attachments/442266 pptx]
+  [http://javawork.springnote.com/pages/971284/attachments/440430 예제]
+ [http://javawork.springnote.com/pages/846608 2강]
+  [http://javawork.springnote.com/pages/846608/attachments/380740 2강 pptx]
+  [http://javawork.springnote.com/pages/846608/attachments/378488 2강 예제]
+ [http://javawork.springnote.com/pages/740529 1강]
+  [http://javawork.springnote.com/pages/740529/attachments/380742 1강 pptx]
+  [http://javawork.springnote.com/pages/740529/attachments/373536 1강 예제]

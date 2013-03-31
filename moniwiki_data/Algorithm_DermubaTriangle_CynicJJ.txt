@@ -1,0 +1,208 @@
+[[TableOfContents([maxdepth])]]
+
+== Dermuba Triangle ==
+
+=== !ModuleMain.vb ===
+{{{
+Public Module ModuleMain
+
+	Sub Main()
+		While True
+			Console.WriteLine(Run(Console.ReadLine()))
+		End While
+	End Sub
+
+	Function Run(ByVal input As String) As String
+		Dim strs() As String = input.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+		If strs.Length < 2 Then Return Nothing
+
+		Dim number1 As Integer = Integer.Parse(strs(0))
+		Dim number2 As Integer = Integer.Parse(strs(1))
+
+		Return Triangle.GetDistance(number1, number2).ToString()
+	End Function
+
+End Module
+}}}
+
+=== Triangle.vb ===
+{{{
+Public Enum Direction
+	Up
+	Down
+End Enum
+
+Public Class Triangle
+
+	Shared Function GetDistance(ByVal number1 As Integer, ByVal number2 As Integer) As Double
+		Dim bigger As Integer = Math.Max(number1, number2)
+		Dim smaller As Integer = Math.Min(number1, number2)
+
+		Dim horizontalDistance As Double = GetHorizontalDistance(smaller, bigger)
+		Dim verticalDistance As Double = GetVerticalDistance(smaller, bigger)
+
+		Dim distance As Double = Math.Sqrt(Math.Pow(horizontalDistance, 2) + Math.Pow(verticalDistance, 2))
+		Return Math.Round(distance, 3)
+	End Function
+
+	Private Shared Function GetHorizontalDistance(ByVal number1 As Integer, ByVal number2 As Integer)
+		Dim columnDiff As Integer = GetColumn(number1) - GetColumn(number2)
+		Return columnDiff * 0.5
+	End Function
+
+	Private Shared Function GetVerticalDistance(ByVal number1 As Integer, ByVal number2 As Integer)
+		Dim rowDiff As Integer = Math.Abs(GetRow(number1) - GetRow(number2))
+		Return GetBottomDistance(number1) + (rowDiff - 1) * GetHeight() + GetTopDistance(number2)
+	End Function
+
+	Shared Function GetRow(ByVal number As Integer) As Integer
+		Dim row As Integer = 0
+
+		Dim rowFirst As Long = 0
+		While True
+			row += 1
+			rowFirst = rowFirst + GetCount(row)
+			If rowFirst > number Then Exit While
+		End While
+
+		Return row
+	End Function
+
+	Shared Function GetColumn(ByVal number As Integer) As Integer
+		Dim column As Integer
+
+		Dim rowFirst As Long
+		For row As Integer = 1 To GetRow(number) - 1
+			rowFirst = rowFirst + GetCount(row)
+		Next
+
+		Dim rowLast As Long = rowFirst + GetCount(GetRow(number)) - 1
+		Dim rowMiddle As Long = (rowFirst + rowLast) \ 2
+
+		column = number - rowMiddle
+		Return column
+	End Function
+
+	Private Shared Function GetDirection(ByVal number As Integer) As Direction
+		If GetRow(number) And 1 Then
+			If GetColumn(number) And 1 Then
+				Return Direction.Down
+			Else
+				Return Direction.Up
+			End If
+		Else
+			If GetColumn(number) And 1 Then
+				Return Direction.Up
+			Else
+				Return Direction.Down
+			End If
+		End If
+	End Function
+
+	Private Shared Function GetTopDistance(ByVal number As Integer) As Double
+		If GetDirection(number) = Direction.Up Then
+			Return (GetHeight() - GetCenterDistance())
+		Else
+			Return GetCenterDistance()
+		End If
+	End Function
+
+	Private Shared Function GetBottomDistance(ByVal number As Integer) As Double
+		If GetDirection(number) = Direction.Up Then
+			Return GetCenterDistance()
+		Else
+			Return (GetHeight() - GetCenterDistance())
+		End If
+	End Function
+
+	Shared Function GetHeight() As Double
+		Return (Math.Sqrt(3) / 2)
+	End Function
+
+	Shared Function GetCenterDistance() As Double
+		Return (1 / Math.Sqrt(3) / 2)
+	End Function
+
+	Private Shared Function GetCount(ByVal row As Integer) As Integer
+		Return ((row - 1) * 2) + 1
+	End Function
+
+End Class
+}}}
+
+=== !TriangleTest.vb ===
+{{{
+<TestClass()> _
+Public Class TriangleTest
+
+	<TestMethod()> _
+	Public Sub GetRowTest()
+		Assert.AreEqual(1, Triangle.GetRow(0))
+		Assert.AreEqual(2, Triangle.GetRow(1))
+		Assert.AreEqual(2, Triangle.GetRow(2))
+		Assert.AreEqual(2, Triangle.GetRow(3))
+		Assert.AreEqual(3, Triangle.GetRow(4))
+		Assert.AreEqual(3, Triangle.GetRow(8))
+		Assert.AreEqual(4, Triangle.GetRow(9))
+		Assert.AreEqual(4, Triangle.GetRow(15))
+		Assert.AreEqual(5, Triangle.GetRow(16))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetColumnTest()
+		Assert.AreEqual(0, Triangle.GetColumn(0))
+		Assert.AreEqual(-1, Triangle.GetColumn(1))
+		Assert.AreEqual(0, Triangle.GetColumn(2))
+		Assert.AreEqual(1, Triangle.GetColumn(3))
+		Assert.AreEqual(-2, Triangle.GetColumn(4))
+		Assert.AreEqual(-1, Triangle.GetColumn(5))
+		Assert.AreEqual(0, Triangle.GetColumn(6))
+		Assert.AreEqual(1, Triangle.GetColumn(7))
+		Assert.AreEqual(2, Triangle.GetColumn(8))
+		Assert.AreEqual(-3, Triangle.GetColumn(9))
+		Assert.AreEqual(2, Triangle.GetColumn(14))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetDistanceTest()
+		Assert.AreEqual(1.528, Triangle.GetDistance(7, 0))
+		Assert.AreEqual(1.528, Triangle.GetDistance(2, 8))
+		Assert.AreEqual(0.577, Triangle.GetDistance(10, 9))
+		Assert.AreEqual(0.577, Triangle.GetDistance(10, 11))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetDistanceTestMore()
+		Assert.AreEqual(0.0, Triangle.GetDistance(7, 7))
+		Assert.AreEqual(1.0, Triangle.GetDistance(10, 12))
+
+		Dim distance As Double
+
+		distance = Math.Round(2 * (Triangle.GetHeight() - Triangle.GetCenterDistance()), 3)
+		Assert.AreEqual(distance, Triangle.GetDistance(2, 6))
+
+		distance = Math.Round(2 * Triangle.GetCenterDistance(), 3)
+		Assert.AreEqual(distance, Triangle.GetDistance(0, 2))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub HugeNumberTest()
+		Assert.AreEqual(0.577, Triangle.GetDistance(2147483646, 2147483647))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub InputOutputTest()
+		Dim input As String
+
+		input = "0 7"
+		Assert.AreEqual("1.528", ModuleMain.Run(input))
+		input = "2 8"
+		Assert.AreEqual("1.528", ModuleMain.Run(input))
+		input = "9 10"
+		Assert.AreEqual("0.577", ModuleMain.Run(input))
+		input = "10 11"
+		Assert.AreEqual("0.577", ModuleMain.Run(input))
+	End Sub
+
+End Class
+}}}

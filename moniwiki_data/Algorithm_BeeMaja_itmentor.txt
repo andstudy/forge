@@ -1,0 +1,330 @@
+=== C++ Accept버전 ===
+ * 한 라인의 끝점부터 순회하여 좌표를 계산함.
+{{{
+/* @JUDGE_ID:itmentor 110401 Cpp "Bee maja" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+#ifdef _UNIT_TEST
+	#include <UnitTest++.h>
+#endif
+
+using namespace std;
+
+class SearchRange
+{
+public:
+	struct Coord
+	{
+		int begin;
+		int end;
+	};
+
+	typedef vector<Coord> LineInfoList;
+
+	LineInfoList coord;
+	int X;
+	int Y;
+
+	SearchRange()
+	{
+	}
+
+	void initializeCoordArray(int limit)
+	{
+		coord.clear();
+
+		Coord c;
+		c.begin = 1;
+		c.end = 1;
+
+		coord.push_back(c);
+		int sum = 1;
+		int i = 1;
+		while (sum < limit)
+		{
+			sum += (i * 6);
+
+			c.begin = coord[i-1].end + 1;
+			c.end = sum;
+
+			coord.push_back(c);
+			if (sum >= 100000)
+			{
+				break;
+			}
+			i++;
+		}
+	}
+
+	SearchRange(int coordinate)
+	{
+		X = 0;
+		Y = 0;
+	}
+
+	void convert2(int searchTarget, int& xCoordinate, int& yCoordinate)
+	{
+		if( searchTarget == 1 )
+		{
+			xCoordinate = 0;
+			yCoordinate = 0;
+		}
+
+		int lineDistance = this->calcLineDistance( searchTarget );
+		
+		int seed1DPoint = coord[lineDistance].end;
+		
+		int base2DPointX = lineDistance;
+		int base2DPointY = 0;
+
+		if( searchTarget == seed1DPoint )
+		{
+			xCoordinate = base2DPointX;
+			yCoordinate = base2DPointY;
+			return;
+		}
+
+		int current2DPointX = base2DPointX;
+		int current2DPointY = base2DPointY;
+		int current1DPoint = seed1DPoint;
+
+		int directionX[6] = { 0,-1,-1,0,1,1 };
+		int directionY[6] = { -1,0,1,1,0,-1 };
+
+		for(int dir = 0 ; dir < 6 ; dir++)
+		{
+			for(int i = 0 ; i < lineDistance ; i++)
+			{
+				current2DPointX += directionX[dir];
+				current2DPointY += directionY[dir];
+				current1DPoint--;						//끝점에서 시작점으로 역순으로 순회
+
+				if( current1DPoint == searchTarget )
+				{
+					xCoordinate = current2DPointX;
+					yCoordinate = current2DPointY;
+					return;
+				}
+
+				if( current1DPoint == coord[lineDistance].begin )
+				{
+					xCoordinate = -1;
+					yCoordinate = -1;
+					return;
+				}
+			}
+		}
+	}
+
+	int getBasePositionX(int searchTarget)
+	{
+		if( searchTarget == 1 )
+		{
+			return 0;
+		}
+
+		return this->calcLineDistance( searchTarget );
+	}
+
+	int getBasePositionY(int searchTarget)
+	{
+		return 0;
+	}
+
+	int getChangingDirectionCount(int searchTarget )
+	{
+		int lineDistance = this->calcLineDistance( searchTarget );
+
+		int beginNum = coord[lineDistance].begin;
+
+		float retVal = 0.0f;
+		
+		if( searchTarget != beginNum )
+		{
+			retVal = (float)(searchTarget - beginNum) / lineDistance;
+
+			if( lineDistance < retVal )
+				retVal += 0.5;
+		}
+
+		return (int)(retVal);
+	}
+
+	int getChangingDirectionOffset(int searchTarget )
+	{
+		int lineDistance = this->calcLineDistance( searchTarget );
+		int beginNum = coord[lineDistance].begin;
+
+		int offset = 0;
+		if( searchTarget != beginNum && lineDistance != 1)
+		{
+			offset = (searchTarget - beginNum+1) % (lineDistance);
+		}
+		else if( searchTarget == beginNum && searchTarget != 1 && lineDistance > 1)
+		{
+			offset = 1;
+		}
+
+		return offset;
+	}
+
+	int calcLineDistance(int searchTarget)
+	{
+		if( searchTarget == 1 )
+			return 0;
+
+		int retVal = 0;
+
+		int i = 0;
+		for(LineInfoList::iterator iter = coord.begin() ; iter != coord.end() ; ++iter, ++i)
+		{
+			if( searchTarget >= iter->begin && searchTarget <= iter->end )
+			{
+				retVal = i;
+				break;
+			}
+		}
+
+		return retVal;
+	}
+};
+
+
+int main()
+{
+#ifdef _UNIT_TEST
+	UnitTest::RunAllTests();
+#endif
+
+	SearchRange range;
+	range.initializeCoordArray(100000);
+
+	int value1D = 0;
+	
+
+	while(true)
+	{
+		char ln[512];
+		cin.getline(ln,512);
+
+		if( ln[0] == 0 )
+			break;
+		value1D = atoi(ln);
+		int x = -1,y = -1;
+		range.convert2( value1D, x, y );
+		std::cout << x << " " << y << std::endl;
+	}
+	return 0;
+}
+
+#ifdef _UNIT_TEST
+
+TEST(LineDistance)
+{
+	SearchRange range;
+	range.initializeCoordArray(100000);
+
+	CHECK_EQUAL( 0, range.calcLineDistance(1));
+	CHECK_EQUAL( 1, range.calcLineDistance(2));
+	CHECK_EQUAL( 1, range.calcLineDistance(7));
+	CHECK_EQUAL( 2, range.calcLineDistance(8));
+	CHECK_EQUAL( 3, range.calcLineDistance(22));
+	CHECK_EQUAL( 3, range.calcLineDistance(23));
+}
+
+TEST(LineRangeDiv)
+{
+	SearchRange range;
+	range.initializeCoordArray(100000);
+
+	CHECK_EQUAL( 0, range.getChangingDirectionCount( 1 ) );
+	CHECK_EQUAL( 0, range.getChangingDirectionOffset( 1 ) );
+
+	CHECK_EQUAL( 0, range.getChangingDirectionCount( 2 ) );
+	CHECK_EQUAL( 0, range.getChangingDirectionOffset( 2 ) );
+
+	CHECK_EQUAL( 1, range.getChangingDirectionCount( 3 ) );
+	CHECK_EQUAL( 0, range.getChangingDirectionOffset( 3 ) );
+
+	CHECK_EQUAL( 1, range.getChangingDirectionOffset( 8 ) );
+
+	CHECK_EQUAL( 2, range.getChangingDirectionCount( 12 ) );
+	CHECK_EQUAL( 1, range.getChangingDirectionOffset( 12 ) );
+	
+	CHECK_EQUAL( 3, range.getChangingDirectionCount( 13 ) );
+	CHECK_EQUAL( 0, range.getChangingDirectionOffset( 13 ) );
+
+	CHECK_EQUAL( 0, range.getChangingDirectionCount( 22 ) );
+	CHECK_EQUAL( 0, range.getChangingDirectionOffset( 22 ) );
+
+	CHECK_EQUAL( 1, range.getChangingDirectionCount( 23 ) );
+	CHECK_EQUAL( 1, range.getChangingDirectionOffset( 23 ) );
+}
+
+TEST(BasePosition)
+{
+	SearchRange range;
+	range.initializeCoordArray(100000);
+
+	CHECK_EQUAL(0, range.getBasePositionX(1) );
+	CHECK_EQUAL(0, range.getBasePositionY(1) );
+
+	CHECK_EQUAL(1, range.getBasePositionX(2) );
+	CHECK_EQUAL(0, range.getBasePositionY(2) );
+
+	CHECK_EQUAL(1, range.getBasePositionX(7) );
+	CHECK_EQUAL(0, range.getBasePositionY(7) );
+
+	CHECK_EQUAL(2, range.getBasePositionX(8) );
+	CHECK_EQUAL(0, range.getBasePositionY(8) );
+
+	CHECK_EQUAL(3, range.getBasePositionX(22) );
+	CHECK_EQUAL(0, range.getBasePositionY(22) );
+}
+
+TEST(Final)
+{
+	SearchRange range;
+	range.initializeCoordArray(100000);
+
+	int x,y;
+
+	range.convert2(1, x, y);
+	CHECK_EQUAL(0, x);
+	CHECK_EQUAL(0, y);
+
+	range.convert2(2, x, y);
+	CHECK_EQUAL(0, x);
+	CHECK_EQUAL(1, y);		
+	
+	range.convert2(3, x, y);
+	CHECK_EQUAL(-1, x);
+	CHECK_EQUAL(1, y);	
+
+	range.convert2(5, x, y);
+	CHECK_EQUAL(0, x);
+	CHECK_EQUAL(-1, y);	
+	
+	range.convert2(7, x, y);
+	CHECK_EQUAL(1, x);
+	CHECK_EQUAL(0, y);
+
+	range.convert2(16, x, y);
+	CHECK_EQUAL(1, x);
+	CHECK_EQUAL(-2, y);
+
+	range.convert2(22, x, y);
+	CHECK_EQUAL(0, x);
+	CHECK_EQUAL(3, y);
+}
+#endif
+
+/* @END_OF_SOURCE_CODE */
+
+}}}

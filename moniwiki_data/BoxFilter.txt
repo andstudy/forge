@@ -1,0 +1,98 @@
+filtering 을 보다가 [http://tech-algorithm.com/articles/boxfiltering/ Tech-Algorithm.com 에서 Box Filtering 에 대해 쓴 재미있는 블로깅]이 있어서 간단 번역해 올립니다. 더 재미있는 것인 필자가 예제 이미지로 리니지2 를 썼다는 점. :) box filtering 이나 convolution 에 대해 개념이 거의 없는 상태에서 쓴 글이라 이상한 부분이 있으면 얘기해주세요. 감사합니다.
+
+'''Box filtering'''
+tech-algorithm.com
+
+box filtering 은 근본적으로 주변 픽셀값의 평균을 얻는 방식의 이미지 필터링이다. 사실상 이미지 필터링을 위해 흔히 쓰는 수학 연산으로 된 convolution filter 이기도 하다. convolution filter 는 두 개의 배열을 곱해서 제 3의 배열을 만들어낸다. box filtering 에서는 이미지 샘플과 filter kernel 를 곱해서 필터링된 결과값을 얻는다. filter kernel 이란 실제로 어떻게 필터링 할지를 정의하는 일종의 명세라고 할 수 있다. box filtering 의 좋은 점은 적당한 filter kernel 만 제공한다면 쉽게 sharpen, emboss, edge-detect, smooth, motion-blur 같은 이미지 필터를 작성할 수 있다는 점이다.
+
+이만하면 소개는 충분한 듯하니, box filtering 과 filter kernel 이 얼마나 끝내주는지 살펴보자. 앞에서 filter kernel 이 filter 타입을 정의한다고 했는데, 뭘 어떻게 한다는 걸까? 한 픽셀보다는 큰 네모난 유리를 kernel 이라고 생각하고 이를 이미지 위로 쭉 훑어지나간다고 상상해 보자. 이때 kernel 은 계속해서 유리를 통해서 보이는 픽셀들의 평균값을 계산한다.
+
+attachment:bf-img01.png
+
+filter kernel 의 최소 표준 크기는 위 그림에서 보는 것처럼 3 x 3 이다. filter kernel 은 샘플 이미지 안에 들어가야 한다는 규칙 때문에, 이미지의 테두리에는 filtering 을 적용할 수가 없다. 물론 좀 신경쓰면 테두리도 처리할 수 있지만 지금은 먼저 기본적인 기능부터 돌아가게 만들어 보자. 서론이 길었다. 당장 구현 코드를 살펴보자!
+
+{{{#!plain java
+public int[] BoxFiltering(
+        int[] pixels,int width, int height, float[] kernel) {
+    int[] temp = new int[width*height] ;
+    float denominator = 0.0f ;
+    float red, green, blue ;
+    int ired, igreen, iblue, indexOffset, rgb ;
+    int[] indices = {
+        -(width + 1),  -width,     -(width - 1), 
+        -1,                0,           +1, 
+        width - 1,      width,      width + 1
+    } ;
+    for (int i=0;i<kernel.length;i++)
+        denominator += kernel[i] ;
+    if (denominator==0.0f) denominator = 1.0f ;
+    for (int i=1;i<height-1;i++) {
+        for (int j=1;j<width-1;j++) {
+            red = green = blue = 0.0f ;
+            indexOffset = (i*width)+j ;
+            for (int k=0;k<kernel.length;k++) {
+                rgb = pixels[indexOffset+indices[k]] ;
+                red += ((rgb & 0xff0000)>>16)*kernel[k] ;
+                green += ((rgb & 0xff00)>>8)*kernel[k] ;
+                blue += (rgb & 0xff)*kernel[k] ;
+            }            
+            ired = (int)(red / denominator) ;
+            igreen = (int)(green / denominator) ;
+            iblue = (int)(blue / denominator) ;
+            if (ired>0xff) ired = 0xff ;
+                else if (ired<0) ired = 0 ;
+            if (igreen>0xff) igreen = 0xff ;
+                else if (igreen<0) igreen = 0 ;
+            if (iblue>0xff) iblue = 0xff ;
+                else if (iblue<0) iblue = 0 ;            
+            temp[indexOffset] = 0xff000000 | ((ired<<16) & 0xff0000) | 
+                    ((igreen<<8) & 0xff00) | (iblue & 0xff) ;
+        }
+    }
+    return temp ;
+}
+}}}
+
+자바 코드 설명
+
+인자로 넘어온 pixels 배열에는 전체 너비 * 높이 pixel 값이 들어있다. kernel 인자는 크기가 9인 배열이다. 즉, 이 코드에서는 kernel 의 크기를 3*3 으로 가정한다. 또한 각 pixel 은 ARGB(alpha, red, green, blue) 형식이라고 가정한다. alpha 는 투명도 값이라 여기에서는 건드리지 않는다. indices 배열은 주변 픽셀을 찾기 좋도록 만든 테이블이다. denominator(분모) 는 인자로 넘어온 kernel 배열값의 합으로 나중에 filter kernel 에서 평균을 계산할 때 사용한다.
+
+여러 다른 kernel 을 썼을 때 결과가 어떻게 달라지는지 이미지로 확인해 보자. 샘플 이미지는 리니지2 이다.
+
+Original unfiltered image.
+attachment:bf-kernel-nofilter.gif
+attachment:la2-nofilter.png
+
+Smoothing (평활화)
+attachment:bf-kernel-smooth.gif
+attachment:la2-smooth.png
+
+Sharpening
+attachment:bf-kernel-sharpen.gif
+attachment:la2-sharpen.png
+
+Raised
+attachment:bf-kernel-raise.gif
+attachment:la2-raise.png
+
+Motion-blur (Blurring 을 몽롱화라고 번역하기도 하는군요)
+attachment:bf-kernel-mblur.gif
+attachment:la2-motionblur.png
+
+Edge detection
+attachment:bf-kernel-edge.gif
+attachment:la2-edge.png 
+
+[http://tech-algorithm.com/articles/boxfiltering-interactive-applet/ Box Filtering Java applet interactive demo] 에서는 행렬에 값을 넣었을 때 이미지가 어떻게 달라지는지를 바로 확인해 볼 수 있다.
+
+참고 URL
+[http://www.hybrid.pe.kr/tt/582 hybrid : 신기한 Convolution 의 세계~]
+[http://trip2ee.tistory.com/101 trip2ee : Convolution의 의미]
+[http://cagetu.egloos.com/5576794 CrazyXIII - Bilateral Filtering]
+
+[http://www.designlog.org/2512205 포토샵에서 꼭 알아야 할 메뉴 '블러 필터(Blur Filter)']
+[http://www.gamerendering.com/2008/12/20/radial-blur-filter/ Radial Blur Filter - Racing 게임등에 사용]
+
+[http://blog.daum.net/gamza-net/16 D3D이용 2D 출력시 마법의 숫자 -0.5에 대하여]
+
+[[UploadFile]]

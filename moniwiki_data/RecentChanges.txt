@@ -1,0 +1,12 @@
+#notwins
+Total [[PageCount]] pages
+
+Please see MoniWiki:MoniWiki
+
+[[RecentChanges(7000,comment)]]
+
+|||| [[Icon(diff)]] ||marks older pages that have at least one backup version stored (click for an author diff)||
+|||| [[Icon(updated)]] ||marks pages edited since you set your bookmark (click for a bookmark diff)||
+|||| [[Icon(new)]] ||marks pages created since you set your bookmark, and were not edited after creation||
+
+See also HelpOnNavigation

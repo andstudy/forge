@@ -1,0 +1,94 @@
+= 문제 풀이 =
+숫자를 입력받아, 그 숫자를 뒤집고 서로 더해서 회문인지 검사하는 문제입니다. 정수형 변수를 가지고 이러한 작업을 하기 위해서는 나누기 곱하기 나머지 등의 산수를 복잡하게 사용해야 해서 문자열의 힘을 빌려 풀었습니다.
+
+
+= 소스코드 (ANSI C) =
+{{{
+#include <stdio.h>
+#include <string.h>
+
+int isOk(char *P)
+{
+	int len = strlen(P) - 1;
+	int i;
+
+	for(i = 0; i <= len/2; i++ )
+	{
+		if( P[i] != P[len-i] ) return 0;
+	}	
+
+	return 1;
+}
+
+void Reverse(char *P)
+{
+	int i;
+	char TempP[11]={0};
+	int len = strlen(P)-1;
+
+	for(i = 0; P[i]; ++i )
+	{
+		TempP[len-i] = P[i];
+	}
+
+	strcpy(P, TempP);
+}
+
+void ReverseAdd(char *P)
+{
+	int i;
+	char TempP[11];
+	int carry = 0;
+
+	strcpy(TempP, P);
+	Reverse(TempP);
+
+	for(i = 0; P[i]; ++i )
+	{
+		P[i] = P[i]-'0'+TempP[i]-'0'+carry;
+		if(P[i] >= 10 )
+		{
+			P[i] -= 10;
+			carry = 1;
+		}
+		else
+		{
+			carry = 0;
+		}
+
+		P[i] += '0';
+	}
+
+	if(carry)
+	{
+		P[i] = carry+'0';
+		P[i+1] = 0;
+	}
+}
+
+int main()
+{
+	int N;
+	char P[11];
+	int result;
+	scanf("%d", &N);
+
+	while( N --> 0 )
+	{
+		scanf("%s", P);
+		Reverse(P);
+
+		result = 0;
+
+		while( !isOk(P) )
+		{
+			ReverseAdd(P);
+			result++;
+		}
+
+		printf("%d %s\n", result, P);
+	}
+
+	return 0;
+}
+}}}

@@ -1,0 +1,4 @@
+[http://www.slideshare.net/ecatmon/ndc11 ecatmon - 포세이든용개시벨은어떻게탄생했는가]
+[http://www.slideshare.net/buffmail/replay-system-2 장재화, Replay system, NDC2011]
+[http://ozlael.egloos.com/3661663 ozlael : NDC11 게임 관련 법령 리뷰 세션 후기 "게임 코드가 법의 꿈을 꾸는가, 법이 게임 코드의 꿈을 꾸는가"]
+[http://ozlael.egloos.com/3661902 ozlael : NDC11 멀티플랫폼 SNG 세션 대충 후기]

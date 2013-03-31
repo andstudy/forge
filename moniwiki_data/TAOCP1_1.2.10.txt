@@ -1,0 +1,10 @@
+Describe TAOCP1/1.2.10 here
+
+1.2.10 발표 자료 - 박민욱
+{{{#!html
+<div style="width:425px" id="__ss_7022554"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/phoenixex/11210" title="1[1].2.10알고리즘 분석">1[1].2.10알고리즘 분석</a></strong><object id="__sse7022554" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=11-2-10-110222192225-phpapp02&stripped_title=11210&userName=phoenixex" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse7022554" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=11-2-10-110222192225-phpapp02&stripped_title=11210&userName=phoenixex" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/phoenixex">Park Min Wook</a>.</div></div>
+}}}
+
+풀문제 - 최학윤
+
+일단 7,8,11

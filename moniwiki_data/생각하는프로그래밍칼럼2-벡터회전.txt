@@ -1,0 +1,183 @@
+John Bentley 가 작성한 코드입니다. 약간의 버그와 코드가 수정됐습니다.
+{{{
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define MAXN 100000000
+int x[MAXN];
+int rotdist, n;
+//-----------------------------------------------------------------------------------
+// 1. > 반전 알고리즘
+void reverse(int i, int j)
+{ 
+	int t;
+	while (i < j) {
+		t = x[i]; x[i] = x[j]; x[j] = t;
+		i++;
+		j--;
+	}
+}
+void revrot(int rotdist, int n)
+{ 
+	reverse(0, rotdist-1);
+	reverse(rotdist, n-1);
+	reverse(0, n-1);
+}
+//-----------------------------------------------------------------------------------
+// 2. > 저글링 알고리즘
+int gcd(int i, int j)
+{ 
+	int t;
+	while (i != 0) 
+	{
+		if (j >= i)
+			j -= i;
+		else 
+		{
+			t = i; i = j; j = t;
+		}
+	}
+	return j;
+}
+void jugglerot(int rotdist, int n)
+{ 
+	int cycles, i, j, k, t;
+	cycles = gcd(rotdist, n);
+	for (i = 0; i < cycles; i++) 
+	{
+		/* move i-th values of blocks */
+		t = x[i];
+		j = i;
+		for (;;) 
+		{
+			k = j + rotdist;
+			if (k >= n)
+				k -= n;
+			if (k == i)
+				break;
+			x[j] = x[k];
+			j = k;
+		}
+		x[j] = t;
+	}
+}
+//-----------------------------------------------------------------------------------
+// 3. > 블록교환 알고리즘
+void swap(int i, int j, int k) 
+{ 
+	/* swap x[i..i+k-1] with x[j..j+k-1] */
+	int t;
+	while (k-- > 0) 
+	{
+		t = x[i]; x[i] = x[j]; x[j] = t;
+		i++;
+		j++;
+	}
+}
+void gcdrot(int rotdist, int n)
+{ 
+	int i, j, p;
+	if (rotdist == 0 || rotdist == n)
+		return;
+	i = p = rotdist;
+	j = n - p;
+	while (i != j) 
+	{
+		/* invariant:
+		x[0 ..p-i ] is in final position
+		x[p-i..p-1 ] = a (to be swapped with b)
+		x[p ..p+j-1] = b (to be swapped with a)
+		x[p+j..n-1 ] in final position
+		*/
+		if (i > j) 
+		{
+			swap(p-i, p, j);
+			i -= j;
+		} 
+		else 
+		{
+			swap(p-i, p+j-i, i);
+			j -= i;
+		}
+	}
+	swap(p-i, p, i);
+}
+
+//-----------------------------------------------------------------------------------
+// . > 기타 함수
+void initx()
+{
+	int i;
+	for (i = 0; i < n; i++)
+		x[i] = i;
+}
+void printx()
+{ 
+	int i;
+	for (i = 0; i < n; i++)
+		printf(" %d", x[i]);
+	printf("\n");
+}
+void roterror()
+{
+	//fprintf(stderr, " rotate bug %d %d\n", n, rotdist);
+	//printx();
+	//exit (1);
+}
+void checkrot()
+{ 
+	int i;
+	for (i = 0; i < n-rotdist; i++)
+		if (x[i] != i+rotdist)
+			roterror();
+	for (i = 0; i < rotdist; i++)
+		if (x[n-rotdist+i] != i)
+			roterror();
+}
+//-----------------------------------------------------------------------------------
+// Additional : 메모리복사
+int temp[MAXN];
+void MemCpy(int rotdist, int n)
+{ 
+	memcpy( temp, x, n*sizeof(int));
+	memcpy( x, temp+rotdist, (n-rotdist)*sizeof(int));
+	memcpy( x+n-rotdist, temp, rotdist*sizeof(int));
+}
+ 
+//-----------------------------------------------------------------------------------
+// Additional : 테스트 유닛
+typedef void (*TestFunc)(int rotdist, int n);
+
+void RunFunc( TestFunc Func, char* Desc = "Default", int Count = 1)
+{
+	for( int i=0; i<Count; i++)
+	{
+		initx();
+		int startx = clock();
+		Func(rotdist, n);
+		printf("(%03d) %s time = %d ms\n", i, Desc, clock()-startx);
+		checkrot();
+	}
+}
+//-----------------------------------------------------------------------------------
+int main()
+{ 
+	// 이 코드의 묘미를 보시라 ㅋㅋ
+	n = 5000000;
+	rotdist = 100;
+
+	// 이 코드가 없으면 gcdrot 에러 발생!
+	rotdist = rotdist % n;
+
+	int Count = 1;
+
+	RunFunc(jugglerot,"jugglerot", Count);
+	RunFunc(gcdrot, "gcdrot", Count);
+	RunFunc(revrot,"revrot", Count);
+	RunFunc(MemCpy,"memcpy", Count);
+}
+}}}
+
+
+언뜻 보기에는 환형큐를 사용해서 상수시간 처리가 가능해 보이지만, 이 문제가 담고 있는 내용은 '단지' 그것이 아니다.

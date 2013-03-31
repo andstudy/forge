@@ -1,0 +1,306 @@
+{{{
+#ifdef _UNIT_TEST
+#include "UnitTest++.h"
+#endif
+
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <math.h>
+#include <stdio.h>
+#include <algorithm>
+#include <functional>
+
+class CExchanger
+{
+public:
+	CExchanger()
+	{
+		m_TotalExpenses = 0;
+		m_MemberCount = 0;
+		m_MoneyList.reserve( 10 );
+	}
+
+	CExchanger( int memberCount )
+	{
+		m_TotalExpenses = 0;
+		m_MemberCount = 0;
+		m_MoneyList.reserve( memberCount );
+	}
+
+	void AddMoney( double money )
+	{
+		long val = ( money + 0.001f ) * 100.0;
+		m_MoneyList.push_back( val );
+		m_TotalExpenses += val;
+		m_MemberCount++;
+	}
+
+	double GetMinAmount()
+	{
+		std::sort( m_MoneyList.begin(), m_MoneyList.end(), std::greater<int>( ));			
+		
+		long average = m_TotalExpenses / m_MemberCount;
+		long remainder = m_TotalExpenses % m_MemberCount;
+
+		std::vector<long>::iterator begin = m_MoneyList.begin();
+		std::vector<long>::iterator end = m_MoneyList.end();
+
+		int total = 0;
+		for( ;begin != end; ++begin )
+		{
+			int myMoney = *begin;
+			if( myMoney <= average )
+				break;
+
+			int moveMoney = myMoney - average;
+            if( remainder > 0 )
+			{
+				moveMoney--;
+				remainder--;
+			}
+
+			total += moveMoney;
+		}
+
+		return (double)total / 100.0f;
+	}	
+
+private:
+	int					m_MemberCount;
+	long				m_TotalExpenses;
+	std::vector< long >	m_MoneyList;
+};
+
+using namespace std;
+
+int main()
+{
+#ifdef _UNIT_TEST
+	if( UnitTest::RunAllTests() )
+	{
+		int i;
+		std::cin >> i;
+	}
+#endif
+
+	int memberCount = 0;		
+	while( 1 )
+	{		
+		std::cin >> memberCount;
+		if( memberCount == 0 )
+			return 0;
+
+		CExchanger exchanger(memberCount);
+		for( int i = 0; i < memberCount; i++ )
+		{
+			double money = 0.0f;			
+			std::cin >> money;
+			exchanger.AddMoney( money );
+		}
+
+		double minAmount = exchanger.GetMinAmount();		
+		printf( "$%.2f\n", minAmount );		
+	}
+
+	return 0;
+}
+
+#ifdef _UNIT_TEST
+TEST( exchangerText )
+{
+	CExchanger exchanger;
+	exchanger.AddMoney( 10.00f );
+	exchanger.AddMoney( 20.00f );
+	exchanger.AddMoney( 30.00f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 10.00f, result, 0.001f );
+}
+
+TEST( testConfirm )
+{
+	CExchanger exchanger;
+	exchanger.AddMoney( 15.00f );
+	exchanger.AddMoney( 15.01f );
+	exchanger.AddMoney( 3.00f );
+	exchanger.AddMoney( 3.01f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 11.99f, result, 0.001f );
+}
+
+TEST( testConfirm02 )
+{
+	CExchanger exchanger;
+	exchanger.AddMoney( 0.03f );
+	exchanger.AddMoney( 0.02f );
+	exchanger.AddMoney( 0.01f );
+	exchanger.AddMoney( 0.01f );
+	
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.01f, result, 0.001f );
+}
+
+TEST( testConfirm03 )
+{
+	CExchanger exchanger;
+	exchanger.AddMoney( 0.04f );
+	exchanger.AddMoney( 0.04f );
+	exchanger.AddMoney( 0.04f );
+	exchanger.AddMoney( 0.01f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.02f, result, 0.001f );
+}
+
+TEST( testConfirm04 )
+{
+	CExchanger exchanger;
+	exchanger.AddMoney( 0.04f );
+	exchanger.AddMoney( 0.01f );
+	exchanger.AddMoney( 0.01f );
+	exchanger.AddMoney( 0.01f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.02f, result, 0.001f );
+}
+
+TEST( testConfirm05 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 1.01f );
+	exchanger.AddMoney( 0.90f );
+	exchanger.AddMoney( 0.02f );
+	
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.62f, result, 0.001f );
+}
+
+TEST( testConfirm06 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 1.00f );
+	exchanger.AddMoney( 0.01f );
+	exchanger.AddMoney( 0.01f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.66f, result, 0.001f );
+}
+
+TEST( testConfirm07 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 100.00f );
+	exchanger.AddMoney( 0.01f );
+	exchanger.AddMoney( 100.0f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 66.66f, result, 0.001f );
+}
+
+TEST( testConfirm08 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 0.4f );
+	exchanger.AddMoney( 0.4f );
+	exchanger.AddMoney( 0.4f );
+	exchanger.AddMoney( 0.1f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.22f, result, 0.001f );
+}
+
+TEST( testConfirm09 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 15.00f );
+	exchanger.AddMoney( 15.00f );
+	exchanger.AddMoney( 9.00f );
+	exchanger.AddMoney( 9.00f );
+	exchanger.AddMoney( 3.02f );
+	exchanger.AddMoney( 3.01f );
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 11.98f, result, 0.001f );
+}
+
+TEST( testConfirm10 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 0.03f );
+	exchanger.AddMoney( 0.04f );
+	exchanger.AddMoney( 0.05f );
+	exchanger.AddMoney( 0.06f );	
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.01f, result, 0.001f );
+}
+
+TEST( testConfirm11 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 0.07f );
+	exchanger.AddMoney( 0.03f );
+	exchanger.AddMoney( 0.02f );
+	exchanger.AddMoney( 0.02f );	
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.03f, result, 0.001f );
+}
+
+TEST( testConfirm12 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 0.05f );
+	exchanger.AddMoney( 0.05f );
+	exchanger.AddMoney( 0.03f );
+	exchanger.AddMoney( 0.02f );	
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 0.02f, result, 0.001f );
+}
+
+TEST( testConfirm13 )
+{
+	CExchanger exchanger;	
+	exchanger.AddMoney( 1.00f );
+	exchanger.AddMoney( 2.00f );
+	exchanger.AddMoney( 3.00f );
+	exchanger.AddMoney( 4.00f );	
+	exchanger.AddMoney( 5.00f );	
+
+	double result = exchanger.GetMinAmount();
+
+	CHECK_CLOSE( 3.00f, result, 0.001f );
+}
+
+TEST( testConfirm14 )
+{
+	CExchanger exchanger(3);	
+	exchanger.AddMoney( 5678934.00f );
+	exchanger.AddMoney( 234.00f );
+	exchanger.AddMoney( 45673.00f );	
+
+	double result = exchanger.GetMinAmount();
+
+	///CHECK_CLOSE( 3770653.66f, result, 0.001f );
+}
+
+
+#endif
+
+}}}

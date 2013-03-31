@@ -1,0 +1,8 @@
+[Ruby-CodeBlocksAndIteration]
+[Ruby-Extension]
+[Ruby-Regexp]
+[Ruby-Windows]
+[RubyIO]
+[RubyMetaProgramming]
+[AnD_Gems_Ruby_2007]
+[ConstraintProgramming]

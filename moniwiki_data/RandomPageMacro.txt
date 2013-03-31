@@ -1,0 +1,8 @@
+{{{[[RandomPage(9)]]}}}
+[[RandomPage(9)]]
+----
+{{{[[RandomPage]]}}}
+
+[[RandomPage]]
+----
+CategoryMacro

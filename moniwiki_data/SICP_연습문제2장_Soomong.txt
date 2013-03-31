@@ -1,0 +1,124 @@
+== Exercise 2.17. last-pair ==
+
+{{{#!gcode
+(define (last-pair list)
+  (if (null? (cdr list))
+      list
+      (last-pair (cdr list))))
+
+(last-pair (list 23 72 149 34))
+}}}
+
+== Exercise 2.18. reverse ==
+{{{#!gcode
+(define (reverse-new list)
+  (if (null? (cdr list))
+      list
+      (cons (reverse-new (cdr list))
+            (car list))))
+(reverse-new (list 1 4 9 16 25))
+}}}
+
+== Exercise 2.20. same-parity ==
+{{{#!gcode
+(define (iter list fun)
+  (if (null? list)
+      '()
+      (if (fun (car list))
+          (cons (car list)
+                (iter (cdr list) fun))
+          (iter (cdr list) fun))))
+(define (same-parity . x)
+  (if (even? (car x))
+      (iter x even?)
+      (iter x odd?)))
+
+(same-parity 1 2 3 4 5 6 7)
+(same-parity 6 5 4 3 2 1)
+}}}
+
+== Exercise 2.21. square-list ==
+{{{#!gcode
+(define (square-list items)
+  (if (null? items)
+      items
+      (cons (* (car items) (car items))
+            (square-list (cdr items)))))
+
+(define (square-map items)
+  (map (lambda (x) (* x x)) items))
+
+(square-list (list 2 4 5))
+(square-map (list 2 4 5))
+}}}
+
+== Exercise 2.27 ==
+{{{#!gcode
+(define (reverse-new list)
+  (if (null? (cdr list))
+      list
+      (cons (reverse-new (cdr list))
+            (car list))))
+(reverse-new (list (list 1 2) (list 3 4)))
+}}}
+
+== Exercise 2.30 ==
+{{{#!gcode
+(define (square-tree tree)
+  (cond ((null? tree) '())
+        ((not (pair? tree)) (* tree tree))
+        (else (cons (square-tree (car tree))
+                    (square-tree (cdr tree))))))
+
+(define (square-tree-map tree)
+  (map (lambda (x)
+         (if (pair? x)
+             (square-tree-map x)
+             (* x x)))
+       tree))
+
+(square-tree (list 1
+                   (list 2 (list 3 4) 5)
+                   (list 6 7)))
+(square-tree-map (list 1
+                   (list 2 (list 3 4) 5)
+                   (list 6 7)))
+}}}
+
+== Exercise 2.31 ==
+{{{#!gcode
+(define (tree-map fun tree)
+  (map (lambda (x) 
+         (if (pair? x)
+             (tree-map fun x)
+             (fun x)))
+       tree))
+
+(define (square x) (* x x))
+(define (square-tree tree)
+  (tree-map square tree))
+
+(square-tree (list 1
+                   (list 2 (list 3 4) 5)
+                   (list 6 7)))
+}}}
+
+== Exercise 2.36 ==
+{{{#!gcode
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+(define (accumulate-n op init seqs)
+  (if (null? seqs) 
+      '()
+      (if (null? (car seqs))
+          '()
+          (cons (accumulate op init (map car seqs))
+                (accumulate-n op init (map cdr seqs))))))
+
+(define s (list (list 1 2 3) (list 4 5 6) (list 7 8 9) (list 10 11 12)))
+(accumulate-n + 0 s)
+}}}

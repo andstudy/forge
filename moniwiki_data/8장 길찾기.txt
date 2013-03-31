@@ -1,0 +1,4 @@
+#title 8장 길찾기
+{{{#!html
+<embed name="__sse4023000" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=programminggameai-100508233501-phpapp02&stripped_title=programming-game-ai" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true"  width="575" height="480"></embed>
+}}}

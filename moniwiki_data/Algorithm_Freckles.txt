@@ -1,0 +1,12 @@
+[http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=111001&format=html 문제보기]
+[http://www.programming-challenges.com/pg.php?page=studenthome&threshold=0&perpage=7&pagenum=10&orderby=10 10장 Summit Pages]
+
+== 문제 풀이 ==
+ [Algorithm/Freckles/ParkPD]
+ [Algorithm/Freckles/kukuman]
+ [Algorithm/Freckles/Outbreak]
+ [Algorithm/Freckles/CynicJJ]
+ [Algorithm/Freckles/soomong]
+ [Algorithm/Freckles/Mastojun]
+----
+CategoryProblem

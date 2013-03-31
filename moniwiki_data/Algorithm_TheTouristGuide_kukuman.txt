@@ -1,0 +1,125 @@
+* Graph
+{{{
+import java.util.ArrayList;
+
+
+public class Graph {
+	private int pointCount;
+	private int[][] nodes;
+	
+	public Graph(int pointCount) {
+		this.pointCount = pointCount;
+		nodes = new int[pointCount][pointCount];
+		for(int i=0;i<pointCount;i++){
+			for(int j=0;j<pointCount;j++){
+				nodes[i][j] = 0;
+			}
+		}
+	}
+	
+	
+	public void insertNode(int fromPoint, int toPoint, int weight) {
+		nodes[fromPoint][toPoint] = weight;
+		nodes[toPoint][fromPoint] = weight;
+		
+	}
+	public Path findMinPath(int fromPoint,int toPoint){
+		Path newPath= new Path(fromPoint);
+		return findMinPath( fromPoint, toPoint, newPath);
+	}
+	public Path findMinPath(int fromPoint,int toPoint,Path path){
+		if(fromPoint == toPoint){
+			return path;
+		}
+		ArrayList<Path> resultPaths = new ArrayList<Path>();
+		for(int i=0;i<pointCount;i++){
+			//검사할 노드가 연결되어 있고  이전에 방문하지 않았던 노드이면 다음 노드로 부터 탐색
+			if( nodes[fromPoint][i] > 0 ){
+				if(path.isVisitedNode(i)){
+					continue;
+				}
+				Path newPath = new Path(path);
+				newPath.addVisitedPoint(i, nodes[fromPoint][i]);
+				
+				Path searchedPath = findMinPath(i, toPoint,newPath);
+				if(searchedPath != null){
+					resultPaths.add(searchedPath);
+				}
+			
+			}
+		}
+		
+		Path minPath = null;
+		int minWeight = Integer.MAX_VALUE;
+		//가장 짧은 Path 찾아서 return
+		for(int i=0;i<resultPaths.size();i++){
+			Path curPath = resultPaths.get(i);
+			if(curPath.getPathWeight() < minWeight){
+				minPath = curPath;
+				minWeight = curPath.getPathWeight();
+			}
+		}
+		return minPath;
+	}
+
+}
+
+}}}
+
+* Path
+{{{
+import java.util.ArrayList;
+
+
+public class Path {
+	private ArrayList<Integer> visitedPoint = new ArrayList<Integer>();
+	private int pathWeight =Integer.MAX_VALUE;
+	
+	public Path(Path fromPath){
+		visitedPoint.addAll(fromPath.visitedPoint);
+		pathWeight = fromPath.pathWeight;
+	}
+	
+	public Path(int fromPoint){
+		visitedPoint.add(fromPoint);
+	}
+	
+	public void addVisitedPoint(int point,int weight){
+		visitedPoint.add(point);
+		pathWeight = Math.min(pathWeight, weight);
+	}
+	public int getPathWeight() {
+		return pathWeight;
+	}
+	public void setPathWeight(int pathWeight) {
+		this.pathWeight = pathWeight;
+	}
+	
+	public boolean isVisitedNode(int point){
+		return visitedPoint.contains(point);
+	}
+	
+	public String toString(){
+		return "Paths : "+visitedPoint.toString()+"\nWeight:"+pathWeight;
+	}
+}
+
+}}}
+ * TestCase
+{{{
+import junit.framework.TestCase;
+
+
+public class GraphTestCase extends TestCase {
+	public void testInitGraph(){
+		Graph graph = new Graph(3);
+		graph.insertNode(0,1,10);
+		graph.insertNode(1,2,20);
+		graph.insertNode(2,0,30);
+		
+		Path minPath = graph.findMinPath(0, 2);
+		System.out.println(minPath);
+	}
+}
+
+}}}

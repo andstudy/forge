@@ -1,0 +1,267 @@
+== Chapt 14. 소켓 프로그래밍 ==
+[[TableOfContents]]
+
+=== TCP 사용하기 ===
+==== 서버에서 데이터 추출해내기 ====
+  * socket_examples.erl
+{{{#!gcode
+nano_get_url() ->
+    nano_get_url("www.google.com").
+
+nano_get_url(Host) ->
+    {ok,Socket} = gen_tcp:connect(Host,80,[binary, {packet, 0}]), %% (1)
+    ok = gen_tcp:send(Socket, "GET / HTTP/1.0\r\n\r\n"),  %% (2)
+    receive_data(Socket, []).
+
+receive_data(Socket, SoFar) ->
+    receive
+	{tcp,Socket,Bin} ->    %% (3)
+	    receive_data(Socket, [Bin|SoFar]);
+	{tcp_closed,Socket} -> %% (4)
+	    list_to_binary(reverse(SoFar)) %% (5)
+    end.
+
+}}}
+   * 실행해보기
+{{{
+socket_examples:nano_get_url().
+RESULT = socket_examples:nano_get_url("www.naver.com").
+io:format("~p~n",[RESULT]).
+string:tokens(binary_to_list(RESULT),"\r\n").          
+}}}
+==== 간단한 TCP서버 ====
+ * eval 서버
+{{{#!gcode
+start_nano_server() ->
+    {ok, Listen} = gen_tcp:listen(2345, [binary, {packet, 4},  %% (6)
+					 {reuseaddr, true},
+					 {active, true}]),
+    {ok, Socket} = gen_tcp:accept(Listen),  %% (7)
+    gen_tcp:close(Listen),  %% (8)
+    loop(Socket).
+
+loop(Socket) ->
+    receive
+	{tcp, Socket, Bin} ->
+	    io:format("Server received binary = ~p~n",[Bin]),
+	    Str = binary_to_term(Bin),  %% (9)
+	    io:format("Server (unpacked)  ~p~n",[Str]),
+	    Reply = lib_misc:string2value(Str),  %% (10)
+	    io:format("Server replying = ~p~n",[Reply]),
+	    gen_tcp:send(Socket, term_to_binary(Reply)),  %% (11)
+	    loop(Socket);
+	{tcp_closed, Socket} ->
+	    io:format("Server socket closed~n")
+    end.
+
+}}}
+ * 클라이언트
+{{{#!gcode
+nano_client_eval(Str) ->
+    {ok, Socket} = 
+	gen_tcp:connect("localhost", 2345,
+			[binary, {packet, 4}]),
+    ok = gen_tcp:send(Socket, term_to_binary(Str)),
+    receive
+	{tcp,Socket,Bin} ->
+	    io:format("Client received binary = ~p~n",[Bin]),
+	    Val = binary_to_term(Bin),
+	    io:format("Client result = ~p~n",[Val]),
+	    gen_tcp:close(Socket)
+    end.
+}}}
+ * 서버 실행하기
+{{{
+c("socket_examples").
+c("lib_misc").
+socket_examples:start_nano_server().
+}}}
+ * 클라이언트 실행하기
+{{{
+c("socket_examples").
+socket_examples:nano_client_eval("list_to_tuple([2+3*4,10+20])").
+}}}
+
+==== 서버 개선하기 ====
+ * 순차서버 - 한 번에 하나의 접속만 받는 서버
+{{{#!gcode
+start_seq_server() ->
+  {ok, Listen} = gen_tcp:listen(...),
+  seq_loop(Listen).
+
+seq_loop(Listen) ->
+  {ok, Socket} = gen_tcp:accept(Listen),
+  loop(Socket),
+  seq_loop(Listen).
+
+loop(..) -> %..원래 로직
+}}}
+ * 병렬서버 - 동시에 다수의 병렬 접속을 받는 서버
+{{{#!gcode
+start_parallel_server() ->
+  {ok, Listen} = gen_tcp:listen(...),
+  spawn( fun() -> par_connect(Listen) end ).
+par_connect(Listen) ->
+  {ok, Socket} = gen_tcp:accecpt(Listen),
+  spawn( fun() -> par_connect(Listen) end ).
+  loop(Socket).
+
+loop(..) -> %..원래 로직
+}}}
+
+=== 제어이슈 ===
+ * 얼랭 소켓의 세가지 모드
+|| '''옵션''' || '''모드설명''' || 데이터 수신 ||
+|| {active,true} || 능동적 메세지 수신(논블로킹) || {tcp, Socket, Data} 로 전달 받음 ||
+|| {active,false} || 수동적 메세지 수신(블로킹) ||  gen_tcp:recv{Socket,N) 으로 데이터를 가져옴 ||
+|| {active,once} || 혼합형 메세지 수신(부분 블로킹) || 한번만 데이터가 {tcp, Socket, Data}로 수신 ||
+
+==== 능동적 메세지 수신(논블로킹) ====
+{{{#!gcode
+{ok, Listen| = gen_tcp:listen(Port, [..,{active, true}, ..]),
+{ok, Socket} = gen_tcp:accept(Listen),
+loop(Socket).
+loop(Socket) ->
+  receive
+     {tcp, Socket, Data} ->
+          .. do something with the data...
+     {tcp_closed, Socket} ->
+          ..
+  end.
+}}}
+
+==== 수동적 메세지 수신 (블로킹) ====
+{{{#!gcode
+{ok, Listen| = gen_tcp:listen(Port, [..,{active, false}, ..]),
+{ok, Socket} = gen_tcp:accept(Listen),
+loop(Socket).
+loop(Socket) ->
+  case gen_tcp:recv(Socket, N) of
+     {ok, B} ->
+          .. do something with the data...
+          loop(Socket);
+     {error, closed} ->
+          ..
+  end.
+}}}
+
+==== 혼합형 방식(부분 블로킹) ====
+{{{#!gcode
+{ok, Listen} = gen_tcp:listen(Port, [..,{active, once}, ..]),
+{ok, Socket} = gen_tcp:accept(Listen),
+loop(Socket).
+loop(Socket) ->
+   receive
+     {tcp, Socket, Data} ->
+      ...데이터로 무언가를 함 ...
+      %% 다음번 메세지를 반응 준비가 되면
+       inet:setopts(Socket, [{active,once}]),
+      loop(Socket);
+     {tcp_closed, Socket} ->
+          ..
+  end.
+}}}
+
+=== 그 접속은 어디서부터 왔는가 ===
+@spec inet:peername(Socket) -> {ok, {IP_Address, Port}) | {error,Why}
+
+=== 소켓과 오류 처리 ===
+{{{#!gcode
+
+error_test() ->
+    spawn(fun() -> error_test_server() end),
+    lib_misc:sleep(2000),
+    {ok,Socket} = gen_tcp:connect("localhost",4321,[binary, {packet, 2}]),
+    io:format("connected to:~p~n",[Socket]),
+    gen_tcp:send(Socket, <<"123">>),
+    receive
+	Any ->
+	    io:format("Any=~p~n",[Any])
+    end.
+
+error_test_server() ->
+    {ok, Listen} = gen_tcp:listen(4321, [binary,{packet,2}]),
+    {ok, Socket} = gen_tcp:accept(Listen),
+    error_test_server_loop(Socket).
+
+error_test_server_loop(Socket) ->
+    receive
+	{tcp, Socket, Data} ->
+	    io:format("received:~p~n",[Data]),
+	    atom_to_list(Data),
+	    error_test_server_loop(Socket)
+    end.
+}}}
+
+=== UDP ===
+==== 가장 간단한 UDP 서버와 클라이언트 ====
+ * UDP 서버
+{{{#!gcode
+server(Port) ->
+{ok,Socket} = gen_udp:open(Port, {binary}),
+loop(Socket).
+
+loop(Socket) ->
+   recive
+     {udp, Socket, Host, Port, Bin} ->
+         BinReply = ....
+         gen_udp:send(Socket, Host, Port, BinReply),
+         loop(Socket)
+   end.
+}}}
+ * UDP 클라이언트
+{{{#!gcode
+client(Request) ->
+  {ok, Socket} = gen_udp:open(0, {binary}),
+  ok = gen_udp:send(Socket, "localhost" , 4000, Request),
+  Value = receive
+            {udp, Socket, _, _, Bin} -> {ok, Bin}
+          after 2000 ->
+              error
+          end,
+  gen:udp_close(Socket),
+  Value
+}}}
+==== UDP 팩토리얼 서버 ====
+* udp_test.erl
+{{{#!gcode
+start_server() ->
+    spawn(fun() -> server(4000) end).
+
+%% The server 		  
+server(Port) ->
+    {ok, Socket} = gen_udp:open(Port, [binary]),
+    io:format("server opened socket:~p~n",[Socket]),
+    loop(Socket).
+
+loop(Socket) ->
+    receive
+	{udp, Socket, Host, Port, Bin} = Msg ->
+	    io:format("server received:~p~n",[Msg]),
+	    N = binary_to_term(Bin),
+	    Fac = fac(N),
+	    gen_udp:send(Socket, Host, Port, term_to_binary(Fac)),
+	    loop(Socket)
+    end.
+    
+fac(0) -> 1;
+fac(N) -> N * fac(N-1).
+
+%% The client
+
+client(N) ->
+    {ok, Socket} = gen_udp:open(0, [binary]),
+    io:format("client opened socket=~p~n",[Socket]),
+    ok = gen_udp:send(Socket, "localhost", 4000, 
+		      term_to_binary(N)),
+    Value = receive
+		{udp, Socket, _, _, Bin} = Msg ->
+		    io:format("client received:~p~n",[Msg]),
+		    binary_to_term(Bin)
+	    after 2000 ->
+		    0
+	    end,
+    gen_udp:close(Socket),
+    Value.
+
+}}}

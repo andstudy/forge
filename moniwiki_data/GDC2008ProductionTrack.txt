@@ -1,0 +1,87 @@
+ '''GDC2008''' 메인 페이지로 바로가기
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+
+= Production Track =
+ * '''Adding New Revenue Streams with Voice Chat Services for the MMOGs Sponsored by Vapps''' - ''Jerry Norton''
+ * '''Agile Development ? Is it the Silver Bullet? The Goodthe Bad and the Ugly (Day 1, 2, 3)''' - ''Rich Vogel''
+ * '''An Agile Retrospective''' - ''Clinton Keith''
+  [http://www.agilegamedevelopment.com/ 강연 슬라이드]
+  [http://www.agilegamedevelopment.com/Articles/GDC2008/An%20Agile%20Retrospective%20Clinton%20Keith%20GDC%202008%20AGD.pdf PDF]
+  [http://www.agilegamedevelopment.com/Articles/GDC2008/An%20Agile%20Retrospective%20Clinton%20Keith%20GDC%202008%20AGD.ppt PPT]
+  [http://groups.google.com/group/Agile-Game-Development Agile Game Development Google Groups]
+  평가 : 김기웅(★★★★★), 최우성(★★★★)
+ * '''Bend Microsoft Project to Your Will - Again!''' - ''Mike McShaffry''
+ * '''Breaking in to Academia (Day 1, 2)''' - ''Ian Schreiber''
+ * '''Building a Successful Production Process''' - ''Lesley Mathieson''
+ * '''Challenges of Creating Linear Content in a Game Engine''' - ''Kim LibreriJerry O''Flaherty''
+ * '''COLLADA in the Game Sponsored by Intel''' - ''Remi ArnaudPete FalcoDoug Binks 외''
+ * '''From DOOM to RAGE: Pushing Boundaries''' - ''Matt Hooper''
+ * '''Home Tools and Support: Creating Content for PlayStation Home Sponsored by Sony''' - ''James CoxWarren Keyes''
+ * '''How to Break All Rules and yet Make a 90+ Game''' - ''Petter Sydow''
+  [https://www.cmpevents.com/sessions/GD/S6211i1.ppt PPT]
+  평가 : 김기웅(★★★☆)
+ * '''How to Prepare Your Game for Certification Sponsored by VMC Game Labs''' - ''Linda LemieuxH. Percival NghiemSamer Raad 외''
+ * '''Improving QA (Day 1, 2, 3)''' - ''Chuck McFadden''
+ * '''Jazzing Up Agile Software Development Sponsored by IBM''' - ''Scott Ambler''
+ * '''Living with Madden: The Drive for Consistent Excellence''' - ''Phillip Holt''
+ * '''Making in-Game Commerce Work for You: SINGSTARa Case Study''' - ''Richard Bates''
+ * '''Outsourcing: Best Practices at Pandemic Studios''' - ''Carey Chico''
+  [https://www.cmpevents.com/sessions/GD/S6525i1.pdf PDF]
+  평가 : 김기웅(★★★★)
+ * '''Pollinating the Universe: User-generated Content in SPORE''' - ''Caryl Shaw''
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/20/3536349.html GDC 08: Spore / Content Pollenation]
+ * '''Preserving Games: Saving the Past and Present Now (Day 1, 2)''' - ''Henry Lowood''
+ * '''Producing Award Winning Audio for Games: A Producer''s Guide to Sounding Great''' - ''Jonathan Mayer, Greg deBeer, Phil Kovats 외''
+ * '''Production: Basics and Beyond''' - ''Laura Fryer''
+ * '''QOL Today: 3 Years after EA_Spouse (Day 1, 2)''' - ''Evan Robinson''
+ * '''Rethinking Game Localization as Global Game Development Sponsored by Localization World''' - ''Miguel BernalHeather ChandlerTom Edwards 외''
+ * '''SAM AND MAX - Episodic Content Creation''' - ''Julian KwasneskiJared Emerson-Johnson''
+ * '''Security and Privacy in Games (Day 1, 2, 3)''' - ''Elonka Dunin''
+ * '''Self-Censoring Potential Content Risks for Global Audiences: WhyHow and When''' - ''Tom Edwards''
+  [https://www.cmpevents.com/sessions/GD/S6247i1.ppt PPT]
+ * '''Small Team, Big Dreams: How to Make an MMORPG without a Massive Team or Budget''' - ''Hermann PeterscheckScott Brown''
+  [https://www.cmpevents.com/sessions/GD/S6884i1.ppt PPT]
+  [http://www.jossh.com/join_today/index.html JumpGate - 발표자 회사가 만든 게임]
+  [http://clubpenguin.com/ clubpenguin.com Small Team 으로도 잘 만들 수 있는 게임의 예]
+  평가 : 김기웅(★★★☆)
+ * '''STAR WARS: THE FORCE UNLEASHED: How LucasArts is Building a Gamea Development Team and a Technology Pipeline... At the Same Time''' - ''Haden BlackmanMatt OmernickCedric Collomb 외''
+ * '''Supercharge the Production Pipeline Sponsored by IBM''' - ''George DolbierJames McConnell''
+ * '''The Benefits and Challenges Associated with a Centralized Model of Art Asset Creation for Video Games''' - ''Dan Forden''
+  [https://www.cmpevents.com/sessions/GD/S6508i1.ppt PPT]
+ * '''The BioWare Live Team: Building Community through Technology''' - ''Derek French''
+ * '''The Future of Animation is Games''' - ''Bill KroyerMark DeAngelis''
+ * '''The IGDA Credits Movement: The Revolution is Already Here (Day 1, 2)''' - ''John Feil''
+ * '''The Profile of a Great Software Tester''' - ''Anibal Sousa''
+ * '''The Virtual Arts Studio: A Partnership for Development''' - ''James SutherlandPaul Steed''
+ * '''The World within - Building Social Environments in EVE Online''s Space Stations''' - ''Torfi Frans Olafsson''
+ * '''Training as a Productivity Multiplier''' - ''John Nash''
+ * '''Transition to Scrum Midway through a AAA Development Cycle: Lessons Learned''' - ''Asbjoern Soendergaard''
+  [http://www.crytek.com/fileadmin/user_upload/inside/presentations/gdc2008/ASoendergaardGDC08.ppt ppt]
+  평가 : 김기웅(★★★★)
+ * '''UNCHARTED: DRAKE''S FORTUNE Post-Mortem: Amazing Feats of Daring''' - ''Richard Lemarchand''
+ * '''UNREAL TOURNAMENT 3 Postmortem: ULTRA KILL!''' - ''Michael CappsJeff Morris''
+ * '''What Can Original IP''s Learn from Movie Games?''' - ''Don Daglow''
+ * '''What Do You Need to Become a Great QA Team? (Day 1, 2, 3)''' - ''Dennis MooneyMichael SB Johnson''
+ * '''When the Honeymoon Ends: 12 Ways to Keep Your Publisher in Love with You''' - ''Michael Fitch''
+  [https://www.cmpevents.com/sessions/GD/S6279i1.ppt PPT]
+
+
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+

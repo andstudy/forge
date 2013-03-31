@@ -1,0 +1,116 @@
+== 연습문제 3.1 ==
+{{{#!gcode
+( define (make-accumulator default)
+  ( lambda (addend)
+    ( begin (set! default (+ default addend))
+            default
+     ))
+   )
+
+(define A (make-accumulator 5))
+(A 10)
+(A 10)
+
+}}}
+
+== 연습문제 3.2 ==
+{{{#!gcode
+( define (make-monitored fun)        
+   (  let (( counte 0))  
+   (  define ( call-and-add param )       
+            
+        ( begin (set! counte (+ counte 1)) 
+                (fun param) ))
+     ( define ( how-many-calls) 
+        counte)
+     ( define (dispatch m )
+        (cond  (( eq? m 'how-many-calls?) (how-many-calls) )
+             ( else ( call-and-add m ))))
+     dispatch
+  ))
+
+(define s (make-monitored sqrt))
+
+(s 100)
+(s 'how-many-calls?)
+(s 100)
+(s 100)
+(s 'how-many-calls?)
+}}}
+
+==  연습문제 3.3 ==
+{{{#!gcode
+(define (make-account balance password)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch input m )
+    (if ( eq? password input)
+     (cond ((eq? m 'withdraw) withdraw)
+          ((eq? m 'deposit) deposit)
+          (else (error "Unknown request -- MAKE-ACCOUNT"
+                       m)))
+      ( error "Incorrect passwd" ) 
+     ))
+  dispatch)
+  
+
+  
+
+
+                       
+(define acc (make-account 100 'secret-password))
+((acc 'secret-password 'withdraw) 40)
+((acc 'some-other-password 'deposit) 50)
+
+}}}
+
+== 연습문제 3.7 ==
+{{{#!gcode
+(define (make-account balance password)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch input m )
+    ( if (eq? m 'pwd-ok)
+         (pwd-ok input)
+         (if ( eq? password input)
+     (cond ((eq? m 'withdraw) withdraw)
+          ((eq? m 'deposit) deposit)
+          (else (error "Unknown request -- MAKE-ACCOUNT"
+                       m)))
+      ( error "Incorrect passwd" ) 
+     )))
+  (define (pwd-ok input) (eq? input password)
+    )
+    dispatch)
+
+(define (make-joint acct acct-pwd new-pwd)
+   (define (dispatch pwd m) 
+     ( if (eq? new-pwd pwd)
+     (acct acct-pwd m) 
+     ( error "invalid new-passwd")))
+  (cond ( (acct acct-pwd 'pwd-ok)         dispatch)
+           ( else ( error "invalid org passwd!" )))
+  ) 
+
+  
+  
+
+(define  peter-acc (make-account 100 'open-sesame))   
+
+(define paul-acc
+  (make-joint peter-acc 'open-sesame 'rosebud))
+
+( (paul-acc 'rosebud 'withdraw) 49)
+}}}

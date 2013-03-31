@@ -1,0 +1,117 @@
+== 문제 풀이 ==
+ 이걸 왜 DP를 사용해야 하지? 라는 고민을 수차례 했었어요.
+ 그러다가 번뜩! 아이디어가 떠올랐네요 +_+
+
+ DP를 이용해야 한다는 힌트가 없었다면 정렬을 해서 어떻게 구워삶을까 생각만 하다가 GG쳤을듯;
+
+== Programming Challenges의 문제점 ==
+ PC에서는 제대로 체점이 안됩니다.
+ 하나의 문제에 다수개의 답이 나올 경우는 제대로 처리 못하는듯 해요.
+ 실제 책의 예제도
+ {{{
+4
+4
+5
+9
+8
+}}}
+ 혹은 마지막이 1인 답도 존재하죠
+
+== forever ANSI C ^^ ==
+ 들여쓰기를 줄이기 위해서 MakeTable의 이중 for문 안의 구문을 함수 하나로 뺐는데 저런식으로 빼는게 옳은 방법일까요?
+
+{{{#!vim cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Elephant
+{
+	int weight;
+	int iq;
+	int num;
+}elephants[1001];
+
+int List[1001][2] = {0};
+int n = 1;
+
+void Input()
+{
+	int w, i;
+
+	while( scanf("%d %d", &w, &i) == 2 )
+	{
+		elephants[n].weight 	= w;
+		elephants[n].iq		= i;
+		elephants[n].num	= n;
+
+		n++;
+	}
+}
+
+int sort_function(const void *r, const void *l)
+{
+	return  ((struct Elephant*)r)->weight - ((struct Elephant*)l)->weight;
+}
+
+void Procedure(int i, int j)
+{
+	if( elephants[i].iq > elephants[j].iq )
+	{
+		if( List[elephants[i].num][0] <= List[elephants[j].num][0] )
+		{
+			List[elephants[i].num][0] = List[elephants[j].num][0]+1;
+			List[elephants[i].num][1] = elephants[j].num;
+		}
+
+	}
+}
+
+void MakeTable()
+{
+	int i, j;
+
+	/* Sort By Weight ASC */
+	qsort((void*)elephants, n, sizeof(struct Elephant), sort_function);
+
+	for( i = n; i >= 1; i-- )
+	{
+		for( j = i+1; j <= n; j++ )
+		{
+			Procedure(i, j);
+		}
+	}
+
+}
+
+void PrintResult()
+{
+	int i;
+	int maxi, max = 0;
+
+	for( i = 1; i <= n; i++ )
+	{
+		if( List[i][0] > max )
+		{
+			max = List[i][0];
+			maxi = i;
+		}
+	}
+
+	printf("%d\n", max);
+
+	while( maxi )
+	{
+		printf("%d\n", maxi);
+		maxi = List[maxi][1];		
+	}
+}
+
+int main()
+{
+	Input();
+	MakeTable();
+	PrintResult();
+
+	return 0;
+}
+}}}

@@ -1,0 +1,50 @@
+AnD 위키는 상단 메뉴의 계정 -> 사용자 등록으로 가입만 하면 확인절차없이 바로 문서 수정이 가능합니다.
+
+== 개발자의 은퇴 후 ==
+=== 식당 ===
+[http://clien.career.co.kr/cs2/bbs/board.php?bo_table=park&wr_id=12776972 지인의 이공계 닭집테크트리]
+[https://twitter.com/#!/s879563/status/145427200584335360 @s879563 충무로 동국대 근처 돈엔돈 고깃집 사장님이 국민은행 전산실에서 코볼하셧던분] -> 서울특별시 중구 퇴계로44길 14 , 필동 2가 59-3 돈앤돈
+[https://twitter.com/#!/oscarplex/status/146257922735878145 @oscarplex 베트남 쌀국수 체인점]
+[https://twitter.com/#!/jeri_82/status/146351805322899456 @jeri_82 신촌 초이스타코던가... 거기 사장도 개발자 출신이라는 소문이 있습니다. 자그만치 천리안 이하생략. (소문)] [http://www.hani.co.kr/arti/economy/economy_general/499267.html 초이스타코 사장인 최우진(54). 최씨는 천리안 개발팀장을 지내고 유망 벤처기업을 세웠던 사업가 출신이다. 7년 공들인 골목상권, 다국적기업 앞에선 허망]
+남성역 2번 출구 앞 고가네 막창집
+
+=== 커피숍 ===
+[http://blog.naver.com/freejay24 원화가 장진영씨가 은퇴후 운영중인 '카페나두' 블로그. 속초 근처인듯] 
+ [http://blog.naver.com/cafe806?Redirect=Log&logNo=110123295231 아바이 마을 cafe nadoo] [https://twitter.com/#!/ecatmon/status/144997296550060033 @ecatmon 저희팀에서 그래픽 팀장 하시다가 커피집 차리신 분]
+[http://chulin28ho.egloos.com/5261625 가야네 밀크하우스] [http://chulin28ho.egloos.com/5327444 밀크하우스 오픈식 by 김윤정] ([https://twitter.com/#!/JPcorps/status/146330648607596545 지금은 게임 그래픽 학원 운영중])
+[https://twitter.com/#!/jaheekim/status/145904327788199936 서울과학기술대학교 근처 가장 맛있는 커피를 만드시는 사장님이 DB관리자 출신]
+[https://twitter.com/#!/jaheekim/status/145904327788199936 @jaheekim 삼성동에서 SI업계 종사하시던 분의 커피점에 간 적이 있습니다.]
+[https://twitter.com/#!/jeri_82/status/146352343288528896 @jeri_82 게임 그래픽 디자이너 한 분이 대학로에서 카페 하십니다. 아직 일년도 안 되심.]
+
+=== 식당 등을 경영했으나 실패한 사례 ===
+[https://twitter.com/#!/iliyard/status/144990104375660544 @iliyard 친구(10년이상차 프로그래머)가 치킨집 차린적이 있는데 한달 정도만에 접었어요 치킨집도 힘든듯 ㅎ 그 친구는 다시 게임업계로 복귀했다는 ^^]
+[https://twitter.com/#!/iliyard/status/144996134547501056 @iliyard 그친구 하는 말이 이렇게 더 일하다간 죽겠다고 그러더군요 그만큼 육체적으로 힘들다고 하네요]
+
+== 그 외 ==
+[https://twitter.com/#!/barami84/status/145564529215016960 @barami84 휴대폰 대리점도 한 루트입니다. 저와 알고 있는 한분이 결국 때려치고 휴대폰 대리점을 여셨습니다.]
+[https://twitter.com/#!/___YUI___/status/145558767025655808 @___YUI___ 함께 일했던 분들 중 두분이 일식집과 주점을 운영 중이시네요..]
+[https://twitter.com/#!/setsalle/status/146003261026078720 @setsalle 숙대 근처 만화방 주인 되시는 분이 게임업계 분이셨습니다. 아트 쪽이셨다고... 야근 때문에 너무 늦게 간 제가 게임회사 얘기를 꺼내자 반가워하시며 얘기하셨습니다.]
+[https://twitter.com/#!/pakyoungrok/status/146251333421371392 @pakyoungrok 제 첫 직장 때 회사 망하면서 제 상사 중 하나는 빵집을 차렸었죠. 상도동 파리바게트였던가... 지금 아마 50대 초반이실 듯.]
+[https://twitter.com/#!/ultrakain/status/146259973016526848 @ultrakain 제 옛 CTO는 의류매장을 하십니다]
+[http://www.facebook.com/changwoo.suh/posts/358323800861888 이사집 : 마님 만나고 얼마 안되서 마님 이사 할 때 학생 이사 전용 용달(0.5톤) 끌고 5만원씩 받고 이사하던 아저씨도 조흥은행에서 cobol로 뱅킹 시스템 개발하던 분이라고 했었죠. 신한-조흥 합병될 때 명퇴하시고 사업하다 날려먹어서 그 일한다고 했었는데요.]
+
+=== 인생 2모작을 진행중인 분들 ===
+[http://orumi.egloos.com/ 초록불의 잡학다식] : 게임개발하시다가 지금은 역사동화책 등을 집필하시는 듯
+[http://www.yes24.com/24/goods/3922245 '김유신의 머리일까' 작가 차무진(차영훈, 라임라이트) : '그라비티'의 개발팀장으로 1999년부터 근무하며 '레퀴엠 온라인'을 완성했다.]
+[https://twitter.com/#!/seik_kim/status/145919774172524544 G모 모바일 사에서 모 야구게임 팀에 계시던 프로그래머(7년차)분은 개인자산 관리사 (라고 하는게 맞나;;) 로 바꾸셨습니다. PCA생명 계시다가 지금 어디 계시는지 모르겠네요.]
+[http://blog.daum.net/stormcsm/2666007 삼성SDS 에서 프로그래머 하다가 사법고사 합격해서 변호사가 된 사례]
+[https://twitter.com/#!/oscarplex/status/146257922735878145 @oscarplex 변호사(N사 법무팀)]
+[https://twitter.com/#!/oscarplex/status/146257922735878145 @oscarplex 투자자문사]
+호주 국제변호사 2명
+[https://twitter.com/#!/Ultra_Tom/status/146375851708129280 @Ultra_Tom 모 기업 전산실 근무자가 부동산 개발 시행사로 이직한 경우를 본 적 있죠]
+[https://twitter.com/#!/BattleWolf81/status/146895618743336960 @BattleWolf81 아는 개발자가 가업을 잇기로 했습니다. 작은 공장을 운영중입니다.]
+[http://comic.naver.com/challenge/list.nhn?titleId=383401 네이버 만화 - 두개의달R (쫒김상민 님 작품)]
+[http://comic.naver.com/webtoon/list.nhn?titleId=105533&weekday=thu 네이버만화 커피우유신화 - 그림작가 joana님] 게임기획자 출신
+[http://www.aladin.co.kr/shop/wproduct.aspx?ISBN=8989571650 누군가를 만났어 - SF 소설 작가 김보영님] 씰 개발에 참여한 기획자로 알고 있습니다. 
+
+=== 교수 ===
+한국산업기술대학교 정내훈 교수
+[http://dailysecu.com/news_view.php?article_id=1132 김휘강 고려대 정보보호대학원 교수]
+[http://www.gamemeca.com/news/news_view.html?seq=2&ymd=20081224 별바람 김광삼 청강문화산업대학교 교수]  
+ 하지만 별바람님 같은 경우는 계속 게임개발을 하고 있기 때문에 은퇴라고 보기엔 좀 미묘하지 않나 싶습니다. 
+그 외에도 몇 분 더 있습니다.

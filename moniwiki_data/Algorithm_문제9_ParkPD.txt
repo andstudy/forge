@@ -1,0 +1,315 @@
+이거 UVa 어디에서 submit 할 수 있나요?
+Browse Problems 에서 못 찾겠네요.
+ * [http://icpcres.ecs.baylor.edu/onlinejudge/index.php?option=com_onlinejudge&Itemid=8&category=12&page=show_problem&problem=979  Jolly Jumpers]
+  * 찾는 요령이라도 있으신거에요? 검색해도 안 나오던데...
+
+== C++ 버전 ==
+{{{
+/* @JUDGE_ID:parkpd 10038 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <strstream>
+
+using namespace std;
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+
+#include "../../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+class CJollyJumpers
+{
+public:
+	CJollyJumpers() {}
+	bool IsJollyJumper(string s);
+	bool IsJollyJumper(int count, istream& input);
+
+protected:
+	vector<int> m_Nums;
+	set<int> m_Diffs;
+};
+
+bool CJollyJumpers::IsJollyJumper(string s)
+{
+	istrstream input(s.c_str());
+
+	int count = 0;
+	input >> count;
+	// count > 0 이상임은 문제에서 보장하고 있다.
+
+	return IsJollyJumper(count, input);
+}
+
+bool CJollyJumpers::IsJollyJumper(int count, istream& input)
+{
+	int num = 0;
+	int old = 0;
+
+	input >> num;
+	m_Nums.push_back(num);
+	old = num;
+
+	for (int i = 1; i < count; ++i)
+	{
+		input >> num;
+		m_Nums.push_back(num);
+
+		m_Diffs.insert(abs(num - old));
+		old = num;
+	}
+
+	// Jolly Jumper 인지를 확인하는 방법.
+	return (m_Diffs.size() + 1) == count;
+}
+
+#ifndef _UNIT_TEST
+
+char s[10000000];
+
+int main()
+{
+	int count;
+	while (cin >> count)
+	{
+		CJollyJumpers jumper;
+		if (jumper.IsJollyJumper(count, cin))
+		{
+			cout << "Jolly\n";
+		}
+		else
+		{
+			cout << "Not Jolly\n";
+		}
+	}
+
+	return 0;
+}
+
+#else
+
+TEST_FIXTURE(CJollyJumpers, m_Nums)
+{
+	m_Nums.push_back(1);
+	CHECK_EQUAL(1, m_Nums.size());
+}
+
+TEST_FIXTURE(CJollyJumpers, IsJollyJumper_1)
+{
+	string input = "4 1 4 2 3";
+	CHECK(IsJollyJumper(input));
+
+	CHECK_EQUAL(4, m_Nums.size());
+	CHECK_EQUAL(3, m_Diffs.size());
+}
+
+TEST_FIXTURE(CJollyJumpers, IsJollyJumper_2)
+{
+	string input = "5 1 4 2 -1 6";
+	CHECK(!IsJollyJumper(input));
+
+	CHECK_EQUAL(5, m_Nums.size());
+	CHECK_EQUAL(3, m_Diffs.size());
+}
+
+TEST_FIXTURE(CJollyJumpers, IsJollyJumper_3)
+{
+	string input = "1 1";
+	CHECK(IsJollyJumper(input));
+
+	CHECK_EQUAL(1, m_Nums.size());
+	CHECK_EQUAL(0, m_Diffs.size());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}
+
+== Lua 버전 ==
+{{{
+-- Library
+
+function fwrite (fmt, ...)
+	return io.write(string.format(fmt, unpack(arg)))
+end
+
+function SwapBySize(i1, i2)
+	if (i2 < i1) then
+		return i2, i1
+	end	
+	return i1, i2
+end
+
+function IsBetween(i, i1, i2)
+	i1, i2 = SwapBySize(i1, i2)
+	return i1 <= i and i <= i2
+end
+
+-- UnitTest
+UnitTest = {test = 0, success = 0, failed = 0}
+
+function UnitTest:new(o)
+	o = o or {}
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function UnitTest:ShowResult()
+	if UnitTest.failed == 0 then
+		fwrite("Success : %d tests passed\n", UnitTest.success)
+	else
+		fwrite("Failed : %d in tests %d\n", UnitTest.failed, UnitTest.test)
+	end
+end
+
+function Check(name, actual)
+	UnitTest.test = UnitTest.test + 1
+	if not actual then
+		fwrite("Check Failed in %s\n", name)
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+function CheckEqual(name, expect, actual)
+	UnitTest.test = UnitTest.test + 1
+	if (expect ~= actual) then
+		fwrite("CheckEqual Failed in %s. %s expected but actual is %s\n", name, tostring(expect), tostring(actual))
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+-- Algorithm
+
+Solver = {m_Count = 0, m_Nums = {}}
+
+function Solver:new(o)
+	o = o or {m_Count = 0}
+	
+	-- 일종의 자식 클래스용 멤버 변수 정의. lua 에서의 class 개념을 숙지할 것
+	o.m_Nums = {}
+	
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function Solver:PushNum(o)
+	self.m_Nums[#self.m_Nums + 1] = o
+end
+
+function Solver:PrintResult()
+	diffs = {}
+	
+	-- lua 에서는 for i = 2, 1 do 해도 loop 을 돌기 때문에
+	-- 이런 if 문이 필요하다. 이거 없앨 수 있는 방법은?
+        -- if 문 필요없음. 뭔가 다른게 문제였구만...
+	if (2 <= #self.m_Nums) then
+		for i = 2, #self.m_Nums do
+			diff = math.abs(self.m_Nums[i - 1] - self.m_Nums[i])
+			if (IsBetween(diff, 1, self.m_Count - 1)) then
+				diffs[diff] = 1
+			end
+		end
+	end
+	
+	if (#diffs == self.m_Count - 1) then
+		return "Jolly"
+	else
+		return "Not jolly"
+	end
+end
+
+-- test part
+
+do
+	local c = Solver:new{}
+	CheckEqual("m_Count", 0, c.m_Count)
+	
+	--- PushNum
+	c:PushNum(1)
+	c:PushNum(3)
+	CheckEqual("PushNum1", 1, c.m_Nums[1])
+	CheckEqual("PushNum3", 3, c.m_Nums[2])
+	
+	--- IsBetween
+	Check("IsBetween 2 1 3", IsBetween(2, 1, 3))
+	Check("IsBetween 7 2 3", not IsBetween(7, 2, 3))
+	Check("IsBetween 2 3 1", IsBetween(2, 3, 1))
+	Check("IsBetween 5 3 1", not IsBetween(5, 3, 1))
+end
+
+do
+	local c = Solver:new{m_Count = 4}
+	c:PushNum(1)
+	c:PushNum(4)
+	c:PushNum(2)
+	c:PushNum(3)
+	CheckEqual("size1", 4, #c.m_Nums)
+		
+	--- PrintResult
+	CheckEqual("PrintResult1", "Jolly", c:PrintResult())
+end
+
+do
+	local c = Solver:new{m_Count = 5}
+	c:PushNum(1)
+	c:PushNum(4)
+	c:PushNum(2)
+	c:PushNum(-1)
+	c:PushNum(6)
+	CheckEqual("size2", 5, #c.m_Nums)
+		
+	--- PrintResult
+	CheckEqual("PrintResult2", "Not jolly", c:PrintResult())
+end
+
+do
+	local c = Solver:new{m_Count = 1}
+	c:PushNum(1)
+	CheckEqual("size3", 1, #c.m_Nums)
+		
+	--- PrintResult
+	CheckEqual("PrintResult3", "Jolly", c:PrintResult())
+end
+
+UnitTest:ShowResult()
+
+-- input part
+
+while 1 do
+	local count = io.read("*number")
+	if count == nil then 
+		break 
+	end
+	
+	local c = Solver:new{m_Count = count}
+	
+	for i = 1, count do
+		c:PushNum(io.read("*number"))
+	end
+
+	print(c:PrintResult())
+end
+}}}

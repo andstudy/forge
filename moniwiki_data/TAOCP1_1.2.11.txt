@@ -1,0 +1,5 @@
+1.2.11.1 O 표기법 - 유장혁
+
+{{{#!html
+<div style="width:425px" id="__ss_6978506"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/niddo/20110219" title="TAOCP1 - 1.2.11.1 - O 표기법">TAOCP1 - 1.2.11.1 - O 표기법</a></strong> <object id="__sse6978506" width="425" height="355"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=20110219-110218172906-phpapp01&stripped_title=20110219&userName=niddo" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <embed name="__sse6978506" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=20110219-110218172906-phpapp01&stripped_title=20110219&userName=niddo" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/niddo">JangHyuk You</a> </div> </div>
+}}}

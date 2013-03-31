@@ -1,0 +1,18 @@
+게임이름 : RAVEN SOFTWARE'S SINGULARITY
+
+잘된 점
+1. Focus on gameplay with reuse of assets
+2. Switching the perspective back to first-person
+3. Short team goals with purpose
+4. Focus on player experience
+5. FPS vs. third-person multiplayer
+
+아쉬웠던 점
+1. Not enough focus on story or additional gameplay beyond prototype
+2. Indecision and blurry vision
+3. Trying to please everyone leaves no one happy
+4. Too much stuff, too little time
+5. Multiplayer match a la mode
+
+----
+[GameDeveloperMagazine]

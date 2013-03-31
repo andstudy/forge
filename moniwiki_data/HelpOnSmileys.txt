@@ -1,0 +1,21 @@
+== Graphical Smileys ==
+To insert a smiley, just type in your favourite from the list below. They're only converted to an icon though if they are ''surrounded by whitespace''.
+
+For more information on the possible markup, see HelpOnEditing. 
+
+=== Examples ===
+[[ShowSmiley]]
+== MoniWiki extensions ==
+{{{[[SmileyChooser]]}}}
+----
+If you want to add {{{[[SmileyChooser]]}}} in the edit form,
+make EditTextForm page like following
+{{{
+HelpOnEditing | ThisWiki
+#editform
+[[SmileyChooser]]
+[[EditHints]]
+}}}
+
+----
+[[Navigation(HelpOnEditing)]]

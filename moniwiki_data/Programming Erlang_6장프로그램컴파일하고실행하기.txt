@@ -1,0 +1,288 @@
+= 얼랭 셸 중단하기 =
+ * ^G누르고 (Windows에서는 ^Break) A 누르기
+ * erlang:halt() - 시스템을 즉각 중단시키는 BIF. 오류 복구 절차 필요
+ * q()
+
+
+= 개발 환경 수정하기 =
+ == 코드 로딩 검색 경로 설정 ==
+ 로드되지 않은 어떤 모듈의 함수를 호출할 경우 예외가 발생하고 시스템은 현재 로드 경로에 들어있는 모든 디렉토리에서 해당 모듈의 목적 코드 파일을 검색한다.
+ {{{
+> code:get_path().
+> code:add_patha(Dir).
+> code:add_pathz(Dir).
+> code:all_loaded().
+> code:clash().
+-----------------------------------------------------
+$ erl -pa Dir1 -pa Dir2 ... -pz DirK1 -pz DirK2
+ }}}
+
+ 얼랭 런타임 시스템은 얼랭으로 만들어진 코드 자동 로드 메커니즘을 사용한다.
+ E.4절 '동적 코드 로딩'(483쪽) 참고
+ == 시스템이 시작할 때 명령 실행 == 
+  * 홈 디렉토리의 .erlang 파일에 얼랭 코드 작성
+  * 현재 디렉토리의 .erlang 파일이 우선 - 어디서 시작하느냐에 따라 얼랭이 다른 방식으로 작동하도록 구성할 수 있다.
+  * 얼랭이 판단하는 홈 디렉토리 보기
+  {{{
+1> init:get_argument(home).
+{ok,[["/user1/bt22d"]]}
+   }}}
+
+
+= 프로그램을 실행하는 다른 방법들 =
+{{{#!gcode erlang
+-module(hello).
+-export([start/0]).
+
+start() ->
+    io:format("Hello world~n").
+}}}
+
+ == 얼랭 셸에서 컴파일하고 실행하기 ==
+ {{{
+[bt22d@fog:/user1/bt22d/STUDY/erlang 11 ] erl
+Erlang (BEAM) emulator version 5.6.3 [source] [smp:4] [async-threads:0] [hipe] [kernel-poll:false]
+
+Running Erlang DIR(erlang)
+Eshell V5.6.3  (abort with ^G)
+1> c(hello).
+{ok,hello}
+2> hello:start().
+Hello world
+ok
+ }}}
+
+ == 명령 프롬프트에서 컴파일하고 실행하기 ==
+ {{{
+[bt22d@fog erlang]$ erlc hello.erl
+[bt22d@fog erlang]$ erl -noshell -s hello start -s init stop
+Hello world
+[bt22d@fog erlang]$
+ }}}
+ -noshell : 인터렉티브 셸 없이 얼랭 시작
+ -s hello start : hello:start() 함수 실행 (컴파일되어 있어야 함)
+ -s init stop : init:stop() 실행
+ (-s ... 명령은 apply문과 함께 수행되며 완료 시 그 다음 명령이 수행된다)
+
+ == Escript로 실행하기 ==
+ {{{#!gcode erlang
+#!/usr/bin/env escript
+
+main(_) ->
+    io:format("Hello world\n").
+ }}}
+ {{{
+[bt22d@fog erlang]$ chmod u+x hello
+[bt22d@fog erlang]$ ./hello
+Hello world
+[bt22d@fog erlang]$
+ }}}
+
+ == 명령행 인수를 가지는 프로그램 ==
+ {{{#!gcode erlang
+-module(fac1).
+-export([main/1]).
+
+main([A]) ->
+    I = list_to_integer(atom_to_list(A)),
+    F = fac(I),
+    io:format("factorial ~w = ~w~n",[I, F]),
+    init:stop().
+
+fac(0) -> 1;
+fac(N) -> N*fac(N-1).
+ }}}
+
+
+= Makefile로 컴파일 자동화하기 =
+{{{
+# leave these lines alone
+.SUFFIXES: .erl .beam .yrl
+
+.erl.beam:
+    erlc -W $<
+
+.yrl.erl:
+    erlc -W $<
+
+ERL = erl -boot start_clean
+
+# 컴파일 하려는 얼랭 모듈들의 목록
+# If the modules don't fit onto one line add a \ character
+# to the end of the line and continue on the next line
+
+# Edit the lines below
+MODS = module1 module2 \
+       module3 ... special1 ...\
+       ...
+       moduleN
+
+# The first target in any makefile is the default target.
+# If you just type "make" then "make all" is assumed (because
+#   "all" is the first target in this makefile)
+
+all: compile
+
+compile: ${MODS:%=%.beam} subdirs
+
+## special compilation requirements are added here
+
+special1.beam: special1.erl
+    ${ERL} -Dflag1 -W0 special1.erl
+
+## run an application from the makefile
+
+application1: compile
+    ${ERL} -pa Dir1  -s application1 start Arg1 Arg2
+
+# the subdirs target compiles any code in
+# sub-directories
+
+subdirs:
+    cd dir1; make
+    cd dir2; make
+    ...
+
+# remove all the code
+
+clean:
+    rm -rf *.beam erl_crash.dump
+    cd dir1; make clean
+    cd dir2; make clean
+}}}
+
+
+= 얼랭 셸에서 명령 편집하기 = 
+|| ^A || 줄의 시작 ||
+|| ^E || 줄의 끝 ||
+|| ^F || 포워드 문자 ||
+|| ^B || 백워드 문자 ||
+|| ^P || 이전 줄 ||
+|| ^N || 다음 줄 ||
+|| ^T || 마지막 두 문자 교체 ||
+|| Tab || 현재의 모듈 또는 함수 이름의 펼침을 시도 ||
+
+
+= 얼랭을 중단하기 어려운 경우 =
+ * 셸이 응답하지 않는다.
+ * ^C 핸들러가 비활성화
+ * -detached 플래그로 얼랭을 시작한 경우
+ * -heart Cmd 옵션으로 얼랭을 시작한 경우
+ * 좀비 얼랭 프로세스
+
+
+= 뭔가 잘못되었을 때 =
+ == 정의가 안된 코드 ==
+ {{{
+[bt22d@fog:/user1/bt22d 49 ] erl -pa "/user1/bt22d/STUDY/erlang"
+Erlang (BEAM) emulator version 5.6.3 [source] [smp:4] [async-threads:0] [hipe] [kernel-poll:false]
+
+Running Erlang
+Eshell V5.6.3  (abort with ^G)
+1> code:clash().
+** /user1/bt22d/STUDY/erlang/a.beam hides ./a.beam
+** Found 1 name clashes in code paths
+ok
+2>
+ }}}
+ == Makefile이 make되지 않는 경우 ==
+ == 셸이 응답하지 않는 경우 ==
+ 여러 개의 작동하는 셸을 두고 원하는 명령을 내릴 수 있다.
+ - 무한히 기다리는 셸을 중단시키기
+ {{{
+1> receive foo -> true end.
+
+User switch command
+ --> h
+  c [nn]   - connect to job
+  i [nn]   - interrupt job
+  k [nn]   - kill job
+  j        - list all jobs
+  s        - start local shell
+  r [node] - start remote shell
+  q        - quit erlang
+  ? | h    - this message
+ --> j
+   1* {shell,start,[init]}
+ --> s
+ --> j
+   1  {shell,start,[init]}
+   2* {shell,start,[]}
+ --> c 2
+Eshell V5.6.3  (abort with ^G)
+1> init:stop().
+ok
+2> [bt22d@fog:/user1/bt22d/STUDY/erlang 27 ]
+[bt22d@fog:/user1/bt22d/STUDY/erlang 27 ]
+ }}}
+
+
+= 도움 받기 =
+ *유닉스 시스템에서 도움말 보기
+ {{{
+ $ erl -man erl
+ ...
+ }}}
+
+ *개별 모듈 도움말
+ {{{
+ $ erl -man lists
+ ...
+ }}}
+
+ *도움말 문서
+ [http://www.erlang.org/doc/]
+ Windows에서는 기본 설치, Unix 시스템에서는 설치 필요
+
+
+= 환경 개조하기 = 
+얼랭 셸에 내장된 명령들은 셸 명령 help()를 이용해서 볼 수 있다.
+이 내장 명령들은 shell_default 모듈에 정의되어 있다.
+{{{
+2> help().
+** shell internal commands **
+b()        -- display all variable bindings
+e(N)       -- repeat the expression in query <N>
+f()        -- forget all variable bindings
+f(X)       -- forget the binding of variable X
+h()        -- history
+...
+}}}
+
+user_default 모듈을 만들면 사용자 내장 명령을 정의할 수 있다.
+user_default.beam이 로드 경로 어딘가 위치한다면 모듈 이름 없이 호출 가능
+{{{#!gcode erlang
+%%------------------
+%% user_default.erl
+%%------------------
+
+-module(user_default).
+
+-compile(export_all).
+
+hello() ->
+    "Hello Joe how are you?".
+
+away(Time) ->
+    io:format("Joe is away and will be back in ~w minutes~n",
+          [Time]).
+}}}
+
+
+= 크래쉬 덤프 = 
+ * erl_crash.dump
+ {{{#!gcode erlang
+-module(test).
+-export([crash/0]).
+
+crash() ->
+  1000000 * crash().
+ }}}
+ * 웹 기반의 크래시 분석기
+ {{{
+1> webtool:start().
+WebTool is available at http://localhost:8888/
+Or  http://127.0.0.1:8888/
+{ok,<0.34.0>}
+ }}}
+ * [http://localhost:8888/]

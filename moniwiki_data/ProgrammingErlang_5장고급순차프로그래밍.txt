@@ -1,0 +1,228 @@
+== Chapt 5. 고급 순차 프로그래밍 ==
+[[TableOfContents]]
+=== Key Point ===
+ * BIF - Built In Function
+ * Binary
+ * Bit
+ * Etc
+=== BIF ===
+ * 얼랭에 내장된 함수. 얼랭으로 프로그래밍 할 수 없는 작업들을 수행한다.
+{{{#!gcode erlang
+tuple_to_list({12,cat,"hello"}). 
+time().
+}}}
+
+  * tuple_to_list /1 : 튜플을 리스트로 변환
+  * time/0 : 오늘 현재 시간을 시,분,초로 반환한다.( 튜플자료형으로 )
+
+ * 모든 BIF는 마치 erlang모듈에 속한 것 처럼 움직인다. 
+   *자주 사용되는 BIF들은 자동으로 import됨. 
+ * http://www.erlang.org/doc/man/erlang.html 에서 BIF의 목록을 찾을 수 있다.
+
+=== Binary ===
+ * 데이터구조
+ * 작은 부등호 두개와 큰 부등호 두개로 둘러싼 일련의 정수 또는 문자열로 작성되고 출력됨
+
+{{{
+<<5,10,20>>.
+<<"hello">>.
+}}}
+
+ *바이너리에서 정수를 사용할 경우, 정수 각각은 0~255범위. 넘어갈 경우 0부터 다시 시작한다.
+  *문자열은 아스키문자코드로 구성된 바이너리.
+ *바이너리 조작 BIF
+
+  * @spec list_to_binary(IoList) -> binary()
+  * @spec split_binary(Bin,Pos) -> {Bin1, Bin2}
+  * @spec term_to_binary(Term) -> Bin                                external term format? http://www.erlang.org/doc/apps/erts/erl_ext_dist.html
+  * @spec binary_to_term(Bin) -> Term
+{{{#!gcode erlang
+
+B = term_to_binary({binarise,"are",useful}).
+<<131,104,3,100,0,8,98,105,110,97,114,105,101,115,107,0,3,97,114,101,100,0,6,117,115,101,102,117,108>>.
+binary_to_term(B).
+{binaries,"are",useful}
+
+}}} 
+ * @spec size(Bin) -> Int
+=== Bit ===
+ * 비트 구문은 바이너리 데이터에 들어 있는 개별 비트 또는 연속한 비트들을 추출하고 묶는 데 사용하는 패턴 매칭의 확장판이다.
+  * 프로토콜 프로그래밍 용으로 개발되어 프로토콜 데이터를 묶고 푸는 데 있어 매우 효율적인 코드를 만들어낸다.
+ * X,Y,Z를 변수 M에 16비트 메모리 영역으로 묶으려 하는 경우. 
+{{{
+M = << X:3, Y:7, Z:6>>
+}}}
+ * 16비트 색상 묶고 풀기
+{{{#!gcode erlang
+Red = 2.
+Green = 61.
+Blue = 20.
+
+Mem = <<Red:5, Green:6, Blue:5>>.    
+<<23,180>>
+}}}
+
+워드를 풀경우 패턴 매칭을 이용. 
+
+ * 비트 구문식 
+{{{
+<<>>
+<<E1,E2,...,En>>
+}}}
+  * Ei는 바이너리에서 하나의 세그먼트를 가리킴. Ei는 다음 중 한가지 형태가 가능
+{{{#!gcode erlang
+Ei = Value |
+     Value : Size |
+     Value/TypeSpecifierList |
+     Value:Size/TypeSpecifierList
+}}}
+
+  어떤 형태를 사용하건 바이너리의 전체 비트 수는 8로 나누어 떨어져야 한다. 이유는? 책에!
+
+  * Value, Size, TypeSpecifieList의 제한. (패턴 매칭시에는 또 다르다)
+
+   (바이너리를 구성할 경우) Value 는 바운드 변수 이거나 리터럴 문자열 정수, 부동형, 바이너리
+
+    Size는 정수.  Size의 값은 유닛의 세그먼트 크기를 지정한다. 
+
+{{{
+
+@type End = big | little | native
+@type Sign = signed | unsigned
+@type Type = integer | float | binary
+@type Unit = 1 | 2 | ... | 255
+}}}
+ * 고급 비트 구문 예제 
+  * MPEG 데이터에서 동기화 프레임 찾기
+  * COFF 데이터 풀기
+  * IPv4 데이터그램에서 헤더풀기
+
+=== 나머지 짧은 주제들 ===
+ * apply - 함수와 모듈의 이름이 동적으로 계산. 함수의 이름과 인수로부터 함수값 계산
+  * apply(Mod,Func,[Arg1,Arg2,..,ArgN])  - BIF
+    Mod:Func(Arg1,Arg2,...,ArgN) 과 동일 하다.
+
+ {{{#!gcode erlang
+ apply(erlang, atom_to_list,[hello]).
+}}}
+
+  * 주의사항 은 책에!
+ * 속성 - 얼랭 모듈 속성의 구문과 의미
+  * -AtomTag(...)의 구문, 파일의 특정한 속성을 정의하는데 사용 
+  * 사전 정의된 것과 사용자 정의 속성 두 유형이 존재 
+  * -record(...)와 -include(...)는 모듈 속성으로 취급 X
+  * 사전 정의된 속성
+
+{{{#!gcode erlang
+ -module(modname)
+ -import(Mod,[Name1/Arity1,Name2/Arity2,...]).
+ -export([Name1/Arity1,Name2/Arity2,...]).
+ -compile(Options).  Option에 대해서는 compile모듈의 매뉴얼 페이지에 설명되어있음.
+ -vsn(Version). 
+}}}
+
+  * 사용자 정의 속성
+   {{{#!gcode erlang
+-SomeTag(Value).}}}
+
+   SomeTag는 Atom이어야 하며, Value는 리터럴 텀이어야 한다.
+
+ * 블록 식 - begin & end
+
+ {{{#!gcode erlang
+ begin
+   Expr1,
+   ....,
+   ExprN
+ end
+}}}
+ 
+
+ * 불리언 식 - 모든 불리언 식
+  * not B1 
+  * B1 and B2
+  * B1 or B2
+  * B1 xor B2
+
+ * 문자 집합 
+  * 얼랭 소스코드 파일들은 ISO-8859-1(Latin-1)문자 집합으로 인코드 된다고 가정
+
+ * 주석
+  * %로 시작, 줄의 끝까지 영향을 미친다.
+  * %% 이맥스 얼랭 모드에서 인식됨.
+
+{{{#!gcode erlang
+%
+my_func(Arg1,Arg2) ->
+ case f(Arg1) of
+   {...}  -> 주석 작동함.
+}}}
+ 
+ * epp - 얼랭 전처리기
+  * compile:file(M,['P'])  전처리기의 처리 결과를 파일로 저장 할 수 있다.
+
+ * 이스케이프 시퀀스 - 문자열과 atom에서 사용하는 구문
+  * 문자열이나 다옴표가 붙은 Atom내에서 출력 불가능 한 문자들을 출력하게 해줌.
+ * 식과 식 시퀀스
+  * 식 : 평가되어 나올 수 있는 것
+  * 쉼표로 구분된 일련의 식. 시퀀스의 값은 마지막 식의 값으로 정의 됨. 앞선 식에서 생성된 모든 바인딩을 사용
+ * 함수 참조 법
+  * fun LocalFunc/Arity
+  * Mod:RemoteFunc/Arity
+ * 인클루드 파일 - 컴파일 시 파일을 포함시키는 법
+  * - include(Filename).  인클루드파일의 확장자는 .hrl.  절대경로나 상대경로를 가져야함
+  * - include_lib(Name).   라이브러리 헤더파일 포함시킬때
+ * 리스트연산 - ++와 --
+ * 매크로 - 얼랭 매크로 처리기
+  * -define(Constant, Replacement).
+  * -define(Func(V1,...,VN),Replacement).
+  * 매크로 호출 : ?MACRO
+  * 매크로 속 제어 흐름
+  -undef(Macro).
+  -ifdef(Macro).
+  -ifndef(Macro).
+  -else.
+  -endif.
+  * 매크로를 켜고 끄는 방식으로 컴파일에 부가적인 옵션을 줄 수 있다. 
+
+ * 패턴에서의 매치 연산자 
+ * 숫자
+  * 정수와 부동형으로 나뉨
+  * 정수는 일반적인 수와 K진법수,$구문으로 나뉜다.
+  * 부동형은 다섯부분으로 나뉜다.  option,정수,소수점,정수,선택적인 지수
+ * 연산자 순위 - 우선 순위와 결합 방식
+  * 책참조.
+ * 프로세스 사전 
+  *프로세스마다 가지는 고유한 개별 데이터 저장소. 
+  * 키와 값의 집합으로 구성된 연관배열( map or hashmap 등등으로 불린다 ).
+  * control BIF
+
+{{{#!gcode erlang
+@spec put(Key,Value) -> OldValue
+@spec get(Key) -> [{Key,Value}].
+@spec get() -> 모든 리스트
+@spec get_keys(Value) -> [Key].
+@spec erase(Key) -> Value
+@spec erase() -> [{Key,Value}].
+}}}
+
+  * Side effect 발생
+ * 레퍼런스 - 유일한 심벌
+  *erlang:make_ref()로 생성
+  *유일한 전역 텀.
+ * 단락 불리언식 - 완전히 평가되지 않는 불리언 식
+  *Expr1 orelse Expr2
+  *Expr2 andalso Expr2
+ * 텀 비교와 텀의 사전적 순서
+  * number < atom < ref < fun < port < pid < tuple < list < binary
+  * =:= , =/=를 제외한 모든 텀 비교 연산자의 작동( 인수가 숫자일 경우)
+   * 정수,부동형 일경우 정수를 부동형으로 변환
+   * 같을 경우 변환 없이 사용
+  * ==의 사용 주의. 우리가 알고 있는 == 는 =:=로 사용해야 한다.
+ * 밑줄 변수
+  * 익명 변수가 아닌, 정상적인 변수의 자리에 _VarName같은 구문 사용 가능
+
+== 다른 발표 자료 ==
+=== 온라인 학습 생태계 ===
+[http://langstudy.metaschool.org/upload/down/769/erlang_5ch.pdf erlang_5ch.pdf]
+[http://langstudy.metaschool.org/upload/down/770/erlang_5ch.zip erlang_5ch.zip]

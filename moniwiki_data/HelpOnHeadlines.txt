@@ -1,0 +1,21 @@
+== Section Headings ==
+You can create headings by starting and ending a line with up to five equal signs. The heading text is between those markers, separated by a space.
+
+See also TableOfContentsMacro
+=== Example ===
+{{{
+ = Heading =
+ == Subheading ==
+ === Level 3 ===
+ ==== Level 4 ====
+ ===== Level 5 =====
+}}} 
+
+=== Display ===
+ = Heading =
+ == Subheading ==
+ === Level 3 ===
+ ==== Level 4 ====
+ ===== Level 5 =====
+----
+[[Navigation(HelpOnEditing)]]

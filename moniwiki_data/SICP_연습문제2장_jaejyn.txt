@@ -1,0 +1,165 @@
+
+== Exercise 2.2.  ==
+{{{#!gcode
+(define (x-point p) (car p))
+
+(define (y-point p) (cdr p))
+
+(define (make-point x y)
+  (cons x y))
+
+(define (start-seg seg) (car seg))
+
+(define (end-seg seg) (cdr seg))
+
+(define (make-seg s e)
+  (cons s e))
+
+(define (mid-value x y)
+  (/ (+ x y) 2))
+
+(define (midpoint-seg s e)
+  (make-seg (mid-value (x-point s) (x-point e)) 
+            (mid-value (y-point s) (y-point e)))) 
+}}}
+
+== Exercise 2.3. ==
+{{{#!gcode
+
+(define (make-rect topLeft bottomRight)
+  (cons topLeft bottomRight))
+
+(define (topLeft-rect rect)
+  (car rect))
+
+(define (bottomRight-rect rect)
+  (cdr rect))
+
+(define (width-rect rect)
+  (- (x-point (bottomRight-rect rect)) (x-point (topLeft-rect rect))))
+
+(define (height-rect rect)
+  (- (y-point (topLeft-rect rect)) (y-point (bottomRight-rect rect))))
+
+(define (round-rect rect)
+  (* 2 (+ (width-rect rect) (height-rect rect))))
+
+(define (area-rect rect)
+  (* (width-rect rect) (height-rect rect)))
+}}}
+
+
+== Exercise 2.7. ==
+{{{#!gcode
+(define (upper-bound interval)
+  (cdr interval))
+
+(define (lower-bound interval)
+  (car interval))
+}}}
+
+== Exercise 2.8. ==
+{{{#!gcode
+(define (sub-interval x y)
+  (add-interval x (mul-interval -1 y)))
+}}}
+
+== Exercise 2.11. ==
+{{{#!gcode
+(define (new-mul-interval x y)
+  (cond ((and (minus-plus x) (plus-plus y)) (make-interval (* (lower-bound x) (upper-bound y)) (* (upper-bound x) (upper-bound y))))
+        ((and (plus-plus x) (minus-plus y)) (make-interval (* (upper-bound x) (lower-bound y)) (* (upper-bound x) (upper-bound y))))
+        ((and (minus-minus x) (plus-plus y)) (make-interval (* (lower-bound x) (upper-bound y)) (* (upper-bound x) (lower-bound y))))
+        ((and (plus-plus x) (minus-minus y)) (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (upper-bound y))))
+        
+        ((and (minus-plus x) (minus-plus y)) (make-interval (min (* (lower-bound x) (upper-bound y)) (* (upper-bound x) (lower-bound x)))
+                                                            (max (* (lower-bound x) (lower-bound y)) (* (upper-bound x) (upper-bound y)))))
+        
+        ((and (minus-minus x) (minus-plus y)) (make-interval (* (lower-bound x) (upper-bound y)) (* (lower-bound x) (lower-bound y))))
+        ((and (minus-plus x) (minus-minus y)) (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (lower-bound y))))
+        ((and (minus-minus x) (minus-minus y)) (make-interval (* (upper-bound x) (upper-bound y)) (* (lower-bound x) (lower-bound y))))
+        ((and (plus-plus x) (plus-plus y)) (make-interval (* (lower-bound x) (lower-bound y)) (* (upper-bound x) (upper-bound y))))))
+}}}
+
+== Exercise 2.54. ==
+{{{#!gcode
+(define (equal? x y)
+  (define (equal_iter a b)
+    (cond ((and (null? a) (null? b))
+        'true)
+        ((not (equal_length? a b))
+         'false)
+        ((eq? (car a) (car b)) 
+         (equal_iter (cdr a) (cdr b)))
+        (else 'false)))
+  (equal_iter x y))
+}}}
+
+== Exercise 2.56. ==
+{{{#!gcode
+(define (exponentiation? x)
+  (and (pair? x) (eq? (car x) '**)))
+(define (base p) (cadr p))
+(define (exponent p) (caddr p))
+(define (make-exponentiation m1 m2) 
+  (cond 
+       ((=number? m1 0) 0)
+       ((=number? m2 0) 1)
+       ((and (number? m1) (number? m2)) (fast-expt m1 m2))
+       (else (list '** m1 m2))))
+
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+            ((variable? exp)
+              (if (same-variable? exp var) 1 0))
+            ((sum? exp)
+              (make-sum (deriv (addend exp) var)
+                 (deriv (augend exp) var)))
+           ((product? exp)
+             (make-sum
+              (make-product (multiplier exp)
+                  (deriv (multiplicand exp) var))
+              (make-product (deriv (multiplier exp) var)
+                       (multiplicand exp))))
+           ((exponentiation? exp)
+             (make-product (exponent exp)
+                          (make-product  (make-exponentiation (base exp) (- (exponent exp) 1)) 
+                                                   (deriv (base exp) var))))
+          (else
+            (error "unknown expression type -- DERIV" exp))))
+}}}
+
+== Exercise 2.59. ==
+{{{#!gcode
+(define (union-set set1 set2)
+  (cond     
+    ((null? set1) set2)
+    ((null? set2) set1)
+    (else (union-set (adjoin-set (car set2) set1) (cdr set2)))))
+}}}
+
+== Exercise 2.61. ==
+{{{#!gcode
+(define (adjoin-set x set)
+  (cond ((null? set) '()) 
+            ((> x (car set)) (cons (car set) (adjoin-set x (cdr set))))
+            ((< x (car set)) (cons x set))
+            ((= x (car set)) set)))
+}}}
+
+== Exercise 2.62. ==
+{{{#!gcode
+(define (union-set set1 set2)
+  (cond ((null? set1) set2)
+		((null? set2) set1)
+		(else (let ((x1 (car set1)) (x2 (car set2)))
+					(cond ((< x1 x2) (cons x1 (union-set (cdr set1) set2)))
+				   ((> x1 x2) (cons x2 (union-set set1 (cdr set2))))
+				   ((= x1 x2) (cons x1 (union-set (cdr set1) (cdr set2)))))))))
+}}}
+
+
+
+
+== 이전 페이지 ==
+[SICP/연습문제2장]

@@ -1,0 +1,77 @@
+ * 입출력 처리 하지 않음
+ * 중간값 구한 뒤 거리 합 계산
+ * 수학적 증명이 필요할까?
+
+[[TableOfContents([maxdepth])]]
+
+= Vito's Family =
+
+== Vito.vb ==
+{{{
+' $Id: Vito.vb 91 2008-02-19 01:16:33Z 정희종 $
+
+Public Class Vito
+
+	Function GetDistanceSum(ByVal middle, ByVal addresses) As Integer
+		Dim distanceSum As Integer
+		For Each address As Integer In addresses
+			distanceSum += Math.Abs(middle - address)
+		Next
+		Return distanceSum
+	End Function
+
+	Function GetMiddle(ByVal addresses As List(Of Integer)) As Integer
+		addresses.Sort()
+		Dim middleIndex As Integer = (addresses.Count / 2)
+		Return addresses(middleIndex)
+	End Function
+
+End Class
+}}}
+
+== !ModuleTest.vb ==
+{{{
+' $Id: ModuleTest.vb 91 2008-02-19 01:16:33Z 정희종 $
+
+Imports Microsoft.VisualStudio.TestTools.UnitTesting
+
+Module ModuleTest
+	Private _vito As Vito = New Vito
+
+	Sub run()
+		DivideIngeterTest()
+		GetMiddleTest()
+		GetDistanceSumTest()
+		GetDistanceSumMoreTest()
+	End Sub
+
+	Sub GetDistanceSumMoreTest()
+		Dim input() As Integer = {13, 17, 17, 19, 22, 22, 55, 100, 101, 22, 22, 23, 23, 24, 100, 101}
+		Dim addresses As List(Of Integer) = New List(Of Integer)(input)
+		Dim middle As Integer = _vito.GetMiddle(addresses)
+		Assert.AreEqual(23, middle)
+		Assert.AreEqual(373, _vito.GetDistanceSum(middle, addresses))
+	End Sub
+
+	Sub GetDistanceSumTest()
+		Dim input() As Integer = {9, 1, 9, 2, 9, 3}
+		Dim addresses As List(Of Integer) = New List(Of Integer)(input)
+		Dim middle As Integer = _vito.GetMiddle(addresses)
+		Assert.AreEqual(21, _vito.GetDistanceSum(middle, addresses))
+	End Sub
+
+	Sub GetMiddleTest()
+		Dim input() As Integer = {9, 1, 9, 2, 9, 3}
+		Dim addresses As List(Of Integer) = New List(Of Integer)(input)
+		Assert.AreEqual(9, _vito.GetMiddle(addresses))
+	End Sub
+
+	Sub DivideIngeterTest()
+		' 정수를 나누면 자동으로 실수가 된다
+		Assert.AreEqual(2.5, 5 / 2)
+		' 정수로 선언해서 받으면 정수가 된다 (소수점 이하 버림)
+		Dim val As Integer = 5.5 / 2.2
+		Assert.AreEqual(2, val)
+	End Sub
+End Module
+}}}

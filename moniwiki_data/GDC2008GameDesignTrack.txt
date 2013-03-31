@@ -1,0 +1,195 @@
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+
+== Game Design ==
+ * ''' (101) Learn Better Game Writing in a Day''' - ''Evan Skolnick''
+ * ''' (102) Staging Workshop: Visual storytelling Masterclass''' - ''Mark Travis, Andrew Lindsay, Matt Ritchey 외''
+ * ''' (201) Creativity Boot Camp '08''' - ''Paul Schuytema''
+ * ''' (301) Game Design Workshop''' - ''Marc LeBlanc, Andrew Leker, Frank Lantz 외''
+  [http://www.8kindsoffun.com 강연 슬라이드(2008년도 자료는 아직 올라오지 않았음)]
+ * ''' (More of) The Real Story on Characters and Emotion: Taking it 'to the Streets'''' - ''Corey Nolan''
+ * ''' 10 in 20: Ten Keys to Designing for IPs''' - ''Timothy Longo''
+ * ''' 10 Tips for a Successful Wiki''' - ''James Everett''
+  [http://www.brainofjames.com/wp-content/uploads/2008/02/jameseverett_10tipswiki.pdf PDF]
+ * ''' 8th Annual Game Developers Choice Awards and 10th Annual Independent Games Festival''' - ''Speaker TBA''
+ * ''' A Future Wide Open: Unleashing the Creative Community(Keynote)''' - ''John Schappert''
+  동영상: [http://kr.youtube.com/watch?v=dCkKC7TUo3U 1/7],  [http://kr.youtube.com/watch?v=rF5IHd8b7fo 2/7], [http://kr.youtube.com/watch?v=5VBiPQ5uSN4 3/7], [http://kr.youtube.com/watch?v=A1aaqFwV9TM 4/7], [http://kr.youtube.com/watch?v=CLluki-ApTA 5/7], [http://kr.youtube.com/watch?v=LfDa6Rax6P0 6/7], [http://kr.youtube.com/watch?v=foZTji3naLU 7/7]
+  [http://blogs.guardian.co.uk/games/archives/2008/02/21/gears_of_war_2_announced_at_gdc.html Gears Of War 2 Announced At Gdc]
+ * ''' A PORTAL Post-Mortem: Integrating Writing and Design''' - ''Kim Swift, Erik Wolpaw''
+  [http://www.valvesoftware.com/publications/2008/GDC2008_PortalPostMortem.pdf PDF]
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/22/3540268.html xemu]
+  [http://www.thisisgame.com/board/view.php?id=158603&category=203 번역 포탈 포스트모텀]
+  [http://shacknews.com/featuredarticle.x?id=784 shacknews]
+ * ''' Academics/Students Group Gathering''' - ''Susan Gold''
+ * ''' Advanced Dialogue Techniques for Games''' - ''David Freeman''
+ * ''' Agents Group Gathering''' - ''Dan Rogers''
+ * ''' Are Games Essentially Superficial? Exploring the Positive Impact Model of Design''' - ''Chris Taylor, Louis Castle, Peter Molyneux 외''
+ * ''' ARG Group Gathering''' - ''Adam Martin''
+ * ''' Bloggers/Journos Group Gathering''' - ''David Thomas''
+ * ''' Brainstorming in Public: 52 Game Ideas in 52 Weeks''' - ''Patrick Curry''
+ * ''' Career Pavilion Booth Crawl''' - ''Speaker TBA''
+ * ''' Career Pavilion Booth Crawl''' - ''Speaker TBA''
+ * ''' Casual Game Design: A Year in Review''' - ''Juan Gril, Nick Fortugno''
+ * ''' Casual Game Developers Group Gathering''' - ''Charles Merrin''
+ * ''' Casual Games Roundtable ? Business Models (Day 2)''' - ''Brian Robbins, Wade Tinney''
+ * ''' Casual Games Roundtable ? Community Issues (Day 3)''' - ''Brian Robbins, Wade Tinney''
+ * ''' Casual Games Roundtable ? Production & Design (Day 1)''' - ''Brian Robbins, Wade Tinney''
+ * ''' Collaborative Writing and Vast Narratives: Principles, Processes, and Genteel Truculence''' - ''Ken Rolston, Mark Nelson''
+  [https://www.cmpevents.com/sessions/GD/S6745i1.ppt PPT]
+ * ''' Conquering Bane's Citadel: The Collision of Casual and Hardcore Gaming in PUZZLE QUEST''' - ''Steve Fawkner''
+ * ''' Creating Spielberg's BOOM BLOX''' - ''Louis Castle''
+ * ''' Creativity in the Form of Improvement''' - ''Yoshiki Okamoto''
+ * ''' CRYSIS in the Making''' - ''Cevat Yerli, Sten Huebler, Bernd Diemer 외''
+  [https://www.cmpevents.com/sessions/GD/S6465i1.pdf PDF]
+ * ''' DataPlay: Living Games''' - ''Justin Hall''
+ * ''' Defeating Designer's Block, Tools to Boost Creative Output ? Part 1: the Principles, Tools & Theory''' - ''Sam Coates''
+ * ''' Defeating Designer's Block, Tools to Boost Creative Output ? Part 2: Putting the ideas into Practice''' - ''Graeme Ankers''
+ * ''' Design Reboot''' - ''Jonathan Blow''
+ * ''' Designing Conflict Resolution without Combat (Day 1)''' - ''Gordon Walton''
+ * ''' Designing Conflict Resolution without Combat (Day 2)''' - ''Gordon Walton''
+ * ''' Designing Conflict Resolution without Combat (Day 3)''' - ''Gordon Walton''
+ * ''' Designs on Writing: Improving the Game Writing Process''' - ''Mac Walters, Steve Jaros, Tom Abernathy 외''
+ * ''' Developers in the Crosshairs: Mature Content, Censorship, and Design Choices (Day 1)''' - ''Daniel Greenberg''
+ * ''' Developers in the Crosshairs: Mature Content, Censorship, and Design Choices (Day 2)''' - ''Daniel Greenberg''
+ * ''' Development - SUPER SMASH BROS. BRAWL''' - ''Masahiro Sakurai''
+ * ''' Development of the Peripheral: From Inception to Release''' - ''Mike Haigh''
+ * ''' DINER DASH: HOMETOWN HERO Postmortem: Where Casual Games Meet Virtual Worlds''' - ''Brad Edelman, Kenny Shea Dinkin''
+  [https://www.cmpevents.com/sessions/GD/S6344i1.ppt PPT]
+ * ''' 'Do, Don't Show' ? Narrative Design in FARCRY 2''' - ''Patrick Redding''
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/22/3540260.html GDC 08: Narrative Design in Far Cry 2]
+ * ''' Don't Mess with Great Gameplay! How WIPEOUT Innovated on PSP''' - ''Clark Davies''
+ * ''' Dynamic Cinematic Gameplay: Creating STRANGLEHOLD's''' - ''Neill Glancy''
+ * ''' E Pluribus Unum: Matchmaking in HALO 3''' - ''Chris Butcher''
+  [https://www.cmpevents.com/sessions/GD/S6177i1.ppt PPT]
+  평가: 김기웅(★★★★★)
+ * ''' Experimental Gameplay Sessions''' - ''Jonathan Blow''
+ * ''' FABLE 2 ?The Big Three Features Revealed''' - ''Peter Molyneux''
+ * ''' FIFA08 BE A PRO: Innovating in a Established Genre''' - ''Sebastian Enrique''
+ * ''' Free to Play! Pay for Item: The Virtual Goods Debate (Day 1)''' - ''Daniel James, Matt Mihaly''
+ * ''' Free to Play! Pay for Item: The Virtual Goods Debate (Day 2)''' - ''Daniel James, Matt Mihaly''
+ * ''' Free to Play! Pay for Item: The Virtual Goods Debate (Day 3)''' - ''Daniel James, Matt Mihaly''
+ * ''' Future of MMOs''' - ''Mark Jacobs, Rob Pardo, Jack Emmert 외''
+ * ''' Game Accessibility & Developers with Disabilities Group Gathering''' - ''Michelle Hinn, Mark Barlet''
+ * ''' Game Accessibility Arcade: Or How to Do the Jedi Mind Trick (Day 1)''' - ''Michelle Hinn, Stephanie Walker, Mark Barlet 외''
+ * ''' Game Accessibility Arcade: Or How to Do the Jedi Mind Trick (Day 2)''' - ''Michelle Hinn, Stephanie Walker, Reid Kimball 외''
+ * ''' Game Design Based on Micro-Transactions in Online Games''' - ''Gyuhwan Oh, Taiyoung Ryu''
+  [https://www.cmpevents.com/sessions/GD/S6981i1.pdf PDF]
+ * ''' Game Studies Download 3.0''' - ''Jane McGonigal, Mia Consalvo, Ian Bogost 외''
+  [https://www.cmpevents.com/sessions/GD/S6207i1.pdf PDF]
+ * ''' Game Writers' Round Table: Tricks, Techniques and Concerns (Day 1)''' - ''Richard Dansky''
+ * ''' Game Writers' Round Table: Tricks, Techniques and Concerns (Day 2)''' - ''Richard Dansky''
+ * ''' Game Writers' Round Table: Tricks, Techniques and Concerns (Day 3)''' - ''Richard Dansky''
+ * ''' HALO vs. Facebook: The Emotions that Drive Play''' - ''Nicole Lazzaro''
+ * ''' Hentai, Hardcore and Hotties: Sex in Games (Day 1)''' - ''Brenda Brathwaite''
+ * ''' Hentai, Hardcore and Hotties: Sex in Games (Day 2)''' - ''Brenda Brathwaite''
+ * ''' Hitting the Jackpot in the MMO Game Space''' - ''Allen Partridge''
+ * ''' How Heroes are Made: A Collaborative Approach to Serialized Content in a Transmedia World''' - ''Jesse Alexander''
+ * ''' How to Create an Industry: The Making of the Brown Box and PONG''' - ''Allan Alcorn, Ralph H. Baer''
+ * ''' How to Create the Greatest Boss Battle (and Why Not to Do It!)''' - ''Scott Rogers''
+ * ''' How to Pick a Lock: Creating Intuitive, Immersive Minigames''' - ''Kent Hudson''
+  [https://www.cmpevents.com/sessions/GD/S6213i1.ppt PPT]
+ * ''' How Wikipedia is Like a Multiplayer Game''' - ''Elonka Dunin''
+ * ''' I-fi: Immersive Fidelity in Game Design''' - ''Clint Hocking''
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/21/3538292.html xemu]
+ * ''' Innovative Touch Screen Controls ? SPIDER-MAN 3 DS Postmortem''' - ''Leo Zuniga, Muhammad Ahmed''
+  [https://www.cmpevents.com/sessions/GD/S6479i1.ppt PPT]
+ * ''' Interactive Actors That Express Emotion''' - ''Ken Perlin''
+ * ''' Interactive Actors That Express Emotion''' - ''Ken Perlin''
+ * ''' Invasion of the Prefabricated Communities!''' - ''Joel Gonzales''
+ * ''' Lawyers Group Gathering''' - ''Jim Charne''
+ * ''' Let Me Win! Best Practices for Approachable Game Design Sponsored by Microsoft''' - ''Katie Stone-Perez''
+ * ''' LGBT Group Gathering''' - ''Jeb Havens''
+ * ''' Little Hands, Foul Moods, and Runny Noses: Researching Games with Kids''' - ''Carla Engelbrecht''
+ * ''' Localization Group Gathering''' - ''Tom Edwards''
+ * ''' Looking Back at LOST ODYSSEY - The Challenge of Cross Cultural Development''' - ''Ray Nakazato''
+ * ''' Master Metrics: The Science behind the Art of Game Design''' - ''Chris Swain, E. Daniel Arey''
+ * ''' Metaplace Postmortem: Reinventing MMOs''' - ''Raph Koster, Sean Riley''
+ * ''' Minorities Group Gathering''' - ''Joseph Saulter''
+ * ''' Multiverse: Under the Hood Sponsored by Multiverse''' - ''Rafhael Cedeno, Corey Bridges''
+ * ''' My First MMO''' - ''Dave Jones''
+ * ''' Nuances of Design''' - ''Jonathan Blow''
+ * ''' Outside the Box''' - ''David Fox''
+ * ''' Outsourcing Group Gathering''' - ''Munir Haddad''
+ * ''' Planning the Wii Menu: From Pre-Launch to WiiWare''' - ''Takashi Aoyama''
+ * ''' Player-Generated Content in Casual Games''' - ''Wade Tinney, Daniel James, Kris Soumas 외''
+ * ''' Playing to Lose: AI and "CIVILIZATION''' - ''Soren Johnson''
+  [http://www.designer-notes.com/PlayingToLose.zip PPT] [http://www.designer-notes.com/ 강연자 블로그]
+  [http://aigamedev.com/discussion/good-vs-fun aigamedev]
+  [http://www.intrinsicalgorithm.com/IAonAI/2008/02/gdc-2008-soren-johnsons-lecture-on-civ.html intrinsicalgorithm]
+  [http://www.next-gen.biz/index.php?option=com_content&task=view&id=9256&Itemid=2 next-gen.biz]
+  [http://pc.gamespy.com/pc/civilization-iv/854509p1.html gamespy]
+  [http://insider.ign.com/teasers/854/854040.html insider]
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/21/3538285.html xemu]
+ * ''' Pouring Gas on the Flames: Game Designers Rant''' - ''Eric Zimmerman, Clint Hocking, Daniel James 외''
+ * ''' Predictability in Games: How to Avoid Pre-Conceived Experiences in Design?''' - ''Jonathan Morin''
+ * ''' Producers Group Gathering''' - ''Heather Chandler''
+ * ''' Proper Use of Episodic Content in a MMO''' - ''Jack Emmert''
+ * ''' PROTOTYPE: Open World, Open Mind, Next Generation Thinking''' - ''Eric Holmes, Tim Bennison''
+ * ''' Rules of Engagement: Blizzard's Approach to Multiplayer Game Design(교전 수칙: 멀티플레이어 게임 기획에 대한 블리자드의 접근법)''' - ''Rob Pardo''
+  [http://blogs.msdn.com/danielfe/archive/2008/02/20/session-rules-of-engagement-blizzard-s-approach-to-multiplayer-game-design.aspx 대략적인 강연 노트]
+  [http://www.wowinsider.com/2008/02/20/gdc08-live-from-rob-pardo-talks-about-blizzards-approach-to-mm/ GDC08: Live from Rob Pardo talks about Blizzard's approach to MMOs by WoW Insider]
+  [http://www1.thisisgame.com/board/view.php?id=155835&category=8021&subcategory= 블리자드의 멀티플레이 개발전략 (상) @ TIG]
+  [http://pc.ign.com/articles/853/853812p2.html GDC 2008: Rob's Rules of Engagement @ IGN]
+  [http://www.gamespot.com/news/6186416.html?print=1 GDC '08: Pardo navigates WOW Blizzard @ Gamespot]
+  [http://icdia.egloos.com/1773530 랍 팔도가 전하는 블리자드의 7가지 성공키워드]
+  [http://tara.teich.net/archives/gdc-rules-of-engagement-part-2/ Blog]
+  평가: 김기웅(★★★★★)
+ * ''' Semantic Interactivity ? Virtual Coherence Using Next Generation Human Computer Interface''' - ''Allan Snyder, Randy Breen''
+ * ''' Standing the Test of Time: A Q&A with Sid Meier''' - ''Sid Meier, Noah Falstein''
+  [http://tara.teich.net/archives/gdc-a-qa-with-sid-meier/ tara]
+ * ''' Stories Best Played: Deconstructing the Best Interactive Storytelling''' - ''Richard Rouse III, Steve Meretzky, Marc Laidlaw 외''
+ * ''' Storytelling in BIOSHOCK: Empowering Players to Care about Your Stupid Story''' - ''Kenneth Levine''
+  [https://defrag.depaul.edu/gdc/?p=44 defrag]
+ * ''' Successful Instrumentation: Tracking Attitudes and Behaviors to Improve Games''' - ''Ramon Romero''
+  평가: 김기웅(★★★★★)
+  [http://download.microsoft.com/download/7/6/a/76ad49f8-cf47-47d3-8894-df30c67e5c1f/GDC_2008_RamonRomero_SuccessfulInstrumentation.pps ppt]
+ * ''' Suite Night''' - ''Speaker TBA''
+ * ''' Surprises from the HELLGATE LONDON launch Sponsored by IBM''' - ''Dave Laux''
+ * ''' Taking Xbox LIVE Arcade Games to the Next Level Sponsored by Microsoft''' - ''Scott Austin''
+ * ''' Teaching Players: Tutorial and Opening Mission Design for COMPANY OF HEROES''' - ''Neil Jones-Rodway, Aldric Sun''
+ * ''' The Blur ? Creating in the Eye of the Storm''' - ''Flint Dille''
+ * ''' The Emergent Gamer''' - ''Rod Humble''
+ * ''' The Future of Story in Game Design''' - ''Matt Costello, Tim Willits, Denis Dyack 외''
+ * ''' The Game Design Challenge: The Inter-Species Game''' - ''Eric Zimmerman, Alexey Pajitnov, Brenda Brathwaite 외''
+ * ''' The Next 20 Years of Gaming''' - ''Ray Kurzweil''
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/21/3538288.html GDC 08: xemu]
+ * ''' The Real Story on Characters and Emotion: Taking it 'to the Streets'''' - ''Katherine Isbister''
+ * ''' The Revolution in TV Gaming Entertainment: Championship Gaming Series and the Development of Games for Global Sports Television Sponsored by Championship Gaming Series''' - ''Andy Reif, Mike Burks, Steven Roberts 외''
+ * ''' The State of the Hotel - What Makes Teens Tick at HABBO''' - ''Sulka Haro''
+ * ''' Treat Me like a Lover''' - ''Margaret Robertson''
+ * ''' Virtual Greenspans - Running an MMOG Economy''' - ''Eyjolfur Gudmundsson''
+ * ''' What Would a Black, Latin, or Caribbean Game Really Look Like? (Day 1)''' - ''Joseph Saulter''
+ * ''' What Would a Black, Latin, or Caribbean Game Really Look Like? (Day 2)''' - ''Joseph Saulter''
+ * ''' What's Next for God Games?''' - ''Ernest Adams''
+ * ''' WII FIT: Creating a Brand New Interface for the Home Console''' - ''Takao Sawano''
+ * ''' WiiWare Project Lifecycle: FINAL FANTASY CRYSTAL CHRONICLES, THE LITTLE KING''' - ''Fumiaki Shiraishi, Toshiro Tsuchida''
+ * ''' Womens Group Gathering''' - ''Barbara Lippe''
+ * ''' Writers Group Gathering''' - ''Wendy Despain''
+ * ''' Writing Great Design Documents(끝내주는 기획 문서 작성하기)''' - ''Damion Schubert''
+  [http://www.zenofdesign.com/Writing_Design_Docs_2008.ppt PPT]
+  평가: 김기웅(★★★★☆)
+ * ''' XNA Keynote Announcements Sponsored by Microsoft''' - ''Albert Ho, Dax Hawkins''
+ * ''' XNA Keynote Announcements Sponsored by Microsoft''' - ''Michael Klucher''
+ * ''' Your Music Is the Game: Designing PHASE, the Other Project at Harmonix''' - ''Chris Foster''
+ * ''' UNREAL TOURNAMENT 3 Postmortem'''
+  * [http://forum.ps3korea.com/t21484/ forum.ps3korea]
+ * [http://t-machine.org/index.php/2008/02/24/gdc08-virtual-greenspans-running-an-mmog-economy/ Virtual Greenspans: Running an MMOG Economy]
+
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars

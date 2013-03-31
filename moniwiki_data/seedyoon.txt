@@ -1,0 +1,10 @@
+이름 : 윤석윤
+이메일 : seedyoon_at_gmail_dot_com
+블로그 : 준비중입니다. 
+직업 : 게임 서버 개발
+관심 분야 : C++, Agile 개발론, AI, 병렬프로그래밍 
+주로 쓰는 언어 : C++
+
+현재 관심분야 : TDD, AI, Debugging
+----
+CategoryHomepage

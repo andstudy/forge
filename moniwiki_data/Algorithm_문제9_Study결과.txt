@@ -1,0 +1,130 @@
+JollyMain.java
+
+{{{
+import java.io.*;
+
+
+public class JollyMain 
+{
+	
+	public static void main(String[] args)
+	{
+		JollyMain j = new JollyMain();
+		
+		String[] data = j.readLine().split(" ");
+		
+		if(j.parseData(data))
+			System.out.println("Jolly");
+		else
+			System.out.println("Not jolly");
+	}
+	
+	public static boolean parseData(String[] data)
+	{
+		int[] intList = new int[data.length];
+		boolean[]  checkMap= new boolean[data.length];
+		for(boolean curItem : checkMap){
+			curItem = false;
+		}
+		int sub;
+		boolean result = false;
+		
+		if( data.length == 1)
+			return false;
+		
+		for(int j=0; j < data.length ;j++)
+		{
+			intList[j] = Integer.parseInt(data[j]);
+		}
+		
+		for(int i=0; i < intList.length -1 ; i++)
+		{
+			sub = Math.abs(intList[i] - intList[i+1]);
+			if(isArrayBound(intList, sub)){
+				checkMap[sub] = true;
+			}
+			
+		}
+		result = isContain(checkMap);
+		
+		return result;
+	}
+
+	public static boolean isArrayBound(int[] data, int sub) {
+		return sub>0 && sub < data.length;
+	}
+	
+	public static boolean isContain(boolean [] data)
+	{
+		for(int i=1 ;i<data.length; i++)
+		{
+			if(!data[i]){
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public String readLine()
+	{
+		String data = null;
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+		
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			
+		}
+		
+		
+		return data;
+	}
+}
+
+}}}
+
+
+JollyMainTest.java
+{{{
+import junit.framework.TestCase;
+
+
+public class JollyMainTest extends TestCase 
+{
+
+	public void testMain() {
+	}
+
+	public void testParseData() {
+		assertEquals("1",JollyMain.parseData(new String[]{"1","2","3","4"}),false);
+		assertEquals("2",JollyMain.parseData(new String[]{"1","5","3","2"}),false);
+		assertEquals("3",JollyMain.parseData(new String[]{"1","-1","10","2"}),false);
+		assertEquals("4",JollyMain.parseData(new String[]{"1","4","2","3"}),true);
+		assertEquals("5",JollyMain.parseData(new String[]{"1","4","2","-1","6"}),false);
+		
+	}
+
+	public void testIsContain() {
+		
+//		assertEquals("1",JollyMain.isContain(new int[]{1,2,3,4},2),true);
+//		assertEquals("2",JollyMain.isContain(new int[]{1,2,3,4},5),false);
+//		assertEquals("3",JollyMain.isContain(new int[]{1,2,3,4},1),true);
+		assertTrue(JollyMain.isContain(new boolean[]{true,true}));
+		assertFalse(JollyMain.isContain(new boolean[]{true,false}));
+	}
+	
+	public void testIsArrayBound(){
+		int [] checkArray = new int[]{1,2,3,4};
+		assertFalse(JollyMain.isArrayBound(checkArray, 4));
+		assertTrue(JollyMain.isArrayBound(checkArray, 3));
+		assertFalse(JollyMain.isArrayBound(checkArray, 0));
+		assertFalse(JollyMain.isArrayBound(checkArray, -1));
+		assertFalse(JollyMain.isArrayBound(checkArray, 44855));
+	}
+	
+}
+}}}

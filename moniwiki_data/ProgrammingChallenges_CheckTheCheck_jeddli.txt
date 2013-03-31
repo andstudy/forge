@@ -1,0 +1,1222 @@
+입출력이 더 어렵다..
+
+{{{#!gcode cpp
+#ifdef _UNIT_TEST
+#include "UnitTest++.h"
+#endif
+
+#include <iostream>
+#include <string>
+#include <assert.h>
+
+
+enum emVICTORY_TEAM
+{
+	VICTORY_BLACK = 1,
+	VICTORY_WHITE = 2,
+	VICTORY_NONE = 3,
+};
+
+class CChessBoard
+{
+public:
+
+	CChessBoard(){};
+
+	void ClearChessBoard()
+	{
+		for( int i = 0; i < 8; i++ )
+			m_ChessBoard[i].clear();
+	}
+
+	bool IsEmpthBoard()
+	{		
+		for( int i = 0; i < 8; i++ )
+		{
+			if( m_ChessBoard[i] != "........" )
+				return false;
+		}
+
+		return true;
+	}
+
+	void SetBoardRow( int row, std::string boardInfo )
+	{
+		if( row < 0 || row >= 8 )
+			return;
+
+		m_ChessBoard[row] = boardInfo;
+	}
+
+	void CheckBlackTeam( bool checkBlackTeam )
+	{
+		m_CheckBlackTeam = checkBlackTeam;
+	}
+
+	/// Black/White 에 따른 대소문자 변환
+	char AdjustChessPiece( char piece )
+	{
+		if( m_CheckBlackTeam )
+			return piece;
+
+		return piece + ( 'a' - 'A' );
+	}
+
+	/// 해당 위치의 말
+	char GetChessPiece( int x, int y )
+	{
+		if( x < 0 || x >= 8 )
+			return -1;
+
+		if( y < 0 || y >= 8 )
+			return -1;
+
+		return m_ChessBoard[y][x];
+	}
+
+	char GetTargetKing()
+	{
+		char targetKing = 0;
+		if( m_CheckBlackTeam )
+			targetKing = 'K';
+		else
+			targetKing = 'k';
+
+		return targetKing;
+	}
+
+	bool InKing( int x, int y )
+	{
+		char piece = GetChessPiece( x, y );
+		if( piece == -1 )
+			return false;
+
+		char targetKing = GetTargetKing();
+
+		if( piece == targetKing )
+			return true;
+
+		return false;
+	}
+
+	bool CheckBoardArray( char targetKing, int x, int y, int offsetx, int offsety )
+	{
+		int cx = x;
+		int cy = y;
+		char chessPiece = 1;
+		while( chessPiece >= 0 )
+		{
+			cx += offsetx;
+			cy += offsety;
+			chessPiece = GetChessPiece( cx, cy );
+			if( chessPiece == -1 )
+				break;
+
+			if( chessPiece == '.' )
+				continue;
+
+			if( chessPiece == targetKing )
+				return true;						
+
+			break;
+		}
+
+		return false;
+	}
+
+
+
+	//======================================================================================
+
+	/// pawn
+	bool CheckPawn( int x, int y )
+	{
+		//assert( m_ChessBoard[y][x] == AdjustChessPiece( 'p' ) );
+
+		/// if black team, move down...
+		if( m_CheckBlackTeam )
+		{
+			if( InKing( x - 1, y + 1 ) )
+				return true;
+
+			if( InKing( x + 1, y + 1 ) )
+				return true;
+		}else
+		{
+			if( InKing( x - 1, y - 1 ) )
+				return true;
+
+			if( InKing( x + 1, y - 1 ) )
+				return true;
+		}
+
+		return false;
+	}
+
+	/// Rook
+	bool CheckRook( int x, int y )
+	{
+		//assert( m_ChessBoard[y][x] == AdjustChessPiece( 'r' ) );
+
+		char targetKing = GetTargetKing();
+		/// Left
+		if( CheckBoardArray( targetKing, x, y, -1, 0 ) )
+			return true;
+
+		/// Right
+		if( CheckBoardArray( targetKing, x, y, 1, 0 ) )
+			return true;
+
+		/// Up
+		if( CheckBoardArray( targetKing, x, y, 0, -1 ) )
+			return true;
+
+		/// Down
+		if( CheckBoardArray( targetKing, x, y, 0, 1 ) )
+			return true;
+
+
+		return false;
+	}
+
+	/// Bishop
+	bool CheckBishop( int x, int y )
+	{
+		//assert( m_ChessBoard[y][x] == AdjustChessPiece( 'b' ) );
+
+		char targetKing = GetTargetKing();
+
+		/// upper-left direction
+		if( CheckBoardArray( targetKing, x, y, -1, -1 ) )
+			return true;
+
+		/// upper-right direction
+		if( CheckBoardArray( targetKing, x, y, 1, -1 ) )
+			return true;
+
+		/// lower-left direction
+		if( CheckBoardArray( targetKing, x, y, -1, 1 ) )
+			return true;
+
+		/// lower-right direction
+		if( CheckBoardArray( targetKing, x, y, 1, 1 ) )
+			return true;
+
+		return false;
+	}
+
+	/// Queen
+	bool CheckQueen( int x, int y )
+	{
+		//assert( m_ChessBoard[y][x] == AdjustChessPiece( 'q' ) );
+
+		if( CheckBishop( x, y ) )
+			return true;
+
+		if( CheckRook( x, y ) )
+			return true;
+
+		return false;
+	}
+
+	/// King
+	bool CheckKing( int x, int y )
+	{
+		/// upper-left
+		if( InKing( x - 1, y - 1 ) )
+			return true;
+
+		/// up
+		if( InKing( x, y - 1 ) )
+			return true;
+
+		/// upper-right
+		if( InKing( x + 1, y - 1 ) )
+			return true;
+
+		/// left
+		if( InKing( x - 1, y ) )
+			return true;
+
+		/// right
+		if( InKing( x + 1, y ) )
+			return true;
+
+		/// lower-left
+		if( InKing( x - 1, y + 1 ) )
+			return true;
+
+		/// down
+		if( InKing( x, y + 1 ) )
+			return true;
+
+		/// lower-right
+		if( InKing( x + 1, y + 1 ) )
+			return true;
+
+		return false;
+	}
+
+	/// knight
+	bool CheckKnight( int x, int y )
+	{
+		if( InKing( x - 2, y - 1 ) )
+			return true;
+
+		if( InKing( x - 1, y - 2 ) )
+			return true;
+
+		if( InKing( x + 1, y - 2 ) )
+			return true;
+
+		if( InKing( x + 2, y - 1 ) )
+			return true;
+
+		if( InKing( x + 2, y + 1 ) )
+			return true;
+
+		if( InKing( x + 1, y + 2 ) )
+			return true;
+
+		if( InKing( x - 1, y + 2 ) )
+			return true;
+
+		if( InKing( x - 2, y + 1 ) )
+			return true;
+
+		return false;
+	}
+
+
+	/// Check board
+	int CheckInKing()
+	{
+		int result = VICTORY_NONE;
+		for( int row = 0; row < 8; row++ )
+		{
+			for( int column = 0; column < 8; column++ )
+			{
+				result = VICTORY_NONE;
+				char piece = GetChessPiece( column, row );
+				if( piece < 0 )
+					continue;
+				if( piece == '.' )
+					continue;
+
+				/// black mode								
+				if( piece < 'a' )
+				{
+					CheckBlackTeam( false );
+					result = VICTORY_WHITE;					
+				}else
+				{
+					CheckBlackTeam( true );
+					result = VICTORY_BLACK;
+				}
+
+				switch( piece )
+				{
+				case 'p':
+				case 'P':
+					if( CheckPawn( column, row ) )
+						return result;
+					break;
+				case 'r':
+				case 'R':
+					if( CheckRook( column, row ) )
+						return result;
+					break;
+				case 'b':
+				case 'B':
+					if( CheckBishop( column, row ) )
+						return result;
+					break;
+				case 'q':
+				case 'Q':
+					if( CheckQueen( column, row ) )
+						return result;
+					break;
+				case 'k':
+				case 'K':
+					if( CheckKing( column, row ) )
+						return result;
+					break;
+				case 'n':
+				case 'N':
+					if( CheckKnight( column, row ) )
+						return result;
+					break;
+				}		
+
+				result = VICTORY_NONE;
+			}
+		}
+
+		return result;
+	}
+
+
+
+private:
+	std::string		m_ChessBoard[8];
+
+	bool			m_CheckBlackTeam;	
+};
+
+int main()
+{
+#ifdef _UNIT_TEST
+	if( UnitTest::RunAllTests() )
+	{
+		int i;
+		std::cin >> i;
+	}
+#endif
+	
+	//std::fstream
+
+	CChessBoard chessBoard;
+	
+	int gameNO = 0;
+	while( 1 )
+	{
+		std::string line;
+		for( int i = 0; i < 8; i++)
+		{			
+			getline( std::cin, line );
+			chessBoard.SetBoardRow( i, line );
+		}
+
+		//std::cout << std::endl;
+
+		if( chessBoard.IsEmpthBoard() )
+			break;
+
+		gameNO++;
+
+		int result = chessBoard.CheckInKing();
+		std::cout << "Game #" << gameNO;
+		if( result == VICTORY_BLACK )
+		{
+			std::cout << ": white king is in check."<< std::endl;
+		}else if( result == VICTORY_WHITE )
+		{
+			std::cout << ": black king is in check."<< std::endl;
+		}else
+			std::cout << ": no king is in check."<< std::endl;		
+
+		getline( std::cin, line );
+	}
+
+
+	return 0;
+}
+
+
+#ifdef _UNIT_TEST
+
+
+
+
+
+
+
+TEST( CheckPawn )
+{
+	CChessBoard chessBoard;
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	bool inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( false, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, "..k....." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( false, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, "..K....." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( true, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, "...K...." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( false, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, "....K..." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( true, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, ".....K.." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( false, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "..K....." );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( false, inCheck );
+
+	chessBoard.CheckBlackTeam( false );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "....k..." );
+	chessBoard.SetBoardRow( 3, "...P...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( true, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "..K....." );
+	chessBoard.SetBoardRow( 3, "...P...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( false, inCheck );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...P...." );
+	chessBoard.SetBoardRow( 4, "....k..." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckPawn( 3, 3 );
+	CHECK_EQUAL( false, inCheck );
+}
+
+TEST( checkRook )
+{
+	CChessBoard chessBoard;
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...r...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	bool inCheck = chessBoard.CheckRook( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...r...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "...K...." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckRook( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...r...K" );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckRook( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...r...." );
+	chessBoard.SetBoardRow( 4, "...p...." );
+	chessBoard.SetBoardRow( 5, "...K...." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckRook( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...r.p.K" );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckRook( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+}
+
+TEST( checkBishop )
+{
+	CChessBoard chessBoard;
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...b...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	bool inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, ".K......" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...b...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...b...." );
+	chessBoard.SetBoardRow( 4, "....K..." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...b...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "K......." );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.CheckBlackTeam( false );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...B...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, ".......k" );
+
+	inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, ".K......" );
+	chessBoard.SetBoardRow( 2, "..p....." );
+	chessBoard.SetBoardRow( 3, "...b...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...b...." );
+	chessBoard.SetBoardRow( 4, "..p....." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "K......." );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.CheckBlackTeam( false );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...B...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, ".....p.." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, ".......k" );
+
+	inCheck = chessBoard.CheckBishop( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+}
+
+TEST( checkQueen )
+{
+	CChessBoard chessBoard;
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	bool inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "...K...." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...K" );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "...p...." );
+	chessBoard.SetBoardRow( 5, "...K...." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q.p.K" );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, ".K......" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "....K..." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "K......." );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.CheckBlackTeam( false );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...Q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, ".......k" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, ".K......" );
+	chessBoard.SetBoardRow( 2, "..p....." );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...q...." );
+	chessBoard.SetBoardRow( 4, "..p....." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "K......." );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.CheckBlackTeam( false );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...Q...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, ".....p.." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, ".......k" );
+
+	inCheck = chessBoard.CheckQueen( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+}
+
+TEST( checkKing )
+{
+	CChessBoard chessBoard;
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...k...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	bool inCheck = chessBoard.CheckKing( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "..K....." );
+	chessBoard.SetBoardRow( 3, "...k...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKing( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...k...." );
+	chessBoard.SetBoardRow( 4, "...K...." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKing( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, ".....K.." );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...k...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKing( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "..Kk...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKing( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.CheckBlackTeam( false );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...Kk..." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKing( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+}
+
+TEST( checkKnight )
+{
+	CChessBoard chessBoard;
+
+	chessBoard.CheckBlackTeam( true );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	bool inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( false, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, ".K......" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "..K....." );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "....K..." );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, ".....K.." );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, ".....K.." );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "....K..." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "..K....." );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "...n...." );
+	chessBoard.SetBoardRow( 4, ".K......" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );
+
+	inCheck = chessBoard.CheckKnight( 3, 3 );
+	CHECK_EQUAL( true, inCheck );	
+}
+
+TEST( checkSample )
+{
+	CChessBoard chessBoard;
+
+	chessBoard.SetBoardRow( 0, "..k....." );
+	chessBoard.SetBoardRow( 1, "ppp.pppp" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, ".R...B.." );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "PPPPPPPP" );
+	chessBoard.SetBoardRow( 7, "K......." );
+
+	std::string resultStr;
+	int result = chessBoard.CheckInKing();
+	if( result == VICTORY_WHITE )
+	{
+		resultStr = "black king is in check.";
+	}else if( result == VICTORY_BLACK )		
+	{
+		resultStr = "white king is in check.";
+	}else
+	{
+		resultStr = "no king is in check.";
+	}
+
+    CHECK_EQUAL( "black king is in check.", resultStr );
+
+
+	chessBoard.SetBoardRow( 0, "rnbqk.nr" );
+	chessBoard.SetBoardRow( 1, "ppp..ppp" );
+	chessBoard.SetBoardRow( 2, "....p..." );
+	chessBoard.SetBoardRow( 3, "...p...." );
+	chessBoard.SetBoardRow( 4, ".bPP...." );
+	chessBoard.SetBoardRow( 5, ".....N.." );
+	chessBoard.SetBoardRow( 6, "PP..PPPP" );
+	chessBoard.SetBoardRow( 7, "RNBQKB.R" );		
+
+	result = chessBoard.CheckInKing();
+	if( result == VICTORY_WHITE )
+	{
+		resultStr = "black king is in check.";
+	}else if( result == VICTORY_BLACK )		
+	{
+		resultStr = "white king is in check.";
+	}else
+	{
+		resultStr = "no king is in check.";
+	}
+
+	CHECK_EQUAL( "white king is in check.", resultStr );
+
+	chessBoard.SetBoardRow( 0, "..K....." );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "........" );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );		
+
+	result = chessBoard.CheckInKing();
+	if( result == VICTORY_WHITE )
+	{
+		resultStr = "black king is in check.";
+	}else if( result == VICTORY_BLACK )		
+	{
+		resultStr = "white king is in check.";
+	}else
+	{
+		resultStr = "no king is in check.";
+	}
+
+	CHECK_EQUAL( "no king is in check.", resultStr );
+
+	chessBoard.SetBoardRow( 0, "........" );
+	chessBoard.SetBoardRow( 1, "........" );
+	chessBoard.SetBoardRow( 2, "k......." );
+	chessBoard.SetBoardRow( 3, "........" );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "........" );
+	chessBoard.SetBoardRow( 7, "........" );		
+
+	result = chessBoard.CheckInKing();
+	if( result == VICTORY_WHITE )
+	{
+		resultStr = "black king is in check.";
+	}else if( result == VICTORY_BLACK )		
+	{
+		resultStr = "white king is in check.";
+	}else
+	{
+		resultStr = "no king is in check.";
+	}
+
+	CHECK_EQUAL( "no king is in check.", resultStr );
+
+		
+	chessBoard.SetBoardRow( 0, "rnbqkbnr" );
+	chessBoard.SetBoardRow( 1, "pppppppp" );
+	chessBoard.SetBoardRow( 2, "........" );
+	chessBoard.SetBoardRow( 3, "........" );
+	chessBoard.SetBoardRow( 4, "........" );
+	chessBoard.SetBoardRow( 5, "........" );
+	chessBoard.SetBoardRow( 6, "PPPPPPPP" );
+	chessBoard.SetBoardRow( 7, "RNBQKBNR" );		
+
+	result = chessBoard.CheckInKing();
+	if( result == VICTORY_WHITE )
+	{
+		resultStr = "black king is in check.";
+	}else if( result == VICTORY_BLACK )		
+	{
+		resultStr = "white king is in check.";
+	}else
+	{
+		resultStr = "no king is in check.";
+	}
+
+	CHECK_EQUAL( "no king is in check.", resultStr );
+}
+#endif
+}}}

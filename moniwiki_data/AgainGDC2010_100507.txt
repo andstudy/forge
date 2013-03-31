@@ -1,0 +1,134 @@
+http://twitter.com/#search?q=%23againgdc
+AgainGDC 20100507 후기입니다.
+이번에도 넥슨 건물 회의실에서 진행되었습니다. 도와주신 많은 분들께 감사합니다.
+여기 내용은 그날 있었던 얘기와 개인적인 생각등이 혼재되어 있습니다. 익명성을 위해 누가 한 얘기인지는 포함하지 않았습니다. 뒷풀이에서 무슨 얘기가 나왔는지 참 궁금하군요. ㅎㅎ
+그리고 몇몇 좋은 얘기가 출처가 없는 관계로 누락되었습니다. 아쉽...
+
+== 당신의 팀에 불이 났어요 ==
+ * [http://www.gdcvault.com/play/1012347/Wake_Up_Your_Team_Is_On_Fire Wake up! Your Team is on Fire! Why Your Real Problems Are Cultural and How to Change Them - former Pandemic exec Michael Saladino]
+ * Michael Saladino 는 Pandemic Studios 에서 PM 를 했었다고...
+ * lack of shared vision -> leader 와 개발자 사이의 기대치가 다름. 결국 직원에 대한 신뢰 감소 -> 더 많은 결정을 경영진이 주도 -(delay)-> 왜 이렇게 많이 간섭하는거지 -(delay)->  팀원 사기 저하(경영진이 시키는대로 해야 하니까) & 책임감 감소 -> 품질 저하 -> 기대치 차이 의 악순환
+  * 원인 : '기대치 차이' 를 늦게 알 수록(delay 간격이 클수록) 인과관계를 알기 어렵다.
+  * 강아지 대변 훈련시킬때는 이상한데 싼 그 순간에 혼내야(feedback 줘야) 인과관계를 파악하고 제대로 된 곳에서 대변을 본다(강아지 똥 싸는 거에 비교당한 느낌은 별로인듯. ㅎㅎ)
+ * 선순환으로 바꾸기
+  * 비전 공유 -> 기대치 이해, 신뢰 구축 -> 개인의 참여 -(delay)-> 주인의식 -(delay)-> 좀 더 많은 결정을 팀원이 참여 -> 기대치 이해, 신뢰 구축 -> ...
+ * 모 회사 CEO 가 facebook 같은 거 만들어봐 라고 했는데, 직원들은 twitter 같은 걸 만드는 바람에 drop 된 사례가 있다고(레알?) 비전 공유가 제대로 되지 않아 생긴 문제.
+ * 기존에는 프로젝트의 문제를 재앙(disaster) 에 비유했다. 원인은 외부에 있고, 영웅이 필요하고, 단기간(immediate)에 해결할 수 있다.
+ * 이제는 프로젝트의 문제를 암(Cancer)에 비유해 보자. 이렇게 봤을 때는 원인이 내부에 있고, 식생활이나 운동같은 계속적인 노력이 일상적(long term)으로 필요하다.
+ * 투명성(정보방열기, WarRoom, BurnDown 차트...)
+  * 5가지 다른 방법으로 5번 의사소통 시도하라.(예 : 말로, 글로, 그림으로, 그래도 안 되면 마셔라.)
+  * 효과적인 의사소통 방법은 문화, 사람에 따라 다를 수 있다.
+  * 너무 이상적이다. 돈이 없거나 인력이 부족하다는 것을 투명하게 공유하면 팀원들이 동요하지 않을까?
+   * [http://www.aladdin.co.kr/shop/wproduct.aspx?ISBN=6000080432&partner=egloos 스컹크웍스(책)] 추천 -> 하지만 품절 크리(누구 저에게 책 빌려주실 분)
+   * 예 : 사무실을 격납고 구석에 둬서 관리자가 쉽게 오지 못하게 하고, 일일 미팅을 할 때 사람들이 자신이 작업중인 부분에 손을 얹은채로 발언하게 하고, 손을 얹을 곳이 없는 사람(한게 없는 사람)은 발언하지 못하게 한다.
+  * 투명성 때문에 오히려 사람들의 업무 효율이 낮아질 수 있지 않을까?
+   * [http://www.joelonsoftware.com/articles/DevelopmentAbstraction.html 조엘 온 소프트웨어를 넘어서 - 스물다섯 반. 개발 추상화 계층 The Development Abstraction Layer]
+   * 정보가 투명해야 능동적으로(self-organized) 일할 것이다. 투명하면서도 동시에 외부로부터의 공격은 막아주는 비닐 하우스를 메타포로 생각해 봐도 좋겠다.
+  * TODO 리스트에 priority 정한 후, 2-8인 단위로 같이 일하고 싶은 사람끼리 짝지어 하고 싶은 일을 단 두 개만 고르게 했더니 사람들 사이의 관계, 업무 성향등을 파악할 수 있었다.
+ * 크기를 지렛대로(Leverage Size)
+  * 한 번 했던 실수를 다른 studio 에서 하지 않도록 표시(문서화, 공유) 하기
+  * 사람들이 자기 프로젝트와 자신들의 문제를 서로 얘기하기 좋아하더라.
+   * EA 내에서 서로 도와줄 수 있는 다른 사람을 엮어줬더니 효과가 좋았다.
+  * 처음에는 컨퍼런스 콜 -> share point portal 로 발전
+ * 모든 사람에게 멘토 되기(Be a Teacher)
+  * 회사, 팀, 개인 단위로 teach-learn 관계 맺어주기
+ * 문화 만들기(Build Culture)
+  * 스스로(lead yourself)를 -> 상사(supervisor)를 -> 동료(peer)를 이끌라.
+  * 나 스스로가 바뀌지 않으면 다른 사람을 이끌 수 없다(수신제가치국평천하)
+   * 아주 사소한 거라도 문제를 해결하는 경험을 직접 해 보라.
+ * 1:1 면담
+  * 2주마다 업적(과거), 목표(다음 2주) 면담 결과를 문서로 공유하는 작업을 top priority 로 지속
+  * 10 명의 기획자 중 8 명이 중간에 팀을 옮겼다. 그래도 계속 했다("언젠가 때가 되면" 이란 건 없다. 그냥 지금 바로 해라). 마지막에는 8 명 모두 팀으로 돌아왔다. 비전 공유가 되기 시작. 만족도가 높고 다른 팀에서도 따라하기 시작함.
+ * 기술 공유
+  * "처음부터 새로 합시다" 라고 선언하는게 아니라 몇 명만 따로 모아서 몰래 (ninja weekend 에 작업해) Unreal Engine 로 게임을 재구성. 결과를 다른 팀원에게 보여줘서 좋은 평가를 받아 결국 [http://store.steampowered.com/app/24840/?l=koreana Medal of Honor: Airborne] 의 엔진을 Unreal 로 변경. [http://en.wikipedia.org/wiki/Mercenaries2 Mercenaries 2] 는 Frostbite(DICE) 로 변경
+  * 결과적으로 생산성 증가
+ * 애자일 & 린 적용
+  * 아침에 stand-up meeting. Product owner 가 feature 우선순위 정하기, Studio 에서는 월마다 컨퍼런스 콜로 공유 -> share point 로 전세계 스튜디오간에 공유, 팀을 소규모(7-10명) cross-function 단위로 묶음, Poker Planning 도입, ScrumMaster 교육
+  * 결과 : 전세계 EA 의 애자일 도입
+   * 아는 걸 실천하는 계기(crunch 는 나쁘지만 어쩔 수 없지 -> crunch 를 안 해야 겠다)
+ * 너무 이상적인 얘기이지 않느냐. 보수적인 윗사람들은 안 바뀐다.
+  * 꼭 여기까지는 아니더라도 회사를 나갈 각오라면 윗선과 한 판 붙어볼 수 있고, 의외의 성과가 날 수 있다.
+  * 더 좋은 개발 문화가 있는 회사로 개발자가 몰려야 게임 산업이 발전할 거다(voting by feet).
+   * 사람들이 우르르 나가면 경영진도 뭔가를 느끼는 거 같더라.
+  * 회사가 안 바뀐다, 안 바뀐다 하는데 실제로 얼마나 노력했느냐. 보수적인 회사에서 다면평가제 도입하겠다고 4년간 부딛쳐 와서 결국 성사시킨 사람도 있다.
+   * 먼저 이런 몇 년간의 노력을 하고 싶게 만드는 회사(혹은 프로젝트)가 되어야 한다는 것.
+ * ref : [http://www.amazon.com/One-Many-VISA-Chaordic-Organization/dp/1576753328/ref=sr_1_1?ie=UTF8&s=books&qid=1273329986&sr=1-1 One from Many: VISA and the Rise of Chaordic Organization]
+ * [http://blog.agilegamedevelopment.com/2009_05_01_archive.html Big documents and bananas - 댓글에 도시 전설이다 어쩌고 하는 얘기도 꽤 있군요.]
+
+== 프로토타입 기반 디자인  ==
+ * [http://cmpmedia.vo.llnwd.net/o1/vault/gdc10/slides/Perry_PrototypingBasedDesign.pdf Prototype Based Design - Lee Perry]
+  * [http://www.unrealtechnology.com/whats-new.php?ref=downloads 동영상 자료 포함된 1.2GB 짜리 자료. 꼭 보자.]
+ * 모든 아이디어를 끄집어 쓴다.
+  * 이것 저것 막 아이디어를 짬뽕해서 만들었는데, 결과가 좋게 나온 예 : Boomer
+ * 문서가 '왜' 안 먹힐까?
+  * 너무 자세히 쓰면 아무도 안 읽는다.
+  * 너무 요약하면 읽는 사람마다 오해한다.
+   * "I love you" 가 무슨 뜻인가? 문맥마다 연인, 친구, 가족 등 다른 의미로 사용 가능
+  * 결국 읽는 사람을 믿어야만 한다.
+  * 꼭 딴지 거는 사람이 있다.
+ * 전통적인 디자인 과정
+  * 디자인 구상 -> 문서화 -> 회의 -> 프로토타입 -> 의도대로 나오길 기도 -> 리뷰 -> (최악의 경우) 다시 디자인 구상
+ * 더 좋은 방법
+  * 디자인 구상 -> 바로 리뷰
+  * (구체적으로)디자인 구상 -> 디자이너가 직접 프로토타입 작성 -> 리뷰 -> 알게 된 점을 문서화
+ * POC(Proof of concept)
+  * 문답무용. 디자인이 막히는 걸 막아주는 방법.
+  * 회의 따위는 닥치고 직접 보자.
+  * 컷씬을 만들 때 기획서 작성하기보다는 Unreal Script 로 직접 컷씬 만드는 게 훨씬 나았다. 그리고 그걸 보고 아이디어가 많이 나왔다.
+   * 디아블로3 에서 기획서 대신 컨셉 아트를 많이 그렸다는 것과 비슷한 맥락
+    * [http://parkpd.egloos.com/1839252 KGC 08 Diablo III Environment Art - Jeff Kang 부분 참고. PT 자료 있으신 분?]
+  * asset 은 Gears of War1 에 있던 거 그래도 사용
+  * POC 가 필요했던 이유
+   * 대부분의 프로그래머가 Unreal Tournament 에 투입되는 바람에 6개월동안 1 명의 프로그래머만 할당받았다. 개발 기간은 24개월 주어졌음. POC 덕분에 크리스마스전에 작업 끝낼 수 있었다.
+  * POC 를 쓴 영역 : creatures, weapons, Gameplay systems, Level one-offs, 
+   * 통과된 부분 : Bloodmount, Cover Worm, Ground Reavers, Shield Boomer, Player Shield, Flippable Cover, Reaver Ride, Riftworm Heart
+   * 특히 Flippable Cover 은 POC 상태 그대로 제품에 적용되었음. 누군가가 '이건 나도 5분이면 만들 수 있는건데...' 라고 얘기했음.
+   * 빠진 부분 : Scorcher, Perching.
+   * [http://www.gamasutra.com/php-bin/news_index.php?story=25412 TGS: Epic's Mike Capps On Developing Epic-Style] 과 [http://parkpd.egloos.com/1952636 간단 번역본] 참고
+  * POC 는 딱 한 명의 "designer" 가 만들어야 함 -> designer 는 '기획자' 가 아닌 팀원 누구라도 될 수 있다.
+  * 아주 빠르게 만들 것. iteration 돌아야 하고, 꼭 피드백을 받아야 한다. 
+  * trigger, move object, dummy fire weapon 등으로 가라로 만든다.
+  * 낙관적이어야 함(drop 될 각오 할 것)
+ * Unreal Editor 같은 훌륭한 툴이 없어도 POC 는 할 수 있다.
+  * paper prototype, 팀원(혹은 고용한 배우)가 직접 롤플레잉, 카드 게임 등등
+   * [http://parkpd.egloos.com/1945729 Choice: The Ultimate Game Mechanic - Peter Molyneux - 페이블2 사례 확인]
+   * 페이블2 만들 때 애니메이터들을 권투선수한테 직접 얻어맞게 했더니, 좀 더 실감하는 액션 애니메이션이 나왔다고([http://picasaweb.google.com/cixoftop/GDC09ProducingFABLEII# 7번째 사진부터 살펴보자])
+  * 다른 게임 디자이너들도 3D 레벨 만들기 전에 꼭 평면에 레벨을 그려보는 사람이 많다고 한다.
+ * prototyping 이 재미 없으면, 컨셉이 재미없기 때문인 것인가, 아트가 허접해 느낌이 안 나기 때문인가?
+  * idea 에서 가장 멋진 부분을 부각해서 보여주는 노력을 해 보자. 툴에 너무 집중할 필요 없다.
+  * 전체에게 보여주기 전에, 친한 사람에게 먼저 조금씩 보여주고 feedback 받는 것도 좋다.
+  * DeadSpace 에서도 회색 캐릭터에 (게임 핵심 요소인) 모델 컷팅으로 EA 컨펌 받았다고(링크?)
+  * [http://studioxga.net/445 John Buchanan 의 Game Sketch 도 살펴보자.]
+   * 여러 사람이 NPC (심지어 문 같은 거 포함) 을 조정해서 게임 플레이 아이디어를 1주일 안에 가시화 하는 방법이라고 함.
+   * '최소한의 아트를 이용해서 가능한 보는 사람들이 많은 상상을 하도록 하자.' 가 모토인 듯.
+ * 피드백을 주는 방법이 문제. 최대한 솔직해야 하는데 이러면 기획자가 맘 상하고 팀웍이 상할 수 있음.
+  * 너티독에서는 누구나 가차없이 비판하는 문화가 형성되어 있는 듯
+  * 분명 재미없는 기획 프로토타입을 기획자가 재미있다고 우기면?
+  * 프로토타입에서만 재미있는 기획도 분명 있다.
+   * [http://www.thisisgame.com/board/view.php?id=301496&board=&category=11109&subcategory=&page=1&best=&searchmode=&search=&orderby=&token= KGC 2009 - FGT 결과에서 오해하면 안 되는 4가지]
+   * PC방 같은 한 공간에 유저들이 모여서 게임을 즐기면 채팅이 아닌 대화를 통해 자연스럽게 의사소통을 할 수 있기 때문에, 유저들의 초기 반응이 좋을 수 밖에 없다. 하지만 이런 게임들은 PC방이 아닌 집에서 개별적으로 플레이하면 시간이 지날수록 만족도는 나빠진다고 한다.
+   * 할리갈리에서 사용하는 종을 책상에 둔 뒤, "이건 이상한 거 같아"(what)이 아닌 "누가 잘못한 거 같아" (who)를 언급하기 시작하면 누구나 종을 치게 했음 -> 기획 자체만 비판하게 되었음.
+    * 피드백은 받는 사람, 주는 사람 모두 훈련이 필요하다([http://www.yes24.com/24/goods/1425462 비폭력 대화 (책)] 추천).
+    * 또한 사람들 사이의 신뢰가 필요하다.([http://parkpd.egloos.com/2135906 불신 비용 참고])
+  * 인지를 하면 더 잘 고칠 수 있다.
+   * 모 회사에서 인트라넷 로그인하면 항상 그 팀의 비전이 팝업으로 뜨게 했더니, 모든 팀원들이 '지금 내가 하려는 일이 우리 팀의 비전에 맞는가' 를 고민하기 시작하더라.
+ * MMORPG 같이 multiplay 게임 컨텐츠(공성전, 커뮤니티)도 POC 가 가능한 것인가?
+  * 크게 보면 클베가 POC 라고 볼 수도 있을 듯
+  * 컨텐츠에 따라 검증방법이 달라져야... 이런 경우에는 원하는 상황을 최대한 빠르게 구현한 후 여러 사람이 직접 접속할 수 있게 하는 게 답이지 않을까
+  * 어떻게 보면 WOW 의 지금까지의 업데이트는 이번에 나오는 "대격변" 을 위한 POC 였던 게 아닐까.
+  * 중요한 건 Speed.
+  * 공성전도 단계별로 작은 단위로 쪼개어 POC 해 볼 수 있지 않을까
+ * 기획자가 툴의 기능이 부족해서 이런 작업을 못한다고 하는데 프로그래머들은 당연히 이런 기능을 해 주고 싶다. 기획자가 먼저 spec 을 정해주면 더 좋은 결과가 나오지 않을까
+  * 이걸 기획자가 미리 알 수 있을리가 없겠지.
+  * 하지만, 기획자도 툴에 대한 고민을 꼭 해야할 듯. 그냥 있는 걸로 꾸역꾸역 하는 것도 별로임. 프로그램팀에 '이런 거 안 되나요' 라고 물어보는 건 프로그램팀도 (대체로) 좋아함.
+  * 디자이너는 항상 창의적이어야 하고, 노력을 게을리하지 않아야 한다.
+  * 보통 프로그래머가 spec 에 제약 거는데, 이럴 때 오히려 창의적인 기획이 나오기도 한다.
+   * [http://static.netdevil.com/cms-images/gdc2008_brown_scott_small_teams_big_dreams.ppt GDC08 Small Team, Big Dreams 에서 비슷한 얘기가 나왔었음]
+  * POC 와 TDD 는 맥락이 맞닿는 부분이 있다.
+ * POC 를 보고 실제 제품에 들어갈지는 누가 결정?
+  * 당연히 디렉터. 하지만 대강 팀원들 분위기를 보면 이미 결정되어 있음
+  * 재미없는 걸 만든 기획자가 고생한 게 안스럽다고 재미없는 기획을 통과시켜주면 전체 팀의 개발 power 가 낭비될 뿐만 아니라 사기도 떨어짐.
+
+== 후기 ==
+ * [http://catmon.egloos.com/5265766 잊혀진 상처의 낮은 읊조림 님 1부]
+ * [http://catmon.egloos.com/5268101 잊혀진 상처의 낮은 읊조림 님 2부]

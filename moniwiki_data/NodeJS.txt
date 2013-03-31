@@ -1,0 +1,33 @@
+== 참가자 ==
+
+== 발표순서 ==
+=== 2012-03-10 (1주) ===
+ *시작발표
+  * 변정훈
+  * 최유림 - http://www.slideshare.net/tedypicker/test-term-12530185
+  * 강대명 - http://www.slideshare.net/charsyam2/libtcc-and-gwan-11945671
+=== 2012-03-17(2주 : 참석자 17명) ===
+ * 3장 : 황윤희 - http://www.slideshare.net/yoonheecode/nodejs-chapter3-12040296
+ * 4장 : 박강용
+ * 5장 : 최성기 - http://www.slideshare.net/hiscale/120316-nodejs-5
+=== 2012-03-24(3주) ===
+ * 6장 : 전효성 - http://www.slideshare.net/itmentor/nodejs-express
+ * 7장 : 김광훈
+ * 8장 : 최우영 - http://www.slideshare.net/WooYeongChoe1/node-js-8
+=== 2012-03-31(4주) ===
+ * 9장 : 박상혁 - http://www.slideshare.net/kazuyapsh/nodejschapter9
+ * 10장 : 최기원 - http://prezi.com/zpf6zuw1e8--/nodejs-10/
+ * 11장 : 문현진 - http://www.slideshare.net/springofmylife/nodejs-cloud-service-publish
+=== 2012-04-07(5주) ===
+
+== 회비 ==
+|| 날짜 || 수입 || 지출 || 잔고 || 비고 ||
+|| 2012-03-10 || 40|| 0|| 40||회비 : 10명 - 최우영, 김광훈, 박강용, 최유림, 주영찬, 주영익, 박일, 전효성, 최문규, 문현진 ||
+|| 2012-03-10 || 0|| 20.2|| 19.8||토즈이용료 ||
+|| -- || 28.2|| 0|| 48.0||기존 잔액 ||
+|| 2012-03-17 || 24.0|| 0|| 72.0||회비 : 6명 - 김성안, 이재상, 현수명, 최기원, 이년복, 박상혁 ||
+|| 2012-03-17 || 0|| 16.5|| 55.5||토즈 이용료 (20인) ||
+|| 2012-03-24 || 0|| 18.9|| 36.6||토즈 이용료 ||
+|| 2012-03-24 || 12.0|| 0|| 48.6||회비 : 3명 - 최성기, 김광중, 김명관 ||
+|| 2012-03-31 || 0|| 14.4|| 34.2||토즈 이용료 ||
+|| 2012-03-31 || 0|| 24.6|| 9.6||책거리 - 제시카키친(11명) ||

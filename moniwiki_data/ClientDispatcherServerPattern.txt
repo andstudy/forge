@@ -1,0 +1,79 @@
+[POSA1]
+[[TableOfContents]]
+= Client-Dispatcher-Server =
+ * Client-Dispatcher-Server 디자인 패턴은 Server와 Client사이 중간 layer 로 dispatcher component를 제안한다.
+ * 이름으로 service  를 하기에 위치 투명성을 제공한다.
+ * Client와 Server 사이의 연결 설정에 관한 사항을 감춘다.
+
+== Example ==
+ * 새로운 과학정보를 검색하는 System.
+ * 정보 제공자가 Local network 과 밖에 분산되어있다.
+ * 정보 제공자에게 접근하려면 위치와 수행할 서비스를 명시 해야한다.
+
+== Context ==
+이 시스템은 로컬에서 동작중이거나 혹은 네트웍상에 분산되어진 분산 서버들의 집합을 통합한다.
+
+== Problem ==
+ * Component가 Service Provider의 위치에 독립적으로 서비스를 사용할 수 있다.
+ * Service consumer의 중심 기능 코드는 Service Providers 와의 connection 설정 코드와 분리되어야 한다.
+
+== Solution ==
+ * Servers와 Clients 사이에 중간 layer로 Dispatcher Component를 제공한다.
+ * Dispatcher 는 name service 제공.
+ * 위치 투명성 제공.
+ * Dispatcher 는 server와 client사이의 Connection Channel을 만들 역할이 있다.
+ * 각 서버는 유일한 이름을 가지고 Dispatcher에 의해 clients에게 연결된다.
+ * Client는 각 server를 위치를 알아내는 것과 server에게 연결하는 것을 dispatcher에게 의지한다.
+
+== structure ==
+ * Client
+  * Implements a system task
+  * Requests server connections from the dispatcher
+  * Invokes services of servers
+ * Server
+  * Provides services to clients.
+  * Registers itself with the dispatcher.
+ * Dispatcher
+  * Establishes communication channels between clients and servers.
+  * Locates servers.
+  * (Un-)Registers server.
+  * Maintains a map of server locations.
+ 
+== Dynamics ==
+ 1. Server는 dispatcher에게 자신을 등록
+ 1. Client는 특정 Server의 통신 채널을 요청.
+ 1. Dispatcher 는 registry에서 server를 lookup
+ 1. Dispatcher는 communication link 를 만든다. 성공적으로 만들어 지면 communication channel 리턴, 실패하면 err message.
+ 1. Client는 communication channel을 사용해 server에게 직접 요청을 전송.
+ 1. 서버는 요청을 전송 받고 서비스 실행.
+ 1. 서비스가 종료되면 서버는 결과 전송.
+
+== Implementation ==
+ 1. Server와 Client 로 나누기.
+ 1. 통신방법 선택.
+ 1. Components 사이의 protocol 정의. (3가지 protocol)
+ 1. Name service 방법 결정.
+ 1. Dispatcher를 설계하고 구현.
+ 1. Client , server 구현.
+
+== Variants ==
+ * Distributed dispatchers.
+ * Client-Dispatcher-Server with communication managed by clients
+ * Client-Dispatcher-Server with heterogeneous communication.
+ * Client dispatcher-service.
+
+== Known Uses ==
+ * Sun’s implementation of RPC (각 portmapper)
+ * OMG Corba	(common object request broker architecture)
+
+== Consequences ==
+=== Benefits ===
+ * Server들의 교환성.
+ * 위치와 이주 투명성.
+ * Re-configuration
+ * Fault tolerance.
+=== Liabilities ===
+ * Lower efficiency through indirection and explicit connection establishment.
+ * Dispatcher의 Interface의 변화에 민감하다.
+
+== Related Patterns ==

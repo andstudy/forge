@@ -1,0 +1,4 @@
+
+{{{#!html
+<a href="http://www.slideshare.net/codevania/3-3866609" title="3장 자동적으로 움직이는 게임 에이전트 생성법_2">3장 자동적으로 움직이는 게임 에이전트 생성법_2</a>
+<embed name="__sse3928384" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=3928384&stripped_title=ss-3928384" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed>}}}

@@ -1,0 +1,108 @@
+= 함수형 언어에 대한 낯설음 =
+
+ * for 가 없다 !!!
+ * 1 에서 10 까지 합을 구해보자
+
+{{{#!vim cpp
+int Sum()
+{
+	int sum = 0;
+	
+	for(int i=1 ; i<=10 ; i++)
+	{
+		sum += i;
+	}
+
+	return sum;
+}
+}}}
+
+{{{#!vim python
+def sumx():
+    return sum(range(1, 11))
+}}}
+
+{{{#!vim ruby
+(1...10).sum()	// 컴파일은 안 해봤지롱 (루비 주석이 뭐더라?)
+}}}
+
+ * 함수형으로 해보자
+ * for 가 없어 !!!
+ * 후훗, 뻥셔널 세계의 기본을 모르는군
+ 
+ * 리스트 중 제일 처음 하나를 떼서 처리하고 나머지를 재귀적으로 처리
+ * 응???
+ * 예제를 보자
+
+{{{#!vim erlang
+sum([H|T]) -> H + sum(T);
+sum([]) -> 0.
+
+sum([1,2,3,4,5,6,7,8,9,10]).
+}}}
+
+ * 뻥셔널 세계에서는 리스트의 처음을 가져오는 연산과 그 나머지를 구하는 연산이 있다
+
+{{{#!vim erlang
+[H|T] = [1,2,3].
+## H = 1
+## T = [2,3]
+}}}
+
+ * 스~스~스~스킴~~~
+{{{#!vim scheme
+(define myList (list 1 2 3)) ; (1 2 3)
+
+(car myList) ; 1
+(cdr myList) ; (2 3)
+}}}
+
+{{{#!vim scheme
+(define (sum aList)
+  (if (empty? aList)
+      0
+      (+ (car aList) (sum (cdr aList)))))
+
+(sum (list 1 2 3 4 5 6 7 8 9 10))
+}}}
+
+ * 팩토리얼을 스킴으로 짜면? 
+  * + 만 * 로 바꾸면 되지
+
+{{{#!vim scheme
+(define (fac aList)
+  (if (empty? aList)
+      1
+      (* (car aList) (fac (cdr aList)))))
+}}}  
+
+ * 뜬금없이 등장하는 템플릿 메타 프로그래밍
+
+{{{#!vim scheme
+#include <iostream>
+
+template<unsigned n>
+struct Factorial
+{
+	enum { value = n * Factorial<n-1>::value };
+};
+
+template<>
+struct Factorial<0>
+{
+	enum { value = 1 };
+};
+
+int main()
+{
+	std::cout << Factorial<10>::value << "\n";
+	return 0;
+}
+}}}
+
+ * 끔찍하다
+
+ * 게임에서 캐릭터가 있고 레벨이 올라가
+ * 객체지향에선 그냥 하면 되
+ * 뻥셔널에선 난감해 -_-
+ * 아직도 이건 잘 모르겠어

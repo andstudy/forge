@@ -1,0 +1,40 @@
+[ogmj]
+
+== 문제 1.11 ==
+{{{#!gcode scheme
+;recursive
+(define (pr1-11 n)
+  (cond ((< n 3) n)
+        (else (+ (pr1-11 (- n 1))
+                 (* 2 (pr1-11 (- n 2)))
+                 (* 3 (pr1-11 (- n 3))))
+              )
+        )
+  )
+
+결과
+> (pr1-11 3)
+4
+> (pr1-11 4)
+11
+> (pr1-11 10)
+1892
+
+;iterative
+(define (pi1-11 n)
+  (cond ((< n 3) n)
+        (else(pi1-11-iter 2 1 0 (- n 2)))))
+  
+(define (pi1-11-iter x y z count)
+  (cond ((= count 0) x)
+        (else (pi1-11-iter (+ x (* 2 y)(* 3 z ) ) x y (- count 1)))
+        )
+  )
+결과
+> (pi1-11 3)
+4
+> (pi1-11 4)
+11
+> (pi1-11 10)
+1892
+}}}

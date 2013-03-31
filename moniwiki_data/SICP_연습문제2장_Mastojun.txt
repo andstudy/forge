@@ -1,0 +1,286 @@
+== 2 장 ==
+2주동안이나 참여 못했는데, 다시 달립니다 !
+
+=== 연습문제 2.1 ===
+ {{{#!gcode scheme
+#lang scheme
+
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd (abs b) (remainder (abs a) (abs b)))))
+
+(define (make-rat n d)
+  (let ((g (gcd n d))
+        (a (abs n))
+        (b (abs d)))
+    (if (< (* n d) 0 )
+        (cons (- (/ a g)) (/ b g))
+        (cons (/ a g) (/ b g)))))
+
+(define (numer x) (car x))
+(define (denom x) (cdr x))
+
+(define (add-rat x y)
+  (make-rat (+ (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+
+(define (sub-rat x y)
+  (make-rat (- (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+
+(define (mul-rat x y)
+  (make-rat (* (numer x) (numer y))
+            (* (denom x) (denom y))))
+
+(define (div-rat x y)
+  (make-rat (* (numer x) (denom y))
+            (* (denom x) (numer y))))
+
+(define (equal-rat? x y)
+  (= (* (numer x) (denom y))
+     (* (numer y) (denom x))))
+
+(define (print-rat x)
+  (newline)
+  (display (numer x))
+  (display "/")
+  (display (denom x)))
+
+(define one-half (make-rat -1 2))
+(print-rat one-half)
+(define one-third (make-rat 1 3))
+(print-rat (add-rat one-half one-third))
+(print-rat (mul-rat one-half one-third))
+(print-rat (add-rat one-third one-third))
+
+
+
+}}}
+
+=== 연습문제 2.2 ===
+ {{{#!gcode scheme
+#lang scheme
+
+(define (make-segment s e) (cons s e))
+(define (start-segment x) (car x))
+(define (end-segment x) (cdr x))
+
+(define (make-point s e) (cons s e))
+(define (x-point x) (car x))
+(define (y-point y) (cdr y))
+
+(define (midpoint-segment x)
+  (make-point (/ (+ (x-point (start-segment x)) (x-point (end-segment x))) 2)
+              (/ (+ (y-point (start-segment x)) (y-point (end-segment x))) 2)))
+
+(define (print-point p)
+  (newline)
+  (display "(");
+  (display (x-point p))
+  (display ",")
+  (display (y-point p))
+  (display ")"))
+
+(define testLint (make-segment (make-point 1 1) (make-point 2 2)))
+
+(print-point (midpoint-segment testLint))
+}}}
+
+=== 2.4 연습문제 ===
+ {{{#!gcode scheme
+#lang scheme
+
+(define (cons x y)
+  (lambda (m) (m x y)))
+
+(define (car z)
+  (z (lambda (p q) p)))
+
+(define (cdr z)
+  (z (lambda (p q) q)))
+
+(define x (cons 1 2))
+(car x)
+(cdr x)
+}}}
+
+=== 연습문제 2.7, 2.8 ===
+ {{{#!gcode Scheme
+#lang scheme
+
+(define (add-interval x y)
+  (make-interval (+ (lower-bound x) (lower-bound y))
+                 (+ (upper-bound x) (upper-bound y))))
+
+(define (mul-interval x y)
+  (let ((p1 (* (lower-bound x) (lower-bound y)))
+        (p2 (* (lower-bound x) (upper-bound y)))
+        (p3 (* (upper-bound x) (lower-bound y)))
+        (p4 (* (upper-bound x) (upper-bound y))))
+    (make-interval (min p1 p2 p3 p4)
+                   (max p1 p2 p3 p4))))
+
+(define (div-interval x y)
+  (mul-interval x
+                (make-interval (/ 1.0 (upper-bound y))
+                               (/ 1.0 (lower-bound y)))))
+
+(define (make-interval a b) (cons a b))
+
+(define (upper-bound x)
+  (if (> (car x) (cdr x))
+      (car x)
+      (cdr x)))
+
+(define (lower-bound x)
+  (if (> (car x) (cdr x))
+      (cdr x)
+      (car x)))
+
+(define (sub-interval x y)
+  (make-interval (- (lower-bound x) (lower-bound y))
+                 (- (upper-bound x) (upper-bound y))))
+
+}}}
+
+=== 연습문제 2.9 ===
+ {{{#!gcode Scheme
+; 이렇게 하는게 맞는지 @_@
+; (((upper-bound x) ± (upper-bound y)) - ((lower-bound x) ± (lower-bound y)))/2
+; (((upper-bound x) +- (upper-bound y)) - (lower-bound x) -+ (lower-bound y))/2
+; ((upper-bound x) - (lower-bound x) +- (upper-bound y) -+ (lower-bound y))/2
+; ((upper-bound x) - (lower-bound x))/2 + ( +- (upper-bound y) -+ (lower-bound y))/2
+; + : width of x + width of y
+; - : width of x - width of y
+; 
+; 곱하기나 나누기는 더하고 있는(또는 빼고 있는) 구간 값의 폭으로 일반화 시킬 수 없음.
+; 해보진 않았지만 아마도?
+}}}
+
+=== 연습문제 2.17, 2.18 ===
+ {{{#!gcode Scheme
+(define (length items)
+  (define (length-iter a count)
+    (if (null? a)
+        count
+        (length-iter (cdr a) (+ 1 count))))
+  (length-iter items 0))
+
+; 2.17
+(define (last-pair items)
+  (if (= 1 (length items))
+      items
+      (last-pair (cdr items))))
+
+(define (delete-end items)
+    (if (= 1 (length items))
+        null
+        (cons (car items) (delete-end (cdr items)))))
+; 2.18
+(define (reverse items)
+  (if (= 1 (length items))
+      items
+      (cons (car (last-pair items)) (reverse (delete-end items)))))
+}}}
+
+=== 연습문제 2.20 ===
+ {{{#!gcode Scheme
+#lang scheme
+
+(define (same-parity n . items)
+  (define (find-even items)
+    (if (null? items)
+        null
+        (if (even? (car items))
+            (cons (car items) (find-even (cdr items)))
+            (find-even (cdr items)))))
+  (define (find-odd items)
+    (if (null? items)
+        null
+        (if (even? (car items))
+            (find-odd (cdr items))
+            (cons (car items) (find-odd (cdr items))))))
+  
+  (if (even? n)
+      (cons n (find-even items))
+      (cons n (find-odd items))))
+  
+
+(same-parity 1 2 3 4 5 6 7)
+(same-parity 2 3 4 5 6 7)
+}}}
+
+=== 연습문제 2.21 ===
+ {{{#!gcode scheme
+(define (square-list items)
+  (if (null? items)
+      null
+      (cons (* (car items) (car items)) (square-list (cdr items)))))
+;문제의 의도를 무시하고 Scheme 기본 연산자를 사용 =_=;;
+(define (square-list-2 items)
+  (map * items items))
+
+
+(square-list (list 1 2 3 4))
+(square-list-2 (list 1 2 3 4))
+}}}
+
+=== 연습문제 2.23 ===
+ {{{#!gcode scheme
+; 좀 억지스러운 =_=;
+#lang scheme
+(define (for-each-mine fun items)
+  (if (null? items)
+      (newline)
+      (and (fun (car items)) (for-each-mine fun (cdr items)))))
+
+(for-each (lambda (x) (newline) (display x))
+          (list 57 321 99))
+
+(for-each-mine (lambda (x) (newline) (display x))
+               (list 57 321 99))
+}}}
+
+=== 연습문제 2.25 ===
+ {{{#!gcode Scheme
+;(1 3 (5 7) 9)
+(define list1 (list 1 3 (list 5 7) 9))
+list1
+(car (cdr (car(cdr (cdr list1)))))
+(newline)
+;((7))
+(define list2 (list (list 7)))
+list2
+(car (car list2))
+(newline)
+;(1 (2 (3 (4 (5 (6 7))))))
+(define list3 (list 1 (list 2 (list 3 (list 4 (list 5 (list 6 7)))))))
+list3
+(car (cdr (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr list3))))))))))))
+
+(newline)
+}}}
+
+
+=== 연습문제 2.28 ===
+ {{{#!gcode Scheme
+#lang scheme
+
+(define (fringe items)
+  (if (pair? items)
+      (append (fringe (car items)) (fringe (cdr items)))
+      (if (null? items)
+          null
+          (list items))))
+
+(define 2.28.x (list (list 1 2) (list 3 4)))
+
+2.28.x
+
+(fringe 2.28.x)
+(fringe (list 2.28.x 2.28.x))
+}}}
+

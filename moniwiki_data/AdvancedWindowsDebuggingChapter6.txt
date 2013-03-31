@@ -1,0 +1,5 @@
+= Memory Corruption - Heap =
+
+{{{#!html
+<div style="width:425px;text-align:left" id="__ss_2179533"><object style="margin:0px" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=memorycorruption-heap-091009160032-phpapp02&stripped_title=memory-corruption-heap" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=memorycorruption-heap-091009160032-phpapp02&stripped_title=memory-corruption-heap" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/codevania">codevania</a>.</div></div>
+}}}

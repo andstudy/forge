@@ -1,0 +1,142 @@
+== 9.1 프로세스 연결하기 ==
+
+ * 다른 프로세스에 연결하는 방법 : link 사용, 모니터 사용
+ * link(P) : A <- > B, 서로 죽으면 연결된 프로세스에 종료 신호를 보냄.
+ * 별다른 조치를 취하지 않았다면, 종료 신호를 받으면 수신자 프로세스 역시 종료된다.
+ * 시스템 프로세스 : 종료 신호를 받아 그 신호를 잡아서 처리할 수 있는 상태의 프로세스
+
+
+== on_exit 핸들러 하나 ==
+
+어떤 프로세스가 종료할 경우에 뭔가 행동을 취하기 위한 핸들러 만들기 예제
+
+{{{#!gcode erlang
+ <lib_misc.erl>
+ on_exit(Pid, Fun) ->
+        spawn(fun() ->
+          process_flag(trap_exit, true),
+          link(Pid),
+          receive
+            {'EXIT', Pid, Why} ->
+              Fun(Why)
+          end
+        end).
+}}}
+
+{{{#!gcode erlang
+ 1> F = fun() ->
+      receive
+      X -> list_to_atom(X)
+      end
+      end.
+}}}
+
+{{{#!gcode erlang
+ 2> Pid = spawn(F).
+ <0.61.0>
+}}}
+
+{{{#!gcode erlang
+ 3> lib_misc:on_exit(Pid,
+      fun(Why) ->
+      io:format(" ~p died with:~p~n", [Pid, Why])
+      end).
+ <0.63.0>
+}}}
+
+{{{#!gcode erlang
+ 4> Pid ! hello.
+ hello
+ <0.61.0> died with:{badarg, [{erlang,list_to_atom,[hello])])
+}}}
+
+== 9.3 오류의 원격 처리 ==
+
+ * 얼랭 시스템은 많은 수의 병렬 프로세스로 구성되어 있으므로 다른 프로세스의 오류도 다룰 수 있어야 한다.
+ * 또 오류를 다루는 프로세스가 다른 머신일 수도 있다.
+
+
+== 9.4 오류 처리 상세 ==
+ * 연결(link)
+  * 두 프로세스 간에 오류의 확산 경로를 정의한다.
+  * 한 프로세스가 죽으면 연결된 나머지 프로세스에 종료 신호를 보낸다.
+  * 주어진 프로세스와 연결되어 있는 일련의 프로세스를 그 프로세스의 연결 집합(link set)이라 부름.
+ * 종료 신호(exit signal)
+  * 프로세스가 죽을 때 해당 프로세스가 생성하는 어떤 것.
+  * 왜 죽었는지 사유를 exit(Reason) 으로 명시적으로 설정하거나, 오류가 발생하면 암묵적으로 설정됨.
+  * exit 함수로 fake 종료 신호를 보낼 수도 있음.
+ * 시스템 프로세스
+  * 종료 신호를 받아 그 신호를 잡아서 처리할 수 있는 상태의 프로세스가 시스템 프로세스이다.
+  * process_flag(trap_exit, true) 를 호출하여 일반 프로세스를 시스템 프로세스로 전환시킨다.
+  * exit(Pid, kill) - 사기꾼(rogue) 프로세스를 죽일 때 사용
+
+  process_flag의 trap_exit 플래그 설명
+  || trap_exit || 종료 신호 || 행동 ||
+  || true || kill || 죽는다. 종료 신호 killed를 연결 집합에 브로드캐스팅 ||
+  || true || X || 메일 박스에 {'EXIT', Pid, X}를 추가한다. ||
+  || false || normal || 계속한다: 아무 것도 하지 않고 신호가 사라진다. ||
+  || false || kill || 죽는다: 종료 신호 killed를 연결 집합으로 브로드캐스팅 ||
+  || false || X || 죽는다: 종료 신호 X를 연결 집합으로 브로드캐스팅 ||
+
+=== 종료 잡기 프로그래밍 관용법 ===
+==== 관용법1. 내가 생성한 프로세스가 멎더라도 나는 몰라 ====
+   {{{#!gcode erlang
+Pid = spawn(fun() -> ... end)
+}}}
+
+==== 관용법2. 내가 생성한 프로세스가 normal이 아니게 멎으면 나도 죽으련다 ====
+   {{{#!gcode erlang
+Pid = spawn_link(fun() -> ... end)
+}}}
+
+==== 관용법3. 내가 생성한 프로세스가 멎으면 오류를 처리하고 싶다. ====
+   {{{#!gcode erlang
+...
+process_flag(trap_exit, true).
+Pid = spawn_link(fun() -> ... end),
+...
+loop(...).
+
+loop(State) ->
+   receive
+      {'EXIT', SomePid, Reason} ->
+        %% 오류로 무언가를 한다
+        loop(State1);
+      ...
+   end
+}}}
+
+=== 종료 잡기 잡기(고급) ===
+책참고 (180p ~ 185)
+
+== 9.5 오류 처리 프리미티브 ==
+
+ * @spec spawn_link(Fun) -> Pid
+  * atomic하게 spawn과 link를 동시에 수행한다.
+ * @spec process_flag(trap_exit, true)
+  * 현재 프로세스를 시스템 프로세스로 만든다.
+ * @spec link(Pid) -> true
+  * 프로세스 Pid로 연결이 없을 경우 연결을 생성한다.
+ * @spec unlink(Pid) -> true
+  * 현재 프로세스와 프로세스 Pid간의 모든 연결을 제거한다.
+ * @spec exit(Why) -> none()
+  * 현재 프로세스를 사유 Why로 종료시킨다.
+ * @spec exit(Pid, Why) -> true
+  * 종료 신호를 사유 Why와 함께 프로세스 Pid로 보낸다.
+ * @spec erlang:monitor(process, Item) -> MonitorRef
+  * 모니터를 설정한다.
+
+
+== 9.6 연결된 프로세스 집합 ==
+프로세스가 비정상적인 종료를 하면 그룹에 있는 모든 프로세스가 죽음.
+
+== 9.7 모니터 ==
+연결(link)은 대칭적이지만, 모니터(monitor)는 비대칭적인 연결이다.
+
+== 9.8 계속 살아 있는 프로세스 ==
+{{{#!gcode erlang
+<lib_misc.erl>
+keep_alive(Name, Fun) ->
+   register(Name, Pid = spawn(Fun)),
+   on_exit(Pid, fun(_Why) -> keep_alive(Name, Fun) end).
+}}}

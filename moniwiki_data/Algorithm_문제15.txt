@@ -1,0 +1,368 @@
+== 문제 15번 경시대회 점수판 (Contest Scoreboard) ==
+책 입력부분에 대한 한글 번역이 너무 애매모호해서 찾아봤는데.
+역시 번역이 이상한거였네요.
+
+contestant, problem, time, L
+
+Sample Input:
+1
+
+1 2 10 I
+3 1 11 C
+1 2 19 R
+1 2 21 C
+1 1 25 C
+
+[http://acm.uva.es/p/v102/10258.html 영문 Contest Scoreboard]
+
+----
+ 1. 한 문제도 풀지 못한 팀도 출력이 되어야 하나요?
+   => 출력안해도 될것 같습니다. (display only the contestants that have made a submission.)
+   => 역시 이것도 잘못생각. 맞추건 못맞추건 결과를 submission 한 팀은 출력해야할듯 합니다.
+ 1. 첫번째 문제는 풀고 두번째 문제는 I만 두번에 결국 못 풀었다면 이 팀의 벌점은?
+  * 두번째 문제 벌점 40점이 최종 결과에 추가가 되느냐 아니냐 그것이 문제로세...
+  * 추가가 안 될듯 하다. 다 푼줄 알았더니 한참 남았군.. 흑..
+   => 일단 1문제는 풀었으니 출력은 해야하므로 첫번째문제에서 걸린 시간+40점의 벌점이 출력될듯 합니다.
+   (Each line of output will contain a contestant number, the number of problems solved by the contestant and the time penalty accumulated by the contestant) 
+
+   => 헉. 문제를 다시 읽어보니 아니네요 ㅜ_ㅜ ... Correct 한 문제가 1개 이상일때만 출력하는줄 알았는데. 풀지못했어도 제출만 해도 submission 만 해도 출력하는거였네요. I 일경우 나중에 Correct 했을때만 최종벌점시간에 적용하고 .....너무 늦어서 수정은 내일 @_@
+
+== Java 버전 ==
+ * TDD 가 쉽지 않네요. Test case 작성은 프로그램 작성후 해버렸습니다 아악 ㅜ_ㅜ
+  * Test '''Driven'''을 고집할 필요는 없습니다.
+  * Test '''Accelerated''' Development (["TAD"])로 하시면 됩니다.
+
+ * submission 하면 출력해주고 C 일때만 I 의 시간벌점을 계산하도록 수정해보았습니다.
+
+
+= ScoreBoardMain.java =
+{{{
+import java.io.*;
+import java.util.*;
+
+public class ScoreBoardMain
+{	
+	ArrayList<Contestant> ctList = new ArrayList<Contestant>();
+	
+	public static void main(String[] args)
+	{
+	
+		ScoreBoardMain sbMain = new ScoreBoardMain();
+		
+		int testCase = Integer.parseInt(ReadLine());
+		ReadLine();
+		
+		/* testCase 만큼 */
+		while(testCase != 0)
+		{
+			sbMain.InitScoreBoard();
+			sbMain.RunScoreBoard();
+			sbMain.PrintScoreBoard();
+			
+			testCase--;
+		}
+		
+	}
+	
+	public void InitScoreBoard()
+	{
+		ctList.clear();
+	}
+	
+	/* 빈칸이 들어올때까지 점수판 Parse */
+	public void RunScoreBoard()
+	{
+		String in;
+		while( (in = ReadLine()) != null )
+		{
+			if( in.equals("") )
+				break;
+			
+			ParseInputData(in);
+		}				
+	}
+	
+	public void PrintScoreBoard()
+	{
+		for(int i=0; i<ctList.size(); i++)
+		{
+			System.out.println(ctList.get(i).GetTeamNum() + " "
+					+ ctList.get(i).GetSolvedProblemCount() + " "
+					+ ctList.get(i).GetTotalPenaltyTime());
+		}
+	}
+	
+	/* teamNum, problemNum, time, L type 파싱 */
+	public void ParseInputData(String in)
+	{
+		String[] token = new String[5];
+		token = in.split(" ");
+		
+		// L type 에 상관없이 무조건 contestant 추가
+		Contestant cont = GetExistContestant(token[0]);
+		
+		if( cont == null )
+		{
+			cont = new Contestant(token[0]);
+			ctList.add(cont);
+		}
+		
+		cont.SubmitProblem(token[1],token[2],token[3]);
+		
+	}
+	
+	/* ArrayList 에 존재하는 Contestant 인지 체크.. 다른방법은 없나 ㅜㅜ */
+	public Contestant GetExistContestant(String teamNum)
+	{
+		if( ctList.size() == 0)
+			return null;
+		
+		for(int i=0; i< ctList.size(); i++)
+		{
+			if(ctList.get(i).GetTeamNum() == Integer.parseInt(teamNum))
+				return ctList.get(i);
+		}
+		return null;
+	}
+	
+	public static String ReadLine()
+	{
+		String data = null;
+		
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			System.out.println("IOException " +e);
+		}
+		
+		return data;		
+	}
+
+}
+}}}
+
+= Contestant.java =
+{{{
+import java.util.*;
+
+public class Contestant 
+{
+	private int teamNum;
+	private int solvedProblemCount;
+	private int totalPenaltyTime;
+	
+	/* HashMap <팀번호,문제당벌점> */
+	HashMap<String,Integer> tScoreMap = new HashMap<String,Integer>();
+	
+	public Contestant(String teamNum)
+	{
+		this.teamNum = Integer.parseInt(teamNum);
+	}
+	
+	
+	public void SubmitProblem(String problemNumber,String time, String type)
+	{
+		totalPenaltyTime += ComputeTime(problemNumber,time,type);
+		
+	}
+	
+	// type 별로 Time 계산.
+	public int ComputeTime(String num, String time,String type)
+	{
+		int resultTime = 0;
+		
+		if( type.equals("C") )	// Correct
+		{
+			solvedProblemCount++;
+			
+			if(tScoreMap.get(num) != null)
+				resultTime += tScoreMap.get(num);
+
+			resultTime += Integer.parseInt(time); 
+		}
+		
+		if( type.equals("I") )	// Incorrect
+		{
+			if( tScoreMap.get(num) != null)
+				tScoreMap.put(num, tScoreMap.get(num) + 20);
+			else
+				tScoreMap.put(num,20);
+		}
+		
+		/* 나머지 3 case 는 처리 할게 없음.
+		if( type == "R" )	// clarification Request
+		if( type == "U" )	// Unjudged
+		if( type == "E" )	// Erroneous submission
+		*/
+			
+		return resultTime;
+		
+	}
+	
+	public int GetTeamNum()
+	{
+		return teamNum;
+	}
+	
+	public int GetSolvedProblemCount()
+	{
+		return solvedProblemCount;
+	}
+	
+	public int GetTotalPenaltyTime()
+	{
+		return totalPenaltyTime;
+	}	
+	
+}
+}}}
+
+= ContestantTest.java = 
+{{{
+import junit.framework.TestCase;
+
+
+public class ContestantTest extends TestCase 
+{
+
+	public void testSubmitProblem() 
+	{
+		
+		/* test 1 */
+		Contestant c1 = new Contestant("1");
+		c1.SubmitProblem("2","10","I");
+		assertEquals("1-1",c1.GetTotalPenaltyTime(),0);
+		c1.SubmitProblem("2","19","R");
+		assertEquals("1-3",c1.GetTotalPenaltyTime(),0);
+		c1.SubmitProblem("2","21","C");
+		assertEquals("1-4",c1.GetTotalPenaltyTime(),41);
+		c1.SubmitProblem("1","25","C");
+		assertEquals("1-5",c1.GetTotalPenaltyTime(),66);		
+
+		/* test 2 */
+		Contestant c2 = new Contestant("2");
+		c2.SubmitProblem("2","30","C");
+		assertEquals("2-1",c2.GetTotalPenaltyTime(),30);
+		c2.SubmitProblem("2","19","R");
+		assertEquals("2-2",c2.GetTotalPenaltyTime(),30);
+		c2.SubmitProblem("3","50","I");
+		assertEquals("2-3",c2.GetTotalPenaltyTime(),30);
+		c2.SubmitProblem("3","10","C");
+		assertEquals("2-4",c2.GetTotalPenaltyTime(),60);		
+
+		/* test 3 */
+		Contestant c3 = new Contestant("1");
+		c3.SubmitProblem("5","10","I");
+		assertEquals("3-1",c3.GetTotalPenaltyTime(),0);
+		c3.SubmitProblem("4","19","R");
+		assertEquals("3-2",c3.GetTotalPenaltyTime(),0);
+		c3.SubmitProblem("3","21","I");
+		assertEquals("3-3",c3.GetTotalPenaltyTime(),0);
+		c3.SubmitProblem("2","25","I");
+		assertEquals("3-4",c3.GetTotalPenaltyTime(),0);		
+
+	}
+
+	public void testComputeTime() 
+	{
+		Contestant c = new Contestant("1");
+		
+		assertEquals("1",c.ComputeTime("1","10","I"),0);
+		assertEquals("2",c.ComputeTime("2","10","I"),0);
+		assertEquals("3",c.ComputeTime("1","11","C"),31);
+		assertEquals("4",c.ComputeTime("1","19","R"),0);
+		assertEquals("5",c.ComputeTime("2","10","I"),0);		
+		assertEquals("6",c.ComputeTime("2","10","C"),50);
+	}
+
+}
+
+}}}
+
+= ScoreBoardMainTest.java =
+{{{
+import junit.framework.TestCase;
+
+
+public class ScoreBoardMainTest extends TestCase 
+{
+	ScoreBoardMain sbMain = new ScoreBoardMain();
+	
+	
+	public void testRunScoreBoard() 
+	{
+
+	}
+
+	public void testParseInputData() 
+	{
+		/* test 1 */
+		sbMain.ParseInputData("1 2 10 I");
+		sbMain.ParseInputData("1 2 19 R");
+		sbMain.ParseInputData("1 2 21 C");
+		sbMain.ParseInputData("1 1 25 C");
+		assertEquals("1-1",sbMain.ctList.size(),1);
+		assertEquals("1-2",sbMain.ctList.get(0).GetTeamNum(),1);
+		assertEquals("1-3",sbMain.ctList.get(0).GetSolvedProblemCount(),2);
+		assertEquals("1-4",sbMain.ctList.get(0).GetTotalPenaltyTime(),66);
+		sbMain.ctList.clear();
+		
+		/* test 2 */
+		sbMain.ParseInputData("4 2 30 C");
+		sbMain.ParseInputData("1 2 19 R");
+		sbMain.ParseInputData("4 2 50 U");
+		sbMain.ParseInputData("4 5 25 E");
+		sbMain.ParseInputData("4 3 22 E");
+		assertEquals("2-1",sbMain.ctList.size(),2);
+		assertEquals("2-2",sbMain.ctList.get(0).GetTeamNum(),4);
+		assertEquals("2-3",sbMain.ctList.get(0).GetSolvedProblemCount(),1);
+		assertEquals("2-4",sbMain.ctList.get(0).GetTotalPenaltyTime(),30);
+		assertEquals("2-5",sbMain.ctList.get(1).GetTeamNum(),1);
+		assertEquals("2-6",sbMain.ctList.get(1).GetSolvedProblemCount(),0);
+		assertEquals("2-7",sbMain.ctList.get(1).GetTotalPenaltyTime(),0);
+		sbMain.ctList.clear();
+
+		/* test 3 */
+		sbMain.ParseInputData("5 3 20 I");
+		sbMain.ParseInputData("5 4 15 R");
+		sbMain.ParseInputData("5 4 30 I");
+		sbMain.ParseInputData("5 3 30 C");
+		assertEquals("3-1",sbMain.ctList.size(),1);
+		assertEquals("3-2",sbMain.ctList.get(0).GetTeamNum(),5);
+		assertEquals("3-3",sbMain.ctList.get(0).GetSolvedProblemCount(),1);
+		assertEquals("3-4",sbMain.ctList.get(0).GetTotalPenaltyTime(),50);
+		sbMain.ctList.clear();
+		
+	}
+
+	public void testGetExistContestant() 
+	{
+		Contestant c1 = new Contestant("1");
+		Contestant c2 = new Contestant("2");
+		Contestant c3 = new Contestant("3");
+		
+		sbMain.ctList.add(c1);
+		assertEquals("1",sbMain.GetExistContestant("1"),c1);
+		assertEquals("1",sbMain.GetExistContestant("2"),null);
+		
+		sbMain.ctList.add(c2);
+		sbMain.ctList.add(c3);
+		assertEquals("1",sbMain.GetExistContestant("5"),null);
+		assertEquals("1",sbMain.GetExistContestant("3"),c3);
+	}
+
+}
+}}}
+
+== 풀이 ==
+[Algorithm/문제15/Study 결과]
+[Algorithm/문제15/폭풍언덕]
+[Algorithm/문제15/ParkPD]
+[Algorithm/문제15/kukuman]
+
+----
+CategoryProblem

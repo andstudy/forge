@@ -1,0 +1,132 @@
+흑 아무리 해봐도 wrong answer이네요 ㅠㅠ
+일단 올립니다.
+ * 소스 코드
+{{{
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+class Main implements Runnable{
+
+    public static void main(String args[])  // entry point from OS
+    {
+        Main myWork = new Main();  // Construct the bootloader
+        myWork.run();            // execute
+    }
+
+    public void run() {
+    	Problem9 pro = new Problem9();
+		pro.run();
+    }
+}
+class Problem9 implements Runnable{
+	
+	public ArrayList<Integer> parserLine(String line){
+		if(line == null)
+			return null;
+		String [] numbers = line.split(" ");
+		ArrayList<Integer> result = new ArrayList<Integer>(numbers.length);
+		for(String row: numbers){
+			if( !row.equals("")){
+				result.add(Integer.parseInt(row));
+			}
+		}
+		return result;
+	}
+	
+	public boolean isJollyJumper(ArrayList<Integer> list){
+		if(list == null)
+			return false;
+		
+		int length = list.size();
+		if(length<2 || length>3000)
+			return false;
+		
+		boolean [] mark = new boolean[length];
+		for(int i =0; i<mark.length;i++){
+			mark[i] = false;
+		}
+		for(int i=0;i<length-1;i++)
+		{
+			int index = list.get(i) - list.get(i+1);
+			index = Math.abs(index);
+			if(index >0 && index < length && !mark[index]){
+				mark[index] = true;
+			}else{
+				return false;
+			}
+				
+		}
+		
+		return true;
+	}
+	
+	
+
+	public void run() {
+		Scanner scan = new Scanner(System.in);
+		while(scan.hasNextInt()){
+			int n = scan.nextInt();
+			ArrayList<Integer> nums = new ArrayList<Integer>(n);
+			for(int i=0;i<n;i++){
+				int temp = scan.nextInt();
+				nums.add(temp);
+			}
+			//System.out.println(nums);
+			String result;
+			if(isJollyJumper(nums)){
+				result = "Jolly";
+			}else{
+				result = "Not jolly";
+			}
+			System.out.println(result);
+			
+		}		
+	}
+}
+
+
+}}}
+
+ * 테스트 코드
+{{{
+package org.and.algo;
+
+import java.util.ArrayList;
+
+import junit.framework.TestCase;
+
+public class Problem9TestCase extends TestCase {
+	public void testParseLine(){
+		Problem proble9 = new Problem();
+		String line = "3 2 1 0";
+		ArrayList<Integer> result = proble9.parserLine(line);
+		assertEquals(result.size(), 4);
+		assertEquals(result.get(0), new Integer(3));
+		assertEquals(result.get(1), new Integer(2));
+		
+		line = "100 -1 5 10 5";
+		result = proble9.parserLine(line);
+		assertEquals(result.size(), 5);
+		assertEquals(result.get(1), new Integer(-1));
+		
+	}
+	
+	public void testJollyJumper(){
+		Problem proble9 = new Problem();
+		String line = "4 3 2 1 0";
+		ArrayList<Integer> list = proble9.parserLine(line);
+		assertFalse(proble9.isJollyJumper(list));
+
+		line = "4 1 4 2 3";
+		list = proble9.parserLine(line);
+		assertTrue(proble9.isJollyJumper(list));
+
+		line = "5 1 4 2 -1 3";
+		list = proble9.parserLine(line);
+		assertFalse(proble9.isJollyJumper(list));
+		
+	}
+}
+
+}}}

@@ -1,0 +1,33 @@
+== 문제 풀이 ==
+ 백투더 대학교 1학년!
+ 오랫만에 [http://mastojun.net/219 적분표] 꺼내들고 풀었습니다 -_ㅠ..
+
+ Programming-Challenges에서는 WA, UVa에서는 AC뜨네요.
+
+ 소스는 민망합니다. =_=;
+ 대부분의 풀이는 종이와 계산기로.
+
+== 소스 코드 ==
+{{{
+#include <stdio.h>
+
+int main()
+{
+	double in;
+
+	double s, d, r;
+
+	while( scanf("%lf", &in) >= 1 )
+	{
+		in *= in;
+		s = in*0.31514674363;
+		d = in*0.51129916633;
+		r = in*0.17355409004;
+
+		printf("%.3lf %.3lf %.3lf\n", s, d, r);
+	}
+
+	return 0;
+}
+
+}}}

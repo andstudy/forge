@@ -1,0 +1,54 @@
+{{{:
+A palindromic number reads the same both ways. 
+The largest palindrome made from the product of two 2-digit numbers is 9009 = 91  99.
+
+Find the largest palindrome made from the product of two 3-digit numbers.
+}}}
+
+= 김명관 =
+ - 세자리 숫자 두 개의 조합을 만듬
+ - palindromic number인지 확인하기 위해 문자열로 만든뒤 뒤집어서 비교함
+{{{#!gcode scheme
+(ns Problem4
+  (:use clojure.contrib.combinatorics))
+
+(defn palindromic-number?
+  [number]
+  (let [num1 (str number)
+        num2 (. (. (new StringBuffer (str number)) reverse) toString)]
+    (. num1 equals num2)))
+
+(reduce max 
+  (filter palindromic-number?
+    (map #(* (first %) (second %))
+      (selections (range 100 1000) 2))))
+}}}
+
+= 박일 =
+{{{#!gcode scheme
+(defn rev-num [n]
+	(loop [x n s 0]
+	  (if (< 0 x)
+	    (recur (quot x 10) (+ (* s 10)(rem x 10)))
+	    s
+	  )
+	)
+)
+
+(defn pal? [n]
+  (if (= n (rev-num n)) true false))
+
+(first
+	(sort >
+		(filter pal? 
+		  (for [a (range 100 999) b (range 100 999)] (* a b))
+		)
+	)
+)
+}}}
+
+= chy =
+{{{#!gcode scheme
+(reduce max (filter #(=(apply str (reverse (str %))) (str %)) 
+  (for[a (range 100 999) b (range 100 999)](* a b)))))
+}}}

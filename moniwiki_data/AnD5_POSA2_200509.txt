@@ -1,0 +1,129 @@
+Members :
+
+이동현 0
+강대명 0
+박일   0
+이수안 0
+한승오 0
+전효성 0
+김미선 0
+강성범 0
+이의호 0
+안준석 0
+김미진 0
+도효진
+
+= 1주 GoF 복습 1/2 =
+
+날짜 : 2005.10.01
+참석자 :
+이동현, 강대명, 박일, 이수안, 한승오, 전효성, 김미선
+
+강대명 : 어디다가 적어야 할지 몰라서 여기다가 적습니다. ^^;
+ 박일님의 정리 참 머리속에 쏙쏙 들어왔습니다. ㅎㅎㅎ ^^
+전효성 : 발표준비 하시느라 수고 많으셨습니다. 코드와 PPT를 같이 보니 더 이해가 잘 되더군요 ^^
+ 스터디 멤버들도 충원되고 분위기도 더 업되는 듯 합니다. 이 기세를 몰아서 좀 더 멋진 프로그래머가 되기 위해 정진합시다. ^^; [ParkPD]
+
+ [CharSyam] : 크, 개인적인 사정으로 인해서 제 발표를 한주 미뤘으면 합니다. 내용은 그냥 
+          그대로 하고, 제 발표가 3주째를 -> 4주째로 옮겼으면 합니다. 죄송합니다.
+  [ParkPD] : 그럼 토요일(10/08)에 순서를 바꾸도록 합시다. 모임 꼭 나오도록.. ^^;
+== introduction ==
+
+== Patterns == 
+
+ * [Composite]
+ * [Singleton]
+ * [Facade]
+ * [Mediator]
+ * [Adapter]
+ * [Bridge]
+ * [Strategy]
+ * [AbstractFactory]
+ * [FactoryMethod]
+ * [Observer]
+ * [Flyweight]
+ * [Iterator]
+
+attachment:/GoF-1stPattern.gif
+
+= 2주 GoF 복습 2/2 = 
+
+참석자
+
+이동현
+김미진
+전효성
+한승오
+강성범
+박일
+강대명
+안준석
+
+== Patterns ==
+
+ * [Builder]	
+ * [Prototype]
+ * [Decorator]
+ * [Proxy]
+ * [ChainOfResponsibility]
+ * [Command]
+ * [Interpreter]
+ * [Memento]
+ * [State]
+ * [TemplateMethod]
+ * [Visitor]
+
+== Conclusion == 
+ [ParkPD] : 그럭저럭 발표 끝냈습니다. 도움이 되셨는지? 발표 자료 정리해서 올려야 하는데 귀찮아질거 같아서 걱정... ^^; 다른 분들도 꼭 공부 하는 패턴에 맞춰서 직접 예제 코드를 만들어 보세요. 이해도가 달라진답니다.
+
+attachment:/GoF-2ndPattern.gif
+
+= 3 주 =
+
+ * Wrapper Facade
+   * 강대명
+ * Component Configurator
+   * 이동현
+ * Interceptor
+   * 전효성
+
+= 4 주 =
+ * Extension Interface
+   * 이수안
+
+= 5 주 =
+ * Reactor
+   * 강대명
+ * Thread-Safe Interface
+   * 이동현
+
+= 6 주 =
+ * Asynchronous Completion Token
+   * 김미선
+ * [Proactor]
+   * 박일
+ * Double-Checked Locking Optimization
+   * 도효진
+
+= 7 주 =
+ * Monitor Objext
+   * 이수안
+ * Active Object
+   * 박일
+ * Scoped Locked
+   * 이의호
+ * Acceptor-Connector
+   * 안준석
+ * Strategized Locking
+   * 안준석
+
+= 8 주 =
+ * Half-Sync/Half-Async
+   * 한승오
+ * Leader/Followers
+   * 전효성
+ * Thread-Specific Storage
+   * 김미선
+
+= 9 주 =
+ * Review?

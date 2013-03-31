@@ -1,0 +1,9 @@
+이름 : ParkPD
+이메일 : rigmania_at_naver_dot_com
+블로그 : http://parkpd.egloos.com/
+Twitter : rigmania
+직업 : 게임 서버 개발
+관심 분야 : Pattern, Architecture, C++, Agile 개발론 등등...
+주로 쓰는 언어 : C++
+약간 아는 분야 : 서버 개발, Window 클라이언트 개발, COM 개발, 인터넷 방송 프로그램(WMT), XML 연동
+아직은 서투름... -.-;;

@@ -1,0 +1,3 @@
+{{{#!html
+<div style="width:425px" id="__ss_8287906"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/seedyoon/cpu-13-14" title="프로그래머가 몰랐던 멀티코어 CPU 이야기 13, 14장">프로그래머가 몰랐던 멀티코어 CPU 이야기 13, 14장</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8287906" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/seedyoon">sukyun yoon</a> </div> </div>
+}}}

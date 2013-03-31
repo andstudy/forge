@@ -1,0 +1,202 @@
+[[attachment:test.zip]]
+attachment:a.jpg
+Please feel free to experiment here...
+
+'''Tip:''' Shift-click "HelpOnEditing" to open a second window with the help pages.
+----
+'''Contents:'''
+[[TableOfContents]] 
+
+Some .. smiley 
+== The First Section ==
+
+Some section one text. More section one text. More section one text. 
+More section one text. More section one text. More section one text. More section one text. 
+
+And then here's a list:
+ * The first bullet.
+   * By the way, that bullet has several sub-headers.  (This is the first.)
+   * This is the second sub-header.  (Duh!)
+ * The second bullet.
+   1. item one
+   2. item two
+
+=== Smiley ===
+:)  ;)  :-)
+
+=== The first subsection ===
+Here is a link to the page titled: BizarStructuredText 
+
+And here is another line of text.  Incidentally, you might want to do one
+of the following:
+ 1. Brush your teeth.
+ 2. Visit: ProposedWork
+If not, then just sit back, relax, and enjoy the flight.
+
+=== Can You Believe There's a Second Subsection? ===
+They were surprised about the first subsection on this page.  Imagine the complete astonishment when they discovered that there was a ''second'' subsection!  An important part of this section is its reference to the MissionStatement.  Be ''sure'' to check it out.
+
+||||||'''A Very Important Table'''||
+||'''x-val'''||'''y-val'''||'''z-val'''||
+||32.6||18.3||21.75||
+||34.9||17.l||23.6||
+ 
+== What to Do When You're Getting Bored with the First Section ==
+Here are several possibilities:
+ 1. Play hopscotch.
+ 1. Check for loose change in the sofa cushions.
+ 1. Clip your fingernails.
+ 1. Change your socks.
+ 1. Have another beer.
+ 1. Check out, http://www.halfbakery.com, for instance http://www.halfbakery.com/idea/Jehovah_27s_20Witness_20Delivery#979686222-5-1
+ 1. Go right ahead and read the Second Section.
+
+-----
+'''''Please Note:''''' ''There has been considerable controversy about several of the above listed alternatives to reading the First Section.  Some people think they are silly.  Some people think they are offensive.  And some people just think that they are a waste of time.  All of these may be true.  However, we stand by them, as we firmly believe that they are '''all''' more interesting than the First Section.'' 
+
+-----
+Please feel free to experiment here, after the four dashes below... and please do '''NOT''' create new pages without any meaningful content just to try it out.
+
+'''Tip:''' Shift-click "HelpOnEditing" to open a second window with the help pages.
+----
+
+== Formatting ==
+
+''italic'' '''bold''' {{{typewriter}}} 
+
+`backtick typewriter` (configurable)
+
+{{{
+preformatted
+}}}
+
+== Linking ==
+
+HelpOnEditing MoinMoin:InterWiki 
+
+http://purl.net/wiki/moin/ [http://www.python.org/ Python]
+
+someone@the.inter.net
+
+== Lists ==
+
+=== Bullet ===
+ * first
+   1. nested and numbered
+   2. numbered lists are renumbered
+ * second
+
+ blockquote
+   deeper
+
+=== Glossary ===
+ Term:: Definition
+
+----
+= Single line LaTeX =
+ $$ \sum_{i=0}^{100} x_i y_i^3 $$
+
+ $$ \int_0^{2\pi}\sin\ x\ dx $$
+
+= Quote =
+pre-formatted, No heading, No tables, No smileys. Only WikiLinks
+{{{:
+ddddff dsf sda sdf sd 
+ ddd 
+   WikiSandBox ddsf sdaf sadf sdf saf sda sdf sdf sdf sdf sfd sdf sdf sd fsdf sd sdf sda sdf sd fs sadf sdf sd sdf sdf sdf sdf df sadf ww w w w w w w w w w w w w w w w w 
+}}}
+
+= Processors =
+== Gnuplot ==
+
+{{{#!gnuplot
+set parametric
+set isosamples 50,20
+set hidden
+set view 40,20 ,1.7
+set noborder
+set nokey
+set noxtics
+set noytics
+set noztics
+set urange [-pi:pi]
+set vrange [-pi:pi]
+set size 0.5,0.5
+splot cos(u)+.5*cos(u)*cos(v),sin(u)+.5*sin(u)*cos(v),.5*sin(v) with lines, 1+cos(u)+.5*cos(u)*cos(v),.5*sin(v),sin(u)+.5*sin(u)*cos(v) with lines
+}}}
+{{{#!gnuplot
+plot x*x
+}}}
+
+{{{
+splot x*x+y*y
+}}}
+{{{
+plot x*x*x+5
+!ls
+}}}
+
+{{{#!gnuplot
+set pm3d
+splot x*x+y*y
+}}}
+
+== Python ==
+a MoniWiki python colorizer using the VimProcessor
+{{{#!python
+foo = 10+20
+def print_element(bla):
+  print '''bla
+this
+sucks.'''
+
+}}}
+
+== PhpLanguage ==
+{{{#!php
+<?
+print "Hello World";
+
+?>
+}}}
+
+
+{{{#!latex
+
+this is a latex 
+$$ 
+\lambda 
+$$
+}}}
+
+
+{{|
+dfdf dfdf df d WikiName
+dfdf dfdf df d WikiName
+dfdf dfdf df d WikiName
+ * dfdf dfdf df d WikiName
+ * dfdf dfdf df d WikiName
+
+|}}
+----
+MetaLink:http://www.slashdot.org WikiPedia:Hello+World
+<:( :D X-( 
+
+{{{#!latex
+\Mfunction{Graphics}(\Mfunction{Line}(\{ \{ 1,2\} ,\{ 2,4\} ,\{ 3,7\} ,\{ 4,11\} ,\{ 5,16\} ,\{ 6,22\} ,\{ 7,29\} ,\{ 8,37\} ,\{ 9,46\} ,\{ 10,56\} ,\{ 11,67\} ,\{ 12,79\} ,\{ 13,92\} ,\{ 14,106\} ,\{ 15,121\} ,\{ 16,137\} ,\{ 17,154\} ,\{ 18,172\} ,\{ 19,191\} ,\{ 20,211\} ,\{ 21,232\} ,\{ 22,254\} ,\{ 23,277\} ,\{ 24,301\} ,\{ 25,326\} ,\{ 26,352\} ,\{ 27,379\} ,\{ 28,407\} ,\{ 29,436\} ,\{ 30,466\} ,\{ 31,497\} ,\{ 32,529\} ,\{ 33,562\} ,\{ 34,596\} ,\{ 35,631\} ,\{ 36,667\} ,\{ 37,704\} ,\{ 38,742\} ,\{ 39,781\} ,\{ 40,821\} ,\{ 41,862\} ,\{ 42,904\} ,\{ 43,947\} ,\{ 44,991\} ,\{ 45,1036\} ,\{ 46,1082\} ,\{ 47,1129\} ,\{ 48,1177\} ,\{ 49,1226\} ,\{ 50,1276\} \} ) )}}}
+{{{#!gnuplot 
+set xlabel "iteration"
+set ylabel "goods"
+
+plot "-" with line
+1 2
+2 4
+3 7
+4 11
+5 16
+6 22
+7 29
+}}}
+
+
+[[FastSearch]]

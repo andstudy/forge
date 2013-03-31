@@ -1,0 +1,3 @@
+{{{#!html
+<object type="application/x-shockwave-flash" data="https://s3.amazonaws.com:443/slideshare/ssplayer.swf?id=75084&doc=10-lessons-of-innovation-idris-mootee-keynote3950" width="425" height="348"><param name="movie" value="https://s3.amazonaws.com:443/slideshare/ssplayer.swf?id=75084&doc=10-lessons-of-innovation-idris-mootee-keynote3950" /></object>
+}}}

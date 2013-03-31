@@ -1,0 +1,62 @@
+[[TableOfContents]]
+
+== 참여자 ==
+이동현, 김태현, 박일, 강대명, 안준석, 이수안, 문세희, 김경렬, 전효성, 방경운
+
+== 책 ==
+Documenting Software Architectures: Views and Beyond
+http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200303100007
+
+== 장소 및 시간 ==
+신촌 토즈 본점
+오후 1시 ~ 3시
+
+== 발표순서 ==
+Prologue, 1장 - 이수안  ( 9월 16일 )
+2장 - 김태현  ( 9월 23일 )
+3장 - 전효성  ( 10월 14일 )
+4장 - 박일    ( 10월 21일 )
+5장 - 문세희  ( 10월 28일)
+6장 - 이동현  ( 11월 4일 )
+7장 - 안준석  ( 11월 11일 )
+8장 - 강대명  ( 11월 18일)
+9장 - 김경열  ( 11월 25일 )
+10장 - 방경운 ( 12월 2일 )
+11장 - ...
+
+== 회비 현황 ==
+납부자 : 박일,이동현,김태헌,문세희,방경운,이수안,전효성,김경렬,강대명,안준석
+참가자 납부회비 : 22만원
+지난회비 : -58,600
+회비 시작 : 161,400 
+
+
+1주차 - 9월 9일 39,600 -> 121,800
+회비입금 - 김경렬,강대명 60,000 -> 181,800
+2주차 - 9월 16일 35,460 -> 146,340
+회비입금 - 지난회비 120,000 -> 266,340
+3주차 - 9월 30일 47,250 -> 219,090
+회비입금 - 안준석 40,000 -> 259,090
+10월 12일 andstudy.com 도메인비 지급 33,000 -> 226,090
+10월 14일 37,800 -> 188,290
+10월 21일 44,000 -> 144,290
+10월 28일 30,000 -> 114,290
+11월 4일 39,600 -> 74,690
+11월 11일 47,250 -> 27,440
+12월 2일 6,000(박일님 30,000쿠폰사용) -> 21,440
+12월 9일 32,400 -> -10,960
+== 참고 자료 ==
+ * http://ww5.introcom.net/~nkcho/dsa/DSA00.ppt
+ * http://ww5.introcom.net/~nkcho/dsa/DSA02.ppt
+ * http://www-users.itlabs.umn.edu/classes/Fall-2005/seng5861/slides/Documenting_Prologue_Part_1-9-10.ppt
+ * [배포금지/암호있음]DSA와 SAIP요약자료 : [attachment:SAIP2E.zip]
+  * 효성씨. 링크 살려주세요 :) [ParkPD]
+  * 링크는 살렸습니다만... SAIP만 올렸습니다. 전체 합치니 10메가가 넘는군요. 암호는 전과 동일합니다. 모르시는 분은 스터디때 알려드리겠습니다. [Itmentor]
+ * 참고서적 Software Architecture in Practice, Second Edition  
+ * [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200607310010 Applications = Code + Markup: A Guide to the Microsoft Windows Presentation Foundation]
+  * 비싸군요 ^^; [ParkPD]
+
+== 잡담란 ==
+ * 어려운 내용 정리해준 수안씨 수고했어요. 힘들더라도 일단 한 번 책을 다 읽고 나서 [SAIP] 랑 몇 개 더 한 다음에 다시 복습해 보는 것도 좋을 거 같네요. POSA 도 다시 읽으니까 처음 읽을 때랑 느낌이 엄청 달랐었거든요. [ParkPD]
+ * 아 그렇군요 ^^; 열심히 다른것도 공부하고 다시 시도 해봐야되겠네요 ^-^ 좋은말씀 감사용[kukuman]
+ * 즐거운 추석 연휴 되십시요. [문세희]

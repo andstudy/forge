@@ -1,0 +1,29 @@
+[POSA1]
+[[TableOfContents]]
+= Pattern Name =
+
+== Example ==
+
+== Context ==
+
+== Problem ==
+=== Forces ===
+
+== Solution ==
+
+== structure ==
+
+== Dynamics ==
+
+== Implementation ==
+
+== Variants ==
+
+== Known Uses ==
+
+== Consequences ==
+=== Benefits ===
+=== Liabilities ===
+=== Benefits & Liabilities ===
+
+== Related Patterns ==

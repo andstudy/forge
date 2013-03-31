@@ -1,0 +1,126 @@
+== 문제 풀이 ==
+ 대세는 프림 알고리즘! ^^;
+ 그래프에서 사용하는 알고리즘들은 많이 미진합니다 ㅠ_ㅠ
+
+== 소스 ==
+{{{#!vim c
+#include <stdio.h>
+#include <math.h>
+
+struct point
+{
+	float x, y;
+};
+
+int	n;			///< 주근깨 개수
+point	points[101];		///< 각 주근깨
+float	Distance[101][101];	///< 각 주근깨와 다른 주근깨의 거리
+bool	isUse[101];		///< 사용중인지 기억
+
+void InputData()
+{
+	scanf("%d", &n);;
+
+	for(int i = 1; i <= n; i++ )
+	{
+		scanf("%f %f",&points[i].x, &points[i].y);
+	}
+}
+
+void ConstructTable()
+{
+	float tempDist;
+
+	for(int i = 1; i <= n; i++ )
+	{
+		for(int j = 1; j <= n; j++ )
+		{
+			if( i == j )
+			{
+				Distance[i][j] = 0;
+			}
+			else
+			{
+				tempDist = sqrt( pow(points[i].x - points[j].x, 2) + 
+						 pow(points[i].y - points[j].y, 2) );
+
+				Distance[i][j] = tempDist;
+			}
+		}
+
+		isUse[i] = false;
+	}
+}
+
+float ShortFreckles()
+{
+	int FrecklesPoint;
+	bool isInit = false;
+	float MinDist;
+
+	for( int i = 1; i <= n; i++ )
+	{
+		if( isUse[i] == false ) continue;
+
+		for( int j = 1; j <= n; j++ )
+		{
+			if( i == j ) continue;
+			if( isUse[j] ) continue;
+
+			if( isInit == false )
+			{
+				MinDist = Distance[i][j];
+				FrecklesPoint = j;
+				isInit = true;
+			}
+			else
+			{
+				if( MinDist > Distance[i][j])
+				{
+					MinDist = Distance[i][j];
+					FrecklesPoint = j;
+				}
+			}
+		}			
+	}
+
+	isUse[FrecklesPoint] = true;
+
+	return MinDist;
+}
+
+float GetResult()
+{
+	float result = 0;
+
+	isUse[1] = true;
+
+	for(int i = 2; i <= n; i++ )
+	{
+		result += ShortFreckles();
+	}
+
+	return result;
+}
+
+int main()
+{
+	int testcase;
+
+	scanf("%d", &testcase);
+
+	while( testcase --> 0 )
+	{
+		InputData();
+		ConstructTable();
+
+		printf("%.2f\n", GetResult());
+
+		if(testcase)putchar('\n');
+	}	
+
+
+	return 0;
+}
+
+}}}

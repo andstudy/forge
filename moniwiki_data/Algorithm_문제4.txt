@@ -1,0 +1,357 @@
+== C++ Accept 버전 ==
+{{{
+}}}
+
+== C++ 버전 ==
+{{{
+/* @JUDGE_ID:itmentor 110104 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+
+
+#ifdef _UNIT_TEST_
+	#include <UnitTest++.h>
+	#include <TestReporterStdout.h>
+#endif
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+
+class Array2D
+{
+public:
+	typedef std::vector< int >  Scanline;
+	typedef std::vector< Scanline >  Table;
+
+	Array2D()
+	{
+	};
+
+	Array2D(const Array2D& arr)
+	{
+		*this = arr;
+	};
+
+	Array2D& operator=( const Array2D& arr )
+	{
+		_table.clear();
+		_table.insert( _table.end(), arr._table.begin(), arr._table.end() );
+		
+		return *this;
+	}
+
+	void create( int width, int height, int defaultValue )
+	{
+		_table.clear();
+
+		Scanline ln;
+		for(int i = 0 ; i < width ; i++)
+			ln.push_back( defaultValue );
+
+		for(int i = 0 ; i < height ; i++)
+			_table.push_back( ln );
+	}
+
+	Array2D( int width, int height, int defaultValue )
+	{
+		create( width, height, defaultValue );
+	}
+
+	int& operator()( int first, int second )
+	{
+		return _table[second][first];
+	}
+
+	int width()
+	{
+		if( _table.empty() == false )
+		{
+			return _table[0].size();
+		}
+
+		return 0;
+	}
+
+	int height()
+	{
+		return _table.size();
+	}
+
+	Array2D& operator+=( const Array2D& arr )
+	{
+		if( _table.size() == arr._table.size() )
+		{
+			for(int i = 0 ; i < _table.size() ; i++)
+			{
+				_table[i].insert( _table[i].end(), arr._table[i].begin(), arr._table[i].end() );
+			}
+		}
+		return *this;
+	}
+
+protected:
+	Table _table;
+};
+
+template< char V >
+struct LineEquation
+{
+	int beginX;
+	int beginY;
+	int endX;
+	int endY;
+	
+	LineEquation( int firstX, int lastX, int firstY, int lastY )
+	{
+		beginX = firstX;
+		beginY = firstY;
+		endX = lastX;
+		endY = lastY;
+	}
+
+	void draw( Array2D& arr )
+	{
+		for(int y = beginY ; y <= endY; y++)
+		{
+			for(int x = beginX ; x <= endX ; x++ )
+			{
+				arr(x,y) = V;
+			}
+		}
+	}
+};
+
+class LCD
+{
+public:
+	static void createSpace( int fontSize, Array2D& arr )
+	{
+		arr.create( 1, fontSize*2 + 3, 0 );
+	}
+
+	static void createDigit( int number, int fontSize, Array2D& arr )
+	{
+		arr.create( fontSize + 2, fontSize*2 + 3, 0 );
+		
+		LineEquation<'-'> horizontalEquation[] = { 
+			LineEquation<'-'>( 1, fontSize, 0, 0 ),
+			LineEquation<'-'>( 1, fontSize, fontSize+1, fontSize+1),
+			LineEquation<'-'>( 1, fontSize, 2*fontSize + 2, 2*fontSize + 2 )
+		};
+
+		LineEquation<'|'> verticalEquation[] = { 
+			LineEquation<'|'>( 0, 0, 1, fontSize ),
+			LineEquation<'|'>( 0, 0, fontSize+2, 2*fontSize+1),
+
+			LineEquation<'|'>( fontSize+1, fontSize+1, 1, fontSize),
+			LineEquation<'|'>( fontSize+1, fontSize+1, fontSize+2, 2*fontSize+1)
+		};
+
+		switch( number )
+		{
+		case 0:
+			horizontalEquation[0].draw( arr );
+			horizontalEquation[2].draw( arr );
+			verticalEquation[0].draw( arr );
+			verticalEquation[1].draw( arr );
+			verticalEquation[2].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 1:
+			verticalEquation[2].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 2:
+			horizontalEquation[0].draw( arr );
+			horizontalEquation[1].draw( arr );
+			horizontalEquation[2].draw( arr );
+			verticalEquation[1].draw( arr );
+			verticalEquation[2].draw( arr );
+			break;
+		case 3:
+			horizontalEquation[0].draw( arr );
+			horizontalEquation[1].draw( arr );
+			horizontalEquation[2].draw( arr );
+			verticalEquation[2].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 4:
+			horizontalEquation[1].draw( arr );
+			verticalEquation[0].draw( arr );
+			verticalEquation[2].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 5:
+			horizontalEquation[0].draw( arr );
+			horizontalEquation[1].draw( arr );
+			horizontalEquation[2].draw( arr );
+			verticalEquation[0].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 6:
+			horizontalEquation[1].draw( arr );
+			horizontalEquation[2].draw( arr );
+			verticalEquation[0].draw( arr );
+			verticalEquation[1].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 7:
+			horizontalEquation[0].draw( arr );
+			verticalEquation[2].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 8:
+			horizontalEquation[0].draw( arr );
+			horizontalEquation[1].draw( arr );
+			horizontalEquation[2].draw( arr );
+			verticalEquation[0].draw( arr );
+			verticalEquation[1].draw( arr );
+			verticalEquation[2].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		case 9:
+			horizontalEquation[0].draw( arr );
+			horizontalEquation[1].draw( arr );
+			horizontalEquation[2].draw( arr );
+		
+			verticalEquation[0].draw( arr );
+			
+			verticalEquation[2].draw( arr );
+			verticalEquation[3].draw( arr );
+			break;
+		};
+	}
+	static void output( Array2D& arr )
+	{
+		for(int j = 0 ;  j < arr.height() ; j++)
+		{
+			for(int i = 0 ; i < arr.width() ; i++)
+			{
+				std::cout << (char)arr(i,j);
+			}
+			std::cout << std::endl;
+		}
+	}
+};
+
+int main()
+{
+#ifdef _UNIT_TEST_
+    UnitTest::RunAllTests();
+#endif
+
+	int fontSize = 1, number = 1;
+	while( true )
+	{
+		std::cin >> fontSize >> number;
+
+		if( fontSize == 0 && number == 0 ) break;
+
+		char buf[512];
+		sprintf( buf, "%d", number);
+		std::string digits = buf;
+
+		Array2D output;
+		
+		Array2D space;
+		LCD::createSpace( fontSize, space );
+
+		Array2D bitmap;
+		for(int i = 0; i < digits.size() ; i++)
+		{
+			if( i == 0 )
+			{
+				LCD::createDigit( digits[i] - '0', fontSize, output );
+				output += space;
+			}
+			else
+			{
+				LCD::createDigit( digits[i] - '0', fontSize, bitmap );
+				output += bitmap;
+				output += space;
+			}
+		}
+
+		LCD::output( output );
+	}
+
+
+	return 0;
+}
+
+#ifdef _UNIT_TEST_
+TEST( testCreateText )
+{
+	Array2D one;
+	Array2D src;
+	LCD::createDigit( 1, 1, one );
+	CHECK_EQUAL( 3, one.width() );
+	CHECK_EQUAL( 5, one.height() );
+
+	CHECK_EQUAL( 0, one(2,0) );
+	CHECK_EQUAL( '|', one(2,1) );
+	CHECK_EQUAL( 0, one(2,2) );
+	CHECK_EQUAL( '|', one(2,3) );
+	CHECK_EQUAL( 0, one(2,4) );
+}
+
+TEST( testAllNumber )
+{
+	int fontSize = 3;
+
+	Array2D space;
+	LCD::createSpace( fontSize, space );
+	Array2D digit[10];
+
+	Array2D output;
+	
+	for(int i = 0 ; i < 10 ; i++)
+	{
+		LCD::createDigit(i, fontSize, digit[i]);
+	}
+
+	output = digit[0];
+	output += space;
+
+	CHECK_EQUAL( fontSize + 3, output.width() );
+
+	for(int i = 1 ; i <= 9 ; i++)
+	{
+		output += digit[i];
+		output += space;
+	}
+	CHECK_EQUAL( (fontSize + 3)*10, output.width() );
+}
+
+TEST( testCreateArray2D )
+{
+	Array2D arr(3,4, 0);
+	arr(0,0) = 10;
+	arr(2,3) = 23;
+
+	CHECK_EQUAL( 10, arr(0,0) );
+	CHECK_EQUAL( 0, arr(1,0) );
+}
+
+TEST( testAppendArray )
+{
+	Array2D arr(3,4, -1 );
+	Array2D arr2(1,4, 0 );
+	arr += arr2;
+
+	CHECK_EQUAL( 4, arr.width() );
+	CHECK_EQUAL( 4, arr.height() );
+	CHECK_EQUAL( 0, arr(3,3) );
+}
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}
+
+ [Algorithm/문제4/ParkPD/Lua]
+
+----
+CategoryProblem

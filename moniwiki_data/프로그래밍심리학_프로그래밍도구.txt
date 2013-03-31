@@ -1,0 +1,46 @@
+ * 특정 언어에서 좋아하는 언어 특징이 있나?
+ * 요즘 분위기는 주석 X, 말줄임 X
+  * 주석이 필요한가?
+   * 오픈 소스의 주석을 다 지웠더니 코드를 보기가 쉬워졌다(Quake)
+  * 변수명, 함수명은 어떻게 정하는 게 좋은가?
+  * cnt 는 count 로 쓰자. vs 코드가 짧으면 이해하기 쉽다
+  * 생명주기가 짧은 변수는 짧게, 전역에서 쓸 수 있는 메서드나 변수는 길게
+ * AOP 적용의 어려움
+ * 천재 재봉사 레빈같은 팀원과 같이 일하는 어려움. 어떻게 해야할까?
+ * 상황에 맞게 여러 프로그램 언어를 써 본 경험은?
+ * 프로젝트에서 쓰고 있는 도구들을 얘기해 보자
+  * check style, pc-lint, araxis merge, incredibuild, lua
+ * 오토들의 공격
+  * 무작위 테스트의 필요성
+  * IBM (concurrent test) 이나 ETRI (비너스) 에서 나온 테스트 도구
+ * UX. 베낀 UI 인가, 친숙한 UI 인가?
+  * 가장 흥행에 성공한 게임의 UI 가 과연 UI 의 최종 형태인가? 너무 고민을 안 하는게 아닐까?
+ * 코드가 시적으로 보일려면
+ * 문서화를 잘 하는 방법, 기술 설계 문서를 잘 쓰는 방법은?
+  * 클래스 이름 같은 코드 레벨까지 내려오지 않게 써야 한다
+  * 오히려 자주 갱신하기 쉽게 만드는 게 더 중요하지 않을까?
+  * Fitness 를 발전시킨 NTAF 이란게 있다 (http://dev.naver.com/projects/ntaf/)
+ * 블로그 등 논쟁거리에 앞장서 보거나 덩달아 참여해 본 적이 있는가?
+ * 템플릿을 많이 쓰는 프로그래머 vs 쉬운 C++ 을 쓰는 프로그래머
+  * 툴이 이해하는 방식으로 일 해야 하는가?
+   * 툴이 분석하지 못하기 때문에 템플릿 사용을 막기도 함
+ * 포팅, 생각보다 어려운 일이 아니다
+  * Windows 에서 리눅스로 게임 개발을 포팅한 경험
+   * 심지어 iocp 보다 epoll 을 썼음에도 불구하고 성능은 더 잘 나왔다
+  * 웹 개발에서 php -> java 로 넘어간 경험
+  * 기본기가 잘 되어 있으면, 도구에 종속되지 않을 수 있다.
+ * 수명이 다 된 코드는 언제 삭제하는가?
+
+{{{#!html
+<object id="Q10907" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420">
+
+    <param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001252731161023887" />
+
+    <param name='allowFullScreen' value='true' />
+
+    <param name='allowScriptAccess' value='always' />
+
+    <param name="wmode" value="opaque" />
+
+    <embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001252731161023887" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' wmode="opaque" width="500" height="420"  />
+}}}

@@ -1,0 +1,31 @@
+== NDC 08 : 이은석 실장 - 마비노기 영웅전의 캐릭터 비주얼 시스템 ==
+ * [http://www1.thisisgame.com/board/view.php?id=171312&board=&page=&category=5001&subcategory=&best=&searchmode=&search=&orderby= 데브캣 이은석 실장 - 마비노기 영웅전의 캐릭터 비주얼 시스템]
+ * Ambient Cube
+  * Origina Light Probe -> Irradiance Volume
+ * Half Lambert Diffuse
+ * Rim Light
+  * Silhouette 을 구하고 : Fresnel = 1 - abs(N*V). 여기에서 V 는 eye->vertex
+   * F 가 1에 근접할수록 물체의 실루엣에 근접
+  * 물체 뒤의 광원과 마주보고 있는지를 확인 : BackLight = max(0, -(T*V))
+  * F 를 적당히 제곱
+ * Fake SSS(Sub-Surface Scattering. 표면하산란)
+  * 반투명한 표면 하부에서 빛이 산란하는 현상
+  * nVidia 의 lambSkinDusk 사용
+ * 천 물리 시스템
+  * [http://en.wikipedia.org/wiki/Verlet_integration Verlet integration]
+  * 충돌처리는 Sphere Set 사용
+  * 매번 normal 이 달라지기 때문에, normal map 쓰지 않도록 권장(전체 simulation time 의 1/3 소모)
+ * Jiggle Bones (지글본)
+ * NDC 2007 영웅전 진선웅님의 '자유도 높은 코스춤' 
+  * Clip & Shrink 
+ * 장비 오염 : 디퓨즈 합성 + specular mask 에 마스킹
+ * 장비 파괴되면 파괴모델로 변경(수동으로 생성한 것임)
+ * LOD
+  * 모델마다 2-3레벨의 LOD모델 제작
+   * 모델 교체, Material(텍스처, 셰이더) 교체, Bonetree Collapse(지정 본의 하위 본 삭제), 본 교체(버텍스가 속하는 본 교체)
+
+== 그외 ==
+ * [http://www1.thisisgame.com/board/view.php?id=171255&board=0&page=2&category=102&subcategory=&best=&searchmode=title&search=&orderby= 데브캣 영웅전 제작팀 김덕영 - 데브캣의 ‘매력적인 캐릭터 모션 만들기’]
+  * NDC10 에서 '스토리텔링과 비쥬얼 내러티브' 발표하신 분?
+ * [http://www1.thisisgame.com/board/view.php?id=171452&category=104&subcategory= 데브캣 마비노기 팀 백두산 - 웹캠을 활용한 마비노기 가상현실 체험]
+  * NDC10 에서 '마비노기 브랜치 관리 전략과 도구' 발표하신 분?

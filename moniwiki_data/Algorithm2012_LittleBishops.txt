@@ -1,0 +1,151 @@
+// 참고로 이 알고리즘은 10초 이상 걸리는 거라  정답은 내지만 UVa 에서는 시간초과로 실패합니다. ^^ㅋ
+
+#include <stdio.h>
+#include <iostream>
+#include <sstream>
+#include <string.h>
+#include <string>
+
+using namespace std;
+
+// 체스 테이블
+// reserveTable: 비숍이 놓인 위치에 '1'이저장되고 그렇지 않다면 '0' 이 저장된다.
+// table: 비숍이 공격할 수 있는 위치에 '1'이 저장되고 그렇지 않다면 '0'이 저장된다.
+class CTable
+{
+public:
+	CTable(int tableCnt) 
+	{
+		m_tableCnt = tableCnt;
+	}
+	virtual ~CTable() 
+	{
+	}
+
+public:
+	int m_Table[ 8][ 8];
+	int m_tableCnt;
+
+public:
+	void InitTable()
+	{
+		memset(m_Table, 0, sizeof(m_Table));
+	}
+
+	void CopyFrom(CTable *srcTable)
+	{
+		if (srcTable->m_tableCnt != m_tableCnt)
+			return;
+		memcpy(m_Table, srcTable->m_Table, sizeof(m_Table));
+	}
+
+	bool CanPositionBishop( int x, int y)
+	{
+		if (1 == m_Table[ x][ y])
+			return false;
+		return true;
+	}
+
+};
+
+
+// 비숍이 위치한 영역을 저장하고, 공격할 수 있는 영역을 '1'로 설정해서
+// 다른 비숍이 위치하지 못하게 한다.
+void SetBishopPos( CTable &reserveTable, CTable &table, int x, int y)
+{
+	reserveTable.m_Table[ x][ y] = 1;
+
+	int i=0, k=0;
+	while (i < table.m_tableCnt && k < table.m_tableCnt)
+	{
+		if ( table.m_tableCnt > x+i && table.m_tableCnt > y+k)
+			table.m_Table[ x+i][ y+k] = 1;
+		if ( table.m_tableCnt > x+i && 0 <= y-k)
+			table.m_Table[ x+i][ y-k] = 1;
+		if ( 0 <= x-i && table.m_tableCnt > y+k)	
+			table.m_Table[ x-i][ y+k] = 1;
+		if ( 0 <= x-i && 0 <= y-k)	
+			table.m_Table[ x-i][ y-k] = 1;
+		++i;
+		++k;
+	}
+}
+
+bool CanPositionBishop( CTable &reserveTable, CTable &table, int x, int y)
+{
+	if (!table.CanPositionBishop(x, y))
+		return false;
+	if (!reserveTable.CanPositionBishop(x, y))
+		return false;
+	return true;
+}
+
+
+bool IsSolution( CTable &reserveTable, CTable &table, int x, int y)
+{
+	return CanPositionBishop(reserveTable, table, x, y);
+}
+
+
+// reserveTable : 비숍이 이미 위치한적이 있는 곳을 저장한다.
+// table : 비숍의 공격 영역을 저장한다.
+int SearchSolution(int bishopsCount, CTable &reserveTable, CTable &table)
+{
+	if (bishopsCount <= 0)
+		return 1;
+
+	int totalCount = 0;
+	// pCopyReserve: 비숍이 위치한 자리는 다시 위치하지 못한다. 백트래킹될때 초기화된다.
+	// pCopyTable: 재귀호출될때마다 초기화 되어야 한다. 공격영역은 비숍이 위치할때마다 초기화 되어야하기 때문이다.
+	CTable copyReserve = reserveTable;
+	CTable copyTable = table;
+	for (int x=0; x < copyTable.m_tableCnt; ++x)
+	{
+		for (int y=0; y < copyTable.m_tableCnt; ++y)
+		{
+			int count = 0;
+			if (IsSolution(copyReserve, copyTable, x, y))
+			{
+				SetBishopPos(copyReserve, copyTable, x, y);
+				count = SearchSolution(bishopsCount-1, copyReserve, copyTable);
+
+				copyTable = table;
+			}
+			else
+			{
+
+			}
+
+			totalCount += count;
+		}
+	}
+
+	return totalCount;
+}
+
+
+int main(int argv, char *argc[])
+{
+	cout.setf(ios::fixed, ios::floatfield);
+	cout.precision(2);
+
+	string line;
+	while (	getline(cin, line) )
+	{
+		istringstream iss(line);
+
+		int tableCnt, bishopCnt;
+		iss >> tableCnt >> bishopCnt;
+		if (tableCnt > 0 && bishopCnt > 0)
+		{
+			CTable reserveTable(tableCnt);
+			CTable table(tableCnt);
+			reserveTable.InitTable();
+			table.InitTable();
+			int cnt = SearchSolution(bishopCnt, reserveTable, table);
+			cout << cnt << endl;
+		}
+	}
+
+	return 1;
+}

@@ -1,0 +1,41 @@
+=== 느낌 ===
+ * 준비운동같은 문제
+ * 쉽다고 방심하지 말자 -_-
+
+=== 어려움 ===
+ * 입력시 큰 숫자가 먼저 올 수 있다
+
+ attachment:3n1.zip
+
+{{{#!vim basic
+Public Class ThreeOne
+
+	Shared Function GetCycleLength(ByVal number As Integer) As Integer
+		Dim cycleLength As Integer = 1
+
+		While number <> 1
+			If number And 1 Then	' 홀수면 (비트연산)
+				number = (number * 3) + 1
+			Else
+				number /= 2
+			End If
+			cycleLength += 1
+		End While
+
+		Return cycleLength
+	End Function
+
+	Shared Function GetMaxCycleLength(ByVal number1 As Integer, ByVal number2 As Integer) As Integer
+		Dim first As Integer = Math.Min(number1, number2)
+		Dim last As Integer = Math.Max(number1, number2)
+
+		Dim max As Integer = -1
+		For n As Integer = first To last
+			Dim cycleLength As Integer = GetCycleLength(n)
+			If cycleLength > max Then max = cycleLength
+		Next
+		Return max
+	End Function
+
+End Class
+}}}

@@ -1,0 +1,14 @@
+[http://acm.uva.es/ UVA 싸이트]
+[http://acm.uva.es/problemset/registerjudge.php 회원 가입]
+http://icpcres.ecs.baylor.edu/onlinejudge/
+[http://icpcres.ecs.baylor.edu/onlinejudge/index.php?option=com_frontpage&Itemid=1 사이트 메인]
+{{{
+/* @JUDGE_ID:parkpd 100 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+int main(void)
+{
+ return 1;
+}
+/* @END_OF_SOURCE_CODE */
+}}}

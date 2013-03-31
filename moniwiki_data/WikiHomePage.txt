@@ -1,0 +1,3 @@
+A WikiHomePage is your personal page on a WikiWiki, where you could put information how to contact you, your interests and skills, etc. It is regarded as to be owned by the person that created it, so be careful when editing it.
+
+When you create one, put the the word Category''''''Homepage on it, like can be seen on this page.

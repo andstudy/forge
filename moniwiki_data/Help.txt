@@ -1,0 +1,3 @@
+ 파일 올리는 법
+  {{{attachment:파일이름}}} 을 쓴 후 저장하면, 파일 올릴 수 있는 창을 볼 수 있다.
+  attachment:test.jpg

@@ -1,0 +1,6 @@
+추가발표
+
+Tools In Android SDK : 정민철
+{{{#!html
+<div style="width:425px" id="__ss_4916985"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/cc612/tools-in-android-sdk" title="Tools in android sdk">Tools in android sdk</a></strong><object id="__sse4916985" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=toolsinandroidsdk-100806113434-phpapp01&stripped_title=tools-in-android-sdk" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4916985" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=toolsinandroidsdk-100806113434-phpapp01&stripped_title=tools-in-android-sdk" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/cc612">cc612</a>.</div></div>
+}}}

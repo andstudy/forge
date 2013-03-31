@@ -1,0 +1,8 @@
+{{{[[Fortune]]}}} (default '''art''')
+[[Fortune]]
+----
+{{{[[Fortune(love)]]}}}
+[[Fortune(love)]]
+----
+{{{[[Fortune(*)]]}}}
+[[Fortune(*)]]

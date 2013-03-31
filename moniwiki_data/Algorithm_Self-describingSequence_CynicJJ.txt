@@ -1,0 +1,77 @@
+ * 최종적으로는 몇줄 안되는 코드지만 엄청 고생했습니다.
+ * 설계도 두번이나 뒤집었고요.
+ * TDD도 잘 안되서 고치고 실행하고 고치고 실행하고 반복에 늪에 빠진 기분이었음.
+ * 큰 수 일때 성능이 좀 떨어지네요.
+
+[[TableOfContents([maxdepth])]]
+
+== Self-describing Sequence ==
+=== !SelfDescribingSequence.vb ===
+{{{
+' $Id: SelfDescribingSequence.vb 121 2008-03-04 05:18:53Z 정희종 $
+
+Public Class SelfDescribingSequence
+
+	Private _sequence As Dictionary(Of Integer, Integer) = New Dictionary(Of Integer, Integer)
+
+	Function GetValue(ByVal k As Integer) As Integer
+		Dim key As Integer = 1
+		Dim value As Integer = 1
+
+		While True
+			If Not _sequence.ContainsKey(key) Then
+				_sequence.Add(key, value)
+			End If
+
+			key = key + GetValueCount(value)
+			If key > k Then Exit While
+			value = value + 1
+		End While
+
+		Return value
+	End Function
+
+	Private Function GetValueCount(ByVal value As Integer) As Integer
+		While Not _sequence.ContainsKey(value)
+			value -= 1
+		End While
+		Return _sequence(value)
+	End Function
+End Class
+}}}
+
+=== !SelfDescribingSequenceTest.vb ===
+{{{
+<TestClass()> _
+Public Class SelfDescribingSequenceTest
+	<TestMethod()> _
+	Public Sub GetValueTestInit()
+		Dim sds As SelfDescribingSequence = New SelfDescribingSequence
+		Assert.AreEqual(1, sds.GetValue(1))
+		Assert.AreEqual(2, sds.GetValue(2))
+		Assert.AreEqual(2, sds.GetValue(3))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetValueTestSmall()
+		Dim sds As SelfDescribingSequence = New SelfDescribingSequence
+		Assert.AreEqual(5, sds.GetValue(10))
+		Assert.AreEqual(8, sds.GetValue(22))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetValueTestLarge()
+		Dim sds As SelfDescribingSequence = New SelfDescribingSequence
+		Assert.AreEqual(21, sds.GetValue(100))
+		Assert.AreEqual(356, sds.GetValue(9999))
+		Assert.AreEqual(1684, sds.GetValue(123456))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetValueTestHuge()
+		Dim sds As SelfDescribingSequence = New SelfDescribingSequence
+		Assert.AreEqual(438744, sds.GetValue(1000000000))
+		Assert.AreEqual(673365, sds.GetValue(2000000000))
+	End Sub
+End Class
+}}}

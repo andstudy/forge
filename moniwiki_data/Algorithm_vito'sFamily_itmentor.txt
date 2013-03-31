@@ -1,0 +1,208 @@
+=== C++ ===
+ * 결과는 wrong answer...
+  * 여러 케이스 입력시 한 케이스 입력 후 바로 답이 나와야 합니다.
+  * 현재 상태는 모든 케이스 입력 후 모든 답이 한번에 출력 되네요.
+  * 입력값에 50이상의 숫자가 들어가면 RTE가 발생하네요. 문제에 명시된 Input의 범위도 고려하셔야 합니다.
+ * 정렬안하고 루프로 돌려서 했습니다 O(N^2)
+ * 위의 문제를 모두 고쳤습니다. 역시 성능은 안나오는군요 ㅋㅋㅋ
+   * 친척이 살지 않는 곳을 검사하지 않으니 성능이 좋아지기는 하는데 좀 찝찝합니다.. 
+
+{{{
+/* @JUDGE_ID:itmentor 110401 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#ifdef _UNIT_TEST_
+	#include <UnitTest++.h>
+	#include <TestReporterStdout.h>
+#endif
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <string>
+#include <strstream>
+#include <sstream>
+
+using namespace std;
+
+class Map
+{
+protected:
+	vector<int> _position;
+	const int MAP_SIZE;
+
+public:
+	Map() : MAP_SIZE(30000)
+	{
+		this->clear();
+	}
+
+	void reside(int index)
+	{
+		_position[index - 1]++;
+	}
+
+	const int& operator[](int index)
+	{
+		return _position[index - 1];
+	}
+
+	void clear()
+	{
+		_position.clear();
+		_position.resize(MAP_SIZE);
+	}
+
+	int length()
+	{
+		int beg = this->getFirstAddress() - 1;
+		int end = this->getLastAddress() - 1;
+
+		//모든 번지에 모든 사람이 살고 있을 경우 거리의 최소값
+		int minDistance = (MAP_SIZE + 1) * MAP_SIZE / 2; 
+
+		for(int i = beg ; i <= end ; i++)
+		{
+			int distance = 0;
+			if( _position[i] != 0 )
+			{
+				for(int k = beg ; k <= end ; k++)
+				{
+					if( _position[k] > 0 )
+						distance += _position[k] * abs(i-k);
+				}
+
+				if( distance != 0 && minDistance > distance )
+					minDistance = distance;
+			}
+		}
+
+		return minDistance;
+	}
+
+	int getFirstAddress()
+	{
+		for(int i = 0 ; i < MAP_SIZE ; i++)
+		{
+			if( _position[i] > 0 )
+				return i+1;
+		}
+		return 0;
+	}
+
+	int getLastAddress()
+	{
+		for(int i = MAP_SIZE - 1 ; i >= 0 ; i--)
+		{
+			if( _position[i] > 0 )
+				return i+1;
+		}
+		return 0;
+	}
+};
+
+int main()
+{
+#ifdef _UNIT_TEST_
+    UnitTest::RunAllTests();
+#endif
+
+	int count = 0;
+
+	cin >> count;
+	cin.ignore();
+
+	Map m;
+
+	for(int i = 0 ; i < count ; i++)
+	{
+		char ln[256];
+		cin.getline(ln,256);
+
+		stringstream sout;
+		sout << std::string(ln);
+
+		int addrCount = 0;
+		sout >> addrCount;
+
+		for(int k = 0; k < addrCount ; k++)
+		{
+			int addr;
+			sout >> addr;
+			m.reside(addr);
+		}
+		cout << m.length() << endl;
+		m.clear();
+	}
+
+	return 0;
+}
+
+#ifdef _UNIT_TEST_
+TEST(basicIO)
+{
+	Map m;
+	m.reside(4);
+	CHECK_EQUAL(m[4],1);
+}
+
+TEST(getFirstAddress)
+{
+	Map m;
+	CHECK_EQUAL(m.getFirstAddress(), 0);
+	
+	m.reside(30);
+	CHECK_EQUAL(m.getFirstAddress(), 30);
+	
+	m.reside(50);
+	CHECK_EQUAL(m.getLastAddress(), 50);
+}
+TEST(distance)
+{
+	Map m;
+	m.reside(2);
+	m.reside(4);
+	int l = m.length();
+	CHECK_EQUAL(l, 2);
+	m.reside(6);
+	l = m.length();
+	CHECK_EQUAL(l, 4);
+}
+
+TEST(distance2)
+{
+	Map m;
+	m.reside(2);
+	m.reside(3);
+	int l = m.length();
+	CHECK_EQUAL(l, 1);
+}
+
+TEST(distance3)
+{
+	Map m;
+	m.reside(13);
+	m.reside(17);
+	m.reside(17);
+	m.reside(19);
+	m.reside(22);
+	m.reside(22);
+	m.reside(55);
+	m.reside(100);
+	m.reside(101);
+	m.reside(22);
+	m.reside(22);
+	m.reside(23);
+	m.reside(23);
+	m.reside(24);
+	m.reside(100);
+	m.reside(101);
+
+	int l = m.length();
+	CHECK_EQUAL( l, 373 );
+}
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

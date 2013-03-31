@@ -1,0 +1,8 @@
+== 추천 책 ==
+ 준석씨, 전에 얘기한 그림책 이름이 뭐예요? [ParkPD]
+  [http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788995316825&orderClick=LAG 발상과 표현 기법]
+  [http://www.amazon.com/Rapid-Viz-Third-Method-Visualitzation/dp/159863268X/ref=sr_1_2?ie=UTF8&s=books&qid=1212209847&sr=8-2 Rapid Viz, Third Edition: A New Method for the Rapid Visualitzation of Ideas 원서는 3판이 나왔군요.]
+ [http://blog.insightbook.co.kr/entry/%EB%B9%84%EB%8F%99%EA%B8%B0%EC%A0%81-%EC%84%B8%EC%83%81%EC%9C%BC%EB%A1%9C-%EB%96%A0%EB%82%98%EB%8A%94-%EC%97%AC%ED%96%89-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%96%BC%EB%9E%ADProgramming-Erlang 프로그래밍 얼랭 드디어 나오는군요.] [ParkPD]
+ [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200302170006 자바 병행 프로그래밍 디자인 원리와 패턴:Concurrent Programming in Java 2ed.Design Principles and Patterns]
+   [http://kangcom.com/common/bookinfo/bookinfo.asp?sku=199912290002 원서]
+ [UML]

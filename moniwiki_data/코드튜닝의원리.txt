@@ -1,0 +1,38 @@
+= 시간 단축을 위한 공간 규칙 =
+ * Data Structure Argumentation
+ * Store Precomputed Results
+ * Caching
+ * Lazy Evaluation
+
+= 공간 절약을 위한 시간 규칙 =
+ * Packing
+ * Interpreters
+
+= 루프 규칙 =
+ * Code Motion Out of Loops
+ * Combining Tests
+ * Loop Unrolling
+ * Transfer-Driven Loop Unrolling
+ * Unconditional Branch Removal
+ * Loop Fusion
+
+= 논리 규칙 =
+ * Exploit Algebraic Identities
+ * Short-Circuilting Monotone Functions
+ * Reordering Tests
+ * Precompute Logical Functions
+ * Boolean Variable Elimination
+
+= 프로시저 규칙 =
+ * Collapsing Function Hierarchies
+ * Exploit Common Cases
+ * Coroutines
+ * Transformations on Recursive Function
+ * Parallelism
+
+= 수식 규칙 =
+ * Compile-Time Initialization
+ * Exploit Algebraic Identities
+ * Common Subexpression Elimination
+ * Pairing Computation
+ * Exploit Word Parallelism

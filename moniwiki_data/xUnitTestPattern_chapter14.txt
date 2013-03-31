@@ -1,0 +1,6 @@
+{{{#!html
+<div style="width:425px" id="__ss_5065782"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/phoenixex/x-unit-14" title="X unit 14장">X unit 14장</a></strong><object id="__sse5065782" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=xunit14-100827002039-phpapp01&stripped_title=x-unit-14" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse5065782" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=xunit14-100827002039-phpapp01&stripped_title=x-unit-14" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/phoenixex">Park Min Wook</a>.</div></div>
+}}}
+
+
+

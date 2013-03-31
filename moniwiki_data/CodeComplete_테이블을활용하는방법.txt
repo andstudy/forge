@@ -1,0 +1,49 @@
+== 직접 접근 방식 ==
+
+== 인덱스 접근 방식 ==
+데이타 응집도가 낮을 때, 메모리 가용량이 작을 때
+
+== 단계적 접근 방식 ==
+
+{{{
+// 단계적 테이블 검색을 수행하는 C++ 예제
+TCHAR GetGrade(const int score)
+{
+	_ASSERT(0 <= score && score <= 100);
+
+	const int GradeRange = 5;
+	double rangeLimit[GradeRange] = {50.0, 65.0, 75.0, 90.0, 100.0};
+	TCHAR grades[GradeRange] = {'F', 'D', 'C', 'B', 'A'};
+
+	for (int i = 0; i < GradeRange - 1; ++i)
+	{
+		if (score < rangeLimit[i])
+		{
+			return grades[i];
+		}
+	}
+
+	return 'A';
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	srand((unsigned int)time(NULL));
+
+	for (int i = 0; i < 10; ++i)
+	{
+		int score = rand() % 100;
+		cout << GetGrade(score);
+	}
+
+	return 0;
+}
+}}}
+
+== 체크 리스트 ==
+ * Have you considered table-driven methods as an alternative to complicated logic? 
+ * Have you considered table-driven methods as an alternative to complicated inheritance structures? 
+ * Have you considered storing the table's data externally and reading it at run time so that the data can be modified without changing code? 
+ * If the table cannot be accessed directly via a straightforward array index (as in the Age example), have your put the access-key calculation into a routine rather than duplicating the index calculation in the code? 
+
+http://www.cc2e.com/content/18-TableDrivenMethods/1872-checklistTableMethods.php

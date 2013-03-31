@@ -1,0 +1,11 @@
+[모니위키]
+
+[http://bluebrown.net/moniwiki/wiki.php/FrontPage bluebrown 위키 - 조만간 여기와 같은 테마를 쓰면 합니다]
+
+[http://www.zdnet.co.kr/itbiz/column/anchor/sypark/0,39030431,10033233,00.htm 간단한 위키 소개]
+[http://math.gsnu.ac.kr/mathwiki/_c0_a7_c5_b0_bc_d2_b0_b3_b1_e2_bb_e7 김창준씨가 쓴 위키 소개]
+
+{{{#!html
+<object width="425" height="350"><param name="movie" value="http://www.youtube.com/v/-dnL00TdmLY"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/-dnL00TdmLY" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
+}}}
+WiKi란...

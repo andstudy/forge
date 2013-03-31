@@ -1,0 +1,69 @@
+[POSA1]
+[[TableOfContents]]
+= Publisher-Subscriber =
+ * Publisher-subscriber 디자인 패턴은 관계된 component들의 동기화된 상태를 유지하도록 도와준다.
+ * 상태변화에 대해 하나의 publisher가 여러수의 subsciber에게 notify한다.
+
+== Example ==
+
+== Context ==
+
+== Problem ==
+ * 한곳에서의 변화가 다른 component들에게 영향을 미친다.(ex. Data 가 변화면 모든 view가 updated 되어야 한다.)
+  * 하나이상의 component 는 특정 component에게 상태 변화를 notify 한다.
+  * The number and identities of dependent components is not known a priori, or may even change over time.
+  * 새로운 정보에 대한 Polling 은 불가능하다. 
+  * Publisher나 그에 종속된 것들의 정보는 tightly coupled 하지 않는다.
+
+== Solution ==
+ * Publisher-Subscriber 패턴.
+  * 한 전용 component 는 publisher의 역할을 한다.
+  * 변화에 의존적인 모든 component들은 subscriber들이다.
+  * Publisher는 현재 subscribed 하는 component들의 registry를 관리한다. 
+  * 언제든지 원하면 publisher에 의해 제공되어진 interface를 사용해서 subscriber가 될 수 있다.
+  * 비슷하게 unsubscribe 할 수도 있다.
+  * 상태가 변화면 모든 subscriber들에게 notification을 보낸다.
+  
+ * 패턴이 제공하는 자유도
+  * Abstract base classes 만을 알고 있으면 된다.
+  * Publisher 는 observer들에게 알려줄 상태 변화를 결정할 수 있다. (notify 를 하기 전에 several changes queue 할 수 있다)
+  * 하나의 object 는 여러 publisher에데 subscriber 가 될 수 있다.
+  * 하나의 object 는 publisher와 subscriber 둘 다가 될 수 있다.
+  * Subscription 과 Notification 뒤는 event type에 따라 구별될 수 있다. (원하는 것만 메시지를 받을 수 있다)
+  * Publisher 는 선택되어진 데이터를 보낼 수 있다. 또는 notification 만 보내고 무엇이 변했는가에 대한 책임은 subscriber에게 줄 수도 있다.
+
+ * 2가지 모델
+  * Push
+   * Publisher가 모든 data 를 보낸다.
+  * Pull
+   * Publisher 는 event 만 notify 하고 subscriber 가 원하는 data 를 가지고 간다.
+  * 복잡한 데이터가 변할 때 push 모델을 사용하는 것은 안 좋은 선택이다.
+
+== structure ==
+
+== Dynamics ==
+
+== Implementation ==
+
+== Variants ==
+ * Gatekeeper. 
+  * 분산 시스템에 적용.
+  * Remote subscriber에 notify.
+ * Event Channel
+  * OMG 에 의해 제안
+  * 분산 system에 targeted
+  * Publisher 와 subscriber 사이에 놓임. (p342)
+  * Event channel chain 구성해 Event filtering 이나 storing 할 수 있다.
+ * Producer-consumer style 
+  * Producer -> buffer  -> consumer
+ * n:n producer-consumer
+
+== Known Uses ==
+ * Observer Pattern 위에 변형과 관점을 추가한다.
+
+== Consequences ==
+=== Benefits ===
+=== Liabilities ===
+=== Benefits & Liabilities ===
+
+== Related Patterns ==

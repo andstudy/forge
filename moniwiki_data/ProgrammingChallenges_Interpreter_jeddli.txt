@@ -1,0 +1,322 @@
+{{{
+#ifdef _UNIT_TEST
+#include "UnitTest++.h"
+#endif
+
+#include <iostream>
+
+
+class CInterpreter
+{
+public:
+	CInterpreter()
+	{
+		Reset();
+	};
+
+	void Reset()
+	{
+		m_CurrentIP = 0;
+
+		memset( m_Register, 0, sizeof( m_Register) );
+		memset( m_Ram, 0, sizeof( m_Ram) );
+	}
+
+	void SetRegister( int index, int value )
+	{
+		m_Register[index] = value;
+	}
+
+	int GetRegister( int index )
+	{
+		return m_Register[index];
+	}
+
+	void SetRam( int address, int value )
+	{
+		m_Ram[address] = value;
+	}
+
+	int GetRamData( int address )
+	{
+		return m_Ram[address];
+	}
+
+	void SetIP( int ip )
+	{
+		m_CurrentIP = ip;
+	}
+
+	int GetCurrentIP()
+	{
+		return m_CurrentIP;
+	}
+
+	int Execute()
+	{
+		SetIP(0);
+
+		int excutedIPCount = 0;
+		while( Do( m_Ram[m_CurrentIP++] ) )
+		{
+			excutedIPCount++;
+		}
+
+		excutedIPCount++;
+		return excutedIPCount;
+	}
+
+
+	bool Do( int instruction )
+	{
+		int opcode = instruction / 100;
+		int operand1 = ( instruction % 100 ) / 10;
+		int operand2 = instruction % 10;
+
+		switch( opcode )
+		{
+			case 0:
+				{
+					int secondReg = m_Register[ operand2 ];
+					if( secondReg )
+					{
+						int newPos = m_Register[ operand1 ];
+						SetIP( newPos );
+					}
+				}
+				break;
+			case 1: // halt
+				{
+					if( operand1 == 0 && operand2 == 0 )
+						return false;
+				}
+				break;
+			case 2: // set register
+				{
+					m_Register[operand1] = operand2;
+				}
+				break;
+			case 3: // add register
+				{
+					m_Register[operand1] += operand2;
+					if( m_Register[operand1] > 999 )
+						m_Register[operand1] -= 1000;
+				}
+				break;
+			case 4: // mul
+				{
+					m_Register[operand1] *= operand2;
+					if( m_Register[operand1] > 999 )
+						m_Register[operand1] -= 1000;
+				}
+				break;
+			case 5: // set register by other register
+				{
+					m_Register[operand1] = m_Register[operand2];
+				}
+				break;
+			case 6: // add register by other register value
+				{
+					m_Register[operand1] += m_Register[operand2];
+					if( m_Register[operand1] > 999 )
+						m_Register[operand1] -= 1000;
+				}
+				break;
+			case 7: // mul register by other register value
+				{
+					m_Register[operand1] *= m_Register[operand2];
+					if( m_Register[operand1] > 999 )
+						m_Register[operand1] -= 1000;
+				}
+				break;
+			case 8: // // set register by ram value
+				{
+					m_Register[operand1] = m_Ram[ m_Register[operand2] ];
+				}
+				break;
+			case 9: // set ram data to .. register value
+				{
+					m_Ram[ m_Register[operand2] ] = m_Register[ operand1 ];
+					if( m_Ram[ m_Register[operand2] ] > 999 )
+						m_Ram[ m_Register[operand2] ] -= 1000;
+				}
+				break;
+		}
+
+		return true;
+	}
+
+private:
+
+	int			m_CurrentIP;
+
+	int			m_Register[10];
+	int			m_Ram[1000];
+};
+
+
+
+int main()
+{
+#ifdef _UNIT_TEST
+	UnitTest::RunAllTests();	
+#endif
+
+	int instruction;
+	int caseCount;
+	
+	std::string line;
+	getline( std::cin, line );
+	caseCount = atoi( line.c_str() );
+	
+
+	// one blank
+	getline( std::cin, line );
+	
+
+	CInterpreter interpreter;
+	for( int i = 0; i < caseCount; i++ )
+	{	
+		interpreter.Reset();
+		getline( std::cin, line );
+	
+
+		int address = 0;
+		while( !line.empty() )
+		{	
+			instruction = atoi( line.c_str() );
+			interpreter.SetRam( address++, instruction );				
+
+			getline( std::cin, line );	
+		}	
+
+		int execCount = interpreter.Execute();
+		if( i > 0 )
+			std::cout << std::endl;
+		std::cout << execCount << std::endl;
+	}	
+
+	return 0;
+}
+
+
+
+#ifdef _UNIT_TEST
+
+TEST( registerTest )
+{
+	CInterpreter interpreter;
+
+	interpreter.SetRegister( 9, 3 );
+	int value = interpreter.GetRegister( 9 );
+
+	CHECK_EQUAL( 3, value );
+
+	/// register test
+	interpreter.Do( 239 );
+	value = interpreter.GetRegister( 3 );
+
+	CHECK_EQUAL( 9, value );
+
+	/// add register
+	interpreter.Do( 333 );
+	value = interpreter.GetRegister( 3 );
+
+	CHECK_EQUAL( 12, value );
+
+	/// mul register
+	interpreter.Do( 432 );
+	value = interpreter.GetRegister( 3 );
+
+	CHECK_EQUAL( 24, value );
+
+	/// set register by other register value
+	interpreter.SetRegister( 4, 7 );
+	interpreter.Do( 534 );
+	value = interpreter.GetRegister( 3 );
+
+	CHECK_EQUAL( 7, value );
+
+	/// add register by other register value
+	interpreter.SetRegister( 4, 3 );
+	interpreter.Do( 634 );
+	value = interpreter.GetRegister( 3 );
+
+	CHECK_EQUAL( 10, value );
+
+	/// mul register by other register value
+	interpreter.SetRegister( 4, 2 );
+	interpreter.Do( 734 );
+	value = interpreter.GetRegister( 3 );
+
+	CHECK_EQUAL( 20, value );
+}
+
+TEST( ramTest )
+{
+	CInterpreter interpreter;
+
+	interpreter.SetRam( 10, 253 );
+	int value = interpreter.GetRamData( 10 );
+
+	CHECK_EQUAL( 253, value );
+
+	interpreter.SetRegister( 5, 10 );
+	interpreter.SetRegister( 3, 5 );
+
+	// set register by ram value
+	interpreter.Do( 835 );
+	value = interpreter.GetRegister( 3 );
+	CHECK_EQUAL( 253, value );
+
+	interpreter.Do( 953 );
+	value = interpreter.GetRamData( 253 );
+	CHECK_EQUAL( 10, value );
+
+	interpreter.SetIP(10);
+	value = interpreter.GetCurrentIP();
+	CHECK_EQUAL( 10, value );	
+
+	// if register 5 is not zero
+	interpreter.Do( 35 );
+	value = interpreter.GetCurrentIP();
+	CHECK_EQUAL( 253, interpreter.GetRegister( 3 ) );
+	CHECK_EQUAL( 253, value );
+
+	// if register 8 is zero
+	interpreter.SetIP( 20 );
+	interpreter.SetRegister( 8, 0 );	
+	interpreter.Do( 38 );
+	value = interpreter.GetCurrentIP();
+	CHECK_EQUAL( 20, value );
+}
+
+TEST( instructionTest )
+{
+	CInterpreter interpreter;
+
+	int ramAddress = 0;
+	interpreter.SetRam( ramAddress++, 299 );
+	interpreter.SetRam( ramAddress++, 492 );
+	interpreter.SetRam( ramAddress++, 495 );
+	interpreter.SetRam( ramAddress++, 399 );
+	interpreter.SetRam( ramAddress++, 492 );
+	interpreter.SetRam( ramAddress++, 495 );
+	interpreter.SetRam( ramAddress++, 399 );
+	interpreter.SetRam( ramAddress++, 283 );
+	interpreter.SetRam( ramAddress++, 279 );
+	interpreter.SetRam( ramAddress++, 689 );
+	interpreter.SetRam( ramAddress++, 78 );
+	interpreter.SetRam( ramAddress++, 100 );
+	interpreter.SetRam( ramAddress++, 0 );
+	interpreter.SetRam( ramAddress++, 0 );
+	interpreter.SetRam( ramAddress++, 0 );
+	
+	int executedCount = interpreter.Execute();
+
+	CHECK_EQUAL( 16, executedCount );
+}
+
+#endif
+
+}}}

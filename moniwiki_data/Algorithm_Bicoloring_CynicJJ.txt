@@ -1,0 +1,196 @@
+ * Vertex 는 NONE, BLUE, RED 3가지 상태를 가짐
+ * Edge 는 2개의 Vertex index 로 이루어짐
+   * 따로 클래스로 만들지는 않았음
+ * !ProcessEdge() 에서 2개의 Vertex 색을 다르게 만든다
+ * 숨겨진 제약사항 - Edge 처리 순서를 지켜야 한다
+   * 낮은 번호의 Vertex 부터 처리 해야함
+
+ * 리팩토링의 여지가 더 있으나 귀찮아서...
+
+[[TableOfContents([maxdepth])]]
+
+== Bicoloring ==
+=== Bicoloring.vb ===
+{{{
+Public Class Bicoloring
+
+	Private _vertexes As List(Of Vertex) = New List(Of Vertex)
+	Private _edges As List(Of List(Of Integer)) = New List(Of List(Of Integer))
+
+	Function GetVertex(ByVal index As Integer) As Vertex
+		Return _vertexes(index)
+	End Function
+
+	Sub SetupEdges(ByVal inputs As List(Of String))
+		_edges.Clear()
+
+		Dim separator() As Char = {" "c}
+
+		Dim edgeCount = Integer.Parse(inputs(1))
+		For i As Integer = 1 To edgeCount
+			Dim input() As String = inputs(i + 1).Split(separator, StringSplitOptions.RemoveEmptyEntries)
+
+			Dim first As Integer = Integer.Parse(input(0))
+			Dim second As Integer = Integer.Parse(input(1))
+
+			Dim edge As List(Of Integer) = New List(Of Integer)
+			edge.Add(Math.Min(first, second))
+			edge.Add(Math.Max(first, second))
+
+			_edges.Add(edge)
+		Next
+	End Sub
+
+	Function IsBicolorable(ByVal inputs As List(Of String)) As Boolean
+		Dim vertexCount As Integer = Integer.Parse(inputs(0))
+		SetupVertexes(vertexCount)
+
+		SetupEdges(inputs)
+
+		ProcessAllEdges(_edges)
+
+		Dim result As Boolean = IsBicolor(_edges)
+		Return result
+	End Function
+
+	Function IsBicolor(ByVal edges As List(Of List(Of Integer))) As Boolean
+		For Each edge As List(Of Integer) In edges
+			Dim first As Vertex = GetVertex(edge(0))
+			Dim second As Vertex = GetVertex(edge(1))
+
+			If first.Color = second.Color Then
+				Return False
+			ElseIf first.Color = COLOR.NONE Or second.Color = COLOR.NONE Then
+				Return False
+			End If
+		Next
+		Return True
+	End Function
+
+	Sub ProcessAllEdges(ByVal edges As List(Of List(Of Integer)))
+		For i As Integer = 0 To _edges.Count - 1
+			For Each edge As List(Of Integer) In edges
+				If edge(0) = i Then
+					ProcessEdge(GetVertex(edge(0)), GetVertex(edge(1)))
+				End If
+			Next
+		Next
+	End Sub
+
+	Sub SetupVertexes(ByVal count As Integer)
+		_vertexes.Clear()
+		For i As Integer = 1 To count
+			_vertexes.Add(New Vertex)
+		Next
+	End Sub
+
+	Function GetVertexCount() As Integer
+		Return _vertexes.Count
+	End Function
+
+	Sub ProcessEdge(ByVal first As Vertex, ByVal second As Vertex)
+		If first.Color = COLOR.RED And second.Color = COLOR.NONE Then
+			second.SetColor(COLOR.BLUE)
+		ElseIf first.Color = COLOR.BLUE And second.Color = COLOR.NONE Then
+			second.SetColor(COLOR.RED)
+		ElseIf first.Color = COLOR.NONE And second.Color = COLOR.RED Then
+			first.SetColor(COLOR.BLUE)
+		ElseIf first.Color = COLOR.NONE And second.Color = COLOR.BLUE Then
+			first.SetColor(COLOR.RED)
+		ElseIf first.Color = COLOR.NONE And second.Color = COLOR.NONE Then
+			first.SetColor(COLOR.BLUE)
+			second.SetColor(COLOR.RED)
+		End If
+	End Sub
+End Class
+}}}
+
+=== COLOR.vb ===
+{{{
+Public Enum COLOR
+	NONE
+	BLUE
+	RED
+End Enum
+}}}
+
+=== Vertex.vb ===
+{{{
+Public Class Vertex
+
+	Private _color As COLOR = Basic.COLOR.NONE
+	ReadOnly Property Color()
+		Get
+			Return _color
+		End Get
+	End Property
+
+	Sub SetColor(ByVal aColor As COLOR)
+		_color = aColor
+	End Sub
+End Class
+}}}
+
+=== BiColoringTest.vb ===
+{{{
+<TestClass()> _
+Public Class BicoloringTest
+
+	Private _bicolor As Bicoloring = New Bicoloring
+	Private _inputs1 As List(Of String) = New List(Of String)
+	Private _inputs2 As List(Of String) = New List(Of String)
+	Private _inputs3 As List(Of String) = New List(Of String)
+
+	Public Sub New()
+		_inputs1.Add("3")
+		_inputs1.Add("3")
+		_inputs1.Add("0 1")
+		_inputs1.Add("1 2")
+		_inputs1.Add("2 0")
+
+		_inputs2.Add("9")
+		_inputs2.Add("8")
+		_inputs2.Add("0 1")
+		_inputs2.Add("0 2")
+		_inputs2.Add("0 3")
+		_inputs2.Add("0 4")
+		_inputs2.Add("0 5")
+		_inputs2.Add("0 6")
+		_inputs2.Add("0 7")
+		_inputs2.Add("0 8")
+
+		_inputs3.Add("4")
+		_inputs3.Add("3")
+		_inputs3.Add("0 2")
+		_inputs3.Add("2 1")
+		_inputs3.Add("3 0")
+	End Sub
+
+	<TestMethod()> _
+	Public Sub SetVertexCountTest()
+		_bicolor.SetupVertexes(3)
+		Assert.AreEqual(3, _bicolor.GetVertexCount())
+		_bicolor.SetupVertexes(9)
+		Assert.AreEqual(9, _bicolor.GetVertexCount())
+	End Sub
+
+	<TestMethod()> _
+	Public Sub ProcessEdgeTest()
+		_bicolor.SetupVertexes(2)
+		Dim first As Vertex = _bicolor.GetVertex(0)
+		Dim second As Vertex = _bicolor.GetVertex(1)
+		second.SetColor(COLOR.BLUE)
+
+		_bicolor.ProcessEdge(first, second)
+		Assert.AreEqual(COLOR.RED, first.Color)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsBicolorableTest()
+		Assert.IsFalse(_bicolor.IsBicolorable(_inputs1))
+		Assert.IsTrue(_bicolor.IsBicolorable(_inputs2))
+		Assert.IsTrue(_bicolor.IsBicolorable(_inputs3))
+	End Sub
+
+End Class
+}}}

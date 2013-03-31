@@ -1,0 +1,5 @@
+{{{#!html
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="500" height="420"><param name="movie" value="http://filefarm.storyq.net/SlideView.swf?boxKey=001238341069009351" ></param> <param name='allowFullScreen' value='true' /><param name='allowScriptAccess' value='always' /><embed src="http://filefarm.storyq.net/SlideView.swf?boxKey=001238341069009351" type="application/x-shockwave-flash" allowFullScreen='true' allowScriptAccess='always' width="500" height="420" ></embed></object>
+}}}
+== 참고 ==
+루비로 해 보는 [ConstraintProgramming]. amb 등장합니다.

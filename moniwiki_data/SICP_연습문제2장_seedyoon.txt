@@ -1,0 +1,82 @@
+== 문제 2.74 ==
+
+{{{#!gcode scheme 
+a
+;get-record 프로시저
+;인사파일에서 지정된 직원 레코드를 뽑애낼 수있음
+;저마다 구조가 다른 프로시저에 적용되어야 
+
+(define (get-record file employee_name)
+ ((get 'get-record )) file employee_name)
+
+b
+; 부서 인사 파일에서 봉급정보를 찾아볼수 있는 get-selary 프로시저
+; 부서 인사 파일
+(define (get-salary file )
+  ((get 'get-salary file ))
+  
+c  
+; 모든 부서의 파일을 뒤지고
+; 어떤 직원의 기록을 찾을 수 있도록 프로시저 구현
+; 직원이름, 모든 부서 파일의 리스트가 인자.
+(define (find-employee-record file-list employee-name)
+  (if (null? file-list)
+      (error 'NotFound employee)
+      (or (get-record (car file-list) employee-name)
+          (find-employee-record (cdr file-list) employee-name))))
+
+d
+; 합병시 바뀔 점
+; 새로운 부서리스트 파일(합병 회사)을 추가
+; 새로 추가된 부서별 프로시저를 정의 해야 put 해준다.
+; 나머지는 다른점이 없음 
+}}}
+
+== 문제 2.75 ==
+{{{#!gcode scheme 
+(define (make-from-mag-ang r a)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part) (* r (cos a)))
+          ((eq? op 'imag-part) (* r (sin a)))
+          ((eq? op 'magnitude) r)
+          ((eq? op 'angle) a)
+          (else
+           (error "Unknown op -- MAKE-FROM-MAG-ANG" op))))
+  dispatch)
+}}}
+
+== 문제 2.76 ==
+{{{#!gcode scheme 
+; 주관적인 의견으로 틀릴수 있습니다 ㅡ_ㅜ
+직접 나눠 맡기는 방식 
+ - 확실한 역활의 분리는 되지만 각 연산과 프로시저의 이름과 정의를 모두 해 주어야 함
+ - 사용하고자 하는 타입과 연산을 전체 시스템에서 알아야 함
+ - c global
+ 
+ 
+데이터 중심 방식
+ - 타입에 따라 인터페이스를 정의, 해당 데이터 내의 프로시저및 연산을 사용
+ - 해당 꾸러미 내에서 어떤 연산을 처리할지 타입 정의에 의해 실행.
+ - 추가되는 데이터 타입에 따라 연산 및 프로시저를 정의해 주어야 함
+ - c++ Class  
+
+메시지 패싱 방식
+ - Dispathch 연산을 통해서 각각에 맞는 프로시저 및 연산을 실행
+ - 메시지 타입에 의해 인터페이스에 정의된 연산 및 프로시저를 실행
+ - 실행되는 부분에 어떤 데이터가 있는지 알 필요 없음?
+ - 일반화된 프로시저에서 인자를 오로지 하나밖에 받지 못한다.
+ - socket 통신 및 window msg
+
+
+
+새로운 데이터 타입을 집어넣어야 할 일이 많다면? 어느방식?
+	한가지 데이터 내부에서 해당 데이터에 관련된 처리가 모두 이루어져야 된다.
+	즉, 데이터 타입에 따라 해야 할 일들이 분리되어야 함(세로 요약의 경계(p223)) 
+	데이터 중심 방식을 사용하는 것이 나음
+
+
+새로운 연산을 덧붙이는 경우가 많을때는?
+	동일한 인터페이스로 정의하여서 넘어온 프로시저만을 확인하여서 사용. 
+	다른 데이터와의 상관 없이 추가, 변경이 용이한 메시지 패싱 방식으로 하는것이 낫다.
+	
+}}}

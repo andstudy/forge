@@ -1,0 +1,97 @@
+[http://aeternum.egloos.com/tag/DomainDrivenDesign Eternity's Chit-Chat - DomainDrivenDesign 전문 블로그]
+[http://cskstory.tistory.com/ DDD quickly 역자 - 최수경님 블로그]
+
+[http://px.tistory.com/1769 2011 JCO 발표자료(도메인주도설계, Domain-Driven Design) 공유] 
+[http://px.tistory.com/1763 Domain-Driven Design 개요]
+[http://www.infoq.com/minibooks/domain-driven-design-quickly Domain Driven Design Quickly]
+[http://en.wikipedia.org/wiki/Domain-driven_design 위키 백과] 
+[http://aeternum.egloos.com/category/Domain-Driven%20Design 이터너티님의 DDD 적용 시리즈]
+[http://thinkddd.com/assets/2/Domain_Driven_Design_-_Step_by_Step.pdf DDD Step By Step PDF]
+ [http://dddsample.sourceforge.net/ 샘플 코드]
+커뮤니티 
+  http://www.domaindrivendesign.org/ 
+  http://tech.groups.yahoo.com/group/domaindrivendesign/ 
+[http://domainlanguage.com/ddd/whirlpool/ DOMAIN LANGUAGE MODEL EXPLORATION PROCESS - 에릭에반스 강연]
+[http://www.domaindrivendesign.org/library/evans_2009_1 Eric Evans: What I've learned about DDD since the book]
+[http://www.domaindrivendesign.org/events/qcon2008SF/eric_evans/index.html Eric Evans on the State of the Art in DDD]
+[http://www.methodsandtools.com/archive/archive.php?id=97 An Introduction to Domain Driven Design - Dan Haywood, Haywood Associates Ltd]
+[http://aeternum.egloos.com/category/Domain-Driven%20Design Eternity's Chit-Chat - 카테고리 : Domain-Driven Design]
+[http://vimeo.com/13824218 7 Reasons Why DDD Projects Fail - Video Vimeo]
+ [http://blog.lowendahl.net/?p=287 NDC2010: Greg Young – 7 reasons why DDD projects #fail]
+[http://msdn.microsoft.com/ko-kr/magazine/dd419654.aspx msdn - DDD(Domain Driven Design) 소개 - David Laribee]
+
+= 참석자 =
+ * 최기원 최유림 최성기 이재정 안명환
+ * 박일 박정범 전효성 박종석 이성은
+ * 채수원(시작 발표 예약) 이영복 이영권(시작 발표 예약) 유장혁 변경숙
+ * 이수안 현수명 김명관 김한솔 조언식
+ * 오종빈
+ 
+== 발표자료 ==
+ * [1장 지식탐구]
+ * [2장 의사소통과 언어 사용]
+ * [3장 모델과 구현의 연계]
+ * [4장 도메인의 격리]
+ * [5장 소프트웨어에서 표현되는 모델]
+ * [5장 소프트웨어에서 표현되는 모델 서비스]
+ * [wiki:DomainDrivenDesign/6장 6장 도메인 객체의 생명주기]
+ * [wiki:DomainDrivenDesign/Ch7UsingTheLanguage 7장 Using the Language]
+ * [8장 도약]
+ * [9장 암시적인 개념을 명확하게]
+ * [wiki:DomainDrivenDesign/Ch12_13 12,13장 모델과 디자인패턴의 연결]
+ * [14장 모델의 무결성 유지]
+ * [15장 디스틸레이션]
+ * [16장 대규모 구조]
+ * [17장 전략의 종합]
+= 발표 순서 =
+신청자 23명
+
+2011.08.20 (참석자 20명)
+[DomainDrivenDesign/시작발표 ]
+당근과 채찍(http://www.slideshare.net/jongsuknim/ss-11032223)
+
+2011.08.27 (참석자 19명)
+1 : 김명관
+2 : 이영권
+
+2011.09.03 (참석자 15명)
+3 : 김한솔
+4 : 최성기
+5+ : 안명환, 이재정
+
+2011.09.17 (참석자 10명)
+6+ : 유장혁
+7 : 박일
+8 : 이수안
+9 : 전효성
+
+2011.09.24 (참석자 9명)
+10 : 채수원
+11 : 박종석
+12, 13 : 현수명
+14 : 최기원
+
+2011.10.01 (13명)
+15 : 김성안
+16  : 박상혁
+17 :  오종빈
+
+
+= 회비 =
+|| 날짜 || 수입 || 지출 || 잔고|| 비고||
+|| 이월금 ||  ||  || 142,000 || ||
+|| 2011.08.20 || 650,000 || || 792,000 || 회비입금(이영권,변경숙,이년복,박정범,박일,안명환,최유림,이성은,이재정,유장혁,박종석,최성기,현수명) ||
+|| 2011.08.20 || || 150,000 || 642,000 || 토즈이용 ||
+|| 2011.08.20 || || 20,000 || 622,000 || 초청강의선물( 도메인 주도 설계란 무엇인가? : 쉽고 간략하게 이해하는 DDD 역자분. 최수경님) ||
+|| 2011.08.27 || 200,000 || || 822,000 || 회비입금(박상혁,김명관,채수원,전효성) ||
+|| 2011.08.27 || || 150,000 || 672,000 || 토즈이용 ||
+|| 2011.09.03 || 100,000 || || 772,000 || 회비입금(김한솔,최기원) ||
+|| 2011.09.03 || || 150,000 || 622,000 || 토즈이용 ||
+|| 2011.09.17 || 100,000 || || 722,000 || 회비입금(조언식,김성안) ||
+|| 2011.09.17 || || 167,250 || 554,750 || 토즈이용 ||
+|| 2011.09.24 || || 169,500 || 385,250 || 토즈이용 ||
+|| 2011.10.01 || 50,000 || || 435,250 || 회비입금(오종빈) ||
+|| 2011.10.01 || || 152,550 || 282,700 || 토즈이용 (기업회원 가입시작. 수원님 감사합니다) ||
+|| 2011.10.01 || || 291,000 || -8,300 || 책거리(초만원) ||
+|| 2011.10.06 || 50,000 || || 41,700 || 회비입금(이수안) ||
+

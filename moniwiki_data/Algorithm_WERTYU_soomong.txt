@@ -1,0 +1,93 @@
+쉬운것도 Wrong Answer 라는 -_-...
+ * Q 입력시 = 나온다고 가정하는게 맞는건지 모르겠네요 - 정희종
+
+ * KeyboardMain.java
+{{{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class KeyboardMain {
+
+	private String key = "`01234567890-=QWERTYUIOP[]\\ASDFGHJKL;'ZXCVBNM,./"; 
+	
+	public static void main(String[] args)
+	{
+		String in;
+		KeyboardMain k = new KeyboardMain();
+		
+		while((in = ReadLine()) != null)
+		{
+			System.out.println(k.reviseKey(in));
+		}
+	}
+	
+
+	public char reviseKeyChar(char in)
+	{
+		int index;
+		
+		if( in == ' ' || (index = key.indexOf(in)) == -1 )
+			return in;
+		else
+			return key.charAt(index-1);
+	}
+	
+	public String reviseKey(String in) 
+	{
+		String result=  "";
+		
+		for(int i=0; i< in.length(); i++)
+		{
+			char ch = this.reviseKeyChar(in.charAt(i));
+			result = result.concat(Character.toString(ch));
+		}
+	
+		return result; 
+	}	
+	
+	public static String ReadLine()
+	{
+		String data = null;
+		
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			System.out.println("IOException " +e);
+		}
+		
+		return data;		
+	}
+	
+}
+
+}}}
+
+ * KeyboardTest.java
+{{{
+import junit.framework.TestCase;
+
+public class KeyboardTest extends TestCase {
+
+	KeyboardMain k = new KeyboardMain();
+	
+	public void testReviseKeyChar() {
+		assertEquals("1",k.reviseKeyChar('Q'),'=');
+		assertEquals("1",k.reviseKeyChar('W'),'Q');
+		assertEquals("1",k.reviseKeyChar('E'),'W');
+		assertEquals("1",k.reviseKeyChar('R'),'E');
+		assertEquals("1",k.reviseKeyChar('S'),'A');
+	}
+
+	public void testReviseKey() {
+		assertEquals("1","I AM FINE TODAY.",k.reviseKey("O S, GOMR YPFSU/"));
+		assertEquals("1","WHAT A WONDERFUL WORLD",k.reviseKey("EJSY S EPMFRTGI; EPT;F"));
+		assertEquals("1","TEST ONE MORE   [TIME]",k.reviseKey("YRDY PMR ,PTR   ]YO,R\\"));
+	}
+	
+}
+}}}

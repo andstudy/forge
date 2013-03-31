@@ -1,0 +1,15 @@
+= ManagingHumans/chap20~24 =
+{{{#!html
+<div style="width:425px" id="__ss_6101699"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/mkkim1129/managinghumanschap2024" title="ManagingHumans/chap20~24">ManagingHumans/chap20~24</a></strong><object id="__sse6101699" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-101210090113-phpapp01&rel=0&stripped_title=managinghumanschap2024&userName=mkkim1129" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6101699" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-101210090113-phpapp01&rel=0&stripped_title=managinghumanschap2024&userName=mkkim1129" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mkkim1129">Myung Kwan Kim</a>.</div></div>
+}}}
+
+= ManagingHumans/chap25~29 =
+
+{{{#!html
+<div style="width:425px" id="__ss_6134055"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jun0683/managinghumanschap2529" title="ManagingHumans/chap25~29">ManagingHumans/chap25~29</a></strong><object id="__sse6134055" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=managinghumans2529-101212182030-phpapp02&stripped_title=managinghumanschap2529&userName=jun0683" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6134055" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=managinghumans2529-101212182030-phpapp02&stripped_title=managinghumanschap2529&userName=jun0683" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jun0683">jun0683</a>.</div></div>
+}}}
+= ManagingHumans/chap30~34 =
+
+{{{#!html
+<div style="width:425px" id="__ss_6092267"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/dagri82/it-6092267" title="It 개발자가쓴 통쾌한 인간관리 이야기">It 개발자가쓴 통쾌한 인간관리 이야기</a></strong><object id="__sse6092267" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=it-101209114248-phpapp02&stripped_title=it-6092267&userName=dagri82" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6092267" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=it-101209114248-phpapp02&stripped_title=it-6092267&userName=dagri82" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/dagri82">dagri82</a>.</div></div>
+}}}

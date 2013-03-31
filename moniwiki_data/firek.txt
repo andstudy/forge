@@ -1,0 +1,10 @@
+이름 : 김강훈 (firek)
+직업 : 게임 서버 프로그래머
+이멜 : firek6@naver.com
+주로 쓰는 언어 : C++
+약간 아는 분야 : 루아, xml, MS_SQL
+최근 관심 분야 : TDD, object-c
+MSN : firek2@hanmail.net
+
+아직 뉴비입니다. 잘 부탁드리겠습니다.
+

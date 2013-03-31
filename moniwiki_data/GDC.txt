@@ -1,0 +1,14 @@
+=== GDC ===
+[GDC2012]
+[GDC2011]
+[GDC2010]
+[GDC2009]
+[GDC2008]
+[GDC2007]
+[GDC2004]
+ 
+=== GDC Europe ===
+ [GDCParis2008]
+ [http://ati.amd.com/developer/gdc/Tatarchuk_Data_Amplification.pdf Richer Worlds for Next Gen Games: Data Amplification Techniques Survey]
+
+[http://store.cmpgame.com/category.php?cat=72&offset=0&tpir=248 GDC Audio 찾기]

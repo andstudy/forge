@@ -1,0 +1,4 @@
+Describe 이산수학/2장_4_5 here
+{{{#!html
+<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=3394448&rel=0&stripped_title=ss-3394448" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="575" height="480"></embed>
+}}}

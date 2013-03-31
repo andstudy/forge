@@ -1,0 +1,4 @@
+#title 5장 그래프의 비밀
+{{{#!html
+<embed name="__sse3937889" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=aich5-100502093835-phpapp02&rel=0&stripped_title=gameai-chapter5" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true"  width="575" height="480"></embed>
+}}}
