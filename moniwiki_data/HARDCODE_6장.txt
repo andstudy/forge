@@ -1,0 +1,15 @@
+= 시간 있으면 설계나 합시다 =
+
+{{{#!html
+<div style="width:640px;text-align:left" id="__ss_2562388">
+<object style="margin:0px" width="640" height="480"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-091122233024-phpapp02&stripped_title=ss-2562388" />
+	<param name="allowFullScreen" value="true"/>
+	<param name="allowScriptAccess" value="always"/>
+	<embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-091122233024-phpapp02&stripped_title=ss-2562388" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="480">	</embed>
+</object>
+	<div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more 
+		<a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations </a> from 
+		<a style="text-decoration:underline;" href="http://www.slideshare.net/codevania">codevania</a>.
+		</div>
+</div>
+}}}

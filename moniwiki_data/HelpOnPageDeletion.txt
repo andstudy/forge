@@ -1,0 +1,6 @@
+== How to delete pages ==
+If enabled (see HelpOnConfiguration), you can delete pages with the {{{DeletePage}}} action. Note that deleting means to make a backup copy of the page, and then deleting the page file. This is almost like saving an empty page.
+
+What this means is that you can get back at deleted pages by using the standard mechanisms. If you enter the page name into the `!GoTo` dialog form, you'll see the usual page creation stuff, but clicking on `!PageInfo` will reveal the old version history, unless the page was purged by WikiMaster out of existence inbetween.
+----
+[[Navigation(HelpContents)]]

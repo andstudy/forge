@@ -1,0 +1,292 @@
+ Wrong Answer!! 왜?
+  * 저번과 마찬가지 입니다 ^^; PC사이트의 Status페이지 Overall Statistics에 never solved가 찍혀 있으면 UVa에 제출해서 확인하세요 - [Mastojun]
+  * http://www.programming-challenges.com/bb/viewtopic.php?t=7 이런내용도 있네요;
+
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <deque>
+#include <list>
+#include <stack>
+#include <string>
+#include <algorithm>
+#include <map>
+#include <limits>
+#include <assert.h>
+#include <iomanip>
+#include <math.h>
+
+//#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+#include <Windows.h>
+#endif
+
+using namespace std;
+
+// Minimum Spanning Tree -> Prim Algorithm 을 생각하며 풀었음.
+
+namespace ATUtil
+{
+	bool IsInRange(int value, int from, int to)
+	{
+		return (from <= value) && (value <= to);
+	}
+
+	int ConvertToIndex(char c)
+	{
+		if ('a' <= c && c <= 'z')
+		{
+			return c - 'a';
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	char ConvertToChar(int i)
+	{
+		return (char)i + 'a';
+	}
+
+#ifdef _UNIT_TEST
+	class CStopWatch
+	{
+	public:
+		CStopWatch()
+		{
+			m_StartTick = GetTickCount();		// gcc 에서 안 될 수 있으니까
+		}
+
+		~CStopWatch()
+		{
+			cout << "Time passed : " << GetTickCount() - m_StartTick << " milisec.\n";
+		}
+
+		int m_StartTick;
+	};
+#endif
+
+	typedef map<int, int> IntDB;
+	typedef vector<int> Ints;
+	typedef list<int> IntList;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+#ifdef max
+#undef max
+#endif
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+	///////////////////////////////////////////////////////////////
+	// CElephant
+	class CElephant
+	{
+	public:
+		CElephant(int i, int w, int s) 
+		: m_Index(i), m_Weight(w), m_Smart(s), m_MaxLength(1), m_pMaxSub(NULL) {}
+
+		// strict weak order 에 주의. = 에 대한 처리 필요.
+		static bool Sort(const CElephant* a, const CElephant* b)
+		{
+			if (a->m_Weight == b->m_Weight)
+			{
+				if (a->m_Smart == b->m_Smart)
+				{
+					return a->m_Index < b->m_Index;
+				}
+				else
+				{
+					return a->m_Smart > b->m_Smart;
+				}
+			}
+			else
+			{
+				return a->m_Weight < b->m_Weight;
+			}
+		}
+
+		bool IsSmallAndSmart(CElephant& o) const
+		{
+			return (m_Weight < o.m_Weight) && (m_Smart > o.m_Smart);
+		}
+
+		int m_Index;
+		int m_Weight;
+		int m_Smart;
+		int m_MaxLength;
+		CElephant* m_pMaxSub;
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CSolver
+	class CSolver
+	{
+	public:
+		enum
+		{
+			MAX_ELEPHANTS = 1000
+		};
+
+		void Input(int w, int s)
+		{
+			m_Elephants.push_back(new CElephant((int)(m_Elephants.size() + 1), w, s));
+		}
+
+		void Solve()
+		{
+			sort(m_Elephants.begin(), m_Elephants.end(), &CElephant::Sort);
+
+			m_pMaxLenNode = m_Elephants[0];			
+
+			const size_t num = m_Elephants.size();
+			for (size_t i = 0; i < num - 1; ++i)
+			{
+				for (size_t j = i + 1; j < num; ++j)
+				{
+					CElephant* pLeft = m_Elephants[i];
+					CElephant* pRight = m_Elephants[j];
+					if (pLeft->IsSmallAndSmart(*pRight))
+					{
+						if (pRight->m_MaxLength < pLeft->m_MaxLength + 1)
+						{
+							// 더 긴 sub 행렬을 찾았다.
+							pRight->m_MaxLength = pLeft->m_MaxLength + 1;
+							pRight->m_pMaxSub = pLeft;
+
+							if (m_pMaxLenNode->m_MaxLength < pRight->m_MaxLength)
+							{
+								m_pMaxLenNode = pRight;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		void PrintResult(ostream& output)
+		{
+			output << m_pMaxLenNode->m_MaxLength << "\n";
+
+			stack<int> ret;
+			CElephant* pNode = m_pMaxLenNode;
+			while(pNode)
+			{
+				ret.push(pNode->m_Index);
+				pNode = pNode->m_pMaxSub;
+			}
+
+			while (!ret.empty())
+			{
+				output << ret.top() << "\n";
+				ret.pop();
+			}
+
+			//output << "4\n" "5\n" "9\n" "7\n";
+		}
+
+		vector<CElephant*> m_Elephants;
+		CElephant* m_pMaxLenNode;
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CConsole
+	class CConsole
+	{
+	public:
+		static void ConsoleTest(istream& input, ostream& output);
+	};
+
+	void CConsole::ConsoleTest(istream& input, ostream& output)
+	{
+		CSolver s;
+		int weight, smart;
+		while (input >> weight >> smart)
+		{
+			s.Input(weight, smart);
+		}
+
+		s.Solve();
+		s.PrintResult(output);
+	};
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase()
+	{
+	}
+
+	CSolver g;
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, ConsoleTest)
+{
+	input << 
+		"6008 1300\n"
+		"6000 2100\n"
+		"500 2000\n"
+		"1000 4000\n"
+		"1100 3000\n"
+		"6000 2000\n"
+		"8000 1400\n"
+		"6000 1200\n"
+		"2000 1900\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL( 
+		"4\n"
+		"4\n"
+		"5\n"
+		"9\n"
+		"8\n",
+		output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

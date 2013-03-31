@@ -1,0 +1,14 @@
+== simple usage ==
+{{{[[Attachment(hello.png)]] or attachment:hello.png}}}
+
+[[Attachment(hello.png)]] or attachment:hello.png
+----
+[[Attachment(hello.txt)]]
+== MoniWiki extension ==
+== Image size and alignment ==
+{{{attachment:hello.png&width=200&align=left}}}
+attachment:hello.png&width=200&align=left
+
+See also UploadFile
+----
+CategoryMacro

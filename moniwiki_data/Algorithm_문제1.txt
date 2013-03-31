@@ -1,0 +1,248 @@
+= 3N + 1 =
+
+
+[ParkPD]
+
+== C++ Accept 버전 ==
+{{{
+/* @JUDGE_ID:parkpd 100 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+
+class C3n1
+{
+public:
+	static int GetCount(int n);
+	static int GetMaxCount(int from, int to);
+};
+
+int C3n1::GetCount(int n)
+{
+	int count = 1;
+	while (1 != n)
+	{
+		if (0 == (n % 2))
+		{
+			n /= 2;
+		}
+		else
+		{
+			n = n * 3 + 1;
+		}
+		count++;
+	}
+
+	return count;
+}
+
+int C3n1::GetMaxCount(int from, int to)
+{
+	if (to < from)
+	{
+		std::swap(from, to);
+	}
+
+	int maxNum = 1;
+	int num = 0;
+	for (int i = from; i <= to; ++i)
+	{
+		num = GetCount(i);
+		if (maxNum < num)
+		{
+			maxNum = num;
+		}
+	}
+
+	return maxNum;
+}
+
+using namespace std;
+
+//#include "../../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	//UnitTest::RunAllTests();
+	//int temp;
+	//cin >> temp;
+
+	int nInput1, nInput2;
+	while (cin >> nInput1 >> nInput2)
+	{
+		cout << 
+			nInput1 << " " <<  
+			nInput2 << " " << 
+			C3n1::GetMaxCount(nInput1, nInput2) << endl;
+	}
+
+	return 0;
+}
+
+/* @END_OF_SOURCE_CODE */
+}}}
+
+== Dynamic Programming 방식 ==
+{{{
+-- Library
+
+function fwrite (fmt, ...)
+	return io.write(string.format(fmt, unpack(arg)))
+end
+
+function SwapBySize(i1, i2)
+	if (i2 < i1) then
+		return i2, i1
+	end	
+	return i1, i2
+end
+
+function IsBetween(i, i1, i2)
+	i1, i2 = SwapBySize(i1, i2)
+	return i1 <= i and i <= i2
+end
+
+-- UnitTest
+UnitTest = {test = 0, success = 0, failed = 0}
+
+function UnitTest:new(o)
+	o = o or {}
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function UnitTest:ShowResult()
+	if UnitTest.failed == 0 then
+		fwrite("Success : %d tests passed\n", UnitTest.success)
+	else
+		fwrite("Failed : %d in tests %d\n", UnitTest.failed, UnitTest.test)
+	end
+end
+
+function Check(name, actual)
+	UnitTest.test = UnitTest.test + 1
+	if not actual then
+		fwrite("Check Failed in %s\n", name)
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+function CheckEqual(name, expect, actual)
+	UnitTest.test = UnitTest.test + 1
+	if (expect ~= actual) then
+		fwrite("CheckEqual Failed in %s. %s expected but actual is %s\n", name, tostring(expect), tostring(actual))
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+-- Algorithm
+
+Solver = {}
+function Solver:new(o)
+	o = o or {SolvedNum = {}}
+	o.SolvedNum[1] = 1
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function Solver:GetCycle(num)
+	local originNum = num
+	local count = 0
+	
+	while (self.SolvedNum[num] == nil) do
+		if num % 2 == 0 then
+			num = num / 2
+		else
+			num = num * 3 + 1
+		end
+				
+		count = count + 1
+	end
+	
+	count = count + self.SolvedNum[num]
+	self.SolvedNum[originNum] = count
+	
+	return count
+end
+
+function Solver:GetMaxCycle(from, to)
+	from, to = SwapBySize(from, to)
+	
+	maxSum = 0
+	for i = from, to do
+		local c = self:GetCycle(i)
+		if (maxSum < c) then
+			maxSum = c
+		end
+	end
+	
+	return maxSum
+end
+
+-- test part
+
+do
+	local s = Solver:new()
+	CheckEqual("GetCycle", 16, s:GetCycle(22))
+end
+
+do
+	local testSet = {{1, 1}, {2, 2}, {3, 8}, {4, 3}, {22, 16}, {23, 16}, {100, 26}}
+	local s = Solver:new()
+		
+	for _, j in pairs(testSet) do
+		CheckEqual("GetCycle2", j[2], s:GetCycle(j[1]))
+	end
+	
+	for i, j in pairs(s.SolvedNum) do
+		print (i, j)
+	end
+end
+
+do
+	local testSet = {{1, 10, 20}, {100, 200, 125}, {201, 210, 89}, {900, 1000, 174}}
+	local s = Solver:new()
+
+	for _, j in pairs(testSet) do
+		CheckEqual("GetMaxCycle", j[3], s:GetMaxCycle(j[1], j[2]))
+	end
+end
+
+do		-- speed test
+	local testSet = {{1, 10, 20}, {1, 1000000, 525}}
+	local s = Solver:new()
+	
+	local start = os.clock()
+
+	for _, j in pairs(testSet) do
+		CheckEqual("GetMaxCycle1", j[3], s:GetMaxCycle(j[1], j[2]))
+	end
+	
+	fwrite("%.3f\n", os.clock() - start)
+end
+
+UnitTest:ShowResult()
+
+-- input part
+
+function main()
+	while 1 do
+		local count = io.read("*number")
+		if count == nil then 
+			break 
+		end
+	end
+end
+
+-- main()
+}}}
+
+----
+CategoryProblem

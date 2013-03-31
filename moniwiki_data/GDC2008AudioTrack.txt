@@ -1,0 +1,57 @@
+ '''GDC2008''' 메인 페이지로
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars
+
+
+== Audio ==
+ * ''' (302) Audio Boot Camp''' - ''Dan Bardino, Scott Selfon, Charles Deenen 외''
+ * ''' 26 Slick Tricks for Game Dialog and Other Voiced Bits''' - ''DB Cooper, Patrick Fraley''
+ * ''' At the Cutting Edge ? Audio Production for HEAVENLY SWORD''' - ''Garry Taylor''
+ * ''' Audio for MMO's''' - ''Russell Brower, Michael Henry, Geoff Scott 외''
+ * ''' Audio Post-Mortem: BioShock''' - ''Patrick Balthrop''
+ * ''' Audio Post-Mortem: HALO 3''' - ''C. Paul Johnson, Marty O'Donnell, Jay Weinland 외''
+ * ''' Automatic Audio in Frostbite''' - ''David Mollerstedt, Stefan Strandberg''
+ * ''' Better Tools for Sound Designers on PlayStation 3 Through Open-Architecture Designs''' - ''Michael Kelly''
+ * ''' Can You Hear Us Now? Dolby's New Voice Solution for Online Games Sponsored by Dolby''' - ''Paul Boustead, John Griffin''
+  [https://www.cmpevents.com/sessions/GD/S6167i1.ppt Malone]
+  [https://www.cmpevents.com/sessions/GD/S6167i2.ppt Moore]
+ * ''' Composer Challenge GDC 2008''' - ''Lennie Moore, Billy Martin, Adam Gubman 외''
+ * ''' Composer Tips and Tricks for Creating Interactive Music''' - ''Dan Bardino, Richard Jacques, Marty O'Donnell 외''
+ * ''' Dialog Production for BioWare's Mass Effect: Lessons Learned and Future Plans''' - ''Simon Pressey, Mac Walters''
+ * ''' Dynamic Zone Emitters: Improved Spatialization of Large Regions''' - ''Bryan Pearson''
+ * ''' G.A.N.G. Demo Derby - Music''' - ''Paul Lipson, Chuck Doud, Bob Rice 외''
+ * ''' G.A.N.G. Demo Derby - SOUND DESIGN''' - ''Paul Lipson, Tim Larkin, Gene Semel 외''
+ * ''' Game Music and the AFM''' - ''Janet Ketchum, Tom Lee, Paul Lipson 외''
+ * ''' How to Score Your Video Game with an Orchestra''' - ''Tommy Tallarico, Jack Wall, Ross deRoche 외''
+ * ''' How We Hear and Why it Matters: A Game Developer's Look at the Perception of Sound''' - ''Tom Hays''
+ * ''' Interactive Music Systems: Planning, Producing and Executing an Adaptive Score''' - ''Jonathan Mayer, Keith Leary''
+ * ''' More Tales of Audio from the Third Dimension!''' - ''Scott Selfon''
+ * ''' Music in Video games: Surpassing the Scope of Film Scores?''' - ''John Debney''
+ * ''' Perspectives for Better Game Sound''' - ''Torrie Dorrell, Tim Larkin, Blake Lewin 외''
+ * ''' Procedural Music in SPORE''' - ''Kent Jolly, Aaron McLeran''
+ * ''' Realize Your Vision: Essential Music Production Techniques''' - ''Rod Abernethy, Clark Crawford, Jason Graves 외''
+ * ''' Stories from the Road: How to Achieve Your Audio Goals and Avoid Nightmares''' - ''Caesar Filori''
+ * ''' The Art and Science of Creating Your Own Instrument Samples''' - ''Troels Folmann''
+ * ''' The Changing Landscape in Composer Game Music Underscore Deals''' - ''Jim Charne''
+ * ''' The CRYSIS of Audio''' - ''Tomas Neumann, Inon Zur, Christian Schilling 외''
+ * ''' The Music of KILLER7, GOD HAND, RESIDENT EVIL: THE UMBRELLA CHRONICLES, and NO MORE HEROES''' - ''Masafumi Takada''
+ * ''' Voice of an Angel: Next-Gen Audio Processing and Effects for SINGSTAR on PS3''' - ''Dan Bardino''
+ * ''' XAudio2 ? Audio Building Blocks for the Future Sponsored by Microsoft''' - ''Brian Schmidt''
+
+
+ '''GDC2008''' 메인 페이지로
+ GDC2008AudioTrack
+ GDC2008BusinessAndManagementTrack
+ GDC2008GameDesignTrack
+ GDC2008ProductionTrack
+ GDC2008ProgrammingTrack
+ GDC2008VisualArtsTrack
+ GDC2008MobileSummitsAndTutorials
+ GDC2008OutsourcingSummit
+ GDC2008GameCareerSeminars

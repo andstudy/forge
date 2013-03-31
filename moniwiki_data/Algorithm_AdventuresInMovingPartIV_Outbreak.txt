@@ -1,0 +1,199 @@
+= 문제 요약 =
+ * 최대 10000Km 거리의 목표지 까지 최소의 기름값을 쓰면서 도착하는 방법은?
+
+= 문제 해결 =
+ * 최대 10000 + 1 + 100 Km 를 인덱스로 DP 테이블을 만듬.
+ * 각 위치에서의 최소 기름값을 구해서 DP 테이블 완성
+ * DP 테이블을 돌면서 기름값을 누적 시켜나가 답을 구한다.
+ 
+= 소감 =
+ * Wrong 한번, Presentation Error 한번, Solved.. 오 럭키!
+ * 입출력이 까탈스럽네요;
+
+= ''' 풀이 ''' =
+{{{#!vim cpp
+// "Adventures in Moving - Part IV" Solution By Outbreak 
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+//#define _TDD
+
+//--------------------------------------------------------------------
+
+namespace Solver
+{
+	static const int IMPOSSIBLE_PRICE = 10000;
+	static const int MAX_DISTANCE = 10001;
+	static const int MAX_GAS_SIZE = 200;
+	static const int DEFAULT_GAS_SIZE = 100;
+
+	static vector<int> VPrice(MAX_DISTANCE+DEFAULT_GAS_SIZE,IMPOSSIBLE_PRICE);
+
+	// 1. > DP 테이블 초기화
+	void MakePriceTable()
+	{
+		int i;
+
+		for( i=0; i<MAX_DISTANCE+DEFAULT_GAS_SIZE; i++ )
+		{
+			VPrice[i] = IMPOSSIBLE_PRICE;
+		}
+
+		for( i=0; i<=DEFAULT_GAS_SIZE; i++ )
+		{
+			VPrice[i] = 0;
+		}
+	}
+
+	// 2. > DP 테이블 만들기 - 각 주유소를 중심으로!
+	void InsertPrice( int dist, int price )
+	{
+		// 현재 위치에서 제일 싼 가격
+		for(int i=1;i<=MAX_GAS_SIZE;i++)
+		{
+			if(VPrice[ dist+i ] > price)
+			{
+				VPrice[ dist+i ] = price;
+			}
+		}
+	}
+
+	// 3. > 최소 비용 구하기
+	int CalcMinimumPrice(int distance)
+	{
+		int price = 0;
+
+		// 각 위치에서의 주유 가격을 더해 나가면서 총 비용을 산출한다.
+		// 반납 시 기름통의 반이 채워져 있어야 하므로 그 만큼을 더 간다고 생각한다.
+		for(int i=1; i<=distance+DEFAULT_GAS_SIZE; i++) 
+		{
+			if (VPrice[i] == IMPOSSIBLE_PRICE) 
+			{
+				return -1;
+			}
+
+			price += VPrice[i];
+		}
+
+		return price;
+	}
+}
+
+//--------------------------------------------------------------------
+
+namespace Runner
+{
+	void Execute(istream& in, ostream& out)
+	{	
+		int sample = 0;
+
+		in >> sample;
+
+		while( sample-- )
+		{
+			int distance = 0, dist = 0, price = 0;
+
+			in >> distance;
+
+			Solver::MakePriceTable();
+			
+			while(true)
+			{		
+				in.get();
+
+				// 개행이 한개 더오면 다음 샘플 처리
+				if( in.peek() == '\n')
+				{
+					break;
+				}
+
+				in >> dist >> price;					
+
+				if( in.fail() )
+					break;
+
+				Solver::InsertPrice(dist, price);
+			}
+
+			int result = Solver::CalcMinimumPrice(distance);
+
+			if( result == -1 )
+			{
+				out << "Impossible" << endl;
+			}
+			else
+			{
+				out << result << endl;
+			}
+
+			if( sample > 0 )
+			{
+				out << endl;
+			}
+		}
+	}
+}
+
+
+//--------------------------------------------------------------------
+
+#ifdef _TDD
+
+#include "unittest++.h"
+
+struct TEST_BASE
+{
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(TEST_BASE, PresentationTest)
+{
+	input << 
+		"2\n"
+		"\n"
+		"500\n"
+		"100 999\n" 
+		"150 888\n"
+		"200 777\n"
+		"300 999\n"
+		"400 1009\n"
+		"450 1019\n"
+		"500 1399\n";
+
+	input << "\n";
+
+	input << 	
+		"500\n"
+		"100 999\n" 
+		"150 888\n"
+		"200 777\n"
+		"300 999\n"
+		"400 1009\n"
+		"450 1019\n"
+		"500 1399\n";
+
+	Runner::Execute(input, output);
+
+	CHECK_EQUAL( "450550\n\n450550\n", output.str());
+}
+#endif
+
+//--------------------------------------------------------------------
+
+int main()
+{
+
+#ifdef _TDD	
+	UnitTest::RunAllTests();
+#else
+	Runner::Execute(cin, cout);
+#endif // _TDD
+	return 0;
+}
+
+}}}
+

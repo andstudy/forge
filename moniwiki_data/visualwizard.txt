@@ -1,0 +1,7 @@
+이름       : 김광중(visualwizard)
+이메일     : visualwizard@gmail.com
+블로그     : visualwizard.tistory.com
+Twitter   : @visualwizard
+직업       : 게임 서버 개발
+관심 분야 : 게임 개발, C++, 게임 서버 설계, etc..
+주로 쓰는 언어 : C++

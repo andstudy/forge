@@ -1,0 +1,151 @@
+{{{
+-- Library
+
+function fwrite (fmt, ...)
+	return io.write(string.format(fmt, unpack(arg)))
+end
+
+function SwapBySize(i1, i2)
+	if (i2 < i1) then
+		return i2, i1
+	end	
+	return i1, i2
+end
+
+function IsBetween(i, i1, i2)
+	i1, i2 = SwapBySize(i1, i2)
+	return i1 <= i and i <= i2
+end
+
+-- UnitTest
+UnitTest = {test = 0, success = 0, failed = 0}
+
+function UnitTest:new(o)
+	o = o or {}
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function UnitTest:ShowResult()
+	if UnitTest.failed == 0 then
+		fwrite("Success : %d tests passed\n", UnitTest.success)
+	else
+		fwrite("Failed : %d in tests %d\n", UnitTest.failed, UnitTest.test)
+	end
+end
+
+function Check(name, actual)
+	UnitTest.test = UnitTest.test + 1
+	if not actual then
+		fwrite("Check Failed in %s\n", name)
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+function CheckEqual(name, expect, actual)
+	UnitTest.test = UnitTest.test + 1
+	if (expect ~= actual) then
+		fwrite("CheckEqual Failed in %s. %s expected but actual is %s\n", name, tostring(expect), tostring(actual))
+		UnitTest.failed = UnitTest.failed + 1
+	else
+		UnitTest.success = UnitTest.success + 1
+	end
+end
+
+-- Algorithm
+
+LCDisplay= {}
+
+function LCDisplay:new(o)
+	o = o or { size = 0, pattern= {}, num_pattern = {}, bar = 1, left = 2, right = 3, both = 4, empty = 5 }
+	
+	o.num_pattern[0] = {o.bar, o.both, o.empty, o.both, o.bar}
+	o.num_pattern[1] = {o.empty, o.right, o.empty, o.right, o.empty}
+	o.num_pattern[2] = {o.bar, o.right, o.bar, o.left, o.bar}
+	o.num_pattern[3] = {o.bar, o.right, o.bar, o.right, o.bar}
+	o.num_pattern[4] = {o.empty, o.both, o.bar, o.right, o.empty}
+	o.num_pattern[5] = {o.bar, o.left, o.bar, o.right, o.bar}
+	o.num_pattern[6] = {o.bar, o.left, o.bar, o.both, o.bar}
+	o.num_pattern[7] = {o.bar, o.right, o.empty, o.right, o.empty}
+	o.num_pattern[8] = {o.bar, o.both, o.bar, o.both, o.bar}
+	o.num_pattern[9] = {o.bar, o.both, o.bar, o.right, o.empty}
+	
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+function LCDisplay:SetSize(size)
+	self.size = size
+	barString = string.rep("-", size)
+	emptyString = string.rep(" ", size)
+
+	self.pattern[self.bar] = ' '..barString..'  '
+	self.pattern[self.left] = '|'..emptyString..'  '
+	self.pattern[self.right] = ' '..emptyString..'| '
+	self.pattern[self.both] = '|'..emptyString..'| '
+	self.pattern[self.empty] = ' '..emptyString..'  '
+end
+
+function LCDisplay:PrintNum(num, step)
+	io.write(self.pattern[ self.num_pattern[num][step] ])
+end
+
+function LCDisplay:Display(nums)
+	lcdNumber = {}
+	for i = 1, #nums do
+		lcdNumber[i] = tonumber(string.sub(nums, i, i))
+	end
+
+	for step = 1, 5 do
+		if step % 2 == 1 then
+				for i = 1, #lcdNumber do
+					self:PrintNum(lcdNumber[i], step)
+				end
+				io.write("\n")
+		else
+			for _ = 1, self.size do
+				for i = 1, #lcdNumber do
+					self:PrintNum(lcdNumber[i], step)
+				end
+				io.write("\n")
+			end
+		end
+	end
+	
+end
+
+-- test part
+
+do
+	lcd = LCDisplay:new()
+	lcd:SetSize(2)
+			
+	--io.write(lcd.pattern[lcd.bar])
+	--io.write(lcd.pattern[lcd.left])
+	--io.write(lcd.pattern[lcd.right])
+	--io.write(lcd.pattern[lcd.both])
+	
+	lcd:Display("1234567890")
+end
+
+do
+	lcd = LCDisplay:new()
+	lcd:SetSize(4)
+	lcd:Display("12345")
+end
+
+UnitTest:ShowResult()
+
+-- input part
+
+while 1 do
+	local count = io.read("*number")
+	if count == nil then 
+		break 
+	end
+end
+}}}

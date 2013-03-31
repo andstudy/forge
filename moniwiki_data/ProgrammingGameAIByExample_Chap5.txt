@@ -1,0 +1,19 @@
+[ProgrammingGameAIByExample]
+
+== Visual Studio 2005 에러 수정 ==
+{{{#!gcode cpp
+// GraphHelper_CreateGrid 의 for loop 의 row 앞에 int 타입 추가
+
+// ConstEdgeIterator 클래스의 다음 함수를 이렇게 수정한다.
+const EdgeType* next()
+{
+	const EdgeList& eList = G.m_Edges[NodeIndex];
+	++curEdge;
+	if (curEdge == G.m_Edges[NodeIndex].end())
+	{
+		return NULL;
+	}
+
+	return &(*curEdge);
+}
+}}}

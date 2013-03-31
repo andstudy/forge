@@ -1,0 +1,77 @@
+== 문제 풀이 ==
+ 각 집들의 상대 거리를 측정한후 피타고라스 정의에 의해 구함.
+ 홀수번째 줄이냐 짝수번째 줄이냐에 따라서 생각해줘야할 변수가 많았다. ㅠㅠ
+
+== 소스 ==
+{{{
+#include <stdio.h>
+#include <math.h>
+
+#define square(x) ((x)*(x))
+#define MIN(x, x2, y, y2) ((x)>(y)?(y+y2):(x+x2))
+#define ABS(x) ((x)>0?(x):-(x))
+
+int GetLine(int n)
+{
+	return (int)floor(sqrt((double)n));
+}
+
+double GetResult(int n, int m)
+{
+	double x, y;
+
+	int LineN  = GetLine(n);
+	int LineM  = GetLine(m);
+
+	int PositN = n - square(LineN) - LineN;
+	int PositM = m - square(LineM) - LineM;
+
+	int difX = ABS(PositN - PositM);
+	int difY = ABS(LineN - LineM);
+
+	x = difX / 2.0;
+
+	y = (difY / 2) * sqrt(3.0);
+	
+	if( difY & 1 )
+	{
+		if( MIN(LineN,PositN, LineM,PositM) & 1 )
+		{
+			y += 2*sqrt(3.0)/3;
+		}
+		else
+		{
+			y += sqrt(3.0)/3;
+		}
+	}
+
+	if( difX & 1 )
+	{
+		if( MIN(LineN,PositN, LineM,PositM) & 1 )
+		{
+			if( difY & 1 )	y -= sqrt(3.0)/6;
+			else		y += sqrt(3.0)/6;
+		}		
+		else
+		{
+			if( difY & 1 )	y += sqrt(3.0)/6;
+			else		y -= sqrt(3.0)/6;
+		}
+	}
+
+	return sqrt(x*x + y*y);
+}
+
+int main()
+{
+	int n, m;
+
+	while( scanf("%d %d", &n, &m) == 2 )
+	{
+		printf("%.3lf\n", GetResult(n, m));
+	}
+
+	return 0;
+}
+
+}}}

@@ -1,0 +1,20 @@
+게임이름 : Telltale Games : Tales of Monkey Island
+
+As a studio founded by LucasArts veterans, episodic gaming pioneer Telltale Games went back to its roots with Tales of Monkey Island. Telling a story over five chapters allowed the team to fill out the game's narrative but presented unique challenges to the art and production pipeline.
+
+잘된 점
+1. Telling a story in five chapters
+2. Working with monkey island "Old timers"
+3. The creation of a new cinematic director role
+4. A good balance of old and new content
+5. Strong art direction
+
+아쉬웠던 점
+1. The schedule was too close for comfort
+2. Multiplatform development caused production traffic jams
+3. Our "generic" pirates turned out to be too generic
+4. Contorl scheme decisions were made at the last minute
+5. We wanted every episode to be bigger and better than the last(Aka feature creep)
+
+----
+[GameDeveloperMagazine]

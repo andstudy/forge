@@ -1,0 +1,8 @@
+이름 : NeBel
+블로그 : 
+직업 : 기술 문제 컨설팅
+관심 분야 : Problem Solving, 3D Graphics
+주로 쓰는 언어 : C++
+
+----
+CategoryHomepage

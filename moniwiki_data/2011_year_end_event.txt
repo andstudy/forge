@@ -1,0 +1,33 @@
+= 포스트모템 =
+== 오전반 ==
+{{{#!html
+<div style="width:595px" id="__ss_10626529"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ohyecloudy/2011-10626529" title="2011 아꿈사 오전반 포스트모템" target="_blank">2011 아꿈사 오전반 포스트모템</a></strong> <object id="__sse10626529" width="595" height="497"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2011-111217202722-phpapp01&stripped_title=2011-10626529&userName=ohyecloudy" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <param name="wmode" value="transparent"/> <embed name="__sse10626529" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2011-111217202722-phpapp01&stripped_title=2011-10626529&userName=ohyecloudy" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" width="595" height="497"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/ohyecloudy" target="_blank">Jongbin Oh</a> </div> </div>
+}}}
+== 오후반 ==
+{{{#!html
+<div style="width:595px" id="__ss_10636247"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/allting/2011-study" title="2011 study" target="_blank">2011 study</a></strong> <object id="__sse10636247" width="595" height="497"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2011study-111219063502-phpapp01&stripped_title=2011-study&userName=allting" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <param name="wmode" value="transparent"/> <embed name="__sse10636247" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=2011study-111219063502-phpapp01&stripped_title=2011-study&userName=allting" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" width="595" height="497"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/allting" target="_blank">Kim Kyungryul</a> </div> </div>
+}}}
+= 자유발표 =
+{{{#!html
+<div style="width:595px" id="__ss_10633584"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/hiscale/111217" title="[111217 아꿈사연말모임] 웹소켓과온라인게임" target="_blank">[111217 아꿈사연말모임] 웹소켓과온라인게임</a></strong> <object id="__sse10633584" width="595" height="497"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=111217-111219001615-phpapp01&stripped_title=111217&userName=hiscale" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <param name="wmode" value="transparent"/> <embed name="__sse10633584" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=111217-111219001615-phpapp01&stripped_title=111217&userName=hiscale" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" width="595" height="497"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/hiscale" target="_blank">sung ki choi</a> </div> </div>}}}
+
+{{{#!html
+<div style="width:595px" id="__ss_10627095"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/whiletrue0222/2011-10627095" title="아꿈사 2011 연말행사 자유발표 - 맥킨지, 발표의 기술" target="_blank">아꿈사 2011 연말행사 자유발표 - 맥킨지, 발표의 기술</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10627095" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/whiletrue0222" target="_blank">Youngkwon Lee</a> </div> </div>
+}}}
+
+{{{#!html
+<div style="width:425px" id="__ss_10629346"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/scor7910/ss-10629346" title="[111217 아꿈사연말모임] 어플 개발자의 서버개발 삽질기" target="_blank">어플 개발자의 서버개발 삽질기</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10629346" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/scor7910" target="_blank">scor7910</a> </div> </div>
+}}}
+
+{{{#!html
+<div style="width:595px" id="__ss_10626212"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/HyeonSeokChoi/staged-eventdrivenarchitecture" title="서버를 위한 동시성 모델과 Staged eventdrivenarchitecture" target="_blank">서버를 위한 동시성 모델과 Staged eventdrivenarchitecture</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10626212" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/HyeonSeokChoi" target="_blank">HyeonSeok Choi</a> </div> </div>
+}}}
+= 회비 사용 내역 =
+|| 날짜 || 수입 || 지출 || 잔고 || 비고 ||
+|| 2011.12.17 || 115,000 || 0 || || 행사 회비(인당 5,000원 * 23) ||
+|| 2011.12.17 || 130,000 || 0 || || 1차 회식 추가회비(인당 10,000원 * 13) ||
+|| 2011.12.17 || 70,000 || 0 || 315,000 || 2차 회식 추가회비(인당 10,000원 * 7) ||
+|| 2011.12.17 || 0 || 61,000 || || 행사중 간식 및 음료수 ||
+|| 2011.12.17 || 0 || 198,000 || || 1차 회식 (버블버블) ||
+|| 2011.12.17 || 0 || 45,000 || 11,000 || 2차 회식 (그때그집) ||
+ * 행사장 나갈 때 뒷문 통제하고 앞문에서 수금했어야 되는데... 회비는 제가 받은(혹은 다음에 주시겠다고 말씀해 주신) 액수 기준으로 계산 했습니다. 처음이라 정신이 없이 정산 했네요 ^^; - [florist]

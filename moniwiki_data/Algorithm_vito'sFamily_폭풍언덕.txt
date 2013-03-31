@@ -1,0 +1,191 @@
+= VitosFamily.java =
+{{{
+ import java.io.BufferedReader;
+ import java.io.InputStreamReader;
+ import java.io.IOException;
+ 
+ public class VitosFamily
+ {
+ 	public static void main(String[] args) throws IOException
+ 	{
+ 		int n = readLineInt();
+ 		
+ 		// variable setting 
+ 		Vito[] vitoArray = new Vito[n];
+ 		int[] distanceArray = new int[n];
+ 		
+ 		// read input data 
+ 		for (int i=0; i<n; i++)
+ 		{
+ 			String record = readLineString();
+ 			Vito vito = new Vito(record);
+ 			vitoArray[i] = vito;
+ 		}
+ 		
+ 		// get distance 
+ 		for (int i=0; i<n; i++)
+ 		{
+ 			int midAddress = vitoArray[i].getMiddleAddress();
+ 			int distance = vitoArray[i].getTotalDistanceFrom(midAddress);
+ 			distanceArray[i] = distance;
+ 		}
+ 		
+ 		// print distance
+ 		for (int i=0; i<n; i++)
+ 		{
+ 			System.out.println(distanceArray[i]);
+ 		}
+ 		
+ 	}
+ 	
+ 	public static int readLineInt() throws IOException
+ 	{
+ 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+ 		String line = reader.readLine();
+ 		int size = Integer.parseInt(line);
+ 		
+ 		return size;
+ 	}
+ 	
+ 	public static String readLineString() throws IOException
+ 	{
+ 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+ 		String line = reader.readLine();
+ 		
+ 		return line;
+ 	}
+ }
+}}}
+
+= Vito.java =
+{{{
+import java.util.Arrays;
+import java.lang.Math;
+
+public class Vito
+{
+	private int[] addressArray;
+	private int length;
+	
+	Vito(String record)
+	{
+		String[] token = record.split(" ");
+		
+		length = Integer.parseInt(token[0]);
+		if (length != token.length-1)
+		{
+			System.out.println("Error: Invalid Record");
+			return;
+		}
+		
+		addressArray = new int[length];
+		
+		// read data
+		for (int i=0; i<length; i++)
+		{
+			addressArray[i] = Integer.parseInt(token[i+1]);
+		}
+	}
+	
+	public int size()
+	{
+		return length;
+	}
+	
+	public String toString()
+	{
+		String msg="{";
+		
+		for (int i=0; i<length; i++)
+		{
+			msg += " (" + addressArray[i] + ") ";
+		}
+		
+		msg += "}";
+		
+		return msg;
+	}
+	
+	public int getMiddleAddress()
+	{
+		Arrays.sort(addressArray);
+		
+		int index = (length-1)/2;	
+		
+		return addressArray[index];
+	}
+	
+	public int getTotalDistanceFrom(int add)
+	{
+		int totalDistance = 0;
+		
+		for (int i=0; i<length; i++)
+		{
+			totalDistance += Math.abs(add - addressArray[i]);
+		}
+		
+		return totalDistance;
+	}
+}
+}}}
+
+= VitoTest.java =
+{{{
+import junit.framework.TestCase;
+import kr.re.etri.algorithm.Vito;
+
+public class VitoTest extends TestCase
+{
+	Vito vito;
+		
+	public VitoTest(String name)
+	{
+		super(name);
+	}
+	
+	public void testSize()
+	{
+		String record = "2 3 2";
+		vito = new Vito(record);
+		assertEquals(2, vito.size());
+	}
+	
+	public void testGetMiddleAddress()
+	{
+		String record = "2 3 2";
+		vito = new Vito(record);
+		assertEquals(2, vito.getMiddleAddress());
+		
+		record = "4 2 3 4 5";
+		vito = new Vito(record);
+		assertEquals(3, vito.getMiddleAddress());
+		
+		record = "3 2 3 4";
+		vito = new Vito(record);
+		assertEquals(3, vito.getMiddleAddress());
+		
+		record = "3 2 4 6";
+		vito = new Vito(record);
+		assertEquals(4, vito.getMiddleAddress());
+	}
+	
+	public void testGetTotalDistanceFrom()
+	{
+		String record = "2 2 3";
+		vito = new Vito(record);
+		assertEquals(1, vito.getTotalDistanceFrom(vito.getMiddleAddress()));
+		
+		record = "2 2 4";
+		vito = new Vito(record);
+		assertEquals(2, vito.getTotalDistanceFrom(vito.getMiddleAddress()));
+		
+		record = "3 2 4 6";
+		vito = new Vito(record);
+		assertEquals(4, vito.getTotalDistanceFrom(vito.getMiddleAddress()));
+
+		record = "5 2 3 4 5 100";
+		vito = new Vito(record);
+		assertEquals(100, vito.getTotalDistanceFrom(vito.getMiddleAddress()));
+	}
+}
+}}}

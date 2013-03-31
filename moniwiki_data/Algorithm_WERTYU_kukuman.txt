@@ -1,0 +1,86 @@
+WERTYU 문제
+ * 저도 처음으로 Accept 받아봤네요
+
+ * 소스
+{{{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class Main {
+	private Map<Character, Character> map = new HashMap<Character, Character>();
+	private final String [] sources = {
+			"`1234567890-=",
+			"QWERTYUIOP[]\\",
+			"ASDFGHJKL;'",
+			"ZXCVBNM,./",
+			"  " };
+	public Main(){
+		initMap();
+	}
+
+	private void initMap(){
+		for(String source : sources ){
+			for(int i=1;i<source.length();i++){
+				map.put(source.charAt(i), source.charAt(i-1));
+			}
+		}
+	}
+	
+	public Character get(Character key) {
+		Character result = map.get(key);
+		if(result == null){
+			result = new Character(' ');
+		}
+		return result;
+	}
+	
+	public String transString(String source){
+		StringBuilder builder = new StringBuilder();
+		for(int i =0;i<source.length();i++){
+			builder.append( map.get(source.charAt(i)));
+		}
+		return builder.toString();
+	}
+	
+	public static void main(String[] args) {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			String line ;
+			while((line = reader.readLine())!=null){
+				
+				Main transfer = new Main();
+				System.out.println(transfer.transString(line));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+
+}}}
+
+ * Test Case
+{{{
+import junit.framework.TestCase;
+
+
+public class TransferTestCase extends TestCase {
+	public void testTransCharacter(){
+		Main map = new Main();
+		assertEquals(new Character('I'), map.get('O'));
+		assertEquals(new Character('P'), map.get('['));
+		assertEquals(new Character('-'), map.get('='));
+	}
+	
+	public void testTransString(){
+		Main map = new Main();
+		assertEquals("I AM FINE TODAY.", map.transString("O S, GOMR YPFSU/"));
+	}
+}
+
+}}}

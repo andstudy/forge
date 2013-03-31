@@ -1,0 +1,5 @@
+Describe Algorithm2012/CarmichaelNumbers here
+
+ * 문제 : http://uva.onlinejudge.org/external/100/10006.html
+ * 소수구하기
+  * http://parkpd.egloos.com/3490064

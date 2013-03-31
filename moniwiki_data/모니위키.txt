@@ -1,0 +1,62 @@
+모니위키를 리눅스에 설치하는 방법은 많아도 윈도우에 설치하는 방법은 찾기 어렵더군요.
+설치하는 동안 정리해 놓은 거 올려둡니다.
+
+== 모니위키 ==
+ * [http://moniwiki.kldp.net/wiki.php/MoniWiki moniwiki] 최신판(2010.05.19 현재 1.1.4)을 [http://kldp.net/projects/moniwiki/download 여기]에서 받아 설치한다.
+  * mapmoni-setup-1.1.4.exe 같은 경우에는 Micro Apache 까지 들어있다.
+  * {{{e:\moniwiki\moniwiki}}} 에 설치한다고 해 보자.
+
+== APMSETUP 설치  ==
+ * [http://www.apmsetup.com/ APMSetup] 을 설치한다.
+  * Apache, PHP, MySQL 을 한 번에 설치할 수 있다.
+  * IIS 가 떠 있을 경우 80 번 포트가 사용중이라고 설치가 안 된다.
+   * {{{cmd -> net stop iisadmin}}} 으로 IIS 죽인 후 해 보자.
+  * APMSetup 을 실행시키면 Apache2 과 MySQL 이 실행된다. 모니위키에는 MySQL 이 필요없는데 APMSetup 이 자동 실행될 때 MySQL 실행 안 되게 하는 방법이 보이지 않는다. 아쉽.
+  * {{{C:\APM_Setup\Server\Apache\conf\httpd.conf}}} 를 편집한 후 저장.
+   * Listen 80 -> Listen 8080 (이건 취향대로...)
+   * {{{DocumentRoot "C:/APM_Setup/htdocs"}}} 를 {{{DocumentRoot "E:\moniwiki"}}} 으로 변경
+   * <Directory "C:/APM_Setup/htdocs"> 를 <Directory "E:\moniwiki"> 로 변경
+  * 설정값을 적용하기 위해 APMSETUP 에서 Apache2 를 재시작(STOP -> START)
+ * firefox 에서 {{{http://localhost:8080/moniwiki/}}} 로 들어가면 모니위키 설정 페이지가 나와야 함.
+  * sowseed 로 seed 페이지 넣어주고, admin_pass 값을 넣은 후 완료를 누른다.
+  * $security_class="needtologin" 로 바꿔주면 로그인 한 사람만 글을 변경할 수 있다.
+  * 모니위키가 설치된 폴더가 읽기 전용일 경우 권한 문제가 생길 수 있다. 이 때는 잘 알아서 풀어준다.
+
+== 코드 하이라이팅 ==
+===  1.1.4 부터는 {{{SyntaxHightlighter}}} 이 추가됨 ===
+ * [http://moniwiki.kldp.net/wiki.php/PlainProcessor 모니위키 - Plain Processor]
+ * [http://code.google.com/p/syntaxhighlighter/ syntaxhighlighter 1.5.1] 을 받는다.
+  * attachment:SyntaxHighlighter_1.5.1.zip
+  * {{{dp.SyntaxHighlighter 폴더를 moniwiki/local 밑에 복사한다.}}}
+ * config.php 에 다음을 추가
+{{{
+$js=<<<EOF   
+<script type="text/javascript" src="$url_prefix/local/js/sh.js"></script>  
+<link rel="stylesheet" type="text/css"
+href="$url_prefix/local/dp.SyntaxHighlighter/Styles/SyntaxHighlighter.css" media="screen" />  
+EOF;  
+}}}
+ * #!plain cpp 가 잘 되는지 확인.
+
+=== VIM 으로 하기 ===
+ * [http://www.wgshim.com/tt/entry/%EB%AA%A8%EB%8B%88%EC%9C%84%ED%82%A4-utf-8-%EC%84%A4%EC%A0%95-%EC%8B%9C-%ED%95%9C%EA%B8%80%ED%8C%A8%EC%B9%98 모니위키 utf-8 설정 시 한글패치 (Window NT 에서..)]
+  * 윈도우용 [http://www.vim.org/ VIM] (gvim72.exe) 을 설치
+  * 환경변수 VIMRUNTIME 을 GVIM 이 설치된 경로로 설정. 
+   * 7.2 설치 시 디폴트 VIMRUNTIME 경로는 {{{C:\Program Files\Vim\vim72}}}
+  * 모니위키의 config.php 를 다음과 같이 수정
+   * {{{$vim_options = '+"set enc=utf-8"';}}}
+   * {{{$path = "C:\Program Files\Vim\vim72"; # VIMRUNTIME 경로와 동일하게}}}
+   * #!vim c 가 잘 되는지 확인.
+ 
+=== Google Code 로 하기 ===
+ * [http://parkpd.egloos.com/1767439 Moni Wiki용 코드 하일라이팅 플러그인 소개]
+
+== Theme 설치 ==
+ * attachment:coldgray.zip
+ * coldgray 를 받은 후 {{{E:\moniwiki\moniwiki\theme}}} 밑에 푼다.
+ * config.php 의 {{{$theme='coldgray';}}} 으로 변경한다.
+  * coldgray 는 '[http://scrapnote.com/ 고미다]' 님 작품입니다. 이렇게 배포하면 안 될지도 모르겠지만, 이 분 홈페이지도 없어지고 구할 방법이 없어서 여기에 올려놓습니다. 문제 될 거 같다면 알려주세요. 
+  * 그리고 버전 올라가면서 frame 이 묘하게 깨지는데 이거 수정해 주실 분 있으면 감사하겠습니다.
+
+== config ==
+ * config.php에서 $show_hosts=1;를 추가하시거나 $show_hosts=0 이라는 줄을 지워주시기 바랍니다. 안 그러면 RecentChanges 에서 고친이가 보이지 않음. [http://kldp.net/projects/moniwiki/315387 링크]

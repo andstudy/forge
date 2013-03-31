@@ -1,0 +1,168 @@
+ * Presentation error 나네요 OTL
+ * 모든 점 점들이 연결 될수 있다는 가정하에 프링 알고리즘으로 최소신장트리를 구해서 각 노드의 길이를 출력하도록 하였습니다.
+ * Code
+{{{#!vim java
+/*
+ * Main.java
+ *  java program model for www.programming-challenges.com
+ */
+
+import java.io.IOException;
+import java.text.DecimalFormat;
+
+class Main implements Runnable{
+    static String ReadLn(int maxLength){  // utility function to read from stdin,
+                                          // Provided by Programming-challenges, edit for style only
+        byte line[] = new byte [maxLength];
+        int length = 0;
+        int input = -1;
+        try{
+            while (length < maxLength){//Read untill maxlength
+                input = System.in.read();
+                if ((input < 0) || (input == '\n')) break; //or untill end of line ninput
+                line [length++] += input;
+            }
+
+            if ((input < 0) && (length == 0)) return null;  // eof
+            return new String(line, 0, length);
+        }catch (IOException e){
+            return null;
+        }
+    }
+
+    public static void main(String args[])  // entry point from OS
+    {
+        Main myWork = new Main();  // Construct the bootloader
+        myWork.run();            // execute
+    }
+
+    public void run() {
+    	int testCaseCount = Integer.parseInt( ReadLn(255).trim() );
+    	for(int i=0;i<testCaseCount;i++){
+    		ReadLn(255);
+    		int pointCount = Integer.parseInt( ReadLn(255).trim() );
+    		BackBoard board = new BackBoard(pointCount);
+    		for(int j=0;j<pointCount;j++){
+    			String line = ReadLn(255);
+    			String [] split = line.split(" ");
+    			double x = Double.parseDouble(split[0]);
+    			double y = Double.parseDouble(split[1]);
+    			board.add(new Point(x,y));
+    		}
+    		double result = board.getMinLengh();
+    		DecimalFormat df =new DecimalFormat("###.##");
+
+    		System.out.println(df.format( result));
+    		System.out.println("");
+    	}
+    }
+}
+
+
+
+class BackBoard {
+	private int pointCount;
+	private Point [] points;
+	public BackBoard(int pointCount) {
+		points = new Point[pointCount];
+		pointCount = 0;
+	}
+	public void add(Point point) {
+		points[pointCount++] = point;
+	}
+	
+	public int getPointCount(){
+		return this.pointCount;
+	}
+	public double getMinLengh() {
+		boolean [] isVisited = new boolean[pointCount]; //방문 했는지 여부
+		double [] distance = new double[pointCount]; //각 정점의  방문한 그래프와 최소 거리
+		
+		for(int i=0;i<pointCount;i++){
+			isVisited[i] = false;
+			distance[i] = Double.MAX_VALUE;
+		}
+		
+		//시작은 첫번째 점부터
+		int curPointCursor = 0;
+		distance[curPointCursor] = 0; //시작점의 거리는 자기자신이므로 0
+		
+		while(isVisited[curPointCursor]== false){
+			isVisited[curPointCursor] = true;
+			//방문한 점과의 최소거리를 유지하기 위한 로직
+			for(int i=0;i<pointCount;i++){
+				double curDistance = points[curPointCursor].getDistance(points[i]);
+				//현재 선택된 점과의 거리가  기존에 계산된 값이 작다면 update
+				if(isVisited[i] == false && distance[i] > curDistance){
+					distance[i] = curDistance;
+				}
+			}
+			
+			double minDistance = Double.MAX_VALUE;
+			curPointCursor = 1;
+			//다음 순회할 점을 선택 하는 로직
+			for(int i=0;i<pointCount;i++){
+				//다음 순회점은 방문한 점과의 거리가 가장 가까운 항목이 선택 된다.
+				if(isVisited[i] == false && distance[i] < minDistance){
+					minDistance = distance[i];
+					curPointCursor = i;
+				}
+			}
+		}
+		
+		double  distSum = 0;
+		//각 선의 길이는 distanc 배열의 합과 같다.
+		for(int i=0;i<pointCount;i++){
+			distSum += distance[i];
+		}
+		return distSum;
+	}
+
+}
+
+class Point {
+	private double x;
+	private double y;
+
+	public Point(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public double getDistance(Point point2) {
+		return  Math.sqrt( Math.pow(x-point2.x, 2) + Math.pow(y-point2.y, 2)) ;
+	}
+
+}
+
+}}}
+
+ * test Case
+
+{{{#!vim java
+public class FrecklesTestCase extends TestCase {
+	public void testAddPoint(){
+		BackBoard board = new BackBoard(3);
+		board.add(new Point(1.0,1.0));
+		board.add(new Point(2.0,2.0));
+		board.add(new Point(2.0,4.0));
+		assertEquals(3,board.getPointCount());
+	}
+	
+	public void testPointDistance(){
+		Point point1 = new Point(1.0,1.0);
+		Point point2 = new Point(2.0,2.0);
+		Point point3 = new Point(2.0,4.0);
+		assertEquals(Math.sqrt(2.0), point1.getDistance(point2));
+		assertEquals(2.0, point2.getDistance(point3	));
+	}
+	
+	public void testMinLengh(){
+		BackBoard board = new BackBoard(3);
+		board.add(new Point(1.0,1.0));
+		board.add(new Point(2.0,2.0));
+		board.add(new Point(2.0,4.0));
+		assertEquals("3.41", String.format("%.2f",  board.getMinLengh()));
+	}
+}
+}}}

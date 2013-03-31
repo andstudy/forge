@@ -1,0 +1,157 @@
+= 문제 요약 =
+ * X 라는 문자열 표현식의 규칙을 만족 시키는 경우의 개수를 찾는 문제!
+ * 수학적 귀납법을 활용해야 하는 문제.. BUT..
+= 문제 해결 =
+ * X 를 표현하는 3가지 규칙을 이용해 조합 가능한 경우를 모두 찾는다.
+  * () 부터 시작해서 
+    * empty string 과 결합 시킴
+    * ()을 씌움
+    * 현재 만들어진 X의 집합 원소에 대해 중복순열 구함
+  
+
+= 소감 =
+ * 손으로 먼저 풀어야 하는데.. 역시나 쉽지 않음.
+ * 아래 코드도 최적화 하면 해볼만 하지 않..??
+ * 아직은 컴터 성능이 별루인듯? ( ..)
+ * 후후;;
+
+= ''' 풀이 ''' =
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Expressions
+{
+    class X
+    {
+        public int depth;
+        public string value;
+
+        public X(int depth, string value)
+        {
+            this.depth = depth;
+            this.value = value;
+        }
+
+        // 0 Operation
+        public static X operator -(X x1)
+        {
+            return new X(x1.depth, x1.value);
+        }
+
+        // 겉옷 입히기
+        public static X operator +(X x1)
+        {
+            return new X(x1.depth+1, string.Format("({0})", x1.value));
+        }
+
+        // 두개 합하기
+        public static X operator +(X x1, X x2)
+        {
+            return new X(Math.Max(x1.depth, x2.depth), string.Format("{0}{1}", x1.value, x2.value));
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} : {1}", value, depth);
+        }
+    }
+
+    class Combination
+    {
+        List<X> pool;
+        Dictionary<string, int> dic;
+
+        public Combination()
+        {
+            pool = new List<X>();
+            dic = new Dictionary<string, int>();
+        }
+
+        public void Add(X x)
+        {
+            if (dic.ContainsKey(x.value))
+                return;
+
+            pool.Add(x);
+            dic.Add(x.value, 1);
+        }
+
+        public Combination Next()
+        {
+            Combination next = new Combination();
+
+            foreach (X x in pool)
+            {
+                next.Add(-x);
+            }
+
+            foreach (X x in pool)
+            {
+                next.Add(+x);
+            }
+
+            foreach (X x1 in pool)
+            {
+                foreach (X x2 in pool)
+                {
+                    next.Add(x1 + x2);
+                }
+            }
+
+            return next;
+        }
+
+        public int Find(int length, int depth)
+        {
+            int result= 0;
+
+            foreach (X x in pool)
+            {
+                if (x.value.Length==length && x.depth==depth)
+                {
+                    //Console.WriteLine("답 : {0}", x);
+                    result++;
+                }
+            }
+
+            return result;
+        }
+        
+        public void Display()
+        {
+            int order = 0;
+            foreach(X x in pool)
+            {
+                Console.WriteLine(string.Format("{0}\t{1}", order++, x));
+            }
+
+            Console.WriteLine();
+        }
+    }
+      
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // 1. >  조합 데이터 수집
+            Combination combination = new Combination();
+
+            combination.Add(new X(1, "()"));
+            
+            for (int i = 0; i < 4/*1000*/; i++)
+            {                
+                // 현재 하드웨어로는 4까지만 해볼만 함
+                combination = combination.Next();
+                combination.Display();
+            }
+
+            // 2. > 문제 풀기
+            Console.WriteLine(combination.Find(6, 2));
+            Console.WriteLine(combination.Find(300, 150));
+        }
+    }
+}
+
+}}}

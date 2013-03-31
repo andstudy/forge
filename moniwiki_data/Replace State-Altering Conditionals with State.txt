@@ -1,0 +1,164 @@
+= Replace State-Altering Conditionals with State =
+
+== 한줄요약 ==
+ 1. 상태변경 조건문들을 state 패턴으로 고쳐보자
+ 1. 즉, 복잡한 if else 를 제거한다는 소리
+ 
+== 상태란? 상태변경이란? ==
+ 1. 그림을 보자
+  attachment:simple.PNG
+ 1. 상태
+  1. requested - 사용자의 권한요청 중
+  2. claimed - 관리자 심사 중
+  3. granted - 허가됨
+  4. denied - 거부됨
+ 1. 상태변경
+  1. public void claimedBy(SystemAdmin admin)
+   1. requested -> claimed
+  1. public void grantedBy(SystemAdmin admin)
+   1. 1. claimed -> granted
+  1. public void deniedBy(SystemAdmin admin)
+   1. claimed -> denied
+ 1. 상태변경시 사전조건
+  1. granted 가 되려면 claimed 이어야 함
+  1. 모든 상태 변경의 관리자가 동일해야 함 (심사중인 관리자만 허가상태로 변경 가능)
+
+== state 패턴 ==
+ 1. 그림을 보자
+  attachment:state.gif
+ 1. strategy 패턴과 비교
+  1. 그림을 보자
+   attachment:strategy.gif
+  1. 모양은 비슷해도 동기가 다르다 - 상태전이, 상황에 맞는 로직 선택
+  1. 절차도 다르다
+
+== 복잡한 예제 ==
+ 1. 그림을 보자
+  1. 유닉스 조건이 추가됨 - if else 가 참기 힘들 정도로 많아졌다
+   attachment:complex.PNG
+ 1. 복잡해진 코드
+	{{{#!vim java
+	public void grantedBy(SystemAdmin admin) {
+		if (!state.equals(CLAIMED) && !state.equals(UNIX_CLAIMED))
+		  return;
+		if (!this.admin.equals(admin))
+		  return;
+		
+		if (profile.isUnixPermissionRequired() && state.equals(UNIX_CLAIMED))
+		  isUnixPermissionGranted = true;
+		else if (profile.isUnixPermissionRequired() &&
+		  !isUnixPermissionGranted()) {
+		  state = UNIX_REQUESTED;
+		  notifyUnixAdminsOfPermissionRequest();
+		  return;
+		}
+		state = GRANTED;
+		isGranted = true;
+		notifyUserOfPermissionRequestResult();
+	}
+	}}}
+ 1. 사전조건에 UNIX_CLAIMED 추가
+ 1. 변경 상태에 UNIX_REQUESTED 추가
+
+== 리팩터링 ==
+ 1. 상태 클래스 만들자 - Replace Type Code with Class 참고
+	{{{#!vim java
+	public class PermissionState {
+	  
+		private String name;
+		private PermissionState(String name) {
+			this.name = name;
+		}
+		  
+		public final static PermissionState REQUESTED = new PermissionState("REQUESTED");
+		public final static PermissionState CLAIMED = new PermissionState("CLAIMED");
+		public final static PermissionState GRANTED = new PermissionState("GRANTED");
+		public final static PermissionState DENIED = new PermissionState("DENIED");
+		  
+		public final static PermissionState UNIX_REQUESTED = new PermissionState("UNIX_REQUESTED");
+		public final static PermissionState UNIX_CLAIMED = new PermissionState("UNIX_CLAIMED");
+		  
+		public String toString() {
+			return name;
+		}
+	}
+	}}}
+ 1. 문자열이었던 state의 타잎을 상태클래스 PermissionState 로 변경
+  1. get, set 추가
+  1. PermissionState getState()
+  1. void setState(PermissionState state)
+ 1. 각 세부 상태별로 subclass 작성
+  1. 그림을 보자
+  1. PermissionState는 abstracte로
+  1. 생성 코드 변경
+	{{{#!vim java
+	//public final static PermissionState REQUESTED = new PermissionState("REQUESTED");
+	public final static PermissionState REQUESTED = new PermissionRequested();	// super("REQUESTED");
+	}}}  
+	
+= 상태 변경 함수를 이동 시킨다 =
+ 1. SystemPermission 에 있는 상태변경 함수
+  1. claimedBy(), deniedBy(), grantedBy()
+ 1. 세부 상태 클래스로 이동
+  1. 조건문 사라짐
+  {{{#!vim java
+class PermissionRequested extends PermissionState...
+
+	public void claimedBy(SystemAdmin admin, SystemPermission permission) {
+		if (!permission.getState().equals(REQUESTED) &&
+				!permission.getState().equals(UNIX_REQUESTED))
+			return;
+
+		permission.willBeHandledBy(admin);
+
+		if (permission.getState().equals(REQUESTED))
+			permission.setState(CLAIMED);
+		else if (permission.getState().equals(UNIX_REQUESTED))
+			permission.setState(UNIX_CLAIMED);
+	}
+  }}}
+  {{{#!vim java
+class PermissionRequested extends Permission...
+	public void claimedBy(SystemAdmin admin, SystemPermission permission) {
+		permission.willBeHandledBy(admin);
+		permission.setState(CLAIMED);
+	}
+  }}}
+ 1. 사전조건이 이미 충족 되었음 - claimedBy() 는 PermissionRequested 에만 존재
+ 1. 마찬가지로 deniedBy(), grantedBy() 는 PermissionClaimed 에만 존재
+ {{{#!vim java
+class PermissionClaimed extends PermissionState ...
+	public void deniedBy(SystemAdmin admin, SystemPermission permission) {
+		if (!permission.getAdmin().equals(admin))
+			return;
+
+		permission.setIsGranted(false);
+		permission.setIsUnixPermissionGranted(false);
+		permission.setState(DENIED);
+		permission.notifyUserOfPermissionRequestResult();
+	}
+
+	public void grantedBy(SystemAdmin admin, SystemPermission permission) {
+		if (permission.getProfile().isUnixPermissionRequired()
+				&& !permission.isUnixPermissionGranted()) {
+			permission.setState(UNIX_REQUESTED);
+			permission.notifyUnixAdminsOfPermissionRequest();
+			return;
+		}
+		permission.setState(GRANTED);
+		permission.setIsGranted(true);
+		permission.notifyUserOfPermissionRequestResult();
+	}
+}}}
+== PermissionState 추상클래스로 ==
+ 1. 추상클래스, 아무일도 하지않는 상태변경함수를 인터페이스용으로 가짐
+ {{{#!vim java
+abstract class PermissionState {
+  public String toString();
+  public void claimedBy(SystemAdmin admin, SystemPermission permission) {}
+  public void deniedBy(SystemAdmin admin, SystemPermission permission) {}
+  public void grantedBy(SystemAdmin admin, SystemPermission permission) {}
+}
+}}}
+
+[[UploadedFiles]]

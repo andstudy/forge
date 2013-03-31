@@ -1,0 +1,62 @@
+== 1차 풀이 ==
+ * Accept 한번 받아 보겠다고... Accept 받는 데 딱 1시간 30분 걸렸네요.
+
+{{{
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool IsJollyJumpers(vector<int> &vSeq)
+{
+	if(vSeq.size() == 0)
+		return false;
+
+	if(vSeq.size() == 1)
+		return true;
+
+	vector<int> vDiff;
+	for(int i = 0; i < vSeq.size() - 1; i++)
+	{
+		vDiff.push_back(abs(vSeq[i] - vSeq[i + 1]));
+	}
+
+	sort(vDiff.begin(), vDiff.end());
+
+	for(int i = 0; i < vDiff.size(); i++)
+	{
+		if(vDiff[i] != (i + 1))
+			return false;
+	}
+
+	return true;
+}
+
+int main()
+{
+	int n = 0;
+	vector<int>		vSeq;
+
+	while(cin >> n)
+	{
+		if(n < 0 || n > 3000)
+			continue;		
+
+		int temp = 0;
+		for(int i = 0; i < n; i++)
+		{
+			cin >> temp;
+			vSeq.push_back(temp);
+		}
+
+		while(cin.get() != '\n');
+
+		bool bRet = IsJollyJumpers(vSeq);
+		cout << (bRet == true ? "Jolly" : "Not jolly") << endl;
+		vSeq.clear();
+	}
+
+	return 0;
+}
+}}}

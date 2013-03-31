@@ -1,0 +1,74 @@
+=== C++버전 Accept ===
+{{{
+/* @JUDGE_ID:itmentor 110301 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	string srcString = " 1234567890-=WERTYUIOP[]\\SDFGHJKL;'XCVBNM,./";
+	string dstString = " `1234567890-QWERTYUIOP[]ASDFGHJKL;ZXCVBNM,.";
+
+	while(true)
+	{
+		char ln[512];
+		cin.getline(ln,512);
+
+		if( ln[0] == 0 )
+			break;
+
+		string buf = ln;
+		int bufSize = buf.size();
+		for(int i = 0 ; i < bufSize ; i++)
+		{
+			int index = srcString.find( buf[i] );
+			cout << dstString[index];
+		}
+		cout << std::endl;
+	}
+
+
+	return 0;
+}
+
+/* @END_OF_SOURCE_CODE */
+
+}}}
+=== C#버전 ===
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Alg
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char[] buf = Console.ReadLine().ToUpper().ToCharArray();
+
+ 	    string srcString = " 1234567890-=WERTYUIOP[]\\SDFGHJKL;'XCVBNM,./";
+	    string dstString = " `1234567890-QWERTYUIOP[]ASDFGHJKL;ZXCVBNM,.";
+
+            foreach (char ch in buf)
+            {
+                for (int i = 0; i < srcString.Length; i++)
+                {
+                    if (ch == srcString[i])
+                    {
+                        Console.Write(dstString[i]);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+}}}

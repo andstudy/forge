@@ -1,0 +1,313 @@
+Wrong Answer 가 나오네요. 쩝.. 뭐가 문제가 있는거 같은데 뭘까요.. ㅎㅎ
+
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <strstream>
+#include <algorithm>
+#include <map>
+#include <math.h>
+
+//#define _UNIT_TEST
+
+using namespace std;
+
+namespace ATUtil
+{
+
+bool IsInRange(int value, int from, int to)
+{
+	return (from <= value) && (value <= to);
+}
+
+int ConvertToIndex(char c)
+{
+	if ('a' <= c && c <= 'z')
+	{
+		return c - 'a';
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+char ConvertToChar(int i)
+{
+	return (char)i + 'a';
+}
+
+typedef map<int, int> IntDB;
+typedef vector<int> Ints;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+
+///////////////////////////////////////////////////////////////
+// CTourGuide
+class CTourGuide
+{
+public:
+	CTourGuide() : m_Start(-1), m_Destiny(-1), m_Max(0), m_CityNum(0) {}
+
+	void Init(int cities, int roads);
+	void Connect(int from, int to, int capacity);
+	int NeedTrip(int start, int destiny, int tourists);
+	void _FindMaxTrip(int start);
+
+	struct Road
+	{
+		Road(int to, int capacity) : m_To(to), m_Capacity(capacity) {}
+		int m_To;
+		int m_Capacity;
+	};
+
+	struct City
+	{
+		City(int index) : m_Index(index), m_Checked(false), m_MaxCapacity(-1) {}
+
+		int m_Index;
+		bool m_Checked;
+		int m_MaxCapacity;
+		vector<Road> m_Neighbor;
+	};
+
+	int m_Start;
+	int m_Destiny;
+
+	int m_Max;
+
+	int m_CityNum;
+	vector<City> m_Cities;
+};
+
+void CTourGuide::Init(int cities, int roads)
+{
+	m_Cities.reserve(cities + 1);
+	m_Cities.push_back(City(-1));	// dummy
+	for (int i = 1; i <= cities; ++i)
+	{
+		m_Cities.push_back(City(i));
+	}
+
+	m_CityNum = cities;
+}
+
+void CTourGuide::Connect(int from, int to, int capacity)
+{
+	// bi-direction
+	m_Cities[from].m_Neighbor.push_back(Road(to, capacity));
+	m_Cities[to].m_Neighbor.push_back(Road(from, capacity));
+}
+
+int CTourGuide::NeedTrip(int start, int destiny, int tourists)
+{
+	m_Start = start;
+	m_Destiny = destiny;
+
+	City& s = m_Cities[m_Start];
+	s.m_MaxCapacity = 0x7fffffff;
+	
+	_FindMaxTrip(m_Start);
+
+	double maxTripCapacity = (double)(m_Cities[m_Destiny].m_MaxCapacity - 1);
+	int trip = (int)ceil(tourists / maxTripCapacity);
+	return trip;
+}
+
+void CTourGuide::_FindMaxTrip(int start)
+{
+	City& s = m_Cities[start];
+	if (s.m_Checked)
+	{
+		return;
+	}
+
+	s.m_Checked = true;
+
+	vector<int> needCheckRoads;
+
+	for (size_t i = 0; i < s.m_Neighbor.size(); ++i)
+	{
+		Road& toRoad = s.m_Neighbor[i];
+		City& toCity = m_Cities[toRoad.m_To];
+
+		if (toCity.m_Checked)
+		{
+			continue;
+		}
+
+		const int possibleCapacity = min(s.m_MaxCapacity, toRoad.m_Capacity);
+
+		// 현재 도시의 수용량이 이전 도시까지의 수용량 + 도로가 넓다면 ok			
+		if (possibleCapacity <= toCity.m_MaxCapacity)
+		{
+			// do nothing
+		}
+		// 현재 도시의 수용량보다 이전 도시까지의 수용량 + 도로가 넓다면 이걸 선택
+		else
+		{
+			toCity.m_MaxCapacity = possibleCapacity;
+		}
+
+		if (toCity.m_Index == m_Destiny)
+		{
+			continue;
+		}
+
+		needCheckRoads.push_back(toRoad.m_To);
+	}
+
+	for (size_t i = 0; i < needCheckRoads.size(); ++i)
+	{
+		_FindMaxTrip(needCheckRoads[i]);
+	}
+}
+
+///////////////////////////////////////////////////////////////
+// CConsole
+class CConsole
+{
+public:
+	static void ConsoleTest(istream& input, ostream& output);
+};
+
+void CConsole::ConsoleTest(istream& input, ostream& output)
+{
+	int scenarioIndex = 1;
+
+	while (1)
+	{
+		int cities = 0;
+		int roads = 0;
+	
+		input >> cities >> roads;
+
+		if ((0 == cities) && (0 == roads))
+		{
+			break;
+		}
+
+		CTourGuide tourGuide;
+		tourGuide.Init(cities, roads);
+
+		int from = 0;
+		int to = 0;
+		int capacity = 0;
+
+		for (int i = 0; i < roads; ++i)
+		{
+			input >> from >> to >> capacity;
+			tourGuide.Connect(from, to, capacity);
+		}
+
+		int start;
+		int destiny;
+		int tourists;
+		input >> start >> destiny >> tourists;
+
+		output << "Scenario #" << scenarioIndex << "\n";
+		output << "Minimum Number of Trips = " << tourGuide.NeedTrip(start, destiny, tourists) << "\n";
+	}
+};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureConsole
+{
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureConsole, ConsoleTest1)
+{
+	input << 
+		"7 10\n"
+		"1 2 30\n"
+		"1 3 15\n"
+		"1 4 10\n"
+		"2 4 25\n"
+		"2 5 60\n"
+		"3 4 40\n"
+		"3 6 20\n"
+		"4 7 35\n"
+		"5 7 20\n"
+		"6 7 30\n"
+		"1 7 99\n"
+		"0 0\n"
+	;
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("Scenario #1\nMinimum Number of Trips = 5\n", output.str());
+}
+
+TEST_FIXTURE(FixtureConsole, ConsoleTest2)
+{
+	input << 
+		"7 12\n"
+		"1 2 30\n"
+		"1 3 25\n"
+		"1 4 40\n"
+		"2 3 80\n"
+		"2 7 25\n"
+		"7 6 20\n"
+		"3 4 70\n"
+		"5 3 45\n"
+		"6 5 30\n"
+		"7 5 60\n"
+		"3 7 15\n"
+		"4 6 25\n"
+		"1 6 100\n"
+		"0 0\n"
+	;
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("Scenario #1\nMinimum Number of Trips = 4\n", output.str());
+}
+
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

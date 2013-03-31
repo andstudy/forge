@@ -1,0 +1,1 @@
+ [http://labs.google.com/papers/mapreduce.html MapReduce: Simplified Data Processing on Large Clusters - Jeffrey Dean and Sanjay Ghemawat]

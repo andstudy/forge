@@ -1,0 +1,24 @@
+== 네트워크 모델 ==
+=== FoF ===
+FoF : Friend-of-a-Friend model
+예전에 쓰이던 방식
+Gnutella 는 7 단계의 HTL (Hops to Live) 을 이용한다. (5 ^ 7 = 78125 nodes)
+
+=== Ultrapeer-Leaf ===
+Ultrapeer-Leaf model
+FoF 보다 진보된 방식. Server-Client 와 P2P 의 Hybrid 방식이라고 생각할 수 있다. FastTrack 의 supernodes 와도 비슷한 개념.
+
+Ultrapeers 는 다른 16 개의 Ultrapeers (UP) 와 16개의 leaf node 의 주소를 관리한다.
+leaf 노드는 주소관리양이 작은 대신, 데이타 전송량이 많다.
+UP 는 어떤 데이타가 있는지 물어보는 query 패킷을 받으면 연결되어 있는 다른 UP 하나에게 그 패킷을 전송한 후, 일정시간을 기다려서 결과가 no 일 때에만 다른 UP 에게로 다시 query 패킷을 전송한다.
+
+== 패킷 종류 ==
+ * Ping
+ * Pong 
+ * Query
+ * QueryHit
+ * Push
+
+== 참고 문서 ==
+ * Wikipedia 정의
+  * http://en.wikipedia.org/wiki/Gnutella

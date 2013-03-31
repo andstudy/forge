@@ -1,0 +1,48 @@
+[http://www.autohotkey.com/ 홈페이지]
+
+== 주요 기능 ==
+ * hotkey 
+ * hotstring 
+ * keyboard & mouse event hooking
+ * 스크립트 컴파일
+
+== 스크립트 예제 ==
+1. 특정 문자열을 다른 문자열로 대체
+{{{
+;이게 주석처리입니다. C/C++의 //와 같죠
+::my-bank-id::045-52313-01-302542
+::my-phone::010-1234-5678
+}}}
+
+2. 여러키 예제
+{{{
+;Window키 + N이 눌리면 메모장이 뜹니다.
+#n::
+Run notepad
+return
+
+;Ctrl키 + N이 눌리면 마우스 현재 위치에 클릭을 10번 합니다.
+^n::
+Loop, 10
+{
+      MouseClick, left
+}
+return
+
+;Alt키 + N이 눌리면 마우스 현재 위치를 얻어와서 posX에 10픽셀 더한 위치를 마우스 오른쪽 버튼으로 클릭합니다.
+!n::
+MouseGetPos posX, posY ; posX, posY가 포인터 값이라고 생각하세요.. scanf처럼..
+MouseClick, right, %posX% + 10, %posY%  ; posX, posY가 포인터라고 생각하시면 되요
+return
+
+;Shift키 + N이 눌리면 foo함수를 실행합니다. foo함수는 "bar"를 키보드 이벤트로 보냅니다.
+foo()
+{
+   Send bar
+}
+
+~n::
+foo()
+return
+
+}}}

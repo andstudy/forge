@@ -1,0 +1,146 @@
+ * 비숍 문제 풀어봤습니다.
+ * 이것도 온라인 채점에서는 'Time limit exceeded'가 뜨네요 ㅡㅜ)...
+
+{{{#!plain cpp
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <algorithm>
+
+using namespace std;
+
+class Main
+{
+public:
+	Main( istream& stm ) : m_stmIn( stm ), m_n( -1 ) {}
+	void Solve();
+
+protected:
+	void Init( int n );
+	bool IsASolution( int a[], int k, int n );
+	void Backtrack( int a[], int k, int input );
+	void BuildCandidates( int a[], int k, int input, int c[], int& nCandidates );
+
+	//------------------------------------------------------------------------
+
+	istream&    m_stmIn;			// 파일입력 or STDIN 입력.
+	int			m_n;				// 체스판의 크기
+	int			m_numPosition;		// = m_n * m_n
+	int			m_count;			// 솔루션의 개수.
+	int			idToAxis[64][2];	// 체스판의 위치id를 좌표로 바꾼 값.
+};
+
+void Main::Init( int n )
+{
+	m_count = 0;
+
+	if( m_n != n )
+	{
+		m_n = n;
+		m_numPosition = m_n * m_n;
+
+		for( int i = 0; i < m_numPosition; i++ )
+		{
+			idToAxis[i][0] = i / m_n;
+			idToAxis[i][1] = i % m_n;
+		}
+	}
+}
+
+void Main::Backtrack( int a[], int k, int input )
+{
+	int c[64];
+	int nCandidates = 0;
+
+	if( IsASolution( a, k, input ) )
+	{
+		m_count++;
+		return;
+	}
+	else
+	{
+		BuildCandidates( a, k, input, c, nCandidates );
+		for( int i = 0; i < nCandidates; i++ )
+		{
+			a[k] = c[i];
+			Backtrack( a, k + 1, input );
+		}
+	}
+}
+
+void Main::BuildCandidates( int a[], int k, int input, int c[], int& nCandidates )
+{
+	nCandidates = 0;
+
+	// 이미 비숍이 충분히 위치했다면 더이상 진행할 필요 없다.
+	if( k >= input )
+		return;
+
+	for( int i = (k == 0 ? 0 : a[k-1]+1); i < m_numPosition; i++ )
+	{
+		int canX = idToAxis[i][0];
+		int canY = idToAxis[i][1];
+
+		bool bEnable = true;
+		for( int j = 0; j < k; j++ )
+		{
+			int bishopX = idToAxis[a[j]][0];
+			int bishopY = idToAxis[a[j]][1];
+
+			if( abs(canX - bishopX) == abs(canY - bishopY) ) // 대각선 체크
+			{
+				bEnable = false;
+				break;
+			}
+		}
+
+		if( bEnable )
+			c[nCandidates++] = i;
+	}
+
+}
+
+void Main::Solve()
+{
+	int n, k;
+
+	while( true )
+	{
+		m_stmIn >> n >> k;
+		m_stmIn.get();
+
+		if( n == 0 && k == 0 )
+			return;
+
+		Init( n );
+
+		int bishops[64];
+
+		Backtrack( bishops, 0, k );
+
+		cout << m_count << endl;
+	}
+}
+
+bool Main::IsASolution( int a[], int k, int n )
+{
+	return k == n;
+}
+
+int main( int argc, char* argv[] )
+{
+	if( argc > 1 ) // 명령행 인자를 받는다면 해당 이름의 파일을 인풋으로 삼는다.
+	{
+		ifstream fstm( argv[1] );
+		Main g( fstm );
+		g.Solve();
+	}
+	else // 그냥 실행하면 표준입력으로 인풋을 받음.
+	{
+		Main g( cin );
+		g.Solve();
+	}
+
+	return 0;
+}
+}}}

@@ -1,0 +1,5 @@
+Describe 14장모델의무결성유지
+
+{{{#!html
+<div style="width:425px" id="__ss_9439606"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/dagri82/ddd-14-9439606" title="Ddd 14장" target="_blank">Ddd 14장</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9439606" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/dagri82" target="_blank">dagri82</a> </div> </div>
+}}}

@@ -1,0 +1,116 @@
+[Clojure] 함수 Index
+reference 용으로 정리합니다. 함수 syntax 와 간단한 예만 정리해 주세요.
+그러고 보니 아래 링크에도 잘 정리되어 있긴 하군요 ㅎㅎ
+
+[http://richhickey.github.com/clojure/clojure.core-api.html clojure 홈페이지 - API for clojure.core (master branch)]
+[http://richhickey.github.com/clojure-contrib/math-api.html#clojure.contrib.math/exact-integer-sqrt clojure 홈페이지 - API for math (master branch) by Mark Engelberg]
+[http://clojuredocs.org/clojure_contrib clojure 홈페이지 - clojure_contrib]
+[http://clojure.org/java_interop clojure 홈페이지 - Java Interop]
+
+== 구문 ==
+ * boolean : true, false p.36
+ * character : \a p.34
+ * keyword : :tag, :doc p.37
+ * list : (1 2 3), (println "foo")
+ * map : {:name "Bill", :age 42}
+ * nil : nil
+ * number : 1, 4.2
+ * set : #{:snap, :crackle, :pop}
+ * string : "hello"
+ * symbol : user/foo, java.lang.String p.33
+ * vector : [1 2 3]
+
+== 리더 매크로 ==
+ * 익명 함수 : #(.toUpperCase %)
+ * 주석 : ; 한 줄 주석
+ * deref : @form --> (deref form)
+ * meta : ^form --> (meta form)
+ * 메타데이터 : #^metadata form
+ * 인용 : 'form --> (quote form)
+  * '(1 2) 는 (quote (1 2)) 와 동일
+ * 정규식 패턴 : #"foo" --> a java.util.regex.Pattern
+ * 구문 따옴표 : 'x
+ * 평가 기호 : ~
+ * 이음 평가 기호 : ~@
+ * var-quote : #'x --> (var x)
+
+== 함수 ==
+ * #(body) : p.45 익명함수
+ * (and & expres) : p.236
+  * (and 1 0 nil false)
+ * (apply f args* argseq) : p.35
+  * (apply str (interleave "Attack" "The purple"))
+ * (cond & clauses) : p.7
+  * (cond ((< x 10) "less") ((> x 10) "more"))
+ * (conj coll element & elements) : p.16, 110
+  * (conj #{} "Stu")
+ * (cons elem aseq) : p.107
+ * (count coll)
+ * (dec x)
+ * (def symbol initial-value?) : p.16
+  * (def visitors (ref #{}))
+ * (defn name doc-string? attr-map? [params*] body) : p.14, 42 함수 선언
+  * (defn greeting "help" [username] (str "Hello, " username))
+  * (defn greeting "help" ([] (greeing "world")) ([username] (str "Hello, " username)))
+ * (defstruct name & keys) p.39
+  * (defstruct book :title :author) -> 인스턴스는 struct 로 만든다.
+ * (doc name) : p.21
+  * (doc str)
+ * (false? expr) : p.37
+ * (filter pred coll) : p.115
+  * (take 10 (filter even? (whole-numbers)))
+  * (reduce + (filter even? (take-while #(>= 4000000 %) (fibo))))
+ * (first aseq) : p.106
+ * (fn [params*] body) : p.45
+  * (filter (fn [w] (> (count w) 2)) (re-split #"W+" "A fine day"))
+ * (for [binding-form coll-expr filter-expre? ...] expr) : p.120
+  * (for [file "ABCDEFG" rank (range 1 9)] (format "%c%d" file rank))
+ * (format fmt & args)
+ * (inc x)
+ * (into to-coll from-coll) : p.110
+  * (into [1 2 3] [:a :b :c]) -> [1 2 3 :a :b :c]
+ * if : p.55
+  * (defn is-small? [number] (if (< number 100) "yes" "no"))
+ * (iterate f x) : p.113
+  * (take 10 (iterate inc 1))
+  * (take 10 (iterate (fn [x] (* 2 x)) 2))
+ * (let [bindings*] expres*) : p.48
+  * (defn square-corners [bottom left size] (let [top (+ bottom size) right (+ left size)] [[bottom left] [top left] [top right] [bottom right]]))
+ * (loop [bindings *] expres*) : p.56
+  * (loop [result [] x 5] (if (zero? x) result (recur (conj result x) (dec x))))
+ * (map  f coll) : p.118
+  * (map #(format "<p>%s</p>" %) ["the" "quick" "brown" "fox"])
+  * (map (fn[x] (* x x)) (take 10 (iterate inc 1)))
+ * (next aseq) : p.107 (seq (rest aseq)) 와 같다.
+ * (nil? expr) : p.37
+ * (or & exprs) : p.236
+  * (or 1 0 nil false)
+  * (defn pred1[n] (or (= (rem n 3) 0) (= (rem n 5) 0)))
+ * (quot 22 7) -> 3 p.32 : 몫 구하기
+ * (range start? end step?) : p.112
+  * (range 10 20)
+ * (recur exprs) : p.32 loop 대신 함수를 반복시킬 수도 있다.
+  * (defn countdown [result x] (if (zero? x) result (recur (conj result x) (dec x))))
+ * (reduce f coll) : p.119
+  * (reduce + (range 1 11))
+  * (reduce + (filter even? (take-while #(>= 4000000 %) (fibo))))
+ * (rem 22 7) -> 1 p.32 : 나머지 구하기
+ * (repeat n x) p.113
+  * (repeat 5 1)
+ * (rest aseq) : p.106
+ * (seq coll) : p.107 
+ * (sort comp? coll) : p.119
+  * (sort [42 1 7 11])
+  * (sort > [42 1 7 11)
+ * (sort-by a-fn comp? coll) : p.119
+  * (sort-by #(.toString %) [42 1 7 11])
+ * (str & args) : p.34
+  * (str 1 2 nil 3)
+ * (struct name & vals)
+  * (def b (struct book "Anathem" "Neal Stephenson")) 선언은 defstruct 로 한다. p.39
+ * (take n sequence) : p.113
+  * (take 10 (iterate inc 1))
+ * (take-while pred coll) : p.116
+  * (take-while (complement #{\a\e\i\o\u}) "the-quick-brown-fox")
+ * (true? expr) : p.37
+ * (zero? expr) : p.37

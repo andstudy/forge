@@ -1,0 +1,5 @@
+{{{#!html
+<iframe src="http://www.slideshare.net/slideshow/embed_code/17557740" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/ssuser239f08/tcpl-14" title="Tc++pl 14장발표" target="_blank">Tc++pl 14장발표</a> </strong> from <strong><a href="http://www.slideshare.net/ssuser239f08" target="_blank">재정 이</a></strong> </div>
+}}}
+
+예제 소스코드는 [[https://github.com/jjuiddong/TCPL]] 에서 확인할 수 있습니다.

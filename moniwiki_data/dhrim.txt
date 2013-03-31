@@ -1,0 +1,14 @@
+이름 : 임도형
+이메일 : dh-rim@hanmail.net
+MSN : dh-rim@hanmail.net
+twitter : dhrim00
+직업 : java, 서버 개발
+관심 분야 : 개발 문화 만들기, 제대로 개발하기, 삽질 증오.
+주로 쓰는 언어 : java
+약간 아는 분야 : 서버 개발
+shared slide
+[http://www.slideshare.net/dhrim/java-4091108 Java 그쪽 동네는]
+[http://www.slideshare.net/dhrim/test-case 자동화된 Test Case의 효과]
+[http://www.slideshare.net/dhrim/ss-2892207 소토리포인트로 공수 산정하기 운선수위정하기]
+[http://www.slideshare.net/dhrim/ss-2804901 예외처리가이드]
+[http://www.slideshare.net/dhrim/cmmi-2804834 팀장님 근데 CMMI가 뭐에여]

@@ -1,0 +1,119 @@
+== 1차 풀이 ==
+ * Wrong Answer
+  * 복수개의 carry가 발생하면 operations. 라고 출력해야 합니다....;;;
+
+{{{
+#include <iostream>
+#include <vector>
+
+#ifdef	_UNITTEST
+	#include "../UnitTest++/src/UnitTest++.h"
+	#include "../UnitTest++/src/TestReporterStdout.h"
+#endif	//_UNITTEST
+
+using namespace std;
+
+int GetPrimaryArithmetic(int n1, int n2)
+{
+	int iRet = 0;
+	int	each_digit_min = 0;
+	int each_digit_max = 0;
+	int carry = 0;
+
+	int min_n = min(n1, n2);
+	int max_n = max(n1, n2);
+
+	while(min_n > 0)
+	{
+		each_digit_min	= min_n % 10;
+		each_digit_max	= max_n % 10;
+
+		if(each_digit_min + each_digit_max + carry > 9)
+		{
+			iRet++;
+			carry = 1;
+		}
+		else
+			carry = 0;
+
+		min_n /= 10;
+		max_n /= 10;
+	}
+
+	while(carry == 1 && max_n > 0)
+	{
+		each_digit_max = max_n % 10;
+		if(each_digit_max == 9)
+			iRet++;
+		else
+			break;
+
+		max_n /= 10;
+	}
+
+	return iRet;
+}
+
+int main()
+{
+#ifdef	_UNITTEST
+	UnitTest::RunAllTests();
+#endif	//_UNITTEST
+
+	int n1, n2;
+	std::vector<int> vResult;
+	while(cin >> n1 >> n2)
+	{
+		if(n1 == 0 && n2 == 0)
+			break;
+
+		vResult.push_back(GetPrimaryArithmetic(n1, n2));
+	}
+
+	if(vResult.size() > 0)
+	{
+		for(int i = 0; i < vResult.size(); i++)
+		{
+			if(vResult[i] == 0)
+				cout << "No" << " carry operation." << endl;
+			else
+				cout << vResult[i] << " carry operation." << endl;		
+		}
+	}
+
+	return 0;
+}
+
+#ifdef	_UNITTEST
+//TEST(testSetUp)
+//{
+//}
+//TEST(testTearDown)
+//{
+//}
+
+TEST(testGetPrimaryArithmetic_1and1)
+{
+	CHECK_EQUAL(0, GetPrimaryArithmetic(4, 5));
+	CHECK_EQUAL(1, GetPrimaryArithmetic(5, 5));
+
+	CHECK_EQUAL(0, GetPrimaryArithmetic(0, 0));
+	CHECK_EQUAL(1, GetPrimaryArithmetic(9, 9));
+	CHECK_EQUAL(0, GetPrimaryArithmetic(-1, -1));
+
+	CHECK_EQUAL(0, GetPrimaryArithmetic(0, 1));
+}
+TEST(testGetPrimaryArithmetic_1and2)
+{
+	CHECK_EQUAL(1, GetPrimaryArithmetic(55, 5));
+	CHECK_EQUAL(2, GetPrimaryArithmetic(95, 5));
+}
+TEST(testGetPrimaryArithmetic_multi)
+{
+	CHECK_EQUAL(3, GetPrimaryArithmetic(999, 9));	
+	CHECK_EQUAL(4, GetPrimaryArithmetic(9999, 9));	
+}
+#endif	//_UNITTEST
+
+
+}}}

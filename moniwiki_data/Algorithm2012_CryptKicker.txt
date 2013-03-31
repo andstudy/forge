@@ -1,0 +1,254 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <map>
+#include <list>
+#include <string>
+#include <string.h>
+#include <algorithm>
+using namespace std;
+
+#ifndef NULL
+#define NULL '\0'
+#endif
+
+typedef struct _sRsvWord
+{
+	bool reserve;
+	string str;
+	
+	_sRsvWord() {}
+	_sRsvWord(const string st) : str(st), reserve(false)
+	{
+	}
+	bool operator==(const _sRsvWord &rhs)
+		{ return str == rhs.str; }
+} sRsvWord;
+
+typedef map<int, list<sRsvWord> > Dict; //string length, string list
+typedef Dict::iterator DictItor;
+Dict g_Dictionary; 
+
+typedef list< list<string> > CryptList;
+typedef CryptList::iterator CryptItor;
+CryptList g_CryptStrings;
+
+
+// 사전로딩
+bool Input(char *fileName)
+{
+	FILE *fp = fopen(fileName, "r");
+	if (!fp) return false;
+
+	char line[ 256];
+	char *next = fgets(line, sizeof(line), fp);
+	if (!next)
+	{
+		fclose(fp);
+		return false;
+	}
+
+	const int size = atoi(next);
+	int cnt = 0;
+	while (next && size > cnt++)
+	{
+		next = fgets(line, sizeof(line), fp);
+		const int len = strlen(line)-1;
+		line[ len] = NULL; // 개행문자 제거
+		DictItor it = g_Dictionary.find(len);
+		if (g_Dictionary.end() == it)
+			g_Dictionary.insert( Dict::value_type(len, list<sRsvWord>()) );
+		g_Dictionary[ len].push_back( sRsvWord(line) );
+	}
+
+	// 암호화된 스트링 로딩
+	while (next)
+	{
+		next = fgets(line, sizeof(line), fp);
+		const int len = strlen(line)-1;
+		line[ len] = NULL; // 개행문자 제거
+		list<string> cryptStrings;
+		char *p = strtok(line, " ");
+		while (p)
+		{
+			cryptStrings.push_back(p);
+			p = strtok(NULL, " ");
+		}
+		g_CryptStrings.push_back( cryptStrings );
+	}	
+	
+	fclose(fp);
+	return true;
+}
+
+
+char g_MatchTable[ 26];
+
+string GetMatchString(string &cryptString)
+{
+	string str = cryptString;
+	const int len = cryptString.length();
+	for (int i=0; i < len; ++i)
+		str[ i] = g_MatchTable[ 'z'-cryptString[ i]];
+	return str;
+}
+
+void SetMatchString(string &cryptString, string &matchString)
+{
+	const int len = cryptString.length();
+	for (int i=0; i < len; ++i)
+	{
+		g_MatchTable[ 'z'-cryptString[ i]] = matchString[ i];
+	}
+}
+
+string GetDictionaryString( string &findString )
+{
+	const int len = findString.length();
+	DictItor it = g_Dictionary.find(len);
+	if (g_Dictionary.end() == it)
+		return "";
+
+	list<sRsvWord>::iterator i = find(it->second.begin(), it->second.end(), findString);
+	if (it->second.end() == i)
+		return "";
+	return i->str;
+}
+
+// '*' 표시를 제외한 스트링을 비교해서 리턴한다.
+list<sRsvWord>::iterator GetNextDictionaryString( list<sRsvWord>::iterator beginItor, 
+												 const list<sRsvWord>::iterator endItor, string &findString )
+{
+	list<sRsvWord>::iterator it = beginItor;
+	while (endItor != it)
+	{
+		if (it->reserve)
+		{
+			++it;
+			continue;
+		}
+
+		const int len = it->str.length();
+		if (len != findString.length())
+			break;
+
+		int i=0;
+		for (i=0; i < len; ++i)
+		{
+			if (findString[ i] == '*') 
+				continue;
+			if (it->str[ i] != findString[ i])
+				break;
+		}
+		if (i==len) // 일치
+			return it;
+		++it;
+	}
+	return endItor;
+}
+
+// cryptString을 사전에있는 단어로 예약시킨다.
+string ReserveTable( string &reserveString, string &cryptString, string &matchString )
+{
+	string str;
+	list<sRsvWord>::iterator ritor;
+	const int len = cryptString.length();
+	DictItor it = g_Dictionary.find(len);
+	if (g_Dictionary.end() == it)
+		return "";
+
+	if (reserveString.empty())
+	{
+		ritor = GetNextDictionaryString(it->second.begin(), it->second.end(), matchString);
+	}
+	else
+	{
+		list<sRsvWord>::iterator i = find(it->second.begin(), it->second.end(), reserveString);
+		if (it->second.end() != i)
+			i->reserve = false; // 예약된 단어 복구
+
+		ritor = GetNextDictionaryString(++i, it->second.end(), matchString );
+	}
+
+	if (it->second.end() != ritor)
+	{
+		SetMatchString(cryptString, ritor->str);
+		ritor->reserve = true;
+		str = ritor->str;
+	}
+
+	return str;
+}
+
+// 테이블 생성
+bool MakeTable(list<string>::iterator crypStringItor, list<string>::iterator cryptEndItor )
+{
+	if (crypStringItor == cryptEndItor)
+		return true;
+
+	string cryptString = *crypStringItor;
+	string matchString = GetMatchString(cryptString);
+	string dictString = GetDictionaryString(matchString);
+	if (dictString.empty())
+	{
+		string reseveString;
+		while (1)
+		{
+			reseveString = ReserveTable( reseveString, cryptString, matchString );
+			if (reseveString.empty())
+				return false;
+			if (MakeTable(++crypStringItor, cryptEndItor))
+				return true;
+		}
+	}
+	else
+	{
+		return MakeTable(++crypStringItor, cryptEndItor);
+	}
+
+	return true;
+}
+
+// 암호문으로 매칭테이블을 이용해서 글자를 출력한다.
+void PrintCryptString(list<string>::iterator beginIt, list<string>::iterator endIt)
+{
+	list<string>::iterator it = beginIt;
+	if (it == endIt)
+		return;
+
+	string matchString = GetMatchString(*beginIt);
+	printf( "%s ", matchString.c_str() );
+	PrintCryptString(++it, endIt);
+}
+
+void DecryptLine(list<string> &cryptStrings)
+{
+	for (int i=0; i < sizeof(g_MatchTable); ++i)
+		g_MatchTable[ i] = '*';
+
+	list<string>::iterator it = cryptStrings.begin();
+	MakeTable(cryptStrings.begin(), cryptStrings.end() );
+
+	PrintCryptString(cryptStrings.begin(), cryptStrings.end());
+	printf( "\n" );
+
+}
+
+// 복호화
+void Decrypt()
+{
+	CryptItor it = g_CryptStrings.begin();
+	while (g_CryptStrings.end() != it)
+		DecryptLine(*it++);
+}
+
+int main(int argc, char* argv[])
+{
+	if (argc < 2)
+		return 0;
+
+	Input(argv[1]);
+	Decrypt();
+
+	return 0;
+}

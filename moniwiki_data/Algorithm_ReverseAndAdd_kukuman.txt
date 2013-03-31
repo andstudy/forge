@@ -1,0 +1,88 @@
+ * 계속 wrong answer이네요 ㅠㅠ 이리저리 고쳐보다 포기 ㅠㅠ
+  * UVa에 제출하면 Runtime Error가 발생하네요 @_@);;
+  * 온라인 판사님에겐 신경 끄기로 했는데 그게 잘 안되네요.
+   * 51814 무한 루프 도는것 같은데
+    * {{{double addend = getReverseNum(curSum);}}} 에서 long 으로 바꿔야 함
+    * 그래도 wrong answer
+   * Solved 판정 받은 Mastojun님 풀이는 001과 1을 다르게 처리함
+    * 혹시 이것 때문이라면 OTL
+    * 작년에 제출했던 코드는 001과 1을 같게 처리하는데 Solved받았어요.
+
+ * 코드
+{{{
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+class Main implements Runnable{
+	public Long readLine(){
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			return new Long( reader.readLine().trim() );
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	public static void main(String[] args) {
+		Main myWork = new Main();  // Construct the bootloader
+		myWork.run();            // execute
+	}
+	
+	public void run() {
+		long caseCount = readLine().longValue();
+		for(int i=0;i<caseCount;i++){
+			String result = ReverseAdder.GetReverseResult(readLine().longValue());
+			System.out.println(result);
+		}
+	}
+}
+
+
+class ReverseAdder {
+	public static long getReverseNum(long num){
+		String strNum = new Long(num).toString();
+		StringBuilder builder = new StringBuilder();
+		for(int i=0;i<strNum.length();i++){
+			builder.insert(0,strNum.charAt(i));
+		}
+		return Long.parseLong(builder.toString());
+		
+	}
+
+	public static String GetReverseResult(long num) {
+		int loopCount =0;
+		long curSum = num;
+		while(curSum != getReverseNum(curSum)){
+			loopCount++;
+			double addend = getReverseNum(curSum);
+			curSum += addend;
+		}
+		return loopCount + " "+ curSum;
+	}
+}
+
+}}}
+
+ * 테스트 케이스
+{{{
+import junit.framework.TestCase;
+
+
+public class ReverseTestCase extends TestCase {
+	public void testGetReverse(){
+		assertEquals(123,  ReverseAdder.getReverseNum(321));
+		assertEquals(1234,  ReverseAdder.getReverseNum(4321));
+		assertEquals(3,  ReverseAdder.getReverseNum(3));
+		assertEquals(13,  ReverseAdder.getReverseNum(31));
+	}
+	public void testCheckPalindrome(){
+		assertEquals(123, ReverseAdder.getReverseNum(ReverseAdder.getReverseNum(123)));
+	}
+	
+	public void testGetReverseResult(){
+		assertEquals("4 9339", ReverseAdder.GetReverseResult(195));
+		assertEquals("5 45254", ReverseAdder.GetReverseResult(265));
+		assertEquals("3 6666", ReverseAdder.GetReverseResult(750));
+	}
+}
+
+}}}

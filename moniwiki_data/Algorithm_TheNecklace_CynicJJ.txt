@@ -1,0 +1,262 @@
+ * 한 색상 구슬 때문에 예외가 많아지고 코드가 지저분함
+
+[[TableOfContents([maxdepth])]]
+
+== The Necklace ==
+=== Bead.vb ===
+{{{
+Public Class Bead
+
+	Sub New(ByVal color1 As Integer, ByVal color2 As Integer)
+		_color1 = color1
+		_color2 = color2
+	End Sub
+
+	Function IsThereColor(ByVal color As Integer) As Boolean
+		If color = Color1 Or color = Color2 Then
+			Return True
+		Else
+			Return False
+		End If
+	End Function
+
+	Function IsMonoColor() As Boolean
+		Return (Color1 = Color2)
+	End Function
+
+	Sub ReverseColor()
+		Dim temp As Integer = Color1
+		_color1 = Color2
+		_color2 = temp
+	End Sub
+
+	Private _color1 As Integer
+	Private _color2 As Integer
+
+	ReadOnly Property Color1() As Integer
+		Get
+			Return _color1
+		End Get
+	End Property
+
+	ReadOnly Property Color2() As Integer
+		Get
+			Return _color2
+		End Get
+	End Property
+
+End Class
+}}}
+
+=== Necklace.vb ===
+{{{
+Public Class Necklace
+
+	Private _isReparable As Boolean
+	ReadOnly Property IsReparable() As Boolean
+		Get
+			Return _isReparable
+		End Get
+	End Property
+
+	Function AreCountOfColorEven(ByVal beads As List(Of Bead)) As Boolean
+		Dim colorCount(50) As Integer
+
+		For color As Integer = 1 To 50
+			For Each aBead As Bead In beads
+				If aBead.Color1 = color Then colorCount(color) += 1
+				If aBead.Color2 = color Then colorCount(color) += 1
+			Next
+		Next
+
+		For i As Integer = 1 To 50
+			If colorCount(i) Mod 2 <> 0 Then Return False
+		Next
+
+		Return True
+	End Function
+
+	Private _repaired As List(Of Bead) = New List(Of Bead)
+
+	Function GetRepaired() As List(Of Bead)
+		Return _repaired
+	End Function
+
+	Sub TryRepair(ByVal beadList As List(Of Bead))
+		_repaired.Clear()
+
+		If Not AreCountOfColorEven(beadList) Then
+			_isReparable = False
+			Return
+		End If
+
+		Dim beads As List(Of Bead) = GetCopied(beadList)
+		Dim monos As List(Of Bead) = GetAndRemoveMono(beads)
+
+		Dim areAllMono As Boolean = (monos.Count = beadList.Count)
+		If areAllMono Then
+			_isReparable = True
+			_repaired.InsertRange(0, monos)
+			Return
+		End If
+
+		Dim startColor As Integer = beads(0).Color1
+
+		Dim color As Integer = startColor
+		While beads.Count > 0
+			Dim aBead As Bead = GetMatched(color, beads)
+			If aBead.Color2 = color Then aBead.ReverseColor()
+			_repaired.Add(aBead)
+			beads.Remove(aBead)
+			color = aBead.Color2
+			If color = startColor Then Exit While
+		End While
+
+		For Each mono As Bead In monos
+			Dim i As Integer = 0
+			While True
+				If i >= _repaired.Count Then Exit While
+				If _repaired(i).Color2 = mono.Color1 And Not _repaired(i).IsMonoColor() Then
+					_repaired.Insert(i + 1, mono)
+					i += 1
+				End If
+				i += 1
+			End While
+		Next
+
+		_isReparable = True
+		If _repaired.Count <> beadList.Count Then _isReparable = False
+		If _repaired(0).Color1 <> _repaired(_repaired.Count - 1).Color2 Then _isReparable = False
+		For i As Integer = 0 To _repaired.Count - 2
+			If _repaired(i).Color2 <> _repaired(i + 1).Color1 Then _isReparable = False
+		Next
+	End Sub
+
+	Function GetAndRemoveMono(ByVal beads As List(Of Bead)) As List(Of Bead)
+		Dim monos As List(Of Bead) = New List(Of Bead)
+
+		Dim i As Integer = 0
+		While True
+			If i >= beads.Count Then Exit While
+			If beads(i).IsMonoColor() Then
+				monos.Add(beads(i))
+				beads.RemoveAt(i)
+			Else
+				i += 1
+			End If
+		End While
+
+		Return monos
+	End Function
+
+	Shared Function GetCopied(ByVal beadList As List(Of Bead)) As List(Of Bead)
+		Dim beadArray(beadList.Count - 1) As Bead
+		beadList.CopyTo(beadArray)
+		Return New List(Of Bead)(beadArray)
+	End Function
+
+	Function GetMatched(ByVal color As Integer, ByVal beads As List(Of Bead)) As Bead
+		For Each aBead As Bead In beads
+			If aBead.IsThereColor(color) Then Return aBead
+		Next
+		Return Nothing
+	End Function
+
+End Class
+}}}
+
+=== !NecklaceTest.vb ===
+{{{
+<TestClass()> _
+Public Class NecklaceTest
+
+	<TestMethod()> _
+	Public Sub AreCountOfColorEvenTest()
+		Dim beads As List(Of Bead) = New List(Of Bead)
+		beads.Add(New Bead(1, 2))
+		beads.Add(New Bead(2, 2))
+		beads.Add(New Bead(2, 3))
+		beads.Add(New Bead(3, 1))
+
+		Dim aNecklace As Necklace = New Necklace
+		Assert.IsTrue(aNecklace.AreCountOfColorEven(beads))
+
+		beads.Add(New Bead(3, 4))
+		Assert.IsFalse(aNecklace.AreCountOfColorEven(beads))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetCopiedTest()
+		Dim beads As List(Of Bead) = New List(Of Bead)
+		beads.Add(New Bead(1, 2))
+		beads.Add(New Bead(2, 3))
+
+		Dim copied As List(Of Bead) = Necklace.GetCopied(beads)
+		Assert.AreEqual(beads.Count, copied.Count)
+		Assert.AreEqual(beads(0).Color1, copied(0).Color1)
+		Assert.AreEqual(beads(1).Color1, copied(1).Color1)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetAndRemoveMonoTest()
+		Dim beads As List(Of Bead) = New List(Of Bead)
+		beads.Add(New Bead(1, 2))
+		beads.Add(New Bead(2, 2))
+		beads.Add(New Bead(2, 2))
+
+		Dim aNecklace As Necklace = New Necklace
+		Dim monos As List(Of Bead) = aNecklace.GetAndRemoveMono(beads)
+		Assert.AreEqual(2, monos.Count)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetRepairedTest()
+		Dim beads As List(Of Bead) = New List(Of Bead)
+		beads.Add(New Bead(2, 1))
+		beads.Add(New Bead(2, 2))
+		beads.Add(New Bead(2, 2))
+		beads.Add(New Bead(3, 4))
+		beads.Add(New Bead(3, 1))
+		beads.Add(New Bead(2, 4))
+		beads.Add(New Bead(3, 3))
+
+		Dim aNecklace As Necklace = New Necklace
+		aNecklace.TryRepair(beads)
+		Dim repaired As List(Of Bead) = aNecklace.GetRepaired()
+
+		Assert.IsTrue(aNecklace.IsReparable)
+		Assert.AreEqual(beads.Count, repaired.Count)
+		Assert.AreEqual(repaired(0).Color1, repaired(repaired.Count - 1).Color2)
+		For i As Integer = 1 To repaired.Count - 1
+			Assert.AreEqual(repaired(i - 1).Color2, repaired(i).Color1)
+		Next
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetRepairedTestTwoCircle()
+		Dim beads As List(Of Bead) = New List(Of Bead)
+		beads.Add(New Bead(2, 1))
+		beads.Add(New Bead(1, 2))
+		beads.Add(New Bead(5, 6))
+		beads.Add(New Bead(5, 6))
+
+		Dim aNecklace As Necklace = New Necklace
+		aNecklace.TryRepair(beads)
+		Assert.IsFalse(aNecklace.IsReparable)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetRepairedTestAllMono()
+		Dim beads As List(Of Bead) = New List(Of Bead)
+		beads.Add(New Bead(1, 1))
+		beads.Add(New Bead(1, 1))
+		beads.Add(New Bead(1, 1))
+		beads.Add(New Bead(1, 1))
+
+		Dim aNecklace As Necklace = New Necklace
+		aNecklace.TryRepair(beads)
+		Assert.IsTrue(aNecklace.IsReparable)
+	End Sub
+
+End Class
+}}}

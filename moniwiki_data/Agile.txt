@@ -1,0 +1,4 @@
+ [http://www.gamasutra.com/features/19991210/birdwell_pfv.htm The Cabal: Valve’s Design Process For Creating Half-Life]
+ [http://agile2008.org/ Agile 2008]
+ [http://submissions.agile2008.org/node/2769 New Car Development in Toyota. Kenji Hiranabe]
+ [AgilePractice2010]

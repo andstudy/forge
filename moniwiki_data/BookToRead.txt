@@ -1,0 +1,11 @@
+Domain-Driven Design. 괜찮음.
+
+Framework Design Guidelines: Conventions, Idioms, and Patterns for Reusable .Net Libraries
+
+http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200508240013
+----
+
+자바 병행 프로그래밍 디자인 원리와 패턴:Concurrent Programming in Java 2ed.Design Principles and Patterns
+
+http://kangcom.com/common/bookinfo/bookinfo.asp?sku=200302170006
+----

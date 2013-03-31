@@ -1,0 +1,4 @@
+트리
+{{{#!html
+<div style="width:425px" id="__ss_7990126"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jun0683/taocp-23-7990126" title="Taocp 2.3">Taocp 2.3</a></strong><object id="__sse7990126" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp2-3-110517010757-phpapp01&stripped_title=taocp-23-7990126&userName=jun0683" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse7990126" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp2-3-110517010757-phpapp01&stripped_title=taocp-23-7990126&userName=jun0683" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jun0683">홍준 김</a>.</div></div>
+}}}

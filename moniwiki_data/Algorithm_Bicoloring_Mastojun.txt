@@ -1,0 +1,128 @@
+= 문제 풀이 =
+ 학부 2학년때 그래프 부분을 제대로 공부를 못해서인지 그래프가 두려워요.
+ 자료는 Array를 이용해서 표현하고, 최초 node를 검정색으로 칠하고 연결되어있는 node들을 찾아가며 색을 칠하다가 이전 node랑 같은색의 연결된 node를 발견하면 false를 돌려주도록 했습니다.
+
+ 이번엔 소스가 깔끔하지 못하게 나왔네요 ㅠ_ㅠ..
+
+= 소스 코드 =
+{{{
+#include <stdio.h>
+#define ever (;;)
+
+enum COLOR {NONE, BLACK, WHITE};
+
+struct node
+{
+	bool use;
+	int  color;
+	bool isLink[200];
+}Matrix[200];
+
+int n;
+
+void InputData()
+{
+	int l;
+	scanf("%d", &l);
+
+	for(int i = 0; i < n; i++ )
+	{
+		Matrix[i].color = NONE;
+		Matrix[i].use	= false;
+
+		for(int j = 0; j < n; j++ )
+		{
+			Matrix[i].isLink[j] = false;	
+		}
+	}
+
+	for(int i = 0; i < l; i++ )
+	{
+		int temp1, temp2;
+
+		scanf("%d %d", &temp1, &temp2);
+
+		Matrix[temp1].use = true;
+		Matrix[temp2].use = true;
+		Matrix[temp1].isLink[temp2] = true;
+		Matrix[temp2].isLink[temp1] = true;	
+	}
+}
+
+int GetNextColor(int color)
+{
+	color++;
+	if(color > WHITE) color = BLACK;
+
+	return color;
+}
+
+//////////////////////////////////////////////////////////////////////////
+// no에 연결된 node들에 색을 다른색으로 칠해주는 함수.,
+//  만약 node에 이미 색이 칠해져 있다면,. no의 색과 같으면 false리턴
+//////////////////////////////////////////////////////////////////////////
+bool FillColor(int no, int color)
+{
+	int nextColor = GetNextColor(color);
+	
+	for(int i = 0; i < n; i++ )
+	{
+		if( Matrix[no].isLink[i] )
+		{
+			if( Matrix[i].color  == color ) // 이미 색이 칠해져 있는데 같다면..
+			{
+				return false;
+			}
+			else if( Matrix[i].color == NONE ) // 색이 칠해져 있지 않다면..
+			{
+				Matrix[i].color = nextColor;	// no와 다른색을 칠하기
+
+				if( FillColor(i, nextColor) == false ) // i와 연결된 node들 탐색 시키기!
+				{
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+
+bool GetResult()
+{
+	for(int i = 0; i < n; i++ )
+	{
+		if( Matrix[i].use )
+		{
+			Matrix[i].color = BLACK;
+
+			return FillColor(i, BLACK);
+		}
+
+	}
+
+	return true;
+}
+
+int main()
+{
+
+	for ever
+	{
+		scanf("%d", &n);
+
+		if( n == 0 ) break;
+
+		InputData();
+		if( GetResult() == false )
+		{
+			printf("NOT ");
+		}
+
+		printf("BICOLORABLE.\n");
+	}
+
+	return 0;
+}
+}}}

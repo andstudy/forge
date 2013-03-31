@@ -1,0 +1,12 @@
+== 1 장 ==
+=== 연습문제 1.3 ===
+{{{#!gcode scheme
+(define (square x) (* x x))
+(define (sum-square a b) (+ (square a) (square b)))
+(define (ex1_3 v1 v2 v3) 
+        (if (> v1 v2) 
+              (sum-square v1 (if (> v2 v3) v2 v3)) 
+              (sum-square v2 (if (> v1 v3) v1 v3)) 
+        )
+)
+}}}

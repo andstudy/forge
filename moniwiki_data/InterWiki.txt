@@ -1,0 +1,11 @@
+List of valid InterWiki names this wiki knows of:
+  [[InterWiki]]
+
+Other Wikis:
+  * [http://panoptic.com/wiki/aolserver AOL Server Wiki]
+  * [http://seattlewireless.net/ SeattleWireless]
+  * [http://pikie.darktech.org/cgi/pikie.py PikiePikie]
+
+MoinMoin marks the InterWiki links in a way that works for the MeatBall:ColourBlind and also is MeatBall:LynxFriendly by using a little icon with an ALT attribute. If you hover above the icon in a graphical browser, you'll see to which Wiki it refers. If the icon has a border, that indicates that you used an illegal or unknown BadBadBad:InterWiki name (see the list above for valid ones). BTW, the reasoning behind the icon used is based on the idea that a Wiki:WikiWikiWeb is created by a team effort of several people.
+
+See the wiki:MeatBall/InterWiki page on wiki:MeatBall:MeatballWiki for further details.

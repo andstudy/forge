@@ -1,0 +1,139 @@
+[CSP]
+== CSP second trial ==
+{{{
+using namespace mylib;
+
+namespace Fibo
+{
+template <typename T>
+class LockAndWaitQueue
+{
+public:
+	LockAndWaitQueue() : m_event(INVALID_HANDLE_VALUE) { m_event = CreateEvent(NULL, FALSE, FALSE, NULL); }
+	~LockAndWaitQueue() { CloseHandle(m_event); }
+	void PushRequest(T n)
+	{
+		mylib::AutoGuard guard(m_lock);
+		m_deque.push_back(n);
+		if (m_deque.size() == 1)
+		{
+			SetEvent(m_event);
+		}
+	}
+	T PopRequest()
+	{
+		AutoGuard guard(m_lock);
+		while (m_deque.empty())
+		{
+			guard.Unlock();
+			WaitForSingleObject(m_event, INFINITE);
+			guard.Lock();
+		}
+		T n = m_deque.front();
+		m_deque.pop_front();
+		return n;
+	}
+	T PeekRequest()
+	{
+		AutoGuard guard(m_lock);
+		while (m_deque.empty())
+		{
+			guard.Unlock();
+			WaitForSingleObject(m_event, INFINITE);
+			guard.Lock();
+		}
+		return m_deque.front();
+	}
+private:
+	HANDLE m_event;
+	AutoLock m_lock;
+	deque<T> m_deque;
+};
+
+typedef LockAndWaitQueue<int> Channel;
+
+typedef shared_ptr<Thread> ProcessPtr;
+
+class Succ : public Thread
+{
+public:
+	Succ(Channel& in, Channel& out1, Channel& out2) 
+		: m_in(in), m_out1(out1), m_out2(out2) {}
+
+	virtual void OnThread() 
+	{
+		while (!IsEnded())
+		{
+			m_out1.PushRequest(m_in.PopRequest());
+			m_out2.PushRequest(m_in.PeekRequest());
+		}
+	}
+private:
+	Channel& m_in;
+	Channel& m_out1;
+	Channel& m_out2;
+};
+
+class Plus : public Thread
+{
+public:
+	Plus(Channel& in1, Channel& in2, Channel& out)
+		: m_in1(in1), m_in2(in2), m_out(out) {}
+
+	virtual void OnThread() 
+	{
+		while (!IsEnded())
+		{
+			m_out.PushRequest(m_in1.PopRequest() + m_in2.PopRequest());
+		}
+	}
+private:
+	Channel& m_in1;
+	Channel& m_in2;
+	Channel& m_out;
+};
+
+class Printer : public Thread
+{
+public:
+	Printer(Channel& in, Channel& out)
+		: m_in(in), m_out(out){}
+
+	virtual void OnThread() 
+	{
+		while (!IsEnded())
+		{
+			int n = m_in.PopRequest();
+			cout << n << '\n';
+			m_out.PushRequest(n);
+			Sleep(1000);		// to see result
+		}
+	}
+private:
+	Channel& m_in;
+	Channel& m_out;
+};
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	using namespace Fibo;
+
+	Channel succToAdder1;
+	Channel succToAdder2;
+	Channel adderToPrinter;
+	Channel printerToSucc;
+
+	ThreadManager threadMgr;
+	threadMgr.Spawn(ThreadPtr(new Succ(printerToSucc, succToAdder1, succToAdder2)));
+	threadMgr.Spawn(ThreadPtr(new Plus(succToAdder1, succToAdder2, adderToPrinter)));
+	threadMgr.Spawn(ThreadPtr(new Printer(adderToPrinter, printerToSucc)));
+
+	adderToPrinter.PushRequest(1);
+	adderToPrinter.PushRequest(1);
+
+	threadMgr.WaitForAll(30000);
+
+	return 0;
+}
+}}}

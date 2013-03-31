@@ -1,0 +1,11 @@
+[http://agile.egloos.com/1666312 표면적 단순함과 심층적 단순함 : -5/4는 얼마일까]
+[TAOCP1]
+
+문제 풀이 번호
+#1 ~ 5, 10, 19, 21, 28, 29, 35, 37
+
+여기서 #28은 함께 풀어보면 좋을 듯하고 # 35, 37은 발표 시간이 남으면 풀어볼까 합니다.
+
+{{{#!html
+<div style="width:425px" id="__ss_7009677"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/parkpd/taocp1-2-4" title="Taocp1 2 4">Taocp1 2 4</a></strong><object id="__sse7009677" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp124-110222030320-phpapp01&stripped_title=taocp1-2-4&userName=parkpd" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse7009677" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=taocp124-110222030320-phpapp01&stripped_title=taocp1-2-4&userName=parkpd" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/parkpd">Ryan Park</a>.</div></div>
+}}}

@@ -1,0 +1,83 @@
+== Text Formatting Rules ==
+
+Leave blank lines between paragraphs. Use {{{[[BR]]}}} to insert linebreaks into paragraphs.
+
+You can render text in ''italics'' or '''bold'''.
+To write italics, enclose the text in double single quotes.
+To write bold, enclose the text in triple single quotes.
+__Underlined text__ needs a double underscore on each side.
+You get ^superscripted^ text by enclosing it into caret characters,
+and ,,subscripts,, have to be embedded into double commas.
+
+To insert program source without reformatting in a {{{monospace font}}}, use three curly braces:
+{{{
+10 PRINT "Hello, world!"
+20 GOTO 10
+}}}
+Note that within code sections, both inline and display ones, any wiki markup is ignored. An alternative and shorter syntax for `inlined code` is to use backtick characters.
+
+For more information on the possible markup, see HelpOnEditing.
+
+=== Example ===
+{{{
+__Mixing__ ''italics'' and '''bold''':
+ * '''''Mix''' at the beginning'' 
+ * '''''Mix'' at the beginning'''
+ * '''Mix at the ''end'''''
+ * ''Mix at the '''end'''''
+
+You might recall ''a''^2^ `+` ''b''^2^ `=` ''c''^2^ from your math lessons, unless your head is filled with H,,2,,O.
+
+An {{{inline code sequence\}}} has the start and end markers on the same line. Or you use `backticks`.
+
+A code display has them on different lines: {{{
+'''No''' markup here!
+\}}}
+}}} 
+/!\ In the above example, we "escaped" the markers for source code sequences by inserting \ character before the curly braces.
+
+/!\ MoinMoin does not support escape "{''''''{{" markup in preblock.
+
+=== Display ===
+__Mixing__ ''italics'' and '''bold''':
+ * '''''Mix''' at the beginning''
+  * '' '''Mix''' at the beginning''
+ * '''''Mix'' at the beginning'''
+  * ''' ''Mix'' at the beginning'''
+ * '''Mix at the ''end'''''
+  * '''Mix at the ''end'' '''
+ * ''Mix at the '''end'''''
+  * ''Mix at the '''end''' ''
+
+You might recall ''a''^2^ `+` ''b''^2^ `=` ''c''^2^ from your math lessons, unless your head is filled with H,,2,,O.
+
+An {{{inline code sequence}}} has the start and end markers on the same line. Or you use `backticks`.
+
+
+A code display has them on different lines: {{{
+'''No''' markup here!
+}}}
+
+=== ColorizedSourceCode ===
+Example:
+
+{{{#!php
+<?
+phpinfo();
+?>
+}}}
+
+== SixSingleQuotes and backticks ==
+{{{
+Wiki''''''Name vs Wiki``Name
+}}}
+
+Wiki''''''Name vs Wiki``Name
+== MoniWiki extensions ==
+To write --striked text--, enclose the text in double dashes.
+
+Superscripted text also obtained by encloseing a string into double carets ^^like it^^.
+
+/!\ MoinMoin does superscript texts contain space but, MoniWiki does not. You can superscript a string contains space by encloseing it into double carets.
+----
+[[Navigation(HelpOnEditing)]]

@@ -1,0 +1,330 @@
+입력 부분 만들기가 왜 이리 귀찮은지 ㅎㅎ
+judge 은 안 해 봤습니다. -.-;;;
+
+{{{
+/* @JUDGE_ID:parkpd 10038 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <strstream>
+#include <algorithm>
+
+using namespace std;
+
+#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+enum State
+{
+	NOT_TOUCHED = 0,
+	INCORRECT,
+	CORRECT
+};
+
+class CScore
+{
+public:
+	CScore() : m_Problem(0), m_Time(0), m_State(NOT_TOUCHED)
+	{
+	}
+
+	void InsertData(int time, bool result);
+
+	int m_Problem;
+	int m_Time;
+	State m_State;
+};
+
+void CScore::InsertData(int time, bool result)
+{
+	if (result)		// 풀기 성공.
+	{
+		m_Time += time;
+		m_State = CORRECT;
+	}
+	else	// 실패했다면
+	{
+		m_State = INCORRECT;
+		m_Time += 20;		// 20 초 패널티
+	}
+}
+
+class CTeamScore
+{
+public:
+	CTeamScore() : m_Id(-1), m_Corrects(0), m_Penalty(0)
+	{
+		for (int i = 0; i <= 9; ++i)
+		{
+			m_Scores[i].m_Problem = i;
+		}
+	}
+
+	void InsertData(int id, int problem, int time, bool result);
+	void CalcResult();
+
+	static bool IsMore(CTeamScore& a, CTeamScore& b);
+	static bool IsLess(CTeamScore& a, CTeamScore& b);
+	bool operator < (CTeamScore& other);
+
+	int m_Id;
+	int m_Corrects;
+	int m_Penalty;
+	CScore m_Scores[10];	
+};
+
+void CTeamScore::InsertData(int id, int problem, int time, bool result)
+{
+	m_Scores[problem].InsertData(time, result);
+	CalcResult();
+}
+
+void CTeamScore::CalcResult()
+{
+	m_Corrects = 0;
+	m_Penalty = 0;
+
+	for (int i = 1; i <= 9; ++i)
+	{
+		if (CORRECT == m_Scores[i].m_State)
+		{
+			++m_Corrects;
+			m_Penalty += m_Scores[i].m_Time;
+		}
+		else if (INCORRECT == m_Scores[i].m_State)
+		{
+			m_Penalty += m_Scores[i].m_Time;
+		}
+	}
+}
+
+bool CTeamScore::IsMore(CTeamScore& a, CTeamScore& b)
+{
+	return b < a;
+}
+
+bool CTeamScore::IsLess(CTeamScore& a, CTeamScore& b)
+{
+	return a < b;
+}
+
+bool CTeamScore::operator < (CTeamScore& other)
+{
+	// 점수 보고
+	if (m_Corrects != other.m_Corrects)
+	{
+		return m_Corrects < other.m_Corrects;
+	}
+	else
+	{
+		// 패널티 보고
+		if (other.m_Penalty != m_Penalty)
+		{
+			return other.m_Penalty < m_Penalty;
+		}
+
+		// 번호를 본다.
+		return (other.m_Id < m_Id);
+	}
+}
+
+class CScoreBoard
+{
+public:
+	CScoreBoard() : m_InsertedCount(0)
+	{
+		m_TeamScores.resize(101);
+		for (int i = 1; i <= 100; ++i)
+		{
+			m_TeamScores[i].m_Id = i;
+		}
+	}
+
+	void InsertData(int contestant, int problem, int time, char result);
+	void SortData();
+	void Print(ostream& output);
+
+	typedef vector<CTeamScore> Teams;
+	Teams m_TeamScores;
+	int m_InsertedCount;
+};
+
+void CScoreBoard::InsertData(int contestant, int problem, int time, char result)
+{
+	if (result != 'C' && result != 'I')
+	{
+		return;
+	}
+
+	m_TeamScores[contestant].InsertData(contestant, problem, time, (result == 'C'));
+	++m_InsertedCount;
+}
+
+void CScoreBoard::SortData()
+{
+	sort(m_TeamScores.begin(), m_TeamScores.end(), CTeamScore::IsMore);
+}
+
+void CScoreBoard::Print(ostream& output)
+{
+	Teams::iterator it = m_TeamScores.begin();
+	while (-1 != it->m_Id)
+	{
+		CTeamScore& score = *it;
+		output << score.m_Id << " " << score.m_Corrects << " "  << score.m_Penalty << "\n";
+		++it;
+	}
+}
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	return 0;
+}
+
+#else
+
+TEST_FIXTURE(CScore, InsertDataWithoutFailed)
+{
+	CHECK_EQUAL(NOT_TOUCHED, m_State);
+	InsertData(10, true);
+	CHECK_EQUAL(CORRECT, m_State);
+	CHECK_EQUAL(10, m_Time);
+}
+
+TEST_FIXTURE(CScore, InsertDataWithFailed)
+{
+	CHECK_EQUAL(NOT_TOUCHED, m_State);
+	InsertData(10, false);
+	CHECK_EQUAL(INCORRECT, m_State);
+	CHECK_EQUAL(20, m_Time);
+}
+
+TEST_FIXTURE(CScore, Example1)
+{
+	InsertData(10, false);
+	InsertData(21, true);
+	CHECK_EQUAL(41, m_Time);
+}
+
+TEST_FIXTURE(CScore, Example2)
+{
+	InsertData(11, true);
+	CHECK_EQUAL(CORRECT, m_State);
+	CHECK_EQUAL(11, m_Time);
+}
+
+TEST_FIXTURE(CTeamScore, Example1)
+{
+	InsertData(1, 2, 10, false);
+	CHECK_EQUAL(0, m_Corrects);
+	CHECK_EQUAL(20, m_Penalty);
+
+	InsertData(1, 2, 21, true);
+	CHECK_EQUAL(1, m_Corrects);
+	CHECK_EQUAL(41, m_Penalty);
+
+	InsertData(1, 1, 25, true);
+	CHECK_EQUAL(2, m_Corrects);
+	CHECK_EQUAL(66, m_Penalty);
+}
+
+TEST_FIXTURE(CTeamScore, Example2)
+{
+	InsertData(3, 1, 11, true);
+	CHECK_EQUAL(1, m_Corrects);
+	CHECK_EQUAL(11, m_Penalty);
+}
+
+TEST_FIXTURE(CScoreBoard, InsertData)
+{
+	InsertData(1, 2, 10, 'I');
+	InsertData(3, 1, 11, 'C');
+	InsertData(1, 2, 19, 'R');
+	InsertData(1, 2, 21, 'C');
+	InsertData(1, 1, 25, 'C');
+
+	CHECK_EQUAL(2, m_TeamScores[1].m_Corrects);
+	CHECK_EQUAL(66, m_TeamScores[1].m_Penalty);
+
+	CHECK_EQUAL(1, m_TeamScores[3].m_Corrects);
+	CHECK_EQUAL(11, m_TeamScores[3].m_Penalty);
+}
+
+struct FixtureCompare
+{
+	FixtureCompare()
+	{
+		a.m_Id = 1;
+		b.m_Id = 2;
+	}
+
+	CTeamScore a;
+	CTeamScore b;
+};
+
+TEST_FIXTURE(FixtureCompare, Compare)
+{
+	// 가장 우선순위는 문제 맞춘 횟수
+	b.m_Corrects = 1;
+	CHECK(a < b);
+	CHECK(!(b < a));
+
+	// a 도 같은 수를 맞췄다면, 패널티를 본다.
+	a.m_Corrects = 1;
+	a.m_Penalty = 1;
+	CHECK(a < b);
+	CHECK(!(b < a));
+
+	b.m_Penalty = 10;
+	CHECK(b < a);
+	CHECK(!(a < b));
+
+	// 둘 다 조건이 같을 때는 팀 번호 순서대로
+	a.m_Penalty = 10;
+	CHECK(b < a);
+	CHECK(!(a < b));
+}
+
+TEST_FIXTURE(CScoreBoard, SortData)
+{
+	InsertData(1, 2, 10, 'I');
+	InsertData(3, 1, 11, 'C');
+	InsertData(1, 2, 19, 'R');
+	InsertData(1, 2, 21, 'C');
+	InsertData(1, 1, 25, 'C');
+
+	SortData();
+
+	CHECK_EQUAL(2, m_TeamScores[0].m_Corrects);
+	CHECK_EQUAL(66, m_TeamScores[0].m_Penalty);
+
+	CHECK_EQUAL(1, m_TeamScores[1].m_Corrects);
+	CHECK_EQUAL(11, m_TeamScores[1].m_Penalty);
+
+	Print(cout);
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

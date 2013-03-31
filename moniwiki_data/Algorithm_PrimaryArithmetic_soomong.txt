@@ -1,0 +1,116 @@
+ * 한자리씩 더하면서 carry 을 체크하였습니다. 왠지 너무 어렵게 푼듯한 느낌이 --;
+ * 안 되잖아요~ 버럭 -_-++ 99099 + 1001 - CynicJJ
+ * 잇힝 ( __)
+
+
+{{{
+public class PrimaryMain {
+	
+	int[] firNum = new int[10];
+	int[] secNum = new int[10];
+	
+	public boolean parseInput(String fir, String sec) {
+
+		if(fir.length() > 10 || sec.length() > 10)
+			return false;
+		
+		char[] temp = fir.toCharArray();
+		for(int i=temp.length-1, j=0 ; i>=0 ; i-- , j++)		{
+			firNum[i] = Integer.parseInt(String.valueOf(temp[j]));
+		}
+		
+		char[] temp2= sec.toCharArray();
+		for(int i=temp2.length-1, j=0 ; i>=0 ; i-- , j++)		{
+			secNum[i] = Integer.parseInt(String.valueOf(temp2[j]));
+		}
+				
+		return true;	
+	}
+
+	public int addOneDigit(int fir, int sec, int carry) {
+		
+		if( fir + sec + carry > 9)
+			return 1;
+		else
+			return 0;
+	}
+	
+	public void initNumbers(String in) {
+		String[] input = in.split(" ");
+		
+		if(input.length > 2)
+			return;
+				
+		parseInput(input[0],input[1]);
+		
+	}
+
+	public int sumCarryCount() {
+		
+		int sumCarry = 0;
+		int carry = 0;
+				
+		for(int i=0; i < firNum.length ; i++) {
+			carry = addOneDigit(firNum[i],secNum[i],carry);
+			
+			if( carry == 1)
+				sumCarry++;
+			
+			if( firNum[i] == 0 && secNum[i] == 0)
+				break;
+		}
+		
+		return sumCarry;
+	}
+
+}
+}}}
+
+{{{
+import static org.junit.Assert.*;
+import java.util.Arrays;
+import org.junit.Test;
+
+
+public class PrimaryMainTest {
+	
+	PrimaryMain pri = new PrimaryMain();
+
+	@Test
+	public void testSumCarryCount() {
+		pri.initNumbers("123 456");
+		assertEquals(0,pri.sumCarryCount());
+		
+		pri.initNumbers("555 555");
+		assertEquals(3,pri.sumCarryCount());
+
+		pri.initNumbers("123 594");
+		assertEquals(1,pri.sumCarryCount());
+
+		pri.initNumbers("146 554");
+		assertEquals(2,pri.sumCarryCount());
+	}
+
+	@Test
+	public void testParseInput() {
+		pri.parseInput("15","4");
+		assertTrue(Arrays.equals(pri.firNum,new int[] {5,1,0,0,0,0,0,0,0,0}));
+		assertTrue(Arrays.equals(pri.secNum,new int[] {4,0,0,0,0,0,0,0,0,0}));
+		
+		pri.parseInput("123","456");
+		assertTrue(Arrays.equals(pri.firNum,new int[] {3,2,1,0,0,0,0,0,0,0}));
+		assertTrue(Arrays.equals(pri.secNum,new int[] {6,5,4,0,0,0,0,0,0,0}));
+		
+	}
+	
+	@Test
+	public void testAddOneDigit() {
+		assertEquals(0,pri.addOneDigit(4,5,0));
+		assertEquals(1,pri.addOneDigit(5,5,0));
+		assertEquals(1,pri.addOneDigit(4,5,1));
+		assertEquals(0,pri.addOneDigit(1,2,1));
+	}
+	
+	
+}
+}}}

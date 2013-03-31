@@ -1,0 +1,209 @@
+진행방식은 [HarryPotterKata] 와 유사하게 진행될 예정입니다.
+
+[Programming Challenges]
+[http://www.programming-challenges.com ProgrammingChallenges]
+[UVA]
+[Algorithm/발표순서]
+[Algorithm/참가자]
+[Algorithm/개발툴]
+[http://acm.uva.es/board/ UVa 문제 관련된 질문 답변이 올라와 있는 게시판이라고 합니다.]
+[http://www.algorithmist.com/index.php/UVa Algoritmist] 문제 풀이에 사용된 알고리듬 설명 위키 (안 풀린 문제가 더 많음)
+[http://www.spoj.pl/ Sphere Online Judge] 매우 다양한 언어 지원 (C#, Python, Ruby, Scheme, 어셈블리도 지원, 우왕ㅋ굳ㅋ)
+
+CategoryProblem 분류를 만들었습니다. 각 문제 페이지에 태그를 달아주시면 진행했던 알고리즘 문제들 확인하기 좋을 것 같네요...
+
+== 스터디 진행 ==
+3월 29일 스터디는 [http://www.toz.co.kr/v2/01about/pop_map_sin.gif 토즈 본점] 9층에서 진행됩니다. 시간은 변함 없이 9시 부터 11시50분까지 입니다.
+
+=== 20080503 ===
+[Algorithm/Nice Milk]
+ - 문제 112: 마지막 문제 ㄱㄱ
+[Algorithm/File Fragmentation]
+ - 문제 22 : 보너스 문제!
+[Algorithm/ShellSort]
+ - 문제 31 : 보너스 문제!!
+
+=== 20080426 ===
+[Algorithm/Is This Integration?]
+ - 문제 103: 그럴듯해 보이는 문제 ㄱㄱ
+
+=== 20080419 ===
+[Algorithm/Bee Maja]
+ - 문제 92 : 꿀벌.. 왠지 친숙해서 골라봤습니다.
+[Algorithm/Dermuba Triangle]
+ - 문제 95 : 한문제로는 왠지 섭섭하지 않겠어요? ㅋㅋ
+[Algorithm/Light more light]
+ - 문제 49 : 수안씨의 불참으로 간단한 한 문제 더
+
+
+=== 20080412 ===
+[Algorithm/Is Bigger Smarter?]
+ - 문제 81 : 큰 것이 똑똑하다?
+[Algorithm/Cutting Sticks]
+ - 문제 85 : 막대 자르기
+[Algorithm/Adventures in Moving Part IV]
+ - 문제 88 : 여행 제4부
+
+=== 20080405 ===
+[Algorithm/Freckles]
+ - 문제 73. 주근깨 연결하기(Freckles)
+[Algorithm/TheNecklace]
+ - 문제 74. 목걸이(TheNecklace)
+
+=== 20080329 ===
+[Algorithm/LittleBishops]
+ - 문제 57. 알고리즘 책에 자주 나오는 그 문제입니다.
+[Algorithm/15PuzzleProblem]
+ - 문제 58. 15-퍼즐 문제(15-Puzzle Problem)
+[Algorithm/Sudoku]
+ - 수도쿠 풀이법
+
+ 두 문제 우선 풀어보고 시간 되면 한 문제 정도 더 풀어볼 생각입니다. [ParkPD]
+
+=== 20080322 ===
+[Algorithm/Bicoloring] 
+ - 문제65 : 가볍게(?)레벨1 문제를 풀어 봅니다.
+[Algorithm/The Tourist Guide] 
+ - 문제67 : 모양이 가장 그래프스럽게 생긴 문제네요
+[Algorithm/Edit Step Ladder] 
+ - 문제69 : 설명이 제일 짧은 문제입니다. '생각하는 프로그래밍'의 향수가 느껴집니다.
+
+=== 20080308 ===
+[Algorithm/How many Fibs?] - 피보나치 수의 개수
+ * 유일한 레벨1의 문제입니다.
+[Algorithm/Expressions] - 표현식
+ * 어려워 보이는 문제도 하나.
+[Algorithm/Self-describing Sequence] - 자기기술 수열
+ * 성공률이 높은 문제 랍니다.
+ * 책에는 오타가 있으니 사이트 가서 문제 보세요.
+
+=== 20080301 ===
+[Algorithm/Primary Arithmetic] - 자리올림
+[Algorithm/Reverse and Add] - 뒤집어서 더하기
+[Algorithm/The Stern-Brocot Number System] - 스턴-브로콧 수체계
+
+=== 20080223 ===
+[Algorithm/Vito's Family] - 비토와 친척들
+ * 쉬워 보이는 문제입니다.
+ * 스터디 인원이 적어도 정시에 그냥 빨리 진행 할 계획 입니다.
+[Algorithm/Stacks of Flapjacks] - 팬 케이크
+ * 메인 문제로 자세한 코딩 시연 예정 입니다.
+[Algorithm/Shoemaker's Problem] - 구두 수선공 문제
+ * 보너스 문제로 혹시 시간이 남을 경우 진행합니다.
+ * 풀어볼 필요는 없지만 알고리즘은 고민 해 오세요.
+ * 먼저 알고리즘 아이디어 교환 후 시간이 남으면(그럴리 없겠지만) 코딩까지 합니다.
+
+[http://www.programming-challenges.com/pg.php?page=studenthome&threshold=0&perpage=8&pagenum=3&orderby=10 4장 Summit Pages]
+
+=== 20080202 ===
+[Algorithm/WERTYU] : 쉬운 거 부터 하나 합니다.
+[Algorithm/WheresWaldort] : 크게 어렵지 않은 문제입니다.
+그 외 재미있어 보이는 문제 있으면 추천해 주세요
+[http://www.programming-challenges.com/pg.php?page=studenthome&threshold=0&perpage=8&pagenum=2&orderby=10 Summit Pages]
+
+=== 20080126 ===
+[Algorithm/080126] 참석자
+[Algorithm/문제9] : 유쾌한점퍼
+[Algorithm/문제15] : 경시대회 점수판
+
+=== 20080119 ===
+[Algorithm/080119]
+[Algorithm/문제2] : 지뢰찾기
+[Algorithm/문제4] : LCD 디스플레이
+[Algorithm/문제6] : 인터프리터
+[Algorithm/문제8] : 호주식 투표법
+
+=== 20080112 ===
+[Algorithm/080112]
+[Algorithm/문제1] : 3n+1문제
+
+== 공지사항 ==
+ * 1/19일 스터디때는 문제 2번, 4번, 6번, 8번을 풀겠습니다. :) - [itmentor]
+  * 일단 2,4,8번 문제를 풀고 6번 문제는 시간 봐서 진행하도록 하겠습니다. - [itmentor]
+ * 1/26일 스터디 : 문제 9번, 15번 입니다 - [soomong]
+
+== 질문&답 ==
+ * 회원 가입을 하려 uva에 갔는데 Online judge ID를 입력하라고 나오는군요. 어떻게 해야 하나요 :( - [itmentor]
+  * 별 의미없는 항목 이더군요. 저는 ID와 동일하게 적었습니다. -MovingSpotlight
+
+== 잡담 ==
+ * 활기찬 위키의 모습 좋습니다. itmentor 님은 빨리 문제 올려주세요 :) [ParkPD]
+ * 코딩질로 무슨 부귀영화를 누리겠다고 4문제나 푸나요? -_- [CynicJJ]
+  * 4문제면 좀 빡빡하기는 하죠.. 그럼 3+1로 3문제 일단 풀고 시간 남으면 한문제 더 푸는 방식으로 하겠습니다. TDD할만한 좋은 예제들이 몇개 보이네요.. :) [itmentor]
+ * 우아~ 첫 모임이후 이렇게 진도가 많이 나아갔습니까? ^^;; 긴장되네요 [kwbang]
+  * 경운씨. 스터디 나와야줘? :)
+ * 문제2,4,6,8번 페이지에 테스트케이스를 넣는 부분이 있는데 여기에 테스트 코드를 넣어 버리면 다른 생각을 제한하는거 같아서 일단 뺐습니다. [itmentor]
+ * http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110101&format=html 에 보시면 우리가 푸는 문제의 원본을 보실 수 있습니다. probid 의 숫자만 바꿔주시면 다른 문제도 보실 수 있습니다. 가끔 번역이 잘 못 되어 있는 경우가 있으니 같이 참고해 주세요. [ParkPD]
+ * 이거 ?UVa 어디에서 submit 할 수 있나요? Browse Problems 에서 못 찾겠네요.
+  * 문제를 쉽게 찾는 법 알려주세요.
+   * site내에 구글 검색창이 있습니다. icpcres.ecs.baylor.edu를 체크하고 문제 이름을 검색어로 넣어 찾고 있습니다. 좀 구린 방법이죠...
+ * 2/2 Study 못갈듯 합니다. 주말출근의 압박이 ..ㅜㅜ [soomong]
+ * 저도 이번주 스터디(2/2)는 참석하기 어려울거 같습니다. 그럼 다음 스터디때 뵙죠~ [폭풍언덕]
+ * 어느덧 2월 10일이네요~ 시간 참 빨라요 ^^ 남은 주말 재밌게 보내세요! [Outbreak]
+ * 이런저런 사정으로 주말에 스터디에 참석하는게 쉬운일이 아니네요. 저는 당분간 온라인상으로 스터디에 참석하도록 하겠습니다. [폭풍언덕]
+ * 이번 주 스터디는 어떻게 되는 건가요??? 알고리즘 문제도 안 올라오는 것 보니 쉬는 것 같은데.. -- MovingSpotlight
+ * syntax highlight 해주삼
+ * 회사일이 바빠서 당분간 계속 주말 출근입니다. 몇주간 스터디 참가 못할듯 합니다.[itmentor]
+ * [http://codingdojo.org/ CodingDojo]
+ * 결혼식이 있어 내일(2008년 03월 08일) 스터디는 참여하지 못할 것 같습니다.  다음주에 뵙겠습니다. -- MovingSpotlight
+ * 3/8 스터디는 미참석입니다. ㅜㅜ 미칠듯한 업무로 문제도 하나도 못봣어요. 이렇게 일하다 죽을지도 모르겠다는 생각이... [soomong]
+ * 3/15 스터디 참석을 못하게 됐습니다~ 스터디 준비 순서 바꿔주실분~~! [Outbreak]
+  * 한 주 쉽니다. [Outbreak] 님은 다음 주 발표 준비 부탁드려요. 문제는 미리 올려놔 주세요. :) [ParkPD]
+ * 빨리 문제를 올리시오~ 버럭 -_-+
+  * 크크 집에오자 마자 '버럭' 보고 책 폈어요 ㅋㅋ [Outbreak]
+ * 3/22 스터디 쉽니다, 철야+주말출근 크리 ㅠㅠ [Mastojun]
+ * 금요일 밤부터 시작하는 알고리즘 여행 -0-; [Outbreak]
+ * 밤새고 이제서야 집에 들어왔네요..그것도 구미집 ㅜㅜ.. 이번주 참석못합니다.  [soomong]
+ * Dev C++ 을 쓰면 gcc 로도 컴파일 해 볼 수 있습니다. 링크 걸어주세요. [ParkPD]
+ * 4월, 5월 공포의 결혼식 시즌이 찾아왔습니다. 4월달은 매주 결혼식이네요. 오프라인 참석 여부는 계속 불투명이고, 온라인으로 문제라도 풀어야 하는데 쉽지 않네요.. Syntax Highlight가 드디어 먹히는 군요... --MovingSpotlight
+ * 호스팅 서버가 이상하여~ 위키소스 고쳐서 Syntax Highlight 겨우 붙였네용 ㅠㅠ
+  * syntax 하이라이팅이.. 안이뻐요 -_-.. [soomong]
+  * 수안씨 고마워요. 그런데 좀 안 이쁘긴 하네 ㅎㅎ [ParkPD]
+  * http://code.google.com/p/syntaxhighlighter/ 이건 어떨까요? ^_^;
+ * UVa 에 Java 로 제출할 때는 default 패키지로만 제출하자. 아니면 런타임 에러난다.
+ * 저 4월19일 결혼식 참석 관계로 스터디에 참가 힘들거 같네요ㅋ 대신 26일 경에 아파치컨퍼런스다녀온거 발표 준비해두겠습니다 ㅋ[kukuman]
+ * 토즈 결재 25500
+ * UVa 사이트 정상 동작 하는지 확인 좀 해주세요. 완전 쪼그라들어 보이네요. [CynicJJ]
+  * 저는 제대로 나옵니다 [Mastojun]
+  * IE 에서 잘 되나요? FireFox 에서만 잘 보이네요. 아주 돌아버리겠네~
+  * 아.. UVa군요!.. 찌그러져 보이네요 @_@ [Mastojun]
+ * 철야+주말출근 ㅠ_ㅠ 이번주 참가못합니다., 발표 보고싶었는데ㅠ [Mastojun]
+ * 영준씨~ 문병로아저씨 연습문제 답 휘리릭 했다고 하셨었나요? ^^ [Outbreak]
+  * 2006년도 이전껏만 있더군요 ㅠ_ㅠ...;;[Mastojun]
+ * 내일은 그 동안 풀었던 문제들을 살펴보면서 실제 응용에 대해 브레인스토밍 해보아요~ ^^ [Outbreak]
+ * 5/3일 불참입니다. 지금도 회사예요....ㅠ[Mastojun]
+ * 마지막 스터디를 참석하지 못했네요 ^^;; 다들 수고하셨습니다. 다음 스터디때도 잘부탁드려요 ㅋㅋ [soomong]
+
+== 참고 ==
+ * [http://altlang.org/fest/%EB%8C%80%EC%95%88%EC%96%B8%EC%96%B4%EC%B6%95%EC%A0%9C2006/%EA%B3%B5%ED%86%B5%EB%AC%B8%EC%A0%9C%EC%A7%91%ED%95%A9 대안언어축제2006공통문제집합]
+ * [http://xp123.com/xplor/xp0201/index.shtml code race 문제]
+  http://xp123.com/rwb/
+ * [http://codingdojo.metaschool.org/ 온라인 학습 생태계 코딩 도장]
+ * [http://www.programming-challenges.com/samples.zip 각 문제의 입/출력값 모음]
+ * C++ STL 알고리즘 예제입니다.
+    [STL Algorithm Example]
+
+= 회비 현황 =
+
+|| '''날짜''' || '''지출''' || '''수입''' || '''잔액''' || '''비고''' ||
+|| || ||  || 327,100   || 회비이월 ||
+|| 2008.1.12 ||  || 240,000  || 567,100   || 회비입금 (백호근,박일,전효성,현수명,허승욱,이수안) ||
+|| 2008.1.12 || 43,000 ||  || 524,100   || 토즈 지출 ||
+|| 2008.1.19 || || 40,000 || 564,100   || 회비입금( 박경현 ) ||
+|| 2008.1.19 || 41,500 ||  || 522,600   || 토즈 지출 ||
+|| 2008.1.27 || 43,000 ||  || 479,600   || 토즈 지출 ||
+|| 2008.2.2 || 43,000 ||  || 436,600   || 토즈 지출 ||
+|| 2008.2.2 ||  || 80,000  || 516,600   || 회비입금(안준석,정희종)||
+|| 2008.2.23 || 32,500  ||  || 484,100   || 토즈 지출||
+|| 2008.3.1 || 46,500  ||  || 437,600 || 토즈 지출||
+|| 2008.3.15 || 46,500  ||  || 391,100|| 토즈 지출||
+|| 2008.3.22 || 46,500  ||  || 344,600|| 토즈 지출||
+|| 2008.3.29 || 51,000  ||  || 293,600|| 토즈 지출||
+|| 2008.4.5 || 25,500 ||  || 268,100|| 토즈 지출||
+|| 2008.4.5 ||  || 20,000 || 288,100 || 회비입금(송영준) ||
+|| 2008.4.12 || 25,500 ||  || 262,600 || 토즈 지출 ||
+|| 2008.4.19 || 25,500 ||  || 237,100 || 토즈 지출 ||
+|| 2008.4.26 || 25,500 ||  || 211,600 || 토즈 지출 ||
+
+
+

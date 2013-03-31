@@ -1,0 +1,7 @@
+[DeView]
+ * 공식 홈페이지 : http://deview.naver.com/2010/
+ * 발표 자료 : http://deview.naver.com/2010/courses.nhn
+
+[http://www.gamemeca.com/news/news_view.html?seq=24&ymd=20100908&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 한게임의 첫 페이스북 SNG 도전기]
+[http://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=105&oid=138&aid=0001970605 1년에 코드 4200만 라인…NHN , SW 품질관리 비결?]
+

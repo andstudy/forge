@@ -1,0 +1,92 @@
+= 참고 웹페이지 =
+아래에서 최신 source 파일 받으면 VS8 버전도 있고 소스도 조금 다른것 같아요 -_ㅜ
+http://www.jblearning.com/catalog/9781556220784/
+
+5월 1일에 잠시 이야기 했던 Bohemia Interactive에서 사용했던 FSM툴 링크 입니다.
+http://community.bistudio.com/wiki/BI_Tools_2
+
+[StateMachine]
+
+
+= 참석자 =
+김홍준 
+김태우
+최학윤
+박상혁 
+현수명
+이수안
+이동현
+박일
+최기원
+오종빈
+전효성 
+공봉식
+박민욱
+황윤희
+안명환
+장수윤
+신케빈
+
+= 발표 자료 모음 =
+{{{#!html
+<div style="MARGIN: auto; WIDTH: 540px"><embed autostart="false" invokeurls="false" allowscriptaccess="never" allownetworking="internal" height="341" type="application/x-shockwave-flash" width="538" src="http://static.slidesharecdn.com/swf/egowidget2.swf" allowfullscreen="true" flashvars="feedurl=ohyecloudy/tags/programminggameaibyexample&amp;widgettitle=%5Bandstudy%5D%20ProgrammingGameAIByExample"><br><div style="TEXT-ALIGN: left; FONT-FAMILY: tahoma,arial; HEIGHT: 26px; FONT-SIZE: 11px; PADDING-TOP: 2px"><a target="_blank" title="SlideShare" href="http://www.slideshare.net/?src=egowidget"><img id="http://static.slidesharecdn.com/swf/logo_embd.png" src="http://static.slidesharecdn.com/swf/logo_embd.png" alt="SlideShare src" style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; MARGIN-BOTTOM: -5px; BORDER-TOP: 0px; BORDER-RIGHT: 0px"></a> | <a target="_blank" title="Get your Presentation Pack" href="http://www.slideshare.net/widgets/presentation-pack">Get your Presentation Pack</a></div></div>
+}}}
+
+= 발표 자료 =
+4.17 : ["시작발표 - 버클리DB"]
+4.17 : ["시작발표 - behavior tree"]
+4.24 : ["2장 상태구동형 에이전트의 디자인"]
+4.24 : ["3장 자동적으로 움직이는 게임 에이전트 생성법"]
+4.24 : ["3장 자동적으로 움직이는 게임 에이전트 생성법_2"]
+5.01 : ["4장 스포츠 시뮬레이션 - 단순 축구"]
+5.01 : ["5장 그래프의 비밀"]
+5.08 : [ProgrammingGameAIByExample/Chap7]
+5.08 : ["8장 길찾기"]
+5.08 : ["9장 목적이 부여된 에이전트 행동"]
+5.15 : ["추가발표 - Monte-Carlo Go Overview"]
+
+ect : [The State Map Compiler]
+
+[ProgrammingGameAIByExample/Chap5]
+
+== 발표 자료 모음 ==
+동의대 게임공학과 AI 수업
+http://hyomin.deu.ac.kr/~jsseo/courses/spring08/ai/
+
+= 참고자료 =
+
+= 발표 순서 =
+2장 김홍준 
+3장 김태우, 최학윤
+4장 박상혁 
+5장 현수명, 이수안 (이동현)
+7장 박일
+8장 최기원 (오종빈)
+9장 전효성 
+10장 공봉식
+
+= 대기자 =
+박민욱
+황윤희
+안명환
+장수윤
+신케빈
+
+
+
+= 회비 =
+|| 날짜 || 수입 || 지출 || 잔고|| 비고||
+|| 이월금 ||  ||  || -747 || ||
+|| 2010. 4. 17 || 440.000 || || 439,253 || 회비입금(이동윤,전효성,이동현,오종빈,박상혁,||
+|| || || || ||신케빈,현수명,최학윤,김태우,황윤희,최기원)||
+|| 2010. 4. 17 ||  || 60,000 || 379,253 || 토즈이용 ||
+|| 2010. 4. 24 || 200,000 ||  || 579,253 || 회비입금(장수윤,안명환,박일,김근수,이수안) ||
+|| 2010. 4. 24 || || 115,500 || 463,753 || 토즈이용 ||
+|| 2010. 5. 01 || 80,000 || || 543,753 || 회비입금(공봉식,김홍준) ||
+|| 2010. 5. 01 || || 87,500 || 456,253|| 토즈이용 ||
+|| 2010. 5. 08 || 40,000 || || 496,253 || 회비입금(박민욱) ||
+|| 2010. 5. 08 || || 90,000 || 406,253|| 토즈이용 ||
+|| 2010. 5. 15 || 40,000 || || 446,253 || 회비입금 (김명관) ||
+|| 2010. 5. 15 || || 90,000 || 356,253 || 토즈이용 ||
+|| 2010. 5. 15 || || 324,000 || 32,253 || 책거리-회식(수몽님 10%DC 지원) ||
+

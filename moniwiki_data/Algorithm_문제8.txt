@@ -1,0 +1,343 @@
+== C++ Accept 버전 ==
+{{{
+}}}
+
+== C++ 버전 ==
+ * 계속해서 Wrong answer뜨는군요 -_-; 일단 올립니다. [itmentor]
+ * 성공률이 낮은 이유가 있었습니다. 자세한 얘기는 스터디 시간에.. [itmentor]
+{{{
+/* @JUDGE_ID:itmentor 187460 C "pc008" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#ifdef _UNIT_TEST_
+	#include <UnitTest++.h>
+	#include <TestReporterStdout.h>
+#endif
+
+
+#include <cassert>
+#include <iostream>
+#include <cstdlib>
+#include <cstdio>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <list>
+
+class Ticket
+{
+public:
+	int ticket[3];
+	int index;
+public:
+	Ticket( int a, int b, int c ) : index(0) 
+	{
+		ticket[0] = a;
+		ticket[1] = b;
+		ticket[2] = c;
+	}
+
+	int getTicket()	const											
+	{
+		if( index != -1 && index < 3 ) 
+			return ticket[index];
+		return -1;
+	}
+	void next()
+	{
+		if( index != -1 ) 
+			index++;
+	}
+
+	void done()
+	{
+		index = -1;	
+	}
+};
+
+typedef std::vector< Ticket > TicketList;
+typedef std::vector< std::string > PersonList;
+
+std::string calcElectedPerson(  PersonList& personList, TicketList& ticketList )
+{
+	int maxVotedPersonIndex = 0;
+	
+	std::string electedPersonName;
+
+	//투표함 초기화
+	std::vector< int > voteList;
+	for(int i = 0 ; i < personList.size() ; i++)
+	{
+		voteList.push_back(0);
+	}
+
+	//과반수 표수
+	int winningPoint = (ticketList.size()+1) / 2;
+
+	bool exitCondition = true;
+
+	int traverseCount = 1;
+	while( exitCondition )
+	{
+		//표를 집계한다.
+		for(int i = 0 ; i < ticketList.size() ; i++)
+		{
+			int value = ticketList[i].getTicket();
+			if( value != -1 )
+			{
+				int index = value - 1;
+				
+				if( voteList[index] != -1 )
+				{
+					voteList[index]++;
+				}
+			}
+		}
+
+		//과반수 조사
+		for(int i = 0 ; i < voteList.size() ; i++)
+		{
+			if( voteList[i] >= winningPoint )
+			{
+				electedPersonName = personList[i];
+				exitCondition = false;
+				break;
+			}
+		}
+
+		//최소 득표수 선정
+		int minIndex = 0;
+		for(int i = 0 ; i < voteList.size() ; i++)
+		{
+			if( voteList[i] < voteList[minIndex] && voteList[i] != -1)
+			{
+				minIndex = i;
+			}
+		}
+
+		//탈락자 선정
+		std::list< int > dropList;
+		for(int i = 0 ; i < voteList.size() ; i++)
+		{
+			if( voteList[minIndex] == voteList[i] )
+			{
+				dropList.push_back( i );
+			}
+		}
+
+		//탈락자 추출
+		for(std::list<int>::iterator iter = dropList.begin() ; iter != dropList.end() ; ++iter )
+		{
+			voteList[ *iter ] = -1;
+		}
+
+		bool bDrawElection = true;
+		for(std::vector<int>::iterator iter = voteList.begin() ; iter != voteList.end() ; ++iter )
+		{
+			if( *iter != -1 )
+				bDrawElection = false;
+		}
+
+		if( bDrawElection == true )
+		{
+			electedPersonName = "";
+			break;
+		}
+		//탈락자의 투표
+		for(int i = 0 ; i < ticketList.size() ; i++)
+		{
+			int ticketValue = ticketList[i].getTicket();
+
+			if( ticketValue != -1 && voteList[ ticketValue - 1 ] == -traverseCount )
+			{
+				ticketList[i].next();			//탈락자들의 표를 모은다.
+			}
+			else
+			{
+				ticketList[i].done();
+			}
+		}
+		
+		traverseCount++;
+	}
+
+	return electedPersonName;
+}
+
+int main()
+{
+#ifdef _UNIT_TEST_
+    UnitTest::RunAllTests();
+#endif
+	int roundCount = 0;
+	std::cin >> roundCount;
+	std::cin.ignore();
+
+	char buf[512];
+	std::cin.getline(buf, 512);
+
+	for(int i = 0 ; i < roundCount ; i++)
+	{
+		int eligiblePersonCount; //피선거인 수
+		std::cin >> eligiblePersonCount;
+		
+		PersonList eligiblePersonList;
+		for(int i = 0 ; i < eligiblePersonCount ; i++)
+		{
+			std::string person;
+			std::cin >> person;
+			eligiblePersonList.push_back( person );
+		}
+
+		std::cin.ignore();
+
+		TicketList ticketList;
+		buf[0] = 255;
+
+		while( buf[0] != 0 )
+		{
+			std::cin.getline(buf, 512);
+			if( buf[0] != 0 )
+			{
+				int a,b,c;
+				sscanf(buf, "%d %d %d", &a, &b, &c);
+				ticketList.push_back( Ticket( a,b,c ) );
+			}
+		};
+
+		std::string electedPersonName = calcElectedPerson( eligiblePersonList, ticketList );
+		std::cout << electedPersonName << std::endl;
+
+	}
+
+	return 0;
+}
+
+#ifdef _UNIT_TEST_
+TEST( testAllDraw )
+{
+	std::vector< Ticket > ticketList;
+	
+	ticketList.push_back( Ticket( 1,2,3 ) );
+	ticketList.push_back( Ticket( 2,3,4 ) );
+	ticketList.push_back( Ticket( 3,4,1 ) );
+	ticketList.push_back( Ticket( 4,1,2 ) );
+
+	std::vector< std::string > personList;
+	personList.push_back("111");
+	personList.push_back("222");
+	personList.push_back("333");
+	personList.push_back("444");
+
+	std::string winnerName = calcElectedPerson( personList, ticketList );
+
+	CHECK_EQUAL( std::string(""),  winnerName);
+}
+
+TEST( testFindElectedPerson2 )
+{
+	std::vector< Ticket > ticketList;
+	
+	ticketList.push_back( Ticket( 3,4,2 ) );
+	ticketList.push_back( Ticket( 3,4,2 ) );
+	ticketList.push_back( Ticket( 3,4,2 ) );
+
+	ticketList.push_back( Ticket( 1,4,3 ) );
+	ticketList.push_back( Ticket( 1,4,3 ) );
+	ticketList.push_back( Ticket( 1,4,3 ) );
+
+	ticketList.push_back( Ticket( 2,4,1 ) );
+	ticketList.push_back( Ticket( 2,4,1 ) );
+	
+	ticketList.push_back( Ticket( 4,3,2 ) );
+	ticketList.push_back( Ticket( 4,3,3 ) );
+
+	std::vector< std::string > personList;
+	personList.push_back("111");
+	personList.push_back("222");
+	personList.push_back("333");
+	personList.push_back("444");
+
+	std::string winnerName = calcElectedPerson( personList, ticketList );
+
+	CHECK_EQUAL( std::string("333"),  winnerName);
+}
+
+TEST( testSameTicketPeople )
+{
+	std::vector< Ticket > ticketList;
+	
+	ticketList.push_back( Ticket( 3,4,2 ) );
+	ticketList.push_back( Ticket( 3,4,2 ) );
+	ticketList.push_back( Ticket( 3,4,2 ) );
+
+	ticketList.push_back( Ticket( 1,4,3 ) );
+	ticketList.push_back( Ticket( 1,4,3 ) );
+	ticketList.push_back( Ticket( 1,4,3 ) );
+
+	ticketList.push_back( Ticket( 2,4,1 ) );
+	ticketList.push_back( Ticket( 2,4,1 ) );
+	
+	ticketList.push_back( Ticket( 4,1,2 ) );
+	ticketList.push_back( Ticket( 4,3,2 ) );
+
+	std::vector< std::string > personList;
+	personList.push_back("111");
+	personList.push_back("222");
+	personList.push_back("333");
+	personList.push_back("444");
+
+	std::string winnerName = calcElectedPerson( personList, ticketList );
+
+	CHECK_EQUAL( std::string(""),  winnerName);
+}
+
+TEST( testFindElectedPerson )
+{
+	std::vector< Ticket > ticketList;
+	ticketList.push_back( Ticket( 1,2,3 ) );
+	ticketList.push_back( Ticket( 2,3,1 ) );
+	ticketList.push_back( Ticket( 3,1,2 ) );
+	ticketList.push_back( Ticket( 3,1,3 ) );
+	ticketList.push_back( Ticket( 1,2,3 ) );
+
+	std::vector< std::string > personList;
+	personList.push_back("John Doe");
+	personList.push_back("Jane Doe");
+	personList.push_back("Na Doe");
+
+	std::string winnerName = calcElectedPerson( personList, ticketList );
+
+	CHECK_EQUAL( std::string("Na Doe"),  winnerName);
+
+}
+
+TEST( testBigBangVoteTicket )
+{
+	Ticket t(3,2,1);
+	
+	CHECK_EQUAL( 3, t.getTicket() );
+	t.next();
+	CHECK_EQUAL( 2, t.getTicket() );
+	t.next();
+	CHECK_EQUAL( 1, t.getTicket() );
+	t.next();
+	CHECK_EQUAL( -1, t.getTicket() );
+}
+
+TEST( testSimpleVote )
+{
+	Ticket t(3,2,1);
+	
+	CHECK_EQUAL( 3, t.getTicket() );
+	t.done();
+	CHECK_EQUAL( -1, t.getTicket() );
+}
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}
+
+----
+CategoryProblem

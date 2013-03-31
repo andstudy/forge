@@ -1,0 +1,272 @@
+= 문제 풀이 =
+
+ * Solved받은 코드 입니다. char한개에 1자리 하는것보다 int형 한개에 4자리씩 하는게 속도가 10배정도 빠릅니다.(정확히 잰건 아니고 느낌상,,) 주석처리 한 것을 바꾸어주면 속도비교를 하실 수 있습니다.
+ └ char형으로 계산할땐 Show메소드를 약간 수정해야 겠네요 ^^;; %04d를 %d로;
+
+ * www.programming-challenges.com 에 제출하면 실행시간이 7초이상, UVa에 제출하면 1초네요.
+  * 놀라운건 최고속도가 PC에서 0.019초 라는.... 테스트 입력값을 빼내와서 결과만 뿌려준거라고 추측해봅니다;
+   └ 소켓 플밍해서 입력값 받을 때, 내 IP로 쏘게 하면 되겠는 걸요! 해봐야지 ㅋㅋ
+    └ 맞아요! ㅋ 하지만... 그런식으로 입력값 빼와서 결과만 출력하게 3n+1을 만들어서 제출했었는데.. 최고속도보다 느렸었다는 ;;;;;
+    └ 오.. 좋은 생각인데요.. ㅋㅋ
+
+ * 구현할때 보니, 코딩시연할때는 곱하기를 완전 잘못 구현했었어요, :$
+ * 책의 해답보다도 속도 빠른거 같아요!
+   └ 오~ 나이스~ ^ㅇ^/
+
+ * 역시 피곤할땐 잠을 자주는게 최고, 덕분에 KLDP못갔다는;;;
+= 소스코드 =
+{{{
+#include <stdio.h>
+#include <string.h>
+#define max(x,y) ((x)>(y)?(x):(y))
+
+#define MAXLEN 25
+#define ONEDIGIT 10000
+typedef int num;
+/*
+#define MAXLEN 200
+#define ONEDIGIT 10
+typedef char num;
+*/
+class BigNumber
+{
+public:
+	BigNumber()
+	{
+		Init();	
+	}
+
+	BigNumber(char* in)
+	{
+		Init();
+
+		length = strlen(in);
+		for(int i = length-1; i >= 0; i-- )
+		{
+			Number[i] = in[length-i-1] - '0';
+		}
+	}
+
+	BigNumber(int in)
+	{
+		Init();
+
+		while(in)
+		{
+			Number[length] = in%ONEDIGIT;
+			in/= ONEDIGIT;
+			length++;
+		}
+	}
+
+	const BigNumber& operator+=(const BigNumber& rhs)
+	{
+		int i;
+		int carry = 0;
+		int MaxLen = max(rhs.length, length);
+
+		for( i = 0; i < MaxLen; i++ )
+		{
+			Number[i] = rhs.Number[i] + Number[i] + carry;
+
+			if( Number[i] >= ONEDIGIT )
+			{
+				Number[i] -= ONEDIGIT;
+				carry = 1;
+			}
+			else
+			{
+				carry = 0;
+			}						
+		}
+
+		if( carry )
+		{
+			length = MaxLen+1;
+			Number[i] = carry;
+		}
+		else
+		{
+			length = MaxLen;
+		}
+
+		return *this;
+	}
+
+	const BigNumber& operator-=(const BigNumber& rhs)
+	{
+
+		for(int i = 0; i < length; i++ )
+		{
+			Number[i] = Number[i] - rhs.Number[i];
+			while( Number[i] < 0 )
+			{
+				Number[i] += ONEDIGIT;
+				Number[i+1] -= 1;
+			}
+		}
+
+		int i;
+
+		for(i = length-1; i >= 0; i-- )
+		{
+			if( Number[i] != 0 )
+			{
+				break;
+			}
+		}
+
+		length = i+1;
+
+		return *this;
+	}
+
+	const BigNumber& operator*=(const BigNumber& rhs)
+	{
+		BigNumber Temp;
+		int i, j;
+		int carry = 0;
+		
+		for( i = 0; i < length; i++ )
+		{
+			for( j = 0; j < rhs.length; j++ )
+			{
+				Temp.Number[i+j] += Number[i]*rhs.Number[j];
+
+				if(Temp.Number[i+j] >= ONEDIGIT )
+				{
+					Temp.Number[i+j+1] += Temp.Number[i+j]/ONEDIGIT;
+					Temp.Number[i+j] %= ONEDIGIT;
+				}
+			}
+		}
+
+		for( i = MAXLEN-1; i >= 0; i-- )
+		{
+			if(Temp.Number[i] != 0 )
+			{
+				Temp.length = i+1;
+				break;
+			}
+		}
+
+		*this = Temp;
+
+		return *this;
+	}
+
+	void Show()
+	{
+		if( length == 0 )
+		{
+			printf("0\n");
+			return;
+		}
+
+		printf("%d", Number[length-1]);
+
+		for(int i = length-2; i >= 0; i-- )
+		{
+			printf("%04d", Number[i]);
+		}
+
+		printf("\n");
+	}
+
+private:
+
+	void Init()
+	{
+		length = 0;
+		for(int i = 0; i < MAXLEN; i++ )
+		{
+			Number[i] = 0;
+		}
+	}
+
+	num Number[MAXLEN];
+	int length;
+};
+
+const BigNumber operator+(const BigNumber& lhs, const BigNumber& rhs)
+{
+	BigNumber Temp(lhs);
+
+	Temp += rhs;
+
+	return Temp;
+}
+
+const BigNumber operator-(const BigNumber& lhs, const BigNumber& rhs)
+{
+	BigNumber Temp(lhs);
+
+	Temp -= rhs;
+
+	return Temp;
+}
+
+const BigNumber operator*(const BigNumber& lhs, const BigNumber& rhs)
+{
+	BigNumber Temp(lhs);
+
+	Temp *= rhs;
+
+	return Temp;
+}
+
+BigNumber Matrix[151][151] = {0};
+
+
+BigNumber GetMatrix(int n, int d )
+{
+	if( n == 0 && d == 0 ) return 1;
+	if( n < d ) d = n;
+	
+
+	return Matrix[n][d];
+}
+
+void PrintResult(int n, int d )
+{
+	BigNumber Temp(GetMatrix(n, d) - GetMatrix(n, d-1));
+
+	Temp.Show();
+}
+
+void CalMatrix(int n, int d )
+{
+	for(int i = 0; i < n; i++ )
+	{
+		Matrix[n][d] += GetMatrix(i, d-1)*GetMatrix(n-1-i, d);
+	}
+}
+
+void MakeMatrix()
+{
+	Matrix[0][0] = 1;
+
+	for(int i = 1; i <= 150; i++ )
+	{
+		for(int j = 1; j <= i; j++ )
+		{
+			CalMatrix(i, j);
+		}
+	}
+}
+
+int main()
+{
+	int n, d;
+
+	MakeMatrix();
+
+	while( scanf("%d %d", &n, &d) == 2 )
+	{
+		n /= 2;
+		PrintResult(n, d);
+	}
+	
+	return 0;
+}
+}}}

@@ -1,0 +1,233 @@
+[POSA1]
+[[TableOfContents]]
+= Reflection =
+ * 소프트웨어 시스템의 구조와 행위가 동적으로 변화할 수 있게 하는 메커니즘을 제공.
+ * Meta, Base 레벨 2가지의 파트로 구분된다.
+ * 자신에 변화에 대해 미리 예측 가능한(a priori) 시스템을 만드는 것.
+ 
+== Example ==
+객체를 디스크에 계속 쓰고 읽어야 하는 어플리케이션이 있다고 가정. 어떻게 하면, 변화에 유동적인 구조를 만들 수 있을까? 객체 타입에 독립적인 'persistence component'를 만들어 보자.
+
+== Context ==
+연역적으로 자기 자신을 수정할 수 있는 시스템을 만들어 보자.
+
+== Problem ==
+수정/확장이 가능한 아키텍쳐를 만들어보자.
+=== Forces ===
+ * 소프트웨어의 변화는 에러를 일으키기 쉬우며, 대부분의 경우 비싼 비용을 요구한다.
+ * Adaptable 시스템은 대부분의 경우 복잡한 내부 구조를 가지고 있다.
+ * Parameterization, subclassing, mix-ins 혹은 copy나 paste와 같이 시스템이  변화 가능하도록 유지하기 위해 필요한 테크닉들이 많을 수록, 수정은 더 힘들고 복잡해진다.
+ * 변화들의 규모는 다양 할 수 있다.
+ * 소프트웨어 시스템의 가장 기본적인 개념들도 바뀔 수 있다.
+ 
+== Solution ==
+ * Self-aware 소프트웨어를 만든다.
+ * 엄선되어진 구조와, 행위의 구현을 통해 변화와 적용이 쉽게 이루어 질 수 있도록 한다.
+== structure ==
+ * meta level
+  * 소프트웨어가 자기자신의 구조, 행동등을 알릴 수 있게 해 준다(self-representation을 제공)
+  * metaobjects 의 집합으로 이루어진다.
+  * 변화가 잦은 부분만 metaobjects 로 encapsulated 되어야 한다.
+ * base level
+  * 실질적인 어플리케이션의 로직을 구현한다.
+  * 변화 할 것 같은 aspect의 독립성을 유지하기 위해 metaobject를 사용.
+  * depend 되어 있는 metaobjects 와 직접 연결되어 있거나, request 를 날린다.
+ * MOP(metaobject protocol)
+  * meta level 와 base level 이 서로 통신하기 위해 사용하는 인터페이스.
+  * meta level 에 대한 명시적인 인터페이스. MOP 의 client 는 base-level 컴포넌트, 다른 어플리케이션, 또는 권한을 가진 인간 사용자가 될 수 있고, 이들은 MOP 를 이용해서 metaobjects 의 수정이나 base level 을 사용하는 relationship 을 명시할 수 있다.
+  * RTTI 를 제공하는 metaobjects 를 명시. 어떤 객체를 저장하기 위해, 우리는 이 객체의 내부구조와 데이타멤버들의 layout 을 알아야 한다. 이 정보를 이용해서 객체 내부 정보를 built-in 타입이 될때까지 recursive 하게 들어간 후 저장해 준다.
+        
+== Dynamics ==
+1. 객체들이 저장되어 있는 스트리밍에서 객체를 로드하고 싶다.
+    * 사용자는 객체들이 저장되어 있는 파일 이름을 매개변수로 read() 를 호출
+    * read() 는 readObject() 를 호출, 이건 이 파일안에 있는 첫번째 type identifire 를 찾는다.
+    * 객체를 생성하는 metaobject 를 생성
+    * 객체의 데이타 멤버 iteratator 를 리턴.
+    * 재귀호출하면서 built-in type 까지 얻고, 그 데이타를 객체에 저장
+    * 다 읽으면, 완성된 객체를 리턴.
+	
+1. 메타 레벨에 새로운 타입을 추가할 수 있는 클래스 라이브러리를 만들고 싶다.
+    * 새로운 타입의 RTTI 를 MOP 에 전달
+    * MOP 는 type_info 객체 생성
+    * extInfo 정보와 baseInfo 정보 생성
+    * dataInfo 정보 생성.
+    * dataInfo 정보를 Type-Info Metaobejct 에 등록/수정
+    * 이 완성된 새 타입의 객체를 'object creator' metaobject 에 등록
+    
+== Implementation ==
+1. 어플리케이션의 모델을 정의
+2. 변하는 behavior 를 안다.
+    어플리케이션의 어떤 부분이 자주 바뀔것인지, 어떤 부분은 stable 한지를 확인한다.
+3. Identify structural aspects of the system, which, when changed, should not affect the implementation of the base level.
+4. 2,3 번을 지원하는 시스템 서비스를 밝힌다.
+     언어, OS 에서 어떤걸 지원해 주나?
+5. metaobjects 를 정의한다.
+6. MOP 를 정의
+     * metaobjects 에 통합
+     * MOP 를 분리된 컴포넌트로 제작
+     * robustness 을 잘 신경써 줘야 한다.
+7. 1번에서 알아낸 내용을 토대로 필요한 base level 을 정의, 구현
+
+== Variants ==
+ * Reflection with several meta levels.
+	ex) RbCl
+	
+== Known Uses ==
+ * CLOS
+ * MIP
+ * PGen
+ * NEDIS
+ * OLE 2.0
+	
+== Consequences ==
+즉 Refrection은 Client가 사용하기 위한 인터페이스 부분(meta-level, MOP사용)과, 실제 로직(base-level)이 구현되는 부분을 분리함으로써, 여러 가지 변화에 실제 로직을 보호하려는 의도를 가진다고 볼 수 있다.
+
+=== Benefits ===
+ * 소스 코드를 안 고쳐도 된다.
+ * 소프트웨어를 고치기 쉽다.
+ * 다양한 변화를 가능하게 한다.
+=== Liabilities ===
+ * meta level 을 수정하는 건 위험할 수 있다.
+ * 컴포넌트의 수가 증가한다.
+ * 능률이 떨어진다.
+ * MOP 가 지원하는 부분 외에는 바꿀 수 없다.
+ * 모든 언어가 reflection 을 지원하는 건 아니다.
+=== Benefits & Liabilities ===
+
+== Related Patterns ==
+MicrokernelPattern
+
+== 그외 읽을만한 것 ==
+Enough talk! Here is an example that illustrates many of the new language features. It is one answer to the common question ‘‘how can I read objects from a stream, determine that they are of acceptable types, and then use them?’’ For example:
+
+{{{
+void user(istream& ss)
+{
+	io_obj* p = get_obj(ss); // read object from stream
+	if (Shape* sp = dynamic_cast<Shape*>(p)) { // is it a Shape?
+		sp->draw(); // use the Shape
+		// ...
+	}
+	else // oops: nonshape in Shape file
+		throw unexpected_shape();
+}
+}}}
+The function user() deals with shapes exclusively through the abstract class Shape and can therefore use every kind of shape. The construct
+
+dynamic_cast<Shape*>(p)
+
+performs a runtime check to see whether p really points to an object of class Shape or a class derived from Shape. If so, it returns a pointer to the Shape part of that object. If not, it returns the null pointer. Unsurprisingly, this is called a dynamic cast. It is the primary facilty provided to allow users to take advantage
+of runtime type information (RTTI). The dynamic_cast allows convenient use of RTTI where necessary without encouraging switching on type fields. 
+	The use of dynamic_cast here is essential because the object I/O system can deal with many other kinds of objects and the user may accidentally have opened a file containing perfectly good objects of classes that this user has never heard of.
+	Note the declaration in the condition of the ifstatement:
+	
+	if (Shape* sp = dynamic_cast<Shape*>(p)) { ... }
+
+The variable sp is declared within the condition, initialized, and its value checked to determine which branch of the ifstatement is executed. A variable declared in a condition must be initialized and is in scope in the statements controlled by the condition (only). This is both more concise and less errorprone than separating the declaration, the initialization, or the test from each other and leaving the variable around after the end of its intented use the way it is traditionally done:
+
+{{{
+Shape* sp = dynamic_cast<Shape*>(p);
+if (sp) { ... }
+// sp in scope here
+}}}
+This ‘‘miniature object I/O system’’ assumes that every object read or written is of a class derived from io_obj. Class io_obj must be a polymorphic type to allow us to use dynamic_cast. For example:
+{{{
+class io_obj { // polymorphic
+	public:
+	virtual io_obj* clone();
+	virtual ~io_obj() { }
+};
+}}}
+
+The critical function in the object I/O system is get_obj() that reads data from an istream and creates class objects based on that data. Let me assume that the data representing an object on an input stream is prefixed by a string identifying the object’s class. The job of get_obj() is to read that string prefix and call a function capable of creating and initializing an object of the right class. For example:
+{{{
+typedef io_obj* (*PF)(istream&);
+
+map<string,PF> io_map; // maps strings to creation functions
+io_obj* get_obj(istream& s)
+{
+	string str;
+	if (get_word(s,str) == false) // read initial word into str
+		throw no_class();
+	PF f = io_map[str]; // lookup ‘str’ to get function
+	if (f == 0) throw unknown_class(); // no match for ‘str’
+	return f(s); // construct object from stream
+}
+}}}
+
+The map called io_map is an associative array that holds pairs of name strings and functions that can construct objects of the class with that name. The associate array is one of the most useful and efficient data structures in any language. This particular map type is taken from the C++ standard library. So is the string class.
+The get_obj() function throws exceptions to signal errors. An exception thrown by get_obj() can be caught be a direct or indirect caller like this:
+{{{
+	try {
+		// ...
+		io_obj* p = get_obj(cin);
+		// ...
+	}
+	catch (no_class) {
+		cerr << "format error on input";
+		// ...
+	}
+	catch (unknown_class) {
+		cerr << "unknown class on input";
+		// ...
+	}
+}}}
+A catch clause is entered if (and only if) an exception of its specified type is thrown by code in or invoked from the try block.
+We could, of course, define class Shape the usual way by deriving it from io_obj as required by user():
+{{{
+	class Shape : public io_obj {
+		// ...
+		virtual void draw() = 0; // pure virtual function
+		// ...
+	};
+}}}
+However, it would be more interesting (and also more realistic) to use some previously defined Shape
+class hierarchy unchanged by incorporating it into a hierarchy that adds the information needed by our I/O
+system:
+{{{
+class iocircle : public Circle, public io_obj {
+public:
+	io_obj* clone() // override io_obj::clone()
+	{ return new iocircle(*this); }
+	
+	iocircle(istream&); // initialize from input stream
+	
+	static iocircle* new_circle(istream& s)
+	{
+		return new iocircle(s);
+	}
+	// ...
+};
+}}}
+The iocircle(istream&) constructor initializes an object with data from its istream argument. The new_circle function is the one put into the io_map to make the class known to the object I/O system. For example:
+
+io_map["iocircle"]=&iocircle::new_circle;
+
+Other shapes are constructed in the same way:
+
+class iotriangle : public Triangle, public io_obj {
+	// ...
+};
+
+If the provision of the object I/O scaffolding becomes tedious, a template might be used:
+
+{{{
+template<class T>
+class io : public T, public io_obj {
+public:
+	io_obj* clone() { return new io(*this); }
+	io(istream&); // initialize from input stream
+	static io* new_io(istream& s)
+	{
+		return new io(s);
+	}
+};
+}}}
+
+Given this, we could define iocircle like this:
+
+typedef io<Circle> iocircle;
+
+We would still have to define io<Circle>::io(istream&) explicitly, though, because it needs to know about the details of Circle.
+This simple object I/O system may not do everything anyone ever wanted, but it almost fits on a single page, is general and extensible, is potentially efficient, and the key mechanisms have many uses. Undoubtedly, you would have designed and implemented an object I/O system somewhat differently. Please take a few minutes to consider how this general design strategy compares to your favorite scheme, and also think about what it would take to implement this scheme in preISO
+C++ or some other language.

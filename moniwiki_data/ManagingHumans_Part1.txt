@@ -1,0 +1,7 @@
+= ManagingHumans/chap1~6 =
+
+{{{#!html
+<div style="width:425px" id="__ss_6022018"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ohyecloudy/managing-humans" title="ManagingHumans/chap1~6">ManagingHumans/chap1~6</a></strong><object id="__sse6022018" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=managinghumans-101203121930-phpapp01&stripped_title=managing-humans&userName=ohyecloudy" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse6022018" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=managinghumans-101203121930-phpapp01&stripped_title=managing-humans&userName=ohyecloudy" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ohyecloudy">Jongbin Oh</a>.</div></div>
+}}}
+
+= ManagingHumans/chap7~12 =

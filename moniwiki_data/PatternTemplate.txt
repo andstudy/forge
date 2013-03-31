@@ -1,0 +1,59 @@
+= Pattern Name =
+''Name of Pattern ''
+
+'''Aliases:''' ''Aliases (or None at this time) ''
+
+== Problem ==
+A statement of the problem this pattern solves. The problem may be stated as a question. 
+
+== Context ==
+The setting for the problem. This can include a description of the target user, e.g., developer, manager, customer. 
+
+== Forces ==
+The forces influencing the problem and solution. This can be represented as a list. 
+    * Force one 
+    * Force two 
+
+== Solution ==
+The solution to the problem. 
+
+== Resulting Context ==
+The context of the solution. This should include the new problems that appear as a result of applying the pattern that will require new patterns for their resolution. 
+
+== Rationale ==
+Explain the rationale behind the solution. Tell stories! Share your expertise. 
+
+== Known Uses ==
+List or describe places where the pattern is used. 
+
+== Related Patterns ==
+Describe any related patterns and their relationships with this pattern. 
+
+== Sketch ==
+Give a sketch, if needed. 
+
+http://www.agcs.com/graphics/patterns/sketch.gif
+ 
+
+
+
+----
+'''Author(s):''' Author's name or "as told to" for pattern mining 
+
+'''Date:''' Date string, e.g. 2000-12-31
+
+[mailto:author@somewhere.com Send email to author(s)]
+
+----
+'''References:''' References cited in the pattern. 
+
+== Keywords ==
+A comma delimited string of terms to be used for searching. 
+
+== Example ==
+Sample implementation of the pattern, usually code, pseudo code, etc.
+
+{{{ 
+xxx 
+}}} 
+ 

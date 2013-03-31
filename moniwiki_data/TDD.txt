@@ -1,0 +1,5 @@
+테스트 주도 개발
+
+[http://www.gamesfromwithin.com/articles/0603/000107.html Backwards Is Forward: Making Better Games with Test-Driven Development]
+ * [BackwardsIsForward] - 제가 번역해 본 자료입니다. :) [ParkPD]
+    * 와웅 멋지십니다~ 블로그에서 봤던 번역 하신다는게 이거였군요 :) 잘보겠습니다 [kukuman]

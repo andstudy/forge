@@ -1,0 +1,6 @@
+이름 : 오종빈
+이메일 : ohyecloudy_at_gmail_dot_com
+블로그 : http://ohyecloudy.com
+직업 : 게임 클라이언트 개발
+관심 분야 : C++, Shader, 수학, 알고리즘
+주로 쓰는 언어 : C++

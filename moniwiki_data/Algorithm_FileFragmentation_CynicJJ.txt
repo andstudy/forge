@@ -1,0 +1,70 @@
+ attachment:FileFragmentation.zip
+
+{{{#!vim vb
+Public Class FileFragments
+
+	Function GetOriginalFile(ByVal fragments As List(Of String)) As String
+		Dim frags As New List(Of String)(fragments)
+		frags.Sort(AddressOf CompareLength)
+
+		Dim candidate As List(Of String) = GetCombined(frags(0), frags)
+		RemoveDuplicated(candidate)
+		For i As Integer = 1 To frags.Count - 1
+			If candidate.Count = 1 Then Exit For
+
+			Dim combined As List(Of String) = GetCombined(frags(i), frags)
+			RemoveWrongCandidate(candidate, combined)
+		Next
+
+		Return candidate(0)
+	End Function
+
+	Private Sub RemoveDuplicated(ByVal candidate As List(Of String))
+		Dim i As Integer
+		While i < candidate.Count
+			Dim duplicated As Integer = candidate.IndexOf(candidate(i), i + 1)
+			If duplicated <> -1 Then
+				candidate.RemoveAt(i)
+			Else
+				i += 1
+			End If
+		End While
+	End Sub
+
+	Private Sub RemoveWrongCandidate(ByVal candidate As List(Of String), ByVal combined As List(Of String))
+		Dim i As Integer
+		While i < candidate.Count
+			If combined.IndexOf(candidate(i)) = -1 Then
+				candidate.RemoveAt(i)
+			Else
+				i += 1
+			End If
+		End While
+	End Sub
+
+	Private Function GetCombined(ByVal frag, ByVal frags) As List(Of String)
+		Dim originalLength As Integer = frags(0).Length + frags(frags.Count - 1).Length
+
+		Dim combined As New List(Of String)
+		For i As Integer = frags.Count - 1 To 0 Step -1
+			Dim compared As String = frags(i)
+			If compared.Length + frag.Length = originalLength Then
+				combined.Add(frag + compared)
+				combined.Add(compared + frag)
+			End If
+		Next
+		Return combined
+	End Function
+
+	Private Shared Function CompareLength(ByVal str1 As String, ByVal str2 As String) As Integer
+		If str1.Length > str2.Length Then
+			Return 1
+		ElseIf str1.Length < str2.Length Then
+			Return -1
+		Else
+			Return 0
+		End If
+	End Function
+
+End Class
+}}}

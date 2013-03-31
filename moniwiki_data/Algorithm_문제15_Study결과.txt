@@ -1,0 +1,305 @@
+= ScoreBoardMain.java =
+
+{{{
+import java.io.*;
+import java.util.*;
+
+public class ScoreBoardMain
+{	
+	ArrayList<Contestant> ctList = new ArrayList<Contestant>();
+	
+	public static void main(String[] args)
+	{
+	
+		ScoreBoardMain sbMain = new ScoreBoardMain();
+		
+		int testCase = Integer.parseInt(ReadLine());
+		ReadLine();
+		
+		/* testCase 만큼 */
+		while(testCase != 0)
+		{
+			sbMain.InitScoreBoard();
+			sbMain.RunScoreBoard();
+			sbMain.PrintScoreBoard();
+			
+			testCase--;
+		}
+		
+	}
+	
+	public void InitScoreBoard()
+	{
+		ctList.clear();
+	}
+	
+	/* 빈칸이 들어올때까지 점수판 Parse */
+	public void RunScoreBoard()
+	{
+		String in;
+		while( (in = ReadLine()) != null )
+		{
+			if( in.equals("") )
+				break;
+			
+			ParseInputData(in);
+		}				
+	}
+	
+	public void PrintScoreBoard()
+	{
+		for(Contestant cnt : ctList){
+			System.out.println(cnt);
+		}
+	}
+	
+	/* teamNum, problemNum, time, L type 파싱 */
+	public void ParseInputData(String in)
+	{
+		String[] token = new String[5];
+		token = in.split(" ");
+		
+		// L type 에 상관없이 무조건 contestant 추가
+		Contestant cont = GetExistContestant(token[0]);
+		
+		if( cont == null )
+		{
+			cont = new Contestant(token[0]);
+			ctList.add(cont);
+		}
+		
+		cont.SubmitProblem(token[1],token[2],token[3]);
+		
+	}
+	
+	/* ArrayList 에 존재하는 Contestant 인지 체크.. 다른방법은 없나 ㅜㅜ */
+	public Contestant GetExistContestant(String teamNum)
+	{
+		if( ctList.size() == 0)
+			return null;
+		
+		for(int i=0; i< ctList.size(); i++)
+		{
+			if(ctList.get(i).GetTeamNum() == Integer.parseInt(teamNum))
+				return ctList.get(i);
+		}
+		return null;
+	}
+	
+	public static String ReadLine()
+	{
+		String data = null;
+		
+		try
+		{
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			data = is.readLine();
+		}
+		catch(IOException e)
+		{
+			System.out.println("IOException " +e);
+		}
+		
+		return data;		
+	}
+
+	public void SortDataInput() 
+	{
+		Contestant [] cnts = new Contestant[ctList.size()];
+		cnts = ctList.toArray(cnts);
+		 Arrays.sort(cnts);
+		ctList = new ArrayList<Contestant>();
+		for(Contestant row : cnts){
+			ctList.add(row);
+		}
+	}
+
+}
+}}}
+
+= Contestant .java =
+
+{{{
+import java.util.*;
+
+public class Contestant implements Comparable<Contestant> 
+{
+	private int teamNum;
+	private int solvedProblemCount;
+	private int totalPenaltyTime;
+	
+	/* HashMap <팀번호,문제당벌점> */
+	HashMap<String,Integer> tScoreMap = new HashMap<String,Integer>();
+	
+	public Contestant(String teamNum)
+	{
+		this.teamNum = Integer.parseInt(teamNum);
+	}
+	
+	
+	public void SubmitProblem(String problemNumber,String time, String type)
+	{
+		totalPenaltyTime += ComputeTime(problemNumber,time,type);
+		
+	}
+	
+	// type 별로 Time 계산.
+	public int ComputeTime(String num, String time,String type)
+	{
+		int resultTime = 0;
+		
+		if( type.equals("C") )	// Correct
+		{
+			solvedProblemCount++;
+			
+			if(tScoreMap.get(num) != null)
+				resultTime += tScoreMap.get(num);
+
+			resultTime += Integer.parseInt(time); 
+		}
+		
+		if( type.equals("I") )	// Incorrect
+		{
+			if( tScoreMap.get(num) != null)
+				tScoreMap.put(num, tScoreMap.get(num) + 20);
+			else
+				tScoreMap.put(num,20);
+		}
+		
+		/* 나머지 3 case 는 처리 할게 없음.
+		if( type == "R" )	// clarification Request
+		if( type == "U" )	// Unjudged
+		if( type == "E" )	// Erroneous submission
+		*/
+			
+		return resultTime;
+		
+	}
+	
+	public int GetTeamNum()
+	{
+		return teamNum;
+	}
+	
+	public int GetSolvedProblemCount()
+	{
+		return solvedProblemCount;
+	}
+	
+	public int GetTotalPenaltyTime()
+	{
+		return totalPenaltyTime;
+	}
+
+
+	public int compareTo(Contestant o) {
+		if(this.solvedProblemCount > o.GetSolvedProblemCount())
+			return -1;
+		else if( this.solvedProblemCount < o.GetSolvedProblemCount())
+			return 1;
+		else if( this.totalPenaltyTime > o.GetTotalPenaltyTime())
+			return -1;
+		else if(this.totalPenaltyTime < o.GetTotalPenaltyTime())
+			return 1;
+		
+		return 0;
+	}	
+	public String toString(){
+		return teamNum + " " + solvedProblemCount + " " + totalPenaltyTime;
+	}
+	
+}
+}}}
+
+= ScoreBoardMainTest.java =
+
+{{{
+import junit.framework.TestCase;
+
+
+public class ScoreBoardMainTest extends TestCase 
+{
+	ScoreBoardMain sbMain = new ScoreBoardMain();
+	
+	
+	public void testRunScoreBoard() 
+	{
+
+	}
+
+	public void testParseInputData() 
+	{
+		/* test 1 */
+		sbMain.ParseInputData("1 2 10 I");
+		sbMain.ParseInputData("1 2 19 R");
+		sbMain.ParseInputData("1 2 21 C");
+		sbMain.ParseInputData("1 1 25 C");
+		assertEquals("1-1",sbMain.ctList.size(),1);
+		assertEquals("1-2",sbMain.ctList.get(0).GetTeamNum(),1);
+		assertEquals("1-3",sbMain.ctList.get(0).GetSolvedProblemCount(),2);
+		assertEquals("1-4",sbMain.ctList.get(0).GetTotalPenaltyTime(),66);
+		sbMain.ctList.clear();
+		
+		/* test 2 */
+		sbMain.ParseInputData("4 2 30 C");
+		sbMain.ParseInputData("1 2 19 R");
+		sbMain.ParseInputData("4 2 50 U");
+		sbMain.ParseInputData("4 5 25 E");
+		sbMain.ParseInputData("4 3 22 E");
+		assertEquals("2-1",sbMain.ctList.size(),2);
+		assertEquals("2-2",sbMain.ctList.get(0).GetTeamNum(),4);
+		assertEquals("2-3",sbMain.ctList.get(0).GetSolvedProblemCount(),1);
+		assertEquals("2-4",sbMain.ctList.get(0).GetTotalPenaltyTime(),30);
+		assertEquals("2-5",sbMain.ctList.get(1).GetTeamNum(),1);
+		assertEquals("2-6",sbMain.ctList.get(1).GetSolvedProblemCount(),0);
+		assertEquals("2-7",sbMain.ctList.get(1).GetTotalPenaltyTime(),0);
+		sbMain.ctList.clear();
+
+		/* test 3 */
+		sbMain.ParseInputData("5 3 20 I");
+		sbMain.ParseInputData("5 4 15 R");
+		sbMain.ParseInputData("5 4 30 I");
+		sbMain.ParseInputData("5 3 30 C");
+		assertEquals("3-1",sbMain.ctList.size(),1);
+		assertEquals("3-2",sbMain.ctList.get(0).GetTeamNum(),5);
+		assertEquals("3-3",sbMain.ctList.get(0).GetSolvedProblemCount(),1);
+		assertEquals("3-4",sbMain.ctList.get(0).GetTotalPenaltyTime(),50);
+		sbMain.ctList.clear();
+		
+	}
+
+	public void testGetExistContestant() 
+	{
+		Contestant c1 = new Contestant("1");
+		Contestant c2 = new Contestant("2");
+		Contestant c3 = new Contestant("3");
+		
+		sbMain.ctList.add(c1);
+		assertEquals("1",sbMain.GetExistContestant("1"),c1);
+		assertEquals("1",sbMain.GetExistContestant("2"),null);
+		
+		sbMain.ctList.add(c2);
+		sbMain.ctList.add(c3);
+		assertEquals("1",sbMain.GetExistContestant("5"),null);
+		assertEquals("1",sbMain.GetExistContestant("3"),c3);
+	}
+	
+         /* 정렬 */
+	public void testSortResult() 
+	{
+		/* test 1 */
+		sbMain.ParseInputData("1 2 10 I");
+		sbMain.ParseInputData("1 2 19 R");
+		sbMain.ParseInputData("1 2 21 C");
+		sbMain.ParseInputData("1 1 25 C");
+		sbMain.ParseInputData("4 2 30 C");
+		sbMain.ParseInputData("4 2 50 U");
+		sbMain.ParseInputData("4 5 25 C");
+		sbMain.ParseInputData("4 3 42 E");
+		sbMain.SortDataInput();
+		sbMain.PrintScoreBoard();
+		
+	}
+
+}
+}}}

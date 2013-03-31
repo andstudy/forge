@@ -1,0 +1,227 @@
+'위대한 게임의 탄생' 번역과정 포스트모템 v1.2
+
+{{{#!html
+<div id="div_wm1">
+<!-- 가로 147 사이즈 : 1개 -->
+<table width="188" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td style="color:#46a9c6; line-height:120%;padding:5px 0px;">
+   <span style="color:#000000; font-weight:bold; font-size: 12px;"></span>  
+  </td>
+</tr>
+</table>
+<table  width="188" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td bgcolor="#46a9c6" colspan="7"><img src="http://image.yes24.com/blogimage/blogImages/line_color_3.gif" width="188" height="1"></td>
+</tr>
+<tr> 
+  <td colspan="7" bgcolor="#46a9c6"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#FFFFFF" width="182" height="1"></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td colspan="3" width="182" align="center" style="padding:10px 0 10px 0;"> 
+    <!-- 상품박스 -->
+    <table width="182" cellspacing="0" cellpadding="0" border="0" style="table-layout:fixed; font-size:12px;">
+        
+	    <tr>
+		    <td align="center"><a href="http://blog.yes24.com/lib/adon/View.aspx?blogid=1170563&goodsno=5819514&idx=11893&ADON_TYPE=B&regs=b" target="_blank"><img src='http://image.yes24.com/goods/5819514/147x215' border='0' /></a></td>
+	    </tr>
+	    
+	    <tr>
+		    <td style="padding:10px 10px 5px 10px; font-size:12px; text-align:center;"><b>[예약판매] 위대한 게임의 탄생</b>
+			   <br>Michael Thornton Wyman 저/박일 역
+		    </td>
+	    </tr>
+	    																			
+    </table>	
+    <!-- 상품박스 -->																		
+  </td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#FFFFFF" width="182" height="1"></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td colspan="7" bgcolor="#46a9c6"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" colspan="7"><img src="http://image.yes24.com/blogimage/blogImages/line_color_3.gif" width="188" height="1"></td>
+</tr>
+<!-- 로고 추가 -->
+<tr>
+	<td colspan="7" style="padding:3px 10px; text-align:right; font-size:11px;"><a href="http://www.yes24.com" target="_New"><span style="font-size:11px;">예스24</span></a> | <a href="http://www.yes24.com/notice/FirstClass/Infoadon2.aspx" target="_New"><span style="font-size:11px;">애드온2</span><a></td>
+</tr>
+<!-- 로고 추가 -->
+</table>
+<!-- 가로 147 사이즈 : 1개 끝 -->
+</div>
+}}}
+
+'위대한 게임의 탄생' 번역과정 포스트모템 v1.2 (작성일 : 2011년 10월 24일)
+
+= 서론 =
+필자는 이제까지 세 권의 책([http://parkpd.egloos.com/3748742 스크럼, xUnit 테스트패턴, 실용주의 디버깅])을 번역했다. 세 권 모두 개발자에게 꼭 필요한 훌륭한 책이다. 하지만 게임 개발은 프로그래머만 잘 한다고 성공할 수 있는 게 아니다. 기획, 아트, 운영 등 모든 팀이 하나 되어 잘 해야 하고, 시장 타이밍도 잘 맞아야 한다. 이런 고민을 안고 게임 개발에 직접적으로 도움을 줄 수 있는 책이 없을까 고심하던 차에 2011년 1월 14일 출판사 지앤선과 함께한 자리에서 우연히 'Making Great Game'이라는 책을 추천받았다. 이 책에는 10개의 게임 포스트모템과 12개의 개발자 인터뷰가 실려 있다. '게임 성공을 위해서라면 이 책만큼 도움이 되는 게 없겠다'는 확신이 들어 바로 2011년 2월 23일 계약을 했다.
+'위대한 게임의 탄생'을 번역하면서 잘된 점과 잘못된 점을 포스트모템 형식으로 공유하고자 한다.
+
+== Data Point ==
+저자 : Michael Thornton Wyman
+평가 : 아마존에서 5점 만점에 4.5
+출판사 :지앤선
+발행일 : 2011년 10월 21일
+총쪽수 : 368쪽
+인쇄 : 4도 인쇄(풀칼라)
+ISBN-13 : 9788993827392
+ISBN-10 : 8993827397
+수록된 게임 : {{{LittleBigPlanet, World of Warcraft, Diner Dash, Half-Life 2, Uncharted 2: Among Thieves, Rock Bank, Farmville, Bejeweled Twist, Madden NFL 10, World of Goo, 마비노기 영웅전, 마비노기, 아틀란티카, Hero City, 아크로폴리스, 스페셜포스2, 그 외 12명의 게임 개발자 인터뷰}}}
+
+attachment:MGGMabinogi.jpg
+
+= 잘된 점 =
+== 한국 사례를 추가했다 ==
+10개의 외국 게임 사례를 번역하면서 아쉽다는 생각이 들었다. '온라인 게임 개발의 종주국'이라는 우리나라는 왜 우리나라 게임의 포스트모템을 찾아보기 어려울까? 외국에서는 [http://www.gdmag.com/ Game Developer Magazine] 에서 매달 꾸준히 포스트모템을 싣고 있는 반면, 우리나라에는 그런 매체가 별로 없다. kocca 게임 리포트에 분기별로 포스트모템 비슷한 내용이 실리지만 많이 알려져 있지 않고, 문의해 본 결과 담당자가 바뀌면서 저작권이 어떻게 되어 있는지도 모르고 있었다. 몇몇 포스트모템은 인터넷에 올라온 지 얼마 되지 않아 삭제되어 원본을 찾아볼 수 없다.
+원래는 한국 사례를 따로 모아 2권으로 내려고 했기 때문에 '위대한 게임의 탄생' 1권에 한국 사례를 추가할 생각은 없었다. 하지만 (잘못된 점에서 얘기하겠지만) 편집이 오래 걸리다보니 '기왕 기다리는 거 한국 사례도 추가해 볼까'라는 생각이 들어 아는 분들께 부탁을 드렸다. 많은 분들의 도움 덕분에 6개라는 많은 수의 한국 게임 포스트모템을 수집할 수 있었다. 이 자리를 빌어 멋진 포스트모템을 공유해 주신 마비노기 영웅전(넥슨)의 이은석님, 마비노기(넥슨)의 이원님, 아틀란티카(엔도어즈)의 정종필님, Hero City(파프리카 랩)의 김동신님, 아크로폴리스(플로우게임즈)의 오영욱님, 스페셜포스2(드래곤플라이)의 고성원님께 감사합니다. 또한 여러모로 많이 소개해 주신 권도영, 김주복, 김형준, 김형진, 배재호, 장호준님께도 감사합니다.
+
+== 페이스북을 활용해 저자로부터 내용을 확인했다 ==
+기술서와 달리, '위대한 게임의 탄생' 은 인터뷰를 모아 놓은 책이다 보니 사람마다 어휘, 어투가 달라 번역하기가 쉽지 않았다. 뜻이 분명하지 않은 부분은 저자(Michael Thornton Wyman)와 여러 번 이메일을 주고받으면서 많이 해결했지만, 저자도 인터뷰어이다 보니 정확히 파악하지 못한 부분이 있었다. 이때 나의 해결사가 되어 준 것은 facebook의 친구 파도타기였다. 책에 나온 많은 인터뷰 대상자들이 저자와 facebook 친구였다. 일단 나는 역자다보니 저자와 쉽게 facebook 친구가 될 수 있었다. 그 다음에는 저자의 친구들 중에서 인터뷰 대상자들을 찾아 모두에게 친구추가 요청을 한 뒤 쪽지로 질문을 했다. 아무래도 저자와 친구이다 보니 많은 인터뷰 대상자들이 질문에 친절하게 답변해 주었고, 덕분에 원서에 없던 내용까지 추가해 번역할 수 있었다. {{{Eric Zimmerman, Greg LoPiccolo, Tim Fields, Richard Dansky, Jason Kapalka, Clint Jorgenson, Ian Cummings, Peter McConnell}}} 에게 진심으로 감사한다.
+
+attachment:MichaelThorntonWyman.PNG
+
+== 알파리딩과 베타리딩을 진행했다 ==
+이건 '실용주의 디버깅'을 번역할 때부터 내가 써 온 방법이다. 원고가 출판사를 통해 편집자에 넘어갈 때의 가장 큰 문제점은 피드백이 느리다는 점이다. 아무래도 조판을 해야 하고, 이 책 외에도 다른 책들이 진행 중이기 때문인지 출판사에 원고를 넘기면 적어도 2주, 늦으면 3~4주 후에야 피드백을 받게 된다. 그러면 번역자조차 번역한 내용을 까먹을 수 있고, 여러 번 피드백을 주고받다 보면 책이 나오는 게 너무 늦어진다.
+그래서 출판사에게 텍스트 파일을 편집없이 출력해서 알파리더들에게 보내 달라고 한다. 그러면 2~3일 안에 알파리더들이 원고를 받을 수 있다. 알파리더들은 약 2주 동안 책을 검토한 후 위키, 이메일, 빨간펜 검사 등의 방법으로 작성한 피드백을 역자에게 전달한다. 그 내용들을 종합해 출판사에 보내 편집하게 되면, 큰 오역 없는 매끄러운 상태로 베타리딩을 할 수 있다. 
+예를 들어 UNCHARTED 2 에는 이런 문장이 나온다.
+원본 : "You know why Ripley is willing to sacrifice so much in Aliens..."
+번역 : "우리는 왜 Ripley 가 Aliens 에게 그렇게까지 희생하려는지 알고..."
+82년생 베타리더가 다음과 같은 멘트를 남겼다.
+"Ripley 가 게임 주인공 이름인가요? UNCHARTED 2 에서는 외계인이 안 나오지 않나요?"
+영화 에일리언의 주인공이 리플리라는 사실이 누군가에게는 일반상식이었지만, 좀 더 어린 친구들에게는 처음 들어보는 고전 영화일 수도 있었던 것이다. 덕분에 위 문장을 아래와 같이 번역했다.
+"우리는 영화 Aliens에서 왜 주인공 Ripley가 Aliens에게 그렇게까지 희생하려는지를 알고, ..."
+
+이 책은 알파리더 7명, 베타리더 9명이 수고해 주셨다. 김근수, 김명관, 김성안, 김성호, 오종빈, 이영권, 최성기, 황승현, 황윤희, 권연진님께 감사한다. 혹시라도 책에서 오역이 발견된다면 다 역자가 잘못한 것이다.
+
+attachment:AlphaReading.jpg
+attachment:BetaReading.jpg
+attachment:AlphaBetaResult.jpg
+
+== 다른 자료를 최대한 참고했다 ==
+인터뷰에는 내용이 부족해 선뜻 이해되지 않는 곳이 좀 있었다. 예를 들어 {{{LittleBigPlanet}}}에서 서버 관련 기술을 언급한 부분 중 'Sony는 그다지 내키지는 않았겠지만 우리에게 필요한 것을 제공해 주었습니다.'라고 번역된 곳이 있다. '내키지 않는다'는 부분이 계속 껄끄럽던 차에 Game Developer Magazine 2009년 1월호에서 LBP({{{LittleBigPlanet}}})의 포스트모템을 보고서야 내용을 추가할 수 있었다. 자세한 내용은 번역서를 참고하자. 
+그 외에도 {{{YouTube}}}나 wikipedia 등 여러 곳에서 추가로 정보를 확인했다. 예를 들어 원문에 'unicorn hammering out Iron Maiden on a double-necked guitar' 가 있는데, 도대체 유니콘이 기타로 해머링을 친다는 게 뭘까? 내가 모르는 은어가 아닐까 한참 고민하다가 [http://www.youtube.com/watch?v=aFF3Eq4ApnQ 동영상]에서 진짜로 유니콘이 기타로 해머링을 치는 장면이 있는 걸 보고서야 안심하고 번역할 수 있었다.
+
+== 인터넷을 최대한 활용했다 ==
+번역에서는 사전을 잘 찾는게 참 중요하다. 요즘이야 인터넷이 워낙 발달해있어 예전보다는 참 환경이 좋아졌다. 인터넷 한영사전도 각 포탈별로 내용이 조금씩 다르므로 다같이 살펴봐야 하고, Oxford 사전이나 Longman 영영사전도 결정적일 때 많은 도움이 되었다. 그리고 [http://forum.wordreference.com wordreference.com]은 영어 표현에 대한 Q&A 사이트인데 여기에서도 많은 도움을 얻었다.
+
+= 잘못된 점 =
+== 출판사와 손발이 맞지 않았다 ==
+지앤선 출판사는 사이텍미디어의 자매사고, 사이텍미디어는 대학교재로 유명한 출판사다. 여기에서 불행이 시작되었다. 1차 번역물을 6월 27일에 출판사에 넘겼고, 알파리딩 결과를 취합해 베타리딩용으로 만들 원고를 7월 17일에 보냈다. 출판사 측에서 편집 기간은 최대 2주라고 했지만, 실제로는 8월 18일 즉, 한 달이 지난 후에야 1차 편집본을 받을 수 있었다. 곧 2학기가 시작되기 때문에 대학교재 편집이 최우선순위라 작업순서에서 밀렸다는 거다. 편집을 기다리는 동안 '한국사례를 추가'할 수 있었기 때문에 결과적으로 보면 잘된 일이지만, 편집이 늦어진다는 사실을 미리 알았더라면 원고를 더 다듬어서 보내거나 아예 다른 내용을 추가할 수도 있었다는 점에서 아쉽다.
+
+== 포맷을 미리 정하지 않았다 ==
+한국사례에 대한 포스트모템을 요청하면서 특별히 포맷을 정하지 않았다. '원고 내용이 중요하지 형식이 뭐 그리 중요할까'라고 생각했기 때문이다. 그러다보니 형식이 들쑥날쑥해졌다. 이는 역자가 처음에 제대로 얘기하지 못해 생긴 일이다. Game Developer Magazine의 포스트모템은 서론, Data Point, 잘된 점 5가지, 잘못된 점 5가지, 결론이라는 형식을 우리나라 시조만큼이나 엄격하게 지킨다. 실제로 '위대한 게임의 탄생'의 외국사례도 차례를 잘 살펴보면 이 형식을 그대로 따르고 있다. 이렇게 형식을 정하면, '잘된 점'만큼 '잘못된 점'도 공개해야 하기 때문에 자기 자랑만 하는 포스트모템이 아닌 실수를 인정하고 더 좋은 방향을 제시하는 유익한 포스트모템을 쓰도록 유도할 수 있다. 2편에서는 처음부터 템플릿을 정해 포맷을 일관되게 적용할 생각이다.
+
+== 적극적으로 한국사례를 수집하지 않았다 ==
+역자가 기자나 작가가 아닌 신규 게임팀의 프로그래머다보니 다른 분들에게 원고청탁하는 게 쉽지 않았다. 프로그래머가 프로그래밍이나 열심히 하지 왜 이런 걸 하느냐라고 생각할까봐 어렵기도 했다. 특히 같은 회사({{{NCsoft}}})분들에게 부탁하는 게 가장 어려웠고, 실제로 몇 분에게 부탁을 드렸지만 원고를 얻지 못한 점이 아쉽다. 그나마 용기를 낼 수 있었던 건 "복권에 당첨되고 싶다면 기도하기 전에 먼저 복권부터 사라."(영화 '먹고 기도하고 사랑하라')는 말 덕분이었다.
+관심을 보인 분들 중에도 회사 보안 정책상 기밀에 해당하는 내용을 공개하기 어렵고 그렇다고 그런 내용을 빼고 포스트모템을 쓰자니 너무 뻔한 홍보글이 될 거 같아서 포기한 경우가 많았다. 실제로 한국사례를 보내주신 분들 대부분이 원고를 보내기 전에 사내 보안규정 검수를 거쳐야 했다. 이 책을 시작으로, 게임을 런칭하면서 몸으로 배운 경험을 포스트모템으로 남기는 문화가 정착되었으면 한다. 그것은 모든 게임개발자에게 큰 도움이 될 뿐만 아니라, 누구보다 함께 고생한 팀원들에게 뜻 깊은 일이 될 거라고 생각한다.
+
+== League of Legends를 시작했다 ==
+문명 이후로 게임 안 하고 잘 살아왔는데, 우연히 {{{LoL}}}(League of Legends)을 시작했다가 푹 빠져버렸다. 부분유료화에 돈을 써 본 적이 없었는데 캐릭터 스킨까지 사 가면서 만랩 30레벨을 찍었다. "시험기간에는 공부만 빼고 뭐든지 재미있다."는 얘기도 있지 않은가. 덕분에 번역하는데에 처음 예상했던 두 달이 아닌 세 달이 걸렸다.
+
+attachment:LoL.png
+
+== 실제로 해 보지 못한 게임들이 있다 ==
+콘솔게임기라고는 5년 전에 받은 PSP 1.5와 작년 말에 산 {{{PS3}}}밖에 없다. PC도 5년 전에 구입한거라 성능상의 문제로 플레이해 보지 못한 게임이 좀 있었다. 특히 Rock Band 같은 경우는 한 번 해 보고 싶었는데 악기도 없고 한국에 정식발매를 한 것도 아니어서, 2009년 독일 {{{GamesCom}}}에서 한 번 해 본 것 외에 제대로 플레이해 보지도 못한 상태에서 번역을 한 점이 아쉽다.
+
+attachment:RockBand.jpg
+
+= 결론 =
+지금까지 '위대한 게임의 탄생'을 어떻게 번역했는지를 포스트모템으로 써 봤다. 보면 알겠지만, 포스트모템 형식은 참 간단하다. 하지만 잘된 점, 잘못된 점 중에서도 가장 중요한 5가지를 공유함으로써 다른 사람에게는 교훈을 주고, 스스로에게는 실수를 반복하지 않게 한다는 점에서 유용하다. '위대한 게임의 탄생'에는 한국 게임 포스트모템이 6개 들어갔지만 아직 포스트모템으로 공유할만한 한국 게임은 많다고 생각한다. 게임을 개발하면서 알게 된 내용, 아쉬웠던 점을 포스트모템으로 공유하고 싶은 분들은 언제든지 연락해 주기 바란다. 그리고 지금 한창 게임을 개발하고 있는 분들도 중간중간 데이터를 기록해 두면 소중한 역사를 얻을 수 있을 것이다. 모든 게임 개발팀이 다 성공하고 그 결과를 포스트모템으로 만나기를 기대한다.
+
+{{{#!html
+<div id="div_wm1">
+<!-- 가로 147 사이즈 : 1개 -->
+<table width="188" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td style="color:#46a9c6; line-height:120%;padding:5px 0px;">
+   <span style="color:#000000; font-weight:bold; font-size: 12px;"></span>  
+  </td>
+</tr>
+</table>
+<table  width="188" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td bgcolor="#46a9c6" colspan="7"><img src="http://image.yes24.com/blogimage/blogImages/line_color_3.gif" width="188" height="1"></td>
+</tr>
+<tr> 
+  <td colspan="7" bgcolor="#46a9c6"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#FFFFFF" width="182" height="1"></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td colspan="3" width="182" align="center" style="padding:10px 0 10px 0;"> 
+    <!-- 상품박스 -->
+    <table width="182" cellspacing="0" cellpadding="0" border="0" style="table-layout:fixed; font-size:12px;">
+        
+	    <tr>
+		    <td align="center"><a href="http://blog.yes24.com/lib/adon/View.aspx?blogid=1170563&goodsno=5819514&idx=11893&ADON_TYPE=B&regs=b" target="_blank"><img src='http://image.yes24.com/goods/5819514/147x215' border='0' /></a></td>
+	    </tr>
+	    
+	    <tr>
+		    <td style="padding:10px 10px 5px 10px; font-size:12px; text-align:center;"><b>[예약판매] 위대한 게임의 탄생</b>
+			   <br>Michael Thornton Wyman 저/박일 역
+		    </td>
+	    </tr>
+	    																			
+    </table>	
+    <!-- 상품박스 -->																		
+  </td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#FFFFFF" width="182" height="1"></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+  <td bgcolor="#46a9c6" width="1"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td colspan="7" bgcolor="#46a9c6"><img src="http://image.yes24.com/blogimage/blogImages/1px_blank.gif" width="1" height="1" /></td>
+</tr>
+<tr> 
+  <td bgcolor="#46a9c6" colspan="7"><img src="http://image.yes24.com/blogimage/blogImages/line_color_3.gif" width="188" height="1"></td>
+</tr>
+<!-- 로고 추가 -->
+<tr>
+	<td colspan="7" style="padding:3px 10px; text-align:right; font-size:11px;"><a href="http://www.yes24.com" target="_New"><span style="font-size:11px;">예스24</span></a> | <a href="http://www.yes24.com/notice/FirstClass/Infoadon2.aspx" target="_New"><span style="font-size:11px;">애드온2</span><a></td>
+</tr>
+<!-- 로고 추가 -->
+</table>
+<!-- 가로 147 사이즈 : 1개 끝 -->
+</div>
+}}}
+

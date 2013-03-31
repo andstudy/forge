@@ -1,0 +1,18 @@
+MovingSpotlight
+	
+이름   : 백호근 
+이메일 : movingspotlight_at_gmail_dot_com
+직업   : 프로그래머(영상 처리)
+관심 분야 : XP 몇 년째 관심만.
+주로 쓰는 언어 : c/c++
+
+Dear MovingSpotlight
+----
+----
+반가워요. 앞으로 잘 부탁드립니다. -- [ParkPD] [[DateTime(2008-01-14T15:19:30)]]
+----
+ * 반갑습니다. 2008년에는 모든 AndStudy 회원 여러분들이 보다 더 agile 해질 수 있는 한 해가 되면 좋겠네요. -- MovingSpotlight [[DateTime(2008-01-17T04:06:42)]]
+[[Comment]]
+
+----
+CategoryHomepage

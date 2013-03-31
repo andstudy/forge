@@ -1,0 +1,32 @@
+== Actions ==
+
+Actions are tools that work on a page or the whole wiki, but unlike macros do not add ''to'' the page content when viewing a page, but work ''on'' that page content. They either produce some output based on page contents (navigational actions like searching) or implement functions that are not related to viewing a page (like deleting or renaming a page).
+
+There is a set of system-defined actions, which includes page editing; you can extend the set of known actions by your own ones. See HelpForDevelopers for more on that.
+
+The following actions are added to the list of user-defined extension actions at the bottom of each page or other position defend on your selected theme. This happens to any mixed-case extension, for other actions (all lower-case) see the list further down this page. Some of these action might not be available for this wiki site.
+ * `!UploadFile`: upload files to a page, see UploadFile for more details.
+ * `!DeletePage`: Delete a page, after you confirmed it; deletion means a final backup copy is created and only then the page is deleted, i.e. you can ''revive'' the page later on (as long as the backups are not physically deleted).
+ * `!LikePages`: list pages whose title starts or ends with the same MeatBall:WikiWord as the current page title.
+----
+The following is a list of ''internal'' actions that are used to implement the various menus and links at the top and bottom of pages, or supplement certain macros.
+ * `edit`: edit this page.
+ * `diff`: display differences between page revisions.
+ * `info`: show meta-data on a page.
+ * `show`: display a page (the default action).
+ * `print`: show the print-view of a page, which omits the navigational items from the display view.
+ * `subscribe`: subscribe to a page.
+ * `userform`: save user preferences.
+ * `recall`: display an older revision of a page.
+ * `rename`: Rename a page, after you confirmed it.
+ * `titleindex`: Implements the listing of all page names as text (Self:?action=titleindex) or XML (Self:?action=titleindex&amp;mimetype=text/xml''''''); the main use of this action is to enable MeatBall:MetaWiki.
+ * `fullsearch`: this action is triggered by clicking on the "Go" button of the `FullSearch` macro (Self:?action=fullsearch&amp;value=HelpOnActions).
+ * `titlesearch`: this action is triggered by clicking on the "Go" button of the `TitleSearch` macro (Self:?action=titlesearch&amp;value=HelpOnActions).
+ * `highlight`: highlight the search word when you click on a link in a search result list.
+ * `bookmark`: set bookmark for RecentChanges.
+ * `raw`: send the raw wiki markup as text/plain (e.g. for backup purposes via wget); Self:SystemInfo?action=raw shows the markup of SystemInfo.
+ * `rss_rc`: generate a RSS feed of RecentChanges.
+
+for more information about actions See MoniWiki:MoniWikiActions
+----
+[[Navigation(HelpContents)]]

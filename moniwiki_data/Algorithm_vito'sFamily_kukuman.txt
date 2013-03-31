@@ -1,0 +1,100 @@
+ * 해결 방법
+   * 입력 받은 집의 번지의 최대와 최소값을 구해와서 중간값으로 비토의 집의 위치 구함
+   * set을 이용해서 주소 중복을 제거하고 비토의 집위와의 각 거리의 함을 구함
+ * 소스
+{{{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
+class Main implements Runnable{
+	public int getVitoHousePos(int [] addrs){
+		int max=Integer.MIN_VALUE ;
+		int min=Integer.MAX_VALUE;
+		for(int curVal : addrs){
+			min = Math.min(min, curVal);
+			max = Math.max(max, curVal);
+		}
+		int midPos = min +  (max-min)/2;
+		return midPos;
+	}
+
+	public int getRelativeDistance(int[] datas,int housePos) {
+		Set<Integer> set = new HashSet<Integer>();
+		for(int curInt : datas){
+			set.add(curInt);
+		}
+		
+		int sum=0;
+		Iterator<Integer> i=set.iterator();
+		while(i.hasNext()){
+			int curInt = i.next();
+			sum += Math.abs(curInt - housePos);
+		}
+		return sum;
+	}
+	
+	public static void main(String[] args) throws Exception, IOException {
+		Main main = new Main();
+		main.run();
+	}
+
+	public void run() {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		int cases;
+		try {
+			cases = Integer.parseInt(reader.readLine().trim());
+		
+			for(int i=0;i<cases;i++){
+				Scanner scanner = new Scanner(System.in);
+				int itemSize = scanner.nextInt();
+				int [] datas = new int[itemSize];
+				for(int j=0;j<itemSize;j++){
+					datas[j] = scanner.nextInt();
+				}
+				
+				int housePos = getVitoHousePos(datas);
+				int result = getRelativeDistance(datas, housePos);
+				System.out.println(result);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+}}}
+
+ * TestCase
+
+{{{
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
+public class MainTest extends Main{
+	private int [] test1 = {2,4};
+	private int [] test2 = {2,4,6};
+	private int [] test3 = {2,3,2};
+	@Test
+	public void testGetVitoHouse(){
+		Main main = new Main();
+		assertEquals(3, main.getVitoHousePos(test1));
+		assertEquals(4, main.getVitoHousePos(test2));
+		assertEquals(2, main.getVitoHousePos(test3));
+	}
+	
+	public void testGetRelativeDistance(){
+		Main main = new Main();
+		assertEquals(2, main.getRelativeDistance(test1,main.getVitoHousePos(test1)));
+		assertEquals(4, main.getRelativeDistance(test2,main.getVitoHousePos(test2)));
+		assertEquals(1, main.getRelativeDistance(test3,main.getVitoHousePos(test3)));
+	}
+}
+}}}

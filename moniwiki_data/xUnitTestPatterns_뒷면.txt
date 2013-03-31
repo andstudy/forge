@@ -1,0 +1,42 @@
+[xUnitTestPatterns] 상위로 가기
+
+책 뒷면 번역입니다. 개선할만한 부분이 없는지 의견 부탁드립니다.
+<> 는 병기표시입니다.
+
+자동 테스팅<Automated testing>은 애자일 개발의 기초다. 테스팅 전략을 잘 활용하면 기능을 과감하게 추가할 수 있고, 사용자 피드백을 빠르게 받을 수 있으며, 품질을 향상시킬 수 있다. 하지만 많은 개발자들이 자동 테스트에 대한 경험이 부족해 효과적인 테스트 작성을 어려워한다.
+
+xUnit 테스트 패턴은 요즘 가장 인기있는 단위 테스트 프레임워크인 xUnit 으로 자동 테스트를 작성하는 방법을 완벽하게 지도해준다. 애자일 코치이자 테스트 자동화 전문가인 제라드 메스자로스<Gerard Meszaros>는 테스트 작성, 이해, 유지보수를 쉽게 해 주는 68개의 입증된 패턴을 소개한다. 또한 어떻게 하면 테스트를 더 견고하고 반복가능하며, 쉽게 만들 수 있는지도 보여준다.
+
+많은 정보로 가득한 이 책은 마치 3권의 책을 한 권으로 합쳐 놓은 느낌이다. 1부에서는 테스트 전략에서부터 실제 테스트 코딩까지 테스트 자동화에 대한 모든 것을 자세하게 설명한다. 2부에서는 자주 만날 수 있는 18개의 "테스트 냄새" 목록을 보여주면서, 문제의 근본원인과 그에 맞는 가장 적당한 패턴을 찾는데 도움을 주는 해결 방안을 제공한다. 3부에서는 각각의 패턴에 대해 자세하게 설명하고, 다양한 프로그래밍 언어로 되어 있는 예제 코드를 통해서 리팩토링하는 방법을 보여준다.
+
+그 외에도
+. 테스트를 더 빠르게, 잘 작성하는 법
+. 자동 테스트의 4단계 : 픽스처 설치, 테스트 대상 시스템 실행, 결과 검증, 픽스처 해체
+. 테스트 스텁<Test Stub>과 모의 객체<Mock Object>로 소프트웨어를 환경으로부터 격리시켜 테스트 커버리지를 향상시키는 법
+. 테스트하기 좋게 소프트웨어를 설계하는 법
+. (코드 냄새, 동작 냄새, 프로젝트 냄새를 포함한) 테스트 "냄새"로 문제를 파악하고, 이런 냄새를 언제 어떻게 제거할 수 있는지 아는 법
+. 테스트를 리팩토링해서 더 단순하고, 견고하며, 빠르게 실행될 수 있게 만드는 법
+등을 다룬다.
+
+이 책은 개발자, 매니저, 테스터에게 필요하다. 애자일 개발 환경에서 일하느냐, 전통적인 개발환경에서 일하느냐, 테스트 주도 개발을 하느냐, 테스트 나중 작성을 하느냐는 중요하지 않다. 이 책에서 나온 패턴과 냄새들은 모든 xUnit 계열에 적용할 수 있을 뿐만 아니라 차세대 동작 주도 개발<behavior-driven development> 프레임워크인 RSpect, JBehave, 그 외에도 기록 테스트 툴이라든지, Fit 나 FitNesse 같은 데이터주도 테스트 툴에서도 써 먹을 수 있다.
+
+제라드 메스자로스<Gerard Meszaros>는 캘거리<Calgary>에 있는 애자일 개발 전문 컨설팅 회사 ClearStream Consulting 의 수석 과학자<Chief Scientist>이자 선임 컨설턴트다. 제라드는 십수년간을 자동 단위 테스트 프레임워크 분야에서 경험을 쌓았고 테스트 자동 패턴, 소프트웨어와 테스트 리팩토링, 테스트 용이성을 위한 설계 분야를 선도하는 전문가다.
+
+원문 :
+Automated testing is a cornerstone of agile development. An effective testing strategy will deliver new functionality more aggressively, accelerate user feedback, and improve quality. However, for many developers, creating effective automated tests is a unique and unfamiliar challenge.
+
+xUnit Test Patterns is the definitive guide to writing automated tests using xUnit, the most popular unit testing framework in use today. Agile coach and test automation expert Gerard Meszaros describes 68 proven patterns for making tests easier to write, understand, and maintain. He then shows you how to make them more robust and repeatable--and far more cost-effective.
+
+Loaded with information, this book feels like three books in one. The first part is a detailed tutorial on test automation that covers everything from test strategy to in-depth test coding. The second part, a catalog of 18 frequently encountered "test smells," provides trouble-shooting guidelines to help you determine the root cause of problems and the most applicable patterns. The third part contains detailed descriptions of each pattern, including refactoring instructions illustrated by extensive code samples in multiple programming languages.
+
+Topics covered include
+* Writing better tests--and writing them faster
+* The four phases of automated tests: fixture setup, exercising the system under test, result verification, and fixture teardown
+* Improving test coverage by isolating software from its environment using Test Stubs and Mock * Objects
+* Designing software for greater testability
+* Using test "smells" (including code smells, behavior smells, and project smells) to spot problems and know when and how to eliminate them
+* Refactoring tests for greater simplicity, robustness, and execution speed
+
+This book will benefit developers, managers, and testers working with any agile or conventional development process, whether doing test-driven development or writing the tests last. While the patterns and smells are especially applicable to all members of the xUnit family, they also apply to next-generation behavior-driven development frameworks such as RSpec and JBehave and to other kinds of test automation tools, including recorded test tools and data-driven test tools such as Fit and FitNesse.
+
+출처 : http://www.yes24.com/24/goods/192464

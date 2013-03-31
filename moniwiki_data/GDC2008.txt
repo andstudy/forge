@@ -1,0 +1,540 @@
+GDC08 에 다녀온 후 [http://andstudy.com/andwiki/wiki.php/GDC2008 위키]를 통해서 몇 분이서 모은 발표자료들입니다.
+한참 잊고 있었는데, 지금 다시 자료를 찾아보니 그 당시 공개 안 되어 있던 자료가 꽤 많이 웹에 공개되어 있네요. 
+지금 봐도 괜찮은 자료들도 많군요.
+다른 좋은 자료도 있으면, [http://andstudy.com/andwiki/wiki.php/GDC2008 AnD 위키] 나 댓글로 알려주세요.
+틈나는 대로 업데이트 합니다. :)
+
+== [http://www.gdconf.com/conference/viewallsessions.htm 전체 강연 목록] ==
+== 자료 있는 것들 ==
+ * Can You Hear Us Now? Dolby's New Voice Solution for Online Games Sponsored by Dolby- Paul Boustead, John Griffin
+  [https://www.cmpevents.com/sessions/GD/S6167i1.ppt Malone], [https://www.cmpevents.com/sessions/GD/S6167i2.ppt Moore]
+ * Casual Games Summit- Steve Meretzky, Kenny Shea Dinkin, Dave Rohrl 외
+  [https://www.cmpevents.com/sessions/GD/S6166i1.pps Monday, Business Today, Allard]
+ * Worlds In Motion Summit- Leigh Alexander, Erik Bethke, Adrian Crook 외
+  [http://www.massively.com/2008/02/19/gdc-08-entertainment-content-convergence-in-online-worlds/ massively]
+ * Managing Copyright Issues in Videogames and Virtual Worlds- Sean Kane
+  [https://www.cmpevents.com/sessions/GD/S6225i1.ppt PPT]
+ * Your Shameful Secret Addiction to Crunch- David Amor
+  [http://www.gamewatch.org/phpBB2/viewtopic.php?t=518 How We Beat Crunch @ gamewatch.org]
+  [http://www.igda.org/guildford/amortalk.htm Making high quality games in a 40 hour week(주 40시간씩 일하면서 고품질의 게임 만들기)]
+  [http://www.gamesindustry.biz/content_page.php?aid=12872 Focus: Relentless puts its finger on the Buzz! @ gamesindustry.biz -"the crazy idea of a development studio that works 9 to 5 with no overtime."]
+ * Game Design Workshop- Marc LeBlanc, Andrew Leker, Frank Lantz 외
+  [http://www.8kindsoffun.com 강연 슬라이드(2008년도 자료는 아직 올라오지 않았음)]
+ * 10 Tips for a Successful Wiki- James Everett
+  [http://www.brainofjames.com/wp-content/uploads/2008/02/jameseverett_10tipswiki.pdf PDF]
+ * A Future Wide Open: Unleashing the Creative Community(Keynote)- John Schappert
+  동영상: [http://kr.youtube.com/watch?v=dCkKC7TUo3U 1/7],  [http://kr.youtube.com/watch?v=rF5IHd8b7fo 2/7], [http://kr.youtube.com/watch?v=5VBiPQ5uSN4 3/7], [http://kr.youtube.com/watch?v=A1aaqFwV9TM 4/7], [http://kr.youtube.com/watch?v=CLluki-ApTA 5/7], [http://kr.youtube.com/watch?v=LfDa6Rax6P0 6/7], [http://kr.youtube.com/watch?v=foZTji3naLU 7/7]
+  [http://blogs.guardian.co.uk/games/archives/2008/02/21/gears_of_war_2_announced_at_gdc.html Gears Of War 2 Announced At Gdc]
+ * A PORTAL Post-Mortem: Integrating Writing and Design- Kim Swift, Erik Wolpaw
+  [http://www.valvesoftware.com/publications/2008/GDC2008_PortalPostMortem.pdf PDF], [http://xemu.blogharbor.com/blog/_archives/2008/2/22/3540268.html xemu], [http://www.thisisgame.com/board/view.php?id=158603&category=203 번역 포탈 포스트모텀], [http://shacknews.com/featuredarticle.x?id=784 shacknews]
+ * Collaborative Writing and Vast Narratives: Principles, Processes, and Genteel Truculence- Ken Rolston, Mark Nelson
+  [https://www.cmpevents.com/sessions/GD/S6745i1.ppt PPT]
+ * CRYSIS in the Making- Cevat Yerli, Sten Huebler, Bernd Diemer 외
+  [https://www.cmpevents.com/sessions/GD/S6465i1.pdf PDF]
+ * DINER DASH: HOMETOWN HERO Postmortem: Where Casual Games Meet Virtual Worlds- Brad Edelman, Kenny Shea Dinkin
+  [https://www.cmpevents.com/sessions/GD/S6344i1.ppt PPT]
+ * Do, Don't Show' ? Narrative Design in FARCRY 2- Patrick Redding
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/22/3540260.html GDC 08: Narrative Design in Far Cry 2]
+ * E Pluribus Unum: Matchmaking in HALO 3- Chris Butcher
+  [https://www.cmpevents.com/sessions/GD/S6177i1.ppt PPT]
+ * Game Design Based on Micro-Transactions in Online Games- Gyuhwan Oh, Taiyoung Ryu
+  [https://www.cmpevents.com/sessions/GD/S6981i1.pdf PDF]
+ * Game Studies Download 3.0- Jane McGonigal, Mia Consalvo, Ian Bogost 외
+  [https://www.cmpevents.com/sessions/GD/S6207i1.pdf PDF]
+ * How to Pick a Lock: Creating Intuitive, Immersive Minigames- Kent Hudson
+  [https://www.cmpevents.com/sessions/GD/S6213i1.ppt PPT]
+ * I-fi: Immersive Fidelity in Game Design- Clint Hocking
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/21/3538292.html xemu]
+ * Innovative Touch Screen Controls ? SPIDER-MAN 3 DS Postmortem- Leo Zuniga, Muhammad Ahmed
+  [https://www.cmpevents.com/sessions/GD/S6479i1.ppt PPT]
+ * Playing to Lose: AI and "CIVILIZATION- Soren Johnson
+  [http://www.designer-notes.com/PlayingToLose.zip PPT] [http://www.designer-notes.com/ 강연자 블로그], [http://aigamedev.com/discussion/good-vs-fun aigamedev]
+  [http://www.intrinsicalgorithm.com/IAonAI/2008/02/gdc-2008-soren-johnsons-lecture-on-civ.html intrinsicalgorithm], [http://www.next-gen.biz/index.php?option=com_content&task=view&id=9256&Itemid=2 next-gen.biz], [http://pc.gamespy.com/pc/civilization-iv/854509p1.html gamespy], [http://insider.ign.com/teasers/854/854040.html insider], [http://xemu.blogharbor.com/blog/_archives/2008/2/21/3538285.html xemu]
+ * Rules of Engagement: Blizzard's Approach to Multiplayer Game Design(교전 수칙: 멀티플레이어 게임 기획에 대한 블리자드의 접근법)- Rob Pardo
+  [http://blogs.msdn.com/danielfe/archive/2008/02/20/session-rules-of-engagement-blizzard-s-approach-to-multiplayer-game-design.aspx 대략적인 강연 노트]
+  [http://www.wowinsider.com/2008/02/20/gdc08-live-from-rob-pardo-talks-about-blizzards-approach-to-mm/ GDC08: Live from Rob Pardo talks about Blizzard's approach to MMOs by WoW Insider]
+  [http://www1.thisisgame.com/board/view.php?id=155835&category=8021&subcategory= 블리자드의 멀티플레이 개발전략 (상) @ TIG]
+  [http://pc.ign.com/articles/853/853812p2.html GDC 2008: Rob's Rules of Engagement @ IGN]
+  [http://www.gamespot.com/news/6186416.html?print=1 GDC '08: Pardo navigates WOW Blizzard @ Gamespot]
+  [http://icdia.egloos.com/1773530 랍 팔도가 전하는 블리자드의 7가지 성공키워드], [http://tara.teich.net/archives/gdc-rules-of-engagement-part-2/ tara Blog]
+ * Standing the Test of Time: A Q&A with Sid Meier- Sid Meier, Noah Falstein
+  [http://tara.teich.net/archives/gdc-a-qa-with-sid-meier/ tara]
+ * Storytelling in BIOSHOCK: Empowering Players to Care about Your Stupid Story- Kenneth Levine
+  [https://defrag.depaul.edu/gdc/?p=44 defrag]
+ * Successful Instrumentation: Tracking Attitudes and Behaviors to Improve Games- Ramon Romero
+  [http://download.microsoft.com/download/7/6/a/76ad49f8-cf47-47d3-8894-df30c67e5c1f/GDC_2008_RamonRomero_SuccessfulInstrumentation.pps ppt]
+ * The Next 20 Years of Gaming- Ray Kurzweil
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/21/3538288.html GDC 08: xemu]
+ * Writing Great Design Documents(끝내주는 기획 문서 작성하기)- Damion Schubert
+  [http://www.zenofdesign.com/Writing_Design_Docs_2008.ppt PPT]
+ * UNREAL TOURNAMENT 3 Postmortem
+  [http://forum.ps3korea.com/t21484/ forum.ps3korea]
+ * [http://t-machine.org/index.php/2008/02/24/gdc08-virtual-greenspans-running-an-mmog-economy/ Virtual Greenspans: Running an MMOG Economy]
+ * An Agile Retrospective- Clinton Keith
+  [http://www.agilegamedevelopment.com/ 강연 슬라이드], [http://www.agilegamedevelopment.com/Articles/GDC2008/An%20Agile%20Retrospective%20Clinton%20Keith%20GDC%202008%20AGD.pdf PDF], [http://www.agilegamedevelopment.com/Articles/GDC2008/An%20Agile%20Retrospective%20Clinton%20Keith%20GDC%202008%20AGD.ppt PPT], [http://groups.google.com/group/Agile-Game-Development Agile Game Development Google Groups]
+ * How to Break All Rules and yet Make a 90+ Game- Petter Sydow
+  [https://www.cmpevents.com/sessions/GD/S6211i1.ppt PPT]
+ * Outsourcing: Best Practices at Pandemic Studios- Carey Chico
+  [https://www.cmpevents.com/sessions/GD/S6525i1.pdf PDF]
+ * Pollinating the Universe: User-generated Content in SPORE- Caryl Shaw
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/20/3536349.html GDC 08: Spore / Content Pollenation]
+ * Self-Censoring Potential Content Risks for Global Audiences: WhyHow and When- Tom Edwards
+  [https://www.cmpevents.com/sessions/GD/S6247i1.ppt PPT]
+ * Small Team, Big Dreams: How to Make an MMORPG without a Massive Team or Budget- Hermann PeterscheckScott Brown
+  [https://www.cmpevents.com/sessions/GD/S6884i1.ppt PPT], [http://www.jossh.com/join_today/index.html JumpGate - 발표자 회사가 만든 게임], [http://clubpenguin.com/ clubpenguin.com Small Team 으로도 잘 만들 수 있는 게임의 예]
+ * The Benefits and Challenges Associated with a Centralized Model of Art Asset Creation for Video Games- Dan Forden
+  [https://www.cmpevents.com/sessions/GD/S6508i1.ppt PPT]
+ * Transition to Scrum Midway through a AAA Development Cycle: Lessons Learned- Asbjoern Soendergaard
+  [http://www.crytek.com/fileadmin/user_upload/inside/presentations/gdc2008/ASoendergaardGDC08.ppt ppt]
+ * UNCHARTED: DRAKES FORTUNE Post-Mortem: Amazing Feats of Daring- Richard Lemarchand
+  [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-Amazing-Feats-of-Daring-Uncharted-Postmortem.pdf PDF]
+ * When the Honeymoon Ends: 12 Ways to Keep Your Publisher in Love with You- Michael Fitch
+  [https://www.cmpevents.com/sessions/GD/S6279i1.ppt PPT]
+ * Advanced Visual Effects with Direct3D- Cem Cebenoyan, Richard Huddy, Natalya Tatarchuk 외
+  [https://www.cmpevents.com/sessions/GD/S6152i1.pdf PDF]
+ * Core Techniques and Algorithms in Shader Programming- Wolfgang Engel, Vlad Stamate, Maxime Beaudoin 외
+  [http://www.coretechniques.info/ 강연 슬라이드]
+ * Studies of Threading Successes in Popular PC Games and Engines- Paul Lindberg, Brad Werth
+  [https://www.cmpevents.com/sessions/GD/S6589i1.ppt Intro], 
+  [https://www.cmpevents.com/sessions/GD/S6589i2.ppt PPT], 
+  [https://www.cmpevents.com/sessions/GD/S6589i3.ppt Gamebryo] , [https://www.cmpevents.com/sessions/GD/S6589i4.ppt Hellgate]
+  [https://www.cmpevents.com/sessions/GD/S6589i5.ppt Smoke], [https://www.cmpevents.com/sessions/GD/S6589i6.ppt Allegorithmic]
+  [https://www.cmpevents.com/sessions/GD/S6589i7.ppt Outro]
+ * A Survey of Font Rendering Techniques- Cameron Egbert
+  [https://www.cmpevents.com/sessions/GD/S6150i1.ppt PPT], [http://dev3d.tistory.com/attachment/ek150000000001.pdf 김성익 - A Survey of Font Rendering Techniques]
+ * Adventures in Data Compilation and Scripting for UNCHARTED: DRAKE'S FORTUNE- Dan Liebgold
+  [https://www.cmpevents.com/sessions/GD/S6636i1.pdf PDF], [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-Adventures-In-Data-Compilation.pdf PDF]
+ * Beyond Printf: Debugging Graphics Through Tools- Dave Aronson, Karen Stevens
+  [https://www.cmpevents.com/sessions/GD/S6454i1.ppt PPT]
+ * Building a Better Battle: HALO 3 AI Objectives- Damian Isla
+  [http://www.bungie.net/images/Inside/publications/presentations/gdc08_damian.pptx 강연 슬라이드], [http://www.ai-blog.net/archives/000142.html#more ai-blog.net 추가 설명], [http://www.aarmstrong.org/journal/2008/03/02/gdc08-notes-building-a-better-battle-halo-3-ai-objectives aarmstrong.org/journal], [http://www.bungie.net/Forums/posts.aspx?postID=18094031 bungie.net/Forums]
+ * Comparative Analysis of Game Parallelization Sponsored by Intel- Dmitry Eremin
+  [http://softwarecommunity.intel.com/isn/downloads/graphics/GDC/Comparative%20Analysis%20of%20Game%20Parallelization.ppt PPT]
+ * Creating a Character in DRAKE'S FORTUNE- Christian Gyrling
+  [https://www.cmpevents.com/sessions/GD/S6169i1.pdf PDF], [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-Creating-a-Character-in-Drakes-Fortune.pdf PDF], [http://tara.teich.net/archives/gdc-creating-a-character-in-uncharted/ Blog]
+ * CRYSIS Next-Gen Effects- Tiago Sousa
+  [https://www.cmpevents.com/sessions/GD/S6172i1.pdf PDF]
+ * Designing and Implementing a Dynamic Camera System- Phil Wilkins
+  [https://www.cmpevents.com/sessions/GD/S6174i1.pdf PDF], [http://blog.naver.com/aeris98/90028720274 소개]
+ * Dynamic Performance Profiling of C++ Code- Kim Steen Riber
+  [https://www.cmpevents.com/sessions/GD/S6468i1.jpg JPG]
+ * Fast Water Simulation for Games Using Height Fields- Matthias M?ller-Fischer
+  [http://www.matthiasmueller.info/ Speaker], [http://www.matthiasmueller.info/talks/GDC2008.pdf PDF]
+ * How to Go from PC to Console Development without Shooting Yourself in the Foot- Elan Ruskin
+  [http://www.valvesoftware.com/publications/2008/GDC2008_CrossPlatformDevelopment.pdf PDF], [http://assemblyrequired.wordpress.com/how-to-go-from-pc-to-crossplatform-development-qa/ QA], [http://assemblyrequired.wordpress.com/ Speaker]
+ * Implementing Ragdoll Physics on the Nintendo DS- Eric Brown
+  [https://www.cmpevents.com/sessions/GD/S6215i1.ppt PPT]
+ * Insomniac's SPU Programming Practices- Mike Acton
+  [https://www.cmpevents.com/sessions/GD/S6462i1.ppt PPT]
+ * Lighting and Material of HALO 3- Hao Chen  
+  [http://www.bungie.net/images/Inside/publications/presentations/lighting_material.zip 강연슬라이드]
+ * Lightmap Compression in HALO 3- Yaohua Hu
+  [http://www.bungie.net/images/Inside/publications/presentations/Lightmap_Compression_2008_02_22.pptx 강연슬라이드]
+ * Massive D: STRANGLEHOLD's Breakable Object System- Steven Ellmore
+  [https://www.cmpevents.com/sessions/GD/S6229i1.ppt PPT] <-- PPT 2007 로 봐야합니다.
+  [http://xbox360.gamespy.com/xbox-360/stranglehold/854458p1.html GameSpy], [http://play.tm/wire/click/1761713 관련 페이지], [http://www.bairdy.com/?p=23 bairdy]
+ * MERCENARIES 2: Networked Physics in a Large Streaming World- Glenn Fiedler
+  [http://xemu.blogharbor.com/blog/_archives/2008/2/20/3536354.html xemu Blog], [http://www.gaffer.org/downloads/NetworkedPhysics-GDC2008.pdf PDF], [http://www.gaffer.org/?s=GDC speaker]
+ * Post Processing in The Orange Box- Alex Vlachos
+  [http://www.valvesoftware.com/publications/2008/GDC2008_PostProcessingInTheOrangeBox.pdf PDF]
+ * Real-Time Depth-Buffer-Based Ambient Occlusion- Miguel Sainz
+  [https://www.cmpevents.com/sessions/GD/S6856i1.ppt PPT]
+ * Snakes on a Seamless Living World!: Stackless Python as a Scripting Language- David Hawes, Doug Wolff
+  [https://www.cmpevents.com/sessions/GD/S6464i1.ppt PPT]
+ * Sparse Virtual Texture Memory- Sean Barrett
+  [http://silverspaceship.com/src/svt/ 강연 슬라이드]
+ * SQL Considered Harmful: Databases for MMORPGs- Shannon Posniewski
+  [http://t-machine.org/index.php/2008/02/21/gdc08-sql-considered-harmful/ Blog], [http://www.crypticstudios.com/index.php?option=com_content&task=view&id=178&Itemid=31 강연 슬라이드] - [http://www.crypticstudios.com/files/SQLConsideredHarmful.ppt PPT], [http://doublebuffered.com/2008/02/26/gdc-08-sql-considered-harmful/ doublebuffered]
+ * Streaming Open World Pathfinding- Quinn Dunki
+  mailto:qd@quinndunki.com, [http://quinndunki.com/xfer 강연 슬라이드], [http://quinndunki.com/xfer/GDC08_Presentation.pdf PDF], [http://www.aarmstrong.org/journal/2008/02/28/gdc08-notes-streaming-open-world-pathfinding Blog]
+ * Structure VS. Style- Chris Hecker
+  [https://defrag.depaul.edu/gdc/?p=49 Web]
+ * Stupid Spherical Harmonics (SH) Tricks- Peter-Pike Sloan
+  [https://www.cmpevents.com/sessions/GD/S6469i1.pdf PDF], [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-Practical-Spherical-Harmonics-Based-PRT-Methods.pdf PDF]
+ * Practical Spherical Harmonics Based PRT Methods  - Manny Ko (Naughty Dog) and Jerome Ko (UCSD/Bunkspeed) 
+  [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-Practical-Spherical-Harmonics-Based-PRT-Methods.pdf PDF]
+ * Stylization with a Purpose: The Illustrative World of TEAM FORTRESS 2- Jason Mitchell
+  [http://www.valvesoftware.com/publications/2008/GDC2008_StylizationWithAPurpose_TF2.pdf PDF], [http://www.primotechnology.com/2008/02/25/gdc-08-the-illustrative-world-of-team-fortress-2/ WebPage], [http://www.primotechnology.com/audio/gdc08/11_GDC08_0222_TF2StyleJasonMitchell.mp3 mp3]
+ * Taming the Mob: Creating believable crowds in ASSASSIN'S CREED- Sylvain Bernard, James Therien
+  [https://www.cmpevents.com/sessions/GD/S6996i1.ppt PPT], [http://xemu.blogharbor.com/blog/_archives/2008/2/22/3540263.html xemu], [http://tara.teich.net/archives/gdc-creating-believable-crowds-in-assassins-creed/ tara]
+ * The Art and Technology Behind Bioshock's Special Effects- Jesse Johnson, Stephen Alexander
+  [http://www.2kboston.com/powerpoint/The-Art-and-Technology-Behind-Bioshocks-Special-Effects.zip PPT]
+ * The Technology of UNCHARTED: DRAKE'S FORTUNE- Christophe Balestra, P?l-Kristian Engstad
+  [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-UNCHARTED-Tech.pdf PDF], [http://xemu.blogharbor.com/blog/_archives/2008/2/20/3536343.html GDC 08: Tech of Uncharted]
+ * Using Wavelets on the Xbox360 for Current and Future Games- Michael Boulton
+  [https://www.cmpevents.com/sessions/GD/S6467i1.ppt PPT]
+ * [http://www.intrinsicalgorithm.com/IAonAI/2008/02/john-abercrombie-2k-boston-on-ai-in.html John Abercrombie (2K Boston) on the AI in Bioshock]
+ * [http://www.intrinsicalgorithm.com/GDC/ AI Roundtable Notes]
+  [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay1.doc Day1 - Note] / [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay1.mp3 Day1 - MP3]
+  [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay2.doc Day2 - Note] / [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay2.mp3 Day2 - MP3]
+  [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay3.doc Day3 - Note] / [http://www.intrinsicalgorithm.com/GDC/GDC_AI_RoundtableDay3.mp3 Day3 - MP3]
+ * [http://aigamedev.com/discussion/designers-testers-friend-foe Designers and Testers: Friend, Foe, or Just Frustrating for Programmers?]
+ * Normal Mapping Industry Survey- Gio Nakpil, Scott Spencer, Rich Diamant 외
+  [https://www.cmpevents.com/sessions/GD/S6526i1.pdf Normal Maps Tutorial pdf Part 1], [https://www.cmpevents.com/sessions/GD/S6526i2.pdf Normal Maps Tutorial pdf Part 2]
+  [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-Creating-a-Character-in-Drakes-Fortune.pdf PDF]
+ * Autodesk Mudbox: Integration and Use with Autodesk 3ds Max and Autodesk Maya- Rich Diamant, Louis Marcoux
+  [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-Mudbox.pdf PDF]
+ * Internal & Outsourcer Management Of Tools & Pipelines- Adam Pletcher, Brendan Holloway
+  [https://www.cmpevents.com/sessions/GD/S6460i1.ppt PPT]
+ * Python for Technical Artists- Adam Pletcher
+  [https://www.cmpevents.com/sessions/GD/S6459i1.ppt PPT]
+ * Uncharted Animation: An In-depth Look at the Character Animation Workflow and Pipeline- Judd Simantov, Jeremy Lai-Yates
+  [http://www.naughtydog.com/docs/Naughty-Dog-GDC08-UNCHARTED-Animation-Workflow.pdf PDF], [https://defrag.depaul.edu/gdc/?p=48 Web]
+ [http://t-machine.org/index.php/2008/02/24/gdc08-the-bioware-live-team-building-community-through-technology/ The BioWare Live Team: Building Community through Technology]
+ [http://t-machine.org/index.php/2008/02/23/gdc08-raising-venture-financing-for-your-startup/ Raising Venture Financing for your Startup]
+ [http://t-machine.org/index.php/2008/02/23/gdc08-building-a-successful-production-process/ Building a successful production process]
+ [http://t-machine.org/index.php/2008/02/20/gdc08-thinking-outside-the-virtual-world/ Thinking Outside the Virtual World]
+ [http://puzzlelab.net/tt/index.php?pl=157 퍼즐 퀘스트 개발 후기 (Puzzle Quest Postmortem)]
+ [http://www.intrinsicalgorithm.com/IAonAI/2008/02/gdc-2008-ray-kurzweils-vision-of-future.html Ray Kurzweil's vision of the future] 
+ [http://icdia.egloos.com/1793649 오카모토의 프로듀서론 ”개조와 창조"]
+ [http://blog.hirihiri.com/entry/PhyreEngine-XNA%EC%97%90-%EB%8C%80%ED%95%AD%ED%95%98%EB%8A%94-%EC%86%8C%EB%8B%88%EC%9D%98-%EB%AC%B4%EB%A3%8C-%ED%81%AC%EB%A1%9C%EC%8A%A4%ED%94%8C%EB%A0%9B%ED%8F%BC-3D-%EC%97%94%EC%A7%84 PhyreEngine :: XNA에 대항하는 소니의 무료 크로스플렛폼 3D 엔진]
+ [http://blog.hirihiri.com/entry/%ED%97%A4%EC%9D%BC%EB%A1%9CHalo-3-%EB%B9%84%ED%95%98%EC%9D%B8%ED%8A%B8-%EC%8A%A4%ED%86%A0%EB%A6%AC-How-Microsoft-Labs-Invented-a-New-Science-of-Play 헤일로(Halo) 3 비하인트 스토리 : How Microsoft Labs Invented a New Science of Play]
+ * [http://dnp.perplexing.kr/84 우린 뭐든 할 수 있어요. (2008년 GDC) - Clint Hocking]
+
+== 강연 후기 ==
+ all2one: [http://all2one.springnote.com/pages/841606 셋째날], [http://all2one.springnote.com/pages/846166 넷째 날], [http://all2one.springnote.com/pages/849612 마지막 날]
+
+== 관련 페이지 ==
+ [http://feeds.feedburner.com/~r/GameDevelopersConference/~3/217953887/top_gdc_tutorial_picks.html Top GDC Tutorial Picks]
+ [http://j2k.naver.com/j2k_frame.php/korean/www.4gamer.net/words/002/W00296/ 4Gamers.net의 GDC관련 리뷰입니다.]
+ [http://www.videogaming247.com/2008/02/25/that-was-the-news-%e2%80%93-week-8-2008-unconvincing-gdc-governed-by-two-main-themes-flux-and-fear/ That was the news – Week 8, 2008: Unconvincing GDC governed by two main themes: flux and fear]
+
+== 강연 자료들이 올라올 만한 곳들 ==
+ [https://www.cmpevents.com/GD08/a.asp?option=C&V=1&SB=4&Pv=2 GDC 2008 Proceedings]
+  -. 하단의 'Only where Session includes download notes'를 Check하고 'Session Search'를 누를 것.
+  -. 보통 GDC 종료 후, 3~4개월까지 계속 추가됨.
+  -. 강연자의 Blog나 Homepage에 먼저 게재되는 경우가 많음.
+ [http://store.cmpgame.com/category.php?cat=72&skin=gdcradio GDC Radio]
+ [http://blogs.msdn.com/danielfe/default.aspx 어느 MS 개발자의 GDC 강연 노트]
+ [http://www.bungie.net/Inside/publications.aspx Bungie의 발표 자료(주로 HALO 3)]
+ [http://mgsuserresearch.com/publications/ Microsoft Game Studio User Research]
+ [http://www.intel.com/software/graphics Intel Graphics]
+ [http://www.thisisgame.com/gdc08/ This Is Game]
+ [http://gdc.gamespot.com/?tag=event_nav%3bheader GameSpot]
+ [http://j2k.naver.com/j2k_frame.php/korean/www.watch.impress.co.jp/game/docs/20080221/gdclink.htm Game Watch]
+ [http://j2k.naver.com/j2k.php/korean/www.4gamer.net/words/002/W00296/ 4gamer.net]
+ [http://video.google.com/videosearch?q=GDC+2008&sitesearch= Google Video & Youtube]
+ [http://www.gametrailers.com/gdc2k8.php Gametrailers.com]
+ [http://www.gamevideos.com/video/channel/GDC%202008 Gamevideos.com]
+ [http://www.valvesoftware.com/publications.html Valve]
+
+== 자료 없는 것들 ==
+ * (More of) The Real Story on Characters and Emotion: Taking it 'to the Streets'- Corey Nolan
+ * 10 in 20: Ten Keys to Designing for IPs- Timothy Longo
+ * 10 Things Journalists Love AND Hate about Your Games- Stuart Dredge
+ * 10 Ways to Run a Porting Team like Genghis Khan- Tom Park
+ * 26 Slick Tricks for Game Dialog and Other Voiced Bits- DB Cooper, Patrick Fraley
+ * 8th Annual Game Developers Choice Awards and 10th Annual Independent Games Festival- Speaker TBA
+ * A Believable Character Postmortem: Motion Capture on the Virtual Set of BEOWULF- Parag Havaldar
+ * A Leap of Faith: When to Leave your Job and go Independent- Brandon Sheffield, Charles Nicholson, Andy Schatz 외
+ * A Look Ahead: The Future for Mobile Gaming in the US- James Song
+ * Academics/Students Group Gathering- Susan Gold
+ * Adding New Revenue Streams with Voice Chat Services for the MMOGs Sponsored by Vapps- Jerry Norton
+ * Advanced Dialogue Techniques for Games- David Freeman
+ * Advanced Skin Rendering in NVIDIA's Human Head Demo Sponsored by NVIDIA- Eugene d'Eon
+ * Advertising & Games ? Opportunities, Pitfalls, and Competition- David Edery
+ * Agents Group Gathering- Dan Rogers
+ * Agile Development ? Is it the Silver Bullet? The Goodthe Bad and the Ugly (Day 1, 2, 3)- Rich Vogel
+ * Agility and Mobility: Applying Agile Practices to Mobile Game Development- Peter Paul Gadi
+ * All About Art- Carey Chico
+ * Are Games Essentially Superficial? Exploring the Positive Impact Model of Design- Chris Taylor, Louis Castle, Peter Molyneux 외
+ * ARG Group Gathering- Adam Martin
+ * Art Directors/Lead Artists Roundtable (Day 1, 2, 3)- Seth Spaulding
+ * Art Outsourcing: Client Best Practices- Paul Steed, William Podurgiel, Sherry Floyd 외
+ * Art Outsourcing: Provider Best Practices- Paul Steed, Manvendra Shukul, Jason Manley 외
+ * Artificial Intelligence in Computer Games (Day 1, 2, 3)- Neil Kirby, Steve Rabin
+ * At the Cutting Edge ? Audio Production for HEAVENLY SWORD- Garry Taylor
+ * Audio Boot Camp - Dan Bardino, Scott Selfon, Charles Deenen 외
+ * Audio for MMO's- Russell Brower, Michael Henry, Geoff Scott 외
+ * Audio Post-Mortem: BioShock- Patrick Balthrop
+ * Audio Post-Mortem: HALO 3- C. Paul Johnson, Marty O'Donnell, Jay Weinland 외
+ * Autodesk 3ds Max and Autodesk Maya: Integrating High-Level Shading Effects Sponsored by Autodesk- Neil Hazzard, Bernard Kwok
+ * Autodesk 3ds Max Tips and Tricks Sponsored by Autodesk- Adrien Cho, Mike Trottier
+ * Autodesk HumanIK Middleware Introduction: Complementing Your FK Animation Sponsored by Autodesk- Eric Bibeau, Jason Walter
+ * Autodesk Maya Tips and Tricks Sponsored by Autodesk- Sam Sharit, Steven Roselle
+ * Autodesk MotionBuilder: Cross Product Integration - Autodesk 3ds Max and Autodesk Maya - of Animation Assets to Develop Workable Motion Libraries- Justin Muir
+ * Automatic Audio in Frostbite- David Mollerstedt, Stefan Strandberg
+ * Automating Regression Discovery: Finding the Wrenches in the GEARS OF WAR- Martin Sweitzer
+ * Bend Microsoft Project to Your Will - Again!- Mike McShaffry
+ * Best Practices For Billing and Fraud Management Sponsored by Vindicia- Brett Thomas, Greg Worch
+ * Best Practices for Online Game Delivery Sponsored by Akamai- Brian Harvey
+ * Better Tools for Sound Designers on PlayStation 3 Through Open-Architecture Designs- Michael Kelly
+ * Bloggers/Journos Group Gathering- David Thomas
+ * Brainstorming in Public: 52 Game Ideas in 52 Weeks- Patrick Curry
+ * Breaking in to Academia (Day 1, 2)- Ian Schreiber
+ * Bringing a Console Quality Games Experience to Mobile Phones- Martin Dunsby
+ * Bringing Mobile Gaming to the Global Masses: Case Study on EARTH DEFENSE FORCE- Atsushi Miyamoto, Toshio Takekawa
+ * Bringing the Brick Online: Inside LEGO Universe- Mark Hansen
+ * Building a Successful Production Process- Lesley Mathieson
+ * Building and Maintaining an Art Department- Steve Reid, Mike Haynes
+ * Career Pavilion Booth Crawl- Speaker TBA
+ * Casual Game Design: A Year in Review- Juan Gril, Nick Fortugno
+ * Casual Game Developers Group Gathering- Charles Merrin
+ * Casual Games Roundtable ? Business Models (Day 2)- Brian Robbins, Wade Tinney
+ * Casual Games Roundtable ? Community Issues (Day 3)- Brian Robbins, Wade Tinney
+ * Casual Games Roundtable ? Production & Design (Day 1)- Brian Robbins, Wade Tinney
+ * Censorship of Game Content - A Report from the Trenches- Lawrence Walters
+ * Challenges of Creating Linear Content in a Game Engine- Kim LibreriJerry OFlaherty
+ * Challenges of Mobile Medium & Approaches to Design for Constrained Platform- Dan Scott
+ * Chills and Thrills: Undefined Behavior in C++- Pete Isensee
+ * Client Focused Management- Dave Ranyard
+ * Client-Server Strategies for Mobile- Jeffrey Miller
+ * COLLADA in the Game Sponsored by Intel- Remi ArnaudPete FalcoDoug Binks 외
+ * Composer Challenge GDC 2008- Lennie Moore, Billy Martin, Adam Gubman 외
+ * Composer Tips and Tricks for Creating Interactive Music- Dan Bardino, Richard Jacques, Marty O'Donnell 외
+ * Concurrency, Distribution, and Server Scaling Sponsored by Sun Microsystems- Jim Waldo
+ * Connecting Mobile Games and MMOs- Dan Roy
+ * Conquering Bane's Citadel: The Collision of Casual and Hardcore Gaming in PUZZLE QUEST- Steve Fawkner
+ * Console Game Experience on Mobile Phones with Immersive Games and Innovative Gadgets- Michael Schade
+ * Creating Havok with Destruction Sponsored by Havok- Oliver Strunk
+ * Creating Scalable and Dynamic Graphics for WORLD IN CONFLICT- Rodrigo Cortes
+ * Creating Spielberg's BOOM BLOX- Louis Castle
+ * Creativity Boot Camp '08- Paul Schuytema
+ * Creativity in the Form of Improvement- Yoshiki Okamoto
+ * Creativity Techniques in Game Design- Annakaisa Kultima
+ * Cross Platform ‘Convergence’ Critical to Consumer Adoption of Mobile Content- Don Ryan
+ * D3D10: Getting From 0 to 60 Hz Sponsored by Microsoft- Kevin Gee
+ * DataPlay: Living Games- Justin Hall
+ * Defeating Designer's Block, Tools to Boost Creative Output ? Part 1: the Principles, Tools & Theory- Sam Coates
+ * Defeating Designer's Block, Tools to Boost Creative Output ? Part 2: Putting the ideas into Practice- Graeme Ankers
+ * Design Reboot- Jonathan Blow
+ * Designing a Casual Social Gaming Experience for Generation C- Kars Alfrink
+ * Designing Conflict Resolution without Combat (Day 1, 2, 3)- Gordon Walton
+ * Designs on Writing: Improving the Game Writing Process- Mac Walters, Steve Jaros, Tom Abernathy 외
+ * Developers in the Crosshairs: Mature Content, Censorship, and Design Choices (Day 1, 2)- Daniel Greenberg
+ * Development - SUPER SMASH BROS. BRAWL- Masahiro Sakurai
+ * Development of the Peripheral: From Inception to Release- Mike Haigh
+ * Dialog Production for BioWare's Mass Effect: Lessons Learned and Future Plans- Simon Pressey, Mac Walters
+ * Digital Delivery: How to Improve the Game Acquisition Experience to Achieve Higher Conversion Rates and Lower Distribution Costs Sponsored by Solid State Networks- Tom Ketola, Rick Buonincontri
+ * Digital Distribution ? From the Basement to the Boardroom Sponsored by Macrovision- Cal Morrell
+ * Disruptive Forces in Gaming Sponsored by Zeemote- Beth Marcus
+ * Don't Mess with Great Gameplay! How WIPEOUT Innovated on PSP- Clark Davies
+ * Dr. Strangeflow or: How I Learned to Stop Worrying and Love the Pipeline- Lane Daughtry
+ * Drawing the Line in the Sand - Which Contract Issues to Fight For?- Jim Charne, Alex Chapman
+ * Dynamic Cinematic Gameplay: Creating STRANGLEHOLD's- Neill Glancy
+ * Dynamic Closed Captioning for Your Game- Michelle Hinn, Reid Kimball
+ * Dynamic Zone Emitters: Improved Spatialization of Large Regions- Bryan Pearson
+ * Early Stage Funding for Gaming Start Ups- Matthew Le Merle
+ * Embracing the Mobile Constraints or: How I Learned to Stop Worrying and Love the Phone- Jeferson Valadares
+ * Engaging the User- Ernesto Perez, Jeremy Rawls
+ * Entrepreneurship: From Zero to Pandemic- Josh Resnick
+ * Environment Design in HALO 3- Mike Zak
+ * Experimental Gameplay Sessions- Jonathan Blow
+ * FABLE 2 ?The Big Three Features Revealed- Peter Molyneux
+ * Famous Last Words Live - An Open Mic to Discuss Game Dev Contracts (Day 1, 2 3)- Jim Charne
+ * Fast Life, Fast Media- Michel Guillemot
+ * FIFA08 BE A PRO: Innovating in a Established Genre- Sebastian Enrique
+ * Free to Play! Pay for Item: The Virtual Goods Debate (Day 1, 2, 3)- Daniel James, Matt Mihaly
+ * From DOOM to RAGE: Pushing Boundaries- Matt Hooper
+ * From Grunt to God to Startup: Career Lessons From the Edge of Game Development by David Jaffe- David Jaffe
+ * From Mundane to Epic: The Making of the STARCRAFT II Cinematic Teaser- Nick Carpenter
+ * Future of MMOs- Mark Jacobs, Rob Pardo, Jack Emmert 외
+ * G.A.N.G. Demo Derby - Music- Paul Lipson, Chuck Doud, Bob Rice 외
+ * G.A.N.G. Demo Derby - SOUND DESIGN- Paul Lipson, Tim Larkin, Gene Semel 외
+ * Game Accessibility & Developers with Disabilities Group Gathering- Michelle Hinn, Mark Barlet
+ * Game Accessibility Arcade: Or How to Do the Jedi Mind Trick (Day 1)- Michelle Hinn, Stephanie Walker, Mark Barlet 외
+ * Game Accessibility Arcade: Or How to Do the Jedi Mind Trick (Day 2)- Michelle Hinn, Stephanie Walker, Reid Kimball 외
+ * Game Development Deals 2008 - Critical and Emerging Issues in Every Negotiation- Mike Arkin, Jim Charne, Joshua Meyer 외
+ * Game Industry Advance: An IGDA Open House (Day 1, 2)- Mitzi McGilvray, Jason Della Rocca
+ * Game Music and the AFM- Janet Ketchum, Tom Lee, Paul Lipson 외
+ * Game Outsourcing Summit- Xin Chung, Steve Gray, Alistair Hirst 외
+ * Game Writers' Round Table: Tricks, Techniques and Concerns (Day 1, 2, 3)- Richard Dansky
+ * Gaming on the Go: Mobility Considerations for Gaming Sponsored by Intel- Satheesh G. Subramanian
+ * GDC Mobile- Robert Tercek
+ * Getting it into the Game (Day 1, 2, 3)- Adam Pino
+ * Getting the Most Out of Intel Graphics Sponsored by Intel- Raymond Paik, Katen Shah
+ * GOD OF WAR: Deconstructing an Epic- Nathan Phail-Liff
+ * GPU Optimization with the Latest NVIDIA Performance Tools Sponsored by NVIDIA- Jeffrey Kiel
+ * HALO vs. Facebook: The Emotions that Drive Play- Nicole Lazzaro
+ * Hardware Accelerated 3D Game on the N-Gage Platform Sponsored by Nokia- Peter Lykke Nielsen
+ * Harnessing the Power of Multiple GPUs Sponsored by AMD- Jon Story, Holger Gruen
+ * Hentai, Hardcore and Hotties: Sex in Games (Day 1, 2)- Brenda Brathwaite
+ * Hitting the Jackpot in the MMO Game Space- Allen Partridge
+ * Home Tools and Support: Creating Content for PlayStation Home Sponsored by Sony- James CoxWarren Keyes
+ * Hottest Jobs at the Hottest Companies- Jill Duffy, Jason Pankow, Matthew Jeffrey 외
+ * How Gamers Really Play and What That Means for Developers and Publishers Sponsored by Wild Tangent- Alex St. John
+ * How Heroes are Made: A Collaborative Approach to Serialized Content in a Transmedia World- Jesse Alexander
+ * How to Create an Industry: The Making of the Brown Box and PONG- Allan Alcorn, Ralph H. Baer
+ * How to Create the Greatest Boss Battle (and Why Not to Do It!)- Scott Rogers
+ * How to Prepare Your Game for Certification Sponsored by VMC Game Labs- Linda LemieuxH. Percival NghiemSamer Raad 외
+ * How to Score Your Video Game with an Orchestra- Tommy Tallarico, Jack Wall, Ross deRoche 외
+ * How We Hear and Why it Matters: A Game Developer's Look at the Perception of Sound- Tom Hays
+ * How Wikipedia is Like a Multiplayer Game- Elonka Dunin
+ * IGDA Education Summit- Susan Gold, Ernest Adams, Brenda Brathwaite 외
+ * IGDA Government and Associations Summit- Toby Barnes, Jason Della Rocca, Per Stromback 외
+ * IGF Mobile Awards Ceremony- Robert Tercek, Mathew Kumar
+ * Improve Your Game Lighting Using Illuminate Labs' Beast Sponsored by Illuminate Labs- Rasmus Bonnedal, David Larsson
+ * Improving QA (Day 1, 2, 3)- Chuck McFadden
+ * Improving the End User Experience: Advances in Playtesting for Mobile Games- Elina Ollila
+ * In Search of...The Quest for Games in the Mobile Universe- John Puterbaugh
+ * Independent Games Summit- Steve Swink, Matthew Wegner, Kyle Gray 외
+ * Indy Games Distribution that Works-What Mobile Can Learn from Casual Web Portals- Matthew Bellows
+ * Interactive Actors That Express Emotion- Ken Perlin
+ * Interactive Music Systems: Planning, Producing and Executing an Adaptive Score- Jonathan Mayer, Keith Leary
+ * Interactive Ray Tracing in Games Sponsored by Intel- Daniel Pohl
+ * Introduction to the Emotiv Software Development Kit Sponsored by Emotiv- Julian Wixson
+ * Invasion of the Prefabricated Communities!- Joel Gonzales
+ * iPhone and Beyond: A New Hope for Mobile Gaming- Tom Hubina
+ * Is Now a Crazy Time to Start a New Mobile Studio?- John Chasey, Fergus McNeill
+ * Jazzing Up Agile Software Development Sponsored by IBM- Scott Ambler
+ * Lawyers Group Gathering- Jim Charne
+ * Learn Better Game Writing in a Day- Evan Skolnick
+ * Legal Nuts & Bolts for Mobile Game Developers- Daniel Offner
+ * Lessons from the Front Lines: Startup CEOs share their insider stories - Startup Launchpad Presented by GDC and CRV- Susan Wu, Erik Bethke, Craig Sherman 외
+ * Lessons Learned in Location-based Gaming- Jeremy Irish
+ * Let Me Win! Best Practices for Approachable Game Design Sponsored by Microsoft- Katie Stone-Perez
+ * LGBT Group Gathering- Jeb Havens
+ * Life on the Bungie Farm: Fun Things to Do with 180 Servers and 350 Processors- Luis Villegas, Sean Shypula
+ * Little Hands, Foul Moods, and Runny Noses: Researching Games with Kids- Carla Engelbrecht
+ * Living with Madden: The Drive for Consistent Excellence- Phillip Holt
+ * Localization Group Gathering- Tom Edwards
+ * Looking Back at LOST ODYSSEY - The Challenge of Cross Cultural Development- Ray Nakazato
+ * Making in-Game Commerce Work for You: SINGSTARa Case Study- Richard Bates
+ * Mashups, Mods & Machinima: Who Owns the Rights to Your Blood, Sweat & Tears- Sean Kane
+ * Master Metrics: The Science behind the Art of Game Design- Chris Swain, E. Daniel Arey
+ * Metaplace Postmortem: Reinventing MMOs- Raph Koster, Sean Riley
+ * Micro-billing Business Model in Mobile Gaming- Don Lim
+ * Microsoft Game Developer Day- Ray Thompson, Ian Lewis, Cameron Egbert 외
+ * Middleware Promises: Warranties That Don't and Indemnities That Won't- Stephen Rubin
+ * Migrating from OpenGL ES 1.x to OpenGL ES 2.0- Dave Astle, Jonathan Feldstein
+ * Minorities Group Gathering- Joseph Saulter
+ * Mobile Game 2.0: The Rise of the Widget?- Paul Coulton, Will Bamford
+ * Mobile Games and Advertising: Kicking Tires on the?- Michael Chang, Matthew Bellows
+ * Mobile Social Entertainment: Next Big Thing from Japan- David Collier
+ * Mobile Social Gaming ? Breaking Down Barriers to Connectivity Sponsored by Exit Games- Christof Wegmann
+ * Momentum vs. Character Animation- David Wu
+ * More Tales of Audio from the Third Dimension!- Scott Selfon
+ * Multiverse: Under the Hood Sponsored by Multiverse- Rafhael Cedeno, Corey Bridges
+ * Music in Video games: Surpassing the Scope of Film Scores?- John Debney
+ * My First MMO- Dave Jones
+ * NaturalMotion: Runtime Character Animation with Morpheme Sponsored by NaturalMotion- Simon Mack
+ * Networking 201: Navigating Corporate Culture- Darius Kazemi
+ * Never Say Die: Breathing life into Game Characters with Havok Behavior Sponsored by Havok- Jeff Yates
+ * New Dog, Old Tricks: Running Halo 3 Without a Hard Drive- Mat Noguchi
+ * Next Generation Game Publishing is Here, Are You? Sponsored by WildTangent- Alex St. John
+ * Next-Gen Lighting Using Illuminate Labs' Turtle Sponsored by Illuminate Labs- Niklas Harrysson, Jens Olsson
+ * Next-Gen Tile-Based GPUs- Maurice Ribble
+ * Nuances of Design- Jonathan Blow
+ * NVIDIA Developer TechTalk Sponsored by NVIDIA- Speaker TBA
+ * NVIDIA FX Composer 2: Shader Development Unleashed Sponsored by NVIDIA- Christopher Maughan, Aravind Kalaiah
+ * Opportunity for Independent Developers: A Simple, Yet Brash Idea Sponsored by Brash Entertainment- Mitch Davis
+ * Optimization Techniques for Attacking CPU Data Bottlenecks in PC Games Sponsored by AMD- Mike Wall
+ * Optimizing DirectX Rendering on Multi-Core Hardware Sponsored by Intel- Leigh Davies
+ * Outside the Box- David Fox
+ * Outsourcing Group Gathering- Munir Haddad
+ * Perspectives for Better Game Sound- Torrie Dorrell, Tim Larkin, Blake Lewin 외
+ * Pervasive Multiuser Mobile Gaming: Reality Overlays for Virtual Worlds to Create an Addictive, Collaborative Experience Sponsored by Nokia- Mark Ollila, Peter Molettiere
+ * PhyreEngine - The New Hotness Sponsored by Sony- Richard Forster
+ * Physics for Game Programmers- Jim Van Verth, Erin Catto, Squirrel Eiserloh 외
+ * Pioneering in Episodic Games and Digital Distribution- Kevin Bruner
+ * Planning the Wii Menu: From Pre-Launch to WiiWare- Takashi Aoyama
+ * Play with Anybody Everywhere: Context, the New Paradigm for Game Play- Anssi Vanjoki
+ * Player-Generated Content in Casual Games- Wade Tinney, Daniel James, Kris Soumas 외
+ * Pouring Gas on the Flames: Game Designers Rant- Eric Zimmerman, Clint Hocking, Daniel James 외
+ * Practical Light and Color- Jeremy Vickery
+ * Predictability in Games: How to Avoid Pre-Conceived Experiences in Design?- Jonathan Morin
+ * Preserving Games: Saving the Past and Present Now (Day 1, 2)- Henry Lowood
+ * Procedural Data Generation in FAR CRY 2- Dominic Guay
+ * Procedural Music in SPORE- Kent Jolly, Aaron McLeran
+ * Producers Group Gathering- Heather Chandler
+ * Producing Award Winning Audio for Games: A Producers Guide to Sounding Great- Jonathan Mayer, Greg deBeer, Phil Kovats 외
+ * Production: Basics and Beyond- Laura Fryer
+ * Proper Use of Episodic Content in a MMO- Jack Emmert
+ * PROTOTYPE: Open World, Open Mind, Next Generation Thinking- Eric Holmes, Tim Bennison
+ * PROTOTYPE: The Artistic Vision Uncensored- Maurice Kimball
+ * Publisher Under the Microscope- Eric Goldberg, Michael Breslin, Mark Ollila 외
+ * Pushing the Mobile Gaming State of the art with Nokia 1st Party Games Sponsored by Nokia- Dan Scott
+ * Put the Fun in Funding: Mobile Games Investments of Yesterday, Today & Tomorrow- John Szeder, Mitch Lasky, Richard Moran 외
+ * QOL Today: 3 Years after EA_Spouse (Day 1, 2)- Evan Robinson
+ * Quick Tips for Tighter ARM Assembly Code- Ed Plowman
+ * Raising Venture Financing for your Startup: Tips, Tricks, and Hacks - Startup Launchpad Presented by GDC and CRV- Nabeel Hyatt, Jason Hable, Susan Wu 외
+ * Real World Texture Painting Tips for Game Developers Sponsored by Maxon- Ben Mathis
+ * Realize Your Vision: Essential Music Production Techniques- Rod Abernethy, Clark Crawford, Jason Graves 외
+ * Rethinking Game Localization as Global Game Development Sponsored by Localization World- Miguel BernalHeather ChandlerTom Edwards 외
+ * SAM AND MAX - Episodic Content Creation- Julian KwasneskiJared Emerson-Johnson
+ * Security and Privacy in Games (Day 1, 2, 3)- Elonka Dunin
+ * Self-Publishing for Independent Developers on the PlayStation Network Sponsored by Sony- Chris Eden
+ * Semantic Environment Sensor System: Data-driven Interactions of Characters with the World- Julien Hamaide
+ * Semantic Interactivity ? Virtual Coherence Using Next Generation Human Computer Interface- Allan Snyder, Randy Breen
+ * Serious Games Summit- Ben Sawyer, Ian Bogost, Katie Salen 외
+ * Sharing Code (Day 1, Day 2, Day 3)- Brian Sharp
+ * Small Studio Survival Stories (Day 1, 2, 3)- Jesse Schell
+ * Social Media, Virtual Worlds, Mobile, and Other Platforms- Peter Marx
+ * Speaking out: Expanding the LGBT Development Community (Day 1, 2)- Jeb Havens
+ * Speed Up Synchronization Locks: A Scaleform Case Study Sponsored by Intel- Abhishek Agrawal
+ * Splash Damage: From Amateur to Triple-A in Five Years- Paul Wedgwood
+ * Staging Workshop: Visual storytelling Masterclass- Mark Travis, Andrew Lindsay, Matt Ritchey 외
+ * STAR WARS: THE FORCE UNLEASHED: How LucasArts is Building a Gamea Development Team and a Technology Pipeline... At the Same Time- Haden BlackmanMatt OmernickCedric Collomb 외
+ * Starting with SPUs. Exploiting the Power of the Cell Sponsored by Sony- Dave Coombes
+ * Stories Best Played: Deconstructing the Best Interactive Storytelling- Richard Rouse III, Steve Meretzky, Marc Laidlaw 외
+ * Stories from the Road: How to Achieve Your Audio Goals and Avoid Nightmares- Caesar Filori
+ * Strategic Briefing: Khronos Mobile Graphics Ecosystem- Neil Trevett
+ * Substance: Redefining the Nature of Texturing Sponsored by Allegorithmic- Sebastien Deguy, Brennan Priest, Jay Koottarappallil 외
+ * Suite Night- Speaker TBA
+ * Supercharge the Production Pipeline Sponsored by IBM- George DolbierJames McConnell
+ * Surprises from the HELLGATE LONDON launch Sponsored by IBM- Dave Laux
+ * Taking Xbox LIVE Arcade Games to the Next Level Sponsored by Microsoft- Scott Austin
+ * Tamarin: A Free, Fast, Open Scripting Runtime- Ben Garney
+ * Teaching Players: Tutorial and Opening Mission Design for COMPANY OF HEROES- Neil Jones-Rodway, Aldric Sun
+ * Technical Art Techniques: State of the Industry- Christopher Evans, Jason Parks, Paul Thuriot 외
+ * Technical Artist Roundtable (Day 1, 2, 3)- Jeff Hanna
+ * Technical Consulting Engineer, Intel C++ Compilers Sponsored by Intel- Ganesh Rao
+ * Technical Issues in Tools Development (Day 1, 2, 3)- John Walker
+ * Tesselation in a Low Poly World Sponsored by AMD- Bill Bilodeau, Peter Lohrmann
+ * TETRIS: Best/Worst Mobile Game Ever- Rick Marazzani
+ * The 1st Annual Startup Showcase - Startup Launchpad Presented by GDC and CRV- Susan Wu, Owen Mahoney, Jamil Moledina 외
+ * The Art and Science of Creating Your Own Instrument Samples- Troels Folmann
+ * The Art and Science of Lighting- Julian Davis
+ * The Art of FINAL FANTASY ?Interview with Isamu Kamikokuryo- Isamu Kamikokuryo, Steve Theodore
+ * The BioWare Live Team: Building Community through Technology- Derek French
+ * The Blur ? Creating in the Eye of the Storm- Flint Dille
+ * The Changing Landscape in Composer Game Music Underscore Deals- Jim Charne
+ * The Commercial Desktop Simulation and Training Revolution ? Lessons Learned from the Front Line Creating Game-Based Tool and Technology Sponsored by BreakAway- Doug Whatley
+ * The CRYSIS of Audio- Tomas Neumann, Inon Zur, Christian Schilling 외
+ * The Emergent Gamer- Rod Humble
+ * The Focused Portfolio Approach: Building a Design-Centric Game Development Studio- Jeff Pobst
+ * The Future of Animation is Games- Bill KroyerMark DeAngelis
+ * The Future of Programming for Multi-core with the Intel Compilers Sponsored by Intel- Ganesh Rao
+ * The Future of Story in Game Design- Matt Costello, Tim Willits, Denis Dyack 외
+ * The Game Design Challenge: The Inter-Species Game- Eric Zimmerman, Alexey Pajitnov, Brenda Brathwaite 외
+ * The Games Industry Giving Back- Martin de Ronde, Ben Sawyer, Robert Khoo 외
+ * The HALO 3 Cinematic Process- CJ Cowan
+ * The IGDA Credits Movement: The Revolution is Already Here (Day 1, 2)- John Feil
+ * The Music of KILLER7, GOD HAND, RESIDENT EVIL: THE UMBRELLA CHRONICLES, and NO MORE HEROES- Masafumi Takada
+ * The Profile of a Great Software Tester- Anibal Sousa
+ * The Real Story on Characters and Emotion: Taking it 'to the Streets'- Katherine Isbister
+ * The Revolution in TV Gaming Entertainment: Championship Gaming Series and the Development of Games for Global Sports Television Sponsored by Championship Gaming Series- Andy Reif, Mike Burks, Steven Roberts 외
+ * The Rise and Fall of the Operator Game Deck?- Kristian Segerstrale
+ * The Road Not Taken: Alternative Channels to Tier-1 Distribution- Dave Bell, Mitch Rotter, Thomas Richter 외
+ * The State of the Hotel - What Makes Teens Tick at HABBO- Sulka Haro
+ * The Technology of FINAL FANTASY- Taku Murata
+ * The Top 10 Reasons Why Publishing Even Good Mobiles Games isn’t Easy- Jill Braff
+ * The Ultimate Developers Toolkit Sponsored by AMD- Dan Ginsburg, Jonathan Zarge
+ * The Virtual Arts Studio: A Partnership for Development- James SutherlandPaul Steed
+ * The Watershed in 3D Mobile Gaming- David Ligon
+ * The World within - Building Social Environments in EVE Onlines Space Stations- Torfi Frans Olafsson
+ * Threading QUAKE 4 and QUAKE WARS Sponsored by Intel- Anu Kalra, JP van Waveren
+ * Top Ten vs. Long Tail- Dave Walls, John Welch, Dan Prigg 외
+ * Training as a Productivity Multiplier- John Nash
+ * Treat Me like a Lover- Margaret Robertson
+ * Truer Impostors- Eric Risser
+ * TV Play Along: Play a Mobile Game Synchronized to TV- Jeroen Elfferich
+ * Ultimate Graphics Performance for DirectX10 Hardware Sponsored by AMD- Nicolas Thibieroz
+ * UNREAL TOURNAMENT 3 Postmortem: ULTRA KILL!- Michael CappsJeff Morris
+ * Up Against the Wall: Game Makers Take On the Press- Brian Crecente, N'Gai Croal, Geoff Keighley 외
+ * Virtual Greenspans - Running an MMOG Economy- Eyjolfur Gudmundsson
+ * Voice of an Angel: Next-Gen Audio Processing and Effects for SINGSTAR on PS3- Dan Bardino
+ * What Can Original IPs Learn from Movie Games?- Don Daglow
+ * What Do You Need to Become a Great QA Team? (Day 1, 2, 3)- Dennis MooneyMichael SB Johnson
+ * What Would a Black, Latin, or Caribbean Game Really Look Like? (Day 1, 2)- Joseph Saulter
+ * What's Next for God Games?- Ernest Adams
+ * Why Use Location in a Mobile Game and How Best Should You Use It- John Carpenter
+ * WII FIT: Creating a Brand New Interface for the Home Console- Takao Sawano
+ * WiiWare Project Lifecycle: FINAL FANTASY CRYSTAL CHRONICLES, THE LITTLE KING- Fumiaki Shiraishi, Toshiro Tsuchida
+ * Womens Group Gathering- Barbara Lippe
+ * Writers Group Gathering- Wendy Despain
+ * XAudio2 ? Audio Building Blocks for the Future Sponsored by Microsoft- Brian Schmidt
+ * XNA Game Studio Developer Day- Shawn Hargreaves, Michael Klucher, Mitch Walker 외
+ * XNA Keynote Announcements Sponsored by Microsoft- Albert Ho, Dax Hawkins
+ * XNA Keynote Announcements Sponsored by Microsoft- Michael Klucher
+ * Your Music Is the Game: Designing PHASE, the Other Project at Harmonix- Chris Foster

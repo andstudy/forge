@@ -1,0 +1,74 @@
+{{{:
+The sum of the squares of the first ten natural numbers is,
+
+1^2^ + 2^2^ + ... + 10^2^ = 385
+The square of the sum of the first ten natural numbers is,
+
+(1 + 2 + ... + 10)^2^ = 55^2^ = 3025
+Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025  385 = 2640.
+
+Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+}}}
+
+= 김명관 =
+{{{#!gcode scheme
+(int (- (Math/pow (reduce + (range 1 101)) 2) (reduce + (for [n (range 1 101)] (Math/pow n 2)))))
+}}}
+
+= 최기원 =
+{{{#!gcode scheme
+; 1~100까지 더한 숫자의 제곱에서 1~100까지 각 숫자의 제곱을 더한 수를 뺀다.
+;
+; 제곱을 구한다.
+(defn squre [n]
+  (* n n))
+
+; 1~n까지 각 숫자의 제곱을 더한다.
+(defn sum-first-squre [n]
+  (reduce + (map squre (range 1 (inc n)))))
+
+; 1~n까지 숫자를 더한다.
+(defn sum-first-n [n]
+  (reduce + (range 1 (inc n))))
+
+; 1~n까지 더한 숫자의 제곱에서 1~n까지 각 숫자의 제곱을 더한 수를 뺀다.
+(defn projecteula6 [n]
+  (- (squre (sum-first-n n)) (sum-first-squre n)))
+}}}
+
+= 박상혁 =
+{{{#!gcode scheme
+; 손으로 2 * sigma(n * (sigma k [k= n+1 ~ 100])) [n = 1 ~ 99] 를 구했습니다.
+; 이 식을 간략화 하면 2 * sigma(n * (5050 - n*(n+1)/2)) [n = 1 ~ 99] 이고
+; 이를 클로저 한줄로 표현.
+(* 2 (reduce + (map #(* % (- 5050 (/ (* % (+ % 1)) 2))) (range 1 100))))
+; "Elapsed time: 0.866711 msecs"
+}}}
+
+= 현수명 =
+{{{#!gcode scheme
+(defn sumofsquare [n]
+  (reduce + (map #(expt % 2) n)))
+
+(defn squareofsum [n]
+  (expt (reduce + n) 2))
+
+(defn euler6 [n]
+  (- (squareofsum n) (sumofsquare n)))
+
+(deftest test_sumofsquare
+  (is (= 14 (sumofsquare (range 1 4))))
+  (is (= 385 (sumofsquare (range 1 11)))))
+
+(deftest test_squareofsum
+  (is (= 36 (squareofsum (range 1 4))))
+  (is (= 3025 (squareofsum (range 1 11)))))
+
+(deftest test_euler6
+  (is (= 2640 (euler6 (range 1 11))))
+  (is (= 0 (euler6 (range 1 101)))))
+
+(run-tests)
+
+(euler6 (range 1 101))
+}}}

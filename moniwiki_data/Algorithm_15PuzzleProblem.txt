@@ -1,0 +1,6 @@
+[http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110802&format=html 문제보기]
+[http://www.programming-challenges.com/pg.php?page=studenthome&threshold=0&perpage=7&pagenum=8&orderby=10 8장 Summit Pages]
+
+ * [Algorithm/15 Puzzle Problem/CynicJJ]
+ * [Algorithm/15 Puzzle Problem/ParkPD]
+ * [Algorithm/15 Puzzle Problem/Solution]

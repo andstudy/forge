@@ -1,0 +1,341 @@
+[ogmj]
+
+== 문제 2.53 ==
+{{{#!gcode scheme
+(list 'a 'b 'c)
+>> (a b c)
+(list (list 'george))
+>> ((george))
+(cdr '((x1 x2) (y1 y2)))
+>> ((y1 y2))
+(cadr '((x1 x2) (y1 y2)))
+>> (y1 y2)
+(pair? (car '(a short list)))
+>> #f
+(memq 'red '((red shoes) (blue shoes)))
+>> #f
+(memq 'red '((red shoes)))
+>> #f
+
+번외
+(memq 'red '(red shoes))
+>> (red shoes)
+(memq 'red '(red shoes blue socks))
+>> (red shoes blue socks)
+(memq 'red '(blue shoes blue socks))
+>> #f
+}}}
+
+== 문제 2.54 ==
+{{{#!gcode scheme
+문제 2.54 eq?를 사용한 되돌리기 프로시저로 equal?를 구현하라.
+(define (equal-n a b)
+  (cond ((null? a) false)
+        ((null? b) false)
+        (else (cond ((eq? (car b) (car a)) 
+                     (if (and (null? (cdr a)) (null? (cdr b)))
+                      true
+                      (equal-n (cdr a) (cdr b)))
+                     )
+               (else false))
+              )
+        )
+  )
+
+결과
+(equal-n '() '())
+>> #f
+(equal-n '(a) '())
+>> #f
+(equal-n '() '(a))
+>> #f
+(equal-n '(a c b) '(a b c))
+>> #f
+(equal-n '(this is a list) '(this (is a) list))
+>> #f
+(equal-n '(this is a list) '(this is a list))
+>> #t
+(equal-n (list 1 2 3 4) (list 1 2 3 4))  
+>> #t
+(equal-n (list 1 2 3 4) (list 1 2 3)) 
+>> #f
+}}}
+
+== 문제 2.55 ==
+{{{#!gcode scheme
+(car ''abracadabra)
+>> quote
+(car '(abracadabra))
+>> abracadabra
+(car '(a))
+>> a
+(car '(a b c))
+>> a
+(car (quote (a b c)))
+>> a
+;(car (quote a b c))
+>> bad syntax
+(car (quote (quote (abracadabra))))
+>> quote
+
+}}}
+
+
+== 문제 2.56 ==
+{{{#!gcode scheme
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+        ((variable? exp)
+         (if (same-variable? exp var) 
+             1 
+             0))
+        ((sum? exp)
+          (make-sum (deriv (addend exp) var)
+                    (deriv (augend exp) var)))
+        ((product? exp)
+         (make-sum 
+          (make-product (multiplier exp)
+                        (deriv (multiplicand exp) var))
+          (make-product (deriv (multiplier exp) var)
+                        (multiplicand exp))))
+        ((exponentiation? exp)
+         (make-product
+          (exponect exp)
+          (make-product
+           (make-exponentiation (base exp) 
+                               (exponect exp))
+           (deriv (base exp) var))))
+           
+         (else
+          (error "unknown expression type -- DERIV" exp))))
+
+;지수연산
+(define (exponentiation? x)
+  (and (pair? x) (eq? (car x) '**)))
+;밑수연산
+(define (base x)(cadr x))
+;(define (base x var)
+;  (if (eq? (cadr x) var)
+;      (cadr x) 
+;       0))
+
+;윗수연산
+(define (exponect x) (caddr x))
+
+(define (make-exponentiation b e)
+  (cond ((=number? b 0) 0)
+        ((=number? e 0) (list '1))
+        ((=number? e 1) (list b))
+        (else (list '** b (- e 1)))))
+  
+;1미분식의 변수는 글자로 나타낸다. 
+;어떤 값이 기호인지 아닌지 알아보는 기본 프로시저는 symbol?이다.
+(define (variable? x) (symbol? x))
+
+;2변수를 나타내는 두 기회가 eq?하다면, 두 변수는 같다.
+(define (same-variable? v1 v2) 
+  (and (variable? v1) (variable? v2) (eq? v1 v2)))
+
+;3덧셈 식과 곱셈 식은 리스트를 써서 짜맞춘다.
+(define (make-sum a1 a2) 
+  ;(list '+ a1 a2))
+  (cond ((=number? a1 0)
+         a2)
+        ((=number? a2 0)
+         a1)
+        ((and (number? a1 ) (number? a2))
+         (+ a1 a2))
+        (else (list '+ a1 a2))))
+;3-1
+(define (=number? exp num)
+  (and (number? exp) (= exp num)))
+
+(define (make-product m1 m2) 
+  ;(list '* m1 m2))
+  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
+        ((=number? m1 1) m2)
+        ((=number? m2 1) m1)
+        ((and (number? m1) (number? m2)) (* m1 m2))
+        (else (list '* m1 m2))))
+
+;4덧셈 식은 첫 번째 원소가 +기호로 시작되는 리스트이다.
+(define (sum? x)
+  (and (pair? x) (eq? (car x) '+)))
+
+;5더하임 수는 리스트의 2번째 원소이다.
+(define (augend s) (cadr s))
+
+;6덧수는 덧셈 리스트이 3번째 원소이다.
+(define (addend s) (caddr s))
+
+;7곱셈 식은 첫 번째 원소가 *기호로 시작되는 리스트이다.
+(define (product? x)
+  (and (pair? x) (eq? (car x) '*)))
+
+;8곱하임수는 곱셈 리스트의 2번째 원소이다.
+(define (multiplicand p) (cadr p))
+
+;9곱수는 곱셈 리스트의 3번째 원소이다.
+(define (multiplier p) (caddr p))
+
+;결과
+(deriv '(+ x 3) 'x)
+>> 1
+(deriv '(* x y) 'x)
+>> y
+(deriv '(* (* x y) (+ x 3)) 'x)
+>> (+ (* (+ x 3) y) (* x y))
+(deriv '(* x x) 'x)
+>> (+ x x)
+(deriv '(** x 3) 'x)
+>> (* 3 (** x 2))
+(deriv '(** x 2) 'x)
+>> (* 2 (** x 1))
+(deriv '(** x 1) 'x)
+>> (x)
+(deriv '(** x 0) 'x)
+>> 0
+(deriv '(+ (** x 4) (** x 3) (** x 2)) 'x)
+>> (+ (* 3 (** x 2)) (* 4 (** x 3))) ;2마디까지만 계산됨
+(deriv '(+ (** x 4) (** x 3)) 'x)
+>> (+ (* 3 (** x 2)) (* 4 (** x 3)))
+(deriv '(** z 4) 'x)
+>> 0
+
+}}}
+
+== 문제 2.57 ==
+{{{#!gcode scheme
+NoSyu님 답
+;5더하임 수
+(define (augend s) 
+ ; (cadr s))
+  (if (null? (cdddr s))
+      (caddr s)
+      (make-sum (caddr s) (cadddr s))))
+
+;8곱하임 수
+(define (multiplicand p) 
+ ; (cadr p))
+  (if (null? (cdddr p))
+      (caddr p)
+      (make-product (caddr p) (cadddr p))))
+
+(deriv '(+ (** x 4) (** x 3) (** x 2)) 'x)
+>> (+ (* 3 (** x 2)) (+ (* 2 (** x 1)) (* 2 (** x 1)))) ; 답이 이상함
+
+ogmj 검산
+;6덧수
+(define (addend s) 
+ ; (caddr s))
+  (if (null? (cdddr s))
+      (caddr s)
+      (make-sum (caddr s) (cadddr s))))
+
+;9곱수
+(define (multiplier p) 
+ ; (caddr p))
+  (if (null? (cdddr p))
+      (caddr p)
+      (make-product (caddr p) (cadddr p))))
+
+(deriv '(+ (* 3 (** x 3)) (* x 2)) 'x)
+>> (+ 2 (* (* 3 (** x 2)) 3)) ;9x^2 + 2
+(deriv '(+ (** x 4) (** x 3) (** x 2)) 'x)
+>> (+ (+ (* 2 (** x 1)) (* 3 (** x 2))) (* 4 (** x 3))) ;4x^3 + 3x^2 + 2x
+}}}
+
+
+== 문제 2.59 ==
+{{{#!gcode scheme
+;Language - Pretty Big
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+        ((equal? x (car set)) true)
+        (else (element-of-set? x (cdr set)))))
+
+(define (adjoin-set x set)
+  (if (element-of-set? x set)
+      set
+      (cons x set)))
+
+(define (intersection-set set1 set2)
+  (cond ((or (null? set1) (null? set2)) '()) 
+        ((element-of-set? (car set1) set2)
+         (cons (car set1)
+               (intersection-set (cdr set1) set2)))
+       (else (intersection-set (cdr set1) set2))))
+
+
+(define (unio-set set1 set2)
+  ;두 집합이 둘다 비었으면 공집합 표시
+  (cond ((null? set1) set2)
+        ((null? set2) set1)
+         ;set1의 1번 원소랑 set2의 원소들과 비교
+         ((element-of-set? (car set1) set2)
+          ;같은 원소가 있으면 set1의 다음원소를 검사
+          (unio-set (cdr set1) set2))
+         ;같은 원소가 없으면 set2에 추가
+        (else (cons (car set1)
+              (unio-set (cdr set1) set2)))))
+ ;       (else
+ ;        (unio-set (adjoin-set (car set2) set1) (cdr set2)))))
+              
+
+(define x1 (list 1 2 3 5))
+(define y1 (list 2 3 4))
+x1
+>> (1 2 3 5)
+y1
+>> (2 3 4)
+(element-of-set? 5 x1)
+>> #t
+(intersection-set x1 y1)
+>> (2 3)
+(unio-set x1 y1)
+>> (1 5 2 3 4)
+x1
+>> (1 2 3 5)
+y1
+>> (2 3 4)
+}}}
+
+== 문제 2.61 ==
+{{{#!gcode scheme
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+        ((= x (car set)) true)
+        ((< x (car set)) false)
+        (else (element-of-set? x (cdr set)))))
+
+(define (intersection-set set1 set2)
+  (if (or (null? set1) (null? set2))
+      '()
+      (let ((x1 (car set1)) (x2 (car set2)))
+        (cond ((= x1 x2)
+               (cons x1
+                     (intersection-set (cdr set1)
+                                       (cdr set2))))
+              ((< x1 x2)
+               (intersection-set (cdr set1) set2))
+              ((< x2 x1)
+               (intersection-set set1 (cdr set2))))))) 
+
+(define (adjoin-set x set)
+  (cond ((equal? x (car set)) set)
+        ((< (car set) x)
+         (if (null? (cdr set))
+             (list (car set) x)
+             (cons (car set) (adjoin-set x (cdr set)))))
+        ((< x (car set)) (cons x set)))) 
+
+(define x1 (list 2 4 6))
+x1
+>> (2 4 6)
+(adjoin-set 1 x1)
+>> (1 2 4 6)
+(adjoin-set 2 x1)
+>> (2 4 6)
+(adjoin-set 7 x1)
+>> (2 4 6 7)
+}}}

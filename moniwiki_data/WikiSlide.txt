@@ -1,0 +1,205 @@
+= What is a Wiki? =
+
+ * a technology for collaborative creation of internet and intranet pages
+ * ''Wiki-Wiki'' is hawaii and means fast
+ 
+== Principles ==
+ * '''Fast''' - fast editing, communicating and easy to learn
+
+ * '''Open''' - everybody may read ''and'' edit everything
+ * '''Uncomplicated''' - everything works in a standard browser
+ * '''Easy''' - no HTML knowledge necessary, simply formatted text
+ * '''Simple''' - ''Content over Form'' (content counts, not the super-pretty appearance)
+ * '''Secure''' - every change is archived, nothing gets lost
+ * '''Interlinked''' - Links between pages are easy to make
+ * '''Flexible'''
+   * Personal Information Management, Knowledgebases, Brainstorming
+   * Collaboration, Coordination and Communication platform
+   * Creating documentation and slide shows ;)
+   * etc...
+
+= The First Steps =
+
+ * Help with problems or questions: HelpContents ([[Icon(help)]]) and HelpMiscellaneous/FrequentlyAskedQuestions
+ * UserPreferences
+   * Name (appears on RecentChanges)
+   * Email address for subscribing to page change emails and retrieving a lost login/password
+   * Personal preferences
+   * Link with User-ID ( (!) ''in any case, put a bookmark on that'')
+ * Structure of pages
+   * Navigation: Quicklinks, Icons link to system actions (HelpOnNavigation)
+   * "Recently visited pages" (see UserPreferences)
+   * Content
+   * Quick search and additional actions (HelpOnActions)
+= How do I navigate? =
+
+Searching and Navigation:
+   * Backlinks (click on title)
+   * Icons at top right (HelpOnNavigation)
+   * Title search and full text search at bottom of page
+
+Good places to start your Wiki exploration:
+    * WikiSandBox: Sandbox page to play around and experiment with
+    * RecentChanges: What has changed recently?
+    * SiteNavigation: A list of the different indices of the Wiki
+    * FindPage: Searching the Wiki by various methods
+    * TitleIndex: A list of all pages in the Wiki
+    * WordIndex: A list of all words in page titles (i.e. a list of keywords/concepts in the Wiki)
+= Using the Editor =
+
+To edit a page, just click on [[Icon(edit)]] or on the link "`EditText`" at the end of the page. A form will appear enabling you to change text and save it again. A backup copy of the previous page's content is made each time.
+
+You can check the appearance of the page without saving it by using the preview function - ''without'' creating an entry on RecentChanges; additionally there will be an intermediate save of the page content, if you have created a homepage ([[Icon(home)]] is visible).
+
+<!> After editing pages, please leave the edit form by "`Save Changes`" since otherwise your edits will be lost!
+= Tips on the Editor =
+"`Check spelling`" examines the text for unknown words.
+
+Within the editor, the usual hotkeys work:
+||<rowbgcolor="#DEDEDE">'''Undo:''' `CTRL+Z`||'''Redo:''' `CTRL+Y`||
+||<rowbgcolor="lightblue">'''Copy:''' `CTRL+C`||'''Paste:''' `CTRL+V`||
+||<rowbgcolor="#DEDEDE">'''Home:''' `CTRL+Home`||'''End:''' `CTRL+End`||
+
+
+(!) If you discover an interesting format somewhere, just use the "raw" icon to find out how it was done.
+
+(!) In UserPreferences, you can set up the editor to open when you double click a page.
+
+(!) You can subscribe to pages to get a mail on every change of that page. Just click on the envelope [[Icon(subscribe)]] at top right of the page.
+= Text Markup and Links =
+
+To add special formatting to text, just enclose it within markup. There are special notations which are automatically recognized as internal or external links or as embedded pictures.
+
+||<rowbgcolor="#FFFFE8"> '''Input''' || '''Display''' ||
+|| {{{''italic'' and '''bold''' and __underlined__}}} || ''italic'' and '''bold''' and __underlined__ ||
+|| {{{`typewriter`}}} || `typewriter` ||
+|| {{{^super^script and ,,sub,,script}}} || ^super^script and ,,sub,,script ||
+|| {{{PageReference WikiSandBox}}} || PageReference WikiSandBox ||
+|| {{{MoinMoin:HelpContents}}} || MoinMoin:HelpContents (InterWiki-Link) ||
+|| {{{http://www.web.de/}}} || http://www.web.de/ ||
+|| {{{http://www.pythonwiki.de/wiki/img/moinmoin.gif}}} || http://www.pythonwiki.de/wiki/img/moinmoin.gif ||
+|| {{{:)  B)  :))  ;)  :D  :(  :-?  ;)) }}} || :)  B)  :))  ;)  :D  :(  :-?  ;)) (Smileys) ||
+|| {{{/!\  <!>  (!)  (./)  {OK}  {X}  {i} }}} || /!\  <!>  (!)  (./)  {OK}  {X}  {i} (Marks) ||
+|| {{{{1}  {2}  {3}  {de}  {en} }}} || {1}  {2}  {3}  {de}  {en} (Priorities and flags) ||
+
+For details see HelpOnFormatting, HelpOnLinking and HelpOnSmileys.
+= Headlines and Paragraphs =
+
+Headlines are placed on a line of their own and surrounded by one to five equal signs denoting the level of the headline. The headline is in between the equal signs, separated by a space. Example: [[BR]] `== Second Level ==`
+
+ (!) A common error is to insert an additional blank after the ending equal signs!
+
+Paragraphs are lines separated by empty lines or other block structures.  This means
+those lines
+which ''directly'' follow each other
+belong to ''one'' paragraph.
+
+Preformatted text (e.g. a copy of an email) should be placed inside three curly braces `{{{ ... }}}`: {{{
+First Line
+...
+Last Line
+}}}
+
+For better visual separation, horizontal lines can be generated by using four dashes.
+= Lists =
+
+== item list ==
+ * first level
+   * second
+   Level
+   * second item
+     ''indented text ''without'' bullet''
+ * first level again
+
+== enumerated list ==
+ 1. first item
+ 1. second item (automatically enumerated)
+
+== Glossary ==
+ Term:: Explanation
+
+----
+For details see HelpOnLists.
+= Tables =
+
+Tables appear if you separate the content of the columns by &#160;`||`. All fields of the same row must be also on the same line in the editor.
+
+Markup:
+ {{{
+||<rowbgcolor="#FFFFE0"> '''Column 1'''  |||| '''Column 2 & 3''' ||
+||<)> 1  ||<:> 2 ||<(> 3 ||
+}}}
+
+Display:
+ ||<rowbgcolor="#FFFFE0"> '''Column 1'''  |||| '''Column 2 & 3''' ||
+ ||<)> 1  ||<:> 2 ||<(> 3 ||
+
+----
+For details see HelpOnTables.
+= Macros =
+
+ * Macros allow dynamic (computed) content to be inserted into pages.
+ * A macro is called by "`[[MacroName(parameters)]]`".
+ * The parameters are optional, depending on the macro.
+ * The most important macros:
+   * `TableOfContents` - show a local table of contents
+   * `Anchor` - defines a link target line
+   * `FootNote` - generates a footnote[[FootNote(Footnotes look like this.)]]
+   * `PageList` - generates lists of pages with titles matching a pattern
+----
+For details see HelpOnMacros.
+= Creating new Pages =
+
+New pages are created by simply adding a new WikiName to an existing page and clicking on it after saving the existing page.
+
+This brings up a page with a variety of possibilities to create the new page:
+ * click on ''create page'' to start with an empty page or
+ * click on one of the listed templates to base your page on the content of the selected template.
+
+Below the list of templates you will also find a list of existing pages with a similar name. You should always check this list because someone else might have already started a page about the same subject but named it slightly differently.
+
+----
+For details see HelpOnPageCreation and WikiName.
+= Actions =
+
+Actions operate either on a single page or on the whole Wiki.
+
+ * `AttachFile`: Attach files to a page (HelpOnActions/AttachFile)
+ * `DeletePage`: Delete a page (after a security question)
+ * `LikePages`: Lists pages with ''similar'' title
+ * `LocalSiteMap`: List of all pages that are referred to, up to a maximum of 4 levels
+ * `SpellCheck`: Call check spelling for the current page (HelpOnSpellCheck)
+----
+For details see HelpOnActions.
+= Wikiquette - how do I behave correctly? =
+
+== Cooperative Editing ==
+
+Basic principle: ''Anybody logged in can edit anything.''
+
+Exceptions:
+ * If you want to edit a page without being disturbed, just write a note to that effect ''at the top'' of the page and save that change first.
+ * If two people edit a page simultaneously, the first can save normally, but the second will get a warning and should follow the directions to merge their changes with the already saved data.
+ * Personal Homepages: normally only changed by their owner, but you may append messages at the end of the page
+
+In general, do follow any hints given on a page, there is generally no ''enforced'' limit, but you should not blindly ignore other people's wishes.
+= Organisation and Structure =
+
+ * Naming
+    * don't create arbitrary wikinames (`OracleDatabase`, ''not'' `OraCle`)
+    * common prefixes (topical correlation)
+    * common postfixes (same page ''type'', e.g. ...Index)
+ * Index pages
+ * Categories (see CategoryCategory)
+ * Templates 
+ * /SubPages (allow shorter links, automatic correlation: HelpOnEditing/SubPages)
+ * Follow the guidance of the Wiki used about how to name pages etc.
+== Exercises ==
+
+For the exercises we use your own Wiki-homepage which is usually based on a WikiName `FirstnameLastname`:
+ * Configure your UserPreferences.
+ * create and change your homepage (normally `FirstnameLastname`)
+ * view the changes in the RecentChanges.
+ * try the icons
+ * unrestrained clicking
+ * ask, ask, ask.

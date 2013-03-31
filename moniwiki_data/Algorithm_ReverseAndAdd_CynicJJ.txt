@@ -1,0 +1,94 @@
+ * 입출력 처리 없음
+ * 각종 언어로 몇번이나 풀어봤던 문제
+ * 196 이 안된다는건 처음 알았음
+
+[[TableOfContents([maxdepth])]]
+
+== Reverse and Add ==
+=== !ReverseAndAdd.vb ===
+{{{
+Public Class ReverseAndAdd
+
+	Private _count As Integer
+	ReadOnly Property Count() As Integer
+		Get
+			Return _count
+		End Get
+	End Property
+
+	Private _resultPalindrome As Integer
+	ReadOnly Property ResultPalindrome() As Integer
+		Get
+			Return _resultPalindrome
+		End Get
+	End Property
+
+	Sub Init()
+		_count = 0
+		_resultPalindrome = 0
+	End Sub
+
+	Function GetReversed(ByVal number As Integer) As Integer
+		Dim strNumber() As Char = String.Format("{0:D}", number).ToCharArray()
+		Array.Reverse(strNumber)
+		Return Integer.Parse(New String(strNumber))
+	End Function
+
+	Function IsPalindrome(ByVal number As Integer) As Boolean
+		Return (number = GetReversed(number))
+	End Function
+
+	Sub DoReverseAndAdd(ByVal number As Integer)
+		Init()
+
+		While Not IsPalindrome(number)
+			number += GetReversed(number)
+			_count += 1
+		End While
+
+		If IsPalindrome(number) Then
+			_resultPalindrome = number
+		End If
+	End Sub
+End Class
+}}}
+
+=== !ReverseAndAddTest.vb ===
+{{{
+<TestClass()> _
+Public Class ReverseAndAddTest
+
+	<TestMethod()> _
+	Public Sub GetReversedTest()
+		Dim rna As ReverseAndAdd = New ReverseAndAdd
+		Assert.AreEqual(321, rna.GetReversed(123))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsPalindromeTest()
+		Dim rna As ReverseAndAdd = New ReverseAndAdd
+		Assert.IsTrue(rna.IsPalindrome(1221))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub DoReverseAndAddTest()
+		Dim rna As ReverseAndAdd = New ReverseAndAdd
+		rna.DoReverseAndAdd(195)
+		Assert.AreEqual(4, rna.Count)
+		Assert.AreEqual(9339, rna.ResultPalindrome)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub DoReverseAndAddTestMore()
+		Dim rna As ReverseAndAdd = New ReverseAndAdd
+
+		rna.DoReverseAndAdd(265)
+		Assert.AreEqual(5, rna.Count)
+		Assert.AreEqual(45254, rna.ResultPalindrome)
+
+		rna.DoReverseAndAdd(750)
+		Assert.AreEqual(3, rna.Count)
+		Assert.AreEqual(6666, rna.ResultPalindrome)
+	End Sub
+End Class
+}}}

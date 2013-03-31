@@ -1,0 +1,295 @@
+ - 계속 wrong answer 가 뜨네요.
+ - 어떤 테스트 케이스를 놓치고 있는지 모르겠습니다. :(
+  - 정말 모르겠네요. 대략 난감.
+  - 굳이 찾는다면 문제 요건에 어긋나는 음수 주소에 살때... -_-
+  - 입력값이 양수를 보장해 주는 거 아니었나요?
+   - 입력값 양수 보장해 주는게 맞습니다. 근데 해답은 음수도 처리하더군요.
+   - 그래서 굳이 찾는다면... 이라고 했습니다. 왜 wrong answer 인지 모르겠네요.
+   - 30000 이상 값도 예외인데 잘 처리하니깐요. 친척의 수가 500개 넘게 입력될때는 테스트 못 해봤어요.
+ - 16 13 17 17 19 22 22 55 100 101 22 22 23 23 24 100 101 이 경우에 정확하지 않은 답이 나오네요. 정답은 373 입니다. 
+  - 출처 : http://acm.uva.es/board/viewtopic.php?t=5483&highlight=10041&sid=ae5ee2263a7d8149b059637faec84753
+ - 과연 버그가 있었네요. 흐... - 정희종
+
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <strstream>
+#include <algorithm>
+#include <map>
+
+//#define _UNIT_TEST
+
+using namespace std;
+
+namespace ATUtil
+{
+
+bool IsInRange(int value, int from, int to)
+{
+	return (from <= value) && (value <= to);
+}
+
+int ConvertToIndex(char c)
+{
+	if ('a' <= c && c <= 'z')
+	{
+		return c - 'a';
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+char ConvertToChar(int i)
+{
+	return (char)i + 'a';
+}
+
+typedef map<int, int> IntDB;
+typedef vector<int> Ints;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+
+class CSolver
+{
+public:
+	unsigned int GetDistanceSumFromPos(int i);
+	unsigned int FindOptimalPos();
+	unsigned int _FindOptimalPos(int from, int to);
+
+	void Insert(int num);
+
+	template<typename InputIterator>
+	void Inserts(InputIterator beg, InputIterator end);
+
+	template<typename InputIterator>
+	static unsigned int GetSolution(InputIterator beg, InputIterator end);
+
+	IntDB m_FamilyStreetDB;
+};
+
+unsigned int CSolver::GetDistanceSumFromPos(int i)
+{
+	unsigned int sum = 0;
+	IntDB::iterator it = m_FamilyStreetDB.begin();
+	for (; it != m_FamilyStreetDB.end(); ++it)
+	{
+		int addr = it->first;
+		int nums = it->second;
+		sum += (abs(i - addr) * nums);
+	}
+
+	return sum;
+}
+
+unsigned int CSolver::FindOptimalPos()
+{
+	IntDB::iterator from = m_FamilyStreetDB.begin();
+	IntDB::reverse_iterator to = m_FamilyStreetDB.rbegin();
+
+	return _FindOptimalPos(from->first, to->first);
+}
+
+unsigned int CSolver::_FindOptimalPos(int from, int to)
+{	
+	int fromV = GetDistanceSumFromPos(from);
+	int toV = GetDistanceSumFromPos(to);
+	int mid = (to + from) / 2;
+
+	if (from == mid)		// 결정의 시간
+	{
+		return min(fromV, toV);
+	}
+
+	if (fromV < toV)
+	{
+		return _FindOptimalPos(from, mid);
+	}
+	else if (toV < fromV)
+	{
+		return _FindOptimalPos(mid, to);
+	}
+	else
+	{
+		return min(_FindOptimalPos(from, mid), _FindOptimalPos(mid, to));
+	}
+}
+
+void CSolver::Insert(int num)
+{
+	m_FamilyStreetDB[num]++;
+}
+
+template<typename InputIterator>
+void CSolver::Inserts(InputIterator beg, InputIterator end)
+{
+	for (InputIterator it = beg; it != end; ++it)
+	{
+		m_FamilyStreetDB[*it]++;
+	}
+}
+
+template<typename InputIterator>
+unsigned int CSolver::GetSolution(InputIterator beg, InputIterator end)
+{
+	CSolver s;
+	s.Inserts(beg, end);
+	return s.FindOptimalPos();
+}
+
+class CConsole
+{
+public:
+	static void ConsoleTest(istream& input, ostream& output);
+};
+
+void CConsole::ConsoleTest(istream& input, ostream& output)
+{
+	//ostrstream tempOutput;
+
+	int testCount = 0;
+	input >> testCount;
+
+	int relatives = 0;
+	int streetNumber = 0;
+
+	for (int i = 0; i < testCount; ++i)
+	{
+		input >> relatives;
+
+		CSolver s;
+
+		for (int j = 0; j < relatives; ++j)
+		{
+			input >> streetNumber;
+			s.Insert(streetNumber);
+		}
+
+		//tempOutput << s.FindOptimalPos() << std::endl;
+		output << s.FindOptimalPos() << std::endl;
+	}
+
+	//tempOutput << std::ends;
+
+	//output << tempOutput.str();
+};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+TEST(FindOptimalPos)
+{
+	int inputs[] = {2};
+	CHECK_EQUAL(0, CSolver::GetSolution(&inputs[0], &inputs[1]));
+}
+
+TEST(FindOptimalPos1)
+{
+	int inputs[] = {2, 4, 6};
+	CHECK_EQUAL(4, CSolver::GetSolution(&inputs[0], &inputs[3]));
+}
+
+TEST(FindOptimalPos2)
+{
+	// 가족이 같은 주소에 둘 이상 사는 경우.
+	int inputs[] = {2, 2, 10};
+	CHECK_EQUAL(8, CSolver::GetSolution(&inputs[0], &inputs[3]));	// 위치는 2
+}
+
+TEST(FindOptimalPos3)
+{
+	int inputs[] = {2, 4};
+	CHECK_EQUAL(2, CSolver::GetSolution(&inputs[0], &inputs[2]));
+}
+
+TEST(FindOptimalPos4)
+{
+	int inputs[] = {5, 2};
+	CHECK_EQUAL(3, CSolver::GetSolution(&inputs[0], &inputs[2]));
+}
+
+TEST(FindOptimalPos5)
+{
+	int inputs[] = {4, 2, 3, 6};
+	CHECK_EQUAL(5, CSolver::GetSolution(&inputs[0], &inputs[4]));
+}
+
+TEST(FindOptimalPos6)
+{
+	int inputs[] = {2, 3, 4, 5, 100};
+	CHECK_EQUAL(100, CSolver::GetSolution(&inputs[0], &inputs[5]));
+}
+
+TEST_FIXTURE(CSolver, GetDistanceSumFromPos)
+{
+	int inputs[] = {2, 6, 8};
+	Inserts(&inputs[0], &inputs[3]);
+	CHECK_EQUAL(6, FindOptimalPos());
+
+	CHECK_EQUAL(10, GetDistanceSumFromPos(2));
+	CHECK_EQUAL(9, GetDistanceSumFromPos(3));
+	CHECK_EQUAL(8, GetDistanceSumFromPos(4));
+	CHECK_EQUAL(7, GetDistanceSumFromPos(5));
+	CHECK_EQUAL(6, GetDistanceSumFromPos(6));
+	CHECK_EQUAL(7, GetDistanceSumFromPos(7));
+	CHECK_EQUAL(8, GetDistanceSumFromPos(8));
+}
+
+TEST(ConsoleTest)
+{
+	stringstream input;
+	stringstream output;
+
+	input << "2\n2 2 4\n3 2 4 6\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL("2\n4\n", output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

@@ -1,0 +1,2 @@
+[http://kkamagui.springnote.com/pages/339546 Part4. 어셈블리어(Assembly Language)와 C 그리고 호출 규약(Calling Convension)]
+ fninit : FPU 초기화 명령(x87 Floating Point Unit 관련 명령)

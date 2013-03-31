@@ -1,0 +1,220 @@
+ * 프림 알고리즘을 처음 접해보는바. 문제풀이보다는 프림 알고리즘의 이해를 위주로 작성하였습니다 ^^
+
+{{{#!vim c
+#include "stdafx.h"
+#include "math.h"
+
+#define _UNIT_TEST
+#define MAXV 100
+
+#define MAXINT 142		// sqrt(pow(0,2)+pow(100,2)) = 141.42
+
+typedef struct
+{
+	double x;
+	double y;
+}point;
+
+typedef struct
+{
+	point points[MAXV+1];
+	int numPoint;	/* 정점 개수 */
+}graph;
+
+class CFreckles
+{
+private:
+	graph g;
+
+public:
+	CFreckles();
+	void addPoint(double x, double y);
+	double prim();
+	double getDistance(point a, point b);
+
+};
+
+CFreckles::CFreckles()
+{
+	g.numPoint = 0;
+}
+
+void CFreckles::addPoint(double x, double y)
+{
+	g.points[g.numPoint].x = x;
+	g.points[g.numPoint].y = y;
+	g.numPoint++;
+}
+
+
+double CFreckles::getDistance(point a, point b)
+{
+	return sqrt(pow(a.x - b.x,2) + pow(a.y - b.y,2));
+}
+
+
+double CFreckles::prim()
+{
+	bool intree[MAXV];		/* 정점이 트리에 들어있는지 여부 */
+	double distance[MAXV];	/* 시작점으로부터의 거리 */
+	int curPoint;		/* 지금 처리할 정점 */
+	double tempDist;			
+	double resultDist = 0;
+	int i,j;
+
+	// 각종 정보를 저장할 배열 초기화
+	for( i=0; i< g.numPoint; i++)
+	{
+		intree[i] = false;
+		distance[i] = MAXINT;
+	}
+
+	distance[0] = MAXINT;
+	curPoint = 0;
+
+	// 시작 point 0 과 나머지 모든 point 들의 거리를 초기값으로.
+	for( i=1; i< g.numPoint; i++)
+	{
+		// point 0 과 point i 의 거리
+		distance[i] = getDistance(g.points[0],g.points[i]);
+	}
+
+	intree[0] = true;
+	curPoint = 1;
+
+	while(intree[curPoint] == false)
+	{
+
+		// point i 에 대하여
+		for( i=0; i< g.numPoint; i++)
+		{
+			// i 를 연결하는 선이 있는경우 continue
+			if( intree[i] == true )
+				continue;		
+			
+			// i 로부터 j 까지의 모든 선의 distance 체크
+			for( j=0; j< g.numPoint; j++)
+			{
+				// j 를 연결하는 선이 있는경우 continue
+				if( intree[j] == true )
+					continue;		
+
+				tempDist = getDistance(g.points[i],g.points[j]);
+
+				// 최소 distance 이고 같은 point 끼리 연결하는게 아닐경우 갱신
+				if( distance[j] > tempDist && i != j )
+				{
+					distance[j] = tempDist;
+				}
+			}
+
+			intree[i] = true;
+		}
+
+		curPoint++;
+
+	}
+
+	// 1부터가 유효한 distance
+	for(int i=1; i<g.numPoint; i++)
+	{
+		resultDist += distance[i];
+	}
+
+	return resultDist;
+}
+
+
+#if defined(_UNIT_TEST)
+#include "UnitTest++.h"
+
+
+struct ConstructorTest
+{
+
+	ConstructorTest() : cf()
+	{
+
+	}
+	CFreckles cf,cf2,cf3;
+	graph g,g1,g2,g3;
+	
+};
+
+TEST_FIXTURE( ConstructorTest, FrecklesTest )
+{
+		
+	/*1.0 1.0
+	  2.0 2.0
+	  2.0 4.0 */
+	cf.addPoint(1.0,1.0);
+	cf.addPoint(2.0,2.0);
+	cf.addPoint(2.0,4.0);
+	CHECK_EQUAL(3.41,cf.prim());
+
+	/* 1.0 1.0
+	   2.0 2.0
+	   2.0 4.0
+	   1.0 0.0 */
+	cf2.addPoint(1.0,1.0);
+	cf2.addPoint(2.0,2.0);
+	cf2.addPoint(2.0,4.0);
+	cf2.addPoint(1.0,0.0);
+	CHECK_EQUAL(4.41,cf2.prim());
+
+	/* 3.0 1.0
+	   1.0 2.0
+	   3.0 3.0
+	   2.0 4.0
+	   4.0 5.0 */
+	cf3.addPoint(3.0,1.0);
+	cf3.addPoint(1.0,2.0);
+	cf3.addPoint(3.0,3.0);
+	cf3.addPoint(2.0,4.0);
+	cf3.addPoint(4.0,5.0);
+	CHECK_EQUAL(7.87,cf3.prim());
+
+}
+
+TEST_FIXTURE( ConstructorTest,  getDistanceTest )
+{
+	g.points[0].x = 1.0;
+	g.points[0].y = 1.0;	
+
+	g.points[1].x = 2.0;
+	g.points[1].y = 2.0;
+
+	g.points[2].x = 2.0;
+	g.points[2].y = 4.0;	
+
+	g.points[3].x = 4.0;
+	g.points[3].y = 3.0;
+
+	CHECK_EQUAL(1.41,cf.getDistance(g.points[0],g.points[1]));
+	CHECK_EQUAL(2,cf.getDistance(g.points[1],g.points[2]));
+	CHECK_EQUAL(2.23,cf.getDistance(g.points[2],g.points[3]));
+
+	g.points[4].x = 0;
+	g.points[4].y = 0;
+	g.points[5].x = 100;
+	g.points[5].y = 100;
+
+	CHECK_EQUAL(141.42,cf.getDistance(g.points[4],g.points[5]));
+
+}
+
+int main(int argc, _TCHAR* argv[])
+{
+   return UnitTest::RunAllTests();
+}
+
+#else
+
+int main(int argc, _TCHAR* argv[])
+{
+	return 0;
+}
+
+#endif
+
+}}}

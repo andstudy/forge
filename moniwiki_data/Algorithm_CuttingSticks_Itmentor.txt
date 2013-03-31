@@ -1,0 +1,73 @@
+DP이용 안하고 문제의 특성과 Greedy방식 이용해서 푸는중.. 잘 안됨
+
+== Main.cs ==
+{{{
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace CuttingSticks
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            int[] input = { 4,5,7,8 };
+
+            int length = 10;
+
+            int totalCost = cutStick(input, 0, length);
+        }
+
+        private static int cutStick(int[] input, int begin, int end)
+        {
+            float length = end - begin;
+            float pivot = (float)(end + begin) / 2;
+
+            int cutValue = getClosestInputValue(pivot, input, begin, end);
+
+            if (cutValue != 0)
+            {
+                int cost = end - begin;
+
+                System.Diagnostics.Trace.WriteLine("Cut: " + begin.ToString() + "-" + cutValue + ", " + cutValue + "-" + end.ToString() + " : " + cost.ToString());
+                
+                cost += cutStick(input, begin, cutValue);
+                cost += cutStick(input, cutValue, end);
+
+                return cost;
+            }
+
+            return 0;
+        }
+
+        private static int getClosestInputValue(float pivot, int[] input, int begin, int end)
+        {
+            float minABS = 10000.0f;
+            int selectedIndex = -1;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                float diff = Math.Abs(input[i] - pivot);
+
+                if (diff < minABS && begin <= input[i] && input[i] <= end )
+                {
+                    selectedIndex = i;
+                    minABS = diff;
+                }
+            }
+
+            if (selectedIndex != -1)
+            {
+                int retVal = input[selectedIndex];
+                input[selectedIndex] = 0;
+                return retVal;
+            }
+
+            return 0;
+        }
+    }
+}
+}}}

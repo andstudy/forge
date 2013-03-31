@@ -1,0 +1,7 @@
+''' < 멀티쓰레드 프로그래밍 패턴 Active Object 발표 자료 > '''
+
+[[TableOfContents]]
+= 발표 자료 =
+http://outbreak.springnote.com
+
+attachment:/멀티쓰레드_디자인패턴_액티브오브젝트_안준석_470x.jpg

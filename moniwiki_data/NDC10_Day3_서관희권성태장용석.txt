@@ -1,0 +1,46 @@
+[NDC10]
+[NDC10_Day3]
+
+== 서관희(엔트리브) - 키노트 : 대한민국 게임 개발자 ==
+ * [http://www.thisisgame.com/board/view.php?id=401959&category=102 NDC 2010 셋째 날 엔트리브 서관희 이사 기조강연 -“온라인게임도 사전제작을 길~게 잡자”]
+ * [http://www.gamemeca.com/news/news_view.html?seq=36&ymd=20100526&page=1&point_ck=&search_ym=&sort_type=&search_text=&send=&mission_num=&mission_seq= 게임메카 - NDC 게임 개발자에게 필요한 것은 ‘올바른 경험’]
+ * 게임개발자에게 필요한 것 : 올바른 경험 -> 통찰력 얻는다
+  * 게임의 처음부터 오픈까지 해 본 경험
+ * 방해하는 것?
+  * 나는 왜 새로운 패러다임을 놓쳤을까. MUG, 라그나로크, 카르마
+  * 주위에 그런 것을 해 본 사람이 없었다.
+ * 새로운 트랜드를 직접 경험해 보자
+  * 아이폰 너무 좋다. 왜 나는, 우리나라 사람은 이런 경험을 외국보다 1년 늦게 해야 하는가. 그 동안 나올 수 있었을 아이디어를 생각하면 화가 날 지경
+  * 트위터를 붙이자고 해도 막상 실무자가 트위터 안 해서 설득하기 어려움. 먼저 맛을 보게 해 줘야 할 듯.
+ * 외부 오픈을 못 시키면 개발자는 프로젝트 드랍 원인을 내부(게임의 재미, 방향성 부재)가 아닌 외부(경영진, 팀원, 자금) 에서 찾는 경향이 있다.
+ * 한국 영화도 요즘은 process 가 정립되어 있다.
+  * 전체 영화 제작이 1년~1년 6개월이라면 배우가 직접 촬영하는 기간은 8주~3달이다.
+  * 배우 비싸고, 카메라는 하루 1억, 폭발씬 비싸기 때문
+  * post-production 도 있다
+   * afting 은 감독 없이 한다. 에디터는 감독 외의 사람이 맡아야 막 편집할 수 있다.
+ * 프리프로덕션이 중요(게임 스케칭 기법)
+  * 단, 이러면 low risk 로 가는 경향있다. (business-driven)
+ * 혁신적인 게임에 대해서는 인디적 접근도 고려해 볼 만 하다
+  * 비용한정(1년 2억, 2년 3억 식으로 비용 정해놓고 마음껏 시도)
+  * [http://parkpd.egloos.com/3195143 신동원님 사례]
+ * 가능하다면 live service 를 2-3년 하면서 user feedback 를 꼭 느껴봐라.
+ * 게임인이라는 것에 대한 자긍심
+  * 내가 만든 게임을 즐기던 친구가 어느새 나와 같이 일하는 경우도 있다.
+  * GDC Award 같은 행사를 가 보면 교회 부흥회 온 기운을 받는다.
+ * 면접 볼 때 drop 이유 물어본다면 남 핑계대기보다 '이랬더라면 더 좋았을 거 같다' 라고 얘기하자.
+ * 철학이 있는 게임은 40대가 넘어야 만들 수 있겠구나 라는 생각도 들더라.
+
+== 권성태, "gamebryo-애매한 미들웨어의 유혹" ==
+ * [http://devcatpublications.wordpress.com/2010/05/28/%EA%B6%8C%EC%84%B1%ED%83%9C-%E2%80%9Cgamebryo-%EC%95%A0%EB%A7%A4%ED%95%9C-%EB%AF%B8%EB%93%A4%EC%9B%A8%EC%96%B4%EC%9D%98-%EC%9C%A0%ED%98%B9%E2%80%9D-nexon-developer-conference-may%C2%A02010/ 발표PT]
+ * 일괄 렌더링이 부족해 허스키도 따로 구현했어야 했음
+ * 2.6 에서는 좋아졌다는 소문이 있지만, 써 보지 않아서 모르겠고 가격도 수억이라고 들었다.
+ * 멀티코어도 그다지 지원하지 않는다. 백그라운드 로딩 정도만 지원한다.
+
+== 장용석, "Fmod를 이용한 사운드 프로그래밍" ==
+ * [http://devcatpublications.wordpress.com/2010/05/28/%EC%9E%A5%EC%9A%A9%EC%84%9D-%E2%80%9Cfmod%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%82%AC%EC%9A%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%E2%80%9D-nexon-developer-conference-may/ 발표PT]
+ * [http://www.fmod.org/ FMOD 홈페이지]
+ * 예 : 총소리는 거리에 따라 가까운near, 중간mid, 먼far 세 종류의 사운드를 따로 틀어준다. 그리고 둘 사이의 사운드를 곡선 그래프로 트랜지션 시킬 수 있다.
+ * MultiThread 지원하지 않아서 TBB library 로 command pattern Message Queue 구현해 해결했다.
+ * 가격 : FMOD Ex (including Designer)
+   * First Platform -> $ 6,000 USD
+   * Subsequent Platforms -> $ 3,000 USD

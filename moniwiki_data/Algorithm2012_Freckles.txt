@@ -1,0 +1,154 @@
+ * Accepted :)
+
+{{{#!plain cpp
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <iomanip>
+#include <math.h>
+
+using namespace std;
+
+struct Vertex
+{
+	float x;
+	float y;
+	float minVal;
+	bool inTree;
+
+	void Init( float x_, float y_ )
+	{
+		x = x_;
+		y = y_;
+		//minVal = 
+		inTree = false;
+	}
+};
+
+class Main
+{
+public:
+	Main( istream& stm ) : m_stmIn( stm ) {}
+	void Solve();
+
+	void Prim();
+
+protected:
+	void Init();
+	float GetDistance( int a, int b );
+
+	//------------------------------------------------------------------------
+
+	istream&    m_stmIn;			// 파일입력 or STDIN 입력.
+
+	enum { MAX_VERTEX = 100 };
+	Vertex		vertex[MAX_VERTEX];
+	int			m_numVertex;
+	float		m_result;
+
+
+};
+
+void Main::Init()
+{
+	m_numVertex = 0;
+	m_result = 0.f;
+}
+
+
+void Main::Solve()
+{
+    int caseNum;
+
+    m_stmIn >> caseNum;
+	m_stmIn.get();
+
+    for( int i = 0; i < caseNum; i++ )
+    {
+        Init();
+
+        m_stmIn.get();
+        m_stmIn >> m_numVertex;
+        m_stmIn.get();
+
+		for( int j = 0; j < m_numVertex; j++ )
+        {
+            float x, y;
+            m_stmIn >> x >> y;
+            m_stmIn.get();
+
+			vertex[j].Init( x, y );
+        }
+
+		// solve.
+		Prim();
+
+		if( i > 0 )
+			cout << endl;
+
+		cout << fixed << showpoint << setprecision(2) << m_result << endl;
+    }
+}
+
+float Main::GetDistance( int a, int b )
+{
+	return sqrt( pow(vertex[a].x - vertex[b].x,2) + pow(vertex[a].y - vertex[b].y,2) );
+}
+
+void Main::Prim()
+{
+	// 0번 버텍스를 시작점으로 잡고, 모든 다른 버텍스의 거리를 시작점과의 거리로 초기화.
+	vertex[0].inTree = true;
+	for( int i = 1; i < m_numVertex; i++ )
+	{
+		vertex[i].minVal = GetDistance( 0, i );
+	}
+
+	// 0번을 제외한 나머지 점들의 수만큼 loop. 변수 i는 참조되지 않음.
+	for( int i = 0; i < m_numVertex - 1; i++ )
+	{
+		int idxNext = -1;						// 다음으로 tree에 집어넣을 버텍스를 찾는다.
+		for( int j = 0; j < m_numVertex; j++ )	// 모든 버텍스 수만큼 loop.
+		{
+			if( vertex[j].inTree )				// 이미 tree에 속한 점이면 통과.
+				continue;
+
+			if( idxNext == -1 || vertex[idxNext].minVal > vertex[j].minVal )
+				idxNext = j;
+		}
+
+		m_result += vertex[idxNext].minVal;
+		vertex[idxNext].inTree = true;
+
+		// 현재 계산된 거리보다 새로 추가된 버텍스와의 거리가 더 짧은 것이 있다면 갱신.
+		for( int j = 0; j < m_numVertex; j++ )
+		{
+			if( vertex[j].inTree )
+				continue;
+
+			float dist = GetDistance( idxNext, j );
+			if( vertex[j].minVal > dist )
+				vertex[j].minVal = dist;
+		}
+
+	}
+}
+
+
+int main( int argc, char* argv[] )
+{
+	if( argc > 1 ) // 명령행 인자를 받는다면 해당 이름의 파일을 인풋으로 삼는다.
+	{
+		ifstream fstm( argv[1] );
+		Main g( fstm );
+		g.Solve();
+	}
+	else // 그냥 실행하면 표준입력으로 인풋을 받음.
+	{
+		Main g( cin );
+		g.Solve();
+	}
+
+	return 0;
+}
+}}}

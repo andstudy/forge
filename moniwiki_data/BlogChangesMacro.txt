@@ -1,0 +1,28 @@
+== Usage: ==
+{{{[[BlogChanges(["BlogPageName or BlogCategory(Pattern)],[개수],[all],[summary],[simple])]]}}}
+=== Examples ===
+{{{[[BlogChanges("WkPark/.*",summary)]]}}}: Blog Page Pattern (regex)
+
+{{{[[BlogChanges(".*Blog",summary)]]}}}: Blog Page Pattern (regex)
+
+{{{[[BlogChanges("CategoryMisc",summary)]]}}}: Category
+
+{{{[[BlogChanges("Blog/Misc",summary)]]}}}: Single Blog page
+
+{{{[[BlogChanges("Blog/Linux",10,summary)]]}}}: show 10 items
+
+{{{[[BlogChanges("Blog/OpenSource",10,summary,noaction)]]}}}: invisible comment and tracback link
+
+{{{[[BlogChanges(10,all,summary)]]}}}
+----
+{{{[[BlogChanges(3,all,summary,simple)]]}}}
+
+[[BlogChanges(3,all,summary,simple)]]
+----
+{{{[[BlogChanges("CategoryMisc",all,simple,summary)]]}}}
+
+[[BlogChanges("CategoryMisc",all,simple,summary)]]
+----
+{{{[[BlogChanges("Test/Blog",simple)]]}}}
+
+[[BlogChanges("Test/Blog",simple)]]

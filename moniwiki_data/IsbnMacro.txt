@@ -1,0 +1,11 @@
+== Examples ==
+{{{
+  [[ISBN(0201657910)]]
+  [[ISBN(8956742235,K,noimg)]]
+  [[ISBN(8989125049,k,img=GIF)]]
+}}}
+  [[ISBN(0201657910)]]
+  [[ISBN(8956742235,K,noimg)]]
+  [[ISBN(8989125049,k,img=GIF)]]
+----
+CategoryMacro

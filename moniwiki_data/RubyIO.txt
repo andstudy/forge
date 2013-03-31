@@ -1,0 +1,179 @@
+== Ruby IO ==
+=== 파일 생성 ===
+{{{
+f = File.new ("test","w")
+  f.puts "Hello world!"
+  f.puts "FreeRIDE"
+  f.puts "Ruby"
+f.close
+}}}
+=== 사용자 입력 받기 ===
+{{{
+# IRB에서 실행해야 함.
+ while line = gets
+   puts line
+ endf`
+}}}
+
+=== 파일 처리 ===
+ * 블럭 사용
+{{{
+File.open("test") do |file|
+    while ln = file.gets
+      puts ln
+    end
+end
+}}}
+
+ * 라인 단위 반복자 사용
+{{{
+  File.open("test") do |file|
+    # String#dump는 개행문자까지 그대로 표현함.
+    file.each_line { |ln| puts "Got #{ln.dump}" ;} 
+  end
+}}}
+
+ * 줄단위 반복자 사용
+{{{
+  File.open("test") do |file|
+    file.each_byte { 
+      |ch| 
+      putc ch; 
+      print "." 
+     }
+  end
+}}}
+
+ * IO객체 이용
+{{{
+str = IO.read ( "test" ) #에러처리 할 필요 없이 모두 string으로 받아온다.
+puts str[0,10] #0~10글자까지 출력
+}}}
+
+ * line separator이용
+{{{
+writeFile = File.new("test2.txt", "w")
+  File.open("test") do |file|
+    file.each_line("e") { |ln| puts "Got #{ln.dump}" ; writeFile.puts ln.dump}
+end
+}}}
+
+ * 파일 자동 닫기 & 반복자 사용
+{{{
+IO.foreach("test") { | ln | puts ln }
+}}}
+
+ * 파일을 배열에 저장
+{{{
+arr = IO.readlines("test")
+puts arr.length
+puts arr[0]         #줄단위로 끊어서 배열에 저장함
+}}}
+
+ * Output을 C++처럼 사용하고 싶다면?
+{{{
+cout = STDOUT
+endl = "\n"
+cout << "AAA" << "\tRRRRRRRRRRR" << endl # <<연산자는 add의 의미를 갖음
+}}}
+
+
+ * StringIO사용하기
+{{{
+require 'stringio'
+ip = StringIO.new("now is\nthe time \nto learn ruby!")
+op = StringIO.new("", "w")
+ip.each_line do |line|
+  op.puts line.reverse
+end
+STDOUT<< op.string.dump << "\n"
+}}}
+
+
+ * binary처리
+{{{
+s1 = "\001\002\003"
+s2 = ""
+s2 << 1 << 2 << 3
+s4 = [1,2,3,13,142].pack("C*")
+puts s4
+File.open("test", "w") do |f|
+  f.syswrite(s4)
+end
+}}}
+ * Pack에서 사용 가능한 옵션
+|| Directive  ||  Meaning  ||
+||@||  Moves to absolute position ||
+||A||  ASCII string (space padded, count is width) ||
+||a||  ASCII string (null padded, count is width) ||
+||B||  Bit string (descending bit order) ||
+||b||  Bit string (ascending bit order) ||
+||C||  Unsigned char ||
+||c||  Char ||
+||D, d  ||  Double-precision float, native format ||
+||E||  Double-precision float, little-endian byte order ||
+||e||  Single-precision float, little-endian byte order ||
+||F, f  ||  Single-precision float, native format ||
+||G||  Double-precision float, network (big-endian) byte order ||
+||g||  Single-precision float, network (big-endian) byte order ||
+||H||  Hex string (high nibble first) ||
+||h||  Hex string (low nibble first) ||
+||I||  Unsigned integer ||
+||i||  Integer ||
+||L||  Unsigned long ||
+||l||  Long ||
+||M||  Quoted printable, MIME encoding (see RFC2045) ||
+||m||  Base64 encoded string ||
+||N||  Long, network (big-endian) byte order ||
+||n||  Short, network (big-endian) byte-order ||
+||P||  Pointer to a structure (fixed-length string) ||
+||p||  Pointer to a null-terminated string ||
+||Q, q  ||  64-bit number ||
+||S||  Unsigned short ||
+||s||  Short ||
+||U||  UTF-8 ||
+||u||  UU-encoded string ||
+||V||  Long, little-endian byte order ||
+||v||  Short, little-endian byte order ||
+||w||  BER-compressed integer\fnm ||
+||X||  Back up a byte ||
+||x||  Null byte ||
+||Z||  Same as ``a'', except that null is added with * ||     
+ * network 
+{{{
+require 'socket'
+client = TCPSocket.open( '127.0.0.1' , 'finger' )
+client.send( 'mysql\n', 0 )
+puts client.readlines
+client.close
+}}}
+
+ * 특정 사이트에서 이미지 긁어오기
+{{{
+require 'net/http'
+h = Net::HTTP.new("www.andstudy.com", 80)
+res = h.get("/index.html", nil )
+if( res.message == "OK" )
+    puts res.body.scan(/<img src="(.*?)"/m).uniq
+end
+}}}
+
+ * 좀더 고수준 - 404에러나 리다이렉트도 알아서 처리
+{{{
+require 'open-uri'
+open('http://www.andstudy.com') do |f|
+  puts f.read.scan(/<img src="(.*?)"/m).uniq
+end
+}}}
+
+
+ * LOGGER사용 예제
+{{{
+require 'logger'
+f = File.new('test.log', 'w')
+log = Logger.new(f )
+log.level = Logger::DEBUG
+log.datetime_format = '%H:%H:%S'
+log.info("App start")
+log.debug("debug message")
+}}}

@@ -1,0 +1,4 @@
+마인드맵 뭐가 좋을까요?
+ * FreeMind
+ * 자바 기반의 공짜 프로그램입니다. 꽤나 간단해서 쓸만 합니다.
+  * http://freemind.sourceforge.net/wiki/index.php/Main_Page

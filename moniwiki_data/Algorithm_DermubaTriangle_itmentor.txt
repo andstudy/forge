@@ -1,0 +1,316 @@
+=== C++버전 Accept ===
+ * 1차 시도 : 모든 데이터 타입을 float로 사용 --> Wrong Answer
+ * 2차 시도 : 데이터 타입을 double로 사용 --> Wrong Answer
+ * 3차 시도 : 출력 부분을 std::cout에서 printf로 바꿈 --> Solved
+  * cout은 기본적으로 실수를 float형으로 처리하나봅니다. printf를 사용하면 됩니다. ios값을 바꿔도 될듯...
+  * 정수부의 값이 커지면 float의 소수부의 표현범위가 작아집니다.
+
+{{{
+#include <vector>
+#include <cmath>
+#include <iostream>
+#include <algorithm>
+
+#ifdef _UNIT_TEST
+	#include <unittest++.h>
+#endif
+
+const long double  PI = 3.14159265358979323846;
+const long double  BaseX = cos( (1.0 / 3.0) * PI );
+const long double  BaseY = sin( (1.0 / 3.0) * PI );
+
+
+struct Point
+{
+	double x,y;
+	double distance(Point& pt)
+	{
+		return sqrt( (pt.x - x) * (pt.x - x) + (pt.y - y) * (pt.y - y) );
+	}
+};
+
+std::vector<unsigned long> calculateBaseColumn(unsigned long limitValue)
+{
+	std::vector<unsigned long> arr;
+	
+	unsigned long nextBaseY = 0;
+	for(unsigned long i = 1 ; nextBaseY <= limitValue; i++)
+	{
+		arr.push_back(nextBaseY);
+		nextBaseY = arr[ arr.size() - 1 ] + i * 2;
+	}
+
+	return arr;
+}
+
+Point CalculateTriangleCenter( Point* triangleVertices )
+{
+	Point center;
+	center.x = triangleVertices[0].x + triangleVertices[1].x + triangleVertices[2].x;
+	center.y = triangleVertices[0].y + triangleVertices[1].y + triangleVertices[2].y;
+
+	center.x /= 3;
+	center.y /= 3;
+	return center;
+}
+
+void searchRow(std::vector<unsigned long>& array, unsigned long address, unsigned long & localX, unsigned long & localY )
+{
+	unsigned long i = 0;
+	for( ; i < array.size() - 1 ; i++)
+	{
+		if( array[i] <= address && address <= array[i+1] )
+		{
+			break;
+		}
+	}
+
+	unsigned long leftIndex = i;
+	unsigned long rightIndex = i + 1;
+	unsigned long leftValue = array[leftIndex];
+	unsigned long rightValue = array[rightIndex];
+
+
+	if( leftValue <= address && address <= leftValue + leftIndex )
+	{
+		localX = address - leftValue;
+		localY = leftIndex;
+	}
+	else if( rightValue - rightIndex <= address && address <= rightValue)
+	{
+		localX = -(rightValue - address);
+		localY = rightIndex;
+	}
+}
+
+void convertLocalToGlobal( int x, int y, Point& a, Point& b, Point& c)
+{
+	if( abs(x+y) % 2 == 0 )	//짝수
+	{
+		a.x = x;
+		a.y = y;
+
+		b.x = x - 1;
+		b.y = y + 1;
+
+		c.x = x + 1;
+		c.y = y + 1;
+	}
+	else			//홀수
+	{
+		a.x = x;
+		a.y = y + 1;
+
+		b.x = x - 1;
+		b.y = y;
+
+		c.x = x + 1;
+		c.y = y;
+	}
+}
+
+
+void GetTriangleCoordinate(Point& a, Point& b, Point& c, Point* output)
+{
+	output[0].x = BaseX * a.x;
+	output[0].y = BaseY * a.y;
+
+	output[1].x = BaseX * b.x;
+	output[1].y = BaseY * b.y;
+
+	output[2].x = BaseX * c.x;
+	output[2].y = BaseY * c.y;
+}
+
+
+double GetDistance(std::vector<unsigned long>& array, unsigned long beginTriangle, unsigned long endTriangle )
+{
+	unsigned long beginLocalX, beginLocalY;
+	searchRow(array, beginTriangle, beginLocalX, beginLocalY );
+	Point beginA, beginB, beginC;
+	convertLocalToGlobal(beginLocalX, beginLocalY, beginA,beginB,beginC);
+	Point beginLastPosition[3];
+	GetTriangleCoordinate(beginA,beginB,beginC, beginLastPosition);
+	Point beginCenter = CalculateTriangleCenter(beginLastPosition);
+
+	unsigned long endLocalX, endLocalY;
+	searchRow(array, endTriangle, endLocalX, endLocalY );
+	Point endA, endB, endC;
+	convertLocalToGlobal(endLocalX, endLocalY, endA,endB,endC);
+	Point endLastPosition[3];
+	GetTriangleCoordinate(endA,endB,endC, endLastPosition);
+	Point endCenter = CalculateTriangleCenter(endLastPosition);
+
+	return endCenter.distance(beginCenter);
+}
+
+
+int main()
+{
+#ifdef _UNIT_TEST
+	UnitTest::RunAllTests();
+#endif
+
+	std::vector< unsigned long > baseCoordinateArray;
+	baseCoordinateArray = calculateBaseColumn(3000000000);
+
+	while(true)
+	{
+		char ln[512];
+		std::cin.getline(ln,512);
+
+		if( ln[0] == 0 )
+			break;
+		
+		long beg,end;
+		sscanf(ln, "%ld %ld", &beg, &end);
+
+		double distance = GetDistance(baseCoordinateArray, beg,end);
+		distance += 0.0005;
+		distance *= 1000;
+		distance = (int)distance;
+		distance /= 1000;
+		printf("%.3lf\n", distance);
+	}	
+
+	return 0;
+}
+
+#ifdef _UNIT_TEST
+TEST(TriangleG)
+{
+	Point pt[3] = { 0, 0, -BaseX, -BaseY, BaseX, -BaseY };
+	Point center = CalculateTriangleCenter(pt);
+
+	CHECK_CLOSE( 0, center.x, 0.001f );
+	CHECK_CLOSE( -0.57735f, center.y, 0.0005f );
+
+	Point pt2[3] = { 0, -2*BaseY, -BaseX, -BaseY, BaseX, -BaseY };
+
+	Point center2 = CalculateTriangleCenter(pt2);
+	CHECK_CLOSE( 0, center2.x, 0.001f );
+	CHECK_CLOSE( -0.57735f * 2, center2.y, 0.0005f );
+
+	double distance = center.distance(center2);
+	CHECK_CLOSE( 0.577f, distance, 0.0005f );
+}
+
+TEST(calculateBaseColumn)
+{
+	std::vector< unsigned long > baseCoordinateArray;
+	baseCoordinateArray = calculateBaseColumn(3000000000);
+
+	CHECK_EQUAL( baseCoordinateArray[0], 0 );
+	CHECK_EQUAL( baseCoordinateArray[1], 2 );
+	CHECK_EQUAL( baseCoordinateArray[2], 6 );
+	CHECK_EQUAL( baseCoordinateArray[3], 12 );
+}
+
+TEST(searchRow)
+{
+	std::vector< unsigned long > baseCoordinateArray;
+	baseCoordinateArray = calculateBaseColumn(3000000000);
+
+	unsigned long localX, localY;
+	searchRow(baseCoordinateArray, 0, localX, localY );
+	CHECK_EQUAL( 0, localX);
+	CHECK_EQUAL( 0, localY);
+
+	searchRow(baseCoordinateArray, 8, localX, localY );
+	CHECK_EQUAL( 2, localX);
+	CHECK_EQUAL( 2, localY);
+
+	searchRow(baseCoordinateArray, 9, localX, localY );
+	CHECK_EQUAL( -3, localX);
+	CHECK_EQUAL( 3, localY);
+}
+
+TEST( convertLocalToGlobal )
+{
+	std::vector< unsigned long > baseCoordinateArray;
+	baseCoordinateArray = calculateBaseColumn(3000000000);
+
+	Point a,b,c;
+	//<0>
+	convertLocalToGlobal(0, 0, a,b,c);
+	CHECK_CLOSE( a.x, 0, 0.001f );
+	CHECK_CLOSE( a.y, 0, 0.001f );
+	CHECK_CLOSE( b.x, -1, 0.001f );
+	CHECK_CLOSE( b.y, 1, 0.001f );
+	CHECK_CLOSE( c.x, 1, 0.001f );
+	CHECK_CLOSE( c.y, 1, 0.001f );
+
+	//<2>
+	convertLocalToGlobal(0, 1, a,b,c);
+	CHECK_CLOSE( a.x, 0, 0.001f );
+	CHECK_CLOSE( a.y, 2, 0.001f );
+	CHECK_CLOSE( b.x, -1, 0.001f );
+	CHECK_CLOSE( b.y, 1, 0.001f );
+	CHECK_CLOSE( c.x, 1, 0.001f );
+	CHECK_CLOSE( c.y, 1, 0.001f );
+
+	//<3>
+	convertLocalToGlobal(1, 1, a,b,c);
+	CHECK_CLOSE( a.x, 1, 0.001f );
+	CHECK_CLOSE( a.y, 1, 0.001f );
+	CHECK_CLOSE( b.x, 0, 0.001f );
+	CHECK_CLOSE( b.y, 2, 0.001f );
+	CHECK_CLOSE( c.x, 2, 0.001f );
+	CHECK_CLOSE( c.y, 2, 0.001f );
+
+	//<5>
+	convertLocalToGlobal(-1, 2, a,b,c);
+	CHECK_CLOSE( a.x, -1, 0.001f );
+	CHECK_CLOSE( a.y, 3, 0.001f );
+	CHECK_CLOSE( b.x, -2, 0.001f );
+	CHECK_CLOSE( b.y, 2, 0.001f );
+	CHECK_CLOSE( c.x, 0, 0.001f );
+	CHECK_CLOSE( c.y, 2, 0.001f );
+}
+
+TEST(GetTriangleCoordinate)
+{
+	std::vector< unsigned long > baseCoordinateArray;
+	baseCoordinateArray = calculateBaseColumn(3000000000);
+
+	Point a,b,c;
+	convertLocalToGlobal(0, 0, a,b,c);
+
+	Point pt[3];
+	GetTriangleCoordinate(a,b,c, pt);
+	Point center = CalculateTriangleCenter(pt);
+
+	CHECK_CLOSE( 0, center.x, 0.001f );
+	CHECK_CLOSE( 0.57735f, center.y, 0.0005f );
+
+	Point pt2[3] = {a,b,c};
+	convertLocalToGlobal(0, 1, a,b,c);
+	GetTriangleCoordinate(a,b,c, pt2);
+
+	Point center2 = CalculateTriangleCenter(pt2);
+	CHECK_CLOSE( 0, center2.x, 0.001f );
+	CHECK_CLOSE( 0.57735f * 2, center2.y, 0.0005f );
+
+	double distance = center.distance(center2);
+	CHECK_CLOSE( 0.577f, distance, 0.0005f );
+}
+
+TEST(GetTriangleDistance)
+{
+	std::vector< unsigned long > baseCoordinateArray;
+	baseCoordinateArray = calculateBaseColumn(3000000000);
+
+	double distance = GetDistance(baseCoordinateArray, 0,7);
+	CHECK_CLOSE( 1.528f, distance, 0.0005f );
+
+	distance = GetDistance(baseCoordinateArray, 2,8);
+	CHECK_CLOSE( 1.528f, distance, 0.0005f );
+
+	distance = GetDistance(baseCoordinateArray, 9,10);
+	CHECK_CLOSE( 0.577f, distance, 0.0005f );
+
+	distance = GetDistance(baseCoordinateArray, 10,11);
+	CHECK_CLOSE( 0.577f, distance, 0.0005f );
+}
+#endif
+}}}

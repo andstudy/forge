@@ -1,0 +1,12 @@
+== 느낌 ==
+ 1. [Programming Challenges/Crypt Kicker]에 비하면 거저먹기
+
+== 풀이 ==
+ 1. 요 라인만 찾으면 끝 -> the quick brown fox jumps over the lazy dog
+ 1. 단어 갯수와 각 단어의 길이로 찾자
+ 1. 특정 글자가 특정 위치에 있는지 하나하나 확인
+ 1. 그 다음은 간단
+
+== 어려운 점 ==
+ 1. 모든 글자 하나하나 정확히 따져봐야 한다.
+ 1. the quick brown fox jumps over the lazy dog 여기서 딱 한 글자만 다른경우도 꼼꼼히 처리 해야 함

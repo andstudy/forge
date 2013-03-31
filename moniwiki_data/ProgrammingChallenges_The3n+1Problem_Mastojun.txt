@@ -1,0 +1,67 @@
+ * 매우 간단한 문제
+ * 실행속도를 빠르게 하기 위해 몸부림을 쳤던 문제 입니다 :D
+ * Dynamic Programming과 Bit operator를 이용했습니다.
+
+ * 입력받기전에 모든 Table을 만들어 두면 더 빠를듯하네요.
+
+== 소스 ==
+{{{#!gcode cpp
+#include <stdio.h>
+
+
+int Solved[1000001] = {0,1,};
+
+int main()
+{
+
+        int i, j;
+        int i2, j2;
+        int max, val;
+        unsigned int x, y;
+        
+
+        while(EOF != scanf("%d %d", &i, &j))
+        {
+                i2 = i;
+                j2 = j;
+                max = 0;
+
+                if(i2>j2)
+                {
+                        int temp = i2;
+                        i2 = j2;
+                        j2 = temp;
+                }
+
+                for(y = i2; y <= j2; y++)
+                {
+                        if(!Solved[y])
+                        {
+                                x = y;
+                                val = 0;
+
+                                while(1)
+                                {
+                                        if(x < 1000001 && Solved[x])
+                                        {
+                                                val += Solved[x];
+                                                break;
+                                        }
+
+                                        while((x & 0x1)){ x=x+(x>>1)+1;val+=2;}
+                                        while(!(x & 0x1)){ x>>=1;val++;}
+                                }
+
+                                Solved[y] = val;
+                        }
+
+                        if(Solved[y] > max) max = Solved[y];
+                }
+
+                printf("%d %d %d\n", i, j, max);
+        }
+
+        return 0;
+}
+
+}}}

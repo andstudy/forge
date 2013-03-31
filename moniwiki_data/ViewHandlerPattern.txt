@@ -1,0 +1,69 @@
+[POSA1]
+[[TableOfContents]]
+= View Handler =
+View Handler 디자인 패턴은 소프트웨어 시스템이 제공하는 모든 뷰 를 관리하는데 도움을 준다. View Handler 는 클라이언트가 뷰를 열고, 쓰고, 배치하도록 해준다. 또 뷰 간의 의존성이나 뷰 들의 업데이트 관련성을 조정한다.
+== Example ==
+ * 다중 문서 편집기에 대한 가정
+  * 여러 가지 문서를 동시에 편리하게 편집 가능.
+  * 각 문서마다 독립적인 편집 View 및 기능 필요.
+  * 각 View는 편집모드, 프린트 모드등을 지원해야 함.
+  * 문서 편집기 자체에서 모든 View들을 통합 관리가 가능 해야 함.
+ * Microsoft Word
+  * 한가지 문서에 대해 다양한 View 제공.
+ * Photoshop
+  * 여러 가지 문서 View들의 통합 관리.
+ * Adobe Acrobat
+  * 여러 가지 View들을 여러 방식의 정렬 및 배치.
+== Context ==
+특정한 데이터의 다양한 뷰를 제공하거나 여러 개의 doc 으로 동작하는 어떤 소프트웨어 시스템.
+
+== Problem ==
+ * 다중 View관리를 위한 추가 기능 필요.
+    사용자들은 편리한 관리 기능 구현을 원한다.
+    (예 : 새로운 View의 생성, 수정, view들의 배치, 등등)
+ * 다중 View들 사이의 통합.
+    한번의 Update는 연관된 View들에 모두 영향을 미쳐야 한다.
+=== Forces ===
+ * 사용자 관점에서 다양한 view 가 쓰기 쉬워야 한다.
+ * 개개의 뷰 들이 서로 의존하지 않아야 한다.
+ * 뷰 구현이 변이할 수 있고 실시간에 추가될 수도 있다.
+
+== Solution ==
+ * 특정 뷰를 제어하거나 표현하는데 필요한 코드와 뷰들의 관리를 분리시킨다.
+ * View Handler 컴포넌트가 시스템의 모든 뷰를 관리한다. 
+ * View Handler 는 MVC 보다 더욱 세부적인 패턴이다.
+ * View Handler 를 Abstract Factory 로 도 생각할 수 있다.
+
+== 구조 ==
+View Handler, abstract View, view, supplier
+
+== Dynamics ==
+
+== Implementation ==
+ 1. 뷰들을 식별
+ 2. 모든 뷰의 공통 인터페이스 지정
+ 3. 각 뷰를 구현
+ 4. View handler를 정의
+
+== Variants ==
+ * View Hander 를 Command 객체와 함께.
+ * Command processor와도 함께.
+
+== Known Uses ==
+ * Macintosh Window Manager
+ * Microsoft Word
+ * [WidgetManager] - 게임에서 Custom UI 를 만들거나, winamp 에서의 스킨 기능을 가능하게 하는 기능.
+
+== Consequences ==
+=== Benefits ===
+ * 뷰 처리를 정형화 할 수 있다.
+ * 뷰 의 확장과 변화가 용이
+ * App-특징적인의 뷰 꾸미기
+=== Liabilities ===
+ * 제한된 적응성
+ * 효율성 (indirection 때문)
+
+== Related Patterns ==
+ * MVC 아키텍처 패턴
+ * Presentation-Abstraction-Control 아키텍처 패턴
+ * 간단한 예제 :  attachment:ViewHandlerPrj.zip

@@ -1,0 +1,13 @@
+{{{
+WowBook http://www.wowbook.com/generic/book/info/book_detail.asp?isbn=ISBN$ISBN2 http://image.wowbook.com/book/large_image/$ISBN2.gif
+Tmecca http://www.tmecca.co.kr/search/isbnsearch.html?isbnstr= 
+AladdinMusic http://www.aladdin.co.kr/music/catalog/music.asp?ISBN=
+}}}
+ [[ISBN(0-201-65791-0,WowBook)]]  [[ISBN(0735700788,Tmecca)]]
+
+ [[ISBN(9049741495,AladdinMusic,noimg)]]
+
+MoniWikiDev:UploadedFiles''''''에서 ISBN.php를 받으시길 바랍니다.
+
+[[ISBN(8946020423,K)]] 
+[[ISBN(0671872346)]]

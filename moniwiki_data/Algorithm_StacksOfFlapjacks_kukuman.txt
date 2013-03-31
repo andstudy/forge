@@ -1,0 +1,176 @@
+ * 해결 방법
+  * flip의 동작을 구현하여 테스트함
+  * 스택의 양끝으로 부터 중간으로 포인터를 이동하면서 왼쪽 끝이 오른쪽 끝보다 작은지 검사 
+   * 만약 다르다면 flip 수행 수행하며 결과 출력
+   * 각 포인터가 교차 될때까지(모든비교가 완료된 시점)이면 검사종료
+ * 코드
+{{{
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Main implements Runnable{
+    static String ReadLn(int maxLength){  // utility function to read from stdin,
+                                          // Provided by Programming-challenges, edit for style only
+        byte line[] = new byte [maxLength];
+        int length = 0;
+        int input = -1;
+        try{
+            while (length < maxLength){//Read untill maxlength
+                input = System.in.read();
+                if ((input < 0) || (input == '\n')) break; //or untill end of line ninput
+                line [length++] += input;
+            }
+
+            if ((input < 0) && (length == 0)) return null;  // eof
+            return new String(line, 0, length);
+        }catch (IOException e){
+            return null;
+        }
+    }
+
+    public static void main(String args[])  // entry point from OS
+    {
+    	Main myWork = new Main();  // Construct the bootloader
+        myWork.run();            // execute
+    }
+
+    public void run() {
+    	ArrayList<String> result = new ArrayList<String>();
+    	String line;
+    	while((line = ReadLn(5000)) != null){
+    		Flapjacks cakes = new Flapjacks(line);
+    		result.add(line.trim());
+    		result.add(cakes.getSortResult());
+    	}
+    	for(String curLine : result){
+    		System.out.println(curLine);
+    	}
+    
+    }
+}
+
+
+class Flapjacks implements Runnable{
+	private int [] cakes;
+	public Flapjacks(String line){
+		Scanner scan = new Scanner(line);
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while(scan.hasNext()){
+			list.add(scan.nextInt());
+		}
+		cakes = new int[list.size()];
+		int i=0;
+		for(Integer data : list){
+			cakes[i++] = data;
+		}
+	}
+	public Flapjacks(int[] cakes) {
+		this.cakes = cakes;
+	}
+
+	public void flip(int flipPos) {
+		if(cakes.length < flipPos || flipPos ==0){
+			return;
+		}
+		int i=0;
+		int j= cakes.length - flipPos;
+		while(i<j){
+			int temp = cakes[i];
+			cakes[i] = cakes[j];
+			cakes[j] = temp;
+			i++;
+			j--;
+		}
+	}
+
+	public int[] getCakes() {
+		return cakes;
+	}
+
+	public int getFlipPos() {
+		int result =1;
+		for(int i=0,j=cakes.length-1;i<j;i++,j--){
+			if(cakes[j] < cakes[i]){
+				return result;
+			}
+			result++;
+		}
+		return 0;
+	}
+
+	public String getSortResult() {
+		int pos = getFlipPos();
+		String result = new Integer(pos).toString();
+		while(pos != 0){
+			flip(pos);
+			pos = getFlipPos();
+			result = result+" "+pos;
+		}
+		return result;
+	}
+
+	public void run() {
+		
+	}
+
+}
+
+}}}
+
+ * 테스트 케이스
+{{{
+import java.util.Arrays;
+
+import junit.framework.TestCase;
+
+
+public class FlapjascksTest extends TestCase {
+	
+	public void testFlip(){
+		int[] data1 = {8,4,6,7,5,2};
+		int[] data2 = {7,6,4,8,5,2};
+		int[] data3 = {2,5,8,4,6,7};
+		Flapjacks cakes = new Flapjacks(data1);
+		cakes.flip(3);
+		assertTrue(Arrays.equals(data2, cakes.getCakes()));
+		cakes.flip(1);
+		assertTrue(Arrays.equals(data3, cakes.getCakes()));
+	}
+	
+	public void testGetFlipPos(){
+		int[] data1 = {1,2,3,4,5};
+		Flapjacks cakes = new Flapjacks(data1);
+		assertEquals(0, cakes.getFlipPos());
+		
+		int[] data2 = {5,4,3,2,1};
+		Flapjacks cakes2 = new Flapjacks(data2);
+		assertEquals(1, cakes2.getFlipPos());
+
+		int[] data3 = {4,3,2,1,5};
+		Flapjacks cakes3 = new Flapjacks(data3);
+		assertEquals(2, cakes3.getFlipPos());
+	}
+	
+	public void testGetSortResult(){
+		int [] data1 = {1, 2, 3, 4, 5};
+		Flapjacks cakes = new Flapjacks(data1);
+		assertEquals("0", cakes.getSortResult());
+
+		int[] data2 = {5,4,3,2,1};
+		Flapjacks cakes2 = new Flapjacks(data2);
+		assertEquals("1 0", cakes2.getSortResult());
+
+		int[] data3 = {5,1,2,3,4};
+		Flapjacks cakes3 = new Flapjacks(data3);
+		assertEquals("1 2 0", cakes3.getSortResult());
+	}
+	public void testInit(){
+		int[] data3 = {5,1,2,3,4};
+		Flapjacks cakes3 = new Flapjacks("5 1 2 3 4");
+		assertTrue(Arrays.equals(data3, cakes3.getCakes()));
+		
+	}
+}
+
+}}}

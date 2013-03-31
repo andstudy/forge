@@ -1,0 +1,13 @@
+= ohyecloudy =
+{{{#!html
+<div style="width:595px" id="__ss_9701436"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ohyecloudy/ss-9701436" title="넘쳐나는 정보 소화 노하우" target="_blank">넘쳐나는 정보 소화 노하우</a></strong> <object id="__sse9701436" width="595" height="497"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-111014144614-phpapp02&rel=0&stripped_title=ss-9701436&userName=ohyecloudy" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <embed name="__sse9701436" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=random-111014144614-phpapp02&rel=0&stripped_title=ss-9701436&userName=ohyecloudy" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="595" height="497"></embed> </object> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/ohyecloudy" target="_blank">Jongbin Oh</a> </div> </div>
+}}}
+
+= florist =
+{{{#!html
+<div style="width:595px" id="__ss_9726213"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/hiscale/111015-html5-1" title="[111015/아꿈사] HTML5를 여행하는 비(非) 웹 개발자를 위한 안내서서 - 1부 웹소켓." target="_blank">[111015/아꿈사] HTML5를 여행하는 비(非) 웹 개발자를 위한 안내서서 - 1부 웹소켓.</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9726213" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/hiscale" target="_blank">sung ki choi</a> </div> </div>
+}}}
+
+{{{#!html
+<div style="width:595px" id="__ss_9841345"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/soomong/hybrid-app-9841345" title="Hybrid app" target="_blank">Hybrid app</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9841345" width="595" height="497" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/soomong" target="_blank">hyun soomyung</a> </div> </div>
+}}}

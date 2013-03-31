@@ -1,0 +1,187 @@
+{{{: 
+문제
+The prime factors of 13195 are 5, 7, 13 and 29. 
+What is the largest prime factor of the number 600851475143 ?
+}}}
+
+이수안&현수명
+소수를 구하고싶었습니다
+{{{#!gcode scheme
+(defn isPrime [number]
+  (loop [result number x number]
+    (if (= 1 x) true 
+    (if(zero? (rem result (dec x)) )
+    true
+    (recur (result) (dec x))))))
+  ;(if (zero? (rem num (dec num))
+  ;  true
+  ;  (recur (isPrime num))))
+  
+(isPrime 5)
+}}}
+
+{{{#!gcode scheme
+;문형태, 최기원
+; n을 m으로 나누었을때 나누어 떨어지면 true를 반환 아니면 false를 반환
+(defn div? [n m](zero? (rem n m))) 
+
+; n의 약수들의 시퀀스를 반환 한다.
+(defn divisors [n]
+  (lazy-seq 
+    (filter #(div? n %) (range 2 (/ n 2)))))
+
+; n을 이루는 가장 작은 소수를 반환 한다. 
+(defn smallest-prime-factor [n]
+  (first (divisors n)))
+
+(def divisors (memoize divisors))
+
+; 가장 큰 소수를 구한다.
+(defn lagest-prime-factor [n]
+  (loop [x n]
+    (if (nil? (smallest-prime-factor x))
+      x
+      (recur (/ x (smallest-prime-factor x) )))))
+
+; 덤~ 소수인지 판단.
+(defn prime? [n]
+  (= n (lagest-prime-factor n)))
+
+(def smallest-prime-factor (memoize smallest-prime-factor))
+
+}}}
+
+== 우정권 & 박일 ==
+{{{#!gcode scheme
+; step 1 : 그냥 풀어본 방식
+(defn whole-number [] (iterate inc 2))
+
+(defn is-not-primes? [s n] 
+  (if (= (rem s n) 0) false true))
+
+(defn first-prime [n]
+  (first (drop-while #(is-not-primes? n %) (whole-number))))
+
+(defn large-prime [n]
+  (loop [n1 n]
+    (if (= n1 (first-prime n1))
+       n1
+       (recur (quot n1 (first-prime n1)))
+    )
+  )
+)
+
+(time (large-prime 600851475143))
+
+"Elapsed time: 27.165184 msecs"
+6857
+}}}
+
+{{{#!gcode scheme
+; step 2 : iterate 시작지점을 n 부터 하는 방식으로 수정
+(defn rest-number [n] (iterate inc n))
+
+(defn is-not-primes? [s n] 
+  (if (= (rem s n) 0) false true))
+
+(defn first-prime [n r]
+  (first (drop-while #(is-not-primes? n %) (rest-number r ))))
+
+(defn large-prime [n]
+  (loop [n1 n r 2]
+    (if (= n1 (first-prime n1 r))
+       n1
+       (recur (quot n1 (first-prime n1 r)) (first-prime n1 r))
+    )
+  )
+)
+
+(time (large-prime 600851475143))
+
+"Elapsed time: 18.362669 msecs"
+6857
+}}}
+
+{{{#!gcode scheme
+; step 3 :  let 을 써서 반복 실행을 막은 버전
+(defn rest-number [n] (iterate inc n))
+
+(defn is-not-primes? [s n] 
+  (if (= (rem s n) 0) false true))
+
+(defn first-prime [n r]
+  (first (drop-while #(is-not-primes? n %) (rest-number r ))))
+
+; quot
+
+(defn large-prime [n]
+  (loop [n1 n r 2]
+    ;(println n1)
+    (let [fp (first-prime n1 r)]
+	    (if (= n1 fp)
+	       n1
+	       (recur (quot n1 fp) fp)
+	    )
+    )
+  )
+)
+
+(time (large-prime 600851475143))
+
+"Elapsed time: 13.368179 msecs"
+6857
+}}}
+
+
+김명관&최학윤
+
+{{{#!gcode scheme
+(ns problem3
+(use: clojure.contrib.lazy-seqs))
+(defn findMaxPrime
+  ([n primes]
+    (findMaxPrime n primes 0))    
+  ([n pri mx]
+    (if (> (first pri) n)
+      (println mx)
+      (if (= 0 (rem n (first pri)))
+        (findMaxPrime (/ n (first pri)) (rest pri) (first pri))
+        (findMaxPrime n (rest pri) mx)))))
+(time (findMaxPrime 600851475143 primes))
+}}}
+
+== 박일 집에서 풀었던 버전 ==
+{{{#!gcode scheme
+; 문제 3 : Find the largest prime factor of a composite number.
+; recur 를 쓴 버전
+; recur 의 인자는 loop 의 binding 인자를 다시 바인딩하기 때문에 서로 갯수가 같아야 한다.
+; 소인수분해 최적화 알고리즘은 전혀 적용하지 않았음. 기억이 안 나...
+(defn div-pf-recur [x n]
+  (loop [x x n n]
+    ;(println x n)
+    (if (= x n)
+      n
+      (if (= (rem x n) 0)
+        (recur (quot x n) n)
+        (recur x (inc n))
+      )
+    )
+  )
+)
+
+(time (div-pf-recur 600851475143 2))
+
+"Elapsed time: 10.16023 msecs"
+6857
+}}}
+
+인성민, 박민욱...
+{{{#!gcode scheme
+(defn divedsth [a b] ( = (mod a b) 0 ))
+
+(defn test [a b] (if (> a b) (if (divedsth a b) (test (/ a b) b) (test a (inc b))) b))
+
+(defn biggest_prime_num [a] (test a 2))
+
+(biggest_prime_num 600851475143 ) -> 오버플로우
+}}}

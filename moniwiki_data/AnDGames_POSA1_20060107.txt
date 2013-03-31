@@ -1,0 +1,61 @@
+Members :
+
+이동현 
+박진시 
+박  일 
+한원규 
+강대명
+이수안
+안준석
+윤종복
+이의호
+김미선
+서창우
+
+= 1주 KICK OFF Meeting =
+
+날짜 : 2006.01.07
+참석자 :
+박진시, 박일, 한원규, 강대명, 이수안, 서창우, 안준석
+장소 : 신촌 TOZ
+시간 : 10시 ~ 13시
+
+
+== introduction ==
+ * 장소 및 시간 선정
+
+== 스터디 발표 순서 == 
+
+= Structural Decomposition =
+ * Whole-Part Design Pattern
+
+= Organisation of Work =
+ * Master-Slave Design Pattern
+
+= Access Control =
+ * Proxy Design Pattern : 이의호
+
+= Management =
+ * Command Processor Design Pattern
+ * View Handler Design Pattern 
+
+= Communication =
+ * Forwarder-Receiver Design Pattern
+ * Client-Dispatcher-Server
+ * Publisher-Subscriber Design Pattern
+
+= From Mud to Structure =
+ * Layers Architectural Pattern
+ * Pipes and Filters Architectural Pattern : 박일
+ * Blackboard Architectural Pattern : 안준석
+
+= Distributed Systems =
+ * Broker Architectural Pattern : 안준석
+
+= Interactive Systems =
+ * Model-View-Controller architectural Pattern 
+ * Presentation-Abstraction-Control architectural Pattern
+
+= Adaptable Systems =
+ * Microkernel Architectural Pattern : 박일
+ * Reflection Architectural Pattern

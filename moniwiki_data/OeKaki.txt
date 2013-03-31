@@ -1,0 +1,25 @@
+[[OeKaki(1)]]
+
+[[OeKaki(test)]]
+
+[[OeKaki(test2)]]
+
+[[OeKaKi(signature)]]
+
+[[OeKaKi(test3)]]
+[[OeKaKi(heya)]]
+
+== 사용법 ==
+{{{[[OeKaki(파일이름)]]}}}을 추가하면, `OeKaki_파일이름.png`그림이 만들어집니다.
+
+재편집 하는 경우, 기존의 그림은 `test_1.png` `test_2.png`과 같은 식으로 이름이 바뀌어 저장됩니다.
+
+[[UploadedFiles]]
+[[OeKaki(test3)]]
+[[OeKaki(test3)]]
+[[OeKaki(test3)]]
+[[OeKaki(heya)]]
+[[OeKaki(1)]]
+[[OeKaki(signature)]]
+[[OeKaki(test)]]
+[[OeKaki(1)]]

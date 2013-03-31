@@ -1,0 +1,43 @@
+== 기존 ==
+{{{
+Log aspect
+Transaction 
+Business Logic
+
+function doSomething()
+{
+  log.write( "start" );
+  Transaction.Join();
+
+  doBusiness();
+
+  Transaction.Continue();
+  log.write( "end" );
+}
+}}}
+
+== Applied aspect programming. ==
+{{{
+function logWrite( var logMessage )
+{
+  log.write( logMessage );
+}
+
+<aspect doSomething>
+  <log var="start" />
+  <doSomething />
+  <log var="end" />
+</aspect>
+
+<aspect doMorething>
+  <log var="start" />
+  <doSomething />
+  <log var="end" />
+</aspect>
+
+[log, Transaction]
+function doSomething()
+{
+  doBusiness();
+}
+}}}

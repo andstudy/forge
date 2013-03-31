@@ -1,0 +1,15 @@
+== 네트워크 모델 ==
+=== Supernodes ===
+소위 2 세대 P2P 프로토콜
+FastTrack 이 실행될 때 컴퓨터 환경과 네트워크 상태에 따라 스스로가 supernodes 가 되어야 하는지 결정한다. (supernodes : nodes = 1 : 100)
+
+supernode는 ip numbers 를 기록한다.
+
+자료가 많이 없는 듯.
+supernode 와 node 끼리를 프로토콜은 reverse-engineered 되었지만 supernodes 사이의 프로토콜은 아직 분석할 게 많음.
+
+== 참고 문서 ==
+ * Wikipedia 정의
+  * http://en.wikipedia.org/wiki/FastTrack
+ * 프로토콜
+  * http://cvs.berlios.de/cgi-bin/viewcvs.cgi/gift-fasttrack/giFT-FastTrack/PROTOCOL?rev=HEAD&content-type=text/vnd.viewcvs-markup

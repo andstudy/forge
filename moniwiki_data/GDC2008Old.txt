@@ -1,0 +1,54 @@
+= 강연 목록 =
+ * [http://www.gdconf.com/conference/viewallsessions.htm 전체 강연 목록]
+ * GDC2008AudioTrack
+ * GDC2008BusinessAndManagementTrack
+ * GDC2008GameDesignTrack
+ * GDC2008ProductionTrack
+ * GDC2008ProgrammingTrack
+ * GDC2008VisualArtsTrack
+ * GDC2008MobileSummitsAndTutorials
+ * GDC2008GameCareerSeminars
+
+= 분류가 어딘지 모르는 녀석들 =
+ [http://t-machine.org/index.php/2008/02/24/gdc08-the-bioware-live-team-building-community-through-technology/ The BioWare Live Team: Building Community through Technology]
+ [http://t-machine.org/index.php/2008/02/23/gdc08-raising-venture-financing-for-your-startup/ Raising Venture Financing for your Startup]
+ [http://t-machine.org/index.php/2008/02/23/gdc08-building-a-successful-production-process/ Building a successful production process]
+ [http://t-machine.org/index.php/2008/02/20/gdc08-thinking-outside-the-virtual-world/ Thinking Outside the Virtual World]
+ [http://puzzlelab.net/tt/index.php?pl=157 퍼즐 퀘스트 개발 후기 (Puzzle Quest Postmortem)]
+ [http://www.intrinsicalgorithm.com/IAonAI/2008/02/gdc-2008-ray-kurzweils-vision-of-future.html Ray Kurzweil's vision of the future] 
+ [http://icdia.egloos.com/1793649 오카모토의 프로듀서론 ”개조와 창조"]
+ [http://blog.hirihiri.com/entry/PhyreEngine-XNA%EC%97%90-%EB%8C%80%ED%95%AD%ED%95%98%EB%8A%94-%EC%86%8C%EB%8B%88%EC%9D%98-%EB%AC%B4%EB%A3%8C-%ED%81%AC%EB%A1%9C%EC%8A%A4%ED%94%8C%EB%A0%9B%ED%8F%BC-3D-%EC%97%94%EC%A7%84 PhyreEngine :: XNA에 대항하는 소니의 무료 크로스플렛폼 3D 엔진]
+ [http://blog.hirihiri.com/entry/%ED%97%A4%EC%9D%BC%EB%A1%9CHalo-3-%EB%B9%84%ED%95%98%EC%9D%B8%ED%8A%B8-%EC%8A%A4%ED%86%A0%EB%A6%AC-How-Microsoft-Labs-Invented-a-New-Science-of-Play 헤일로(Halo) 3 비하인트 스토리 : How Microsoft Labs Invented a New Science of Play]
+
+= 강연 자료들이 올라올 만한 곳들 =
+ [https://www.cmpevents.com/GD08/a.asp?option=C&V=1&SB=4&Pv=2 GDC 2008 Proceedings]
+  -. 하단의 'Only where Session includes download notes'를 Check하고 'Session Search'를 누를 것.
+  -. 보통 GDC 종료 후, 3~4개월까지 계속 추가됨.
+  -. 강연자의 Blog나 Homepage에 먼저 게재되는 경우가 많음.
+ [http://store.cmpgame.com/category.php?cat=72&skin=gdcradio GDC Radio]
+ [http://blogs.msdn.com/danielfe/default.aspx 어느 MS 개발자의 GDC 강연 노트]
+ [http://www.bungie.net/Inside/publications.aspx Bungie의 발표 자료(주로 HALO 3)]
+ [http://mgsuserresearch.com/publications/ Microsoft Game Studio User Research]
+ [http://www.intel.com/software/graphics Intel Graphics]
+ [http://www.thisisgame.com/gdc08/ This Is Game]
+ [http://gdc.gamespot.com/?tag=event_nav%3bheader GameSpot]
+ [http://j2k.naver.com/j2k_frame.php/korean/www.watch.impress.co.jp/game/docs/20080221/gdclink.htm Game Watch]
+ [http://j2k.naver.com/j2k.php/korean/www.4gamer.net/words/002/W00296/ 4gamer.net]
+ [http://video.google.com/videosearch?q=GDC+2008&sitesearch= Google Video & Youtube]
+ [http://www.gametrailers.com/gdc2k8.php Gametrailers.com]
+ [http://www.gamevideos.com/video/channel/GDC%202008 Gamevideos.com]
+ [http://www.valvesoftware.com/publications.html Valve]
+
+= 강연 후기 =
+ all2one: [http://all2one.springnote.com/pages/841606 셋째날], [http://all2one.springnote.com/pages/846166 넷째 날], [http://all2one.springnote.com/pages/849612 마지막 날]
+
+= 관련 페이지 =
+ [http://feeds.feedburner.com/~r/GameDevelopersConference/~3/217953887/top_gdc_tutorial_picks.html Top GDC Tutorial Picks]
+ [http://j2k.naver.com/j2k_frame.php/korean/www.4gamer.net/words/002/W00296/ 4Gamers.net의 GDC관련 리뷰입니다.]
+
+= 작성에 기여한 사람 =
+ 각자 이름이나 아이디를 써 주세요. :)
+ [ParkPD], [김기웅], [kaseton] - 최우성, [장원석], [krucef] - 오영욱(까까) [yellow] - 송찬호
+
+= ETC =
+ [http://www.videogaming247.com/2008/02/25/that-was-the-news-%e2%80%93-week-8-2008-unconvincing-gdc-governed-by-two-main-themes-flux-and-fear/ That was the news – Week 8, 2008: Unconvincing GDC governed by two main themes: flux and fear]

@@ -1,0 +1,5 @@
+{{{[[Play(http://foo.bar/my.mp3)]]}}}
+
+{{{[[Play(mms://foo.bar.com/my.wmv)]]}}}
+----
+CategoryMacro

@@ -1,0 +1,21 @@
+== The Spell Checking Option ==
+MoinMoin looks for valid words in two places:
+ * the "dict" directory in the MoinMoin package directory
+ * the page LocalSpellingWords
+
+If the "dbhash" module is available with your Python installation, the files in "dict" are read only ''once'' and stored in a hash table. This speeds up the spell checking process because then the number of words in the ''checked page'' determines the time needed for the checking, ''not'' the number of words in the dictionary (with 250000 words, some hundred milliseconds instead of several seconds).
+
+BTW, a UNIX machine normally comes with at least one words file; to use those, create a symlink within the dict directory, like so:
+{{{
+MoinMoin/dict> ln -s /usr/dict/words .
+}}}
+On some systems, the words file is found in "/usr/share/dict/words" instead.
+
+=== Example ===
+{{{
+MoinMoin> ls -l dict
+drwxr-xr-x   7 544      everyone        0 Jan 04 08:29 CVS
+-rw-r--r--   1 544      everyone   409067 Jan 04 06:38 american-english
+-rw-r--r--   1 544      everyone  2913577 Jan 25  2000 german.txt
+-rw-r--r--   1 544      everyone    92631 Nov 30 15:24 top10000de.txt
+}}} 

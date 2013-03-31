@@ -1,0 +1,17 @@
+== Help Contents ==
+Here is a tour of the most important help pages:
+ * HelpForBeginners - if you are new to wikis
+ * HelpOnUserPreferences - how to make yourself known to the wiki, and adapt default behaviour to your taste
+ * HelpOnPageCreation - how to create a new page, and how to use page templates
+ * HelpOnPageDeletion - how to delete pages
+ * HelpOnEditing - how to edit a page
+ * HelpOnNavigation - explains the navigational elements on a page
+ * HelpOnActions - tools that work on pages or the whole site
+ * MoniWiki:HelpMiscellaneous for more details, and a FAQ section
+ * MoniWiki:HelpForDevelopers - how to add your own features by changing the MoniWiki code
+
+An automatically generated index of all help pages is on HelpIndex
+
+See also MoniWiki:MoniWikiFaq
+----
+[[Navigation(HelpContents)]]

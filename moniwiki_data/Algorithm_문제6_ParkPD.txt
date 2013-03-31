@@ -1,0 +1,254 @@
+아직 안 끝났는데... 스키장 가야되서 후후...
+
+{{{#!gcode cpp
+/* @JUDGE_ID:parkpd 10033 C "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+
+using namespace std;
+
+#define _UNIT_TEST
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	return 0;
+}
+
+#else
+
+#include "../../UnitTest++/src/UnitTest++.h"
+
+struct Command
+{
+	Command() : cmd(0), d(0), n(0) {}
+	Command(int cmd, int d, int n)
+	{
+		this->cmd = cmd;
+		this->d = d;
+		this->n = n;
+	}
+
+	int GetInt() const
+	{
+		return cmd * 100 + d * 10 + n;
+	}
+
+	void SetInt(int c)
+	{
+		cmd = c / 100;
+		d = (c / 10) % 10;
+		n = c % 10;
+	}
+
+	bool IsZero() const
+	{
+		return (0 == cmd) && (0 == d) && (0 == n);
+	}
+
+	int cmd;
+	int d;
+	int n;
+};
+
+class CInterpreter
+{
+public:
+	CInterpreter() : m_SP(0), m_Halt(false) 
+	{
+		for (int i = 0; i < 10; ++i)
+		{
+			m_Register[i] = 0;
+		}
+	}
+
+	void AddCommand(string command);
+	void AddCommand(int cmd, int d, int n);
+	void Run();
+	void DoCommand(int cmd, int d, int n);
+
+	int m_Register[10];
+	Command m_Ram[1000];
+	int m_SP;
+	bool m_Halt;
+};
+
+void CInterpreter::AddCommand(string command)
+{
+	const char* pCommand = command.c_str();
+	AddCommand(pCommand[0] - '0', pCommand[1] - '0', pCommand[2] - '0');
+}
+
+void CInterpreter::AddCommand(int cmd, int d, int n)
+{
+	m_Ram[m_SP++] = Command(cmd, d, n);
+}
+
+void CInterpreter::Run()
+{
+	m_SP = 0;
+
+	while(!m_Halt)
+	{
+		Command& cmd = m_Ram[m_SP];
+		DoCommand(cmd.cmd, cmd.d, cmd.n);
+		++m_SP;
+	}
+}
+
+void RemainUnder1000(int& n)
+{
+	if (1000 < n)
+	{
+		n = n % 1000;
+	}
+}
+
+void CInterpreter::DoCommand(int cmd, int d, int n)
+{
+	const int s = n;
+	const int a = n;
+
+	switch(cmd)
+	{
+	case 1:
+		if (0 == d && 0 == n)
+		{
+			m_Halt = true;
+			return;
+		}
+
+	case 2:		// 2dn : d 레지스터를 n 으로 설정(0이상 9이하)  <-- TODO
+		m_Register[d] = n;
+		RemainUnder1000(m_Register[d]);
+		break;
+
+	case 3:		// 3dn : d 레지스터에 n 더함
+		m_Register[d] += n;
+		RemainUnder1000(m_Register[d]);
+		break;
+
+	case 4:		// 4dn : d 레지스터에 n 곱합
+		m_Register[d] *= n;
+		RemainUnder1000(m_Register[d]);
+		break;
+
+	case 5:		// 5ds : d 레지스터를 s 레지스터의 값으로 설정
+		m_Register[d] = m_Register[s];
+		break;
+
+	case 6:		// 6ds : s 레지스터의 값을 d 레지스터에 더함
+		m_Register[d] += m_Register[s];
+		RemainUnder1000(m_Register[d]);
+		break;
+
+	case 7:		// 7ds : d 레지스터에 s 레지스터의 값을 곱함
+		m_Register[d] *= m_Register[s];
+		RemainUnder1000(m_Register[d]);
+		break;
+
+	case 8:		// 8da : d 레지스터를 a 레지스터에 저장된 주소의 램에 들어있는 값으로 설정
+		m_Register[d] = m_Ram[m_Register[a]].GetInt();
+		RemainUnder1000(m_Register[d]);
+		break;
+
+	case 9:		// 9ds : a 레지스터에 저장된 주소의 램에 s 레지스터의 값을 대입
+		m_Ram[m_Register[a]].SetInt(m_Register[s]);
+		RemainUnder1000(m_Register[d]);
+		break;
+
+	case 0:
+		if (m_Ram[m_Register[s]].IsZero())
+		{
+			m_SP = m_Register[d];
+		}
+		break;
+	}
+}
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+TEST(Command)
+{
+	Command c;
+	c.SetInt(123);
+	CHECK_EQUAL(1, c.cmd);
+	CHECK_EQUAL(2, c.d);
+	CHECK_EQUAL(3, c.n);
+}
+
+TEST(CInterpreter)
+{
+	CInterpreter s;
+	s.AddCommand("123");
+	CHECK_EQUAL(1, s.m_SP);
+
+	Command& c1 = s.m_Ram[0];
+	CHECK_EQUAL(1, c1.cmd);
+	CHECK_EQUAL(2, c1.d);
+	CHECK_EQUAL(3, c1.n);
+
+	s.AddCommand("946");
+	CHECK_EQUAL(2, s.m_SP);
+
+	Command& c2 = s.m_Ram[1];
+	CHECK_EQUAL(9, c2.cmd);
+	CHECK_EQUAL(4, c2.d);
+	CHECK_EQUAL(6, c2.n);
+}
+
+TEST(RemainUnder1000)
+{
+	int n = 10;
+	RemainUnder1000(n);
+	CHECK_EQUAL(10, n);
+
+	n = 1000;
+	RemainUnder1000(n);
+	CHECK_EQUAL(1000, n);
+
+	n = 1001;
+	RemainUnder1000(n);
+	CHECK_EQUAL(1, n);
+
+	n = 1034;
+	RemainUnder1000(n);
+	CHECK_EQUAL(34, n);
+}
+
+TEST(CInterpreter_Case1)
+{
+	CInterpreter s;
+	s.AddCommand("299");
+	s.AddCommand("492");
+	s.AddCommand("495");
+	s.AddCommand("399");
+	s.AddCommand("492");
+	s.AddCommand("495");
+	s.AddCommand("399");
+	s.AddCommand("283");
+	s.AddCommand("279");
+	s.AddCommand("689");
+	s.AddCommand("078");
+	s.AddCommand("100");
+	s.AddCommand("000");
+	s.AddCommand("000");
+	s.AddCommand("000");
+	s.Run();
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

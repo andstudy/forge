@@ -1,0 +1,156 @@
+= Pattern Name =
+''Proactor''
+
+== Goal ==
+Event-driven 방식의 어플리케이션이 비동기 방식의 완료에 의해 발생된 요청을 효과적으로 처리할 수 있도록 한다. 이를 다중 처리를 통해 성능 향상을 얻으면서 동시에 그로 인한 단점이 발생하는 것을 최소화 시켜주는 패턴이다
+
+== 예 == 
+ * 여러 개의 웹브라우저로부터 보내지는 http요구들을 처리하는 고성능의 웹서버
+  attachment:webserver_ex1.gif
+ * 진행
+  1. HTTP Get요청을 서버에 보냄
+  1. 서버는 접속을 받고 요청을 읽고 파싱
+  1. 서버는 해당 파일을 열고 읽음
+  1. 서버는 브라우저에 해당 파일의 내용을 보내고 닫음
+
+== 구현 방안 ==
+ * Reactor pattern
+  * 굉장히 많은 사용자들의 긴 요청에 응답하기에는 적절하지 않다.
+   * request 처리를 serialize 하게 하기 때문
+   * 만약 reactor 를 여러 개 만든다면?
+   * select 할 수 있는 소켓의 최대 갯수 제한
+ * Thread-per GET request
+  * Thread 갯수가 많아진다.
+   * 보안 : Leader/Follwers, Half-Sync/Half-Async Pattern
+   * 구현하기 복잡하고 확장성 떨어진다.
+ * Proactor
+  * OS 가 비동기 IO 를 지원하는가?
+
+== Reactive 한 디스패칭 모델 ==
+ * 접속단계
+ attachment:webserver_ex2.gif
+ * 요청 처리 단계
+ attachment:webserver_ex3.gif
+
+== 동기화된 multithreading 방식 ==
+attachment:webserver_ex4.gif
+
+ 1. 각 쓰레드는 accept()함수 실행시 동기적으로 블록당한다.
+ 1. 클라이언트가 서버에 연결되면, 접속이 accept된다.
+ 1. 새로 접속된 클라이언트의 HTTP요청이 동기적으로 네트워크 연결을 통해 읽혀진다.
+ 1. 요청을 파싱한다.
+ 1. 요청된 파일을 동기적으로 읽는다.
+ 1. 파일의 내용이 동기적으로 클라이언트에 전송된다.
+
+== Proactor 에서 접속 단계 ==
+attachment:webserver_proactor1.gif
+
+ 1. 웹서버는 acceptor에게 비동기 accpet처리를 초기화하도록 알려준다
+ 1. Acceptor는 비동기 accept요청을 초기화하고, 그 자신을 완료 핸들러와 완료 발송자의 참조로 넘김
+ 1. 웹서버는 완료 발소자의 이벤트 루프를 실행
+ 1. 클라이언트가 웹서버에 접속
+ 1. 비동기 accept명령이 완료하면 운영체제는 완료발송자에 통지
+ 1. Acceptor는 HTTP핸들러를 생성
+ 1. HTTP핸들러는 클라이언터로 부터 전송되는 요청 데이터를 비동기적으로 읽고 작업을 초기화하고 그 자신을 완료 핸들러와 완료 발송자의 참조로 넘기게 된다
+
+== Proactor 에서 요청 처리 단계 ==
+attachment:webserver_proactor2.gif
+
+ 1. 클라이언트가 HTTP GET요청을 전송
+ 1. 읽기 작업이 완료되면 운영체계는 완료 발송자에게 통지
+ 1. 완료 발송자는 HTTP 핸들러에게 통지
+ 1. HTTP핸들러는 요청 데이터를 파싱
+ 1. HTTP핸들러는 동기적으로 요청된 파일 읽음
+ 1. HTTP핸들러는 파일 데이터를 접속된 클라이언트로 전송하기 위한 비동기 명령을 초기화 그리고 자신을 완료 핸들러와 완료 발송자의 참조로 넘기고 비동기 화일전송작업의 완료여부를 HTTP핸들러에게 통지
+ 1. 전송작업이 완료되면 운영체계는 완료발송자에 통지
+ 1. 완료발송자는 완료핸들러에게 통지
+
+
+== Structure ==
+ * Handle
+ * Asynchronous Operation
+  * AcceptEx, WSARecv, WSASend, …
+ * Completion Handler
+ * Concrete Completion Handler
+ * Asynchronous Operation Processor
+  * OS kernel 에서 구현
+ * Completion Event Queue
+  * OS kernel 에서 구현
+ * Asynchronous Event Demultiplexer
+  * GetQueuedCompletionStatus()
+ * Proactor
+  * CreateIoCompletionPort
+ * Initiator
+  * 각 객체들을 연결하고, 비동기 IO 를 최초에 한번 발생시켜준다.
+
+== 그 외 ==
+ * Proactor 를 두 개 이상 만들기
+  * QoS 처리 가능
+ * GetQueuedCompletionStatus() 는 FIFO demultiplexing 방식
+ * 핸들러를 테이블에서 찾을 필요없이 바로 호출 가능
+  * O(1) 의 성능
+
+== In Windows ==
+=== Select ===
+ * Window2.h 의 FD_SETSIZE 는 64 로 정의	
+ * 사용자가 임의로 define 를 재정의할 수 있지만 provider 쪽에서 최대 1024개 정도로 제한해 놓았을 수 있다.
+ * 1000 개 이상의 소켓을 매번 select 할 때마다 FD_SET 해 주는 비용.
+=== WSAAsyncSelect ===
+ * Message 를 이용하는 방식
+ * 하나의 윈도우가 모든 연결을 관리
+ * 윈도우의 Message queueing 자체의 성능이 그다지 좋지 않음.
+=== WSAEventSelect ===
+ * WSAWaitForMultipleEvents 는 64 개의 이벤트만 기다릴 수 있다
+=== Overlapped mode ===
+ * Event Notification
+  * WSAGetOverlappedResult : 한 소켓에 대한 overlapped IO 를 얻는다.
+  * 이벤트 개수의 한계
+ * Completion Routines
+  * Callback function 을 등록하면 system 이 호출해 준다.
+   * Application 의 thread 가 가끔씩 sleep 등을 해서 alterable 상태가 되어야 시스템이 callback 을 호출 할 수 있다.
+   * Callback 호출자가 system 이므로 callback 에서 너무 오래 걸리는 작업을 하면 안 된다.
+ * Kernel ? user mode 간의 버퍼 복사 필요 없어 고성능의 socket I/O 제공.
+
+=== IOCP ===
+ * CreateIoCompletionPort
+ * GetQueuedCompletionStatus
+  * WSARecv 를 두 번 호출 한 후 GetQueuedCompletionStatus 를 호출하면 데이터 순서가 바뀌어서 들어올 수 있다.
+ * PostQueuedCompletionStatus
+
+== 성능 비교 ==
+attachment:benchmark_socket_mode.gif
+
+ * From Network Programming for MS windows. 2ed
+ * echo 서버로 테스트.
+ * Non-blocking 경우 fd_set 설정 등으로 cpu power 를 많이 소모
+ * WSA-AsyncSelect 는 message 핸들링이 가장 큰 성능 하락 요소
+ * WSA-EventSelect 는 thread 가 OS 의 리소스를 많이 차지
+
+== 결론 ==
+ * 장점
+  * 이식성의 증가
+  * 완료감지, 다중수신, 디스패칭의 자동화
+  * 투명한 확장성
+  * 효율의 증가
+  * 스레드 안정성 보장
+  * 쓰레딩 정책이 동시처리 정책과 중복되지 않음
+ * Windows 에서의 장점
+  * Context switching 이 적다
+  * Kernel 과 user mode 사이의 버퍼 복사를 없앨 수 있다.
+   * 비동기 IO 를 호출할 때 미리 버퍼를 잡아주기 때문
+   * Socket 의 option 을 줘야 한다?
+ * 단점
+  * 디버깅의 어려움
+  * 두드러진 명령처리와 스케줄링
+== Known Uses ==
+ * Completion ports in Windows NT
+ * The POSIX AIO family of asynchronous I/O operations
+ * ACE Proactor Framework
+ * Operation system device driver interrupt-handling mechanisms
+ * Phone call initiation via voice mail
+== See Also ==
+ * Observer & Publisher-Subscriber
+ * Reactor Pattern
+ * Leader/Follower & Half-Sync/Half-Async
+ * Active Object Pattern
+ * Chain of Responsibility

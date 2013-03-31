@@ -1,0 +1,4 @@
+= 우정권 = 
+{{{#!html
+<EMBED <div style="width:425px" id="__ss_4487614"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/stupidfox/holub-on-patterns-1" title="Holub on Patterns 1장 후반">Holub on Patterns 1장 후반</a></strong><object id="__sse4487614" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=holubonpatterns-100613085639-phpapp01&stripped_title=holub-on-patterns-1" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4487614" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=holubonpatterns-100613085639-phpapp01&stripped_title=holub-on-patterns-1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px"></div></div></EMBED>
+}}}

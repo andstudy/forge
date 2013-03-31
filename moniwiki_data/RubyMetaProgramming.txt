@@ -1,0 +1,306 @@
+[[TableOfContents]]
+
+== 메타프로그래밍 (Metaprogramming) ==
+
+=== 메타프로그래밍이란? ===
+ 프로그램 코드를 작성하는 프로그램을 만드는 것으로 기계적이고 반복적인 코딩을 자동화 하는 프로그래밍 스타일이다.
+
+=== 메타프로그래밍의 작동 ===
+ * API를 이용해서 RunTime 엔진이 프로그램 코드를 내부적으로 실행하는것
+
+ * 컴파일 타임시에만 작동해서 컴파일 타임이 종료되면 작동을 멈추는 것
+
+ * 프로그래밍 명령을 포함한 스트링을 동적으로 실행하는 것
+
+=== 메타 언어 ===
+ 메타 프로그래밍 시 사용되는 언어가 메타 언어다.
+ 또, 프로그래밍 언어 자체가 메타언어라면 Reflecxity 능력을 갖고 있는 프로그래밍 언어라고 할 수 있다.
+
+=== Generative Programming ===
+ Generic classes, prototypes, template, aspect, Code Generator 등을 이용해서 프로그래머의 생산성을 높이기 위해 자동으로 소스코드를 생성하는 프로그래밍 방법.
+ **inline 은 아님!
+ {{{
+#!/bin/bash
+# metaprogram
+echo '#!/bin/bash' >program
+for ((I=1; I<=992; I++)); do
+echo "echo $I" >>program
+done
+chmod +x program
+ }}}
+
+
+=== Reflective Programming ===
+ 실행시에 객체를 통해 클래스의 정보를 분석해 내는 프로그래밍 기법이다.
+ * 일반적인 프로그래밍 기법 : 타입을 가지고 객체를 만든다.
+ * Reflection : 메모리에서 타입을 얻어내고  메모리와 타입만으로 객체를 다룬다.
+
+
+== 루비 메타프로그래밍 ==
+ 프로그램 코드를 작성하는 프로그램을 만드는데,
+
+ * 런타임시 수정가능하고, 코드를 생성하지 않고 메타 프로그래밍이 가능하게 한다.	
+ * 메타 프로그래밍 코드 자체가 루비로 작성되면 컴파일 타임이 아닌 런타임에 프로그램 코드가 생성된다.		
+ * 루비는 자체적으로 메타 언어이며, 동적 언어의 많은 장점 중의 하나인 Reflecxity를 갖는다. 인트로스펙션(Introspection)이라고도 하는데, 즉 프로그램 스스로 자기자신이 생긴 모양을 살펴볼 수 있다는 의미다.
+
+
+== 루비의 메타 프로그래밍 주요 도구들 ==
+
+=== Symbol ===
+ * '''레퍼런스'''
+ [http://www.troubleshooters.com/codecorn/ruby/symbols.htm#_Introduction Ruby Symbol Introduction]
+=== Singlton Class (Metaclass) ===
+ * lucille.play() 함수를 사용할 경우
+ attachment:/rubymetaprogramming24_1.gif
+
+ * Guitar.strings() 함수를 사용할 경우
+ attachment:/rubymetaprogramming24_2.gif
+
+ 
+ * '''It’s an important lesson: objects do not store methods, only classes can.'''
+
+
+ * Virtual Class 생성 도식
+ attachment:/rubymetaprogramming24_3.gif
+
+ * Proxy Class 생성 도식
+ attachment:/rubymetaprogramming24_4.gif
+
+ * say_hello 를 호출할 수 있는 방법은? 
+ '''[http://feeds.feedburner.com/ikspres Singleton class]'''
+ {{{
+class Fred
+  class << self
+     class << self 
+          def  say_hello
+             puts "Hi!"
+          end
+     end
+  end
+end
+ }}}
+ 
+ * '''레퍼런스'''
+ [http://whytheluckystiff.net/articles/seeingMetaclassesClearly.html Seeing Metaclasses Clearly]
+
+ [http://feeds.feedburner.com/ikspres Singleton class] 
+
+ '''[http://ola-bini.blogspot.com/2006/09/ruby-singleton-class.html The Ruby singleton class for Metaprogramming]'''
+
+ [http://blog.naver.com/tkandrea92?Redirect=Log&logNo=80013693763 스몰토크-메타클래스]
+ 
+=== eval func. ===
+
+== 루비 메타프로그래밍 Lv.1 ==
+ * Getter, Setter
+ {{{
+class Study
+  def name
+    return @name
+  end
+
+  def name=(name)
+     @name = name
+  end
+end
+
+S = Study.new
+S.name = "A&D\n"
+puts S.name
+ }}}
+
+ * 메타프로그래밍 명령을 포함한 스트링을 동적으로 실행하는 것
+ {{{
+class MetaStudy
+  def self.my_attr_accessor(str)
+     class_eval "def #{str}; @#{str}; end"
+     class_eval "def #{str}=(#{str}) @#{str}=#{str}; end"
+   end
+  my_attr_accessor("name")
+end
+
+class AnDStudy < MetaStudy
+ my_attr_accessor :name
+end
+
+S =  MetaStudy.new
+S.name = "AND\n"
+print S.name
+ }}}
+
+
+
+== 루비 메타프로그래밍 Lv.2 ==
+ * [http://mushaku.egloos.com/1472216 Ruby Quiz#67 무책님해설]
+ {{{
+# knowledge.rb v2
+class Module
+  def attribute(x)
+    name, value = x.to_a[0]
+    ivar = "@#{name}"
+    define_method(name) do
+       if instance_variables.include?(ivar)
+        instance_variable_get(ivar)
+       else
+        value
+       end
+    end
+    attr_writer name
+    define_method("#{name}?") { !!send(name) }
+  end
+end
+ }}}
+
+ {{{
+class Animal
+end
+
+class Dog < Animal
+end
+
+class Object
+  def metaclass
+    class << self
+      self
+    end
+  end
+end
+
+d = Dog.new
+
+def dump (d, code) 
+  puts "#{code} = #{eval code}"
+end
+
+dump d, "d.class"
+dump d, "d.metaclass"
+
+puts
+dump d, "d.metaclass.class"
+dump d, "d.metaclass.superclass"
+dump d, "d.metaclass.metaclass"
+
+puts
+dump d, "d.class.class"
+dump d, "d.class.superclass"
+dump d, "d.class.metaclass"
+
+puts
+dump nil, "Class.class"
+dump nil, "Class.superclass"
+dump nil, "Class.metaclass"
+ }}}
+
+ * '''레퍼런스'''
+ [http://mobcode.com/2006/12/22/charting-ruby-class-and-metaclass-relationships/ Class and Metaclass Relationships ]
+
+== 루비 메타프로그래밍 장점과 지향점 == 
+ * 왜 싱글턴클래스가 메타프로그래밍에 유용할까?
+    1) 싱글턴 클래스에 쉽게 인스턴스 클래스메소드를 만들 수 있다.(별로이점이 아님)   
+    2) 자신의 서브클래스에 새로운 함수를 정의하는 슈퍼클래스를 만든다
+
+    3) define_method, module_eval 등 다른 메타프로그래밍 방법을 사용할때,
+      싱글턴 클래스를 사용해야만 한다(일반 self가 아니라!)
+   
+ * 루비 메타프로그래밍을 DSL 로 발전 시키기 좋다?
+   
+ {{{
+class String
+  puts self
+   
+end # => String
+   
+class String
+  puts (class << self; self; end)
+     
+end # => #<Class:String>
+ }}}
+
+ {{{
+class String
+
+  self.module_eval do  
+    define_method :foo do    
+      puts "inside foo"  
+    end
+  end
+    
+ (class << self; self; end).module_eval do  
+    define_method :bar do    
+      puts "inside bar"  
+    end
+  end
+
+end
+
+"string".foo # => "inside foo"
+String.bar # => "inside bar"
+ }}}
+
+ * '''레퍼런스'''
+ '''[http://ola-bini.blogspot.com/2006/09/ruby-singleton-class.html The Ruby singleton class for Metaprogramming]'''
+
+== Domain Specific Language over Ruby Metaprogramming ==
+ * 루비스럽게 메타프로그래밍을 하면 DSL 이된다?
+ * DSL 을 만들고 루비로 메타프로그래밍으로 구현한다?
+
+ {{{
+require ‘model’
+require ‘render’
+
+mymenu = Node.new(:root, ‘root’)
+questions = mymenu.add_node(:q, ‘/q’, ‘Questions’)
+answers   = mymenu.add_node(:a, ‘/a’, ‘Answers’)
+letters   = mymenu.add_node(:letter, ‘’, ‘Letters’)
+bill      = letters.add_node(:bill, ‘/letter/bill’, ‘To Bill’)
+steve     = letters.add_node(:stever, ‘/letter/steve’, ‘To Steve’)
+
+puts ListRenderer.new(mymenu).render
+ }}}
+
+ {{{
+mymenu = menu do
+       item :q, ‘/q’, ‘Questions’
+        item :a, ‘/a’, ‘Answers’ 
+        item :letter, ‘’, ‘Letters’ do
+         item :bill, ‘/letter/bill’, ‘To Bill’ 
+          item :steve, ‘/letter/steve’, ‘To Steve’ 
+        end
+     end
+
+render mymenu
+ }}}
+
+
+ * '''레퍼런스'''
+ '''[http://ola-bini.blogspot.com/2006/09/ruby-metaprogramming-techniques.html Ruby Metaprogramming Techniques]'''
+
+ '''[http://littlelanguages.net/blog/ Applying DSL over Ruby]'''
+
+ '''[attachment:/obie_fernandez-agile_dsl_development_in_ruby.pdf Agile DSL in Ruby]'''
+
+== T-SQL에서의 메타프로그래밍 ==
+ {{{
+SELECT COUNT(*) FROM TargetTable
+ }}}
+
+ {{{
+SET @aQuery = 'SELECT @aMaxCount = COUNT(*) FROM TargetTable' 
+SET @aAddQuery ='WHERE mSize < @aSize'
+SET @aCompleteQuery = @aQuery + @aAddQuery
+
+SET @aParmDefinition = '@aSize INT, @aMaxCount INT OUTPUT'
+EXEC  @aConditionalDate, @aParmDefinition, @aSize=100, @aMaxCount OUTPUT
+ }}}
+
+== 기타 알게 된 것들 == 
+syntax sugar : 편리한 문법 허용
+
+[http://blog.naver.com/tkandrea92?Redirect=Log&logNo=80013693763 스몰토크에서의 메타클래스]
+
+puts 대신 p 만 써도 된다.
+
+== TODO ==
+'''[http://www.rubyquiz.com/quiz67.html RubyQuiz#67 realated Metaprogramming]'''
+
+'''[http://ruby.insightbook.co.kr/?page_id=25 루비를 배우는 좋은 방법, 액티브 서포트]'''

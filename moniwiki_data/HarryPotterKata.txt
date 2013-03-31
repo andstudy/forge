@@ -1,0 +1,517 @@
+ * http://bossavit.com/cgi-bin/dojo.pl?HarryPotterKata
+ * 꽤 시간이 걸리니 금요일 밤이나 토요일 아침에 도전하시면 늦습니다.
+ * 마지막 테스트에서 정말 반전이 있더군요. 엄청 당황했습니다. 재미있었어요. - ParkPD
+ * 그냥 막판쯤 가서 완전히 뜯어 고쳐야 되더군요. ㅡㅜ - [kwbang]
+ * 다음 테스트를 추가하세요
+{{{
+def testNotSorted
+  assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 4, 1, 3, 2, 1, 2, 0]))
+end
+}}}
+
+=== 정희종 ===
+{{{
+def discount(books)
+  discountFactor = [1, 1, 0.95, 0.9, 0.8, 0.75]
+  return discountFactor[books.length]
+end
+
+def priceOfBookSet(bookSet)
+  cost = 8
+  return cost * bookSet.length * discount(bookSet)
+end
+
+def arrangeBooks(books)
+  books = books.sort
+  
+  arranged = []
+  books.each { |book|
+  
+    minAddedPrice = 8
+    bestSet = nil
+    
+    arranged.each { |bookSet|
+      if not bookSet.include?(book)
+        addPrice = priceOfBookSet(bookSet + [book]) - priceOfBookSet(bookSet)
+        if addPrice < minAddedPrice
+          bestSet = bookSet
+          minAddedPrice = addPrice
+        end
+      end
+    }
+    
+    if bestSet == nil
+      arranged << [book]
+    elsif
+      bestSet << book
+    end
+  }
+  
+  return arranged
+end
+
+def totalPrice(books)
+  arranged = arrangeBooks(books)
+  
+  price = 0
+  arranged.each { |bookSet|
+    price += priceOfBookSet(bookSet)
+  }
+  
+  return price
+end
+
+require 'test/unit'
+class TestHarryPotter < Test::Unit::TestCase
+  def testArrange
+    assert_equal([[0]], arrangeBooks([0]))
+    assert_equal([[0],[0]], arrangeBooks([0,0]))
+    assert_equal([[0,1]], arrangeBooks([0,1]))
+    assert_equal([[0,1],[0]], arrangeBooks([0,0,1]))
+    assert_equal([[0,1,2,3],[0,2]], arrangeBooks([0, 0, 1, 2, 2, 3]))
+    assert_equal([[0,1,2,3,4],[1]], arrangeBooks([0, 1, 1, 2, 3, 4]))
+    assert_equal([[0,1,2,3],[0,1,2,4]], arrangeBooks([0, 0, 1, 1, 2, 2, 3, 4]))
+    assert_equal([], arrangeBooks([]))
+  end
+  
+  def testBasicCases
+    assert_equal(0, totalPrice([]))
+    assert_equal(8, totalPrice([0]))
+    assert_equal(8, totalPrice([1]))
+    assert_equal(8, totalPrice([2]))
+    assert_equal(8, totalPrice([3]))
+    assert_equal(8, totalPrice([4]))
+    assert_equal(8 * 2, totalPrice([0, 0]))
+    assert_equal(8 * 3, totalPrice([1, 1, 1]))
+  end
+
+  def testSimpleDiscounts
+    assert_equal(8 * 2 * 0.95, totalPrice([0, 1]))
+    assert_equal(8 * 3 * 0.9, totalPrice([0, 2, 4]))
+    assert_equal(8 * 4 * 0.8, totalPrice([0, 1, 2, 4]))
+    assert_equal(8 * 5 * 0.75, totalPrice([0, 1, 2, 3, 4])) 
+  end
+
+  def testSeveralDiscountsCombined
+    assert_equal(8 + (8 * 2 * 0.95), totalPrice([0, 0, 1])) 
+    assert_equal(2 * (8 * 2 * 0.95), totalPrice([0, 0, 1, 1])) 
+    assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), totalPrice([0, 0, 1, 2, 2, 3])) 
+    assert_equal(8 + (8 * 5 * 0.75), totalPrice([0, 1, 1, 2, 3, 4])) 
+  end
+
+  def testViciousCases
+    assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 0, 1, 1, 2, 2, 3, 4]))
+    assert_equal(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8), 
+      totalPrice([0, 0, 0, 0, 0, 
+                  1, 1, 1, 1, 1, 
+                  2, 2, 2, 2, 
+                  3, 3, 3, 3, 3, 
+                  4, 4, 4, 4]))
+    assert_equal(3 * (8 * 4 * 0.8),
+      totalPrice([0, 1, 2, 4, 
+                  0, 1, 2, 4, 
+                  0, 1, 2, 3])) 
+    assert_equal(4 * (8 * 4 * 0.8),
+      totalPrice([0, 1, 2, 3, 
+                  0, 1, 2, 4, 
+                  0, 1, 2, 4, 
+                  0, 1, 2, 3]))
+  end
+
+  def testNotSorted
+    assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 4, 1, 3, 2, 1, 2, 0]))
+  end
+end
+}}}
+
+=== ParkPD ===
+{{{
+require 'test/unit'
+
+$discountTable = {2 => 0.05, 3 => 0.10, 4 => 0.20, 5 => 0.25}
+
+class BookItems
+  def initialize
+    @bookSet = Array.new()
+    @oldBookSet = nil
+    @bestPrice = 0
+  end
+
+  def pushBook(book)
+    # greey algorithm 사용합니다.
+    bestPrice = 0
+    bestSet = nil
+    @bookSet.each do |x|
+      if x.pushBook(book)   # 집어 넣어보고
+        currentPrice = totalPrice()
+        if bestPrice == 0
+          bestPrice = currentPrice
+          bestSet = x
+        elsif currentPrice < bestPrice  # 가격이 떨어졌다. 이 녀석이 더 적절하다.
+          bestPrice = currentPrice
+          bestSet = x
+        end
+        x.popBook(book)   # 다음 테스트를 위해서 빼 둔다.
+      end
+    end
+      
+    if bestSet == nil   # 아무 곳에도 못 들어갔다면 set 을 추가한다.
+      s = BookSet.new()
+      s.pushBook(book)
+      @bookSet.push(s)
+    else  # 가장 최적의 set 를 찾았다. book 을 거기에 넣는다.
+      bestSet.pushBook(book)
+    end
+  end
+  
+  def totalPrice
+    price = 0
+    @bookSet.each do |x|
+      price += x.price()
+    end
+    return price
+  end
+end
+
+class BookSet
+  def initialize
+    @bookHash = Hash.new()
+  end
+  
+  def hasSameBook(key)
+    return @bookHash.has_key?(key)
+  end
+  
+  def pushBook(key)
+    if hasSameBook(key)
+      return false
+    else
+      @bookHash[key] = 1
+      return true
+    end
+  end
+  
+  def popBook(book)
+    @bookHash.delete(book)
+  end
+  
+  def price
+    discount = 0
+    discount = $discountTable[@bookHash.length] if $discountTable.has_key?(@bookHash.length)
+    return @bookHash.length * 8 * (1 - discount)
+  end  
+end
+
+
+def totalPrice(books)
+  books = books.sort()
+  bookItems = BookItems.new
+  books.each do |x|
+    bookItems.pushBook(x)
+  end
+  return bookItems.totalPrice
+end
+
+
+class TestHarryPotter < Test::Unit::TestCase  
+  def test_simple
+    assert_equal(0, totalPrice([]))
+    assert_equal(8, totalPrice([0]))
+    assert_equal(8, totalPrice([1]))
+    assert_equal(8, totalPrice([2]))
+    assert_equal(8, totalPrice([3]))
+    assert_equal(8, totalPrice([4]))
+    assert_equal(8 * 2, totalPrice([0, 0]))
+    assert_equal(8 * 3, totalPrice([1, 1, 1]))
+  end
+
+  def testSimpleDiscounts
+    assert_equal(8 * 2 * 0.95, totalPrice([0, 1]))
+    assert_equal(8 * 3 * 0.9, totalPrice([0, 2, 4]))
+    assert_equal(8 * 4 * 0.8, totalPrice([0, 1, 2, 4]))
+    assert_equal(8 * 5 * 0.75, totalPrice([0, 1, 2, 3, 4])) 
+  end
+
+  def testSeveralDiscountsCombined
+    assert_equal(8 + (8 * 2 * 0.95), totalPrice([0, 0, 1])) 
+    assert_equal(2 * (8 * 2 * 0.95), totalPrice([0, 0, 1, 1])) 
+    assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), totalPrice([0, 0, 1, 2, 2, 3])) 
+    assert_equal(8 + (8 * 5 * 0.75), totalPrice([0, 1, 1, 2, 3, 4])) 
+  end
+    
+  def testViciousCases
+    assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 0, 1, 1, 2, 2, 3, 4]))
+    assert_equal(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8), 
+      totalPrice([0, 0, 0, 0, 0, 
+                  1, 1, 1, 1, 1, 
+                  2, 2, 2, 2, 
+                  3, 3, 3, 3, 3, 
+                  4, 4, 4, 4]))
+	  end
+	  
+def testNotSorted
+  assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 4, 1, 3, 2, 1, 2, 0]))
+end
+end
+}}}
+
+=== [kwbang] ===
+{{{
+require 'test/unit'
+class TestHarryPotter < Test::Unit::TestCase
+  def testBasicCases
+    assert_equal(0, totalPrice([]))    
+    assert_equal(8, totalPrice([0]))    
+    assert_equal(8, totalPrice([1]))    
+    assert_equal(8, totalPrice([2]))    
+    assert_equal(8, totalPrice([3]))    
+    assert_equal(8, totalPrice([4]))    
+    
+    assert_equal(8*2, totalPrice([0,0]))    
+    assert_equal(8*3, totalPrice([1,1,1]))    
+  end
+  
+  def testSimpleDiscounts
+    assert_equal(8*2*0.95, totalPrice([0,1]))
+    assert_equal(8*3*0.9, totalPrice([0,2, 4]))
+    assert_equal(8*4*0.8, totalPrice([0,1, 2, 4]))
+    assert_equal(8*5*0.75, totalPrice([0,1, 2, 3, 4]))
+  end
+  
+  def testSeveralDiscountsCombined
+  assert_equal(8 + (8 * 2 * 0.95), totalPrice([0, 0, 1])) 
+  assert_equal(2 * (8 * 2 * 0.95), totalPrice([0, 0, 1, 1])) 
+  assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), totalPrice([0, 0, 1, 2, 2, 3])) 
+  assert_equal(8 + (8 * 5 * 0.75), totalPrice([0, 1, 1, 2, 3, 4])) 
+end
+
+ def testViciousCases
+  assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 0, 1, 1, 2, 2, 3, 4]))
+  assert_equal(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8), 
+    totalPrice([0, 0, 0, 0, 0, 
+                1, 1, 1, 1, 1, 
+                2, 2, 2, 2, 
+                3, 3, 3, 3, 3, 
+                4, 4, 4, 4]))
+              end
+              
+ def testNotSorted
+  assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 4, 1, 3, 2, 1, 2, 0]))
+ end
+
+end
+
+
+
+def totalPrice(series)  
+  
+  blockSetList = Array.new()
+  
+  series = series.sort
+  
+  series.each do |book| 
+      lowerPrice = 0
+      lowerSet = nil
+      
+      blockSetList.each do |bookSet|
+        if bookSet.addBook(book)
+          currentPrice = RealtotalPrice(blockSetList)
+          if lowerPrice == 0
+            lowerPrice = currentPrice
+            lowerSet = bookSet
+          elsif currentPrice < lowerPrice 
+            lowerPrice = currentPrice
+            lowerSet = bookSet
+          end
+          bookSet.removeBook(book)
+        end
+      end
+      
+      if lowerSet == nil
+        blockSetList.push(BookSet.new(book))
+      else
+        lowerSet.addBook(book)
+      end
+    end    
+    
+  return RealtotalPrice(blockSetList)
+end
+  
+  def RealtotalPrice(blockSetlist)
+    totalPrice = 0;
+    blockSetlist.each do |bookSet|
+      totalPrice += bookSet.price
+    end    
+    return totalPrice
+  end
+  
+  
+  
+
+class Book 
+  attr_reader :volume
+  def initialize(volume)
+    @volume = volume
+  end
+  
+  def price
+    return 8
+  end
+end
+
+class BookSet
+  @@dicountTable = { 1 => 0, 2 => 0.05, 3 => 0.10, 4=>0.20, 5=>0.25 }  
+  def initialize(book)
+    @booktable = { book =>  Book.new(book) }
+  end
+  
+  def addBook(book)
+    if contains(book)
+      return false
+    else
+      @booktable[book] = Book.new(book)   
+      return true
+    end     
+  end
+  
+  def removeBook(book)
+     @booktable.delete(book)
+  end
+  
+  def contains(book)
+    return @booktable.has_key?(book)
+  end
+        
+  def price
+    totalPrice = 0
+    @booktable.each_value {|value| totalPrice += value.price }
+    return totalPrice * discount
+  end
+  
+  def discount   
+    return 1 - @@dicountTable[@booktable.length]
+  end
+  
+  def to_s
+      result = "bookSet "
+      @booktable.each_value {|value| result += value.volume.to_s }
+      puts result
+  end
+end
+}}}
+
+=== [Itmentor] ===
+* 좀 다른 방법으로 풀어봤습니다만... 테스트를 다 통과하지 못했군요..
+* 2개가 fail이 나는데 하나는 왜 fail이 나는지 모르겠군요.. 값이 똑같이 나왔는데 fail이라니...
+{{{
+class BookPrice
+  attr_reader :discountCode, :oneBookPrice
+  def initialize
+    @oneBookPrice = 8
+    @priceTable = [ 5 * 0.25 * @oneBookPrice, 
+						4 * 0.2 * @oneBookPrice, 
+						3 * 0.1 * @oneBookPrice, 
+						2 * 0.05 * @oneBookPrice]
+    @discountCode = [ 11111, 1111, 111, 11 ]
+  end
+  
+  def calculatePrice( price, priceCode, begindiscountCodeIndex )					
+    if begindiscountCodeIndex >= 0	
+      for index in ( begindiscountCodeIndex.. @discountCode.size-1 )			
+        while priceCode >= @discountCode[index].to_i		
+            #puts "#{priceCode} > #{@discountCode[index]}"	
+            #STDOUT << "priceCode(#{priceCode}) - @discountCode[#{index}] (#{@discountCode[index].to_i}) = " << (priceCode - @discountCode[index].to_i) << ", #{index}, #{@priceTable[index]}\n"	
+
+            price = price - @priceTable[index]	
+            priceCode = priceCode - @discountCode[index].to_i	
+            priceCode = priceCode.to_s.delete( "0" ).to_i	
+
+            #~ otherPrice = calculatePrice( price, priceCode, index + 1, @discountCode )	
+
+          #~ if( price > otherPrice )	
+            #~ price = otherPrice
+          #~ end	
+        end
+      end	
+    end
+    #puts "=========\nprice: #{price}\n========="
+    return price		
+  end			
+
+end
+
+
+
+def totalPrice( order )
+  #1. 주문을 받아서 구매코드를 구한다.
+  arr = [0,0,0,0,0]
+	order.each { | discountCodeIndex | arr[discountCodeIndex] = arr[discountCodeIndex] + 1 }
+  arr.delete( 0 )
+	arr.sort!
+  
+  
+	# default price policy - 할인 없이 샀을 때
+
+  #puts "Order: #{order} arr:#{arr.to_s}\n"
+	price = 0
+  bookPrice = BookPrice.new
+
+	arr.each { | bookCount |  
+		price += bookCount* bookPrice.oneBookPrice
+	}
+
+	priceCode = arr.to_s.to_i
+
+  
+  lastPrice = []
+  for i in (0..bookPrice.discountCode.size)
+    #할인율을 구한다
+    lastPrice.push bookPrice.calculatePrice( price, priceCode, i )
+  end
+  
+  lastPrice.sort!
+  return lastPrice[0]
+end
+
+require 'test/unit'
+class TC_HarryPotterKata < Test::Unit::TestCase
+	def testBasicCases
+		assert_equal(0, totalPrice([]))
+		assert_equal(8, totalPrice([0]))
+		assert_equal(8, totalPrice([1]))
+		assert_equal(8, totalPrice([2]))
+		assert_equal(8, totalPrice([3]))
+		assert_equal(8, totalPrice([4]))
+		assert_equal(8 * 2, totalPrice([0, 0]))
+		assert_equal(8 * 3, totalPrice([1, 1, 1]))
+	end
+	
+	def testSimpleDiscounts
+	  assert_equal(8 * 2 * 0.95, totalPrice([0, 1]))
+	  assert_equal(8 * 3 * 0.9, totalPrice([0, 2, 4]))
+	  assert_equal(8 * 4 * 0.8, totalPrice([0, 1, 2, 4]))
+	  assert_equal(8 * 5 * 0.75, totalPrice([0, 1, 2, 3, 4])) 
+	end
+
+  def testSeveralDiscountsCombined
+    assert_equal(8 + (8 * 2 * 0.95), totalPrice([0, 0, 1])) 
+    assert_equal(2 * (8 * 2 * 0.95), totalPrice([0, 0, 1, 1])) 
+    assert_equal(8 + (8 * 5 * 0.75), totalPrice([0, 1, 1, 2, 3, 4])) 
+    assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), totalPrice([0, 0, 1, 2, 2, 3])) 
+ end
+
+  def testViciousCases
+    assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 0, 1, 1, 2, 2, 3, 4]))
+    assert_equal(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8), 
+      totalPrice([0, 0, 0, 0, 0, 
+                  1, 1, 1, 1, 1, 
+                  2, 2, 2, 2, 
+                  3, 3, 3, 3, 3, 
+                  4, 4, 4, 4]))
+  end
+
+  def testNotSorted
+    assert_equal(2 * (8 * 4 * 0.8), totalPrice([0, 4, 1, 3, 2, 1, 2, 0]))
+  end
+end
+}}}

@@ -1,0 +1,52 @@
+http://twitter.com/#search?q=%23againgdc
+
+== 2010.04.12 ==
+Zynga 의 Funnel Model(funnel analysis)
+Metric Mind : 항상 측정하라.
+자사의 다른 게임의 포인트나 아이템을 주는 식으로 A -> B -> C -> ... 로 계속 이동시키면서 사용자를 유지, 늘려간다. (마피아 워즈 -> 뱀파이어즈 -> 스트리트 레이싱 -> ...)
+즉, 게임 자체의 수명을 늘리려고 하지 않고, 대신 다른 게임으로 넘어가게 만듦.
+
+SNS game 의 3R (Reach, Retention, Revenue) [http://forum.developers.facebook.com/viewtopic.php?pid=186063 Finding Revenue in Retention - Facebook Platform Team]
+ * Reach(도달률. the number of users who try our apps) : 캐주얼 게임에서 부분유료 아이템 구매 비율은 1% 정도이기 때문에 모수를 늘리는 게 중요. (MMO 는 15% 정도라고). 마피어 워즈에서 튜토리얼 1~5 단계를 3단계로 줄여서 측정해 봤더니 전환률이 25% 늘더라.
+ * Retention(유지. the number of users who repeatedly use our apps) : 필요(커뮤니티, 버그 없음, 서버 안정성). free-to-play game 이라 오히려 품질이 중요하다(아니면 확 지워버린다. 정액 게임은 키워놓은 캐릭터가 아까워서 오히려 쉽게 못 떠남)
+ * Revenue(수익) : 아무리 동접이 잘 나와도, 유지 비용이 더 드는 게임이라면 문제가 있다. 차라리 돈을 쓰는 유저에게 집중하거나 컨텐츠를 바꿔야 하지 않을까.
+
+[http://ko.wikipedia.org/wiki/%ED%92%8D%EC%84%A0%EB%AA%A8%EB%8D%B8 Balloon Model(풍선 모델)] 이 이런 걸 잘 설명할 수 있을 것이다.
+ 풍선은 적당한 크기가 있고, 어느 순간 확 쉽게 커진다. 유지비용과 수익 사이의 적당한 균형을 잡을 수 있을 것임. 이 때 언제가 한계인지를 아는게 중요. 적당한 풍선 크기는 가용성, upkeep 비용, 호환성, 버그 비용 등으로 측정할 수 있다.
+
+Zynga 는 (운좋게) 빨리 블로오션을 먹은거지, Funnel Model 이나 Metric 덕분에 게임이 성공했다고 볼 수는 없지 않을까? 아마 처음에는 Metric 분석 같은 것도 안 했을 거 같다.
+ 뭐가 재미있을지 모르니까 일단 만들어 본 후, 빠져나가는 유저를 잡는 데 Metric 를 썼을지는 모르겠다.
+ 
+Funnel Model 은 Zynga 이전부터 이미 있었던 검증된 모델이다. ([http://www.readwriteweb.com/start/2010/03/the-death-of-the-pageview.php The Death of the Pageview])
+아마존 : 사용자 이탈 이유 분석해서 이탈 경로 차단 -> back 버튼 제거, 원클릭 구매 버튼 추가.
+Funnel Model 은 사용자 lost 는 어쩔 수 없이 발생한다고 보고, 최대한 줄이면서 새로 많이 유저를 받을(gain, regain) 방법을 고민하는 모델.
+Metric 역시 이미 MMORPG 에서도 많이 사용하고 있다. Zynga 가 처음 사용하는 게 아님. 하지만, Metric 를 어떻게 분석하느냐는 쉬운 일이 아니다.
+
+[http://ipod-touch.textcube.com/341 WeRule] 은 실패사례다. Reach 는 좋지만, Retention 비용이 높고(서버가 죽어나가고 있음), Revenue 구조를 잘못 잡았다(모조<Mojo> 가 별로 필요없다. 드래곤 둥지 살 때 50 모조가 필요한 정도?)
+ 모조를 소셜에 쓰게 했더라면 어땠을까.
+ 가격은 30개에 4.99$, 800개에 49$ 라고...
+ '사람들에게 일을 시키기 위해 모조를 쓴다', '아는 분들을 도와주기 위해(접대용) 모조를 쓴다'
+ 돈(모조)으로 친구를 사는 것처럼 느껴지기도 한다.
+
+지금 소셜 게임 분위기는 10년 전 온라인 MMO 와 비슷하다. 그 때도 콘솔 게임하던 사람들은, (온라인 게임을) '무슨 재미로 해' 라고 했었다.
+
+모델은 맞다/틀리다가 없다. 지금 상태를 설명하기 가장 적합한가만 고민해서 가져다 쓰면 될 뿐. 하지만 어떤 모델이 적당한지는 'Metric 분석을 통해서 잘 알아서' 선택해야 한다.
+
+열린 지갑 이론 : [http://www.gheed.net/206 포인트는 꼭 1,110 단위로 준다던가], 약간 남게 만든다.
+추수 감사절 등 돈이 많이 들어올 때 특판을 하면 수익을 많이 낼 수 있다.
+요즘 게임은 튜토리얼에 포인터로 상점에서 부분유료 아이템 사는 과정이 포함되어 있다. -> 퍼블리셔들이 요구한다고.
+
+소셜 게임의 친구 숫자를 늘리는 게 무슨 의미가 있냐? 너무 늘어나면 다 챙겨보기도 어려운데.
+ -> 영향력이 핵심. 하지만 영향력으로 뭘 하려는지는 사람마다 다르다.
+
+지금 소셜게임의 Retention 전략에는 문제가 있지 않느냐. 초기 MMO 처럼 계속해서 컨텐츠를 늘려나갈 수 있는 형태로 만들면, 10년짜리 게임도 만들 수 있을텐데 너무 금방 다른 게임으로 넘어가게 만들고 있다. 예를 들어 WeRule 은 16~17레벨부터 이탈 유저가 많아진다.
+ -> 그렇다면 16-17레벨이 풍선이 최대로 부풀어 오른 상태라고 볼 수도 있다. 게임사 입장에서는 그 전에 더 지르도록 유도하는 게 전략적으로 맞을지도.
+
+facebook 은 게임 포탈이 아니다보니 게임 카테고리가 없어서 신규 게임사가 홍보하기가 너무 어렵다.(비용이 많이 든다.) [http://news.ycombinator.com/item?id=696389 Zynga's spending what has to be at least $2m/mo in ads, maybe 3 or 4.]
+
+Unity3D 는 Mono 를 지원하고, 그 위에 java script 와 C# 으로 개발 가능하게 한다. -> Mono 는 다음에 따로 포스팅.
+
+책, "[http://inuit.co.kr/1262 머니볼]" 추천
+
+참고 링크
+[http://www.gamasutra.com/view/news/27310/DICE_2010_Zyngas_Reynolds_On_Social_First_And_Foremost.php DICE 2010: Zynga's Reynolds On 'Social' First And Foremost]

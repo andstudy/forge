@@ -1,0 +1,106 @@
+= Leader/Followers Patterns = 
+
+== Sample ==
+attachment:POSA2_LeaderFollowersPattern2.zip
+
+== Example ==
+on-line transaction processing system 을 디자인 한다고 생각해 보자. 여러 클라이언트는 동시에 여러 개의 transaction 을 발생시킨다. multi-tier 시스템을 이용해서 성능을 향상시키고자 한다.
+이 때 구현 방법으로 우선 Reactor 을 생각해 볼 수 있지만, 이 패턴은 event 을 serialize 시키므로 multi-cpu 환경에서 최대한의 성능을 발휘할 수 없다.
+
+Half_Sync/Half_Async 패턴을 쓸 경우, thread 는 thread pool 안에 저장되어 있다가 필요한 request 가 도착하면 pool 에서 나와서 작업을 수행한다.
+
+단점
+ * request 을 큐에 저장하고 꺼내고 하는 과정에서 context switching, 동적 메모리 할당 등이 발생.
+ * 만약 시스템이 다중 프로세스에서 실행중이라면 context switching 이 실행될 때 processor cache coherency protocols (즉, IPC) 도 발생한다.
+
+== 상황 ==
+
+일련의 이벤트 소스 집합으로 다수의 서비스 요청을 처리해야 하는 이벤트 드리븐 어플리케이션은 그 이벤트 소스 를 공유하는 멀티 스레드를 이용해서 효과적으로 동작해야 한다.
+ 
+== 문제점 ==
+
+멀티 스레드 프로그램을 '잘' 만들기는 힘들다.
+
+ 1. 이벤트 소스와 다중 스레드 들이 효과적으로 demultiplexing association 되어야 한다.
+ 1. context-switching, synchronization, cache coherency management 같은 concurrent 관련 오버헤드를 최소화해야 한다.
+ 1. Race conditions 를 막아야 한다.
+ 
+== 해결책 ==
+이벤트 소스를 공유하는 스레드 풀을 만든다. 한 요청이 도착할 때마다 스레드 풀 안의 스레드는 다음 순서를 넘겨주면서 작업을 진행한다. 
+
+== 구조 ==
+ * Handles and Handle set
+  OS 에서 제공하는 이벤트 소스. SOCKET 같은 거.
+ * Event Handler / Concrete Event Handler
+  * deactivate_handle(HANDLE, Event_Type)
+  * reactivate_handle(HANDLE, Event_Type)
+ * Thread Pool. 이 패턴의 핵심.
+  * join(timeout)
+  * promote_new_leader()
+  * deactivate_handle(HANDLE, Event_Type)
+  * reactivate_handle(HANDLE, Event_Type)
+  * Thread_Id leader_thread_
+  * Thread_Condition followers_condition_
+  * Thread_Mutex mutex_
+
+== 동작 ==
+ * Leader 스레드 (A)는 demultiplexing 을 수행
+ * 스레드 풀 안에서 대기 중인 Follower 스레드 (B) 를 새로운 leader 스레드로 만든다.
+ * A 스레드는 자신에게 주어진 작업을 수행한다.
+ * A 스레드는 작업이 끝난 후, 현재 leader 가 없으면 자신이 leader 가 되고, 현재 leader 가 있다면 follower 가 되어 스레드 풀 내에서 대기한다.
+ 
+== 구현 ==
+ 1. event handler demultiplexing 방법을 구현한다.
+  * Low-Level 방법 : select, WaitForMultipleObjects
+  * High-Level 방법 : Reactor, Proactor, Wrapper Facade
+ 2. 작업이 진행되는 동안 그 핸들을 deactivate 시키고, 끝난 후 다시 reactivate 시킬 수 있도록 구현한다.
+  * Race-condition 을 막아준다.
+  * Proactor 에서 GetQueuedCompletionStatus() 를 한 순간 그 소켓은 deactivate 되었다고 할 수 있고, 다시 WSARecv 를 했을 때 그 소켓은 reactivate 되었다고 할 수 있다.
+ 3. Thread Pool 을 구현.
+ 4. Thread 가 Join 을 호출 할 수 있도록 구현
+  * 처음 스레드 풀이 생성된 후
+  * 스레드가 작업을 끝낸 후 스레드 풀로 되돌아 갈 때
+ 5. follower 를 구현
+  5.1 leader 는 follower 를 새 leader 로 만들기 전에 자신이 작업해야 하는 handle를 deactivate 시켜서 race condition 발생을 막는다.
+   * 현재 작업하려는 handle 를 deactivate 시킨다.
+   * 새로운 leader 를 뽑는다.
+   * handle 에 연결된 이벤트를 처리한다.
+   * 다시 이 handle 에 연결된 이벤트를 받을 수 있도록, reactivate 시킨다.
+  5.2 작업 순서를 결정
+ 6. 이벤트 핸들러를 구현
+
+== Variants ==
+ * Bound Handle/Thread Associations
+ * Relaxing Serialization Constraints
+ * Hybrid Thread Associations
+ * Hybrid Client/Servers
+
+== Known Uses ==
+ * ACE Thread Pool Reactor framework
+ * CORBA ORBs and Web servers
+ * Transaction monitors
+ * Taxi Stands
+ * 그 외 뭐가 있을까?
+ 
+== 결론 ==
+=== 장점 ===
+ * 성능 향상
+  * CPU cache 친화성이 향상
+  * 동적 메모리 할당이 필요없어 짐.
+  * 스레드 간의 데이타 버퍼 공유가 필요없어 짐. 즉 locking 도 따라서 필요없어 짐.
+  * context switching 이 줄어든다.
+   * leader 가 새로운 leader 를 선출하는 과정에서는 context switching 이 일어난다. 그러나 그 후의 작업은 직접 자신이 처리하기 때문에 따로 다른 worker thread 에게 작업을 넘기는 과정에서 발생할 수 있는 context switching 이 없어진다.
+ * 프로그래밍이 간단
+  * 공유되는 핸들 집합을 다중 스레드가 처리하는 프로그래밍을 간단하게 해 준다.
+=== 단점 ===
+ * 구현이 복잡
+  * thread pool 을 만들기가 Half-Sync/Half-Reactive thread pool 보다 어렵다.
+ * 유연성이 부족
+  * Half-Sync/Half-Async 패턴에서는 request 를 버리거나 순서 재조정이 가능하나 Leader/Followers 패턴은 그렇게 하기 어렵다.
+  * 요청을 따로 queue 에 넣는 과정이 없기 때문
+ * 네트워크 I/O 에서 bottelneck 발생 가능
+  * handle set 으로부터 들어오는 이벤트를 leader thread 한 개만 받기 때문에 갑자기 많은 이벤트가 몰릴 경우 bottelnecks 이 걸릴 수 있다.
+  * 하지만 I/O 집중적인 작업의 대부분은 OS 커널에서 이루어지므로 어플리케이션 레벨에서는 크게 문제가 되지 않는다.
+
+== See Also ==
+ * ReactorPattern

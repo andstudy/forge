@@ -1,0 +1,3 @@
+{{{#!html
+<div style="width:425px" id="__ss_9285766"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/kukuman/domain-driven-design-8" title="Domain driven design 8장" target="_blank">Domain driven design 8장</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9285766" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/kukuman" target="_blank">kukuman</a> </div> </div>
+}}}

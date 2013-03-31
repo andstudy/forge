@@ -1,0 +1,123 @@
+ * 백트래킹을 이해 할 수 있는 좋은 문제였던것 같습니다 
+ * 알고리즘에 집착하다보니 코드 가독성과 구조가 극악 입니다. ㅠㅠ 추후에 리팩토링 해야될듯 덜덜
+  * 재귀를 안쓰고 풀수도 있을거 같은데 ㅋ 될까요? ㅋ 담에 시도해봐야 될 듯 
+ * 입출력 처리는 하지 않았습니다 ㅋ
+ 
+ * JAVA
+{{{
+import java.util.ArrayList;
+
+
+public class ChessBoard {
+	private int n;
+	private int checkCount = 0;
+	public ChessBoard(int n) {
+		this.n = n;
+	}
+	public boolean isAttachPos(int i, int j) {
+		int difWidth = Math.abs(i/n-j/n); //위아래차이
+		int iPos = (i%n);
+		int jPos = (j%n);
+		return iPos==(jPos+difWidth) ||  iPos==(jPos-difWidth);
+	}
+	public int getSafeCount(int k) {
+		int [] curData = new int[k];
+		checkCount = 0;
+		backTracking(curData, 0, k);
+		return checkCount;
+	}
+	 
+	private void backTracking(int [] curData , int k, int i){
+		if(k==i){
+			processSolution(curData);
+		}else{
+			Integer [] candidates = makeCandidates(curData,k,i);
+			k++;
+			for(int cadidate : candidates){
+				curData[k-1] = cadidate;
+				backTracking(curData, k, i);
+			}
+		}
+		
+	}
+	private Integer [] makeCandidates(int[] curData,int k, int i) {
+		ArrayList<Integer> candidates = new ArrayList<Integer>(i);
+		//처음 시작은 모든 값이 후보가 됨
+		if(k==0){
+			for(int j=0;j<n*n;j++){
+				candidates.add(j);
+			}
+		}
+		else{ //curData에 값이 있는 경우에는 기존값과 비교하여 값츨 찾음
+			//새로운 후보 는 이전 값보다 크고 기존의 데이터와 Attacking Pos가 되지 않으면 된다.
+			for(int j=curData[k-1];j<n*n;j++){
+				boolean allSafe = true;
+				for(int z=0;z<k;z++){
+					int comVal = curData[z];
+					if(isAttachPos(comVal, j)){
+						allSafe = false;
+						break;
+					}
+				}
+				if(allSafe){
+					candidates.add(j);
+				}
+			}
+		}
+		Integer [] a = new Integer[candidates.size()];
+		return (Integer [])candidates.toArray(a);
+	}
+	
+	private void processSolution(int[] curData) {
+		
+		checkCount ++;
+		/*StringBuilder builder = new StringBuilder();
+		for(int val : curData){
+			builder.append(val);
+			builder.append(" ");
+		}
+		System.out.println(builder.toString());*/
+	}
+
+}
+
+}}}
+ * TEST CASE
+{{{
+import junit.framework.TestCase;
+
+
+public class BisopTestCase extends TestCase {
+	public void testIsAttackPos(){
+		/*
+		 * 012
+		 * 345
+		 * 678
+		 * 
+		 */
+		ChessBoard board = new ChessBoard(3);
+		assertTrue(board.isAttachPos(0,0));
+		assertFalse(board.isAttachPos(0,1));
+		assertFalse(board.isAttachPos(0,2));
+		assertFalse(board.isAttachPos(0,3));
+		assertTrue(board.isAttachPos(0,4));
+		assertFalse(board.isAttachPos(0,5));
+		assertFalse(board.isAttachPos(0,6));
+		assertFalse(board.isAttachPos(0,7));
+		assertTrue(board.isAttachPos(0,8));
+		assertTrue(board.isAttachPos(1,5));
+		assertTrue(board.isAttachPos(0,8));
+		assertTrue(board.isAttachPos(4,0));
+		assertTrue(board.isAttachPos(6,4));
+		assertTrue(board.isAttachPos(0,8));
+	}
+	
+	public void testSafeCount(){
+		ChessBoard board = new ChessBoard(4);
+		assertEquals(260, board.getSafeCount(4));
+		ChessBoard board2 = new ChessBoard(8);
+		assertEquals(5599888, board2.getSafeCount(6));
+	}
+	
+}
+}}}

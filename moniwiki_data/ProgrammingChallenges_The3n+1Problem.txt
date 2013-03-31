@@ -1,0 +1,11 @@
+[http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110101&format=html 문제보기]
+[http://www.programming-challenges.com/pg.php?page=studenthome&threshold=0&perpage=8&pagenum=0&orderby=12 풀이제출]
+
+[wiki:Algorithm/문제1 Programming Challenges/The 3n+1 Problem/ParkPD]
+[wiki:ProgrammingChallenges/The3n%2B1Problem/CynicJJ Programming Challenges/The 3n+1 Problem/CynicJJ]
+[wiki:ProgrammingChallenges/The3n%2B1Problem/Mastojun Programming Challenges/The 3n+1 Problem/Mastojun]
+[wiki:ProgrammingChallenges/The3n%2B1Problem/jeddli Programming Challenges/The 3n+1 Problem/jeddli]
+ 
+ 
+----
+CategoryProblem

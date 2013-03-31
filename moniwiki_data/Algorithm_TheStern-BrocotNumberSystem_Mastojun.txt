@@ -1,0 +1,78 @@
+= 문제 풀이 =
+그래프를 잘 들여다 보면 숫자의 배열에 규칙을 발견할 수 있습니다. 하지만 풀이엔 "참고로, 유리수 m/n과 p/q의 대소를 비교하는데 실제로 m을 n으로, p를 q로 나누어 실수 변수에 대입하는 일은 하지 말자." 라고 되어 있는데.... 전 실제로 나누었습니다 -_-;;단 float으로 하면 제대로 비교가 될꺼 같지 않아 double로 했어요.
+
+= Programming-Challenges 로봇의 문제점 =
+UVa에서는 Accepted를 받았지만 (UVa에서는 Solved를 Accepted라고 표현합니다) PC에서는 Presentation Error를 받았습니다. 저번에도 비슷한 문제로 메일 보낸적이 있었는데 MD5문제라고 하던거 같은데 @_@.. 이번에도 메일 보냈으니 몇일 이내로 고쳐질꺼라 생각해요.
+
+답장이 왔습니다.
+ ''Hello,''
+ ''there were a mistake with the md5sum check, as some time in the past we fixed the 'correct' output and the people in charge, possibly forgot to actualize the database. Sorry and thanks. Take a look in a few minutes, as now we are rejudging all the submissions. I hope yours will get a 'Solved' verdict.''
+
+ ''Miguel''
+
+이젠 Solved라고 뜨네요 ^_^;
+
+
+= 소스 코드 =
+{{{
+#include <iostream>
+
+using namespace std;
+
+struct Number
+{
+	int numerator;
+	int denominator;
+
+	double GetRatio()
+	{
+		if( denominator == 0 ) return -1;
+		return ((double)numerator)/denominator;
+	}
+
+	bool operator!=(Number& rhs)
+	{
+		return (rhs.numerator!=numerator)||(rhs.denominator!=denominator);
+	}
+
+	Number operator+(Number& rhs)
+	{
+		Number Temp = *this;
+		Temp.numerator += rhs.numerator;
+		Temp.denominator += rhs.denominator;
+
+		return Temp;
+	}
+};
+
+int main()
+{
+	int n, d;
+
+	while( cin >> n >> d )
+	{
+		if( n == 1 && d == 1 ) break;
+
+		Number Input = {n, d}, Now = {1, 1};
+		Number LeftNumber = {0, 1}, RightNumber = {1, 0};
+
+		while( Now != Input )
+		{
+			if(Input.GetRatio() > Now.GetRatio())
+			{
+				cout << "R";
+				LeftNumber = Now;
+				Now = Now+RightNumber;
+			}
+			else
+			{
+				cout << "L";
+				RightNumber = Now;
+				Now = Now+LeftNumber;
+			}
+		}
+
+		cout << endl;		
+	}
+}
+}}}

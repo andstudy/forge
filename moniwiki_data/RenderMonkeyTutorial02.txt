@@ -1,0 +1,161 @@
+이번에는 [http://www.david-gouveia.com/adding-a-skybox-to-rendermonkey/ Adding a Skybox to RenderMonkey] 블로깅을 간단하게 번역해 봤습니다. 쉐이더 코드에 한글 주석을 넣으면 error X3000 가 생기는 경우가 있군요. 컴파일 에러가 나면 한글 주석을 다 빼고 해 보세요.
+
+== RenderMonkey 에 스카이박스 붙이기 ==
+전에는 [http://parkpd.egloos.com/3788923 RenderMonkey 에 대한 기본적인 튜토리얼]을 블로깅했습니다. 이번에는 어떻게 하면 RenderMonkey 에서 화면에 보여지는 단색 배경 대신 스카이박스(skybox) 를 보여줄 수 있을지를 얘기해 볼까 합니다. 저는 이미 여러분이 [http://parkpd.egloos.com/3788923 이전 튜토리얼]을 읽고 따라해 봤고, HLSL 에 대해 익숙하며 RenderMonkey 가 아닌 다른 곳에서 스카이박스를 어떻게 만드는지 알고 있다고 가정하겠습니다. 인터넷 찾아보시면 (이 블로깅처럼) 스카이박스를 어떻게 구현하는지 좋은 자료를 많이 찾아볼 수 있습니다. 그나저나 제가 구현한 방식은 Riemer Grootjans 의 책 [http://www.amazon.com/XNA-Game-Programming-Recipes-Problem-Solution/dp/143021855X XNA 3.0 Game Programming Recipes] 에 기초하고 있습니다. 이 책에서는 이 외에도 여러 다양한 주제를 다루고 있는데 도움되는 내용이 많습니다.
+
+== 소개 ==
+RenderMonkey 에서 처음 쉐이더를 짜기 시작하면서 환경매핑(environment mapping) 같은 이펙트를 제대로 테스트하기 위해 씬에 스카이박스를 붙이는 법을 찾아봤습니다. RenderMonkey 의 인터페이스를 뒤져봤지만 스카이박스를 그려주는 기능을 찾을 수가 없더군요. 결국 직접 구현하기로 했습니다. 뭔가 더 쉽고 직관적인 방법이 있을 거 같기도 해서, 사실 제 방식을 공개하는게 큰 의미가 있을까 망설이기도 했습니다. 그러니 더 쉬운 방법이 있다면 제발 저에게 알려주세요.
+
+제가 스카이박스를 그리는 비결은 이펙트에 두 번째 쉐이더 패스를 추가해서, 첫 번째 쉐이더로는 스카이박스를 그리고, 두 번째 쉐이더로 모델을 그리는 것입니다. 여기에서 보여드릴 구현에서는 항상 카메라 중점에 위치하는 (RenderMonkey 에서 생성한) 간단한 텍스처 맵핑 큐브모델을 사용할 겁니다. 이렇게 하면 카메라가 어디 있더라도 스카이박스는 충분한 거리를 항상 유지할 수 있습니다. 그래픽 카드의 렌더 스테이트를 바꾸고 감기 순서(culling order)를 뒤집어서 안이 그려지도록 하고, 스카이박스를 그릴때 Z-버퍼 쓰기를 막아서 두 번째 패스에서 모델을 그리는데 아무 문제가 없게 했습니다. 스카이박스에 텍스처를 입히기 위해서는 기본으로 제공되는 큐브맵과 texCUBE 이라는 HLSL 기본함수만 있으면 됩니다. 이제 시작해 봅시다!
+
+== 이펙트 시작하기 ==
+먼저 워크스페이스에 새로운 DirectX 이펙트를 만들고(Effect Workspace -> Add Default Effect -> DirectX -> DirectX), 이펙트 위에서 우클릭한 뒤 "Add Pass" 를 선택해 두 번째 패스를 추가합시다.
+
+attachment:a_pass1.jpg
+
+이후 워크스페이스는 다음과 같을 겁니다.
+
+attachment:a_pass2.jpg
+
+지금부터 스카이박스를 설치하는 대부분의 작업은 첫 번째 패스(Pass 0)에서 하게 됩니다. 큐브 모델을 만들고, 몇가지 변수와 쉐이더에서 쓸 큐브맵 텍스처를 준비하고, 쉐이더를 작성하고 그래픽 카드의 렌더 스테이트도 제대로 잡아줘야 합니다. 단계별로 나갈테니 너무 걱정마세요.
+
+== 큐브 만들기 ==
+스카이박스로 쓸 큐브 모델을 만들기 위해서는, 이펙스 위에서 우클릭해서 새로운 모델을 추가해야 합니다. 하지만 목록 중에서 모델을 선택하진 마세요. 대신에 목록 최상단에 있는 기본 모델(Model) 을 선택합니다. myModel1 이라는 객체가 생길텐데 기존 모델과 헷갈리는 게 싫으니 이름을 "Box" 로 바꿔줍시다.
+
+attachment:b_model1.jpg
+
+이제 새로 만든 모델 Box 위에서 우클릭한 뒤 "Generator" -> "Geometry Generator" 를 선택합니다. 이러면 RenderMonkey 가 우리의 선택에 따라서 적당한 데이터를 모델에 채워줍니다.
+
+attachment:b_model2.jpg
+
+팝업창에서 적당한 크기의 상자를 생성합니다. near 평면과 far 평면을 어떻게 설정하느냐에 따라서 박스 크기가 너무 작거나 클 경우에 문제가 생길 수 있습니다. 여기에서는 25x25x25 크기의 박스를 만들겠습니다.
+
+attachment:b_model3.jpg
+
+까먹기전에 Pass 0 를 열어서 model 위에서 우클릭한 뒤 새로 생성한 상자를 할당합시다(아마 model 은 처음 추가한 model 을 가리키고 있었을 겁니다). 
+
+attachment:b_model4.jpg
+
+== 변수 생성 ==
+아래에서 보여드릴 스카이박스 쉐이더에서는 3 개의 전역 변수를 사용하는데, 각각 카메라의 위치, 뷰-프로젝션 행렬, 하늘(sky)에 사용할 큐브맵 텍스처입니다.
+{{{#!plain cpp
+float4 ViewPosition;
+float4x4 ViewProjection;
+sampler Texture;
+}}}
+
+이전 튜토리얼에서 봤던 것처럼 이들 변수를 생성합시다. 적당한 데이터타입과 시멘틱을 지정하는 것을 잊지 맙시다. ViewProjection 행렬은 기본적으로 들어있지만(matViewProjection), 기본 이름이 맘에 들지 않기 때문에 이름을 ViewProjection으로 바꿨습니다. Pass 0, Pass 1 의 쉐이더 코드에서 matViewProjection 를 찾아 전부 ViewProjection 로 바꿔줍시다. ViewPosition 같은 경우 Float 의 미리 정의된 (predefined) 변수에서 찾을 수 있습니다. 
+
+attachment:c_var1.jpg
+
+텍스처를 로딩하기 위해서 Cubemap 옵션을 사용합니다(Add Texture -> Add Cubemap -> Snow.dds).
+
+attachment:c_var2.jpg
+
+방금 생성한 큐브맵(Snow)과 링크되는 Texture Object 를 "Texture" 라는 이름으로 Pass 0 에 추가하는 것도 잊지 맙시다.
+
+attachment:c_var4.jpg
+
+원한다면 텍스처 객체가 좀더 나은 필터링 방식을 쓰게 할 수도 있습니다.
+
+attachment:c_var5.jpg
+
+== 코드 추가 ==
+이제 정점 쉐이더와 픽셀 쉐이더 코드를 추가해 봅시다. 아래에 이미 코드가 준비되어 있습니다. 각각 Pass 0 의 정점 쉐이더와 픽셀 쉐이더에 복사해 붙여넣습니다. 코드가 어떤 작업을 하는지를 주석으로 설명해 넣었습니다만, 궁금한 점이 있으면 언제든지 물어봐주세요.
+
+정점 쉐이더 :
+{{{#!plain cpp
+float4 ViewPosition;
+float4x4 ViewProjection;
+ 
+struct VS_INPUT
+{
+   float4 position : POSITION0;
+};
+ 
+struct VS_OUTPUT
+{
+   float4 position : POSITION0;
+   float3 position3D : TEXCOORD0;
+};
+ 
+// 이동 행렬을 만든다.
+float4x4 translation(float3 position)
+{
+   return float4x4(
+              float4(1,0,0,0),
+              float4(0,1,0,0),
+              float4(0,0,1,0),
+              float4(position.xyz, 1)
+          );
+}
+ 
+VS_OUTPUT vs_main(VS_INPUT input)
+{
+   VS_OUTPUT output;
+ 
+   // 스카이박스를 카메라 위치로 옮기는 월드 행렬을 만든다.
+   float4x4 world = translation(ViewPosition.xyz);
+ 
+   // 월드행렬을 기존 뷰-프로젝션 행렬과 곱한다.
+   float4x4 WorldViewProjection = mul(world, ViewProjection);
+ 
+   // 이렇게 만든 공간으로 정점을 이동시킨다.
+   output.position = mul(input.position, WorldViewProjection);
+
+   // 모델 공간에서의 원래 정점 위치를 저장한다.
+   // 큐브 모델은 중심점이 원점에 있기 때문에
+   // 원래 정점 위치값을 큐브맵의 방향값으로 바로 활용할 수 있다.
+   output.position3D = input.position;
+ 
+   return output;
+}
+}}}
+(한글 주석 때문에 error X3000: syntax error: unexpected end of file 에러가 뜨는 경우가 있네요. 한글 주석을 제거하면 에러가 사라집니다. 한글주석이나 경로에 한글이 들어가면 이런 현상이 있다고 하는데 RenderMonkey 의 버그인지 뭔지 정확한 원인을 모르겠네요.)
+
+픽셀 쉐이더 :
+{{{#!plain cpp
+sampler Texture;
+ 
+struct VS_OUTPUT
+{
+   float4 position : POSITION0;
+   float3 position3D : TEXCOORD0;
+};
+ 
+float4 ps_main(VS_OUTPUT input) : COLOR0
+{
+   // 원래 정점 위치를 큐브맵 텍스처를 샘플링하는데 사용한다.
+   return texCUBE(Texture, input.position3D);
+}
+}}}
+
+== 렌더 스테이트 설정 ==
+아직 화면에는 아무 것도 안 나오겠지만, 쉐이더는 아무 문제없이 컴파일 될 겁니다. 아무 것도 보이지 않는 이유는 우리가 큐브 모델 내부에서 그려지지 않는 안쪽 평면을 보고 있기 때문입니다. 그래픽 카드의 감기 방식(culling mode)를 바꿔줍시다. 또한 우리는 하늘(sky)가 씬의 마지막까지 남게 하고 싶기 때문에 z-버퍼 쓰기를 금지시켜야 합니다.
+
+이를 위해서 Pass 0 에 우클릭한 뒤 "Add Render State Block" 을 추가, 편집해 줘야 합니다. 이런 변경사항은 모델 그릴 때에는 원래대로 되돌려놔야 하기 때문에 Pass 1 에서 같은 작업을 반복해야 합니다.
+
+Pass 0 의 Render State Options :
+D3DRS_CULLMODE 를 D3DCULL_CW 로 변경
+D3DRS_ZWRITEENABLE 을 FALSE 로 변경
+attachment:e_state1.jpg
+
+Pass 1 의 Render State Options:
+D3DRS_CULLMODE 를 D3DCULL_CCW 로 변경
+D3DRS_ZWRITEENABLE 을 TRUE 로 변경
+attachment:e_state2.jpg
+
+== 결론 ==
+이제 끝났습니다! 이제 Pass 1 를 바꿔서 원하는 쉐이더를 써 넣어도, 스카이박스는 계속 보일 것이고 카메라에 맞춰서 반응할 것입니다. 결과는 다음과 같습니다 :
+
+attachment:g_end.jpg
+
+적당한 스카이박스가 준비되어 있다면 아래와 같은 반사(reflection) 나 굴절(refraction) 등의 여러 이펙트도 시험해 볼 수 있습니다.
+
+attachment:example.jpg
+
+마지막 팁 : 기본적으로 Pass 1 은 Pass 0 과 똑같은 Stream Mapping 구조체를 참조하고 있습니다. 각 pass 별로 다른 구조체가 필요하다면, 이펙트별로 새로운 Stream Mapping 객체를 만들어 우클릭한 뒤 Pass 1 의 참조를 새로운 인스턴스로 바꿔주기만 하면 됩니다.
+
+오늘은 여기까지입니다. 도움이 되었으면 좋겠네요.
+
+[[UploadFile]]

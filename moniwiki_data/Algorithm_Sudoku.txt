@@ -1,0 +1,3 @@
+전에 올려놨던 수도쿠 풀이법입니다.
+막판에 백트랙킹을 쓰니까 참고하세요
+http://www.parkpd.x-y.net/moniwiki/wiki.php/Sudoku

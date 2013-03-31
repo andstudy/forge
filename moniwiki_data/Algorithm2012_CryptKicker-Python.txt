@@ -1,0 +1,212 @@
+= 당부 사항 =
+이 코드는 단순히 알고리즘을 풀어내는지 검사하기 위한 코드 입니다. 추가로 수정 할 예정 입니다.
+파이썬 2.7 기준으로 작성하였으며 파이토닉에 걸맞지 않는 코드 입니다. C++처럼 짜놨습니다. 그것도 아닌지..
+양해부탁드립니다.
+
+= 실제 코드 no12CryptKicker.py = 
+#-*-coding:utf-8 -*-
+
+mapping = dict()
+""" rd 는 레퍼런스 사전이다. 평문 단어들을 가지고 있음 """
+rd = [ 'dick', 'jane', 'spot', 'puff', 'and', 'yertle']
+""" ed는 암호 사전이다. 암호화된 단어들을 가지고 있다 """
+ed = ['bjvg', 'hxsn', 'qymm', 'rqat', 'xsb', 'pnetfn']
+ed_ = ['bjvg', 'xsb', 'hxsn', 'xsb', 'qymm', 'xsb', 'rqat', 'xsb', 'pnetfn']
+
+def decodewords(mappingdict, word):
+    tempstr = ""
+    for char in word:
+        tempstr = tempstr + mappingdict[char]
+    
+    return tempstr
+    
+def copydictionary(tempdict, mappingdict):
+    """ 두 개의 사전을 합침 """
+    for key in tempdict.keys():
+        mappingdict[key] = tempdict[key]
+    return mappingdict
+        
+def wordmapping(mappingdict, plaintext, cryptogram):
+    """ 두 개의 단어를 받아서 매핑 테이블에 적용 한다.
+    1) 단어끼리 매핑 테이블에 충돌 없이 적용 가능함
+        매핑테이블에 임시테이블을 덮어씌
+        True반환
+    2) 단어끼리 매핑 테이블에 충돌 있어서 적용 불가능함
+        기존 매핑테이블은 그대로.
+        False반환 
+    3) 두 문자의 길이가 다르면 무조건 False반
+    """
+    
+    if len(plaintext) != len(cryptogram):
+        return False
+    
+    tempmappingdict = mappingdict.copy()
+    
+    for i in range(len(cryptogram)):
+        char = cryptogram[i]
+        chkresult = checkintegrity(tempmappingdict, char, plaintext[i])
+        if  chkresult == False:
+            return False
+        else:
+            tempmappingdict[char] = plaintext[cryptogram.index(char)]
+    mappingdict = copydictionary(tempmappingdict, mappingdict)
+    return True
+
+def checkintegrity(mappingdict, indexchar, mappingchar):
+    """ 
+    indexchar => 암호화된글자 
+    mappingchar => 평문
+    
+    1) 매핑 테이블에 이미 해당 키 값에 대한 정보가 있는 경우
+    1-1) 이미 있는 키 값과 새로 들어온 키 값이 일치하는지 검사
+    1-1-1) 이미 있는 키와 새로 들어온 키 값이 일치 하는 경우 true반환 
+    1-1-2) 이미 있는 키와 새로 들어온 키 값이 다른 경우 false반환 
+    
+    2) 매핑 테이블에 해당 키 값에 대한 정보가 없는 경우
+    2-1) 그대로 매핑 테이블에 입력하고 true 반환
+    
+    예) indexchar = qymm
+        mappingchar = dick
+        mappingdict = {}
+        
+    """
+     
+    tempkeys = mappingdict.keys()
+    
+    if indexchar in tempkeys:
+        if mappingdict[indexchar] == mappingchar:
+            return True
+        else:
+            return False
+    else:
+        mappingdict[indexchar] = mappingchar
+        return True
+
+def decode(edword):
+                
+    if len(ed) == 0:
+        wordmapping(mapping, rd[0], edword)
+        print 'touch end -- ed is empty'
+        print mapping
+        return True
+
+    
+    for rdword in rd:
+        print '--On Test %s, %s' % (edword, rdword)
+        if wordmapping(mapping, rdword, edword) == True:
+            rd.remove(rdword)
+            newedword = ed.pop()
+            result = decode(newedword)
+            if result == False:
+                ed.append(newedword)
+                rd.append(rdword)
+            else:
+                return True
+    
+    return False
+
+def main():
+    """ 각각의 4개의 글자를 가진 dictionary를 가짐.
+    모든 암호화 문장을 하나씩 빼서 해독함
+ 
+    평문사전 = [ 'dick', 'jane', 'spot'] 암호사전 = [ 'bjvg', 'rqat', 'hxsn']
+    
+    위와 같이 가정하면, 'bjvg'는 'dick','jane', 'spot' 세 개중에 하나임. 
+    
+    1) 'bjvg'를 'dick'와 매칭 시킴
+    1-1) 'bjvg'를 'dick'에 매칭 시키는데 문제가 없음.
+    1-1-1) 'rqat'를 'jane'에 매칭 시켜봄
+    ...
+    1-2) 'bjvg'를 'dick'에 매칭 시켰는데 문제가 있음.
+    1-2-1) 'bjvg'를 'jane'에 매칭 시켜봄
+    ...
+    계속 암호사전에 단어를 번역 시키는데 더 이상 해독할 단어가 없으면 끝.
+    
+    decode 함수는 자기가 해독한 단어를 출력하므로 결국 retval은 해독한 전체 문자열을 반
+    """
+    strresult = "*"
+    retval = None
+    print '-------------------------'
+    print ed
+    print rd
+    print '-------------------------'
+
+    edword = ed.pop()
+    retval = decode(edword)
+        
+    if retval == False:
+        print strresult
+    else:
+        for edword in ed_:
+            print decodewords(mapping,edword)
+main()
+
+= 테스트 케이스 no12CryptKickerTest.py =
+
+#-*-coding:utf-8 -*-
+import no12CryptKicker as cryptkicker
+import unittest
+
+class testUnit (unittest.TestCase):
+    
+    def setup_testdict1(self):
+        self.testdict1 = {'b': 'd', 'v': 'c', 'g': 'k', 'j': 'i'}
+        pass
+    
+    def setup_testdict2(self):
+        self.testdict2 = {'h': 'j', 'x': 'a', 's': 'n', 'n': 'e'}
+        pass
+    
+    def teardown_testdict1(self):
+        self.testdict1 = dict()
+        pass
+    
+    def teardown_testdict2(self):
+        self.testdict2 = dict()
+        pass
+    
+    def test_func_wordmapping(self):
+        testemptydict = dict()
+        self.assertTrue(cryptkicker.wordmapping(testemptydict, 'dick', 'bjvg'))
+        self.assertDictEqual(testemptydict, {'b':'d', 'j':'i', 'v':'c', 'g':'k'})
+        
+    def test_func_wordmapping2(self):
+        """qymm에 dick를 넣으면 정상적으로 false가 반환되는지 검사 """
+        testemptydict = dict()
+        self.assertFalse(cryptkicker.wordmapping(testemptydict, 'dick', 'qymm'))
+        
+    def test_func_wordmapping3(self):
+        """길이가 다른 문자열을넣어서 제대로 판별 하는지 확인"""
+        testemptydict = dict()
+        self.assertFalse(cryptkicker.wordmapping(testemptydict, 'dick', 'xsb'))
+    
+    def test_func_wordmappingWithCopy(self):
+        self.setup_testdict2()
+        self.assertTrue(cryptkicker.wordmapping(self.testdict2, 'dick', 'bjvg'))
+        self.assertDictEqual(self.testdict2, {'b': 'd', 'v': 'c', 'g': 'k', 'j': 'i','h': 'j', 'x': 'a', 's': 'n', 'n': 'e'})
+        
+        testemptydict = dict()
+        self.assertTrue(cryptkicker.wordmapping(testemptydict, 'puff', 'qymm'))
+        self.assertDictEqual(testemptydict, {'q':'p', 'y':'u', 'm':'f'})
+
+        
+    def test_func_checkintegrity(self):
+        testemptydict = dict()
+        self.assertTrue(cryptkicker.checkintegrity(testemptydict, 'b', 'd'))
+        self.assertTrue(cryptkicker.checkintegrity(testemptydict, 'j', 'i'))
+        self.assertTrue(cryptkicker.checkintegrity(testemptydict, 'v', 'c'))
+        self.assertTrue(cryptkicker.checkintegrity(testemptydict, 'g', 'k'))
+        
+        testemptydict = dict()
+        self.assertTrue(cryptkicker.checkintegrity(testemptydict, 'm', 'c'))
+        self.assertFalse(cryptkicker.checkintegrity(testemptydict, 'm', 'k'))
+    
+    def test_func_copydictionary(self):
+        self.setup_testdict1()
+        self.setup_testdict2()
+        self.assertDictEqual(cryptkicker.copydictionary(self.testdict1, self.testdict2), \
+                             {'b': 'd', 'v': 'c', 'g': 'k', 'j': 'i','h': 'j', 'x': 'a', 's': 'n', 'n': 'e'})
+                
+if __name__ == "__main__":
+    suite = unittest.TestLoader().loadTestsFromTestCase(testUnit)
+    unittest.TextTestRunner(verbosity=2).run(suite)

@@ -1,0 +1,9 @@
+[http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110601&format=html 문제보기]
+[http://www.programming-challenges.com/pg.php?page=studenthome&threshold=0&perpage=8&pagenum=5&orderby=10 6장 Summit Pages]
+
+[Algorithm/How Many Fibs/CynicJJ]
+[Algorithm/How Many Fibs/Mastojun]
+[Algorithm/How Many Fibs/ParkPD]
+
+----
+CategoryProblem

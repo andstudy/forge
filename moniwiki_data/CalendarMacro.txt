@@ -1,0 +1,35 @@
+{{{[[Calendar]] [[Calendar(200407)]]}}} diary mode
+||[[Calendar]]||[[Calendar(200407)]]||
+----
+'''noweek,shortweek'''
+
+no week title or short week title
+
+{{{[[Calendar(noweek)]] [[Calendar(shortweek)]]}}}
+||[[Calendar(noweek)]] || [[Calendar(shortweek)]] ||
+----
+{{{[[Calendar(noweek,yearlink)]]}}} show prev/next year link
+[[Calendar(noweek,yearlink)]]
+----
+== '''blog''' and '''archive''' options ==
+{{{[[Calendar("WkPark",blog)]]}}} blog mode
+
+[[Calendar("WkPark",blog)]]
+----
+{{{[[Calendar(blog)]]}}} blog mode
+
+'''YEAR-MONTH subpage is created'''
+[[Calendar(blog)]]
+
+{{{[[Calendar("Blog",blog)]]}}} blog mode with default page
+/!\ cvs 1.0.9
+[[Calendar("Blog",blog)]]
+----
+'''archive option check blogged dates and link to the archive'''
+{{{[[Calendar("Blog",shortweek,archive,blog)]]}}}
+[[Calendar("Blog",shortweek,archive,blog)]]
+----
+{{{[[Calendar(noweek,archive)]] [[Calendar(shortweek,archive)]]}}}
+||[[Calendar(noweek,archive)]] || [[Calendar(shortweek,archive)]] ||
+----
+CategoryMacro

@@ -1,0 +1,245 @@
+{{{#!plain cpp
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Point
+{
+	Point() : x(0.0), y(0.0) {}
+	Point( double x_, double y_ ) 
+		: x(x_)
+		, y(y_)
+	{}
+	double x;
+	double y;
+};
+
+Point operator+(Point const & lhs, Point const & rhs)
+{
+	return Point(lhs.x+rhs.x, lhs.y+rhs.y);
+}
+Point operator-(Point const & lhs, Point const & rhs)
+{
+	return Point(lhs.x-rhs.x, lhs.y-rhs.y);
+}
+Point operator*(Point const & lhs, double scale)
+{
+	return Point(lhs.x*scale, lhs.y*scale);
+}
+Point operator*(double scale, Point const & lhs)
+{
+	return lhs * scale;
+}
+bool operator==(Point const & lhs, Point const & rhs)
+{
+	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
+bool operator!=(Point const & lhs, Point const & rhs)
+{
+	return !(lhs == rhs);
+}
+
+typedef vector<Point> Polygon;
+
+double Area(Polygon const & polygon, unsigned count)
+{
+	double area = 0.0;
+	for( size_t i = 0 ; i < count ; ++i )
+	{
+		size_t j = (i+1) % count;
+		area += polygon[i].x * polygon[j].y - polygon[j].x * polygon[i].y;
+	}
+	return area / 2.0;
+}
+
+double Distance( Point p1, Point p2 )
+{
+	double diffX = p1.x - p2.x;
+	double diffY = p1.y - p2.y;
+	return diffX*diffX + diffY*diffY; 
+}
+
+class Space
+{
+public:
+	Space() { Initialize(); }
+
+	// near 가 far 보다 목적지에 더 가깝다는 정보를 추가한다
+	void AddInfo( Point near, Point far )
+	{
+		vector<int> select;
+		select.resize(m_n);
+
+		for( size_t i = 0 ; i < m_n ; ++i )
+		{
+			double to_near = Distance(m_points[i], near);
+			double to_far = Distance(m_points[i], far);
+
+			// 숨긴 위치에 가까운 점 까지의 거리가 더 짧으면 이 꼭지점은 선택된다
+			if ( to_near < to_far )			{ select[i] = 1; }
+			// 숨긴 위치에 먼 점 까지의 거리가 더 짧으면 이 꼭지점은 제외된다
+			else if ( to_near > to_far )	{ select[i] = -1; }
+			// near 와 far 까지의 거리가 같다. 이 꼭지점은 선택된다
+			else							{ select[i] = 0; }
+		}
+
+		m_points.push_back(m_points[0]);
+		Polygon temp;
+		temp.reserve(55);
+		unsigned temp_n = 0;
+
+		for( size_t i = 0 ; i < m_n ; ++i )
+		{
+			if ( select[i] >= 0 )
+			{
+				temp.push_back( m_points[i] );
+				++temp_n;
+			}
+
+			size_t j = (i + 1) % m_n;
+			if (select[i] * select[j] < 0) // 1 && -1 || -1 && 1
+			{
+				// 교차점 구하기
+
+				// p1 p2 는 near 와 far 를 잇는 직선의 수직 이등분선 위의 두 점
+				// p3 p4 는 다각형 위의 인접한 두 꼭지점
+				Point nPf = near + far;
+				Point nMf = near - far;
+				Point p1 = nPf * 0.5 + Point(nMf.y, -nMf.x);
+				Point p2 = nPf * 0.5 + Point(-nMf.y, nMf.x);
+				Point p3 = m_points[i];
+				Point p4 = m_points[j];
+
+				// p1 p2 를 지나는 직선위의 점을 나타내는 방정식 P(s) = p1 + (p2-p1)*s
+				// p3 p4 를 지나는 직선위의 점을 나타내는 방정식 P(t) = p3 + (p4-p3)*t
+
+				// p1   + s * (p2 - p1)     = p3   + t * (p4 - p3)
+				
+				// p1.x + s * (p2.x - p1.x) = p3.x + t * (p4.x - p3.x)   -- (1)
+				// p1.y + s * (p2.y - p1.y) = p3.y + t * (p4.y - p3.y)   -- (2)
+
+				//      ((p1.x - p3.x) + (p2.x - p1.x) * s)
+				// t =  -----------------------------------
+				//               (p4.x - p3.x)
+				
+				//      ((p3.y - p1.y) + (p4.y - p3.y) * t)
+				// s =  -----------------------------------
+				//               (p2.y - p1.y)
+				
+				//                                      ((p3.y - p1.y) + (p4.y - p3.y) * t)
+				//     ((p1.x - p3.x) + (p2.x - p1.x) * ----------------------------------- )
+				//                                                 (p2.y - p1.y)
+				// t = ---------------------------------------------------------------------
+				//                              (p4.x - p3.x)
+				//
+
+				// t * (p4.x - p3.x) * (p2.y - p1.y) = 
+				//            (p1.x - p3.x) * (p2.y - p1.y) + 
+				//            (p2.x - p1.x) * (p3.y - p1.y) +
+				//            (p2.x - p1.x) * (p4.y - p3.y) * t
+
+				//     (p1.x - p3.x) * (p2.y - p1.y) + (p2.x - p1.x) * (p3.y - p1.y)
+				// t = -------------------------------------------------------------
+				//     (p4.x - p3.x) * (p2.y - p1.y) - (p2.x - p1.x) * (p4.y - p3.y)
+
+				double a1 = p2.y - p1.y;
+				double b1 = p2.x - p1.x;
+				double a2 = p4.y - p3.y;
+				double b2 = p4.x - p3.x;
+
+				//     (p1.x - p3.x) * a1 + b1 * (p3.y - p1.y)
+				// t = ---------------------------------------
+				//                b2 * a1 - b1 * a2
+
+				// P(t) = p3 + (p4-p3)*t
+
+				// x = p3.x + (p4.x - p3.x) * t = p3.x + b2 * t
+				//
+				//     p3.x * (b2 * a1 - b1 * a2) + b2 * (p1.x - p3.x) * a1  + b2 * b1 * (p3.y - p1.y)
+				// x = ------------------------------------------------------------------------------
+				//                                     b2 * a1 - b1 * a2
+				//
+				//      (-p3.x * b1 * a2) + (b2 * p1.x * a1) + (b2 * b1 * p3.y) - (b2 * b1 * p1.y)
+				// x = --------------------------------------------------------------------------
+				//                                   b2 * a1 - b1 * a2
+				//
+				//     b2 * (a1 * p1.x - b1 * p1.y) - b1 * (a2 * p3.x - b2 * p3.y)
+				// x = -----------------------------------------------------------
+				//                          b2 * a1 - b1 * a2
+
+				double c1 = a1 * p1.x - b1 * p1.y;
+				double c2 = a2 * p3.x - b2 * p3.y;
+				
+				//     b2 * c1 - b1 * c2 
+				// x = -----------------
+				//     b2 * a1 - b1 * a2
+
+				double x_result = (b2 * c1 - b1 * c2) / (b2 * a1 - b1 * a2);
+				double y_result = (a2 * c1 - a1 * c2) / (b2 * a1 - b1 * a2);
+				temp.push_back( Point(x_result, y_result) );
+				++temp_n;
+			}
+		}
+		m_points.swap(temp);
+		m_n = temp_n;
+	}
+
+	void SetZero() { m_n = 0; }
+	double Area() { return ::Area(m_points, m_n); }
+
+private:
+	void Initialize()
+	{
+		m_points.reserve(55);
+		m_points.push_back( Point( 0.0,  0.0) );
+		m_points.push_back( Point(10.0,  0.0) );
+		m_points.push_back( Point(10.0, 10.0) );
+		m_points.push_back( Point( 0.0, 10.0) );
+		m_n = 4;
+	}
+
+private:
+	Polygon m_points;
+	unsigned m_n;
+};
+
+int main()
+{
+	cout.setf(ios::fixed, ios::floatfield);
+	cout.precision(2);
+	
+	Space space;
+
+	Point guess(0.0, 0.0);
+	
+	string one_line;
+	while( getline(cin, one_line) )
+	{
+		Point new_guess;
+		string temperature;
+		
+		istringstream iss(one_line);
+		iss >> new_guess.x >> new_guess.y >> temperature;
+
+		if ( temperature == "Colder" )
+		{
+			space.AddInfo( guess, new_guess );
+		}
+		else if ( temperature == "Hotter" )
+		{
+			space.AddInfo( new_guess, guess );
+		}
+		else if ( guess != new_guess )
+		{
+			space.SetZero();
+		}
+
+		guess = new_guess;
+		cout << space.Area() << endl;
+	}
+	return 0;
+}
+}}}

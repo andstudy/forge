@@ -1,0 +1,226 @@
+ * 많이 늦었습니다. ㅋ
+
+[[TableOfContents([maxdepth])]]
+
+== Edit Step Ladder ==
+=== !StepLadder.vb ===
+{{{
+Public Class StepLadder
+
+	Function GetEditStepLadders(ByVal inputs As List(Of String)) As Integer
+		Dim words As List(Of Word) = CreateWordList(inputs)
+		CalcWordSteps(words)
+		Return GetMaxSteps(words)
+	End Function
+
+	Sub CalcWordSteps(ByVal words As List(Of Word))
+		Dim maxSubStep As Integer
+
+		For i As Integer = 1 To words.Count - 1
+			Dim aWord As Word = words(i)
+
+			For j As Integer = 0 To i - 1
+				Dim compared As Word = words(j)
+
+				If IsEditStep(aWord, compared) Then
+					If compared.Steps > maxSubStep Then maxSubStep = compared.Steps
+				End If
+			Next j
+
+			aWord.SetSteps(aWord.Steps + maxSubStep)
+		Next i
+	End Sub
+
+	Function IsEditStep(ByVal first As Word, ByVal second As Word) As Boolean
+		Dim str1 As String
+		Dim str2 As String
+
+		If first.Str < second.Str Then
+			str1 = first.Str
+			str2 = second.Str
+		Else
+			str1 = second.Str
+			str2 = first.Str
+		End If
+
+		Dim isOneModified As Boolean = IsModifiedOne(str1, str2)
+		Dim isOneRemoved As Boolean = IsRemovedOne(str1, str2)
+		Dim isOneAdded As Boolean = IsAddeddOne(str1, str2)
+
+		Return (isOneModified Or isOneRemoved Or isOneAdded)
+	End Function
+
+	Function IsRemovedOne(ByVal first As String, ByVal second As String) As Boolean
+		Dim ch1() As Char = first.ToCharArray()
+		Dim ch2() As Char = second.ToCharArray()
+
+		If ch1.Length <> ch2.Length + 1 Then Return False
+
+		For Each c2 As Char In ch2
+			If Not IsContain(c2, ch1) Then Return False
+		Next
+
+		Return True
+	End Function
+
+	Function IsContain(ByVal aChar As Char, ByVal chs() As Char) As Boolean
+		For Each ch As Char In chs
+			If aChar = ch Then Return True
+		Next
+		Return False
+	End Function
+
+	Function IsModifiedOne(ByVal first As String, ByVal second As String) As Boolean
+		Dim ch1() As Char = first.ToCharArray()
+		Dim ch2() As Char = second.ToCharArray()
+
+		If ch1.Length <> ch2.Length Then Return False
+
+		Dim diffCount As Integer
+		For i As Integer = 0 To ch1.Length - 1
+			If ch1(i) <> ch2(i) Then diffCount += 1
+			If diffCount >= 2 Then Return False
+		Next
+
+		Return (diffCount = 1)
+	End Function
+
+	Function IsAddeddOne(ByVal first As String, ByVal second As String) As Boolean
+		Return IsRemovedOne(second, first)
+	End Function
+
+	Function CreateWordList(ByVal inputs As List(Of String)) As List(Of Word)
+		inputs.Sort()
+
+		Dim words As List(Of Word) = New List(Of Word)
+		For Each str As String In inputs
+			words.Add(New Word(str))
+		Next
+
+		Return words
+	End Function
+
+	Function GetMaxSteps(ByVal words As List(Of Word)) As Integer
+		Dim maxSteps As Integer
+
+		For Each aWord As Word In words
+			If aWord.Steps > maxSteps Then maxSteps = aWord.Steps
+		Next
+
+		Return maxSteps
+	End Function
+End Class
+}}}
+
+=== Word.vb ===
+{{{
+Public Class Word
+
+	Private _str As String
+	ReadOnly Property Str()
+		Get
+			Return _str
+		End Get
+	End Property
+
+	Private _steps As Integer = 1
+	ReadOnly Property Steps()
+		Get
+			Return _steps
+		End Get
+	End Property
+
+	Sub SetSteps(ByVal steps As Integer)
+		_steps = steps
+	End Sub
+
+	Sub New(ByVal str As String)
+		_str = str
+	End Sub
+End Class
+}}}
+
+=== !StepLadderTest.vb ===
+{{{
+<TestClass()> _
+Public Class StepLadderTest
+
+	Private _inputs As List(Of String)
+	Private _ladder As StepLadder = New StepLadder
+	Private _words As List(Of Word)
+
+	<TestInitialize()> _
+	Public Sub MyTestInitialize()
+		Dim strs() As String = {"cat", "dig", "dog", "fig", "fin", "fine", "fog", "log", "wine"}
+		_inputs = New List(Of String)(strs)
+		_words = _ladder.CreateWordList(_inputs)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub SortTest()
+		_inputs.Sort()
+		Assert.AreEqual("cat", _inputs(0))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub CreateWordListTest()
+		Assert.AreEqual(9, _words.Count)
+		Assert.AreEqual("cat", _words(0).Str)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsContainTest()
+		Dim chs() As Char = {"a"c, "b"c}
+		Assert.IsTrue(_ladder.IsContain("a"c, chs))
+		Assert.IsFalse(_ladder.IsContain("c"c, chs))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsRemovedOneTest()
+		Assert.IsTrue(_ladder.IsRemovedOne("fine", "fne"))
+		Assert.IsFalse(_ladder.IsRemovedOne("fin", "fine"))
+		Assert.IsFalse(_ladder.IsRemovedOne("fine", "fe"))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsAddedOneTest()
+		Assert.IsTrue(_ladder.IsAddeddOne("fin", "fine"))
+		Assert.IsFalse(_ladder.IsAddeddOne("fine", "fie"))
+		Assert.IsFalse(_ladder.IsAddeddOne("fi", "fine"))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsModifiedOneTest()
+		Assert.IsTrue(_ladder.IsModifiedOne("fig", "dig"))
+		Assert.IsTrue(_ladder.IsModifiedOne("fog", "dog"))
+		Assert.IsFalse(_ladder.IsModifiedOne("fog", "fo"))
+		Assert.IsFalse(_ladder.IsModifiedOne("fog", "foge"))
+		Assert.IsFalse(_ladder.IsModifiedOne("fog", "dig"))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub IsEditStepTest()
+		Dim word1 As Word = New Word("fine")
+		Dim word2 As Word = New Word("fin")
+		Assert.IsTrue(_ladder.IsEditStep(word1, word2))
+		Assert.IsTrue(_ladder.IsEditStep(word2, word1))
+		Assert.IsFalse(_ladder.IsEditStep(word1, word1))
+	End Sub
+
+	<TestMethod()> _
+	Public Sub CalcWordStepsTest()
+		_ladder.CalcWordSteps(_words)
+
+		Assert.AreEqual("dog", _words(2).Str)
+		Assert.AreEqual(2, _words(2).Steps)
+
+		Assert.AreEqual("log", _words(7).Str)
+		Assert.AreEqual(5, _words(7).Steps)
+	End Sub
+
+	<TestMethod()> _
+	Public Sub GetEditStepLaddersTest()
+		Assert.AreEqual(5, _ladder.GetEditStepLadders(_inputs))
+	End Sub
+End Class
+}}}

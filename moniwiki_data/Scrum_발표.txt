@@ -1,0 +1,12 @@
+발표 자료를 올리기는 힘들거 같군요 :)
+대신 참고할 수 있는 URL 를 올립니다.
+여기 다운 받아 보시면 발표때 사용했던 PPT 와 거의 유사한 PPT 를 찾아보실 수 있습니다. :)
+
+ * http://www.agilegamedevelopment.com/
+ * http://www.gamesfromwithin.com/
+  * Paper Burns: Game Design With Agile Methodologies
+ * http://gamasutra.com/features/20060628/mcguire_01.shtml
+ * http://www.controlchaos.com/
+ * http://www.mountaingoatsoftware.com/pres/RedistributableIntroToScrum.ppt
+  * Game Developers Conference 2007 Presentation
+ * http://www.scrumforteamsystem.com

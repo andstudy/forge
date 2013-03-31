@@ -1,0 +1,92 @@
+== Lists and Indenting ==
+You can create bulleted and numbered lists in a quite natural way. All you do is inserting the line containing the list item. To get bulleted items, start the item with an asterisk "{{{*}}}"; to get numbered items, start it with a number template "{{{1.}}}", "{{{a.}}}", "{{{A.}}}", "{{{i.}}}" or "{{{I.}}}". Anything else will just indent the line. To start a numbered list with a certain initial value, append "{{{#}}}''value''" to the number template.
+
+To nest lists of different levels, you use different depths of indenting. All items on the same indent level belong to the same (sub-)list. That also means that you cannot change the style of a list after you started it.
+
+Definition lists can be created by items of the form {{{<whitespace>term:: definition}}}
+
+/!\ ''term'' cannot contain any wiki markup in the MoinMoin
+
+For more information on the possible markup, see HelpOnEditing. 
+
+=== Example ===
+{{{
+If you indent text
+  like this, then it is indented in the output
+    you can have multiple levels of indent
+
+And if you put asterisks at the start of the line
+  * you get a 
+  * bulleted
+  * list
+    * which can also be indented
+      * to several levels
+
+A numbered list, mixed with bullets:
+  1. one
+  1. two
+    1. one
+      * bullet 1
+      * bullet 2
+    1. two
+  1. three
+    * bullet
+      1. one
+
+Variations of numbered lists:
+  * Lowercase roman
+    i. one
+    i. two
+  * Uppercase roman (with start offset 42)
+    I.#42 forty-two
+    I. forty-three
+  * Lowercase alpha
+    a. one
+    a. two
+  * Uppercase alpha
+    A. one
+    A. two
+}}} 
+
+=== Display ===
+If you indent text
+  like this, then it is indented in the output
+    you can have multiple levels of indent
+
+And if you put asterisks at the start of the line
+  * you get a 
+  * bulleted
+  * list
+    * which can also be indented
+      * to several levels
+
+A numbered list, mixed with bullets:
+  1. one
+  1. two
+     1. one
+        * bullet 1
+        * bullet 2
+     1. two
+  1. three
+     * bullet
+        1. one
+
+Variations of numbered lists:
+  * Lowercase roman
+    i. one
+    i. two
+  * Uppercase roman (with start offset 42)
+    I.#42 forty-two
+    I. forty-three
+  * Lowercase alpha
+    a. one
+    a. two
+  * Uppercase alpha
+    A. one
+    A. two
+----
+ term WikiName:: definition WikiName
+ another term:: and its definition
+
+----
+[[Navigation(HelpOnEditing)]]

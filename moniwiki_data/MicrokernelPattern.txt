@@ -1,0 +1,71 @@
+[POSA1]
+[[TableOfContents]]
+= Microkernel =
+
+== Example ==
+
+== Context ==
+
+== Problem ==
+ * O/S의 핵심 부분이나 UI같은 경우에는 일정 시간이 지나면 새로운 것이 나타나고 예전 것은 교체되어야 한다.
+ * 또한 하드웨어와 소프트웨어는 계속 진화한다.
+ * 이 때 변화에 어떻게 효과적으로 대처 할 것인가?
+
+== Solution ==
+ * 주요 서비스들을 Mircokernel 패턴에 맞추어 encapsulating 한다.
+ * Mircokernel 패턴은 이것을 위해 5개의 특별한 컴포넌트들을 정의한다.
+ * 5개의 컴포넌트들이 유기적으로 동작함에 따라서 Microkernel의 목적을 이루어 낸다고 볼 수 있다.
+
+== structure ==
+ * Mircokernel
+     패턴의 핵심 부분이다. 가장 기본적인의 서비스들을 구현한다. 
+     시스템 의존을 인캡슐레이팅.
+     즉 컴포넌트간에 커뮤니케이션 지원,자원 관리 및 컨트롤 등.
+ * Internal Server
+     Microkernel에서 제공하는 기능을 확장.
+     Microkernel이 서비스 요청을 통해 Internal server의 기능을 호출하기도 함.
+     Microkernel을 작게 만들어서 메모리 소비를 줄이며, 빠른 실행과, 서비스 실행 시간 감소의 목적을 가짐.
+     Device Driver가 좋은 예가 됨.
+ * External server
+     Client를 위한 프로그래밍 인터페이스를 제공한다.
+     External Server는 Microkernel의 기능에 기반하여 프로세스에서 클라이언트를 위한 자신만의 View를 구현한다.
+     클라이언트로부터 요청을 받고, 해석하고, 실행하여 결과를 돌려주는 것도 External Server의 몫.
+ * Client
+     Client는 하나의 External Server와 관련되는 하나의 어플리케이션이다.
+ * Adapter
+     Adapter는 Client와 External Server의 지나친 커플링을 막아주기 위해 존재한다.
+     클라이언트가 External Server에 메소드를 호출 할 때 호출을 대신 해준다.
+     그 결과로 클라이언트는 External Server에 변화에 보호되며, 극단적으로 External Server가 많은 변화를 가지게 된다 하더라도 Client는 수정이 필요 없게 된다.
+
+== Dynamics ==
+ * Client가 External Server의 서비스를 호출 할 때의 예.
+ * 클라이언트가 Adapter에게 서비스를 요청.
+ * Adapter는 request를 생성하고 External 서버와 통신하기 위한 Microkernel에게 커뮤니티 링크를 요구.
+ * 마이크로 커널은 External서버의 물리적 주소를 결정하여, Adapter에게 리턴.
+ * 정보가 반환된 후에 Adpater는 External Server와의 통신 경로를 수립.
+ * RPC을 이용하여 External Server에게 request를 전송.
+ * External Server는 메시지를 처리하여 응답을 전송한다.
+ * 이렇게 처리 된 응답은 최종적으로 클라이언트가 받게 된다.
+
+== Implementation ==
+
+== Variants ==
+
+== Known Uses ==
+ * Amoeba
+ * Chorus
+ * Window NT
+ * 기타 등
+
+== Consequences ==
+여러 가지 결론 중에서도 Linux와 비교하여 성능상에 특별한 관심이 있어 정리해 보았음.
+Linux는 Monolithic(5개의 부분을 나누지 않고 처리하는 방식)임.
+저자는 Monolitic에 비해 Microkernel에 비해 성능상으로는 비교 할 수 없겠지만 유연함과, 확장성을 위한 대가라고 생각하며, 그 정도는 너그럽게 봐줘야 한다고 함.
+
+== Related Patterns ==
+
+== 참고 ==
+요약 정리본 : http://www.vico.org/pages/PatronsDisseny/Pattern%20MicroKernel/index.html
+다른 발표 자료 : http://people.cs.uchicago.edu/~mark/51050/lectures/lecture.6/lecture.6.pdf
+http://www.titu.jyu.fi/modpa/Patterns/pattern-Microkernel.html
+무슨 에세이 : http://weblogs.asp.net/ngur/archive/2004/12/10/279115.aspx

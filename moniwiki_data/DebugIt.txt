@@ -1,0 +1,32 @@
+[http://parkpd.egloos.com/3329852 "Debug It! 실용주의 디버깅" 예약판매 시작합니다.]
+
+[http://www.acornpub.co.kr/blog/366 에이콘 출판사 - 디버깅과 테스팅의 교본『Debug It! 실용주의 디버깅』]
+[http://www.acornpub.co.kr/book/debug-it 에이콘 출판사 - Debug It! 실용주의 디버깅. 소프트웨어 개발자가 꼭 알아야 할 디버깅의 정석]
+[http://www.yes24.com/24/goods/3937865  Yes24 - Debug It! 실용주의 디버깅 예약판매]
+[http://www.aladdin.co.kr/shop/wproduct.aspx?ISBN=8960771414 알라딘 - Debug It! 실용주의 디버깅 예약판매]
+[http://kangcom.com/sub/view.asp?sku=201006180001 강컴 - Debug It! 실용주의 디버깅 예약판매]
+[http://book.interpark.com/product/BookDisplay.do?_method=detail&sc.shopNo=0000400000&sc.prdNo=204951782&bookblockname=b_sch&booklinkname=bprd_title interpark - Debug It! 실용주의 디버깅 예약판매]
+
+== Resource ==
+[http://www.paulbutcher.com/2009/11/debug-it-sample-code/ Resource Leaks and Exception Handling sample code]
+[http://pragprog.com/titles/pbdp/errata Errata for Debug It!]
+
+== 저자 소개 ==
+[http://www.paulbutcher.com/2009/06/debug-it-in-beta/ 저자 블로그 debug-it-in-beta]
+
+== 한글 리뷰 ==
+[http://blog.naver.com/gameguru/40110983232 조금은 비겁하게 - 미니 서평 #15 gameguru]
+[http://eritaka.net/2320992 'Debug It! 실용주의 디버깅' 리뷰 - 이것이 디버깅 기본서.]
+[http://jhrogue.blogspot.com/2010/07/debug-it.html 컴퓨터 vs 책 - 독서광 Debug It! 실용주의 디버깅]
+[http://www.diebuster.com/?p=1646 dieBuster 님 - Developer Book review 10.07.01]
+
+== 영문 리뷰 ==
+[http://www.linkedin.com/in/paulbutcher paulbutcher 이력서 in LinkedIn]
+[http://blog.jonmdickinson.com/2009/07/book-review-debug-it.html jonmdickinson - Book Review: Debug It!]
+[http://devlicio.us/blogs/krzysztof_kozmic/archive/2009/08/30/book-review-debug-it-find-repair-and-prevent-bugs-in-your-code.aspx krzysztof - Book review - Debug It!: Find, Repair, and Prevent Bugs in Your Code]
+[http://blogs.tedneward.com/2009/11/23/Book+Review+Debug+It+Paul+Butcher+Pragmatic+Bookshelf.aspx tedneward - Book Review: Debug It! (Paul Butcher, Pragmatic Bookshelf)]
+[http://vidhujoshua.blogspot.com/2009/07/debug-it-book-on-software-debugging.html Winds of Change - Debug it! A Book on Software Debugging]
+
+== 책 샘플 ==
+[http://media.pragprog.com/titles/pbdp/debugItself.pdf sample book. 10장 - 가정과 단언문]
+아이폰 에이콘앱을 통해서 번역서 1장을 보실 수 있습니다.

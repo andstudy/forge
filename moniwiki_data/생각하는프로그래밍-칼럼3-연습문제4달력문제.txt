@@ -1,0 +1,199 @@
+= 문제 =
+ * 주어진 두날짜 사이에 며칠이 포함되었는지를 계산하는함수
+ * 주어진 날자가 무슨 요일인지 리턴하는 함수
+ * 주어진 연도와 달에 대한 달력을 문자의 배열로 생성하는 함수
+
+= 해결책 = 
+ * Date.cs : 날자 계산
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calendar
+{
+    class Date
+    {
+        private int[] endofmonth = new int[12] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };      //배열 사용 (0~11)
+        private int _year;
+        private int _month;
+        private int _day;
+
+        public int Year 
+        {
+            get
+            {
+                return _year;
+            }
+        }
+
+        public int Month
+        {
+            get
+            {
+                return _month;
+            }
+        }
+
+        public int Day
+        {
+            get
+            {
+                return _day;
+            }
+        }
+
+        public Date(int year,int month,int day)
+        {
+            _year = year;
+            _month = month;
+            _day = day;
+
+            if (year < 1)
+                throw new ArgumentException("Invalid Day");
+
+            //월 검사
+            if (month > 12 || month < 1)
+                throw new ArgumentException("Invalid Month");
+            
+
+            //윤년이면 2월 날짜 +1
+            if (isLeapYear(year))
+            {
+                endofmonth[1] = endofmonth[1] + 1;
+            }
+
+            //날짜 검사
+            if (day < 1 || day > endofmonth[month - 1])
+                throw new ArgumentException("Invalid Day");
+
+        }
+
+        /*
+         * ① 서력 기원 연수가 4로 나누어 떨어지는 해는 우선 윤년으로 하고, 
+         * ② 그 중에서 100으로 나누어 떨어지는 해는 평년으로 하며,
+         * ③ 다만 400으로 나누어 떨어지는 해는 다시 윤년으로 정하였다.
+         * 이로써 1년의 평균길이를 365.2425일로 정하여 역에 썼으므로 
+         * 실제의 1년보다 0.0003일이 길다.
+         * *. 윤년의 개념을 정확히 숫자로 정의하면
+         * 1.윤년(2월이 29일인 연도)은 다음과 같이 정합니다.
+         * 2. 해당 연도를 4로 나누어 떨어지면 윤년
+         * 3. 그 중에서 100으로 나누어 떨어지면 윤년이 아님
+         * 4. 400으로 나누어 떨어지면 윤년
+         */ 
+
+        /// <summary>
+        /// 윤달인지 검사한다
+        /// </summary>
+        /// <param name="year">검사할 연</param>
+        /// <returns>윤달이면 true</returns>
+        private bool isLeapYear(int year)
+        {
+            return (year % 4 == 0) && (year % 100 == 0) || (year % 400 == 0);
+        }
+
+        /// <summary>
+        /// 0년을 기준으로 몇번째 날인지 반환한다
+        /// </summary>
+        /// <returns></returns>
+        private int getTotalDay()
+        {
+            int total = (_year - 1) * 365 + (_year - 1) / 4 - (_year - 1) / 100 + (_year - 1) / 400;
+            for (int i = 0; i < _month-1; i++)
+            {
+                total = total + endofmonth[i];                              //입력한 전월달까지 일수
+
+            }
+            total += _day;
+            return total;
+        }
+
+        /// <summary>
+        /// 요일을 반환한다
+        /// </summary>
+        /// <returns>요일</returns>
+        public Week getWeek()
+        {
+            return (Week)(getTotalDay() % 7);
+        }
+
+        /// <summary>
+        /// 해당 월의 마지막 날을 반환한다.
+        /// </summary>
+        /// <returns></returns>
+        public int getEndOfMonth()
+        {
+            return endofmonth[_month - 1];
+        }
+
+        /// <summary>
+        /// 두날짜 사이에 며칠이 포함되어 있는지 계산한다
+        /// </summary>
+        /// <param name="d1"></param>
+        /// <param name="d2"></param>
+        /// <returns></returns>
+        public static int operator - (Date d1,Date d2){
+            return d1.getTotalDay() - d2.getTotalDay();
+        }
+    }
+}
+
+}}}
+
+ * CalendarPrinter.cs : 달력 출력
+
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calendar
+{
+    class CalendarPrinter
+    {
+        private Date date;
+        public CalendarPrinter(int year,int month)
+        {
+            this.date = new Date(year, month, 1);
+        }
+
+        /// <summary>
+        /// 달력 출력
+        /// </summary>
+        public void PrintCalendar()
+        {
+            Console.WriteLine("일\t월\t화\t수\t목\t금\t토");
+            Console.WriteLine("===================================================");
+
+            int startWeek = (int)date.getWeek();
+            for (int i = 0; i < startWeek; i++)
+                Console.Write("\t");
+
+            for (int i = 1; i <= date.getEndOfMonth(); i++)
+            {
+                Console.Write("{0}\t", i);
+                if ((i + startWeek) % 7 == 0)
+                    Console.WriteLine("");
+            }
+            Console.WriteLine("");
+        }
+    }
+}
+
+}}}
+
+ * week.cs : 요일 정의
+{{{
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calendar
+{
+    public enum Week
+    {
+        SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY
+    }
+}
+
+}}}

@@ -1,0 +1,266 @@
+{{{
+#ifdef _UNIT_TEST
+#include "UnitTest++.h"
+#endif
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdlib.h>
+
+
+std::string digitMatrix[10] =
+{		
+		" - "
+		"| |"
+		"   "
+		"| |"
+		" - ",
+
+		"   "
+		"  |"
+		"   "
+		"  |"
+		"   ",
+
+		" - "
+		"  |"
+		" - "
+		"|  "
+		" - ",
+
+		" - "
+		"  |"
+		" - "
+		"  |"
+		" - ",
+
+		"   "
+		"| |"
+		" - "
+		"  |"
+		"   ",
+
+		" - "
+		"|  "
+		" - "
+		"  |"
+		" - ",
+
+		" - "
+		"|  "
+		" - "
+		"| |"
+		" - ",
+
+		" - "
+		"  |"
+		"   "
+		"  |"
+		"   ",
+
+		" - "
+		"| |"
+		" - "
+		"| |"
+		" - ",
+
+		" - "
+		"| |"
+		" - "
+		"  |"
+		" - ",
+};
+
+
+
+
+class CDisplayer
+{
+public:
+	CDisplayer( int size, int number )
+	{
+		m_Size		= size;
+		m_Number	= number;
+
+		char buf[255];
+		sprintf( buf, "%d", number );		
+
+		m_strNumber = buf;
+
+		PrepareTable();
+	}
+
+	std::string GetResultString()
+	{
+		WriteString();
+
+		std::string expected;
+
+		DOUBLEDIM_VEC_ITOR begin = m_CharTable.begin();
+		DOUBLEDIM_VEC_ITOR end = m_CharTable.end();
+		for( ;begin != end; ++begin )
+		{
+			std::string strLine = *begin;
+			expected += strLine;
+			expected += "\n";
+		}
+
+		return expected;
+	}
+
+	void WriteString()
+	{
+		int index = 0;
+		for( int i = 0; i < m_strNumber.size(); i++ )
+		{
+			WriteOnChar( index++, m_strNumber[i] );
+		}
+	}
+	void Print()
+	{		
+
+		DOUBLEDIM_VEC_ITOR begin = m_CharTable.begin();
+		DOUBLEDIM_VEC_ITOR end = m_CharTable.end();
+		for( ;begin != end; ++begin )
+		{
+			std::string strLine = *begin;
+			std::cout << strLine << std::endl;
+		}
+
+		std::cout << std::endl;
+	}
+
+private:
+	typedef std::vector< std::string > DOUBLEDIM_VEC;
+	typedef DOUBLEDIM_VEC::iterator	   DOUBLEDIM_VEC_ITOR;
+
+
+	/// index : 몇 번째 숫자인가
+	/// number : 하나의 분리된 숫자
+	void WriteOnChar( int index, char strNumber )
+	{
+		int number = strNumber - '0';
+		if( number < 0 || number > 9 )
+			return;
+
+		std::string strDigit = digitMatrix[number];
+
+		int startPos = index * m_ColumnSize;
+		int disX = startPos;
+		int disY = 0;
+
+		/// digit matrix 의 샘플을 돌면서..
+		for( int i = 0; i < 5; i++ )
+		{
+			for( int j = 0; j < 3; j++ )
+			{	
+				int signIndex = i*3 + j;
+				char curSign = strDigit[signIndex];				
+				
+				if( curSign == '-' )
+				{
+					disX = startPos + 1;
+					disY = (i/2)*(m_Size+1);
+					for( int k = 0; k < m_Size; k++ )
+					{
+						m_CharTable[disY][disX] = curSign;
+						disX++;
+					}					
+				}
+
+				if( curSign == '|' )
+				{
+					disX = startPos + (j/2) * (m_Size+1);
+					disY = ( i - 1 )/2 * (m_Size+1) + 1;
+					for( int k = 0; k < m_Size; k++ )
+					{
+						m_CharTable[disY][disX] = curSign;
+						disY++;
+					}					
+				}
+			}			
+		}
+	}
+	
+	void PrepareTable()
+	{
+		m_ColumnSize = m_Size + 2 + 1;
+		m_RowSize = 2 * m_Size + 3;
+		
+		int charCount = m_strNumber.size();
+
+		m_TableWidth = m_ColumnSize * charCount - 1;
+		m_TableHeight = m_RowSize;
+
+		/// 출력 테이블 초기화
+		m_CharTable.resize( m_TableHeight );
+		DOUBLEDIM_VEC_ITOR begin = m_CharTable.begin();
+		DOUBLEDIM_VEC_ITOR end = m_CharTable.end();
+		for( ;begin != end; ++begin )
+		{
+			(*begin).resize(m_TableWidth, ' ');
+		}
+	}
+
+private:
+	int				m_Size;
+	int				m_ColumnSize;
+	int				m_RowSize;
+
+	int				m_TableWidth;
+	int				m_TableHeight;
+
+	int				m_Number;
+	std::string		m_strNumber;
+
+	DOUBLEDIM_VEC	m_CharTable;
+};
+
+
+int main()
+{
+#ifdef _UNIT_TEST
+	if( UnitTest::RunAllTests() )
+	{		
+	}
+#endif
+
+	while(1)
+	{
+		int size = 0;
+		int number = 0;
+		std::cin >> size;				
+		if( size == 0  )
+			break;		
+
+		std::cin >> number;
+
+		CDisplayer displayer( size, number );
+		displayer.WriteString();
+		displayer.Print();
+	}
+
+	return 0;
+}
+
+
+#ifdef _UNIT_TEST
+TEST( displayer )
+{	
+	CDisplayer displayer( 2, 12345 );
+	std::string result = displayer.GetResultString();
+
+	std::string expected =  "      --   --        -- \n"
+							"   |    |    | |  | |   \n"
+							"   |    |    | |  | |   \n"
+							"      --   --   --   -- \n"
+							"   | |       |    |    |\n"
+							"   | |       |    |    |\n"
+							"      --   --        -- \n";
+
+	CHECK_EQUAL( expected, result );
+}
+#endif
+
+}}}

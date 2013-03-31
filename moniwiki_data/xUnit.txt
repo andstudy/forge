@@ -1,0 +1,102 @@
+[xUnitTestPatterns]
+
+ 1. assert 사용하자
+  * xUnit 프레임워크 없어도 많은것이 가능하다
+ 1. assert 가 없으면 만들자
+  * abort,exit 등의 종료기능 이용
+  {{{
+  #!psudo
+  assert ( param )
+      if param not true then
+          quit  }}}
+  * Ward Cunningham 이 만든 IO language 의 assertEqual
+  {{{
+  #!IO
+  assertEqual := method (       
+      actual := self clone doMessage (thisMessage argAt(0)) 
+      expected := sender doMessage (thisMessage argAt(1)) 
+      if (expected != actual,  
+          writeln ( 
+              self type .. ": ",  
+              thisMessage argAt(0) code, 
+              " ==> ", actual, " not ", expected 
+          ) 
+          Error raise ("Assert Failed", self type .. ": " .. thisMessage argAt(0) code) 
+      ) 
+  )   }}}
+  {{{
+  assertEqual ( actual expected )  }}}
+ 1. assertEqual 을 만드는 것 보다 equal 만들어 assert( equal(...) ) 처럼 사용하면 편하다
+  * 클릭 한번 덜 해도 된다
+ 1. 예외 발생 테스트
+  * fail() 함수 사용
+  {{{
+  #!java
+  // 반드시 예외가 발생해야 할 경우 (예: 디스크 용량 없음 Mock Test)
+  {
+      try {
+          doSomethingBroken(); // 예외가 발생 해야함
+            fail();  // 여기에 도달하면 안됨
+      }
+      catch {
+          assertTrue(true);  // 이 라인이 실행 되어야 한다는 의미 (주석의 역할)
+      }
+  }  }}}
+----
+ 1. xUnit 장점은?
+  1. setUp, tearDown
+  1. suite
+  1. 요약 보고
+  1. 기타
+ 1. 켄트벡의 목록을 보자
+  * 162p
+  * 목록이 바로 xUnit 장점이다
+ 1. 현재 우리들의 상태는?
+  * TDD 어느 정도 가능
+  * 하고 싶어 안달이 나 있는 상태
+  * 그러나, 테스트 코드를 몇천 줄 짜본 경험은 없는 상태
+ 1. TDD 실패담
+  * http://reiot.springnote.com/pages/115708
+ 1. TDD 실제 적용시 만나게 될지도 모를 함정들
+  * 테스트 코드는 리팩토링 안 한다
+  * 테스트 코드에 중복이 많다
+  * 지저분한 테스트 코드
+  * 테스트 코드가 느리다
+  * 테스트 여러개가 한번에 깨진다
+  * 테스트간에 의존성이 크다
+ 1. setUp, tearDown 장점
+  * 테스트간 의존성 제거
+  * 170p
+  * MockDb 테스트를 예로 들어보자
+ 1. suite 장점
+  * 원하는 스윗만 실행
+  * 전체 테스트는 밤이나 점심시간 혹은 빌드서버에서만 실행 가능
+ 1. 요약 보고
+  * 전체 테스트 갯수
+  * 실패한 테스트 갯수
+  * 시간
+ 1. 기타
+  * 녹색막대, 만족감
+  * 테스트 실행 시간 제한 가능
+  * 기타...
+----
+ 1. xUnit 만들기
+  * 책을 보자
+  * CD 동영상도 보자
+ 1. 파이썬
+  * 들여쓰기가 문법
+  * self 남발
+  * None
+  * : 다음 라인은 들여쓰기 해야 함
+  * 생성자 __init__
+  * 함수선언 def func(param):
+  * 상속 class WasRun(TestCase): -> 괄호안에 수퍼클래스
+  * 스크립트이므로 특별히 main 없음
+  * main 역할의 실행코드 필요함
+  {{{
+  if __name__ == "__main__":
+      main()  }}}
+ 1. 알아두면 좋은 것
+  * 최초 결과는 눈으로 확인
+  * 리플렉션 getattr(...)
+  * log 에 assert 사용

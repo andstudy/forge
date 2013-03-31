@@ -1,0 +1,8 @@
+순환목록
+{{{#!html
+
+
+<div style="width:425px" id="__ss_8084162"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/weasel87/223-part1" title="2.2.3 part1">2.2.3 part1</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8084162" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/weasel87">weasel87</a> </div> </div>
+
+<div style="width:425px" id="__ss_7792203"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/suitzero/224" title="2.2.4 순환목록">2.2.4 순환목록</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/7792203" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/suitzero">suitzero</a> </div> </div>
+}}}

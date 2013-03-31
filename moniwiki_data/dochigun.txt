@@ -1,0 +1,7 @@
+이름 : 최영만(dochigun)
+이메일 : dochigun@gmail.com
+블로그 : http://dochigun.com
+Twitter : @dochigun
+직업 : 게임 클라이언트/서버 프로그래머
+관심 분야 : 음식, 렌더링 최적화, 레이싱게임, 세틀러
+주로 쓰는 언어 : C++, C#

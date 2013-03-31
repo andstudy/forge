@@ -1,0 +1,226 @@
+아직 충분한 테스트를 한거 아니구요 출력결과만 제대로 나오나 확인했습니다. --;;
+3개의 클래스를 정의하여 프로그램을 구현했습니다.
+
+Scoreboard 클래스 : 메인 클래스
+ScoreRecord 클래스 : 입력 데이터 저장 클래스
+Team 클래스 : 팀의 번호(아이디), 푼 문제와 걸린 시간을 저장한 클래스
+
+=== Scoreboard.java ===
+{{{
+import java.util.*;
+import java.io.*;
+
+public class Scoreboard {
+	public static void main(String args[]) throws IOException
+	{
+		// Map<팀번호, 팀 객체>
+		TreeMap<Integer, Team> teams;  
+		
+		// 케이스 갯수  입력
+		String line = readLine();
+		int count = Integer.parseInt(line);
+		if (count <= 0)
+		{
+			System.out.println("Error: invalid number!!");
+			return;
+		}
+
+		// 공백라인 입력
+		line = readLine();
+		if (line.length() > 0)
+		{
+			System.out.println("Error: must be a blank line");
+			return;
+		}
+		
+		// 케이스 수만큼 루프
+		while (count > 0)	
+		{
+			// Map<팀번호, 팀객체> 초기화
+			teams = new TreeMap<Integer, Team>();
+			
+			// 데이터 입력
+			line = readLine();
+			
+			// 공백 라인이 나올때까지 루프
+			while (line.length() > 0)	
+			{
+				// ScoreRecord 객체 생성 
+				ScoreRecord record = getScoreRecord(line);
+				
+				// 입력 오류 체크
+				if (record == null)
+				{
+					System.out.println("Error: Invalid data");
+					return;
+				}
+				
+				// ScoreRecord를 가지는  Team 객체 찾기
+				Team team = teams.get(record.getTeamNumber());
+				
+				// 객체가 없으면 Team 객체 생성
+				if (team == null)
+					team = new Team();
+				
+				// 팀의 기록 입력
+				team.appendRecord(record);
+				teams.put(team.getTeamNumber(), team);
+				
+				// 데이터 입력
+				line = readLine();
+			} // while (line.length() > 0)
+			
+			// 팀별로 결과 출력
+			for (Map.Entry<Integer, Team> entry : teams.entrySet())
+			{
+				int teamNumber = entry.getKey();
+				Team eTeam = entry.getValue();
+				
+				System.out.println(teamNumber + " " + eTeam.getProblems() + " " + eTeam.getTimes());
+			}
+	
+			count--;
+		} // while (count > 0)
+	}
+	
+	static String readLine() throws IOException
+	{
+		BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ));
+		
+		return reader.readLine();
+	}
+	
+	static ScoreRecord getScoreRecord(String line)
+	{
+		StringTokenizer tokens = new StringTokenizer(line, " ");
+		if (tokens.countTokens() != 4)
+		{
+			System.out.println("Error: invalid input data");
+			return null;
+		}
+		
+		return new ScoreRecord(line);
+	}
+}
+}}}
+
+=== ScoreRecord.java ===
+{{{
+import java.util.*;
+
+public class ScoreRecord {
+	private int teamNumber;		// 팀번호
+	private int problem;		// 문제 
+	private int time;			// 걸린시간
+	private String format;		// 문제 상태
+	
+	ScoreRecord(String line)
+	{
+		StringTokenizer tokens = new StringTokenizer(line, " ");
+		
+		teamNumber = Integer.parseInt(tokens.nextToken());
+		problem = Integer.parseInt(tokens.nextToken());
+		time = Integer.parseInt(tokens.nextToken());
+		format = tokens.nextToken();
+	}
+	
+	int getTeamNumber()
+	{
+		return teamNumber;
+	}
+	
+	int getProblem()
+	{
+		return problem;
+	}
+	
+	int getTime()
+	{
+		return time;
+	}
+	
+	String getFormat()
+	{
+		return format;
+	}
+	
+	void show()
+	{
+		System.out.println("teamNumber: " + teamNumber + ", problem: " 
+				+ problem + ", time: " + time + ", format: " + format);
+	}
+	
+}
+}}}
+
+
+=== Team.java ===
+{{{
+import java.util.*;
+
+public class Team {
+	private int teamNumber;								// 팀 번호
+	private TreeMap<Integer, Integer> scores; 			// Map<problem, time> 팀이 푼 문제와 해결하는데 걸린 시간
+	
+	Team()
+	{
+		teamNumber = 0;
+		scores = new TreeMap<Integer, Integer>();
+	}
+	
+	int getTeamNumber()
+	{
+		return teamNumber;
+	}
+	
+	void appendRecord(ScoreRecord record)
+	{
+		teamNumber = record.getTeamNumber();
+		String format = record.getFormat();
+
+		if (format.equals("I"))
+			append(record.getProblem(), 20);
+		
+		if (format.equals("C"))
+			append(record.getProblem(), record.getTime()); 
+	}
+	
+	int getProblems()
+	{
+		return scores.size();
+	}
+	
+	int getTimes()
+	{
+		int times = 0;
+		for (Map.Entry<Integer, Integer> entry : scores.entrySet())
+		{
+			times += entry.getValue();
+		}
+		
+		return times;
+	}
+	
+	void append(int problem, int time)
+	{
+		if (!scores.containsKey(problem))
+		{
+			Integer penalty = new Integer(0);
+			scores.put(problem, penalty);
+		}
+		
+		Integer times = scores.get(problem);
+		times += time;
+		scores.put(problem,times);
+	}
+	
+	void show()
+	{
+		System.out.println("No: " + teamNumber);
+		for (Map.Entry<Integer, Integer> entry : scores.entrySet())
+		{
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
+	}
+}
+}}}

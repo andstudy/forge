@@ -1,0 +1,287 @@
+[CSP]
+== CSP first trial ==
+{{{
+#include <iostream>
+#include <deque>
+#include <vector>
+#include <boost/shared_ptr.hpp>
+#include <boost/bind.hpp>
+
+using namespace std;
+using namespace boost;
+
+typedef deque<int> Channel;
+
+////////////////////////////////////////////////////
+// Core Part
+
+namespace mylib
+{
+class MockLock
+{
+public:
+	void Lock() {};
+	void Unlock() {};
+	bool TryLock() { return true; }
+};
+
+class AutoLock
+{
+public:
+	AutoLock() { InitializeCriticalSectionAndSpinCount(&m_CriticalSection, 4000); }
+	virtual ~AutoLock() { DeleteCriticalSection(&m_CriticalSection); }
+	void Lock() { EnterCriticalSection(&m_CriticalSection); }
+	void Unlock() { LeaveCriticalSection(&m_CriticalSection); }
+	bool TryLock() { return TRUE == TryEnterCriticalSection(&m_CriticalSection); }
+private:
+	CRITICAL_SECTION m_CriticalSection;
+};
+
+template <typename T>
+class LockGuard
+{
+public:
+	LockGuard(T& lock) : m_lock(lock) { m_lock.Lock(); }
+	~LockGuard() { m_lock.Unlock(); }
+	void Lock() { m_lock.Lock(); }
+	void Unlock() { m_lock.Unlock(); }
+
+private:
+	T& m_lock;
+};
+
+typedef LockGuard<AutoLock> AutoGuard;
+
+class RWLock
+{
+public:
+	RWLock() : m_reader(0), m_waitingWriter(0), m_writing(false) {
+		m_hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+	}
+	void ReadLock() {
+		LockGuard<AutoLock> guard(m_lock);
+		do {
+			if (m_writing || m_waitingWriter > 0) {
+				guard.Unlock();
+				WaitForSingleObject(m_hEvent, INFINITE);
+				guard.Lock();
+			} else {
+				break;
+			}
+		}
+		while(1); 
+
+		++m_reader;
+	}
+	void ReadUnlock() {
+		{
+			LockGuard<AutoLock> guard(m_lock);
+			--m_reader;
+		}
+		SetEvent(m_hEvent);
+	}
+	void WriteLock() {
+		LockGuard<AutoLock> guard(m_lock);
+		++m_waitingWriter;
+		do {
+			if (m_reader > 0 || m_writing) {
+				guard.Unlock();
+				WaitForSingleObject(m_hEvent, INFINITE);
+				guard.Lock();
+			} else {
+				break;
+			}
+		} 
+		while(1);
+
+		_ASSERT(!m_writing);
+		--m_waitingWriter;
+		m_writing = true;
+	}
+	void WriteUnlock() {
+		{
+			LockGuard<AutoLock> guard(m_lock);
+			m_writing = false;
+		}
+		SetEvent(m_hEvent);
+	}
+
+private:
+	int m_reader;
+	int m_waitingWriter;
+	bool m_writing;
+
+	AutoLock m_lock;
+	HANDLE m_hEvent;
+};
+
+class RWLockGuard
+{
+public:
+	enum Type { READ, WRITE};
+	RWLockGuard(Type type, RWLock& lock) : m_type(type), m_lock(lock) {
+		m_type == READ ? m_lock.ReadLock() : m_lock.WriteLock();
+	}
+	~RWLockGuard() {
+		m_type == READ ? m_lock.ReadUnlock() : m_lock.WriteUnlock();
+	}
+private:
+	Type m_type;
+	RWLock& m_lock;
+};
+
+class Thread
+{
+public:
+	Thread() : m_handle(INVALID_HANDLE_VALUE), m_threadId(0), m_ended(0) {}
+	virtual ~Thread() { CloseHandle(m_handle); }
+
+	HANDLE Handle() const { return m_handle; }
+	virtual void Start() { ::ResumeThread(m_handle); }
+	virtual void Stop() { ::SuspendThread(m_handle); }
+
+	static unsigned __stdcall ThreadFunc(void* pData) {
+		Thread* pThread = (Thread*)pData;
+		pThread->OnThread();
+		return 0;
+	}
+	HANDLE Create(bool start = true) {
+		m_handle = 
+		    (HANDLE)_beginthreadex(NULL, 0, &Thread::ThreadFunc, (void*)this, start ? 0 : CREATE_SUSPENDED, &m_threadId);
+		return m_handle;
+	}
+	virtual void OnThread() {	 // overriding.
+	}
+	virtual void NotifyToEnd() { // overriding.
+	}
+protected:
+	LONG IsEnded() const {
+		return m_ended;
+	}
+private:
+	HANDLE m_handle;
+	unsigned m_threadId;
+	volatile LONG m_ended;
+};
+
+typedef boost::shared_ptr<Thread> ThreadPtr;
+
+class ThreadManager
+{
+public:
+	inline void Spawn(ThreadPtr spThread, bool start = true);
+	inline bool WaitForAll(DWORD waiting);
+
+private:
+	std::vector< ThreadPtr > m_threads;
+};
+
+inline void ThreadManager::Spawn(ThreadPtr spThread, bool start)
+{
+	spThread->Create(start);
+	m_threads.push_back(spThread);
+}
+
+inline bool ThreadManager::WaitForAll(DWORD waiting)
+{
+	vector<HANDLE> handles;
+	handles.resize(m_threads.size());
+	for (size_t i = 0; i < m_threads.size(); ++i) {
+		handles[i] = m_threads[i]->Handle();
+		m_threads[i]->NotifyToEnd();
+	}
+
+	return WAIT_TIMEOUT == ::WaitForMultipleObjects((DWORD)m_threads.size(), &handles[0], true, waiting);
+}
+
+}
+
+////////////////////////////////////////////////////
+// Logic Part
+
+struct Process
+{
+	virtual ~Process() {}
+	virtual void Work() = 0;
+};
+
+typedef shared_ptr<Process> ProcessPtr;
+
+class Succ : public Process
+{
+public:
+	Succ(Channel& in, Channel& out1, Channel& out2) 
+		: m_in(in), m_out1(out1), m_out2(out2) {}
+
+	void Work() {
+		if (m_in.size() > 1) 	{
+			m_out1.push_back(m_in[0]);
+			m_in.pop_front();
+			m_out2.push_back(m_in[0]);
+		}
+	}
+private:
+	Channel& m_in;
+	Channel& m_out1;
+	Channel& m_out2;
+};
+
+class Plus : public Process
+{
+public:
+	Plus(Channel& in1, Channel& in2, Channel& out)
+		: m_in1(in1), m_in2(in2), m_out(out) {}
+
+	void Work() {
+		if (!m_in1.empty() && !m_in2.empty()) {
+			m_out.push_back(m_in1[0] + m_in2[0]);
+			m_in1.pop_front();
+			m_in2.pop_front();
+		}
+	}
+private:
+	Channel& m_in1;
+	Channel& m_in2;
+	Channel& m_out;
+};
+
+class Printer : public Process
+{
+public:
+	Printer(Channel& in, Channel& out)
+		: m_in(in), m_out(out){}
+
+	void Work() {
+		if (!m_in.empty()) {
+			cout << m_in[0] << '\n';
+			m_out.push_back(m_in[0]);
+			m_in.pop_front();
+		}
+	}
+private:
+	Channel& m_in;
+	Channel& m_out;
+};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Channel succToAdder1;
+	Channel succToAdder2;
+	Channel adderToPrinter;
+	Channel printerToSucc;
+
+	vector<ProcessPtr> processes;
+
+	processes.push_back(ProcessPtr(new Succ(printerToSucc, succToAdder1, succToAdder2)));
+	processes.push_back(ProcessPtr(new Plus(succToAdder1, succToAdder2, adderToPrinter)));
+	processes.push_back(ProcessPtr(new Printer(adderToPrinter, printerToSucc)));
+
+	adderToPrinter.push_back(1);
+	adderToPrinter.push_back(1);
+
+	for (int i = 0; i < 12; ++i) {
+		for_each(processes.begin(), processes.end(), bind(&Process::Work, _1));
+	}
+	return 0;
+}
+}}}

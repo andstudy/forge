@@ -1,0 +1,370 @@
+== 17장 Erlang Database ==
+[[TableOfContents]]
+
+=== 테이터베이스 질의 ===
+ * shop table
+|| 항목 || 수량 || 가격 ||
+|| apple || 20 || 2.3 ||
+|| orange || 100 || 3.8 ||
+|| pear || 200 || 3.6 ||
+|| banana || 420 || 4.6 ||
+|| potato || 2456 || 1.2 ||
+ * cost table
+|| 이름 || 가격 ||
+|| apple || 1.5 ||
+|| orange || 2.4 ||
+|| pear || 2.2 ||
+|| banana || 1.5 ||
+|| potato || 0.6 ||
+==== 테스트를 위한 준비과정 ====
+{{{#!gcode erlang
+1> c(test_mnesia).
+{ok,test_mnesia}
+2> test_mnesia:do_this_once().
+stopped
+
+=INFO REPORT==== 9-Aug-2008::07:42:46 ===
+    application: mnesia
+    exited: stopped
+    type: temporary
+3> test_mnesia:start().
+ok
+4> test_mnesia:reset_tables().
+{atomic,ok}
+}}}
+==== 테이블에서 모든 데이터 선택하기 ====
+{{{#!gcode erlang
+%% SQL equivalent
+%%  SELECT * FROM shop;
+
+demo(select_shop) ->
+    do(qlc:q([X || X <- mnesia:table(shop)]));
+}}}
+==== 테이블에서 데이터 추출하기 ====
+{{{#!gcode erlang
+%% SQL equivalent
+%%  SELECT item, quantity FROM shop;
+
+demo(select_some) ->
+    do(qlc:q([{X#shop.item, X#shop.quantity} || X <- mnesia:table(shop)]));
+}}}
+==== 테이블에서 조건적으로 데이터 선택하기 ====
+{{{#!gcode erlang
+%% SQL equivalent
+%%  SELECT shop.item FROM shop
+%%  WHERE shop.quantity < 250;
+
+demo(reorder) ->
+    do(qlc:q([X#shop.item || X <- mnesia:table(shop),
+                             X#shop.quantity < 250
+                          ]));
+                          
+demo(reorder2) ->
+    do(qlc:q([{X#shop.item, X#shop.quantity} || X <- mnesia:table(shop),
+                             X#shop.quantity < 250
+                          ]));
+}}}         
+==== 두 테이블로부터 데이터 조인하기 ====
+{{{#!gcode erlang
+%% SQL equivalent
+%%  SELECT shop.item, shop.quantity, cost.name, cost.price
+%%  FROM shop, cost
+%%  WHERE shop.item = cost.name
+%%    AND cost.price < 2
+%%    AND shop.quantity < 250
+demo(join2) ->
+    do(qlc:q([ {X#shop.item, Y#cost.price} || X <- mnesia:table(shop),
+                             X#shop.quantity < 250,
+                             Y <- mnesia:table(cost),
+                             X#shop.item =:= Y#cost.name,
+                             Y#cost.price < 2
+                          ]));
+                          
+demo(join) ->
+    do(qlc:q([X#shop.item || X <- mnesia:table(shop),
+                             X#shop.quantity < 250,
+                             Y <- mnesia:table(cost),
+                             X#shop.item =:= Y#cost.name,
+                             Y#cost.price < 2
+                          ])).
+}}}
+=== 데이터베이스에 데이터 추가하고 제거하기 ===
+==== 행(Row) 추가하기 ====
+{{{#!gcode erlang
+add_shop_item(Name, Quantity, Cost) ->
+    Row = #shop{item=Name, quantity=Quantity, cost=Cost},
+    F = fun() ->
+                mnesia:write(Row)
+        end,
+    mnesia:transaction(F).
+}}}
+==== 행(Row) 제거하기 ====
+{{{#!gcode erlang
+remove_shop_item(Item) ->
+    Oid = {shop, Item},
+    F = fun() ->
+                mnesia:delete(Oid)
+        end,
+    mnesia:transaction(F).
+}}}
+=== Mnesia 트랜잭션 ===
+ * 비관적 잠금
+ 테이블에 접근할 때 마다, 레코드나 전체 테이블에 대해서 Lock
+ DeadLock 이 생길 꺼 같다면, 트랜잭션 중지
+ * 트랙잭션 코드는 여러번 수행될 수 있다.
+ - 트랙잭션 실패시 잠시 대기후 다시 시도
+ - 부수적 효과 금지 - 이런 코드는 안되요
+{{{#!gcode erlang
+F = fun() ->
+    ...
+    io:format("reading ..."),
+    ...
+}}}
+==== 트랜잭션 중단시키기 ====
+{{{#!gcode erlang
+farmer(Nwant) ->
+    %% Nwant = Number of oranges the farmer wants to buy
+    F = fun() ->
+                %% find the number of apples
+                [Apple] = mnesia:read({shop,apple}),
+                Napples = Apple#shop.quantity,
+                Apple1 = Apple#shop{quantity = Napples + 2*Nwant},
+                %% update the database
+                mnesia:write(Apple1),
+                %% find the number of oranges
+                [Orange] = mnesia:read({shop,orange}),
+                NOranges = Orange#shop.quantity,
+                if
+                    NOranges >= Nwant ->
+                        N1 = NOranges - Nwant,
+                        Orange1 = Orange#shop{quantity=N1},
+                        %% update the database
+                        mnesia:write(Orange1);
+                    true ->
+                        %% Oops -- not enough oranges
+                        mnesia:abort(oranges)
+                end
+        end,
+    mnesia:transaction(F).
+}}}
+
+ 위의 코드를 연속 실행
+{{{#!gcode erlang
+test_mnesia:farmer(50).
+트랜잭션: 사과 개수를 N*2 만큼 업데이트
+트랜잭션: 오렌지 개수를 N 만큼 제거 
+트랜잭션 성공 : 이제 오렌지의 개수는 50
+test_mnesia:farmer(100).
+트랜잭션: 사과 개수를 N*2 만큼 업데이트
+트랜잭션: 오렌지 개수를 N 만큼 제거 
+트랜잭션 실패 : 100개가 안남아 있다.
+트랜잭션 취소
+}}}
+
+=== 테이블에 복잡한 데이터 저장하기 ===
+ * Mnesia 는 얼랭 데이터 구조를 저장하도록 설계 : 뭐든지 테이블에 저장 가능
+ * Mnesia 는 fragmented tables 지원( 서버들이 테이블의 내용을 나눠가지고 있는거)
+
+{{{#!gcode erlang
+add_plans() ->
+    D1 = #design{id = {joe,1},
+                 plan = {circle,10}},
+    D2 = #design{id = fred,
+                 plan = {rectangle,10,5}},
+    D3 = #design{id = {jane, {house,23}},
+                 plan = {house,
+                         [{floor, 1,
+                           [{doors, 3},
+                            {windows, 12},
+                            {rooms, 5}]},
+                          {floor, 2,
+                           [{doors, 2},
+                            {rooms, 4},
+                            {windows, 15}]}]}},
+    F = fun() ->
+                mnesia:write(D1),
+                mnesia:write(D2),
+                mnesia:write(D3)
+        end,
+    mnesia:transaction(F).
+
+get_plan(PlanId) ->
+    F = fun() ->
+                mnesia:read({design, PlanId}) end,
+    mnesia:transaction(F).
+}}}
+
+=== test_mnesia.erl ===
+{{{#!gcode erlang
+-module(test_mnesia).
+-import(lists, [foreach/2]).
+-compile(export_all).
+
+%% IMPORTANT: The next line must be included
+%%            if we want to call qlc:q(...)
+
+-include_lib("stdlib/include/qlc.hrl").
+
+-record(shop, {item, quantity, cost}).
+-record(cost, {name, price}).
+-record(design, {id, plan}).
+
+do_this_once() ->
+    mnesia:create_schema([node()]),
+    mnesia:start(),
+    mnesia:create_table(shop, [{disc_only_copies, [node()]}, {attributes, record_info(fields, shop)}]),
+    mnesia:create_table(cost, [{disc_only_copies, [node()]}, {attributes, record_info(fields, cost)}]),
+    mnesia:create_table(design, [{attributes, record_info(fields, design)}, {disc_only_copies, [node()]}]),
+    mnesia:stop().
+
+start() ->
+    mnesia:start(),
+    mnesia:wait_for_tables([shop,cost,design], 20000).
+
+%% SQL equivalent
+%%  SELECT * FROM shop;
+
+demo(select_shop) ->
+    do(qlc:q([X || X <- mnesia:table(shop)]));
+
+%% SQL equivalent
+%%  SELECT item, quantity FROM shop;
+
+demo(select_some) ->
+    do(qlc:q([{X#shop.item, X#shop.quantity} || X <- mnesia:table(shop)]));
+
+%% SQL equivalent
+%%  SELECT shop.item FROM shop
+%%  WHERE shop.quantity < 250;
+
+demo(reorder) ->
+    do(qlc:q([X#shop.item || X <- mnesia:table(shop),
+                             X#shop.quantity < 250
+                          ]));
+                          
+demo(reorder2) ->
+    do(qlc:q([{X#shop.item, X#shop.quantity} || X <- mnesia:table(shop),
+                             X#shop.quantity < 250
+                          ]));                          
+
+%% SQL equivalent
+%%  SELECT shop.item, shop.quantity, cost.name, cost.price
+%%  FROM shop, cost
+%%  WHERE shop.item = cost.name
+%%    AND cost.price < 2
+%%    AND shop.quantity < 250
+demo(join2) ->
+    do(qlc:q([ {X#shop.item, Y#cost.price} || X <- mnesia:table(shop),
+                             X#shop.quantity < 250,
+                             Y <- mnesia:table(cost),
+                             X#shop.item =:= Y#cost.name,
+                             Y#cost.price < 2
+                          ]));
+                          
+demo(join) ->
+    do(qlc:q([X#shop.item || X <- mnesia:table(shop),
+                             X#shop.quantity < 250,
+                             Y <- mnesia:table(cost),
+                             X#shop.item =:= Y#cost.name,
+                             Y#cost.price < 2
+                          ])).
+                       
+                          
+do(Q) ->
+    F = fun() ->
+                qlc:e(Q) end,
+    {atomic, Val} = mnesia:transaction(F),
+    Val.
+
+example_tables() ->
+    [%% The shop table
+     {shop, apple, 20, 2.3},
+     {shop, orange, 100, 3.8},
+     {shop, pear, 200, 3.6},
+     {shop, banana, 420, 4.5},
+     {shop, potato, 2456, 1.2},
+     %% The cost table
+     {cost, apple, 1.5},
+     {cost, orange, 2.4},
+     {cost, pear, 2.2},
+     {cost, banana, 1.5},
+     {cost, potato, 0.6}
+     ].
+
+add_shop_item(Name, Quantity, Cost) ->
+    Row = #shop{item=Name, quantity=Quantity, cost=Cost},
+    F = fun() ->
+                mnesia:write(Row)
+        end,
+    mnesia:transaction(F).
+
+remove_shop_item(Item) ->
+    Oid = {shop, Item},
+    F = fun() ->
+                mnesia:delete(Oid)
+        end,
+    mnesia:transaction(F).
+
+farmer(Nwant) ->
+    %% Nwant = Number of oranges the farmer wants to buy
+    F = fun() ->
+                %% find the number of apples
+                [Apple] = mnesia:read({shop,apple}),
+                Napples = Apple#shop.quantity,
+                Apple1 = Apple#shop{quantity = Napples + 2*Nwant},
+                %% update the database
+                mnesia:write(Apple1),
+                %% find the number of oranges
+                [Orange] = mnesia:read({shop,orange}),
+                NOranges = Orange#shop.quantity,
+                if
+                    NOranges >= Nwant ->
+                        N1 = NOranges - Nwant,
+                        Orange1 = Orange#shop{quantity=N1},
+                        %% update the database
+                        mnesia:write(Orange1);
+                    true ->
+                        %% Oops -- not enough oranges
+                        mnesia:abort(oranges)
+                end
+        end,
+    mnesia:transaction(F).
+
+reset_tables() ->
+    mnesia:clear_table(shop),
+    mnesia:clear_table(cost),
+    F = fun() ->
+                foreach(fun mnesia:write/1, example_tables())
+        end,
+    mnesia:transaction(F).
+
+add_plans() ->
+    D1 = #design{id = {joe,1},
+                 plan = {circle,10}},
+    D2 = #design{id = fred,
+                 plan = {rectangle,10,5}},
+    D3 = #design{id = {jane, {house,23}},
+                 plan = {house,
+                         [{floor, 1,
+                           [{doors, 3},
+                            {windows, 12},
+                            {rooms, 5}]},
+                          {floor, 2,
+                           [{doors, 2},
+                            {rooms, 4},
+                            {windows, 15}]}]}},
+    F = fun() ->
+                mnesia:write(D1),
+                mnesia:write(D2),
+                mnesia:write(D3)
+        end,
+    mnesia:transaction(F).
+
+get_plan(PlanId) ->
+    F = fun() ->
+                mnesia:read({design, PlanId}) end,
+    mnesia:transaction(F).
+}}}
+
+== 참고 ==
+ [http://www.erlang.org/doc/apps/mnesia/part_frame.html mnesia user guide]

@@ -1,0 +1,344 @@
+주유소 들릴 때마다 항상 탱크를 꽉 채워야 한다는 가정이 있다면 이것도 답이 될 수 있겠지만, 역시 무엇을 DP table 로 만들 것인가를 잘 못 생각했네요. 쩝...
+새로 푼 문제는 준석씨랑 똑같이 풀었기 때문에 따로 올리지 않습니다. :)
+ 그러니까 아래 코드는 잘 못 푼 거라는 거.. T_T
+{{{
+/* @JUDGE_ID:parkpd 110401 Cpp "test" */
+
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <deque>
+#include <list>
+#include <stack>
+#include <string>
+#include <algorithm>
+#include <map>
+#include <limits>
+#include <assert.h>
+#include <iomanip>
+#include <math.h>
+
+#define _UNIT_TEST
+
+#ifdef _UNIT_TEST
+#include <Windows.h>
+#endif
+
+using namespace std;
+
+namespace ATUtil
+{
+	bool IsInRange(int value, int from, int to)
+	{
+		return (from <= value) && (value <= to);
+	}
+
+	int ConvertToIndex(char c)
+	{
+		if ('a' <= c && c <= 'z')
+		{
+			return c - 'a';
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	char ConvertToChar(int i)
+	{
+		return (char)i + 'a';
+	}
+
+#ifdef _UNIT_TEST
+	class CStopWatch
+	{
+	public:
+		CStopWatch()
+		{
+			m_StartTick = GetTickCount();		// gcc 에서 안 될 수 있으니까
+		}
+
+		~CStopWatch()
+		{
+			cout << "Time passed : " << GetTickCount() - m_StartTick << " milisec.\n";
+		}
+
+		int m_StartTick;
+	};
+#endif
+
+	typedef map<int, int> IntDB;
+	typedef vector<int> Ints;
+	typedef list<int> IntList;
+
+};
+
+using namespace ATUtil;
+
+#ifdef _UNIT_TEST
+
+#include "../UnitTest++/src/UnitTest++.h"
+
+#ifdef max
+#undef max
+#endif
+
+#ifdef min
+#undef min
+#endif
+
+int main()
+{
+	UnitTest::RunAllTests();
+
+	char temp;
+	cin >> temp;
+
+	return 0;
+}
+
+#endif
+
+// code implement
+
+namespace ATCode
+{
+	//////////////////////////////////////////////////////////////////////////
+	// CStation
+	class CStation
+	{
+	public:
+		CStation(int d, int c) : m_Dist(d), m_Cost(c), m_TotalCost(0) {}
+
+		int m_Dist;
+		int m_Cost;
+		int m_TotalCost;
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	// CStationNavi
+	class CStationNavi
+	{
+	public:
+		enum {MAX_STATIONS = 9};
+
+		// 100 이상의 연료를 남기기 위해, 아예 거리를 늘려준다.
+		CStationNavi(int dist) : m_Dist(dist + 100)
+		{
+			// 출발지도 일종의 주유소로 생각하자.
+			// 미리 가지고 있는 가스 100 만큼을 뺀 거리에서 가스 200 을 채웠다고 생각하고 시작한다.
+			Input(-100, 0);
+		}
+
+		void Input(int d, int c) 
+		{
+			m_Stations.push_back(CStation(d, c));
+		}
+
+		template<typename InputIterator>
+		void Inputs(InputIterator f, InputIterator t) 
+		{
+			for (InputIterator i = f; i < t; i += 2)
+			{
+				Input(*i, *(i+ 1));
+			}
+		}
+
+		int CalcDirectCost(int from, int to)
+		{
+			if (-1 == m_CostTable[from][to])
+			{
+				const int distBetweenStation = m_Stations[to].m_Dist - m_Stations[from].m_Dist;
+				if (200 < distBetweenStation)
+				{
+					m_CostTable[from][to] = numeric_limits<int>::max();	// 갈 수 없음.
+				}
+				else
+				{
+					m_CostTable[from][to] = m_Stations[from].m_Cost * (distBetweenStation);
+				}
+			}
+
+			return m_CostTable[from][to];
+		}
+
+		int CalcCost(int from, int to)
+		{
+			// TODO : 가스가 부족하면 무한대를 리턴해야 한다. 어떻게?
+
+			// Cs-t = min(Cs-t, min(k=s-t)(Cs-k, Ck-t))
+			if ((from == to) || (from + 1 == to))
+			{
+				return CalcDirectCost(from, to);
+			}
+			else
+			{
+				// Cs-t = min(Cs-t, min(k=s-t)(Cs-k, Ck-t))
+				int minCost = numeric_limits<int>::max();
+				for (int k = from + 1; k < to; ++k)
+				{
+					int cost = CalcCost(from, k) + CalcCost(k, to);
+					if (cost < minCost)
+					{
+						minCost = cost;
+					}
+				}
+
+				m_CostTable[from][to] = min(CalcDirectCost(from, to), minCost);
+				return m_CostTable[from][to];
+			}
+		}
+
+		int Calc()
+		{
+			Input(m_Dist, 0);		// 목적지도 일종의 주유소로 생각하자.
+
+			// Cs-t = min(Cs-t, min(k=s-t)(Cs-k, Ck-t))
+
+			// case 1.
+			// C0-2 = min(C0-2, C0-1 + C1-2)
+
+			for (int r = 0; r < MAX_STATIONS; ++r)
+			{
+				for (int c = 0; c < MAX_STATIONS; ++c)
+				{
+					if (r == c)
+					{
+						m_CostTable[r][c] = 0;
+					}
+					else
+					{
+						m_CostTable[r][c] = -1;
+					}
+				}
+			}
+
+			const int numStations = (int)m_Stations.size();
+			int calcCost = 0;
+			for (int diagonal = 1; diagonal <= numStations; ++diagonal)
+			{
+				for (int r = 0; r < numStations - diagonal; ++r)
+				{
+					int c = r + diagonal;
+					//cout << r << c << "\n";
+					//m_CostTable[r][c] = 
+						//min(m_CostTable[r][c], 
+							//min(k)(m_CostTable[r][k] + m_CostTable[k][c]);
+					calcCost = CalcCost(r, c);
+					m_CostTable[r][c] = calcCost;
+				}
+			}
+			
+			return m_CostTable[0][numStations - 1];
+		}
+
+		int m_Dist;
+		vector<CStation> m_Stations;
+
+		int m_CostTable[MAX_STATIONS][MAX_STATIONS];
+	};
+
+	///////////////////////////////////////////////////////////////
+	// CConsole
+	class CConsole
+	{
+	public:
+		static void ConsoleTest(istream& input, ostream& output);
+	};
+
+	void CConsole::ConsoleTest(istream& input, ostream& output)
+	{
+		int testCount = 0;
+		input >> testCount;
+
+		for (int i = 0; i < testCount; ++i)
+		{
+			if (1 <= i)
+			{
+				output << "\n";
+			}
+
+			int dist;
+			input >> dist;
+
+			CStationNavi navi(dist);
+
+			int pos, price;
+			while (input >> pos >> price)
+			{
+				navi.Input(pos, price);
+			}
+
+			output << navi.Calc() << "\n";
+		}
+	};
+
+}
+
+using namespace ATCode;
+
+#ifndef _UNIT_TEST
+
+int main()
+{
+	CConsole::ConsoleTest(cin, cout);
+
+	return 0;
+}
+
+#else
+
+// tests
+
+struct FixtureBase
+{
+	FixtureBase()
+	{
+	}
+
+	stringstream input;
+	stringstream output;
+};
+
+TEST_FIXTURE(FixtureBase, Case2)
+{
+	int stations[] = {100, 999, 200, 1000};
+	CStationNavi n(300);
+	n.Inputs(&stations[0], &stations[sizeof(stations) / sizeof(int)]);
+	CHECK_EQUAL(0, n.Calc());
+}
+
+TEST_FIXTURE(FixtureBase, Case1)
+{
+	int stations[] = {50, 999};
+	CStationNavi n(100);
+	n.Inputs(&stations[0], &stations[sizeof(stations) / sizeof(int)]);
+	CHECK_EQUAL(0, n.Calc());
+}
+
+TEST_FIXTURE(FixtureBase, ConsoleTest)
+{
+	input << 
+		"1\n"
+		"\n"
+		"500\n"
+		"100 999\n"
+		"150 888\n"
+		"200 777\n"
+		"300 999\n"
+		"400 1009\n"
+		"450 1019\n"
+		"500 1399\n";
+	CConsole::ConsoleTest(input, output);
+	CHECK_EQUAL( 
+		"450550\n", 
+		output.str());
+}
+
+#endif
+
+/* @END_OF_SOURCE_CODE */
+}}}

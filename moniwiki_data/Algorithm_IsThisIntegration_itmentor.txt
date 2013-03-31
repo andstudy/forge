@@ -1,0 +1,54 @@
+=== 참고 사이트 ===
+ * [http://www.hostsrv.com/webmab/app1/MSP/quickmath/02/pageGenerate?site=quickmath&s1=calculus&s2=integrate&s3=advanced#reply 적분계산기]
+
+=== 소스(C++) ===
+{{{
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+float centerTriangleArea(float area)
+{
+	//sqrt( 1-x^2 ) --> (x*sqrt(1 - x^2) + arcsin(x))/2;
+	//x=[0.5.. sqrt(3) / 2]
+	float center = 0.26179938090693;
+	float baseArea = 0.5 * ( sqrt(3.0) / 2.0  - 0.5 );
+
+	return 4*area*(center - baseArea);
+}
+
+float topTriangleArea(float area)
+{
+	//sqrt( 1-x^2 ) --> (x*sqrt(1 - x^2) + arcsin(x))/2;
+	//x=[0..0.5]
+	float top = 0.47830573874525906;
+	return area * 8*(0.5 - top);	//8조각
+}
+
+float midTriangleArea(float area)
+{
+	return area  - centerTriangleArea(area) - topTriangleArea(area);
+}
+
+int main()
+{
+	float scale;
+	while( std::cin >> scale )
+    {
+            if( std::cin.fail() )
+                    break;
+
+			scale *= scale;	//area
+
+ 			float center = centerTriangleArea(scale);
+			float top = topTriangleArea(scale);
+			float mid = midTriangleArea(scale);
+
+			printf("%.3f %.3f %.3f\n", center, mid, top );
+    }
+
+
+	return 0;
+}
+}}}

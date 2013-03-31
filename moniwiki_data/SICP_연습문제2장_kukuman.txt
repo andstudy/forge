@@ -1,0 +1,22 @@
+== Exercise 2.17. last-pair ==
+{{{#!gcode
+(define (last-pair1 list1)
+ (if( null? (cdr list1))
+    list1
+    (last-pair1 (cdr list1))
+ ))
+(last-pair1 (list 23 72 149 34))
+    
+}}}
+
+
+== Exercise 2.27 ==
+{{{#!gcode
+( define (reverse1 list1)
+   (null? cdr list1)
+   (list1)
+   (cons ( reverse1(cdr list1) car list1))
+)
+
+(reverse (list 1 4 9 16 25)) 
+}}}

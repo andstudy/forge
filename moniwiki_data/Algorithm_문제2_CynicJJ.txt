@@ -1,0 +1,200 @@
+== !MineSweeper 지뢰찾기 ==
+[[TableOfContents([maxdepth])]]
+
+=== !ModuleMain.vb ===
+{{{#!vim basic
+' Programming Challenges
+' 2번 문제. 지뢰찾기
+' 사용자로부터 지뢰 데이터 입력받아 주변의 지뢰 갯수 계산 후 출력
+Module ModuleMain
+
+	Sub Main()
+		' 컨트롤러와 보드 준비
+		Dim aBoard As New Board
+		Dim aControler As New Controler
+		aControler.SetBoard(aBoard)
+
+		' 입력 받기
+		While True
+			' 지뢰밭 크기 입력 받기
+			Dim inputStr As String = Console.ReadLine()
+			Dim boardSize As System.Drawing.Size = aControler.GetBoardSize(inputStr)
+			Dim rows As Integer = boardSize.Height
+			Dim columns As Integer = boardSize.Width
+			' 크기가 0 0 이면 종료
+			If rows = 0 And columns = 0 Then Exit While
+			' 지뢰 데이터 입력 받기
+			Dim mineData(rows - 1) As String
+			For i As Integer = 0 To mineData.GetUpperBound(0)
+				mineData(i) = Console.ReadLine()	' 한줄씩 입력 받음
+			Next
+			' 입력 받은 지뢰 데이터 이용 보드 설정
+			aControler.SetupBoardFromMineData(mineData)
+			' 출력
+			PrintBoard(aBoard, rows, columns)
+			' 보드 초기화
+			aBoard.Clear()
+		End While
+	End Sub
+
+	' 지뢰판 출력
+	Private Sub PrintBoard(ByVal aBoard As Board, ByVal rows As Integer, ByVal columns As Integer)
+		For row As Integer = 1 To rows
+			For column As Integer = 1 To columns
+				If aBoard.GetCell(row, column).IsMine Then
+					Console.Write("*")	' 지뢰면 * 출력
+				Else
+					Console.Write("{0:D}", aBoard.GetMineCountAt(row, column))	' 지뢰 아니면 주위 지뢰 갯수 출력
+				End If
+			Next
+			Console.WriteLine()
+		Next
+	End Sub
+
+End Module
+}}}
+
+=== Board.vb ===
+{{{#!vim basic
+' 지뢰밭
+Public Class Board
+
+	' 셀들은 위치값을 키로 가지는 해시맵에 저장
+	Private _cells As New Dictionary(Of String, Cell)
+
+	' 특정 위치 Cell 주위의 지뢰 갯수
+	Public Function GetMineCountAt(ByVal row As Integer, ByVal column As Integer) As Integer
+		Return GetMineCount(GetNearCellsAt(row, column))
+	End Function
+
+	' 셀 추가
+	Public Sub AddCell(ByVal cell As Cell, ByVal row As Integer, ByVal column As Integer)
+		If cell IsNot Nothing Then
+			_cells.Add(GetHashKey(row, column), cell)
+		End If
+	End Sub
+
+	' 셀 가져오기
+	Public Function GetCell(ByVal row, ByVal column) As Cell
+		Dim key As String = GetHashKey(row, column)
+		If _cells.ContainsKey(key) Then
+			Return _cells.Item(key)
+		Else
+			Return Nothing
+		End If
+	End Function
+
+	' 위치로부터 문자열 키 가져오기
+	Public Function GetHashKey(ByVal row, ByVal column) As String
+		Return String.Format("{0:D},{1:D}", row, column)
+	End Function
+
+	' 특정 위치 셀의 주변 셀들 8개 가져오기
+	Public Function GetNearCellsAt(ByVal row As Integer, ByVal column As Integer) As ArrayList
+		Dim cells As New ArrayList()
+
+		Dim aCell As Cell
+		aCell = GetCell(row - 1, column - 1)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+		aCell = GetCell(row - 1, column)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+		aCell = GetCell(row - 1, column + 1)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+		aCell = GetCell(row, column - 1)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+		aCell = GetCell(row, column + 1)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+		aCell = GetCell(row + 1, column - 1)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+		aCell = GetCell(row + 1, column)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+		aCell = GetCell(row + 1, column + 1)
+		If aCell IsNot Nothing Then cells.Add(aCell)
+
+		Return cells
+	End Function
+
+	' 여러 셀들 중 지뢰인것 갯수 세기
+	Public Function GetMineCount(ByVal cells As ArrayList) As Integer
+		Dim mineCount As Integer
+		For Each cell As Cell In cells
+			If cell.IsMine Then
+				mineCount += 1
+			End If
+		Next
+
+		Return mineCount
+	End Function
+
+	' 지뢰밭 초기화
+	Public Sub Clear()
+		_cells.Clear()
+	End Sub
+End Class
+}}}
+
+=== Cell.vb ===
+{{{#!vim basic
+' 지뢰밭의 각 셀
+Public Class Cell
+
+	Private _isMine As Boolean
+
+	Sub New(Optional ByVal isMine As Boolean = False)
+		_isMine = isMine
+	End Sub
+
+	Public ReadOnly Property IsMine() As Boolean
+		Get
+			Return _isMine
+		End Get
+	End Property
+
+End Class
+}}}
+
+=== Controler.vb ===
+{{{#!vim basic
+' 사용자 입력을 분석하고 지뢰밭 설정
+Public Class Controler
+
+	Private _board As Board		' 지뢰밭
+
+	Public Sub SetBoard(ByVal aBoard As Board)
+		_board = aBoard
+	End Sub
+
+	' 사용자 입력으로 부터 지뢰밭 크기 가져오기
+	Public Function GetBoardSize(ByVal inputStr As String) As System.Drawing.Size
+		' 문자열을 공백기준으로 분리
+		Dim separator As Char() = {" "}
+		Dim inputs As String() = inputStr.Trim().Split(separator, StringSplitOptions.RemoveEmptyEntries)
+		' 보드 크기 설정
+		Dim size As New System.Drawing.Size
+		size.Height = Integer.Parse(inputs(0).Trim())
+		size.Width = Integer.Parse(inputs(1).Trim())
+
+		Return size
+	End Function
+
+	' 사용자가 입력한 지뢰 데이터로 지뢰밭 설정
+	Public Sub SetupBoardFromMineData(ByVal mineData As String())
+		For i As Integer = 0 To mineData.GetUpperBound(0)
+			AddCellsByMineData(mineData(i), i + 1)	' 주의 row = i+1
+		Next
+	End Sub
+
+	' 지뢰 데이터로부터 지뢰밭에 지뢰 추가
+	' * 이면 지뢰 . 이면 지뢰 아님
+	Public Sub AddCellsByMineData(ByVal data As String, ByVal row As Integer)
+		Dim mark As Char() = data.ToCharArray()
+		For i As Integer = 0 To mark.GetUpperBound(0)
+			If mark(i).Equals("."c) Then
+				_board.AddCell(New Cell(), row, i + 1)	' 주의 row = i+1
+			ElseIf mark(i).Equals("*"c) Then
+				_board.AddCell(New Cell(True), row, i + 1)	' 주의 row = i+1
+			End If
+		Next
+	End Sub
+End Class
+}}}

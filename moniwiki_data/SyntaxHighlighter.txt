@@ -1,0 +1,144 @@
+[[TableOfContents]]
+== 최신 코드 다운로드 ==
+[http://alexgorbatchev.com/SyntaxHighlighter/ 여기]에서 3.0.83 버젼 코드를 다운받아 local 디렉토리에 압축을 풀고, 폴더명을 {{{SyntaxHighlighter}}}로 수정합니다. 여기서 대소문자 구분을 제대로 하지 않으면 문제가 생기는 경우도 있으니 대소문자를 정확히 지켜 주세요. 제대로 압축을 풀면 모니위키가 설치된 디렉토리에서 다음 파일이 보이게 됩니다.
+  {{{local/SyntaxHighlighter/MIT-LICENSE}}}
+
+한 가지 제 실력이 미숙해서 원 소스 코드를 고쳐주셔야 할 부분이 있습니다.
+{{{#!plain js
+// SyntaxHilighter/src/shAutoloader.js의 38번째 라인
+sh.autoloader = function()
+sh.autoloader = function(arguments)
+}}}
+
+이 부분은 함수의 인자로 배열을 넘겨주어야 하는데 여기서는 인자 묶음 (arg0, arg1, arg2...)을 받아들이기에 생기는 문제입니다. 배열을 풀어서 인자 묶음으로 한꺼번에 넘길 수 있는 방법이 존재할까요?
+
+== sh.js 파일 수정 ==
+{{{local/js/sh.js}}} 파일 수정
+{{{#!plain js
+if ( typeof _ == 'undefined') {
+    _ = function(msgid) {
+        return msgid;
+    };
+}
+
+function shOnload() {
+    var head = document.getElementsByTagName("head")[0];
+    
+    var syntax = {
+        'cpp'        : 'Cpp',
+        'c'          : 'Cpp',
+        'diff'       : 'Diff',
+        'c#'         : 'CSharp',
+        'c-sharp'    : 'CSharp',
+        'csharp'     : 'CSharp',
+        'css'        : 'Css',
+        'jscript'    : 'JScript',
+        'js'         : 'JScript',
+        'javascript' : 'JScript',
+        'java'       : 'Java',
+        'php'        : 'Php',
+        'python'     : 'Python',
+        'ruby'       : 'Ruby', 
+        'xml'        : 'Xml', 
+        'xhtml'      : 'Xml', 
+        'html'       : 'Xml', 
+        'plain'      : 'Plain', 
+        'text'       : 'Plain', 
+        'txt'        : 'Plain'
+    };
+    var syntaxToLoad = [];
+    
+    var tags = document.getElementsByTagName('pre');
+    for (var i = 0; i < tags.length; i++) {
+        // c는 가장 마지막에 검사해야 한다. 그렇지 않으면 csharp도 c로 넘어가 버릴 테니까.
+        var m = tags[i].className.match(/wiki\s+(cpp|diff|c#|csharp|c-sharp|css|java|jscript|js|javascript|php|python|ruby|xml|xhtml|html|plain|text|txt|c)/);
+        if ( m ) {
+            var brush = syntax[m[1]];
+            tags[i].setAttribute('name','code');
+            tags[i].className = 'brush: ' + brush.toLowerCase();
+            syntaxToLoad[brush] = 1;
+        }
+    }
+    
+    var jsToLoad = [];
+    for (var s in syntaxToLoad) {
+        jsToLoad.push(s.toString().toLowerCase() + ' ' + _url_prefix + '/local/SyntaxHighlighter/scripts/shBrush' + s + '.js');
+    }
+    if (jsToLoad.length == 0) {
+        return;
+    }
+
+    var css = document.createElement('link');
+    css.type = 'text/css';
+    css.rel = 'stylesheet';
+    css.href = _url_prefix + '/local/SyntaxHighlighter/styles/shCoreDefault.css';
+    css.media = 'screen';
+    head.appendChild(css);
+    
+    SyntaxHighlighter.autoloader(jsToLoad);
+    SyntaxHighlighter.defaults['toolbar'] = false;
+    SyntaxHighlighter.all();
+    
+    // 이 부분이 제대로 동작한다면 shCore.js와 shAutoloader.js도 동적으로 로딩할 수 
+    // 있을 것입니다만, IE에서는 제대로 동작하지 않는군요.
+    /*
+    var js = document.createElement('script');
+    js.type = 'text/javascript';
+    js.src = _url_prefix + '/local/SyntaxHighlighter/scripts/shCore.js';
+    head.appendChild(js);
+    
+    js = document.createElement('script');
+    js.type = 'text/javascript';
+    js.src = _url_prefix + '/local/SyntaxHighlighter/src/shAutoloader.js';
+    js.onload = function() {
+        SyntaxHighlighter.autoloader(jsToLoad);
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    };
+    head.appendChild(js);
+    */
+}
+
+(function () {
+    // onload
+    var oldOnload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = shOnload;
+    } else {
+        window.onload = function() {
+            oldOnload();
+            shOnload();
+        }
+    }
+})();
+}}}
+
+== Config.php 수정 ==
+{{{$javascripts}}}에 다음을 추가시켜 주시면 됩니다. 대소문자에도 영향을 받기도 하니 주의하시기 바랍니다.
+ * {{{'js/sh.js'}}}
+ * {{{'SyntaxHighlighter/scripts/shCore.js'}}}
+ * {{{'SyntaxHighlighter/src/shAutoloader.js'}}}
+
+== Theme 바꾸기 ==
+위의 {{{sh.js}}} 파일에서 다음 줄만 바꿔 주시면 됩니다.
+{{{css.href = _url_prefix + '/local/SyntaxHighlighter/Styles/shCoreDefault.css';}}}
+가능한 옵션으로는 다음 사이트를 참조하여 주시기 바랍니다.
+ * http://alexgorbatchev.com/SyntaxHighlighter/manual/themes/
+참고로 이 페이지에서 사용하고 있는 테마는 제가 {{{shCoreDefault.css}}}를 스킨에 맞게 약간 수정한 테마 입니다.
+ * attachment:shCoreSeongJae.css
+
+== 사용법 ==
+이렇게 쓰면,
+{{{#!plain plain
+{{{#!plain cpp
+int main() {
+	return 0;
+}
+}} } // 구문상 한계로 이렇게 할 수 밖에 없네요. 당연히 여기 띄어쓰기는 날려야죠.
+}}}
+이렇게 보입니다!
+{{{#!plain cpp
+	int main() {
+		return 0;
+	}
+}}}
